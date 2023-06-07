@@ -1,0 +1,153 @@
+using System.Collections.Concurrent;
+using System.IO.Compression;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Xunit;
+
+namespace Meziantou.Polyfill.SourceGenerator.Tests;
+
+public class UnitTest1
+{
+    [Fact]
+    public async Task NoCodeGeneratedForLatestFramework()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0-preview.4.23259.5", "ref/net8.0/");
+        var result = await GenerateFiles("", assemblyLocations: assemblies);
+        Assert.Empty(result.GeneratorResult.GeneratedTrees);
+    }
+
+    [Theory]
+    [MemberData(nameof(GetConfigurations))]
+    public async Task GeneratedCodeCompile(PackageReference[] packages)
+    {
+        var assemblies = new List<string>();
+        foreach (var package in packages)
+        {
+            assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path));
+        }
+
+        await GenerateFiles("", assemblyLocations: assemblies.ToArray());
+    }
+
+    public static TheoryData<PackageReference[]> GetConfigurations()
+    {
+        return new TheoryData<PackageReference[]>
+        {
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0-preview.4.23259.5", "ref/net8.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "5.0.0", "ref/net5.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net481", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net48", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net472", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net471", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net47", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net462", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", "") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") , new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net46", "1.0.3", "") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", "") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+        };
+    }
+
+    public sealed record PackageReference(string Name, string Version, string Path);
+
+    private static async Task<(GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly)> GenerateFiles(string file, bool mustCompile = true, string[]? assemblyLocations = null)
+    {
+        assemblyLocations ??= Array.Empty<string>();
+        var references = assemblyLocations
+            .Select(loc => MetadataReference.CreateFromFile(loc))
+            .ToArray();
+
+        var compilation = CSharpCompilation.Create("compilation",
+            new[] { CSharpSyntaxTree.ParseText(file) },
+            references,
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+        var generator = new PolyfillGenerator().AsSourceGenerator();
+
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new ISourceGenerator[] { generator });
+
+        driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);
+        Assert.Empty(diagnostics);
+
+        var runResult = driver.GetRunResult();
+
+        // Validate the output project compiles
+        using var ms = new MemoryStream();
+        var result = outputCompilation.Emit(ms);
+        if (mustCompile)
+        {
+            var diags = string.Join("\n", result.Diagnostics);
+            Assert.True(result.Success, "Project should build build:\n" + diags);
+            Assert.Empty(result.Diagnostics);
+        }
+
+        return (runResult, outputCompilation, result.Success ? ms.ToArray() : null);
+    }
+
+    private static class NuGetHelpers
+    {
+        private static readonly ConcurrentDictionary<string, Lazy<Task<string[]>>> Cache = new(StringComparer.Ordinal);
+
+        public static Task<string[]> GetNuGetReferences(string packageName, string version, string path)
+        {
+            var task = Cache.GetOrAdd(packageName + '@' + version + ':' + path, key =>
+            {
+                return new Lazy<Task<string[]>>(Download);
+            });
+
+            return task.Value;
+
+            async Task<string[]> Download()
+            {
+                var tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Meziantou.PolyfillTests", "ref", packageName + '@' + version);
+                if (!Directory.Exists(tempFolder) || !Directory.EnumerateFileSystemEntries(tempFolder).Any())
+                {
+                    Directory.CreateDirectory(tempFolder);
+                    using var httpClient = new HttpClient();
+                    using var stream = await httpClient.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
+                    using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
+
+                    foreach (var entry in zip.Entries.Where(file => file.FullName.StartsWith(path, StringComparison.Ordinal)))
+                    {
+                        entry.ExtractToFile(Path.Combine(tempFolder, entry.Name), overwrite: true);
+                    }
+                }
+
+                var dlls = Directory.GetFiles(tempFolder, "*.dll");
+
+                // Filter invalid .NET assembly
+                var result = new List<string>();
+                foreach (var dll in dlls)
+                {
+                    if (Path.GetFileName(dll) == "System.EnterpriseServices.Wrapper.dll")
+                        continue;
+
+                    try
+                    {
+                        using var stream = File.OpenRead(dll);
+                        using var peFile = new PEReader(stream);
+                        var metadataReader = peFile.GetMetadataReader();
+                        result.Add(dll);
+                    }
+                    catch
+                    {
+                    }
+                }
+
+                return result.ToArray();
+            }
+        }
+    }
+
+}

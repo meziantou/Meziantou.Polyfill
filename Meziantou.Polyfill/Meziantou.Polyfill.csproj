@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Version>1.0.0</Version>
+    <TransformOnBuild>true</TransformOnBuild>
+
+    <LangVersion>11</LangVersion>
+    <Nullable>enable</Nullable>
+
+    <developmentDependency>true</developmentDependency>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <Description>Source Generator to help multi-targeting projects.</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Authors>meziantou</Authors>
+    <PackageTags>SourceGenerator,Roslyn,Polyfill</PackageTags>
+    <PackageProjectUrl>https://github.com/meziantou/Meziantou.Polyfill</PackageProjectUrl>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="" Visible="false" />
+    <None Include="../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="$(OutputPath)\netstandard2.0\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Meziantou.DotNet.CodingStandard" Version="1.0.56">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.3.1" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Members.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Members.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Members.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Members.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
