@@ -6,6 +6,7 @@ namespace Meziantou.Polyfill;
 internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
 {
     private string? _includedPolyfills;
+    private string? _excludedPolyfills;
 
     [AllowNull]
     public string IncludedPolyfills
@@ -14,9 +15,17 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
         set => _includedPolyfills = value;
     }
 
+    [AllowNull]
+    public string ExcludedPolyfills
+    {
+        get => _excludedPolyfills ?? "";
+        set => _excludedPolyfills = value;
+    }
+
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(IncludedPolyfills);
+        return StringComparer.Ordinal.GetHashCode(IncludedPolyfills)
+             + StringComparer.Ordinal.GetHashCode(ExcludedPolyfills);
     }
 
     public override bool Equals(object obj) => Equals(obj as PolyfillOptions);
@@ -26,6 +35,6 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
         if (other == null)
             return false;
 
-        return IncludedPolyfills == other.IncludedPolyfills;
+        return IncludedPolyfills == other.IncludedPolyfills && ExcludedPolyfills == other.ExcludedPolyfills;
     }
 }

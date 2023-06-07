@@ -13,6 +13,7 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
             return new PolyfillOptions()
             {
                 IncludedPolyfills = GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_IncludedPolyfills"),
+                ExcludedPolyfills = GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_ExcludedPolyfills"),
             };
         });
 

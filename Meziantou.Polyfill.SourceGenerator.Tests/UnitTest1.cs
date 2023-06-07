@@ -1,9 +1,11 @@
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Xunit;
 
 namespace Meziantou.Polyfill.SourceGenerator.Tests;
@@ -16,6 +18,18 @@ public class UnitTest1
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0-preview.4.23259.5", "ref/net8.0/");
         var result = await GenerateFiles("", assemblyLocations: assemblies);
         Assert.Empty(result.GeneratorResult.GeneratedTrees);
+    }
+
+    [Fact]
+    public async Task EscludedPolyfill()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+
+        var result = await GenerateFiles("", assemblyLocations: assemblies);
+        Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
+
+        result = await GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T;System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
 
     [Theory]
@@ -60,7 +74,7 @@ public class UnitTest1
 
     public sealed record PackageReference(string Name, string Version, string Path);
 
-    private static async Task<(GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly)> GenerateFiles(string file, bool mustCompile = true, string[]? assemblyLocations = null)
+    private static async Task<(GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly)> GenerateFiles(string file, bool mustCompile = true, string[]? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
@@ -75,7 +89,13 @@ public class UnitTest1
         var generator = new PolyfillGenerator().AsSourceGenerator();
 
         GeneratorDriver driver = CSharpGeneratorDriver.Create(
-            generators: new ISourceGenerator[] { generator });
+            generators: new ISourceGenerator[] { generator },
+            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
+            {
+                ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
+                ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
+
+            }));
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);
         Assert.Empty(diagnostics);
@@ -93,6 +113,35 @@ public class UnitTest1
         }
 
         return (runResult, outputCompilation, result.Success ? ms.ToArray() : null);
+    }
+
+    private sealed class TestAnalyzerConfigOptionsProvider : AnalyzerConfigOptionsProvider
+    {
+        private readonly Dictionary<string, string?> _values;
+
+        public TestAnalyzerConfigOptionsProvider(Dictionary<string, string?> values)
+        {
+            _values = values ?? new Dictionary<string, string?>();
+        }
+
+        public override AnalyzerConfigOptions GlobalOptions => new TestAnalyzerConfigOptions(_values);
+        public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) => new TestAnalyzerConfigOptions(_values);
+        public override AnalyzerConfigOptions GetOptions(AdditionalText textFile) => new TestAnalyzerConfigOptions(_values);
+
+        private sealed class TestAnalyzerConfigOptions : AnalyzerConfigOptions
+        {
+            private readonly Dictionary<string, string?> _values;
+
+            public TestAnalyzerConfigOptions(Dictionary<string, string?> values)
+            {
+                _values = values;
+            }
+
+            public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
+            {
+                return _values.TryGetValue(key, out value);
+            }
+        }
     }
 
     private static class NuGetHelpers

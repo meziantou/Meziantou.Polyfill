@@ -8,6 +8,25 @@ partial class Members
 {
     private static bool IncludeMember(Compilation compilation, PolyfillOptions options, string memberDocumentationId)
     {
+        if (!string.IsNullOrEmpty(options.ExcludedPolyfills))
+        {
+            var found = false;
+            foreach (var entry in new LineSplitEnumerator(options.ExcludedPolyfills.AsSpan()))
+            {
+                if (entry.IsEmpty)
+                    continue;
+
+                if (memberDocumentationId.AsSpan().StartsWith(entry, StringComparison.Ordinal))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found)
+                return false;
+        }
+
         if (!string.IsNullOrEmpty(options.IncludedPolyfills))
         {
             var found = false;

@@ -1,5 +1,6 @@
 <Project>
   <ItemGroup>
     <CompilerVisibleProperty Include="MeziantouPolyfill_IncludedPolyfills" />
+    <CompilerVisibleProperty Include="MeziantouPolyfill_ExcludedPolyfills" />
   </ItemGroup>
 </Project>
