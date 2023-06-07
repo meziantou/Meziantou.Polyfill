@@ -21,14 +21,14 @@ public class UnitTest1
     }
 
     [Fact]
-    public async Task EscludedPolyfill()
+    public async Task ExcludedPolyfill()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
         var result = await GenerateFiles("", assemblyLocations: assemblies);
         Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
 
-        result = await GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T;System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
+        result = await GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
 
