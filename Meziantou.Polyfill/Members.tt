@@ -10,9 +10,10 @@
     var root = Host.ResolvePath("../Meziantou.Polyfill.Editor");
     var files = Directory.GetFiles(root, "*.cs")
         .OrderBy(_ => _, StringComparer.Ordinal)
-        .Select(item =>
+        .Select((item, index) =>
         {
             var polyfill = new Polyfill();
+            polyfill.Index = index;
             polyfill.TypeName = Path.GetFileNameWithoutExtension(item).Replace(';', ':');
             polyfill.OutputPath = Path.GetFileNameWithoutExtension(item)
                 .Replace(';', '_')
@@ -32,6 +33,8 @@
             return polyfill;
         })
         .ToArray();
+
+    var fieldCount = (files.Length / 64) + (files.Length % 64 > 0 ? 1 : 0);
 #>
 #nullable enable
 using System;
@@ -41,44 +44,46 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Meziantou.Polyfill;
 
-internal sealed partial class Members : IEquatable<Members>
+internal readonly partial struct Members : IEquatable<Members>
 {
-    <# foreach(var polyfill in files) { #>
-    private readonly bool <#= polyfill.CSharpFieldName #>;
+    <# for(var i = 0; i < fieldCount; i++) { #>
+    private readonly ulong _bits<#= i #> = 0uL;
     <# } #>
-    
+        
     public Members(Compilation compilation, PolyfillOptions options)
     {
     <# foreach(var polyfill in files) { #>
-        
-        <#= polyfill.CSharpFieldName #> = IncludeMember(compilation, options, "<#= polyfill.TypeName #>");
+        if (IncludeMember(compilation, options, "<#= polyfill.TypeName #>"))
+        {
+            <#= polyfill.CSharpFieldName #> = <#= polyfill.CSharpFieldName #> | <#= polyfill.CSharpFieldBitMask #>uL;
+        }
     <# } #>
     }
 
 
     public override int GetHashCode()
     {    
-        var hash = 0;
-        <# foreach(var polyfill in files) { #>
-        hash = hash * 23 + <#= polyfill.CSharpFieldName #>.GetHashCode();
+        var hash = _bits0.GetHashCode();
+        <# for(var i = 1; i < fieldCount; i++) { #>
+        hash = hash * 23 + _bits<#= i #>.GetHashCode();
         <# } #>
         return hash;
     }
 
     public override bool Equals(object? obj) => obj is Members other && Equals(other);
 
-    public bool Equals(Members? other)
+    public bool Equals(Members other)
     {
-        return other != null
-        <# foreach(var polyfill in files) { #>
-        && <#= polyfill.CSharpFieldName #> == other.<#= polyfill.CSharpFieldName #>
+        return _bits0 == other._bits0
+        <# for(var i = 1; i < fieldCount; i++) { #>
+          && _bits<#= i #> == other._bits<#= i #>
         <# } #>;
     }
 
     public void AddSources(SourceProductionContext context)
     {
         <# foreach(var polyfill in files) { #>
-        if (<#= polyfill.CSharpFieldName #>)
+        if ((<#= polyfill.CSharpFieldName #> & <#= polyfill.CSharpFieldBitMask #>uL) == <#= polyfill.CSharpFieldBitMask #>uL)
         {
             context.AddSource("<#= polyfill.OutputPath #>", PolyfillContents.<#= polyfill.CSharpSourceTextPropertyName #>);
         }        
@@ -103,12 +108,15 @@ file static class PolyfillContents
 <#+
     class Polyfill
     {
+        public int Index { get; set; }
         public string TypeName { get; set; }
         public string CSharpName { get; set; }
         public string Content { get; set; }
         public string OutputPath { get; set; }
 
-        public string CSharpFieldName => "_generate_" + CSharpName;
+        public string CSharpFieldName => "_bits" + (Index / 64);
+        public int CSharpFieldBitIndex => Index % 64;
+        public ulong CSharpFieldBitMask => 1uL << (Index % 64);
         public string CSharpSourceTextPropertyName  => "Source_" + CSharpName;
     }
 #>

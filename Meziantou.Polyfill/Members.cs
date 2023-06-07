@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Meziantou.Polyfill;
 
-partial class Members
+partial struct Members
 {
     private static bool IncludeMember(Compilation compilation, PolyfillOptions options, string memberDocumentationId)
     {
