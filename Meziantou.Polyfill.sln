@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill", "Meziantou.Polyfill\Meziantou.Polyfill.csproj", "{44511A49-0543-4FAC-B934-D022A18749D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill", "Meziantou.Polyfill\Meziantou.Polyfill.csproj", "{44511A49-0543-4FAC-B934-D022A18749D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill.Tests", "Meziantou.Polyfill.Tests\Meziantou.Polyfill.Tests.csproj", "{D7D546F9-83EC-4323-94F9-9529837A07B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill.Tests", "Meziantou.Polyfill.Tests\Meziantou.Polyfill.Tests.csproj", "{D7D546F9-83EC-4323-94F9-9529837A07B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill.Editor", "Meziantou.Polyfill.Editor\Meziantou.Polyfill.Editor.csproj", "{8F241C49-804D-4259-BE96-9D9B3439434C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill.SourceGenerator.Tests", "Meziantou.Polyfill.SourceGenerator.Tests\Meziantou.Polyfill.SourceGenerator.Tests.csproj", "{EE0BDD03-91F0-41FD-AFBC-2F68D499E73D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill.SourceGenerator.Tests", "Meziantou.Polyfill.SourceGenerator.Tests\Meziantou.Polyfill.SourceGenerator.Tests.csproj", "{EE0BDD03-91F0-41FD-AFBC-2F68D499E73D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill.Generator", "Meziantou.Polyfill.Generator\Meziantou.Polyfill.Generator.csproj", "{73D3101F-65DD-4D2D-8529-05E8B5FDD047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EE0BDD03-91F0-41FD-AFBC-2F68D499E73D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE0BDD03-91F0-41FD-AFBC-2F68D499E73D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE0BDD03-91F0-41FD-AFBC-2F68D499E73D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D3101F-65DD-4D2D-8529-05E8B5FDD047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D3101F-65DD-4D2D-8529-05E8B5FDD047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D3101F-65DD-4D2D-8529-05E8B5FDD047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D3101F-65DD-4D2D-8529-05E8B5FDD047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

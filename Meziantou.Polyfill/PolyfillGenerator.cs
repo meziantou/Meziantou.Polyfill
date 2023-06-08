@@ -1,5 +1,7 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Text;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Meziantou.Polyfill;
 
@@ -21,6 +23,8 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
 
         context.RegisterImplementationSourceOutput(provider, (context, members) =>
         {
+            context.AddSource("Debug.g.cs", SourceText.From(members.DumpAsCSharpComment(), Encoding.UTF8));
+
             members.AddSources(context);
         });
     }

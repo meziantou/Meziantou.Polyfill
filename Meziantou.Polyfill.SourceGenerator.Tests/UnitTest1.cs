@@ -17,7 +17,8 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0-preview.4.23259.5", "ref/net8.0/");
         var result = await GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Empty(result.GeneratorResult.GeneratedTrees);
+        var tree = Assert.Single(result.GeneratorResult.GeneratedTrees);
+        Assert.Equal("Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs", tree.FilePath);
     }
 
     [Fact]
@@ -107,8 +108,9 @@ public class UnitTest1
         var result = outputCompilation.Emit(ms);
         if (mustCompile)
         {
+            var tree = runResult.GeneratedTrees.FirstOrDefault(tree => tree.FilePath == "Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs");
             var diags = string.Join("\n", result.Diagnostics);
-            Assert.True(result.Success, "Project should build build:\n" + diags);
+            Assert.True(result.Success, "Project should build build:\n" + diags + "\n" + tree);
             Assert.Empty(result.Diagnostics);
         }
 

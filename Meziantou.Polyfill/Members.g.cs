@@ -1,8 +1,4 @@
-
-
-
-
-
+// Polyfills: 64
 #nullable enable
 using System;
 using System.Text;
@@ -13,645 +9,374 @@ namespace Meziantou.Polyfill;
 
 internal readonly partial struct Members : IEquatable<Members>
 {
-    
-    private readonly ulong _bits0 = 0uL;
-    
-        
-    public Members(Compilation compilation, PolyfillOptions options)
-    {
-    
-        if (IncludeMember(compilation, options, "M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@)"))
-        {
-            _bits0 = _bits0 | 1uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.Collections.Generic.Queue`1.TryDequeue(`0@)"))
-        {
-            _bits0 = _bits0 | 2uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)"))
-        {
-            _bits0 = _bits0 | 4uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)"))
-        {
-            _bits0 = _bits0 | 8uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)"))
-        {
-            _bits0 = _bits0 | 16uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)"))
-        {
-            _bits0 = _bits0 | 32uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})"))
-        {
-            _bits0 = _bits0 | 64uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)"))
-        {
-            _bits0 = _bits0 | 128uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)"))
-        {
-            _bits0 = _bits0 | 256uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)"))
-        {
-            _bits0 = _bits0 | 512uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)"))
-        {
-            _bits0 = _bits0 | 1024uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)"))
-        {
-            _bits0 = _bits0 | 2048uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)"))
-        {
-            _bits0 = _bits0 | 4096uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})"))
-        {
-            _bits0 = _bits0 | 8192uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})"))
-        {
-            _bits0 = _bits0 | 16384uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})"))
-        {
-            _bits0 = _bits0 | 32768uL;
-        }
-    
-        if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync"))
-        {
-            _bits0 = _bits0 | 65536uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
-        {
-            _bits0 = _bits0 | 131072uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
-        {
-            _bits0 = _bits0 | 262144uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
-        {
-            _bits0 = _bits0 | 524288uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
-        {
-            _bits0 = _bits0 | 1048576uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
-        {
-            _bits0 = _bits0 | 2097152uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
-        {
-            _bits0 = _bits0 | 4194304uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
-        {
-            _bits0 = _bits0 | 8388608uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
-        {
-            _bits0 = _bits0 | 16777216uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
-        {
-            _bits0 = _bits0 | 33554432uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
-        {
-            _bits0 = _bits0 | 67108864uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
-        {
-            _bits0 = _bits0 | 134217728uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
-        {
-            _bits0 = _bits0 | 268435456uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
-        {
-            _bits0 = _bits0 | 536870912uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
-        {
-            _bits0 = _bits0 | 1073741824uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
-        {
-            _bits0 = _bits0 | 2147483648uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
-        {
-            _bits0 = _bits0 | 4294967296uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
-        {
-            _bits0 = _bits0 | 8589934592uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
-        {
-            _bits0 = _bits0 | 17179869184uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
-        {
-            _bits0 = _bits0 | 34359738368uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
-        {
-            _bits0 = _bits0 | 68719476736uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
-        {
-            _bits0 = _bits0 | 137438953472uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
-        {
-            _bits0 = _bits0 | 274877906944uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Index"))
-        {
-            _bits0 = _bits0 | 549755813888uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Range"))
-        {
-            _bits0 = _bits0 | 1099511627776uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
-        {
-            _bits0 = _bits0 | 2199023255552uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
-        {
-            _bits0 = _bits0 | 4398046511104uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
-        {
-            _bits0 = _bits0 | 8796093022208uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
-        {
-            _bits0 = _bits0 | 17592186044416uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
-        {
-            _bits0 = _bits0 | 35184372088832uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
-        {
-            _bits0 = _bits0 | 70368744177664uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
-        {
-            _bits0 = _bits0 | 140737488355328uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
-        {
-            _bits0 = _bits0 | 281474976710656uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
-        {
-            _bits0 = _bits0 | 562949953421312uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
-        {
-            _bits0 = _bits0 | 1125899906842624uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
-        {
-            _bits0 = _bits0 | 2251799813685248uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
-        {
-            _bits0 = _bits0 | 4503599627370496uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
-        {
-            _bits0 = _bits0 | 9007199254740992uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
-        {
-            _bits0 = _bits0 | 18014398509481984uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
-        {
-            _bits0 = _bits0 | 36028797018963968uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
-        {
-            _bits0 = _bits0 | 72057594037927936uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
-        {
-            _bits0 = _bits0 | 144115188075855872uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
-        {
-            _bits0 = _bits0 | 288230376151711744uL;
-        }
-    
-        if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
-        {
-            _bits0 = _bits0 | 576460752303423488uL;
-        }
-    
-    }
-
-
-    public override int GetHashCode()
-    {    
-        var hash = _bits0.GetHashCode();
-        
-        return hash;
-    }
-
-    public override bool Equals(object? obj) => obj is Members other && Equals(other);
-
-    public bool Equals(Members other)
-    {
-        return _bits0 == other._bits0
-        ;
-    }
-
-    public void AddSources(SourceProductionContext context)
-    {
-        
-        if ((_bits0 & 1uL) == 1uL)
-        {
-            context.AddSource("M_System.Collections.Generic.KeyValuePair`2.Deconstruct(`0_,`1_).g.cs", PolyfillContents.Source_M_System_Collections_Generic_KeyValuePair_2_Deconstruct__0___1__);
-        }        
-        
-        if ((_bits0 & 2uL) == 2uL)
-        {
-            context.AddSource("M_System.Collections.Generic.Queue`1.TryDequeue(`0_).g.cs", PolyfillContents.Source_M_System_Collections_Generic_Queue_1_TryDequeue__0__);
-        }        
-        
-        if ((_bits0 & 4uL) == 4uL)
-        {
-            context.AddSource("M_System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_);
-        }        
-        
-        if ((_bits0 & 8uL) == 8uL)
-        {
-            context.AddSource("M_System.MemoryExtensions.Contains``1(System.Span{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_);
-        }        
-        
-        if ((_bits0 & 16uL) == 16uL)
-        {
-            context.AddSource("M_System.String.Contains(System.Char).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_);
-        }        
-        
-        if ((_bits0 & 32uL) == 32uL)
-        {
-            context.AddSource("M_System.String.Contains(System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_String_System_StringComparison_);
-        }        
-        
-        if ((_bits0 & 64uL) == 64uL)
-        {
-            context.AddSource("M_System.String.CopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_CopyTo_System_Span_System_Char__);
-        }        
-        
-        if ((_bits0 & 128uL) == 128uL)
-        {
-            context.AddSource("M_System.String.EndsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_EndsWith_System_Char_);
-        }        
-        
-        if ((_bits0 & 256uL) == 256uL)
-        {
-            context.AddSource("M_System.String.GetHashCode(System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_GetHashCode_System_StringComparison_);
-        }        
-        
-        if ((_bits0 & 512uL) == 512uL)
-        {
-            context.AddSource("M_System.String.Replace(System.String,System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Replace_System_String_System_String_System_StringComparison_);
-        }        
-        
-        if ((_bits0 & 1024uL) == 1024uL)
-        {
-            context.AddSource("M_System.String.Split(System.Char,System.Int32,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_);
-        }        
-        
-        if ((_bits0 & 2048uL) == 2048uL)
-        {
-            context.AddSource("M_System.String.Split(System.Char,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_StringSplitOptions_);
-        }        
-        
-        if ((_bits0 & 4096uL) == 4096uL)
-        {
-            context.AddSource("M_System.String.StartsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_StartsWith_System_Char_);
-        }        
-        
-        if ((_bits0 & 8192uL) == 8192uL)
-        {
-            context.AddSource("M_System.String.TryCopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_TryCopyTo_System_Span_System_Char__);
-        }        
-        
-        if ((_bits0 & 16384uL) == 16384uL)
-        {
-            context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__);
-        }        
-        
-        if ((_bits0 & 32768uL) == 32768uL)
-        {
-            context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__);
-        }        
-        
-        if ((_bits0 & 65536uL) == 65536uL)
-        {
-            context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
-        }        
-        
-        if ((_bits0 & 131072uL) == 131072uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
-        }        
-        
-        if ((_bits0 & 262144uL) == 262144uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
-        }        
-        
-        if ((_bits0 & 524288uL) == 524288uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
-        }        
-        
-        if ((_bits0 & 1048576uL) == 1048576uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
-        }        
-        
-        if ((_bits0 & 2097152uL) == 2097152uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
-        }        
-        
-        if ((_bits0 & 4194304uL) == 4194304uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
-        }        
-        
-        if ((_bits0 & 8388608uL) == 8388608uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
-        }        
-        
-        if ((_bits0 & 16777216uL) == 16777216uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
-        }        
-        
-        if ((_bits0 & 33554432uL) == 33554432uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
-        }        
-        
-        if ((_bits0 & 67108864uL) == 67108864uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
-        }        
-        
-        if ((_bits0 & 134217728uL) == 134217728uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
-        }        
-        
-        if ((_bits0 & 268435456uL) == 268435456uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
-        }        
-        
-        if ((_bits0 & 536870912uL) == 536870912uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
-        }        
-        
-        if ((_bits0 & 1073741824uL) == 1073741824uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
-        }        
-        
-        if ((_bits0 & 2147483648uL) == 2147483648uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
-        }        
-        
-        if ((_bits0 & 4294967296uL) == 4294967296uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
-        }        
-        
-        if ((_bits0 & 8589934592uL) == 8589934592uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
-        }        
-        
-        if ((_bits0 & 17179869184uL) == 17179869184uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
-        }        
-        
-        if ((_bits0 & 34359738368uL) == 34359738368uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
-        }        
-        
-        if ((_bits0 & 68719476736uL) == 68719476736uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
-        }        
-        
-        if ((_bits0 & 137438953472uL) == 137438953472uL)
-        {
-            context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
-        }        
-        
-        if ((_bits0 & 274877906944uL) == 274877906944uL)
-        {
-            context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
-        }        
-        
-        if ((_bits0 & 549755813888uL) == 549755813888uL)
-        {
-            context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
-        }        
-        
-        if ((_bits0 & 1099511627776uL) == 1099511627776uL)
-        {
-            context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
-        }        
-        
-        if ((_bits0 & 2199023255552uL) == 2199023255552uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
-        }        
-        
-        if ((_bits0 & 4398046511104uL) == 4398046511104uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
-        }        
-        
-        if ((_bits0 & 8796093022208uL) == 8796093022208uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
-        }        
-        
-        if ((_bits0 & 17592186044416uL) == 17592186044416uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
-        }        
-        
-        if ((_bits0 & 35184372088832uL) == 35184372088832uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
-        }        
-        
-        if ((_bits0 & 70368744177664uL) == 70368744177664uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
-        }        
-        
-        if ((_bits0 & 140737488355328uL) == 140737488355328uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
-        }        
-        
-        if ((_bits0 & 281474976710656uL) == 281474976710656uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
-        }        
-        
-        if ((_bits0 & 562949953421312uL) == 562949953421312uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
-        }        
-        
-        if ((_bits0 & 1125899906842624uL) == 1125899906842624uL)
-        {
-            context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
-        }        
-        
-        if ((_bits0 & 2251799813685248uL) == 2251799813685248uL)
-        {
-            context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
-        }        
-        
-        if ((_bits0 & 4503599627370496uL) == 4503599627370496uL)
-        {
-            context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
-        }        
-        
-        if ((_bits0 & 9007199254740992uL) == 9007199254740992uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
-        }        
-        
-        if ((_bits0 & 18014398509481984uL) == 18014398509481984uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
-        }        
-        
-        if ((_bits0 & 36028797018963968uL) == 36028797018963968uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
-        }        
-        
-        if ((_bits0 & 72057594037927936uL) == 72057594037927936uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
-        }        
-        
-        if ((_bits0 & 144115188075855872uL) == 144115188075855872uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
-        }        
-        
-        if ((_bits0 & 288230376151711744uL) == 288230376151711744uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
-        }        
-        
-        if ((_bits0 & 576460752303423488uL) == 576460752303423488uL)
-        {
-            context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
-        }        
-        
-    }
+private readonly ulong _bits0 = 0uL;
+private readonly bool _hasSpanOfT;
+private readonly bool _hasReadOnlySpanOfT;
+private readonly bool _hasMemoryOfT;
+private readonly bool _hasReadOnlyMemoryOfT;
+private readonly bool _hasValueTask;
+private readonly bool _hasValueTaskOfT;
+private readonly bool _hasValueTupleOf2;
+public Members(Compilation compilation, PolyfillOptions options)
+{
+    _hasSpanOfT = compilation.GetTypeByMetadataName("System.Span`1") != null;
+    _hasReadOnlySpanOfT = compilation.GetTypeByMetadataName("System.ReadOnlySpan`1") != null;
+    _hasMemoryOfT = compilation.GetTypeByMetadataName("System.Memory`1") != null;
+    _hasReadOnlyMemoryOfT = compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1") != null;
+    _hasValueTask = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask") != null;
+    _hasValueTaskOfT = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1") != null;
+    _hasValueTupleOf2 = compilation.GetTypeByMetadataName("System.ValueTuple`2") != null;
+    if (IncludeMember(compilation, options, "M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@)"))
+        _bits0 = _bits0 | 1uL;
+    if (IncludeMember(compilation, options, "M:System.Collections.Generic.Queue`1.TryDequeue(`0@)"))
+        _bits0 = _bits0 | 2uL;
+    if (_hasMemoryOfT && _hasValueTaskOfT && IncludeMember(compilation, options, "M:System.IO.TextReader.ReadAsync(System.Memory{System.Char},System.Threading.CancellationToken)"))
+        _bits0 = _bits0 | 4uL;
+    if (IncludeMember(compilation, options, "M:System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken)"))
+        _bits0 = _bits0 | 8uL;
+    if (_hasReadOnlyMemoryOfT && _hasValueTask && IncludeMember(compilation, options, "M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken)"))
+        _bits0 = _bits0 | 16uL;
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)"))
+        _bits0 = _bits0 | 32uL;
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)"))
+        _bits0 = _bits0 | 64uL;
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)"))
+        _bits0 = _bits0 | 128uL;
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)"))
+        _bits0 = _bits0 | 256uL;
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})"))
+        _bits0 = _bits0 | 512uL;
+    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)"))
+        _bits0 = _bits0 | 1024uL;
+    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)"))
+        _bits0 = _bits0 | 2048uL;
+    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)"))
+        _bits0 = _bits0 | 4096uL;
+    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)"))
+        _bits0 = _bits0 | 8192uL;
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)"))
+        _bits0 = _bits0 | 16384uL;
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)"))
+        _bits0 = _bits0 | 32768uL;
+    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)"))
+        _bits0 = _bits0 | 65536uL;
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})"))
+        _bits0 = _bits0 | 131072uL;
+    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})"))
+        _bits0 = _bits0 | 262144uL;
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})"))
+        _bits0 = _bits0 | 524288uL;
+    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync"))
+        _bits0 = _bits0 | 1048576uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
+        _bits0 = _bits0 | 2097152uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
+        _bits0 = _bits0 | 4194304uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
+        _bits0 = _bits0 | 8388608uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
+        _bits0 = _bits0 | 16777216uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
+        _bits0 = _bits0 | 33554432uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
+        _bits0 = _bits0 | 67108864uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
+        _bits0 = _bits0 | 134217728uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
+        _bits0 = _bits0 | 268435456uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
+        _bits0 = _bits0 | 536870912uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
+        _bits0 = _bits0 | 1073741824uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
+        _bits0 = _bits0 | 2147483648uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
+        _bits0 = _bits0 | 4294967296uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
+        _bits0 = _bits0 | 8589934592uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
+        _bits0 = _bits0 | 17179869184uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
+        _bits0 = _bits0 | 34359738368uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
+        _bits0 = _bits0 | 68719476736uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
+        _bits0 = _bits0 | 137438953472uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
+        _bits0 = _bits0 | 274877906944uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
+        _bits0 = _bits0 | 549755813888uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
+        _bits0 = _bits0 | 1099511627776uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
+        _bits0 = _bits0 | 2199023255552uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
+        _bits0 = _bits0 | 4398046511104uL;
+    if (IncludeMember(compilation, options, "T:System.Index"))
+        _bits0 = _bits0 | 8796093022208uL;
+    if (_hasValueTupleOf2 && IncludeMember(compilation, options, "T:System.Range"))
+        _bits0 = _bits0 | 17592186044416uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
+        _bits0 = _bits0 | 35184372088832uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
+        _bits0 = _bits0 | 70368744177664uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
+        _bits0 = _bits0 | 140737488355328uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
+        _bits0 = _bits0 | 281474976710656uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
+        _bits0 = _bits0 | 562949953421312uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
+        _bits0 = _bits0 | 1125899906842624uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
+        _bits0 = _bits0 | 2251799813685248uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
+        _bits0 = _bits0 | 4503599627370496uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
+        _bits0 = _bits0 | 9007199254740992uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
+        _bits0 = _bits0 | 18014398509481984uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
+        _bits0 = _bits0 | 36028797018963968uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
+        _bits0 = _bits0 | 72057594037927936uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
+        _bits0 = _bits0 | 144115188075855872uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
+        _bits0 = _bits0 | 288230376151711744uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
+        _bits0 = _bits0 | 576460752303423488uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
+        _bits0 = _bits0 | 1152921504606846976uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
+        _bits0 = _bits0 | 2305843009213693952uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
+        _bits0 = _bits0 | 4611686018427387904uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
+        _bits0 = _bits0 | 9223372036854775808uL;
 }
-
+public override int GetHashCode()
+{
+    var hash = _bits0.GetHashCode();
+    return hash;
+}
+public override bool Equals(object? obj) => obj is Members other && Equals(other);
+public bool Equals(Members other) => _bits0 == other._bits0;
+public void AddSources(SourceProductionContext context)
+{
+    if ((_bits0 & 1ul) == 1ul)
+        context.AddSource("M_System.Collections.Generic.KeyValuePair`2.Deconstruct(`0_,`1_).g.cs", PolyfillContents.Source_M_System_Collections_Generic_KeyValuePair_2_Deconstruct__0___1__);
+    if ((_bits0 & 2ul) == 2ul)
+        context.AddSource("M_System.Collections.Generic.Queue`1.TryDequeue(`0_).g.cs", PolyfillContents.Source_M_System_Collections_Generic_Queue_1_TryDequeue__0__);
+    if ((_bits0 & 4ul) == 4ul)
+        context.AddSource("M_System.IO.TextReader.ReadAsync(System.Memory{System.Char},System.Threading.CancellationToken).g.cs", PolyfillContents.Source_M_System_IO_TextReader_ReadAsync_System_Memory_System_Char__System_Threading_CancellationToken_);
+    if ((_bits0 & 8ul) == 8ul)
+        context.AddSource("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs", PolyfillContents.Source_M_System_IO_TextReader_ReadToEndAsync_System_Threading_CancellationToken_);
+    if ((_bits0 & 16ul) == 16ul)
+        context.AddSource("M_System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken).g.cs", PolyfillContents.Source_M_System_IO_TextWriter_WriteAsync_System_ReadOnlyMemory_System_Char__System_Threading_CancellationToken_);
+    if ((_bits0 & 32ul) == 32ul)
+        context.AddSource("M_System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_);
+    if ((_bits0 & 64ul) == 64ul)
+        context.AddSource("M_System.MemoryExtensions.Contains``1(System.Span{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_);
+    if ((_bits0 & 128ul) == 128ul)
+        context.AddSource("M_System.String.Contains(System.Char).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_);
+    if ((_bits0 & 256ul) == 256ul)
+        context.AddSource("M_System.String.Contains(System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_String_System_StringComparison_);
+    if ((_bits0 & 512ul) == 512ul)
+        context.AddSource("M_System.String.CopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_CopyTo_System_Span_System_Char__);
+    if ((_bits0 & 1024ul) == 1024ul)
+        context.AddSource("M_System.String.EndsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_EndsWith_System_Char_);
+    if ((_bits0 & 2048ul) == 2048ul)
+        context.AddSource("M_System.String.GetHashCode(System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_GetHashCode_System_StringComparison_);
+    if ((_bits0 & 4096ul) == 4096ul)
+        context.AddSource("M_System.String.IndexOf(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_IndexOf_System_Char_System_StringComparison_);
+    if ((_bits0 & 8192ul) == 8192ul)
+        context.AddSource("M_System.String.Replace(System.String,System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Replace_System_String_System_String_System_StringComparison_);
+    if ((_bits0 & 16384ul) == 16384ul)
+        context.AddSource("M_System.String.Split(System.Char,System.Int32,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_);
+    if ((_bits0 & 32768ul) == 32768ul)
+        context.AddSource("M_System.String.Split(System.Char,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_StringSplitOptions_);
+    if ((_bits0 & 65536ul) == 65536ul)
+        context.AddSource("M_System.String.StartsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_StartsWith_System_Char_);
+    if ((_bits0 & 131072ul) == 131072ul)
+        context.AddSource("M_System.String.TryCopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_TryCopyTo_System_Span_System_Char__);
+    if ((_bits0 & 262144ul) == 262144ul)
+        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__);
+    if ((_bits0 & 524288ul) == 524288ul)
+        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__);
+    if ((_bits0 & 1048576ul) == 1048576ul)
+        context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
+    if ((_bits0 & 2097152ul) == 2097152ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
+    if ((_bits0 & 4194304ul) == 4194304ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
+    if ((_bits0 & 8388608ul) == 8388608ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
+    if ((_bits0 & 16777216ul) == 16777216ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
+    if ((_bits0 & 33554432ul) == 33554432ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
+    if ((_bits0 & 67108864ul) == 67108864ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
+    if ((_bits0 & 134217728ul) == 134217728ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
+    if ((_bits0 & 268435456ul) == 268435456ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
+    if ((_bits0 & 536870912ul) == 536870912ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
+    if ((_bits0 & 1073741824ul) == 1073741824ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
+    if ((_bits0 & 2147483648ul) == 2147483648ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
+    if ((_bits0 & 4294967296ul) == 4294967296ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
+    if ((_bits0 & 8589934592ul) == 8589934592ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
+    if ((_bits0 & 17179869184ul) == 17179869184ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
+    if ((_bits0 & 34359738368ul) == 34359738368ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
+    if ((_bits0 & 68719476736ul) == 68719476736ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
+    if ((_bits0 & 137438953472ul) == 137438953472ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
+    if ((_bits0 & 274877906944ul) == 274877906944ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
+    if ((_bits0 & 549755813888ul) == 549755813888ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
+    if ((_bits0 & 1099511627776ul) == 1099511627776ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
+    if ((_bits0 & 2199023255552ul) == 2199023255552ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
+    if ((_bits0 & 4398046511104ul) == 4398046511104ul)
+        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
+    if ((_bits0 & 8796093022208ul) == 8796093022208ul)
+        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
+    if ((_bits0 & 17592186044416ul) == 17592186044416ul)
+        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
+    if ((_bits0 & 35184372088832ul) == 35184372088832ul)
+        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
+    if ((_bits0 & 70368744177664ul) == 70368744177664ul)
+        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
+    if ((_bits0 & 140737488355328ul) == 140737488355328ul)
+        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
+    if ((_bits0 & 281474976710656ul) == 281474976710656ul)
+        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
+    if ((_bits0 & 562949953421312ul) == 562949953421312ul)
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
+    if ((_bits0 & 1125899906842624ul) == 1125899906842624ul)
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
+    if ((_bits0 & 2251799813685248ul) == 2251799813685248ul)
+        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
+    if ((_bits0 & 4503599627370496ul) == 4503599627370496ul)
+        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
+    if ((_bits0 & 9007199254740992ul) == 9007199254740992ul)
+        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
+    if ((_bits0 & 18014398509481984ul) == 18014398509481984ul)
+        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
+    if ((_bits0 & 36028797018963968ul) == 36028797018963968ul)
+        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
+    if ((_bits0 & 72057594037927936ul) == 72057594037927936ul)
+        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
+    if ((_bits0 & 144115188075855872ul) == 144115188075855872ul)
+        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
+    if ((_bits0 & 288230376151711744ul) == 288230376151711744ul)
+        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
+    if ((_bits0 & 576460752303423488ul) == 576460752303423488ul)
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
+    if ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul)
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
+    if ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul)
+        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
+    if ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
+    if ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
+}
+public string DumpAsCSharpComment()
+{
+    var sb = new StringBuilder();
+    sb.AppendLine("// HasMemoryOfT: " + _hasMemoryOfT);
+    sb.AppendLine("// HasReadOnlyMemoryOfT: " + _hasReadOnlyMemoryOfT);
+    sb.AppendLine("// HasReadOnlySpanOfT: " + _hasReadOnlySpanOfT);
+    sb.AppendLine("// HasSpanOfT: " + _hasSpanOfT);
+    sb.AppendLine("// HasValueTask: " + _hasValueTask);
+    sb.AppendLine("// HasValueTaskOfT: " + _hasValueTaskOfT);
+    sb.AppendLine("// HasValueTupleOf2: " + _hasValueTupleOf2);
+    sb.AppendLine("//");
+    sb.AppendLine("// M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@): " + ((_bits0 & 1ul) == 1ul));
+    sb.AppendLine("// M:System.Collections.Generic.Queue`1.TryDequeue(`0@): " + ((_bits0 & 2ul) == 2ul));
+    sb.AppendLine("// M:System.IO.TextReader.ReadAsync(System.Memory{System.Char},System.Threading.CancellationToken): " + ((_bits0 & 4ul) == 4ul));
+    sb.AppendLine("// M:System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken): " + ((_bits0 & 8ul) == 8ul));
+    sb.AppendLine("// M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken): " + ((_bits0 & 16ul) == 16ul));
+    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0): " + ((_bits0 & 32ul) == 32ul));
+    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.Span{``0},``0): " + ((_bits0 & 64ul) == 64ul));
+    sb.AppendLine("// M:System.String.Contains(System.Char): " + ((_bits0 & 128ul) == 128ul));
+    sb.AppendLine("// M:System.String.Contains(System.String,System.StringComparison): " + ((_bits0 & 256ul) == 256ul));
+    sb.AppendLine("// M:System.String.CopyTo(System.Span{System.Char}): " + ((_bits0 & 512ul) == 512ul));
+    sb.AppendLine("// M:System.String.EndsWith(System.Char): " + ((_bits0 & 1024ul) == 1024ul));
+    sb.AppendLine("// M:System.String.GetHashCode(System.StringComparison): " + ((_bits0 & 2048ul) == 2048ul));
+    sb.AppendLine("// M:System.String.IndexOf(System.Char,System.StringComparison): " + ((_bits0 & 4096ul) == 4096ul));
+    sb.AppendLine("// M:System.String.Replace(System.String,System.String,System.StringComparison): " + ((_bits0 & 8192ul) == 8192ul));
+    sb.AppendLine("// M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions): " + ((_bits0 & 16384ul) == 16384ul));
+    sb.AppendLine("// M:System.String.Split(System.Char,System.StringSplitOptions): " + ((_bits0 & 32768ul) == 32768ul));
+    sb.AppendLine("// M:System.String.StartsWith(System.Char): " + ((_bits0 & 65536ul) == 65536ul));
+    sb.AppendLine("// M:System.String.TryCopyTo(System.Span{System.Char}): " + ((_bits0 & 131072ul) == 131072ul));
+    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}): " + ((_bits0 & 262144ul) == 262144ul));
+    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}): " + ((_bits0 & 524288ul) == 524288ul));
+    sb.AppendLine("// M:System.Threading.CancellationTokenSource.CancelAsync: " + ((_bits0 & 1048576ul) == 1048576ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 2097152ul) == 2097152ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 4194304ul) == 4194304ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 8388608ul) == 8388608ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 16777216ul) == 16777216ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 33554432ul) == 33554432ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 67108864ul) == 67108864ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 134217728ul) == 134217728ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 268435456ul) == 268435456ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 536870912ul) == 536870912ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 1073741824ul) == 1073741824ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 2147483648ul) == 2147483648ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 4294967296ul) == 4294967296ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 8589934592ul) == 8589934592ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 17179869184ul) == 17179869184ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 34359738368ul) == 34359738368ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 68719476736ul) == 68719476736ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 137438953472ul) == 137438953472ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits0 & 274877906944ul) == 274877906944ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits0 & 549755813888ul) == 549755813888ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits0 & 1099511627776ul) == 1099511627776ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits0 & 2199023255552ul) == 2199023255552ul));
+    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits0 & 4398046511104ul) == 4398046511104ul));
+    sb.AppendLine("// T:System.Index: " + ((_bits0 & 8796093022208ul) == 8796093022208ul));
+    sb.AppendLine("// T:System.Range: " + ((_bits0 & 17592186044416ul) == 17592186044416ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits0 & 35184372088832ul) == 35184372088832ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
+    return sb.ToString();
+}
+}
 file static class PolyfillContents
 {
-    
-    public static SourceText Source_M_System_Collections_Generic_KeyValuePair_2_Deconstruct__0___1__ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_Collections_Generic_KeyValuePair_2_Deconstruct__0___1__ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System.Collections.Generic;
 
 static partial class PolyfillExtensions
@@ -663,12 +388,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_Collections_Generic_Queue_1_TryDequeue__0__ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_Collections_Generic_Queue_1_TryDequeue__0__ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -687,12 +410,77 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_IO_TextReader_ReadAsync_System_Memory_System_Char__System_Threading_CancellationToken_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Threading;
 
+static partial class PolyfillExtensions
+{
+    public static ValueTask<int> ReadAsync(this TextReader target, Memory<char> buffer, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        if (!MemoryMarshal.TryGetArray((ReadOnlyMemory<char>)buffer, out var segment))
+        {
+            segment = new(buffer.ToArray());
+        }
+
+        return new(target.ReadAsync(segment.Array!, segment.Offset, segment.Count));
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_IO_TextReader_ReadToEndAsync_System_Threading_CancellationToken_ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+
+static partial class PolyfillExtensions
+{
+    public static Task<string> ReadToEndAsync(this TextReader target, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return target.ReadToEndAsync();
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_IO_TextWriter_WriteAsync_System_ReadOnlyMemory_System_Char__System_Threading_CancellationToken_ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Threading;
+
+static partial class PolyfillExtensions
+{
+    public static ValueTask WriteAsync(this TextWriter target, ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        if (!MemoryMarshal.TryGetArray(buffer, out var segment))
+        {
+            segment = new(buffer.ToArray());
+        }
+
+        return new(target.WriteAsync(segment.Array!, segment.Offset, segment.Count));
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
 using System;
 
 static partial class PolyfillExtensions
@@ -720,12 +508,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 
 static partial class PolyfillExtensions
@@ -753,12 +539,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_Contains_System_Char_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_Contains_System_Char_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 static partial class PolyfillExtensions
 {
 	public static bool Contains(this string target, char value)
@@ -767,12 +551,10 @@ static partial class PolyfillExtensions
 	}
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_Contains_System_String_System_StringComparison_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_Contains_System_String_System_StringComparison_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 static partial class PolyfillExtensions
 {
 	public static bool Contains(this string target, string value, System.StringComparison comparisonType)
@@ -781,12 +563,10 @@ static partial class PolyfillExtensions
 	}
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_CopyTo_System_Span_System_Char__ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_CopyTo_System_Span_System_Char__ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 
 static partial class PolyfillExtensions
@@ -797,12 +577,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_EndsWith_System_Char_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_EndsWith_System_Char_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 static partial class PolyfillExtensions
 {
     public static bool EndsWith(this string target, char value)
@@ -811,12 +589,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_GetHashCode_System_StringComparison_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_GetHashCode_System_StringComparison_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 
 static partial class PolyfillExtensions
@@ -842,12 +618,22 @@ file class Helpers
         };
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_Replace_System_String_System_String_System_StringComparison_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_IndexOf_System_Char_System_StringComparison_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
+static partial class PolyfillExtensions
+{
+    public static int IndexOf(this string target, char value, System.StringComparison comparisonType)
+    {
+        return target.IndexOf(value.ToString(), comparisonType);
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_String_Replace_System_String_System_String_System_StringComparison_ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
 using System;
 using System.Text;
 
@@ -876,12 +662,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 
 static partial class PolyfillExtensions
@@ -893,12 +677,10 @@ static partial class PolyfillExtensions
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_Split_System_Char_System_StringSplitOptions_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_Split_System_Char_System_StringSplitOptions_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 
 static partial class PolyfillExtensions
@@ -910,12 +692,10 @@ static partial class PolyfillExtensions
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_StartsWith_System_Char_ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_StartsWith_System_Char_ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 static partial class PolyfillExtensions
 {
     public static bool StartsWith(this string target, char value)
@@ -924,12 +704,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_String_TryCopyTo_System_Span_System_Char__ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_String_TryCopyTo_System_Span_System_Char__ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 
 static partial class PolyfillExtensions
@@ -940,12 +718,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 using System.Text;
 
@@ -960,12 +736,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__ { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__ { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System;
 using System.Text;
 
@@ -980,12 +754,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_M_System_Threading_CancellationTokenSource_CancelAsync { get; } = SourceText.From(""""""""""
+public static SourceText Source_M_System_Threading_CancellationTokenSource_CancelAsync { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -998,12 +770,10 @@ static partial class PolyfillExtensions
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1019,12 +789,10 @@ internal sealed class AllowNullAttribute : Attribute
 {
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1035,12 +803,10 @@ namespace System.Diagnostics.CodeAnalysis;
 internal sealed class DisallowNullAttribute : Attribute
 { }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1053,12 +819,10 @@ internal sealed class DoesNotReturnAttribute : Attribute
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1079,12 +843,10 @@ internal sealed class DoesNotReturnIfAttribute : Attribute
     public bool ParameterValue { get; }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1218,12 +980,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1320,12 +1080,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1384,12 +1142,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1401,12 +1157,10 @@ internal sealed class MaybeNullAttribute : Attribute
 { 
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1427,12 +1181,10 @@ internal sealed class MaybeNullWhenAttribute : Attribute
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1459,12 +1211,10 @@ internal sealed class MemberNotNullAttribute : Attribute
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1507,12 +1257,10 @@ internal sealed class MemberNotNullWhenAttribute : Attribute
     public string[] Members { get; }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1524,12 +1272,10 @@ internal sealed class NotNullAttribute : Attribute
 {
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1549,12 +1295,10 @@ internal sealed class NotNullIfNotNullAttribute : Attribute
     public string ParameterName { get; }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1575,12 +1319,10 @@ internal sealed class NotNullWhenAttribute : Attribute
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1630,12 +1372,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1680,12 +1420,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1730,12 +1468,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1750,12 +1486,10 @@ namespace System.Diagnostics.CodeAnalysis
     { }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1826,12 +1560,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1918,12 +1650,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1966,12 +1696,10 @@ namespace System.Diagnostics.CodeAnalysis
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Diagnostics_StackTraceHiddenAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Diagnostics_StackTraceHiddenAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -1996,12 +1724,10 @@ namespace System.Diagnostics
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Index { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Index { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2154,12 +1880,10 @@ namespace System
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Range { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Range { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2276,12 +2000,10 @@ namespace System
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2312,12 +2034,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2345,12 +2065,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2393,12 +2111,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2427,12 +2143,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2473,12 +2187,10 @@ namespace System.Runtime.CompilerServices
 }
 
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2496,12 +2208,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_IsExternalInit { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_IsExternalInit { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2517,12 +2227,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2557,12 +2265,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2584,12 +2290,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2614,12 +2318,10 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2688,12 +2390,10 @@ namespace System.Runtime.InteropServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2733,12 +2433,10 @@ namespace System.Runtime.InteropServices
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2782,12 +2480,10 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2835,12 +2531,10 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2878,12 +2572,10 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2913,12 +2605,10 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_TargetPlatformAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_TargetPlatformAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2937,12 +2627,10 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -2984,12 +2672,10 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-    public static SourceText Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute { get; } = SourceText.From(""""""""""
+public static SourceText Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
 #nullable enable annotations
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -3019,7 +2705,4 @@ namespace System.Runtime.Versioning
     }
 }
 """""""""", Encoding.UTF8);
-    
-
 }
-

@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Meziantou.Polyfill;
 
+[StructLayout(LayoutKind.Auto)]
 partial struct Members
 {
     private static bool IncludeMember(Compilation compilation, PolyfillOptions options, string memberDocumentationId)
@@ -45,35 +46,6 @@ partial struct Members
 
             if (!found)
                 return false;
-        }
-
-        if (memberDocumentationId == "T:System.Range")
-        {
-            if (compilation.GetTypeByMetadataName("System.ValueTuple`2") is null)
-                return false;
-        }
-        else if (memberDocumentationId.StartsWith("M:", StringComparison.Ordinal))
-        {
-            if(memberDocumentationId.IndexOf("System.Span{", StringComparison.Ordinal) != -1)
-            {
-                if (compilation.GetTypeByMetadataName("System.Span`1") is null)
-                    return false;
-            }
-            else if (memberDocumentationId.IndexOf("System.ReadOnlySpan{", StringComparison.Ordinal) != -1)
-            {
-                if (compilation.GetTypeByMetadataName("System.ReadOnlySpan`1") is null)
-                    return false;
-            } 
-            else if(memberDocumentationId.IndexOf("System.Memory{", StringComparison.Ordinal) != -1)
-            {
-                if (compilation.GetTypeByMetadataName("System.Memory`1") is null)
-                    return false;
-            }
-            else if (memberDocumentationId.IndexOf("System.ReadOnlyMemory{", StringComparison.Ordinal) != -1)
-            {
-                if (compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1") is null)
-                    return false;
-            }
         }
 
         var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(memberDocumentationId, compilation);

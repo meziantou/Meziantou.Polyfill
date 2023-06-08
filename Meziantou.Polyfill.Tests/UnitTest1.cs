@@ -197,4 +197,40 @@ public class UnitTest1
         await cts.CancelAsync();
         Assert.True(cts.Token.IsCancellationRequested);
     }
+
+#if NET461_OR_GREATER
+    [Fact]
+    public async Task StreamWriter_WriteAsync()
+    {
+        using var sr = new System.IO.StringWriter();
+        await sr.WriteAsync("test".AsMemory(), CancellationToken.None);
+        Assert.Equal("test", sr.ToString());
+    }
+#endif
+
+    [Fact]
+    public async Task StreamReader_ReadToEndAsync()
+    {
+        using var sr = new System.IO.StringReader("test");
+        var result = await sr.ReadToEndAsync(CancellationToken.None);
+        Assert.Equal("test", result);
+    }
+
+#if NET461_OR_GREATER
+    [Fact]
+    public async Task StreamReader_ReadAsync()
+    {
+        using var sr = new System.IO.StringReader("test");
+        var buffer = new char[2];
+        var result = await sr.ReadAsync(buffer.AsMemory(), CancellationToken.None);
+        Assert.Equal(2, result);
+        Assert.Equal("te", new string(buffer));
+    }
+#endif
+
+    [Fact]
+    public void String_IndexOf_Char_StringComparison()
+    {
+        Assert.Equal(2, "test".IndexOf('S', StringComparison.OrdinalIgnoreCase));
+    }
 }
