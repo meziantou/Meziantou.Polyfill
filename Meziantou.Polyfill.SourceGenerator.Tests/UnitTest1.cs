@@ -46,6 +46,48 @@ public class UnitTest1
         await GenerateFiles("", assemblyLocations: assemblies.ToArray());
     }
 
+    [Fact]
+    public async Task IsIncremental()
+    {
+        var assemblies = (await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/"))
+            .Select(loc => MetadataReference.CreateFromFile(loc))
+            .ToArray();
+
+        var compilation = CSharpCompilation.Create("TestProject",
+           new[] { CSharpSyntaxTree.ParseText("struct Test { }") },
+           assemblies,
+           new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+        var generator = new PolyfillGenerator();
+        var sourceGenerator = generator.AsSourceGenerator();
+
+        // trackIncrementalGeneratorSteps allows to report info about each step of the generator
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            generators: new ISourceGenerator[] { sourceGenerator },
+            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
+            {
+                ["build_property.MeziantouPolyfill_IncludedPolyfills"] = "*",
+                ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = "test",
+            }),
+            driverOptions: new GeneratorDriverOptions(default, trackIncrementalGeneratorSteps: true));
+
+        // Run the generator
+        driver = driver.RunGenerators(compilation);
+
+        // Update the compilation and rerun the generator
+        compilation = compilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText("// dummy"));
+        driver = driver.RunGenerators(compilation);
+
+        // Assert the driver doesn't recompute the output
+        var result = driver.GetRunResult().Results.Single();
+        var allOutputs = result.TrackedOutputSteps.SelectMany(outputStep => outputStep.Value).SelectMany(output => output.Outputs);
+        Assert.Collection(allOutputs, output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason));
+
+        // Assert the driver use the cached result
+        var assemblyNameOutputs = result.TrackedSteps["Members"].Single().Outputs;
+        Assert.Collection(assemblyNameOutputs, output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason));
+    }
+
     public static TheoryData<PackageReference[]> GetConfigurations()
     {
         return new TheoryData<PackageReference[]>
@@ -95,7 +137,6 @@ public class UnitTest1
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
-
             }));
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);

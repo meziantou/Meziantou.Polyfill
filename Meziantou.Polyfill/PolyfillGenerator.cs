@@ -12,14 +12,15 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
     {
         var options = context.AnalyzerConfigOptionsProvider.Select((options, cancellationToken) =>
         {
-            return new PolyfillOptions()
-            {
-                IncludedPolyfills = GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_IncludedPolyfills"),
-                ExcludedPolyfills = GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_ExcludedPolyfills"),
-            };
-        });
+            return new PolyfillOptions(
+                included: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_IncludedPolyfills"),
+                excluded: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_ExcludedPolyfills"));
+        }).WithTrackingName("Options");
 
-        var provider = context.CompilationProvider.Combine(options).Select((provider, cancellationToken) => new Members(provider.Left, provider.Right));
+        var provider = context.CompilationProvider
+            .Combine(options)
+            .Select((provider, cancellationToken) => new Members(provider.Left, provider.Right))
+            .WithTrackingName("Members");
 
         context.RegisterImplementationSourceOutput(provider, (context, members) =>
         {
