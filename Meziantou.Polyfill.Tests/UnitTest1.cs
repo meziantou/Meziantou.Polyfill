@@ -177,19 +177,19 @@ public class UnitTest1
         Assert.True("test".TryCopyTo(data.AsSpan()));
         Assert.Equal("test".ToCharArray(), data);
     }
-    
+
     [Fact]
     public void StringBuilder_Append_ReadonlySpan()
     {
         Assert.Equal("test", new StringBuilder().Append("test".AsSpan()).ToString());
     }
-    
+
     [Fact]
     public void StringBuilder_Append_ReadonlyMemory()
     {
         Assert.Equal("test", new StringBuilder().Append("test".AsMemory()).ToString());
     }
-    
+
     [Fact]
     public async Task CancellationTokenSource_CancelAsync()
     {
@@ -232,5 +232,45 @@ public class UnitTest1
     public void String_IndexOf_Char_StringComparison()
     {
         Assert.Equal(2, "test".IndexOf('S', StringComparison.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public void HashCode_Combine()
+    {
+        Assert.Equal(HashCode.Combine("foo", "bar"), HashCode.Combine("foo", "bar"));
+        Assert.NotEqual(0, HashCode.Combine("foo", "bar"));
+    }
+
+    [Fact]
+    public void Enumerable_Order()
+    {
+        Assert.Equal(new[] { 1, 2, 3 }, new[] { 2, 1, 3 }.Order().ToArray());
+        Assert.Equal(new[] { 1, 2, 3 }, new[] { 2, 1, 3 }.Order(Comparer<int>.Default).ToArray());
+    }
+
+    [Fact]
+    public void Enumerable_OrderDescending()
+    {
+        Assert.Equal(new[] { 3, 2, 1 }, new[] { 2, 1, 3 }.OrderDescending().ToArray());
+        Assert.Equal(new[] { 3, 2, 1 }, new[] { 2, 1, 3 }.OrderDescending(Comparer<int>.Default).ToArray());
+    }
+
+    [Fact]
+    public void Enumerable_DistinctBy()
+    {
+        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_=>_).ToArray());
+        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_=>_, EqualityComparer<int>.Default).ToArray());
+    }
+
+    [Fact]
+    public void String_ReplaceLineEndings()
+    {
+        Assert.Equal("\n\n\n", "\r\n\n\f".ReplaceLineEndings("\n"));
+    }
+
+    [Fact]
+    public void String_ReplaceLineEndings2()
+    {
+        Assert.Equal("\r\n\r\n\r\n", "\r\n\n\f".ReplaceLineEndings("\r\n"));
     }
 }
