@@ -151,7 +151,7 @@ public class UnitTest1
         {
             var tree = runResult.GeneratedTrees.FirstOrDefault(tree => tree.FilePath == "Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs");
             var diags = string.Join("\n", result.Diagnostics);
-            Assert.True(result.Success, "Project should build build:\n" + diags + "\n" + tree);
+            Assert.True(result.Success, "Compilation error:\n" + diags + "\n" + tree);
             Assert.Empty(result.Diagnostics);
         }
 

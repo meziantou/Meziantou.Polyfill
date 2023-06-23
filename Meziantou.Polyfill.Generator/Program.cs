@@ -66,7 +66,6 @@ sb.AppendLine($"private readonly bool _hasMemoryOfT;");
 sb.AppendLine($"private readonly bool _hasReadOnlyMemoryOfT;");
 sb.AppendLine($"private readonly bool _hasValueTask;");
 sb.AppendLine($"private readonly bool _hasValueTaskOfT;");
-sb.AppendLine($"private readonly bool _hasValueTupleOf2;");
 
 sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
 sb.AppendLine("{");
@@ -83,8 +82,6 @@ if (polyfills.Any(p => p.PolyfillData.RequiresValueTask))
     sb.AppendLine("    _hasValueTask = compilation.GetTypeByMetadataName(\"System.Threading.Tasks.ValueTask\") != null;");
 if (polyfills.Any(p => p.PolyfillData.RequiresValueTaskOfT))
     sb.AppendLine("    _hasValueTaskOfT = compilation.GetTypeByMetadataName(\"System.Threading.Tasks.ValueTask`1\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresValueTupleOf2))
-    sb.AppendLine("    _hasValueTupleOf2 = compilation.GetTypeByMetadataName(\"System.ValueTuple`2\") != null;");
 
 foreach (var polyfill in polyfills)
 {
@@ -106,8 +103,6 @@ foreach (var polyfill in polyfills)
             result += "_hasValueTask && ";
         if (data.RequiresValueTaskOfT)
             result += "_hasValueTaskOfT && ";
-        if (data.RequiresValueTupleOf2)
-            result += "_hasValueTupleOf2 && ";
         return result;
     }
 }
@@ -155,7 +150,6 @@ sb.AppendLine("    sb.AppendLine(\"// HasReadOnlySpanOfT: \" + _hasReadOnlySpanO
 sb.AppendLine("    sb.AppendLine(\"// HasSpanOfT: \" + _hasSpanOfT);");
 sb.AppendLine("    sb.AppendLine(\"// HasValueTask: \" + _hasValueTask);");
 sb.AppendLine("    sb.AppendLine(\"// HasValueTaskOfT: \" + _hasValueTaskOfT);");
-sb.AppendLine("    sb.AppendLine(\"// HasValueTupleOf2: \" + _hasValueTupleOf2);");
 sb.AppendLine("    sb.AppendLine(\"//\");");
 foreach (var polyfill in polyfills)
 {

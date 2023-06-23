@@ -15,7 +15,6 @@ internal sealed class PolyfillData
     public bool RequiresReadOnlyMemory { get; set; }
     public bool RequiresValueTask { get; set; }
     public bool RequiresValueTaskOfT { get; set; }
-    public bool RequiresValueTupleOf2 { get; set; }
 
     public static PolyfillData Get(string content)
     {
@@ -54,7 +53,6 @@ internal sealed class PolyfillData
             data.RequiresReadOnlyMemory |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1"));
             data.RequiresValueTask |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask"));
             data.RequiresValueTaskOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1"));
-            data.RequiresValueTupleOf2 |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.ValueTuple`2"));
         }
 
         return data;

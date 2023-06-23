@@ -1,4 +1,4 @@
-// Polyfills: 73
+// Polyfills: 83
 #nullable enable
 using System;
 using System.Text;
@@ -17,7 +17,6 @@ private readonly bool _hasMemoryOfT;
 private readonly bool _hasReadOnlyMemoryOfT;
 private readonly bool _hasValueTask;
 private readonly bool _hasValueTaskOfT;
-private readonly bool _hasValueTupleOf2;
 public Members(Compilation compilation, PolyfillOptions options)
 {
     _hasSpanOfT = compilation.GetTypeByMetadataName("System.Span`1") != null;
@@ -26,7 +25,6 @@ public Members(Compilation compilation, PolyfillOptions options)
     _hasReadOnlyMemoryOfT = compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1") != null;
     _hasValueTask = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask") != null;
     _hasValueTaskOfT = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1") != null;
-    _hasValueTupleOf2 = compilation.GetTypeByMetadataName("System.ValueTuple`2") != null;
     if (IncludeMember(compilation, options, "M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@)"))
         _bits0 = _bits0 | 1uL;
     if (IncludeMember(compilation, options, "M:System.Collections.Generic.Queue`1.TryDequeue(`0@)"))
@@ -49,130 +47,150 @@ public Members(Compilation compilation, PolyfillOptions options)
         _bits0 = _bits0 | 512uL;
     if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})"))
         _bits0 = _bits0 | 1024uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})"))
         _bits0 = _bits0 | 2048uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)"))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)"))
         _bits0 = _bits0 | 4096uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)"))
         _bits0 = _bits0 | 8192uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)"))
         _bits0 = _bits0 | 16384uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})"))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)"))
         _bits0 = _bits0 | 32768uL;
-    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})"))
         _bits0 = _bits0 | 65536uL;
-    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)"))
         _bits0 = _bits0 | 131072uL;
-    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)"))
         _bits0 = _bits0 | 262144uL;
-    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)"))
         _bits0 = _bits0 | 524288uL;
-    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings(System.String)"))
+    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)"))
         _bits0 = _bits0 | 1048576uL;
-    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings"))
+    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings(System.String)"))
         _bits0 = _bits0 | 2097152uL;
-    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)"))
+    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings"))
         _bits0 = _bits0 | 4194304uL;
-    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)"))
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)"))
         _bits0 = _bits0 | 8388608uL;
-    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)"))
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)"))
         _bits0 = _bits0 | 16777216uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})"))
+    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)"))
         _bits0 = _bits0 | 33554432uL;
-    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})"))
         _bits0 = _bits0 | 67108864uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})"))
+    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})"))
         _bits0 = _bits0 | 134217728uL;
-    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync"))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})"))
         _bits0 = _bits0 | 268435456uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
+    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync"))
         _bits0 = _bits0 | 536870912uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
         _bits0 = _bits0 | 1073741824uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
         _bits0 = _bits0 | 2147483648uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
         _bits0 = _bits0 | 4294967296uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
         _bits0 = _bits0 | 8589934592uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
         _bits0 = _bits0 | 17179869184uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
         _bits0 = _bits0 | 34359738368uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
         _bits0 = _bits0 | 68719476736uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
         _bits0 = _bits0 | 137438953472uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
         _bits0 = _bits0 | 274877906944uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
         _bits0 = _bits0 | 549755813888uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
         _bits0 = _bits0 | 1099511627776uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
         _bits0 = _bits0 | 2199023255552uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
         _bits0 = _bits0 | 4398046511104uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
         _bits0 = _bits0 | 8796093022208uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
         _bits0 = _bits0 | 17592186044416uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
         _bits0 = _bits0 | 35184372088832uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
         _bits0 = _bits0 | 70368744177664uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
         _bits0 = _bits0 | 140737488355328uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
         _bits0 = _bits0 | 281474976710656uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
         _bits0 = _bits0 | 562949953421312uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
         _bits0 = _bits0 | 1125899906842624uL;
-    if (IncludeMember(compilation, options, "T:System.HashCode"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
         _bits0 = _bits0 | 2251799813685248uL;
-    if (IncludeMember(compilation, options, "T:System.Index"))
+    if (IncludeMember(compilation, options, "T:System.HashCode"))
         _bits0 = _bits0 | 4503599627370496uL;
-    if (_hasValueTupleOf2 && IncludeMember(compilation, options, "T:System.Range"))
+    if (IncludeMember(compilation, options, "T:System.Index"))
         _bits0 = _bits0 | 9007199254740992uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Range"))
         _bits0 = _bits0 | 18014398509481984uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
         _bits0 = _bits0 | 36028797018963968uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
         _bits0 = _bits0 | 72057594037927936uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
         _bits0 = _bits0 | 144115188075855872uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
         _bits0 = _bits0 | 288230376151711744uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
         _bits0 = _bits0 | 576460752303423488uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
         _bits0 = _bits0 | 1152921504606846976uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
         _bits0 = _bits0 | 2305843009213693952uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
         _bits0 = _bits0 | 4611686018427387904uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
         _bits0 = _bits0 | 9223372036854775808uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
         _bits1 = _bits1 | 1uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.TupleElementNamesAttribute"))
         _bits1 = _bits1 | 2uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
         _bits1 = _bits1 | 4uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
         _bits1 = _bits1 | 8uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
         _bits1 = _bits1 | 16uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
         _bits1 = _bits1 | 32uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
         _bits1 = _bits1 | 64uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
         _bits1 = _bits1 | 128uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
         _bits1 = _bits1 | 256uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
+        _bits1 = _bits1 | 512uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
+        _bits1 = _bits1 | 1024uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple"))
+        _bits1 = _bits1 | 2048uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`1"))
+        _bits1 = _bits1 | 4096uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`2"))
+        _bits1 = _bits1 | 8192uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`3"))
+        _bits1 = _bits1 | 16384uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`4"))
+        _bits1 = _bits1 | 32768uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`5"))
+        _bits1 = _bits1 | 65536uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`6"))
+        _bits1 = _bits1 | 131072uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`7"))
+        _bits1 = _bits1 | 262144uL;
 }
 public override int GetHashCode()
 {
@@ -207,129 +225,149 @@ public void AddSources(SourceProductionContext context)
     if ((_bits0 & 1024ul) == 1024ul)
         context.AddSource("M_System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Order__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IComparer___0__);
     if ((_bits0 & 2048ul) == 2048ul)
-        context.AddSource("M_System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_);
+        context.AddSource("M_System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Zip__2_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__);
     if ((_bits0 & 4096ul) == 4096ul)
-        context.AddSource("M_System.MemoryExtensions.Contains``1(System.Span{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_);
+        context.AddSource("M_System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_);
     if ((_bits0 & 8192ul) == 8192ul)
-        context.AddSource("M_System.String.Contains(System.Char).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_);
+        context.AddSource("M_System.MemoryExtensions.Contains``1(System.Span{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_);
     if ((_bits0 & 16384ul) == 16384ul)
-        context.AddSource("M_System.String.Contains(System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_String_System_StringComparison_);
+        context.AddSource("M_System.String.Contains(System.Char).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_);
     if ((_bits0 & 32768ul) == 32768ul)
-        context.AddSource("M_System.String.CopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_CopyTo_System_Span_System_Char__);
+        context.AddSource("M_System.String.Contains(System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_String_System_StringComparison_);
     if ((_bits0 & 65536ul) == 65536ul)
-        context.AddSource("M_System.String.EndsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_EndsWith_System_Char_);
+        context.AddSource("M_System.String.CopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_CopyTo_System_Span_System_Char__);
     if ((_bits0 & 131072ul) == 131072ul)
-        context.AddSource("M_System.String.GetHashCode(System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_GetHashCode_System_StringComparison_);
+        context.AddSource("M_System.String.EndsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_EndsWith_System_Char_);
     if ((_bits0 & 262144ul) == 262144ul)
-        context.AddSource("M_System.String.IndexOf(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_IndexOf_System_Char_System_StringComparison_);
+        context.AddSource("M_System.String.GetHashCode(System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_GetHashCode_System_StringComparison_);
     if ((_bits0 & 524288ul) == 524288ul)
-        context.AddSource("M_System.String.Replace(System.String,System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Replace_System_String_System_String_System_StringComparison_);
+        context.AddSource("M_System.String.IndexOf(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_IndexOf_System_Char_System_StringComparison_);
     if ((_bits0 & 1048576ul) == 1048576ul)
-        context.AddSource("M_System.String.ReplaceLineEndings(System.String).g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings_System_String_);
+        context.AddSource("M_System.String.Replace(System.String,System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Replace_System_String_System_String_System_StringComparison_);
     if ((_bits0 & 2097152ul) == 2097152ul)
-        context.AddSource("M_System.String.ReplaceLineEndings.g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings);
+        context.AddSource("M_System.String.ReplaceLineEndings(System.String).g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings_System_String_);
     if ((_bits0 & 4194304ul) == 4194304ul)
-        context.AddSource("M_System.String.Split(System.Char,System.Int32,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_);
+        context.AddSource("M_System.String.ReplaceLineEndings.g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings);
     if ((_bits0 & 8388608ul) == 8388608ul)
-        context.AddSource("M_System.String.Split(System.Char,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_StringSplitOptions_);
+        context.AddSource("M_System.String.Split(System.Char,System.Int32,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_);
     if ((_bits0 & 16777216ul) == 16777216ul)
-        context.AddSource("M_System.String.StartsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_StartsWith_System_Char_);
+        context.AddSource("M_System.String.Split(System.Char,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_StringSplitOptions_);
     if ((_bits0 & 33554432ul) == 33554432ul)
-        context.AddSource("M_System.String.TryCopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_TryCopyTo_System_Span_System_Char__);
+        context.AddSource("M_System.String.StartsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_StartsWith_System_Char_);
     if ((_bits0 & 67108864ul) == 67108864ul)
-        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__);
+        context.AddSource("M_System.String.TryCopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_TryCopyTo_System_Span_System_Char__);
     if ((_bits0 & 134217728ul) == 134217728ul)
-        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__);
+        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__);
     if ((_bits0 & 268435456ul) == 268435456ul)
-        context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
+        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__);
     if ((_bits0 & 536870912ul) == 536870912ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
+        context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
     if ((_bits0 & 1073741824ul) == 1073741824ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
     if ((_bits0 & 2147483648ul) == 2147483648ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
     if ((_bits0 & 4294967296ul) == 4294967296ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
     if ((_bits0 & 8589934592ul) == 8589934592ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
     if ((_bits0 & 17179869184ul) == 17179869184ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
     if ((_bits0 & 34359738368ul) == 34359738368ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
     if ((_bits0 & 68719476736ul) == 68719476736ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
     if ((_bits0 & 137438953472ul) == 137438953472ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
     if ((_bits0 & 274877906944ul) == 274877906944ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
     if ((_bits0 & 549755813888ul) == 549755813888ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
     if ((_bits0 & 1099511627776ul) == 1099511627776ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
     if ((_bits0 & 2199023255552ul) == 2199023255552ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
     if ((_bits0 & 4398046511104ul) == 4398046511104ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
     if ((_bits0 & 8796093022208ul) == 8796093022208ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
     if ((_bits0 & 17592186044416ul) == 17592186044416ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
     if ((_bits0 & 35184372088832ul) == 35184372088832ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
     if ((_bits0 & 70368744177664ul) == 70368744177664ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
     if ((_bits0 & 140737488355328ul) == 140737488355328ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
     if ((_bits0 & 281474976710656ul) == 281474976710656ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
     if ((_bits0 & 562949953421312ul) == 562949953421312ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
     if ((_bits0 & 1125899906842624ul) == 1125899906842624ul)
-        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
     if ((_bits0 & 2251799813685248ul) == 2251799813685248ul)
-        context.AddSource("T_System.HashCode.g.cs", PolyfillContents.Source_T_System_HashCode);
+        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
     if ((_bits0 & 4503599627370496ul) == 4503599627370496ul)
-        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
+        context.AddSource("T_System.HashCode.g.cs", PolyfillContents.Source_T_System_HashCode);
     if ((_bits0 & 9007199254740992ul) == 9007199254740992ul)
-        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
+        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
     if ((_bits0 & 18014398509481984ul) == 18014398509481984ul)
-        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
+        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
     if ((_bits0 & 36028797018963968ul) == 36028797018963968ul)
-        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
     if ((_bits0 & 72057594037927936ul) == 72057594037927936ul)
-        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
     if ((_bits0 & 144115188075855872ul) == 144115188075855872ul)
-        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
     if ((_bits0 & 288230376151711744ul) == 288230376151711744ul)
-        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
     if ((_bits0 & 576460752303423488ul) == 576460752303423488ul)
-        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
     if ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul)
-        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
     if ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul)
-        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
     if ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul)
-        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
     if ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul)
-        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
     if ((_bits1 & 1ul) == 1ul)
-        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
     if ((_bits1 & 2ul) == 2ul)
-        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
+        context.AddSource("T_System.Runtime.CompilerServices.TupleElementNamesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_TupleElementNamesAttribute);
     if ((_bits1 & 4ul) == 4ul)
-        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
+        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
     if ((_bits1 & 8ul) == 8ul)
-        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
+        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
     if ((_bits1 & 16ul) == 16ul)
-        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
+        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
     if ((_bits1 & 32ul) == 32ul)
-        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
+        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
     if ((_bits1 & 64ul) == 64ul)
-        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
     if ((_bits1 & 128ul) == 128ul)
-        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
     if ((_bits1 & 256ul) == 256ul)
+        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
+    if ((_bits1 & 512ul) == 512ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
+    if ((_bits1 & 1024ul) == 1024ul)
         context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
+    if ((_bits1 & 2048ul) == 2048ul)
+        context.AddSource("T_System.ValueTuple.g.cs", PolyfillContents.Source_T_System_ValueTuple);
+    if ((_bits1 & 4096ul) == 4096ul)
+        context.AddSource("T_System.ValueTuple`1.g.cs", PolyfillContents.Source_T_System_ValueTuple_1);
+    if ((_bits1 & 8192ul) == 8192ul)
+        context.AddSource("T_System.ValueTuple`2.g.cs", PolyfillContents.Source_T_System_ValueTuple_2);
+    if ((_bits1 & 16384ul) == 16384ul)
+        context.AddSource("T_System.ValueTuple`3.g.cs", PolyfillContents.Source_T_System_ValueTuple_3);
+    if ((_bits1 & 32768ul) == 32768ul)
+        context.AddSource("T_System.ValueTuple`4.g.cs", PolyfillContents.Source_T_System_ValueTuple_4);
+    if ((_bits1 & 65536ul) == 65536ul)
+        context.AddSource("T_System.ValueTuple`5.g.cs", PolyfillContents.Source_T_System_ValueTuple_5);
+    if ((_bits1 & 131072ul) == 131072ul)
+        context.AddSource("T_System.ValueTuple`6.g.cs", PolyfillContents.Source_T_System_ValueTuple_6);
+    if ((_bits1 & 262144ul) == 262144ul)
+        context.AddSource("T_System.ValueTuple`7.g.cs", PolyfillContents.Source_T_System_ValueTuple_7);
 }
 public string DumpAsCSharpComment()
 {
@@ -340,7 +378,6 @@ public string DumpAsCSharpComment()
     sb.AppendLine("// HasSpanOfT: " + _hasSpanOfT);
     sb.AppendLine("// HasValueTask: " + _hasValueTask);
     sb.AppendLine("// HasValueTaskOfT: " + _hasValueTaskOfT);
-    sb.AppendLine("// HasValueTupleOf2: " + _hasValueTupleOf2);
     sb.AppendLine("//");
     sb.AppendLine("// M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@): " + ((_bits0 & 1ul) == 1ul));
     sb.AppendLine("// M:System.Collections.Generic.Queue`1.TryDequeue(`0@): " + ((_bits0 & 2ul) == 2ul));
@@ -353,68 +390,78 @@ public string DumpAsCSharpComment()
     sb.AppendLine("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}): " + ((_bits0 & 256ul) == 256ul));
     sb.AppendLine("// M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0}): " + ((_bits0 & 512ul) == 512ul));
     sb.AppendLine("// M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}): " + ((_bits0 & 1024ul) == 1024ul));
-    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0): " + ((_bits0 & 2048ul) == 2048ul));
-    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.Span{``0},``0): " + ((_bits0 & 4096ul) == 4096ul));
-    sb.AppendLine("// M:System.String.Contains(System.Char): " + ((_bits0 & 8192ul) == 8192ul));
-    sb.AppendLine("// M:System.String.Contains(System.String,System.StringComparison): " + ((_bits0 & 16384ul) == 16384ul));
-    sb.AppendLine("// M:System.String.CopyTo(System.Span{System.Char}): " + ((_bits0 & 32768ul) == 32768ul));
-    sb.AppendLine("// M:System.String.EndsWith(System.Char): " + ((_bits0 & 65536ul) == 65536ul));
-    sb.AppendLine("// M:System.String.GetHashCode(System.StringComparison): " + ((_bits0 & 131072ul) == 131072ul));
-    sb.AppendLine("// M:System.String.IndexOf(System.Char,System.StringComparison): " + ((_bits0 & 262144ul) == 262144ul));
-    sb.AppendLine("// M:System.String.Replace(System.String,System.String,System.StringComparison): " + ((_bits0 & 524288ul) == 524288ul));
-    sb.AppendLine("// M:System.String.ReplaceLineEndings(System.String): " + ((_bits0 & 1048576ul) == 1048576ul));
-    sb.AppendLine("// M:System.String.ReplaceLineEndings: " + ((_bits0 & 2097152ul) == 2097152ul));
-    sb.AppendLine("// M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions): " + ((_bits0 & 4194304ul) == 4194304ul));
-    sb.AppendLine("// M:System.String.Split(System.Char,System.StringSplitOptions): " + ((_bits0 & 8388608ul) == 8388608ul));
-    sb.AppendLine("// M:System.String.StartsWith(System.Char): " + ((_bits0 & 16777216ul) == 16777216ul));
-    sb.AppendLine("// M:System.String.TryCopyTo(System.Span{System.Char}): " + ((_bits0 & 33554432ul) == 33554432ul));
-    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}): " + ((_bits0 & 67108864ul) == 67108864ul));
-    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}): " + ((_bits0 & 134217728ul) == 134217728ul));
-    sb.AppendLine("// M:System.Threading.CancellationTokenSource.CancelAsync: " + ((_bits0 & 268435456ul) == 268435456ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 536870912ul) == 536870912ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 1073741824ul) == 1073741824ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 2147483648ul) == 2147483648ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 4294967296ul) == 4294967296ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 8589934592ul) == 8589934592ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 17179869184ul) == 17179869184ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 34359738368ul) == 34359738368ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 68719476736ul) == 68719476736ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 137438953472ul) == 137438953472ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 274877906944ul) == 274877906944ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 549755813888ul) == 549755813888ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 1099511627776ul) == 1099511627776ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 2199023255552ul) == 2199023255552ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 4398046511104ul) == 4398046511104ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 8796093022208ul) == 8796093022208ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 17592186044416ul) == 17592186044416ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 35184372088832ul) == 35184372088832ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
-    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
-    sb.AppendLine("// T:System.HashCode: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
-    sb.AppendLine("// T:System.Index: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
-    sb.AppendLine("// T:System.Range: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
-    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits1 & 1ul) == 1ul));
-    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits1 & 2ul) == 2ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits1 & 4ul) == 4ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits1 & 8ul) == 8ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits1 & 16ul) == 16ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits1 & 32ul) == 32ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits1 & 64ul) == 64ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits1 & 128ul) == 128ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits1 & 256ul) == 256ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}): " + ((_bits0 & 2048ul) == 2048ul));
+    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0): " + ((_bits0 & 4096ul) == 4096ul));
+    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.Span{``0},``0): " + ((_bits0 & 8192ul) == 8192ul));
+    sb.AppendLine("// M:System.String.Contains(System.Char): " + ((_bits0 & 16384ul) == 16384ul));
+    sb.AppendLine("// M:System.String.Contains(System.String,System.StringComparison): " + ((_bits0 & 32768ul) == 32768ul));
+    sb.AppendLine("// M:System.String.CopyTo(System.Span{System.Char}): " + ((_bits0 & 65536ul) == 65536ul));
+    sb.AppendLine("// M:System.String.EndsWith(System.Char): " + ((_bits0 & 131072ul) == 131072ul));
+    sb.AppendLine("// M:System.String.GetHashCode(System.StringComparison): " + ((_bits0 & 262144ul) == 262144ul));
+    sb.AppendLine("// M:System.String.IndexOf(System.Char,System.StringComparison): " + ((_bits0 & 524288ul) == 524288ul));
+    sb.AppendLine("// M:System.String.Replace(System.String,System.String,System.StringComparison): " + ((_bits0 & 1048576ul) == 1048576ul));
+    sb.AppendLine("// M:System.String.ReplaceLineEndings(System.String): " + ((_bits0 & 2097152ul) == 2097152ul));
+    sb.AppendLine("// M:System.String.ReplaceLineEndings: " + ((_bits0 & 4194304ul) == 4194304ul));
+    sb.AppendLine("// M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions): " + ((_bits0 & 8388608ul) == 8388608ul));
+    sb.AppendLine("// M:System.String.Split(System.Char,System.StringSplitOptions): " + ((_bits0 & 16777216ul) == 16777216ul));
+    sb.AppendLine("// M:System.String.StartsWith(System.Char): " + ((_bits0 & 33554432ul) == 33554432ul));
+    sb.AppendLine("// M:System.String.TryCopyTo(System.Span{System.Char}): " + ((_bits0 & 67108864ul) == 67108864ul));
+    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}): " + ((_bits0 & 134217728ul) == 134217728ul));
+    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}): " + ((_bits0 & 268435456ul) == 268435456ul));
+    sb.AppendLine("// M:System.Threading.CancellationTokenSource.CancelAsync: " + ((_bits0 & 536870912ul) == 536870912ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 1073741824ul) == 1073741824ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 2147483648ul) == 2147483648ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 4294967296ul) == 4294967296ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 8589934592ul) == 8589934592ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 17179869184ul) == 17179869184ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 34359738368ul) == 34359738368ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 68719476736ul) == 68719476736ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 137438953472ul) == 137438953472ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 274877906944ul) == 274877906944ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 549755813888ul) == 549755813888ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 1099511627776ul) == 1099511627776ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 2199023255552ul) == 2199023255552ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 4398046511104ul) == 4398046511104ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 8796093022208ul) == 8796093022208ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 17592186044416ul) == 17592186044416ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 35184372088832ul) == 35184372088832ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
+    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
+    sb.AppendLine("// T:System.HashCode: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
+    sb.AppendLine("// T:System.Index: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
+    sb.AppendLine("// T:System.Range: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits1 & 1ul) == 1ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.TupleElementNamesAttribute: " + ((_bits1 & 2ul) == 2ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits1 & 4ul) == 4ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits1 & 8ul) == 8ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits1 & 16ul) == 16ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits1 & 32ul) == 32ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits1 & 64ul) == 64ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits1 & 128ul) == 128ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits1 & 256ul) == 256ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits1 & 512ul) == 512ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits1 & 1024ul) == 1024ul));
+    sb.AppendLine("// T:System.ValueTuple: " + ((_bits1 & 2048ul) == 2048ul));
+    sb.AppendLine("// T:System.ValueTuple`1: " + ((_bits1 & 4096ul) == 4096ul));
+    sb.AppendLine("// T:System.ValueTuple`2: " + ((_bits1 & 8192ul) == 8192ul));
+    sb.AppendLine("// T:System.ValueTuple`3: " + ((_bits1 & 16384ul) == 16384ul));
+    sb.AppendLine("// T:System.ValueTuple`4: " + ((_bits1 & 32768ul) == 32768ul));
+    sb.AppendLine("// T:System.ValueTuple`5: " + ((_bits1 & 65536ul) == 65536ul));
+    sb.AppendLine("// T:System.ValueTuple`6: " + ((_bits1 & 131072ul) == 131072ul));
+    sb.AppendLine("// T:System.ValueTuple`7: " + ((_bits1 & 262144ul) == 262144ul));
     return sb.ToString();
 }
 }
@@ -623,6 +670,21 @@ static partial class PolyfillExtensions
     public static IOrderedEnumerable<T> Order<T>(this IEnumerable<T> source, IComparer<T>? comparer)
     {
         return source.OrderBy(_ => _, comparer);
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_Linq_Enumerable_Zip__2_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections.Generic;
+using System.Linq;
+
+static partial class PolyfillExtensions
+{
+    public static IEnumerable<(TFirst left, TSecond right)> Zip<TFirst, TSecond>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second)
+    {
+        return first.Zip(second, (x, y) => (x, y));
     }
 }
 """""""""", Encoding.UTF8);
@@ -3031,6 +3093,65 @@ namespace System.Runtime.CompilerServices
     }
 }
 """""""""", Encoding.UTF8);
+public static SourceText Source_T_System_Runtime_CompilerServices_TupleElementNamesAttribute { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using System.Collections.Generic;
+
+namespace System.Runtime.CompilerServices
+{
+    /// <summary>
+    /// Indicates that the use of <see cref="ValueTuple"/> on a member is meant to be treated as a tuple with element names.
+    /// </summary>
+    [CLSCompliant(false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Event)]
+    internal sealed class TupleElementNamesAttribute : Attribute
+    {
+        private readonly string?[] _transformNames;
+
+        /// <summary>
+        /// Initializes a new instance of the <see
+        /// cref="TupleElementNamesAttribute"/> class.
+        /// </summary>
+        /// <param name="transformNames">
+        /// Specifies, in a pre-order depth-first traversal of a type's
+        /// construction, which <see cref="ValueType"/> occurrences are
+        /// meant to carry element names.
+        /// </param>
+        /// <remarks>
+        /// This constructor is meant to be used on types that contain an
+        /// instantiation of <see cref="ValueType"/> that contains
+        /// element names.  For instance, if <c>C</c> is a generic type with
+        /// two type parameters, then a use of the constructed type <c>C{<see
+        /// cref="ValueTuple{T1, T2}"/>, <see
+        /// cref="ValueTuple{T1, T2, T3}"/></c> might be intended to
+        /// treat the first type argument as a tuple with element names and the
+        /// second as a tuple without element names. In which case, the
+        /// appropriate attribute specification should use a
+        /// <c>transformNames</c> value of <c>{ "name1", "name2", null, null,
+        /// null }</c>.
+        /// </remarks>
+        public TupleElementNamesAttribute(string?[] transformNames)
+        {
+            if (transformNames == null)
+                throw new ArgumentNullException(nameof(transformNames));
+
+            _transformNames = transformNames;
+        }
+
+        /// <summary>
+        /// Specifies, in a pre-order depth-first traversal of a type's
+        /// construction, which <see cref="ValueTuple"/> elements are
+        /// meant to carry element names.
+        /// </summary>
+        public IList<string?> TransformNames => _transformNames;
+    }
+}
+"""""""""", Encoding.UTF8);
 public static SourceText Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute { get; } = SourceText.From(""""""""""
 // <auto-generated/>
 #pragma warning disable
@@ -3414,6 +3535,1608 @@ namespace System.Runtime.Versioning
         public UnsupportedOSPlatformGuardAttribute(string platformName)
             //: base(platformName)
         {
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+
+namespace System
+{
+    internal struct ValueTuple : IEquatable<ValueTuple>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple>
+    {
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> is a <see cref="ValueTuple"/>.</returns>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple;
+        }
+
+        /// <summary>Returns a value indicating whether this instance is equal to a specified value.</summary>
+        /// <param name="other">An instance to compare to this instance.</param>
+        /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
+        public bool Equals(ValueTuple other)
+        {
+            return true;
+        }
+
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            return other is ValueTuple;
+        }
+
+        int IComparable.CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return 0;
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple other)
+        {
+            return 0;
+        }
+
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return 0;
+        }
+
+        /// <summary>Returns the hash code for this instance.</summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return 0;
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return 0;
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>()</c>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "()";
+        }
+
+        /// <summary>Creates a new struct 0-tuple.</summary>
+        /// <returns>A 0-tuple.</returns>
+        public static ValueTuple Create() =>
+            new ValueTuple();
+
+        /// <summary>Creates a new struct 1-tuple, or singleton.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <returns>A 1-tuple (singleton) whose value is (item1).</returns>
+        public static ValueTuple<T1> Create<T1>(T1 item1) =>
+            new ValueTuple<T1>(item1);
+
+        /// <summary>Creates a new struct 2-tuple, or pair.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <param name="item2">The value of the second component of the tuple.</param>
+        /// <returns>A 2-tuple (pair) whose value is (item1, item2).</returns>
+        public static ValueTuple<T1, T2> Create<T1, T2>(T1 item1, T2 item2) =>
+            new ValueTuple<T1, T2>(item1, item2);
+
+        /// <summary>Creates a new struct 3-tuple, or triple.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+        /// <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <param name="item2">The value of the second component of the tuple.</param>
+        /// <param name="item3">The value of the third component of the tuple.</param>
+        /// <returns>A 3-tuple (triple) whose value is (item1, item2, item3).</returns>
+        public static ValueTuple<T1, T2, T3> Create<T1, T2, T3>(T1 item1, T2 item2, T3 item3) =>
+            new ValueTuple<T1, T2, T3>(item1, item2, item3);
+
+        /// <summary>Creates a new struct 4-tuple, or quadruple.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+        /// <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+        /// <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <param name="item2">The value of the second component of the tuple.</param>
+        /// <param name="item3">The value of the third component of the tuple.</param>
+        /// <param name="item4">The value of the fourth component of the tuple.</param>
+        /// <returns>A 4-tuple (quadruple) whose value is (item1, item2, item3, item4).</returns>
+        public static ValueTuple<T1, T2, T3, T4> Create<T1, T2, T3, T4>(T1 item1, T2 item2, T3 item3, T4 item4) =>
+            new ValueTuple<T1, T2, T3, T4>(item1, item2, item3, item4);
+
+        /// <summary>Creates a new struct 5-tuple, or quintuple.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+        /// <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+        /// <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+        /// <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <param name="item2">The value of the second component of the tuple.</param>
+        /// <param name="item3">The value of the third component of the tuple.</param>
+        /// <param name="item4">The value of the fourth component of the tuple.</param>
+        /// <param name="item5">The value of the fifth component of the tuple.</param>
+        /// <returns>A 5-tuple (quintuple) whose value is (item1, item2, item3, item4, item5).</returns>
+        public static ValueTuple<T1, T2, T3, T4, T5> Create<T1, T2, T3, T4, T5>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5) =>
+            new ValueTuple<T1, T2, T3, T4, T5>(item1, item2, item3, item4, item5);
+
+        /// <summary>Creates a new struct 6-tuple, or sextuple.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+        /// <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+        /// <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+        /// <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+        /// <typeparam name="T6">The type of the sixth component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <param name="item2">The value of the second component of the tuple.</param>
+        /// <param name="item3">The value of the third component of the tuple.</param>
+        /// <param name="item4">The value of the fourth component of the tuple.</param>
+        /// <param name="item5">The value of the fifth component of the tuple.</param>
+        /// <param name="item6">The value of the sixth component of the tuple.</param>
+        /// <returns>A 6-tuple (sextuple) whose value is (item1, item2, item3, item4, item5, item6).</returns>
+        public static ValueTuple<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6) =>
+            new ValueTuple<T1, T2, T3, T4, T5, T6>(item1, item2, item3, item4, item5, item6);
+
+        /// <summary>Creates a new struct 7-tuple, or septuple.</summary>
+        /// <typeparam name="T1">The type of the first component of the tuple.</typeparam>
+        /// <typeparam name="T2">The type of the second component of the tuple.</typeparam>
+        /// <typeparam name="T3">The type of the third component of the tuple.</typeparam>
+        /// <typeparam name="T4">The type of the fourth component of the tuple.</typeparam>
+        /// <typeparam name="T5">The type of the fifth component of the tuple.</typeparam>
+        /// <typeparam name="T6">The type of the sixth component of the tuple.</typeparam>
+        /// <typeparam name="T7">The type of the seventh component of the tuple.</typeparam>
+        /// <param name="item1">The value of the first component of the tuple.</param>
+        /// <param name="item2">The value of the second component of the tuple.</param>
+        /// <param name="item3">The value of the third component of the tuple.</param>
+        /// <param name="item4">The value of the fourth component of the tuple.</param>
+        /// <param name="item5">The value of the fifth component of the tuple.</param>
+        /// <param name="item6">The value of the sixth component of the tuple.</param>
+        /// <param name="item7">The value of the seventh component of the tuple.</param>
+        /// <returns>A 7-tuple (septuple) whose value is (item1, item2, item3, item4, item5, item6, item7).</returns>
+        public static ValueTuple<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7) =>
+            new ValueTuple<T1, T2, T3, T4, T5, T6, T7>(item1, item2, item3, item4, item5, item6, item7);
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_1 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+
+namespace System
+{
+    internal struct ValueTuple<T1> : IEquatable<ValueTuple<T1>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        public ValueTuple(T1 item1)
+        {
+            Item1 = item1;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple<T1> && Equals((ValueTuple<T1>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1}"/>
+        /// instance is equal to a specified <see cref="ValueTuple{T1}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its field
+        /// is equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1);
+        }
+
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1>)) return false;
+
+            var objTuple = (ValueTuple<T1>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1);
+        }
+
+        int IComparable.CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1>)other;
+
+            return Comparer<T1>.Default.Compare(Item1, objTuple.Item1);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1> other)
+        {
+            return Comparer<T1>.Default.Compare(Item1, other.Item1);
+        }
+
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1>)other;
+
+            return comparer.Compare(Item1, objTuple.Item1);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return s_t1Comparer.GetHashCode(Item1);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return comparer.GetHashCode(Item1);
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1)</c>,
+        /// where <c>Item1</c> represents the value of <see cref="Item1"/>. If the field is <see langword="null"/>,
+        /// it is represented as <see cref="string.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ")";
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_2 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace System
+{
+    /// <summary>
+    /// Represents a 2-tuple, or pair, as a value type.
+    /// </summary>
+    /// <typeparam name="T1">The type of the tuple's first component.</typeparam>
+    /// <typeparam name="T2">The type of the tuple's second component.</typeparam>
+    [StructLayout(LayoutKind.Auto)]
+    internal struct ValueTuple<T1, T2>
+        : IEquatable<ValueTuple<T1, T2>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+        private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2}"/> instance's second component.
+        /// </summary>
+        public T2 Item2;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        /// <param name="item2">The value of the tuple's second component.</param>
+        public ValueTuple(T1 item1, T2 item2)
+        {
+            Item1 = item1;
+            Item2 = item2;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        ///
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple<T1, T2> && Equals((ValueTuple<T1, T2>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is equal to a specified <see cref="ValueTuple{T1, T2}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// are equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1, T2> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1)
+                && s_t2Comparer.Equals(Item2, other.Item2);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is equal to a specified object based on a specified comparison method.
+        /// </summary>
+        /// <param name="other">The object to compare with this instance.</param>
+        /// <param name="comparer">An object that defines the method to use to evaluate whether the two objects are equal.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        ///
+        /// <remarks>
+        /// This member is an explicit interface member implementation. It can be used only when the
+        ///  <see cref="ValueTuple{T1, T2}"/> instance is cast to an <see cref="IStructuralEquatable"/> interface.
+        ///
+        /// The <see cref="IEqualityComparer.Equals"/> implementation is called only if <c>other</c> is not <see langword="null"/>,
+        ///  and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="ValueTuple{T1, T2}"/>
+        ///  whose components are of the same types as those of the current instance. The IStructuralEquatable.Equals(Object, IEqualityComparer) method
+        ///  first passes the <see cref="Item1"/> values of the <see cref="ValueTuple{T1, T2}"/> objects to be compared to the
+        ///  <see cref="IEqualityComparer.Equals"/> implementation. If this method call returns <see langword="true"/>, the method is
+        ///  called again and passed the <see cref="Item2"/> values of the two <see cref="ValueTuple{T1, T2}"/> instances.
+        /// </remarks>
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1, T2>)) return false;
+
+            var objTuple = (ValueTuple<T1, T2>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1)
+                && comparer.Equals(Item2, objTuple.Item2);
+        }
+
+        int IComparable.CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return CompareTo((ValueTuple<T1, T2>)other);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1, T2> other)
+        {
+            int c = Comparer<T1>.Default.Compare(Item1, other.Item1);
+            if (c != 0) return c;
+
+            return Comparer<T2>.Default.Compare(Item2, other.Item2);
+        }
+
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1, T2>)other;
+
+            int c = comparer.Compare(Item1, objTuple.Item1);
+            if (c != 0) return c;
+
+            return comparer.Compare(Item2, objTuple.Item2);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        private int GetHashCodeCore(IEqualityComparer comparer)
+        {
+            return HashCode.Combine(comparer.GetHashCode(Item1!), comparer.GetHashCode(Item2!));
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1, Item2)</c>,
+        /// where <c>Item1</c> and <c>Item2</c> represent the values of the <see cref="Item1"/>
+        /// and <see cref="Item2"/> fields. If either field value is <see langword="null"/>,
+        /// it is represented as <see cref="String.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ")";
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_3 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace System
+{
+    /// <summary>
+    /// Represents a 3-tuple, or triple, as a value type.
+    /// </summary>
+    /// <typeparam name="T1">The type of the tuple's first component.</typeparam>
+    /// <typeparam name="T2">The type of the tuple's second component.</typeparam>
+    /// <typeparam name="T3">The type of the tuple's third component.</typeparam>
+    [StructLayout(LayoutKind.Auto)]
+    internal struct ValueTuple<T1, T2, T3>
+        : IEquatable<ValueTuple<T1, T2, T3>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+        private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+        private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's second component.
+        /// </summary>
+        public T2 Item2;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's third component.
+        /// </summary>
+        public T3 Item3;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        /// <param name="item2">The value of the tuple's second component.</param>
+        /// <param name="item3">The value of the tuple's third component.</param>
+        public ValueTuple(T1 item1, T2 item2, T3 item3)
+        {
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple<T1, T2, T3> && Equals((ValueTuple<T1, T2, T3>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3}"/>
+        /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// are equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1, T2, T3> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1)
+                && s_t2Comparer.Equals(Item2, other.Item2)
+                && s_t3Comparer.Equals(Item3, other.Item3);
+        }
+
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1, T2, T3>)) return false;
+
+            var objTuple = (ValueTuple<T1, T2, T3>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1)
+                && comparer.Equals(Item2, objTuple.Item2)
+                && comparer.Equals(Item3, objTuple.Item3);
+        }
+
+        int IComparable.CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return CompareTo((ValueTuple<T1, T2, T3>)other);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1, T2, T3> other)
+        {
+            int c = Comparer<T1>.Default.Compare(Item1, other.Item1);
+            if (c != 0) return c;
+
+            c = Comparer<T2>.Default.Compare(Item2, other.Item2);
+            if (c != 0) return c;
+
+            return Comparer<T3>.Default.Compare(Item3, other.Item3);
+        }
+
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1, T2, T3>)other;
+
+            int c = comparer.Compare(Item1, objTuple.Item1);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item2, objTuple.Item2);
+            if (c != 0) return c;
+
+            return comparer.Compare(Item3, objTuple.Item3);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2, Item3);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        private int GetHashCodeCore(IEqualityComparer comparer)
+        {
+            return HashCode.Combine(comparer.GetHashCode(Item1!), comparer.GetHashCode(Item2!), comparer.GetHashCode(Item3!));
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3)</c>.
+        /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_4 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace System
+{
+    /// <summary>
+    /// Represents a 4-tuple, or quadruple, as a value type.
+    /// </summary>
+    /// <typeparam name="T1">The type of the tuple's first component.</typeparam>
+    /// <typeparam name="T2">The type of the tuple's second component.</typeparam>
+    /// <typeparam name="T3">The type of the tuple's third component.</typeparam>
+    /// <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+    [StructLayout(LayoutKind.Auto)]
+    internal struct ValueTuple<T1, T2, T3, T4>
+        : IEquatable<ValueTuple<T1, T2, T3, T4>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+        private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+        private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
+        private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's second component.
+        /// </summary>
+        public T2 Item2;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's third component.
+        /// </summary>
+        public T3 Item3;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's fourth component.
+        /// </summary>
+        public T4 Item4;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        /// <param name="item2">The value of the tuple's second component.</param>
+        /// <param name="item3">The value of the tuple's third component.</param>
+        /// <param name="item4">The value of the tuple's fourth component.</param>
+        public ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4)
+        {
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
+            Item4 = item4;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object obj)
+        {
+            return obj is ValueTuple<T1, T2, T3, T4> && Equals((ValueTuple<T1, T2, T3, T4>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4}"/>
+        /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// are equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1, T2, T3, T4> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1)
+                && s_t2Comparer.Equals(Item2, other.Item2)
+                && s_t3Comparer.Equals(Item3, other.Item3)
+                && s_t4Comparer.Equals(Item4, other.Item4);
+        }
+
+        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1, T2, T3, T4>)) return false;
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1)
+                && comparer.Equals(Item2, objTuple.Item2)
+                && comparer.Equals(Item3, objTuple.Item3)
+                && comparer.Equals(Item4, objTuple.Item4);
+        }
+
+        int IComparable.CompareTo(object other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return CompareTo((ValueTuple<T1, T2, T3, T4>)other);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1, T2, T3, T4> other)
+        {
+            int c = Comparer<T1>.Default.Compare(Item1, other.Item1);
+            if (c != 0) return c;
+
+            c = Comparer<T2>.Default.Compare(Item2, other.Item2);
+            if (c != 0) return c;
+
+            c = Comparer<T3>.Default.Compare(Item3, other.Item3);
+            if (c != 0) return c;
+
+            return Comparer<T4>.Default.Compare(Item4, other.Item4);
+        }
+
+        int IStructuralComparable.CompareTo(object other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4>)other;
+
+            int c = comparer.Compare(Item1, objTuple.Item1);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item2, objTuple.Item2);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item3, objTuple.Item3);
+            if (c != 0) return c;
+
+            return comparer.Compare(Item4, objTuple.Item4);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2, Item3, Item4);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        private int GetHashCodeCore(IEqualityComparer comparer)
+        {
+            return HashCode.Combine(comparer.GetHashCode(Item1!),
+                                    comparer.GetHashCode(Item2!),
+                                    comparer.GetHashCode(Item3!),
+                                    comparer.GetHashCode(Item4!));
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4)</c>.
+        /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ")";
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_5 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace System
+{
+    /// <summary>
+    /// Represents a 5-tuple, or quintuple, as a value type.
+    /// </summary>
+    /// <typeparam name="T1">The type of the tuple's first component.</typeparam>
+    /// <typeparam name="T2">The type of the tuple's second component.</typeparam>
+    /// <typeparam name="T3">The type of the tuple's third component.</typeparam>
+    /// <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+    /// <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+    [StructLayout(LayoutKind.Auto)]
+    internal struct ValueTuple<T1, T2, T3, T4, T5>
+        : IEquatable<ValueTuple<T1, T2, T3, T4, T5>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+        private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+        private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
+        private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
+        private static readonly EqualityComparer<T5> s_t5Comparer = EqualityComparer<T5>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's second component.
+        /// </summary>
+        public T2 Item2;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's third component.
+        /// </summary>
+        public T3 Item3;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's fourth component.
+        /// </summary>
+        public T4 Item4;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's fifth component.
+        /// </summary>
+        public T5 Item5;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        /// <param name="item2">The value of the tuple's second component.</param>
+        /// <param name="item3">The value of the tuple's third component.</param>
+        /// <param name="item4">The value of the tuple's fourth component.</param>
+        /// <param name="item5">The value of the tuple's fifth component.</param>
+        public ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5)
+        {
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
+            Item4 = item4;
+            Item5 = item5;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple<T1, T2, T3, T4, T5> && Equals((ValueTuple<T1, T2, T3, T4, T5>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/>
+        /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// are equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1, T2, T3, T4, T5> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1)
+                && s_t2Comparer.Equals(Item2, other.Item2)
+                && s_t3Comparer.Equals(Item3, other.Item3)
+                && s_t4Comparer.Equals(Item4, other.Item4)
+                && s_t5Comparer.Equals(Item5, other.Item5);
+        }
+
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1, T2, T3, T4, T5>)) return false;
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4, T5>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1)
+                && comparer.Equals(Item2, objTuple.Item2)
+                && comparer.Equals(Item3, objTuple.Item3)
+                && comparer.Equals(Item4, objTuple.Item4)
+                && comparer.Equals(Item5, objTuple.Item5);
+        }
+
+        int IComparable.CompareTo(object other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4, T5>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return CompareTo((ValueTuple<T1, T2, T3, T4, T5>)other);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1, T2, T3, T4, T5> other)
+        {
+            int c = Comparer<T1>.Default.Compare(Item1, other.Item1);
+            if (c != 0) return c;
+
+            c = Comparer<T2>.Default.Compare(Item2, other.Item2);
+            if (c != 0) return c;
+
+            c = Comparer<T3>.Default.Compare(Item3, other.Item3);
+            if (c != 0) return c;
+
+            c = Comparer<T4>.Default.Compare(Item4, other.Item4);
+            if (c != 0) return c;
+
+            return Comparer<T5>.Default.Compare(Item5, other.Item5);
+        }
+
+        int IStructuralComparable.CompareTo(object other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4, T5>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4, T5>)other;
+
+            int c = comparer.Compare(Item1, objTuple.Item1);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item2, objTuple.Item2);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item3, objTuple.Item3);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item4, objTuple.Item4);
+            if (c != 0) return c;
+
+            return comparer.Compare(Item5, objTuple.Item5);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2, Item3, Item4, Item5);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        private int GetHashCodeCore(IEqualityComparer comparer)
+        {
+            return HashCode.Combine(comparer.GetHashCode(Item1!),
+                                    comparer.GetHashCode(Item2!),
+                                    comparer.GetHashCode(Item3!),
+                                    comparer.GetHashCode(Item4!),
+                                    comparer.GetHashCode(Item5!));
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5)</c>.
+        /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ")";
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_6 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace System
+{
+
+    /// <summary>
+    /// Represents a 6-tuple, or sixtuple, as a value type.
+    /// </summary>
+    /// <typeparam name="T1">The type of the tuple's first component.</typeparam>
+    /// <typeparam name="T2">The type of the tuple's second component.</typeparam>
+    /// <typeparam name="T3">The type of the tuple's third component.</typeparam>
+    /// <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+    /// <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+    /// <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
+    [StructLayout(LayoutKind.Auto)]
+    internal struct ValueTuple<T1, T2, T3, T4, T5, T6>
+        : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+        private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+        private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
+        private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
+        private static readonly EqualityComparer<T5> s_t5Comparer = EqualityComparer<T5>.Default;
+        private static readonly EqualityComparer<T6> s_t6Comparer = EqualityComparer<T6>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's second component.
+        /// </summary>
+        public T2 Item2;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's third component.
+        /// </summary>
+        public T3 Item3;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's fourth component.
+        /// </summary>
+        public T4 Item4;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's fifth component.
+        /// </summary>
+        public T5 Item5;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's sixth component.
+        /// </summary>
+        public T6 Item6;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        /// <param name="item2">The value of the tuple's second component.</param>
+        /// <param name="item3">The value of the tuple's third component.</param>
+        /// <param name="item4">The value of the tuple's fourth component.</param>
+        /// <param name="item5">The value of the tuple's fifth component.</param>
+        /// <param name="item6">The value of the tuple's sixth component.</param>
+        public ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6)
+        {
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
+            Item4 = item4;
+            Item5 = item5;
+            Item6 = item6;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple<T1, T2, T3, T4, T5, T6> && Equals((ValueTuple<T1, T2, T3, T4, T5, T6>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/>
+        /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// are equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1, T2, T3, T4, T5, T6> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1)
+                && s_t2Comparer.Equals(Item2, other.Item2)
+                && s_t3Comparer.Equals(Item3, other.Item3)
+                && s_t4Comparer.Equals(Item4, other.Item4)
+                && s_t5Comparer.Equals(Item5, other.Item5)
+                && s_t6Comparer.Equals(Item6, other.Item6);
+        }
+
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1, T2, T3, T4, T5, T6>)) return false;
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4, T5, T6>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1)
+                && comparer.Equals(Item2, objTuple.Item2)
+                && comparer.Equals(Item3, objTuple.Item3)
+                && comparer.Equals(Item4, objTuple.Item4)
+                && comparer.Equals(Item5, objTuple.Item5)
+                && comparer.Equals(Item6, objTuple.Item6);
+        }
+
+        int IComparable.CompareTo(object? other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4, T5, T6>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return CompareTo((ValueTuple<T1, T2, T3, T4, T5, T6>)other);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1, T2, T3, T4, T5, T6> other)
+        {
+            int c = Comparer<T1>.Default.Compare(Item1, other.Item1);
+            if (c != 0) return c;
+
+            c = Comparer<T2>.Default.Compare(Item2, other.Item2);
+            if (c != 0) return c;
+
+            c = Comparer<T3>.Default.Compare(Item3, other.Item3);
+            if (c != 0) return c;
+
+            c = Comparer<T4>.Default.Compare(Item4, other.Item4);
+            if (c != 0) return c;
+
+            c = Comparer<T5>.Default.Compare(Item5, other.Item5);
+            if (c != 0) return c;
+
+            return Comparer<T6>.Default.Compare(Item6, other.Item6);
+        }
+
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4, T5, T6>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4, T5, T6>)other;
+
+            int c = comparer.Compare(Item1, objTuple.Item1);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item2, objTuple.Item2);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item3, objTuple.Item3);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item4, objTuple.Item4);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item5, objTuple.Item5);
+            if (c != 0) return c;
+
+            return comparer.Compare(Item6, objTuple.Item6);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2, Item3, Item4, Item5, Item6);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        private int GetHashCodeCore(IEqualityComparer comparer)
+        {
+            return HashCode.Combine(comparer.GetHashCode(Item1!),
+                                    comparer.GetHashCode(Item2!),
+                                    comparer.GetHashCode(Item3!),
+                                    comparer.GetHashCode(Item4!),
+                                    comparer.GetHashCode(Item5!),
+                                    comparer.GetHashCode(Item6!));
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6)</c>.
+        /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ")";
+        }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_ValueTuple_7 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace System
+{
+    /// <summary>
+    /// Represents a 7-tuple, or sentuple, as a value type.
+    /// </summary>
+    /// <typeparam name="T1">The type of the tuple's first component.</typeparam>
+    /// <typeparam name="T2">The type of the tuple's second component.</typeparam>
+    /// <typeparam name="T3">The type of the tuple's third component.</typeparam>
+    /// <typeparam name="T4">The type of the tuple's fourth component.</typeparam>
+    /// <typeparam name="T5">The type of the tuple's fifth component.</typeparam>
+    /// <typeparam name="T6">The type of the tuple's sixth component.</typeparam>
+    /// <typeparam name="T7">The type of the tuple's seventh component.</typeparam>
+    [StructLayout(LayoutKind.Auto)]
+    internal struct ValueTuple<T1, T2, T3, T4, T5, T6, T7>
+        : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>
+    {
+        private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
+        private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
+        private static readonly EqualityComparer<T3> s_t3Comparer = EqualityComparer<T3>.Default;
+        private static readonly EqualityComparer<T4> s_t4Comparer = EqualityComparer<T4>.Default;
+        private static readonly EqualityComparer<T5> s_t5Comparer = EqualityComparer<T5>.Default;
+        private static readonly EqualityComparer<T6> s_t6Comparer = EqualityComparer<T6>.Default;
+        private static readonly EqualityComparer<T7> s_t7Comparer = EqualityComparer<T7>.Default;
+
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's first component.
+        /// </summary>
+        public T1 Item1;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's second component.
+        /// </summary>
+        public T2 Item2;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's third component.
+        /// </summary>
+        public T3 Item3;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's fourth component.
+        /// </summary>
+        public T4 Item4;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's fifth component.
+        /// </summary>
+        public T5 Item5;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's sixth component.
+        /// </summary>
+        public T6 Item6;
+        /// <summary>
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's seventh component.
+        /// </summary>
+        public T7 Item7;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> value type.
+        /// </summary>
+        /// <param name="item1">The value of the tuple's first component.</param>
+        /// <param name="item2">The value of the tuple's second component.</param>
+        /// <param name="item3">The value of the tuple's third component.</param>
+        /// <param name="item4">The value of the tuple's fourth component.</param>
+        /// <param name="item5">The value of the tuple's fifth component.</param>
+        /// <param name="item6">The value of the tuple's sixth component.</param>
+        /// <param name="item7">The value of the tuple's seventh component.</param>
+        public ValueTuple(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7)
+        {
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
+            Item4 = item4;
+            Item5 = item5;
+            Item6 = item6;
+            Item7 = item7;
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance is equal to a specified object.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// <list type="bullet">
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> value type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        /// </list>
+        /// </remarks>
+        public override bool Equals(object? obj)
+        {
+            return obj is ValueTuple<T1, T2, T3, T4, T5, T6, T7> && Equals((ValueTuple<T1, T2, T3, T4, T5, T6, T7>)obj);
+        }
+
+        /// <summary>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/>
+        /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/>.
+        /// </summary>
+        /// <param name="other">The tuple to compare with this instance.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// are equal to that of the current instance, using the default comparer for that field's type.
+        /// </remarks>
+        public bool Equals(ValueTuple<T1, T2, T3, T4, T5, T6, T7> other)
+        {
+            return s_t1Comparer.Equals(Item1, other.Item1)
+                && s_t2Comparer.Equals(Item2, other.Item2)
+                && s_t3Comparer.Equals(Item3, other.Item3)
+                && s_t4Comparer.Equals(Item4, other.Item4)
+                && s_t5Comparer.Equals(Item5, other.Item5)
+                && s_t6Comparer.Equals(Item6, other.Item6)
+                && s_t7Comparer.Equals(Item7, other.Item7);
+        }
+
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
+        {
+            if (other == null || !(other is ValueTuple<T1, T2, T3, T4, T5, T6, T7>)) return false;
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4, T5, T6, T7>)other;
+
+            return comparer.Equals(Item1, objTuple.Item1)
+                && comparer.Equals(Item2, objTuple.Item2)
+                && comparer.Equals(Item3, objTuple.Item3)
+                && comparer.Equals(Item4, objTuple.Item4)
+                && comparer.Equals(Item5, objTuple.Item5)
+                && comparer.Equals(Item6, objTuple.Item6)
+                && comparer.Equals(Item7, objTuple.Item7);
+        }
+
+        int IComparable.CompareTo(object other)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4, T5, T6, T7>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            return CompareTo((ValueTuple<T1, T2, T3, T4, T5, T6, T7>)other);
+        }
+
+        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <param name="other">An instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
+        /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// than <paramref name="other"/>.
+        /// </returns>
+        public int CompareTo(ValueTuple<T1, T2, T3, T4, T5, T6, T7> other)
+        {
+            int c = Comparer<T1>.Default.Compare(Item1, other.Item1);
+            if (c != 0) return c;
+
+            c = Comparer<T2>.Default.Compare(Item2, other.Item2);
+            if (c != 0) return c;
+
+            c = Comparer<T3>.Default.Compare(Item3, other.Item3);
+            if (c != 0) return c;
+
+            c = Comparer<T4>.Default.Compare(Item4, other.Item4);
+            if (c != 0) return c;
+
+            c = Comparer<T5>.Default.Compare(Item5, other.Item5);
+            if (c != 0) return c;
+
+            c = Comparer<T6>.Default.Compare(Item6, other.Item6);
+            if (c != 0) return c;
+
+            return Comparer<T7>.Default.Compare(Item7, other.Item7);
+        }
+
+        int IStructuralComparable.CompareTo(object other, IComparer comparer)
+        {
+            if (other == null) return 1;
+
+            if (!(other is ValueTuple<T1, T2, T3, T4, T5, T6, T7>))
+            {
+                throw new ArgumentException("Argument must be of type {0}.", nameof(other));
+            }
+
+            var objTuple = (ValueTuple<T1, T2, T3, T4, T5, T6, T7>)other;
+
+            int c = comparer.Compare(Item1, objTuple.Item1);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item2, objTuple.Item2);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item3, objTuple.Item3);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item4, objTuple.Item4);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item5, objTuple.Item5);
+            if (c != 0) return c;
+
+            c = comparer.Compare(Item6, objTuple.Item6);
+            if (c != 0) return c;
+
+            return comparer.Compare(Item7, objTuple.Item7);
+        }
+
+        /// <summary>
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2, Item3, Item4, Item5, Item6, Item7);
+        }
+
+        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        private int GetHashCodeCore(IEqualityComparer comparer)
+        {
+            return HashCode.Combine(comparer.GetHashCode(Item1!),
+                                    comparer.GetHashCode(Item2!),
+                                    comparer.GetHashCode(Item3!),
+                                    comparer.GetHashCode(Item4!),
+                                    comparer.GetHashCode(Item5!),
+                                    comparer.GetHashCode(Item6!),
+                                    comparer.GetHashCode(Item7!));
+        }
+
+        /// <summary>
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance.</returns>
+        /// <remarks>
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7)</c>.
+        /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
+        /// </remarks>
+        public override string ToString()
+        {
+            return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
         }
     }
 }

@@ -258,8 +258,8 @@ public class UnitTest1
     [Fact]
     public void Enumerable_DistinctBy()
     {
-        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_=>_).ToArray());
-        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_=>_, EqualityComparer<int>.Default).ToArray());
+        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_ => _).ToArray());
+        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_ => _, EqualityComparer<int>.Default).ToArray());
     }
 
     [Fact]
@@ -272,5 +272,11 @@ public class UnitTest1
     public void String_ReplaceLineEndings2()
     {
         Assert.Equal("\r\n\r\n\r\n", "\r\n\n\f".ReplaceLineEndings("\r\n"));
+    }
+
+    [Fact]
+    public void Enumerable_Zip()
+    {
+        Assert.Equal(new[] { ('a', 'b') }, "a".Zip("b"));
     }
 }
