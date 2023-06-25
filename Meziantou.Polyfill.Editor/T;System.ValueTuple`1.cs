@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System
 {
-    internal struct ValueTuple<T1> : IEquatable<ValueTuple<T1>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1>>
+    internal struct ValueTuple<T1> : IEquatable<ValueTuple<T1>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1>>, ITupleInternal
     {
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
 
@@ -131,5 +131,17 @@ namespace System
         {
             return "(" + Item1?.ToString() + ")";
         }
+
+        int ITupleInternal.GetHashCode(IEqualityComparer comparer)
+        {
+            return comparer.GetHashCode(Item1);
+        }
+
+        string ITupleInternal.ToStringEnd()
+        {
+            return Item1?.ToString() + ")";
+        }
+
+        int ITupleInternal.Size => 1;
     }
 }

@@ -12,7 +12,7 @@ namespace System
     /// <typeparam name="T3">The type of the tuple's third component.</typeparam>
     [StructLayout(LayoutKind.Auto)]
     internal struct ValueTuple<T1, T2, T3>
-        : IEquatable<ValueTuple<T1, T2, T3>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3>>
+        : IEquatable<ValueTuple<T1, T2, T3>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3>>, ITupleInternal
     {
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
@@ -172,5 +172,17 @@ namespace System
         {
             return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
         }
+
+        int ITupleInternal.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+
+        string ITupleInternal.ToStringEnd()
+        {
+            return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ")";
+        }
+
+        int ITupleInternal.Size => 3;
     }
 }

@@ -1,24 +1,28 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Text.RegularExpressions;
 
 namespace Meziantou.Polyfill.Generator;
-internal sealed class PolyfillData
+internal sealed partial class PolyfillData
 {
     public PolyfillData(string content) => Content = content;
 
     public string? Content { get; }
 
-    public bool RequiresSpanOfT { get; set; }
-    public bool RequiresReadOnlySpanOfT { get; set; }
-    public bool RequiresMemory { get; set; }
-    public bool RequiresReadOnlyMemory { get; set; }
-    public bool RequiresValueTask { get; set; }
-    public bool RequiresValueTaskOfT { get; set; }
+    public bool RequiresSpanOfT { get; private set; }
+    public bool RequiresReadOnlySpanOfT { get; private set; }
+    public bool RequiresMemory { get; private set; }
+    public bool RequiresReadOnlyMemory { get; private set; }
+    public bool RequiresValueTask { get; private set; }
+    public bool RequiresValueTaskOfT { get; private set; }
+
+    public string[] ConditionalMembers { get; private set; } = Array.Empty<string>();
 
     public static PolyfillData Get(string content)
     {
         var data = new PolyfillData(content);
+        data.ConditionalMembers = GetConditions(content);
 
         var tree = CSharpSyntaxTree.ParseText(content);
         var compilation = CSharpCompilation.Create("compilation",
@@ -56,5 +60,13 @@ internal sealed class PolyfillData
         }
 
         return data;
+
+        static string[] GetConditions(string content)
+        {
+            return ConditionRegex().Matches(content.ReplaceLineEndings("\n")).Cast<Match>().Select(m => m.Groups["member"].Value).Order().ToArray();
+        }
     }
+
+    [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline)]
+    private static partial Regex ConditionRegex();
 }

@@ -1,7 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Text;
 using Meziantou.Polyfill.Generator;
 
@@ -36,7 +33,11 @@ var polyfills = assembly.GetManifestResourceNames()
                   """"),
           };
       })
+      .OrderBy(_ => _.PolyfillData.ConditionalMembers.Length == 0 ? 0 : 1) // Should be a topological sort to be correct, but it's enough at the moment
+      .ThenBy(_ => _.Index)
       .ToArray();
+
+polyfills = SortPolyfills(polyfills);
 
 var fieldCount = (polyfills.Length / 64) + (polyfills.Length % 64 > 0 ? 1 : 0);
 
@@ -88,7 +89,7 @@ foreach (var polyfill in polyfills)
     sb.AppendLine($"    if ({GenerateIncludeCondition(polyfill.PolyfillData)}IncludeMember(compilation, options, \"{polyfill.TypeName}\"))");
     sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
 
-    static string GenerateIncludeCondition(PolyfillData data)
+    string GenerateIncludeCondition(PolyfillData data)
     {
         var result = "";
         if (data.RequiresSpanOfT)
@@ -103,6 +104,17 @@ foreach (var polyfill in polyfills)
             result += "_hasValueTask && ";
         if (data.RequiresValueTaskOfT)
             result += "_hasValueTaskOfT && ";
+
+        if (data.ConditionalMembers.Length > 0)
+        {
+            result += "(";
+            result += string.Join(" || ", data.ConditionalMembers.Select(member =>
+            {
+                var dependency = polyfills.Single(p => p.TypeName == member);
+                return $"({dependency.CSharpFieldName} & {dependency.CSharpFieldBitMask}ul) == {dependency.CSharpFieldBitMask}ul";
+            }));
+            result += ") && ";
+        }
         return result;
     }
 }
@@ -181,6 +193,33 @@ string ReadResourceAsString(string name)
 {
     using var sr = new StreamReader(assembly.GetManifestResourceStream(name)!);
     return sr.ReadToEnd();
+}
+
+static Polyfill[] SortPolyfills(Polyfill[] items)
+{
+    var result = new List<Polyfill>(items.Length);
+    var remainingItems = items.ToList();
+    while (remainingItems.Count > 0)
+    {
+        foreach (var item in remainingItems.Where(CanAddItem).OrderBy(i => i.Index).ToList())
+        {
+            result.Add(item);
+            remainingItems.Remove(item);
+        }
+    }
+
+    return result.ToArray();
+
+    bool CanAddItem(Polyfill polyfill)
+    {
+        if (polyfill.PolyfillData.ConditionalMembers.Length == 0)
+            return true;
+
+        if (polyfill.PolyfillData.ConditionalMembers.All(m => result.Find(i => i.TypeName == m) != null))
+            return true;
+
+        return false;
+    }
 }
 
 sealed class Polyfill

@@ -16,7 +16,7 @@ namespace System
     /// <typeparam name="T7">The type of the tuple's seventh component.</typeparam>
     [StructLayout(LayoutKind.Auto)]
     internal struct ValueTuple<T1, T2, T3, T4, T5, T6, T7>
-        : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>
+        : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>, ITupleInternal
     {
         private static readonly EqualityComparer<T1> s_t1Comparer = EqualityComparer<T1>.Default;
         private static readonly EqualityComparer<T2> s_t2Comparer = EqualityComparer<T2>.Default;
@@ -242,5 +242,16 @@ namespace System
         {
             return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
         }
+
+        int ITupleInternal.GetHashCode(IEqualityComparer comparer)
+        {
+            return GetHashCodeCore(comparer);
+        }
+        string ITupleInternal.ToStringEnd()
+        {
+            return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ")";
+        }
+
+        int ITupleInternal.Size => 7;
     }
 }

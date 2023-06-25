@@ -2,7 +2,7 @@
 
 namespace System
 {
-    internal struct ValueTuple : IEquatable<ValueTuple>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple>
+    internal struct ValueTuple : IEquatable<ValueTuple>, IStructuralEquatable, IStructuralComparable, IComparable, IComparable<ValueTuple>, ITupleInternal
     {
         /// <summary>
         /// Returns a value that indicates whether the current <see cref="ValueTuple"/> instance is equal to a specified object.
@@ -87,6 +87,18 @@ namespace System
         {
             return "()";
         }
+
+        int ITupleInternal.GetHashCode(IEqualityComparer comparer)
+        {
+            return 0;
+        }
+
+        string ITupleInternal.ToStringEnd()
+        {
+            return ")";
+        }
+
+        int ITupleInternal.Size => 0;
 
         /// <summary>Creates a new struct 0-tuple.</summary>
         /// <returns>A 0-tuple.</returns>
