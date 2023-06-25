@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Diagnostics;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
@@ -10,6 +12,12 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+        if (Environment.GetEnvironmentVariable("Meziantou_Polyfill_Debug") is "true" or "1")
+        {
+            Debugger.Launch();
+            Debugger.Break();
+        }
+
         var options = context.AnalyzerConfigOptionsProvider.Select((options, cancellationToken) =>
         {
             return new PolyfillOptions(
