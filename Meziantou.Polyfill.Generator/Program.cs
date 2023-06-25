@@ -61,6 +61,8 @@ for (var i = 0; i < fieldCount; i++)
     sb.AppendLine($"private readonly ulong _bits{i} = 0uL;");
 }
 
+sb.AppendLine($"private readonly PolyfillOptions _options;");
+sb.AppendLine($"private readonly string[]? _excludedMembers;");
 sb.AppendLine($"private readonly bool _hasSpanOfT;");
 sb.AppendLine($"private readonly bool _hasReadOnlySpanOfT;");
 sb.AppendLine($"private readonly bool _hasMemoryOfT;");
@@ -70,6 +72,7 @@ sb.AppendLine($"private readonly bool _hasValueTaskOfT;");
 
 sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
 sb.AppendLine("{");
+sb.AppendLine("    _options = options;");
 
 if (polyfills.Any(p => p.PolyfillData.RequiresSpanOfT))
     sb.AppendLine("    _hasSpanOfT = compilation.GetTypeByMetadataName(\"System.Span`1\") != null;");
@@ -156,6 +159,7 @@ sb.AppendLine("}");
 sb.AppendLine("public string DumpAsCSharpComment()");
 sb.AppendLine("{");
 sb.AppendLine("    var sb = new StringBuilder();");
+sb.AppendLine("    sb.AppendLine(_options.DumpAsCSharpComment());");
 sb.AppendLine("    sb.AppendLine(\"// HasMemoryOfT: \" + _hasMemoryOfT);");
 sb.AppendLine("    sb.AppendLine(\"// HasReadOnlyMemoryOfT: \" + _hasReadOnlyMemoryOfT);");
 sb.AppendLine("    sb.AppendLine(\"// HasReadOnlySpanOfT: \" + _hasReadOnlySpanOfT);");

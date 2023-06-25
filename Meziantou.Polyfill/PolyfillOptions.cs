@@ -55,7 +55,7 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
 
     private static string[]? ParseValues(string? value)
     {
-        if (value == null)
+        if (string.IsNullOrEmpty(value))
             return null;
 
         List<string>? values = null;
@@ -98,6 +98,12 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
 
             return value1.SequenceEqual(value2, StringComparer.Ordinal);
         }
+    }
+
+    public string DumpAsCSharpComment()
+    {
+        return "// IncludedMembers: " + (_included == null ? "<null>" : string.Join(";", _included)) + "\n"
+             + "// ExcludedMembers: " + (_excluded == null ? "<null>" : string.Join(";", _excluded));
     }
 
     [StructLayout(LayoutKind.Auto)]
