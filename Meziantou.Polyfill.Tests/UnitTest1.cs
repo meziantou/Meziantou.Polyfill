@@ -110,6 +110,14 @@ public class UnitTest1
         Assert.True("test".Contains('t'));
         Assert.False("test".Contains('T'));
     }
+    
+    [Fact]
+    public void String_Contains_Char_StringComparison()
+    {
+        Assert.True("test".Contains('t', StringComparison.Ordinal));
+        Assert.True("test".Contains('T', StringComparison.OrdinalIgnoreCase));
+        Assert.False("test".Contains('T', StringComparison.Ordinal));
+    }
 
     [Fact]
     public void String_Contains()

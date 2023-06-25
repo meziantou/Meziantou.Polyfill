@@ -234,4 +234,9 @@ sealed class Polyfill
     public int CSharpFieldBitIndex => Index % 64;
     public ulong CSharpFieldBitMask => 1uL << (Index % 64);
     public string CSharpSourceTextPropertyName => "Source_" + CSharpName;
+
+    public override string ToString()
+    {
+        return TypeName;
+    }
 }
