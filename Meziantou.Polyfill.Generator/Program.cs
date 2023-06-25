@@ -33,8 +33,6 @@ var polyfills = assembly.GetManifestResourceNames()
                   """"),
           };
       })
-      .OrderBy(_ => _.PolyfillData.ConditionalMembers.Length == 0 ? 0 : 1) // Should be a topological sort to be correct, but it's enough at the moment
-      .ThenBy(_ => _.Index)
       .ToArray();
 
 polyfills = SortPolyfills(polyfills);
@@ -62,7 +60,6 @@ for (var i = 0; i < fieldCount; i++)
 }
 
 sb.AppendLine($"private readonly PolyfillOptions _options;");
-sb.AppendLine($"private readonly string[]? _excludedMembers;");
 sb.AppendLine($"private readonly bool _hasSpanOfT;");
 sb.AppendLine($"private readonly bool _hasReadOnlySpanOfT;");
 sb.AppendLine($"private readonly bool _hasMemoryOfT;");
@@ -89,10 +86,11 @@ if (polyfills.Any(p => p.PolyfillData.RequiresValueTaskOfT))
 
 foreach (var polyfill in polyfills)
 {
-    sb.AppendLine($"    if ({GenerateIncludeCondition(polyfill.PolyfillData)}IncludeMember(compilation, options, \"{polyfill.TypeName}\"))");
+    // TODO check for declared members
+    sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(compilation, options, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
     sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
 
-    string GenerateIncludeCondition(PolyfillData data)
+    string GenerateIncludePreCondition(PolyfillData data)
     {
         var result = "";
         if (data.RequiresSpanOfT)
@@ -118,6 +116,22 @@ foreach (var polyfill in polyfills)
             }));
             result += ") && ";
         }
+        return result;
+    }
+
+    string GenerateIncludePostCondition(PolyfillData data)
+    {
+        var result = "";
+        if (polyfill.TypeName.StartsWith("M:", StringComparison.Ordinal) && data.DeclaredMemberDocumentationIds.Length > 0)
+        {
+            result += " && (";
+            result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
+            {
+                return $"IncludeMember(compilation, options, \"{member}\")";
+            }));
+            result += ")";
+        }
+
         return result;
     }
 }

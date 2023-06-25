@@ -17,6 +17,7 @@ internal sealed partial class PolyfillData
     public bool RequiresValueTask { get; private set; }
     public bool RequiresValueTaskOfT { get; private set; }
 
+    public string[] DeclaredMemberDocumentationIds { get; private set; } = Array.Empty<string>();
     public string[] ConditionalMembers { get; private set; } = Array.Empty<string>();
 
     public static PolyfillData Get(string content)
@@ -41,13 +42,21 @@ internal sealed partial class PolyfillData
         }
 
         var types = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
+        var declaredMethods = new HashSet<string>(StringComparer.Ordinal);
         foreach (var method in root.DescendantNodes().OfType<MethodDeclarationSyntax>())
         {
             var symbol = semanticModel.GetDeclaredSymbol(method)!;
             types.Add(symbol.ReturnType);
             foreach (var param in symbol.Parameters.Select(p => p.Type))
                 types.Add(param);
+
+            if (symbol.DeclaredAccessibility is Accessibility.Public or Accessibility.Internal)
+            {
+                declaredMethods.Add(DocumentationCommentId.CreateDeclarationId(symbol));
+            }
         }
+
+        data.DeclaredMemberDocumentationIds = declaredMethods.ToArray();
 
         foreach (var type in types)
         {

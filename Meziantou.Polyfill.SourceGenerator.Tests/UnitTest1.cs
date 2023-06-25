@@ -33,6 +33,21 @@ public class UnitTest1
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
 
+    [Fact]
+    public async Task InternalsVisibleTo_DoNotRegenerateExtensionMethods()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.0", "ref/net6.0/");
+        var tempGeneration = await GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
+        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs")));
+        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
+
+        var temp = Path.GetTempFileName() + ".dll";
+        File.WriteAllBytes(temp, tempGeneration.Assembly!);
+        var result = await GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("StringSyntaxAttribute")));
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
+    }
+
     [Theory]
     [MemberData(nameof(GetConfigurations))]
     public async Task GeneratedCodeCompile(PackageReference[] packages)
@@ -117,14 +132,14 @@ public class UnitTest1
 
     public sealed record PackageReference(string Name, string Version, string Path);
 
-    private static async Task<(GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly)> GenerateFiles(string file, bool mustCompile = true, string[]? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
+    private static async Task<(GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly)> GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
             .Select(loc => MetadataReference.CreateFromFile(loc))
             .ToArray();
 
-        var compilation = CSharpCompilation.Create("compilation",
+        var compilation = CSharpCompilation.Create(assemblyName,
             new[] { CSharpSyntaxTree.ParseText(file) },
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));

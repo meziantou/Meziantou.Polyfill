@@ -11,6 +11,7 @@ internal readonly partial struct Members : IEquatable<Members>
 {
 private readonly ulong _bits0 = 0uL;
 private readonly ulong _bits1 = 0uL;
+private readonly PolyfillOptions _options;
 private readonly bool _hasSpanOfT;
 private readonly bool _hasReadOnlySpanOfT;
 private readonly bool _hasMemoryOfT;
@@ -19,73 +20,74 @@ private readonly bool _hasValueTask;
 private readonly bool _hasValueTaskOfT;
 public Members(Compilation compilation, PolyfillOptions options)
 {
+    _options = options;
     _hasSpanOfT = compilation.GetTypeByMetadataName("System.Span`1") != null;
     _hasReadOnlySpanOfT = compilation.GetTypeByMetadataName("System.ReadOnlySpan`1") != null;
     _hasMemoryOfT = compilation.GetTypeByMetadataName("System.Memory`1") != null;
     _hasReadOnlyMemoryOfT = compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1") != null;
     _hasValueTask = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask") != null;
     _hasValueTaskOfT = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1") != null;
-    if (IncludeMember(compilation, options, "M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@)"))
+    if (IncludeMember(compilation, options, "M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Deconstruct``2(System.Collections.Generic.KeyValuePair{``0,``1},``0@,``1@)")))
         _bits0 = _bits0 | 1uL;
-    if (IncludeMember(compilation, options, "M:System.Collections.Generic.Queue`1.TryDequeue(`0@)"))
+    if (IncludeMember(compilation, options, "M:System.Collections.Generic.Queue`1.TryDequeue(`0@)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.TryDequeue``1(System.Collections.Generic.Queue{``0},``0@)~System.Boolean")))
         _bits0 = _bits0 | 2uL;
-    if (_hasMemoryOfT && _hasValueTaskOfT && IncludeMember(compilation, options, "M:System.IO.TextReader.ReadAsync(System.Memory{System.Char},System.Threading.CancellationToken)"))
+    if (_hasMemoryOfT && _hasValueTaskOfT && IncludeMember(compilation, options, "M:System.IO.TextReader.ReadAsync(System.Memory{System.Char},System.Threading.CancellationToken)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReadAsync(System.IO.TextReader,System.Memory{System.Char},System.Threading.CancellationToken)~System.Threading.Tasks.ValueTask{System.Int32}")))
         _bits0 = _bits0 | 4uL;
-    if (IncludeMember(compilation, options, "M:System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken)"))
+    if (IncludeMember(compilation, options, "M:System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReadToEndAsync(System.IO.TextReader,System.Threading.CancellationToken)~System.Threading.Tasks.Task{System.String}")))
         _bits0 = _bits0 | 8uL;
-    if (_hasReadOnlyMemoryOfT && _hasValueTask && IncludeMember(compilation, options, "M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken)"))
+    if (_hasReadOnlyMemoryOfT && _hasValueTask && IncludeMember(compilation, options, "M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.WriteAsync(System.IO.TextWriter,System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken)~System.Threading.Tasks.ValueTask")))
         _bits0 = _bits0 | 16uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})~System.Collections.Generic.IEnumerable{``0}")))
         _bits0 = _bits0 | 32uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})~System.Collections.Generic.IEnumerable{``0}")))
         _bits0 = _bits0 | 64uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 128uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 256uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Order``1(System.Collections.Generic.IEnumerable{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 512uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 1024uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})"))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})~System.Collections.Generic.IEnumerable{System.ValueTuple{``0,``1}}")))
         _bits0 = _bits0 | 2048uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)"))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains``1(System.ReadOnlySpan{``0},``0)~System.Boolean")))
         _bits0 = _bits0 | 4096uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains``1(System.Span{``0},``0)~System.Boolean")))
         _bits0 = _bits0 | 8192uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)"))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.Char)~System.Boolean")))
         _bits0 = _bits0 | 16384uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.Char,System.StringComparison)~System.Boolean")))
         _bits0 = _bits0 | 32768uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.String,System.StringComparison)~System.Boolean")))
         _bits0 = _bits0 | 65536uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CopyTo(System.String,System.Span{System.Char})")))
         _bits0 = _bits0 | 131072uL;
-    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)"))
+    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.EndsWith(System.String,System.Char)~System.Boolean")))
         _bits0 = _bits0 | 262144uL;
-    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.GetHashCode(System.String,System.StringComparison)~System.Int32") && IncludeMember(compilation, options, "M:Helpers.FromComparison(System.StringComparison)~System.StringComparer")))
         _bits0 = _bits0 | 524288uL;
-    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.IndexOf(System.String,System.Char,System.StringComparison)~System.Int32")))
         _bits0 = _bits0 | 1048576uL;
-    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)"))
+    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Replace(System.String,System.String,System.String,System.StringComparison)~System.String")))
         _bits0 = _bits0 | 2097152uL;
-    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings(System.String)"))
+    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings(System.String)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReplaceLineEndings(System.String,System.String)~System.String")))
         _bits0 = _bits0 | 4194304uL;
-    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings"))
+    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReplaceLineEndings(System.String)~System.String")))
         _bits0 = _bits0 | 8388608uL;
-    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)"))
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Split(System.String,System.Char,System.Int32,System.StringSplitOptions)~System.String[]")))
         _bits0 = _bits0 | 16777216uL;
-    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)"))
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Split(System.String,System.Char,System.StringSplitOptions)~System.String[]")))
         _bits0 = _bits0 | 33554432uL;
-    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)"))
+    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.StartsWith(System.String,System.Char)~System.Boolean")))
         _bits0 = _bits0 | 67108864uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.TryCopyTo(System.String,System.Span{System.Char})~System.Boolean")))
         _bits0 = _bits0 | 134217728uL;
-    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})"))
+    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Append(System.Text.StringBuilder,System.ReadOnlyMemory{System.Char})~System.Text.StringBuilder")))
         _bits0 = _bits0 | 268435456uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})"))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Append(System.Text.StringBuilder,System.ReadOnlySpan{System.Char})~System.Text.StringBuilder")))
         _bits0 = _bits0 | 536870912uL;
-    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync"))
+    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CancelAsync(System.Threading.CancellationTokenSource)~System.Threading.Tasks.Task")))
         _bits0 = _bits0 | 1073741824uL;
     if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
         _bits0 = _bits0 | 2147483648uL;
@@ -384,6 +386,7 @@ public void AddSources(SourceProductionContext context)
 public string DumpAsCSharpComment()
 {
     var sb = new StringBuilder();
+    sb.AppendLine(_options.DumpAsCSharpComment());
     sb.AppendLine("// HasMemoryOfT: " + _hasMemoryOfT);
     sb.AppendLine("// HasReadOnlyMemoryOfT: " + _hasReadOnlyMemoryOfT);
     sb.AppendLine("// HasReadOnlySpanOfT: " + _hasReadOnlySpanOfT);
