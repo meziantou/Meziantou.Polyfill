@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
@@ -130,7 +131,38 @@ public class UnitTest1
         };
     }
 
-    public sealed record PackageReference(string Name, string Version, string Path);
+    public sealed class PackageReference : IXunitSerializable
+    {
+        public string Name { get; set; }
+        public string Version { get; set; }
+        public string Path { get; set; }
+
+        public PackageReference()
+            : this("", "", "")
+        {
+        }
+
+        public PackageReference(string name, string version, string path)
+        {
+            Name = name;
+            Version = version;
+            Path = path;
+        }
+
+        public void Deserialize(IXunitSerializationInfo info)
+        {
+            Name = info.GetValue<string>("Name");
+            Version = info.GetValue<string>("Version");
+            Path = info.GetValue<string>("Path");
+        }
+
+        public void Serialize(IXunitSerializationInfo info)
+        {
+            info.AddValue("Name", Name);
+            info.AddValue("Version", Version);
+            info.AddValue("Path", Path);
+        }
+    }
 
     private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
     {

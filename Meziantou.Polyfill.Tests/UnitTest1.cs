@@ -305,7 +305,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public async void StreamReader_ReadLineAsync()
+    public async Task StreamReader_ReadLineAsync()
     {
         using var ms = new MemoryStream(Encoding.UTF8.GetBytes("ab\ncd"));
         using var reader = new StreamReader(ms, Encoding.UTF8);
@@ -313,5 +313,24 @@ public class UnitTest1
         Assert.Equal("ab", await reader.ReadLineAsync());
         Assert.Equal("cd", await reader.ReadLineAsync(CancellationToken.None));
         Assert.Null(await reader.ReadLineAsync(CancellationToken.None));
+    }
+
+    [Fact]
+    public void Stream_ReadAtLeast()
+    {
+        using var ms = new MemoryStream(new byte[] { 1, 2, 3, 4 });
+
+        var buffer = new byte[4];
+        Assert.Equal(4, ms.ReadAtLeast(buffer.AsSpan(), 4));
+        Assert.Equal(new byte[] { 1, 2, 3, 4 }, buffer);
+    }
+    [Fact]
+    public async Task Stream_ReadAtLeastAsync()
+    {
+        using var ms = new MemoryStream(new byte[] { 1, 2, 3, 4 });
+
+        var buffer = new byte[4];
+        Assert.Equal(4, await ms.ReadAtLeastAsync(buffer.AsMemory(), 4));
+        Assert.Equal(new byte[] { 1, 2, 3, 4 }, buffer);
     }
 }
