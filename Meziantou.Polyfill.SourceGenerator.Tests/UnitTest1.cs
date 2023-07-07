@@ -16,7 +16,7 @@ public class UnitTest1
     public async Task NoCodeGeneratedForLatestFramework()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0-preview.4.23259.5", "ref/net8.0/");
-        var result = await GenerateFiles("", assemblyLocations: assemblies);
+        var result = GenerateFiles("", assemblyLocations: assemblies);
         var tree = Assert.Single(result.GeneratorResult.GeneratedTrees);
         Assert.Equal("Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs", tree.FilePath);
     }
@@ -26,10 +26,10 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
-        var result = await GenerateFiles("", assemblyLocations: assemblies);
+        var result = GenerateFiles("", assemblyLocations: assemblies);
         Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
 
-        result = await GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
+        result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
 
@@ -37,13 +37,13 @@ public class UnitTest1
     public async Task InternalsVisibleTo_DoNotRegenerateExtensionMethods()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.0", "ref/net6.0/");
-        var tempGeneration = await GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
+        var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
         Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs")));
         Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
 
         var temp = Path.GetTempFileName() + ".dll";
         File.WriteAllBytes(temp, tempGeneration.Assembly!);
-        var result = await GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
+        var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("StringSyntaxAttribute")));
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
     }
@@ -58,7 +58,7 @@ public class UnitTest1
             assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path));
         }
 
-        await GenerateFiles("", assemblyLocations: assemblies.ToArray());
+        GenerateFiles("", assemblyLocations: assemblies.ToArray());
     }
 
     [Fact]
@@ -132,7 +132,7 @@ public class UnitTest1
 
     public sealed record PackageReference(string Name, string Version, string Path);
 
-    private static async Task<(GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly)> GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
+    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations

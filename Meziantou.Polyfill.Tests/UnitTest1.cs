@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -301,5 +302,16 @@ public class UnitTest1
         var dict = new ConcurrentDictionary<int, string>();
         var actual = dict.GetOrAdd(0, (key, arg) => arg, "arg");
         Assert.Equal("arg", actual);
+    }
+
+    [Fact]
+    public async void StreamReader_ReadLineAsync()
+    {
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes("ab\ncd"));
+        using var reader = new StreamReader(ms, Encoding.UTF8);
+
+        Assert.Equal("ab", await reader.ReadLineAsync());
+        Assert.Equal("cd", await reader.ReadLineAsync(CancellationToken.None));
+        Assert.Null(await reader.ReadLineAsync(CancellationToken.None));
     }
 }
