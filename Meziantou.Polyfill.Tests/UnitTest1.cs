@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -110,7 +111,7 @@ public class UnitTest1
         Assert.True("test".Contains('t'));
         Assert.False("test".Contains('T'));
     }
-    
+
     [Fact]
     public void String_Contains_Char_StringComparison()
     {
@@ -292,5 +293,13 @@ public class UnitTest1
     public void ValueTuple()
     {
         Assert.Equal((1, 2, 3, 4, 5, 6, 7, 8, 9, 10), (1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+    }
+
+    [Fact]
+    public void ConcurrentDictionary_GetOrAdd()
+    {
+        var dict = new ConcurrentDictionary<int, string>();
+        var actual = dict.GetOrAdd(0, (key, arg) => arg, "arg");
+        Assert.Equal("arg", actual);
     }
 }
