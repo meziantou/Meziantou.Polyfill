@@ -324,6 +324,7 @@ public class UnitTest1
         Assert.Equal(4, ms.ReadAtLeast(buffer.AsSpan(), 4));
         Assert.Equal(new byte[] { 1, 2, 3, 4 }, buffer);
     }
+
     [Fact]
     public async Task Stream_ReadAtLeastAsync()
     {
@@ -332,5 +333,12 @@ public class UnitTest1
         var buffer = new byte[4];
         Assert.Equal(4, await ms.ReadAtLeastAsync(buffer.AsMemory(), 4));
         Assert.Equal(new byte[] { 1, 2, 3, 4 }, buffer);
+    }
+
+    [Fact]
+    public void String_AsSpan()
+    {
+        var actual = "test".AsSpan(1, 2);
+        Assert.Equal("es", actual.ToString());
     }
 }
