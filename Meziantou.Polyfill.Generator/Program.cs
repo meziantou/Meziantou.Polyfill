@@ -66,6 +66,7 @@ sb.AppendLine($"private readonly bool _hasMemoryOfT;");
 sb.AppendLine($"private readonly bool _hasReadOnlyMemoryOfT;");
 sb.AppendLine($"private readonly bool _hasValueTask;");
 sb.AppendLine($"private readonly bool _hasValueTaskOfT;");
+sb.AppendLine($"private readonly bool _hasImmutableArrayOfT;");
 
 sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
 sb.AppendLine("{");
@@ -83,6 +84,8 @@ if (polyfills.Any(p => p.PolyfillData.RequiresValueTask))
     sb.AppendLine("    _hasValueTask = compilation.GetTypeByMetadataName(\"System.Threading.Tasks.ValueTask\") != null;");
 if (polyfills.Any(p => p.PolyfillData.RequiresValueTaskOfT))
     sb.AppendLine("    _hasValueTaskOfT = compilation.GetTypeByMetadataName(\"System.Threading.Tasks.ValueTask`1\") != null;");
+if (polyfills.Any(p => p.PolyfillData.RequiresImmutableArrayOfT))
+    sb.AppendLine("    _hasImmutableArrayOfT = compilation.GetTypeByMetadataName(\"System.Collections.Immutable.ImmutableArray`1\") != null;");
 
 foreach (var polyfill in polyfills)
 {
@@ -105,6 +108,8 @@ foreach (var polyfill in polyfills)
             result += "_hasValueTask && ";
         if (data.RequiresValueTaskOfT)
             result += "_hasValueTaskOfT && ";
+        if (data.RequiresImmutableArrayOfT)
+            result += "_hasImmutableArrayOfT && ";
 
         if (data.ConditionalMembers.Length > 0)
         {

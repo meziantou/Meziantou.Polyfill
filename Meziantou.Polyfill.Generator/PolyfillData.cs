@@ -16,6 +16,7 @@ internal sealed partial class PolyfillData
     public bool RequiresReadOnlyMemory { get; private set; }
     public bool RequiresValueTask { get; private set; }
     public bool RequiresValueTaskOfT { get; private set; }
+    public bool RequiresImmutableArrayOfT { get; private set; }
 
     public string[] DeclaredMemberDocumentationIds { get; private set; } = Array.Empty<string>();
     public string[] ConditionalMembers { get; private set; } = Array.Empty<string>();
@@ -66,6 +67,7 @@ internal sealed partial class PolyfillData
             data.RequiresReadOnlyMemory |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1"));
             data.RequiresValueTask |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask"));
             data.RequiresValueTaskOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1"));
+            data.RequiresImmutableArrayOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Collections.Immutable.ImmutableArray`1"));
         }
 
         return data;
