@@ -1,4 +1,4 @@
-// Polyfills: 96
+// Polyfills: 100
 #nullable enable
 using System;
 using System.Text;
@@ -61,166 +61,174 @@ public Members(Compilation compilation, PolyfillOptions options)
         _bits0 = _bits0 | 16384uL;
     if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})~System.Collections.Generic.IEnumerable{``0}")))
         _bits0 = _bits0 | 32768uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})~System.Linq.IOrderedEnumerable{``0}")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})~``0")))
         _bits0 = _bits0 | 65536uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})~System.Linq.IOrderedEnumerable{``0}")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})~``0")))
         _bits0 = _bits0 | 131072uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Order``1(System.Collections.Generic.IEnumerable{``0})~System.Linq.IOrderedEnumerable{``0}")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})~``0")))
         _bits0 = _bits0 | 262144uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})~System.Linq.IOrderedEnumerable{``0}")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})~``0")))
         _bits0 = _bits0 | 524288uL;
-    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})~System.Collections.Generic.IEnumerable{System.ValueTuple{``0,``1}}")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 1048576uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.AsSpan(System.String,System.Int32,System.Int32)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.AsSpan(System.String,System.Int32,System.Int32)~System.ReadOnlySpan{System.Char}")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 2097152uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains``1(System.ReadOnlySpan{``0},``0)~System.Boolean")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Order``1(System.Collections.Generic.IEnumerable{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 4194304uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains``1(System.Span{``0},``0)~System.Boolean")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})~System.Linq.IOrderedEnumerable{``0}")))
         _bits0 = _bits0 | 8388608uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.Char)~System.Boolean")))
+    if (IncludeMember(compilation, options, "M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})~System.Collections.Generic.IEnumerable{System.ValueTuple{``0,``1}}")))
         _bits0 = _bits0 | 16777216uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.Char,System.StringComparison)~System.Boolean")))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.AsSpan(System.String,System.Int32,System.Int32)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.AsSpan(System.String,System.Int32,System.Int32)~System.ReadOnlySpan{System.Char}")))
         _bits0 = _bits0 | 33554432uL;
-    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.String,System.StringComparison)~System.Boolean")))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains``1(System.ReadOnlySpan{``0},``0)~System.Boolean")))
         _bits0 = _bits0 | 67108864uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CopyTo(System.String,System.Span{System.Char})")))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains``1(System.Span{``0},``0)~System.Boolean")))
         _bits0 = _bits0 | 134217728uL;
-    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.EndsWith(System.String,System.Char)~System.Boolean")))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.Char)~System.Boolean")))
         _bits0 = _bits0 | 268435456uL;
-    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.GetHashCode(System.String,System.StringComparison)~System.Int32") && IncludeMember(compilation, options, "M:Helpers.FromComparison(System.StringComparison)~System.StringComparer")))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.Char,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.Char,System.StringComparison)~System.Boolean")))
         _bits0 = _bits0 | 536870912uL;
-    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.IndexOf(System.String,System.Char,System.StringComparison)~System.Int32")))
+    if (IncludeMember(compilation, options, "M:System.String.Contains(System.String,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Contains(System.String,System.String,System.StringComparison)~System.Boolean")))
         _bits0 = _bits0 | 1073741824uL;
-    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Replace(System.String,System.String,System.String,System.StringComparison)~System.String")))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.CopyTo(System.Span{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CopyTo(System.String,System.Span{System.Char})")))
         _bits0 = _bits0 | 2147483648uL;
-    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings(System.String)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReplaceLineEndings(System.String,System.String)~System.String")))
+    if (IncludeMember(compilation, options, "M:System.String.EndsWith(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.EndsWith(System.String,System.Char)~System.Boolean")))
         _bits0 = _bits0 | 4294967296uL;
-    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReplaceLineEndings(System.String)~System.String")))
+    if (IncludeMember(compilation, options, "M:System.String.GetHashCode(System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.GetHashCode(System.String,System.StringComparison)~System.Int32") && IncludeMember(compilation, options, "M:Helpers.FromComparison(System.StringComparison)~System.StringComparer")))
         _bits0 = _bits0 | 8589934592uL;
-    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Split(System.String,System.Char,System.Int32,System.StringSplitOptions)~System.String[]")))
+    if (IncludeMember(compilation, options, "M:System.String.IndexOf(System.Char,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.IndexOf(System.String,System.Char,System.StringComparison)~System.Int32")))
         _bits0 = _bits0 | 17179869184uL;
-    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Split(System.String,System.Char,System.StringSplitOptions)~System.String[]")))
+    if (IncludeMember(compilation, options, "M:System.String.Replace(System.String,System.String,System.StringComparison)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Replace(System.String,System.String,System.String,System.StringComparison)~System.String")))
         _bits0 = _bits0 | 34359738368uL;
-    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.StartsWith(System.String,System.Char)~System.Boolean")))
+    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings(System.String)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReplaceLineEndings(System.String,System.String)~System.String")))
         _bits0 = _bits0 | 68719476736uL;
-    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.TryCopyTo(System.String,System.Span{System.Char})~System.Boolean")))
+    if (IncludeMember(compilation, options, "M:System.String.ReplaceLineEndings") && (IncludeMember(compilation, options, "M:PolyfillExtensions.ReplaceLineEndings(System.String)~System.String")))
         _bits0 = _bits0 | 137438953472uL;
-    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Append(System.Text.StringBuilder,System.ReadOnlyMemory{System.Char})~System.Text.StringBuilder")))
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Split(System.String,System.Char,System.Int32,System.StringSplitOptions)~System.String[]")))
         _bits0 = _bits0 | 274877906944uL;
-    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Append(System.Text.StringBuilder,System.ReadOnlySpan{System.Char})~System.Text.StringBuilder")))
+    if (IncludeMember(compilation, options, "M:System.String.Split(System.Char,System.StringSplitOptions)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Split(System.String,System.Char,System.StringSplitOptions)~System.String[]")))
         _bits0 = _bits0 | 549755813888uL;
-    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CancelAsync(System.Threading.CancellationTokenSource)~System.Threading.Tasks.Task")))
+    if (IncludeMember(compilation, options, "M:System.String.StartsWith(System.Char)") && (IncludeMember(compilation, options, "M:PolyfillExtensions.StartsWith(System.String,System.Char)~System.Boolean")))
         _bits0 = _bits0 | 1099511627776uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
+    if (_hasSpanOfT && IncludeMember(compilation, options, "M:System.String.TryCopyTo(System.Span{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.TryCopyTo(System.String,System.Span{System.Char})~System.Boolean")))
         _bits0 = _bits0 | 2199023255552uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
+    if (_hasReadOnlyMemoryOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Append(System.Text.StringBuilder,System.ReadOnlyMemory{System.Char})~System.Text.StringBuilder")))
         _bits0 = _bits0 | 4398046511104uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
+    if (_hasReadOnlySpanOfT && IncludeMember(compilation, options, "M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char})") && (IncludeMember(compilation, options, "M:PolyfillExtensions.Append(System.Text.StringBuilder,System.ReadOnlySpan{System.Char})~System.Text.StringBuilder")))
         _bits0 = _bits0 | 8796093022208uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
+    if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CancelAsync(System.Threading.CancellationTokenSource)~System.Threading.Tasks.Task")))
         _bits0 = _bits0 | 17592186044416uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
         _bits0 = _bits0 | 35184372088832uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
         _bits0 = _bits0 | 70368744177664uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
         _bits0 = _bits0 | 140737488355328uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
         _bits0 = _bits0 | 281474976710656uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
         _bits0 = _bits0 | 562949953421312uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
         _bits0 = _bits0 | 1125899906842624uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
         _bits0 = _bits0 | 2251799813685248uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
         _bits0 = _bits0 | 4503599627370496uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
         _bits0 = _bits0 | 9007199254740992uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
         _bits0 = _bits0 | 18014398509481984uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
         _bits0 = _bits0 | 36028797018963968uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
         _bits0 = _bits0 | 72057594037927936uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
         _bits0 = _bits0 | 144115188075855872uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
         _bits0 = _bits0 | 288230376151711744uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
         _bits0 = _bits0 | 576460752303423488uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
         _bits0 = _bits0 | 1152921504606846976uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
         _bits0 = _bits0 | 2305843009213693952uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
         _bits0 = _bits0 | 4611686018427387904uL;
-    if (IncludeMember(compilation, options, "T:System.HashCode"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
         _bits0 = _bits0 | 9223372036854775808uL;
-    if (IncludeMember(compilation, options, "T:System.Index"))
-        _bits1 = _bits1 | 2uL;
-    if (IncludeMember(compilation, options, "T:System.Range"))
-        _bits1 = _bits1 | 4uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
-        _bits1 = _bits1 | 8uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
-        _bits1 = _bits1 | 16uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
-        _bits1 = _bits1 | 32uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
-        _bits1 = _bits1 | 64uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
-        _bits1 = _bits1 | 128uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
-        _bits1 = _bits1 | 256uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
-        _bits1 = _bits1 | 512uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
-        _bits1 = _bits1 | 1024uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
-        _bits1 = _bits1 | 2048uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
-        _bits1 = _bits1 | 4096uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.TupleElementNamesAttribute"))
-        _bits1 = _bits1 | 8192uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
-        _bits1 = _bits1 | 16384uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
-        _bits1 = _bits1 | 32768uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
-        _bits1 = _bits1 | 65536uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
-        _bits1 = _bits1 | 131072uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
-        _bits1 = _bits1 | 262144uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
-        _bits1 = _bits1 | 524288uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
-        _bits1 = _bits1 | 1048576uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
-        _bits1 = _bits1 | 2097152uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
-        _bits1 = _bits1 | 4194304uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple"))
-        _bits1 = _bits1 | 8388608uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`1"))
-        _bits1 = _bits1 | 16777216uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`2"))
-        _bits1 = _bits1 | 33554432uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`3"))
-        _bits1 = _bits1 | 67108864uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`4"))
-        _bits1 = _bits1 | 134217728uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`5"))
-        _bits1 = _bits1 | 268435456uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`6"))
-        _bits1 = _bits1 | 536870912uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`7"))
-        _bits1 = _bits1 | 1073741824uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`8"))
-        _bits1 = _bits1 | 2147483648uL;
-    if (((_bits1 & 8388608ul) == 8388608ul || (_bits1 & 16777216ul) == 16777216ul || (_bits1 & 33554432ul) == 33554432ul || (_bits1 & 67108864ul) == 67108864ul || (_bits1 & 134217728ul) == 134217728ul || (_bits1 & 268435456ul) == 268435456ul || (_bits1 & 536870912ul) == 536870912ul || (_bits1 & 1073741824ul) == 1073741824ul || (_bits1 & 2147483648ul) == 2147483648ul) && IncludeMember(compilation, options, "T:System.ITupleInternal"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
         _bits1 = _bits1 | 1uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
+        _bits1 = _bits1 | 2uL;
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
+        _bits1 = _bits1 | 4uL;
+    if (IncludeMember(compilation, options, "T:System.HashCode"))
+        _bits1 = _bits1 | 8uL;
+    if (IncludeMember(compilation, options, "T:System.Index"))
+        _bits1 = _bits1 | 32uL;
+    if (IncludeMember(compilation, options, "T:System.Range"))
+        _bits1 = _bits1 | 64uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
+        _bits1 = _bits1 | 128uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
+        _bits1 = _bits1 | 256uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
+        _bits1 = _bits1 | 512uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
+        _bits1 = _bits1 | 1024uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
+        _bits1 = _bits1 | 2048uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
+        _bits1 = _bits1 | 4096uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
+        _bits1 = _bits1 | 8192uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
+        _bits1 = _bits1 | 16384uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
+        _bits1 = _bits1 | 32768uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
+        _bits1 = _bits1 | 65536uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.TupleElementNamesAttribute"))
+        _bits1 = _bits1 | 131072uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
+        _bits1 = _bits1 | 262144uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
+        _bits1 = _bits1 | 524288uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
+        _bits1 = _bits1 | 1048576uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
+        _bits1 = _bits1 | 2097152uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
+        _bits1 = _bits1 | 4194304uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
+        _bits1 = _bits1 | 8388608uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
+        _bits1 = _bits1 | 16777216uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
+        _bits1 = _bits1 | 33554432uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
+        _bits1 = _bits1 | 67108864uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple"))
+        _bits1 = _bits1 | 134217728uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`1"))
+        _bits1 = _bits1 | 268435456uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`2"))
+        _bits1 = _bits1 | 536870912uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`3"))
+        _bits1 = _bits1 | 1073741824uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`4"))
+        _bits1 = _bits1 | 2147483648uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`5"))
+        _bits1 = _bits1 | 4294967296uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`6"))
+        _bits1 = _bits1 | 8589934592uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`7"))
+        _bits1 = _bits1 | 17179869184uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`8"))
+        _bits1 = _bits1 | 34359738368uL;
+    if (((_bits1 & 134217728ul) == 134217728ul || (_bits1 & 268435456ul) == 268435456ul || (_bits1 & 536870912ul) == 536870912ul || (_bits1 & 1073741824ul) == 1073741824ul || (_bits1 & 2147483648ul) == 2147483648ul || (_bits1 & 4294967296ul) == 4294967296ul || (_bits1 & 8589934592ul) == 8589934592ul || (_bits1 & 17179869184ul) == 17179869184ul || (_bits1 & 34359738368ul) == 34359738368ul) && IncludeMember(compilation, options, "T:System.ITupleInternal"))
+        _bits1 = _bits1 | 16uL;
 }
 public override int GetHashCode()
 {
@@ -265,164 +273,172 @@ public void AddSources(SourceProductionContext context)
     if ((_bits0 & 32768ul) == 32768ul)
         context.AddSource("M_System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_DistinctBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__);
     if ((_bits0 & 65536ul) == 65536ul)
-        context.AddSource("M_System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_OrderDescending__1_System_Collections_Generic_IEnumerable___0__);
+        context.AddSource("M_System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_MaxBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__);
     if ((_bits0 & 131072ul) == 131072ul)
-        context.AddSource("M_System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_OrderDescending__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IComparer___0__);
+        context.AddSource("M_System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_MaxBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IComparer___1__);
     if ((_bits0 & 262144ul) == 262144ul)
-        context.AddSource("M_System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Order__1_System_Collections_Generic_IEnumerable___0__);
+        context.AddSource("M_System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_MinBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__);
     if ((_bits0 & 524288ul) == 524288ul)
-        context.AddSource("M_System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Order__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IComparer___0__);
+        context.AddSource("M_System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_MinBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IComparer___1__);
     if ((_bits0 & 1048576ul) == 1048576ul)
-        context.AddSource("M_System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Zip__2_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__);
+        context.AddSource("M_System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_OrderDescending__1_System_Collections_Generic_IEnumerable___0__);
     if ((_bits0 & 2097152ul) == 2097152ul)
-        context.AddSource("M_System.MemoryExtensions.AsSpan(System.String,System.Int32,System.Int32).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_AsSpan_System_String_System_Int32_System_Int32_);
+        context.AddSource("M_System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_OrderDescending__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IComparer___0__);
     if ((_bits0 & 4194304ul) == 4194304ul)
-        context.AddSource("M_System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_);
+        context.AddSource("M_System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Order__1_System_Collections_Generic_IEnumerable___0__);
     if ((_bits0 & 8388608ul) == 8388608ul)
-        context.AddSource("M_System.MemoryExtensions.Contains``1(System.Span{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_);
+        context.AddSource("M_System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Order__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IComparer___0__);
     if ((_bits0 & 16777216ul) == 16777216ul)
-        context.AddSource("M_System.String.Contains(System.Char).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_);
+        context.AddSource("M_System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}).g.cs", PolyfillContents.Source_M_System_Linq_Enumerable_Zip__2_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___1__);
     if ((_bits0 & 33554432ul) == 33554432ul)
-        context.AddSource("M_System.String.Contains(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_System_StringComparison_);
+        context.AddSource("M_System.MemoryExtensions.AsSpan(System.String,System.Int32,System.Int32).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_AsSpan_System_String_System_Int32_System_Int32_);
     if ((_bits0 & 67108864ul) == 67108864ul)
-        context.AddSource("M_System.String.Contains(System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_String_System_StringComparison_);
+        context.AddSource("M_System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_ReadOnlySpan___0____0_);
     if ((_bits0 & 134217728ul) == 134217728ul)
-        context.AddSource("M_System.String.CopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_CopyTo_System_Span_System_Char__);
+        context.AddSource("M_System.MemoryExtensions.Contains``1(System.Span{``0},``0).g.cs", PolyfillContents.Source_M_System_MemoryExtensions_Contains__1_System_Span___0____0_);
     if ((_bits0 & 268435456ul) == 268435456ul)
-        context.AddSource("M_System.String.EndsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_EndsWith_System_Char_);
+        context.AddSource("M_System.String.Contains(System.Char).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_);
     if ((_bits0 & 536870912ul) == 536870912ul)
-        context.AddSource("M_System.String.GetHashCode(System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_GetHashCode_System_StringComparison_);
+        context.AddSource("M_System.String.Contains(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_Char_System_StringComparison_);
     if ((_bits0 & 1073741824ul) == 1073741824ul)
-        context.AddSource("M_System.String.IndexOf(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_IndexOf_System_Char_System_StringComparison_);
+        context.AddSource("M_System.String.Contains(System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Contains_System_String_System_StringComparison_);
     if ((_bits0 & 2147483648ul) == 2147483648ul)
-        context.AddSource("M_System.String.Replace(System.String,System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Replace_System_String_System_String_System_StringComparison_);
+        context.AddSource("M_System.String.CopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_CopyTo_System_Span_System_Char__);
     if ((_bits0 & 4294967296ul) == 4294967296ul)
-        context.AddSource("M_System.String.ReplaceLineEndings(System.String).g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings_System_String_);
+        context.AddSource("M_System.String.EndsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_EndsWith_System_Char_);
     if ((_bits0 & 8589934592ul) == 8589934592ul)
-        context.AddSource("M_System.String.ReplaceLineEndings.g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings);
+        context.AddSource("M_System.String.GetHashCode(System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_GetHashCode_System_StringComparison_);
     if ((_bits0 & 17179869184ul) == 17179869184ul)
-        context.AddSource("M_System.String.Split(System.Char,System.Int32,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_);
+        context.AddSource("M_System.String.IndexOf(System.Char,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_IndexOf_System_Char_System_StringComparison_);
     if ((_bits0 & 34359738368ul) == 34359738368ul)
-        context.AddSource("M_System.String.Split(System.Char,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_StringSplitOptions_);
+        context.AddSource("M_System.String.Replace(System.String,System.String,System.StringComparison).g.cs", PolyfillContents.Source_M_System_String_Replace_System_String_System_String_System_StringComparison_);
     if ((_bits0 & 68719476736ul) == 68719476736ul)
-        context.AddSource("M_System.String.StartsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_StartsWith_System_Char_);
+        context.AddSource("M_System.String.ReplaceLineEndings(System.String).g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings_System_String_);
     if ((_bits0 & 137438953472ul) == 137438953472ul)
-        context.AddSource("M_System.String.TryCopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_TryCopyTo_System_Span_System_Char__);
+        context.AddSource("M_System.String.ReplaceLineEndings.g.cs", PolyfillContents.Source_M_System_String_ReplaceLineEndings);
     if ((_bits0 & 274877906944ul) == 274877906944ul)
-        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__);
+        context.AddSource("M_System.String.Split(System.Char,System.Int32,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_Int32_System_StringSplitOptions_);
     if ((_bits0 & 549755813888ul) == 549755813888ul)
-        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__);
+        context.AddSource("M_System.String.Split(System.Char,System.StringSplitOptions).g.cs", PolyfillContents.Source_M_System_String_Split_System_Char_System_StringSplitOptions_);
     if ((_bits0 & 1099511627776ul) == 1099511627776ul)
-        context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
+        context.AddSource("M_System.String.StartsWith(System.Char).g.cs", PolyfillContents.Source_M_System_String_StartsWith_System_Char_);
     if ((_bits0 & 2199023255552ul) == 2199023255552ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
+        context.AddSource("M_System.String.TryCopyTo(System.Span{System.Char}).g.cs", PolyfillContents.Source_M_System_String_TryCopyTo_System_Span_System_Char__);
     if ((_bits0 & 4398046511104ul) == 4398046511104ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
+        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlyMemory_System_Char__);
     if ((_bits0 & 8796093022208ul) == 8796093022208ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
+        context.AddSource("M_System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}).g.cs", PolyfillContents.Source_M_System_Text_StringBuilder_Append_System_ReadOnlySpan_System_Char__);
     if ((_bits0 & 17592186044416ul) == 17592186044416ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
+        context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
     if ((_bits0 & 35184372088832ul) == 35184372088832ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
     if ((_bits0 & 70368744177664ul) == 70368744177664ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
     if ((_bits0 & 140737488355328ul) == 140737488355328ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
     if ((_bits0 & 281474976710656ul) == 281474976710656ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
     if ((_bits0 & 562949953421312ul) == 562949953421312ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
     if ((_bits0 & 1125899906842624ul) == 1125899906842624ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
     if ((_bits0 & 2251799813685248ul) == 2251799813685248ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
     if ((_bits0 & 4503599627370496ul) == 4503599627370496ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
     if ((_bits0 & 9007199254740992ul) == 9007199254740992ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
     if ((_bits0 & 18014398509481984ul) == 18014398509481984ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
     if ((_bits0 & 36028797018963968ul) == 36028797018963968ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
     if ((_bits0 & 72057594037927936ul) == 72057594037927936ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
     if ((_bits0 & 144115188075855872ul) == 144115188075855872ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
     if ((_bits0 & 288230376151711744ul) == 288230376151711744ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
     if ((_bits0 & 576460752303423488ul) == 576460752303423488ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
     if ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
     if ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
     if ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul)
-        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
     if ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul)
-        context.AddSource("T_System.HashCode.g.cs", PolyfillContents.Source_T_System_HashCode);
-    if ((_bits1 & 2ul) == 2ul)
-        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
-    if ((_bits1 & 4ul) == 4ul)
-        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
-    if ((_bits1 & 8ul) == 8ul)
-        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
-    if ((_bits1 & 16ul) == 16ul)
-        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
-    if ((_bits1 & 32ul) == 32ul)
-        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
-    if ((_bits1 & 64ul) == 64ul)
-        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
-    if ((_bits1 & 128ul) == 128ul)
-        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
-    if ((_bits1 & 256ul) == 256ul)
-        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
-    if ((_bits1 & 512ul) == 512ul)
-        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
-    if ((_bits1 & 1024ul) == 1024ul)
-        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
-    if ((_bits1 & 2048ul) == 2048ul)
-        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
-    if ((_bits1 & 4096ul) == 4096ul)
-        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
-    if ((_bits1 & 8192ul) == 8192ul)
-        context.AddSource("T_System.Runtime.CompilerServices.TupleElementNamesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_TupleElementNamesAttribute);
-    if ((_bits1 & 16384ul) == 16384ul)
-        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
-    if ((_bits1 & 32768ul) == 32768ul)
-        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
-    if ((_bits1 & 65536ul) == 65536ul)
-        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
-    if ((_bits1 & 131072ul) == 131072ul)
-        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
-    if ((_bits1 & 262144ul) == 262144ul)
-        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
-    if ((_bits1 & 524288ul) == 524288ul)
-        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
-    if ((_bits1 & 1048576ul) == 1048576ul)
-        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
-    if ((_bits1 & 2097152ul) == 2097152ul)
-        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
-    if ((_bits1 & 4194304ul) == 4194304ul)
-        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
-    if ((_bits1 & 8388608ul) == 8388608ul)
-        context.AddSource("T_System.ValueTuple.g.cs", PolyfillContents.Source_T_System_ValueTuple);
-    if ((_bits1 & 16777216ul) == 16777216ul)
-        context.AddSource("T_System.ValueTuple`1.g.cs", PolyfillContents.Source_T_System_ValueTuple_1);
-    if ((_bits1 & 33554432ul) == 33554432ul)
-        context.AddSource("T_System.ValueTuple`2.g.cs", PolyfillContents.Source_T_System_ValueTuple_2);
-    if ((_bits1 & 67108864ul) == 67108864ul)
-        context.AddSource("T_System.ValueTuple`3.g.cs", PolyfillContents.Source_T_System_ValueTuple_3);
-    if ((_bits1 & 134217728ul) == 134217728ul)
-        context.AddSource("T_System.ValueTuple`4.g.cs", PolyfillContents.Source_T_System_ValueTuple_4);
-    if ((_bits1 & 268435456ul) == 268435456ul)
-        context.AddSource("T_System.ValueTuple`5.g.cs", PolyfillContents.Source_T_System_ValueTuple_5);
-    if ((_bits1 & 536870912ul) == 536870912ul)
-        context.AddSource("T_System.ValueTuple`6.g.cs", PolyfillContents.Source_T_System_ValueTuple_6);
-    if ((_bits1 & 1073741824ul) == 1073741824ul)
-        context.AddSource("T_System.ValueTuple`7.g.cs", PolyfillContents.Source_T_System_ValueTuple_7);
-    if ((_bits1 & 2147483648ul) == 2147483648ul)
-        context.AddSource("T_System.ValueTuple`8.g.cs", PolyfillContents.Source_T_System_ValueTuple_8);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
     if ((_bits1 & 1ul) == 1ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
+    if ((_bits1 & 2ul) == 2ul)
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
+    if ((_bits1 & 4ul) == 4ul)
+        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
+    if ((_bits1 & 8ul) == 8ul)
+        context.AddSource("T_System.HashCode.g.cs", PolyfillContents.Source_T_System_HashCode);
+    if ((_bits1 & 32ul) == 32ul)
+        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
+    if ((_bits1 & 64ul) == 64ul)
+        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
+    if ((_bits1 & 128ul) == 128ul)
+        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
+    if ((_bits1 & 256ul) == 256ul)
+        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
+    if ((_bits1 & 512ul) == 512ul)
+        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
+    if ((_bits1 & 1024ul) == 1024ul)
+        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
+    if ((_bits1 & 2048ul) == 2048ul)
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
+    if ((_bits1 & 4096ul) == 4096ul)
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
+    if ((_bits1 & 8192ul) == 8192ul)
+        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
+    if ((_bits1 & 16384ul) == 16384ul)
+        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
+    if ((_bits1 & 32768ul) == 32768ul)
+        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
+    if ((_bits1 & 65536ul) == 65536ul)
+        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
+    if ((_bits1 & 131072ul) == 131072ul)
+        context.AddSource("T_System.Runtime.CompilerServices.TupleElementNamesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_TupleElementNamesAttribute);
+    if ((_bits1 & 262144ul) == 262144ul)
+        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
+    if ((_bits1 & 524288ul) == 524288ul)
+        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
+    if ((_bits1 & 1048576ul) == 1048576ul)
+        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
+    if ((_bits1 & 2097152ul) == 2097152ul)
+        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
+    if ((_bits1 & 4194304ul) == 4194304ul)
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
+    if ((_bits1 & 8388608ul) == 8388608ul)
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
+    if ((_bits1 & 16777216ul) == 16777216ul)
+        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
+    if ((_bits1 & 33554432ul) == 33554432ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
+    if ((_bits1 & 67108864ul) == 67108864ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
+    if ((_bits1 & 134217728ul) == 134217728ul)
+        context.AddSource("T_System.ValueTuple.g.cs", PolyfillContents.Source_T_System_ValueTuple);
+    if ((_bits1 & 268435456ul) == 268435456ul)
+        context.AddSource("T_System.ValueTuple`1.g.cs", PolyfillContents.Source_T_System_ValueTuple_1);
+    if ((_bits1 & 536870912ul) == 536870912ul)
+        context.AddSource("T_System.ValueTuple`2.g.cs", PolyfillContents.Source_T_System_ValueTuple_2);
+    if ((_bits1 & 1073741824ul) == 1073741824ul)
+        context.AddSource("T_System.ValueTuple`3.g.cs", PolyfillContents.Source_T_System_ValueTuple_3);
+    if ((_bits1 & 2147483648ul) == 2147483648ul)
+        context.AddSource("T_System.ValueTuple`4.g.cs", PolyfillContents.Source_T_System_ValueTuple_4);
+    if ((_bits1 & 4294967296ul) == 4294967296ul)
+        context.AddSource("T_System.ValueTuple`5.g.cs", PolyfillContents.Source_T_System_ValueTuple_5);
+    if ((_bits1 & 8589934592ul) == 8589934592ul)
+        context.AddSource("T_System.ValueTuple`6.g.cs", PolyfillContents.Source_T_System_ValueTuple_6);
+    if ((_bits1 & 17179869184ul) == 17179869184ul)
+        context.AddSource("T_System.ValueTuple`7.g.cs", PolyfillContents.Source_T_System_ValueTuple_7);
+    if ((_bits1 & 34359738368ul) == 34359738368ul)
+        context.AddSource("T_System.ValueTuple`8.g.cs", PolyfillContents.Source_T_System_ValueTuple_8);
+    if ((_bits1 & 16ul) == 16ul)
         context.AddSource("T_System.ITupleInternal.g.cs", PolyfillContents.Source_T_System_ITupleInternal);
 }
 public string DumpAsCSharpComment()
@@ -452,86 +468,90 @@ public string DumpAsCSharpComment()
     sb.AppendLine("// M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken): " + ((_bits0 & 8192ul) == 8192ul));
     sb.AppendLine("// M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1}): " + ((_bits0 & 16384ul) == 16384ul));
     sb.AppendLine("// M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1}): " + ((_bits0 & 32768ul) == 32768ul));
-    sb.AppendLine("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): " + ((_bits0 & 65536ul) == 65536ul));
-    sb.AppendLine("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}): " + ((_bits0 & 131072ul) == 131072ul));
-    sb.AppendLine("// M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0}): " + ((_bits0 & 262144ul) == 262144ul));
-    sb.AppendLine("// M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}): " + ((_bits0 & 524288ul) == 524288ul));
-    sb.AppendLine("// M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}): " + ((_bits0 & 1048576ul) == 1048576ul));
-    sb.AppendLine("// M:System.MemoryExtensions.AsSpan(System.String,System.Int32,System.Int32): " + ((_bits0 & 2097152ul) == 2097152ul));
-    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0): " + ((_bits0 & 4194304ul) == 4194304ul));
-    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.Span{``0},``0): " + ((_bits0 & 8388608ul) == 8388608ul));
-    sb.AppendLine("// M:System.String.Contains(System.Char): " + ((_bits0 & 16777216ul) == 16777216ul));
-    sb.AppendLine("// M:System.String.Contains(System.Char,System.StringComparison): " + ((_bits0 & 33554432ul) == 33554432ul));
-    sb.AppendLine("// M:System.String.Contains(System.String,System.StringComparison): " + ((_bits0 & 67108864ul) == 67108864ul));
-    sb.AppendLine("// M:System.String.CopyTo(System.Span{System.Char}): " + ((_bits0 & 134217728ul) == 134217728ul));
-    sb.AppendLine("// M:System.String.EndsWith(System.Char): " + ((_bits0 & 268435456ul) == 268435456ul));
-    sb.AppendLine("// M:System.String.GetHashCode(System.StringComparison): " + ((_bits0 & 536870912ul) == 536870912ul));
-    sb.AppendLine("// M:System.String.IndexOf(System.Char,System.StringComparison): " + ((_bits0 & 1073741824ul) == 1073741824ul));
-    sb.AppendLine("// M:System.String.Replace(System.String,System.String,System.StringComparison): " + ((_bits0 & 2147483648ul) == 2147483648ul));
-    sb.AppendLine("// M:System.String.ReplaceLineEndings(System.String): " + ((_bits0 & 4294967296ul) == 4294967296ul));
-    sb.AppendLine("// M:System.String.ReplaceLineEndings: " + ((_bits0 & 8589934592ul) == 8589934592ul));
-    sb.AppendLine("// M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions): " + ((_bits0 & 17179869184ul) == 17179869184ul));
-    sb.AppendLine("// M:System.String.Split(System.Char,System.StringSplitOptions): " + ((_bits0 & 34359738368ul) == 34359738368ul));
-    sb.AppendLine("// M:System.String.StartsWith(System.Char): " + ((_bits0 & 68719476736ul) == 68719476736ul));
-    sb.AppendLine("// M:System.String.TryCopyTo(System.Span{System.Char}): " + ((_bits0 & 137438953472ul) == 137438953472ul));
-    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}): " + ((_bits0 & 274877906944ul) == 274877906944ul));
-    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}): " + ((_bits0 & 549755813888ul) == 549755813888ul));
-    sb.AppendLine("// M:System.Threading.CancellationTokenSource.CancelAsync: " + ((_bits0 & 1099511627776ul) == 1099511627776ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 2199023255552ul) == 2199023255552ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 4398046511104ul) == 4398046511104ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 8796093022208ul) == 8796093022208ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 17592186044416ul) == 17592186044416ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 35184372088832ul) == 35184372088832ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
-    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
-    sb.AppendLine("// T:System.HashCode: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
-    sb.AppendLine("// T:System.Index: " + ((_bits1 & 2ul) == 2ul));
-    sb.AppendLine("// T:System.Range: " + ((_bits1 & 4ul) == 4ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits1 & 8ul) == 8ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits1 & 16ul) == 16ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits1 & 32ul) == 32ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits1 & 64ul) == 64ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits1 & 128ul) == 128ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits1 & 256ul) == 256ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits1 & 512ul) == 512ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits1 & 1024ul) == 1024ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits1 & 2048ul) == 2048ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits1 & 4096ul) == 4096ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.TupleElementNamesAttribute: " + ((_bits1 & 8192ul) == 8192ul));
-    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits1 & 16384ul) == 16384ul));
-    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits1 & 32768ul) == 32768ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits1 & 65536ul) == 65536ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits1 & 131072ul) == 131072ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits1 & 262144ul) == 262144ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits1 & 524288ul) == 524288ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits1 & 1048576ul) == 1048576ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits1 & 2097152ul) == 2097152ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits1 & 4194304ul) == 4194304ul));
-    sb.AppendLine("// T:System.ValueTuple: " + ((_bits1 & 8388608ul) == 8388608ul));
-    sb.AppendLine("// T:System.ValueTuple`1: " + ((_bits1 & 16777216ul) == 16777216ul));
-    sb.AppendLine("// T:System.ValueTuple`2: " + ((_bits1 & 33554432ul) == 33554432ul));
-    sb.AppendLine("// T:System.ValueTuple`3: " + ((_bits1 & 67108864ul) == 67108864ul));
-    sb.AppendLine("// T:System.ValueTuple`4: " + ((_bits1 & 134217728ul) == 134217728ul));
-    sb.AppendLine("// T:System.ValueTuple`5: " + ((_bits1 & 268435456ul) == 268435456ul));
-    sb.AppendLine("// T:System.ValueTuple`6: " + ((_bits1 & 536870912ul) == 536870912ul));
-    sb.AppendLine("// T:System.ValueTuple`7: " + ((_bits1 & 1073741824ul) == 1073741824ul));
-    sb.AppendLine("// T:System.ValueTuple`8: " + ((_bits1 & 2147483648ul) == 2147483648ul));
-    sb.AppendLine("// T:System.ITupleInternal: " + ((_bits1 & 1ul) == 1ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1}): " + ((_bits0 & 65536ul) == 65536ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1}): " + ((_bits0 & 131072ul) == 131072ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1}): " + ((_bits0 & 262144ul) == 262144ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1}): " + ((_bits0 & 524288ul) == 524288ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): " + ((_bits0 & 1048576ul) == 1048576ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}): " + ((_bits0 & 2097152ul) == 2097152ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0}): " + ((_bits0 & 4194304ul) == 4194304ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0}): " + ((_bits0 & 8388608ul) == 8388608ul));
+    sb.AppendLine("// M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}): " + ((_bits0 & 16777216ul) == 16777216ul));
+    sb.AppendLine("// M:System.MemoryExtensions.AsSpan(System.String,System.Int32,System.Int32): " + ((_bits0 & 33554432ul) == 33554432ul));
+    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0): " + ((_bits0 & 67108864ul) == 67108864ul));
+    sb.AppendLine("// M:System.MemoryExtensions.Contains``1(System.Span{``0},``0): " + ((_bits0 & 134217728ul) == 134217728ul));
+    sb.AppendLine("// M:System.String.Contains(System.Char): " + ((_bits0 & 268435456ul) == 268435456ul));
+    sb.AppendLine("// M:System.String.Contains(System.Char,System.StringComparison): " + ((_bits0 & 536870912ul) == 536870912ul));
+    sb.AppendLine("// M:System.String.Contains(System.String,System.StringComparison): " + ((_bits0 & 1073741824ul) == 1073741824ul));
+    sb.AppendLine("// M:System.String.CopyTo(System.Span{System.Char}): " + ((_bits0 & 2147483648ul) == 2147483648ul));
+    sb.AppendLine("// M:System.String.EndsWith(System.Char): " + ((_bits0 & 4294967296ul) == 4294967296ul));
+    sb.AppendLine("// M:System.String.GetHashCode(System.StringComparison): " + ((_bits0 & 8589934592ul) == 8589934592ul));
+    sb.AppendLine("// M:System.String.IndexOf(System.Char,System.StringComparison): " + ((_bits0 & 17179869184ul) == 17179869184ul));
+    sb.AppendLine("// M:System.String.Replace(System.String,System.String,System.StringComparison): " + ((_bits0 & 34359738368ul) == 34359738368ul));
+    sb.AppendLine("// M:System.String.ReplaceLineEndings(System.String): " + ((_bits0 & 68719476736ul) == 68719476736ul));
+    sb.AppendLine("// M:System.String.ReplaceLineEndings: " + ((_bits0 & 137438953472ul) == 137438953472ul));
+    sb.AppendLine("// M:System.String.Split(System.Char,System.Int32,System.StringSplitOptions): " + ((_bits0 & 274877906944ul) == 274877906944ul));
+    sb.AppendLine("// M:System.String.Split(System.Char,System.StringSplitOptions): " + ((_bits0 & 549755813888ul) == 549755813888ul));
+    sb.AppendLine("// M:System.String.StartsWith(System.Char): " + ((_bits0 & 1099511627776ul) == 1099511627776ul));
+    sb.AppendLine("// M:System.String.TryCopyTo(System.Span{System.Char}): " + ((_bits0 & 2199023255552ul) == 2199023255552ul));
+    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}): " + ((_bits0 & 4398046511104ul) == 4398046511104ul));
+    sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}): " + ((_bits0 & 8796093022208ul) == 8796093022208ul));
+    sb.AppendLine("// M:System.Threading.CancellationTokenSource.CancelAsync: " + ((_bits0 & 17592186044416ul) == 17592186044416ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 35184372088832ul) == 35184372088832ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits1 & 1ul) == 1ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits1 & 2ul) == 2ul));
+    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits1 & 4ul) == 4ul));
+    sb.AppendLine("// T:System.HashCode: " + ((_bits1 & 8ul) == 8ul));
+    sb.AppendLine("// T:System.Index: " + ((_bits1 & 32ul) == 32ul));
+    sb.AppendLine("// T:System.Range: " + ((_bits1 & 64ul) == 64ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits1 & 128ul) == 128ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits1 & 256ul) == 256ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits1 & 512ul) == 512ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits1 & 1024ul) == 1024ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits1 & 2048ul) == 2048ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits1 & 4096ul) == 4096ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits1 & 8192ul) == 8192ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits1 & 16384ul) == 16384ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits1 & 32768ul) == 32768ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits1 & 65536ul) == 65536ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.TupleElementNamesAttribute: " + ((_bits1 & 131072ul) == 131072ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits1 & 262144ul) == 262144ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits1 & 524288ul) == 524288ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits1 & 1048576ul) == 1048576ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits1 & 2097152ul) == 2097152ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits1 & 4194304ul) == 4194304ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits1 & 8388608ul) == 8388608ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits1 & 16777216ul) == 16777216ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits1 & 33554432ul) == 33554432ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits1 & 67108864ul) == 67108864ul));
+    sb.AppendLine("// T:System.ValueTuple: " + ((_bits1 & 134217728ul) == 134217728ul));
+    sb.AppendLine("// T:System.ValueTuple`1: " + ((_bits1 & 268435456ul) == 268435456ul));
+    sb.AppendLine("// T:System.ValueTuple`2: " + ((_bits1 & 536870912ul) == 536870912ul));
+    sb.AppendLine("// T:System.ValueTuple`3: " + ((_bits1 & 1073741824ul) == 1073741824ul));
+    sb.AppendLine("// T:System.ValueTuple`4: " + ((_bits1 & 2147483648ul) == 2147483648ul));
+    sb.AppendLine("// T:System.ValueTuple`5: " + ((_bits1 & 4294967296ul) == 4294967296ul));
+    sb.AppendLine("// T:System.ValueTuple`6: " + ((_bits1 & 8589934592ul) == 8589934592ul));
+    sb.AppendLine("// T:System.ValueTuple`7: " + ((_bits1 & 17179869184ul) == 17179869184ul));
+    sb.AppendLine("// T:System.ValueTuple`8: " + ((_bits1 & 34359738368ul) == 34359738368ul));
+    sb.AppendLine("// T:System.ITupleInternal: " + ((_bits1 & 16ul) == 16ul));
     return sb.ToString();
 }
 }
@@ -884,6 +904,238 @@ static partial class PolyfillExtensions
             if (hashSet.Add(key))
                 yield return item;
         }
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_Linq_Enumerable_MaxBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System;
+using System.Collections.Generic;
+
+static partial class PolyfillExtensions
+{
+    public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+    {
+        return source.MaxBy(keySelector, comparer: null);
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_Linq_Enumerable_MaxBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IComparer___1__ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System;
+using System.Collections.Generic;
+
+static partial class PolyfillExtensions
+{
+    public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer)
+    {
+        if (source == null)
+            throw new ArgumentNullException(nameof(source));
+
+        if (keySelector == null)
+            throw new ArgumentNullException(nameof(keySelector));
+
+        comparer ??= Comparer<TKey>.Default;
+
+        using IEnumerator<TSource> e = source.GetEnumerator();
+
+        if (!e.MoveNext())
+        {
+            if (default(TSource) is null)
+            {
+                return default;
+            }
+            else
+            {
+                throw new InvalidOperationException("Sequence contains no elements");
+            }
+        }
+
+        TSource value = e.Current;
+        TKey key = keySelector(value);
+
+        if (default(TKey) is null)
+        {
+            if (key == null)
+            {
+                TSource firstValue = value;
+
+                do
+                {
+                    if (!e.MoveNext())
+                    {
+                        // All keys are null, surface the first element.
+                        return firstValue;
+                    }
+
+                    value = e.Current;
+                    key = keySelector(value);
+                }
+                while (key == null);
+            }
+
+            while (e.MoveNext())
+            {
+                TSource nextValue = e.Current;
+                TKey nextKey = keySelector(nextValue);
+                if (nextKey != null && comparer.Compare(nextKey, key) > 0)
+                {
+                    key = nextKey;
+                    value = nextValue;
+                }
+            }
+        }
+        else
+        {
+            if (comparer == Comparer<TKey>.Default)
+            {
+                while (e.MoveNext())
+                {
+                    TSource nextValue = e.Current;
+                    TKey nextKey = keySelector(nextValue);
+                    if (Comparer<TKey>.Default.Compare(nextKey, key) > 0)
+                    {
+                        key = nextKey;
+                        value = nextValue;
+                    }
+                }
+            }
+            else
+            {
+                while (e.MoveNext())
+                {
+                    TSource nextValue = e.Current;
+                    TKey nextKey = keySelector(nextValue);
+                    if (comparer.Compare(nextKey, key) > 0)
+                    {
+                        key = nextKey;
+                        value = nextValue;
+                    }
+                }
+            }
+        }
+
+        return value;
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_Linq_Enumerable_MinBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System;
+using System.Collections.Generic;
+
+static partial class PolyfillExtensions
+{
+    public static TSource? MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+    {
+        return source.MinBy(keySelector, comparer: null);
+    }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_M_System_Linq_Enumerable_MinBy__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IComparer___1__ { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System;
+using System.Collections.Generic;
+
+static partial class PolyfillExtensions
+{
+    public static TSource? MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer)
+    {
+        if (source == null)
+            throw new ArgumentNullException(nameof(source));
+
+        if (keySelector == null)
+            throw new ArgumentNullException(nameof(keySelector));
+
+        comparer ??= Comparer<TKey>.Default;
+
+        using IEnumerator<TSource> e = source.GetEnumerator();
+
+        if (!e.MoveNext())
+        {
+            if (default(TSource) is null)
+            {
+                return default;
+            }
+            else
+            {
+                throw new InvalidOperationException("Sequence contains no elements");
+            }
+        }
+
+        TSource value = e.Current;
+        TKey key = keySelector(value);
+
+        if (default(TKey) is null)
+        {
+            if (key == null)
+            {
+                TSource firstValue = value;
+
+                do
+                {
+                    if (!e.MoveNext())
+                    {
+                        // All keys are null, surface the first element.
+                        return firstValue;
+                    }
+
+                    value = e.Current;
+                    key = keySelector(value);
+                }
+                while (key == null);
+            }
+
+            while (e.MoveNext())
+            {
+                TSource nextValue = e.Current;
+                TKey nextKey = keySelector(nextValue);
+                if (nextKey != null && comparer.Compare(nextKey, key) < 0)
+                {
+                    key = nextKey;
+                    value = nextValue;
+                }
+            }
+        }
+        else
+        {
+            if (comparer == Comparer<TKey>.Default)
+            {
+                while (e.MoveNext())
+                {
+                    TSource nextValue = e.Current;
+                    TKey nextKey = keySelector(nextValue);
+                    if (Comparer<TKey>.Default.Compare(nextKey, key) < 0)
+                    {
+                        key = nextKey;
+                        value = nextValue;
+                    }
+                }
+            }
+            else
+            {
+                while (e.MoveNext())
+                {
+                    TSource nextValue = e.Current;
+                    TKey nextKey = keySelector(nextValue);
+                    if (comparer.Compare(nextKey, key) < 0)
+                    {
+                        key = nextKey;
+                        value = nextValue;
+                    }
+                }
+            }
+        }
+
+        return value;
     }
 }
 """""""""", Encoding.UTF8);

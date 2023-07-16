@@ -341,4 +341,18 @@ public class UnitTest1
         var actual = "test".AsSpan(1, 2);
         Assert.Equal("es", actual.ToString());
     }
+
+    [Fact]
+    public void Enumerable_MaxBy()
+    {
+        Assert.Equal("ab", new[] { "a", "ab", "b" }.MaxBy(a => a.Length));
+        Assert.Equal("ab", new[] { "a", "ab", "b" }.MaxBy(a => a.Length, Comparer<int>.Default));
+    }
+
+    [Fact]
+    public void Enumerable_MinBy()
+    {
+        Assert.Equal("a", new[] { "a", "ab", "b" }.MinBy(a => a.Length));
+        Assert.Equal("a", new[] { "a", "ab", "b" }.MinBy(a => a.Length, Comparer<int>.Default));
+    }
 }
