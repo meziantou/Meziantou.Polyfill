@@ -355,4 +355,15 @@ public class UnitTest1
         Assert.Equal("a", new[] { "a", "ab", "b" }.MinBy(a => a.Length));
         Assert.Equal("a", new[] { "a", "ab", "b" }.MinBy(a => a.Length, Comparer<int>.Default));
     }
+
+    [Fact]
+    public async Task Process_WaitForExitAsync()
+    {
+        var process = Environment.OSVersion.Platform == PlatformID.Win32NT ?
+            Process.Start("ping.exe", "127.0.0.1 -n 5") :
+            Process.Start("ping", "127.0.0.1 -c 5");
+
+        await process.WaitForExitAsync();
+        Assert.Equal(0, process.ExitCode);
+    }
 }
