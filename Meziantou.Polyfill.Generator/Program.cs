@@ -206,10 +206,26 @@ foreach (var polyfill in polyfills)
 sb.AppendLine("}");
 
 Console.WriteLine(sb.ToString());
-var path = Path.GetFullPath("../../../../Meziantou.Polyfill/Members.g.cs");
+var path = GetMemberFilePath();
 Console.WriteLine(path);
 File.WriteAllText(path, sb.ToString());
 
+static string GetMemberFilePath()
+{
+    var suffix = "Meziantou.Polyfill/Members.cs";
+    var currentFolder = Environment.CurrentDirectory;
+    var fullPath = Path.GetFullPath(Path.Combine(currentFolder, suffix));
+    while (!File.Exists(fullPath))
+    {
+        currentFolder = Path.GetDirectoryName(currentFolder);
+        if (currentFolder == null)
+            throw new Exception("Cannot find the path from " + Environment.CurrentDirectory);
+
+        fullPath = Path.GetFullPath(Path.Combine(currentFolder, suffix));
+    }
+
+    return Path.ChangeExtension(fullPath, ".g.cs");
+}
 
 string ReadResourceAsString(string name)
 {
