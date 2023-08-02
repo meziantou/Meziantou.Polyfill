@@ -41,7 +41,6 @@ var fieldCount = (polyfills.Length / 64) + (polyfills.Length % 64 > 0 ? 1 : 0);
 
 var sb = new StringBuilder();
 sb.AppendLine($$"""
-    // Polyfills: {{polyfills.Length}}
     #nullable enable
     using System;
     using System.Text;
