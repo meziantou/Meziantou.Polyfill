@@ -357,6 +357,13 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Enumerable_ToHashSet()
+    {
+        Assert.Equal(new[] { "a", "b" }, new[] { "a", "b", "a" }.ToHashSet());
+        Assert.Equal(new[] { "a", "b" }, new[] { "a", "b", "A" }.ToHashSet(StringComparer.OrdinalIgnoreCase));
+    }
+
+    [Fact]
     public async Task Process_WaitForExitAsync()
     {
         var psi = new ProcessStartInfo
