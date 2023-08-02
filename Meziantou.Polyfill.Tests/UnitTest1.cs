@@ -401,4 +401,20 @@ public class UnitTest1
         Assert.True(ReferenceEqualityComparer.Instance.Equals(obj, obj));
         Assert.Equal(ReferenceEqualityComparer.Instance.GetHashCode(obj), ReferenceEqualityComparer.Instance.GetHashCode(obj));
     }
+    
+    [Fact]
+    public void ReadOnlyDictionary_GetValueOrDefaultTests()
+    {
+        IReadOnlyDictionary<int, int> dictionary = new Dictionary<int, int>
+        {
+            [1] = 10
+        };
+
+        Assert.Equal(10, dictionary.GetValueOrDefault(1));
+        Assert.Equal(10, dictionary.GetValueOrDefault(1, -1));
+        
+        // key not present
+        Assert.Equal(0, dictionary.GetValueOrDefault(100));
+        Assert.Equal(-1, dictionary.GetValueOrDefault(100, -1));
+    }
 }
