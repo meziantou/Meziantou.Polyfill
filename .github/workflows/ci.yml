@@ -25,6 +25,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
+    - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet pack Meziantou.Polyfill --configuration Release
 
     - uses: actions/upload-artifact@v3
@@ -66,6 +67,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
+    - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
     - run: dotnet test Meziantou.Polyfill.Tests
 
