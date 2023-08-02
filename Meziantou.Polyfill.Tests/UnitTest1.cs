@@ -359,11 +359,28 @@ public class UnitTest1
     [Fact]
     public async Task Process_WaitForExitAsync()
     {
-        var process = Environment.OSVersion.Platform == PlatformID.Win32NT ?
-            Process.Start("ping.exe", "127.0.0.1 -n 5") :
-            Process.Start("ping", "127.0.0.1 -c 5");
+        var psi = new ProcessStartInfo
+        {
+            FileName = Environment.OSVersion.Platform == PlatformID.Win32NT ? "ping.exe" : "ping",
+            Arguments = Environment.OSVersion.Platform == PlatformID.Win32NT ? "127.0.0.1 -n 5" : "127.0.0.1 -c 5",
+            CreateNoWindow = true,
+        };
 
-        await process.WaitForExitAsync();
+        var process = Process.Start(psi);
+        await process!.WaitForExitAsync();
         Assert.Equal(0, process.ExitCode);
+    }
+
+    [Fact]
+    public void PriorityQueueTests()
+    {
+        var queue = new PriorityQueue<string, int>();
+        queue.Enqueue("1", 1);
+        queue.Enqueue("0", 0);
+        queue.Enqueue("2", 2);
+
+        Assert.Equal("0", queue.Dequeue());
+        Assert.Equal("1", queue.Dequeue());
+        Assert.Equal("2", queue.Dequeue());
     }
 }

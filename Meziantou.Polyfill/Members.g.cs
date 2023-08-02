@@ -1,4 +1,4 @@
-// Polyfills: 101
+// Polyfills: 102
 #nullable enable
 using System;
 using System.Text;
@@ -121,116 +121,118 @@ public Members(Compilation compilation, PolyfillOptions options)
         _bits0 = _bits0 | 17592186044416uL;
     if (IncludeMember(compilation, options, "M:System.Threading.CancellationTokenSource.CancelAsync") && (IncludeMember(compilation, options, "M:PolyfillExtensions.CancelAsync(System.Threading.CancellationTokenSource)~System.Threading.Tasks.Task")))
         _bits0 = _bits0 | 35184372088832uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Collections.Generic.PriorityQueue`2"))
         _bits0 = _bits0 | 70368744177664uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.AllowNullAttribute"))
         _bits0 = _bits0 | 140737488355328uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute"))
         _bits0 = _bits0 | 281474976710656uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute"))
         _bits0 = _bits0 | 562949953421312uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"))
         _bits0 = _bits0 | 1125899906842624uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"))
         _bits0 = _bits0 | 2251799813685248uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"))
         _bits0 = _bits0 | 4503599627370496uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"))
         _bits0 = _bits0 | 9007199254740992uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute"))
         _bits0 = _bits0 | 18014398509481984uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"))
         _bits0 = _bits0 | 36028797018963968uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"))
         _bits0 = _bits0 | 72057594037927936uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"))
         _bits0 = _bits0 | 144115188075855872uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullAttribute"))
         _bits0 = _bits0 | 288230376151711744uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"))
         _bits0 = _bits0 | 576460752303423488uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"))
         _bits0 = _bits0 | 1152921504606846976uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute"))
         _bits0 = _bits0 | 2305843009213693952uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"))
         _bits0 = _bits0 | 4611686018427387904uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"))
         _bits0 = _bits0 | 9223372036854775808uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute"))
         _bits1 = _bits1 | 1uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"))
         _bits1 = _bits1 | 2uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"))
         _bits1 = _bits1 | 4uL;
-    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute"))
         _bits1 = _bits1 | 8uL;
-    if (IncludeMember(compilation, options, "T:System.HashCode"))
+    if (IncludeMember(compilation, options, "T:System.Diagnostics.StackTraceHiddenAttribute"))
         _bits1 = _bits1 | 16uL;
-    if (IncludeMember(compilation, options, "T:System.Index"))
-        _bits1 = _bits1 | 64uL;
-    if (IncludeMember(compilation, options, "T:System.Range"))
-        _bits1 = _bits1 | 128uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
-        _bits1 = _bits1 | 256uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
-        _bits1 = _bits1 | 512uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
-        _bits1 = _bits1 | 1024uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
-        _bits1 = _bits1 | 2048uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
-        _bits1 = _bits1 | 4096uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
-        _bits1 = _bits1 | 8192uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
-        _bits1 = _bits1 | 16384uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
-        _bits1 = _bits1 | 32768uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
-        _bits1 = _bits1 | 65536uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
-        _bits1 = _bits1 | 131072uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.TupleElementNamesAttribute"))
-        _bits1 = _bits1 | 262144uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
-        _bits1 = _bits1 | 524288uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
-        _bits1 = _bits1 | 1048576uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
-        _bits1 = _bits1 | 2097152uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
-        _bits1 = _bits1 | 4194304uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
-        _bits1 = _bits1 | 8388608uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
-        _bits1 = _bits1 | 16777216uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
-        _bits1 = _bits1 | 33554432uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
-        _bits1 = _bits1 | 67108864uL;
-    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
-        _bits1 = _bits1 | 134217728uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple"))
-        _bits1 = _bits1 | 268435456uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`1"))
-        _bits1 = _bits1 | 536870912uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`2"))
-        _bits1 = _bits1 | 1073741824uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`3"))
-        _bits1 = _bits1 | 2147483648uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`4"))
-        _bits1 = _bits1 | 4294967296uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`5"))
-        _bits1 = _bits1 | 8589934592uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`6"))
-        _bits1 = _bits1 | 17179869184uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`7"))
-        _bits1 = _bits1 | 34359738368uL;
-    if (IncludeMember(compilation, options, "T:System.ValueTuple`8"))
-        _bits1 = _bits1 | 68719476736uL;
-    if (((_bits1 & 268435456ul) == 268435456ul || (_bits1 & 536870912ul) == 536870912ul || (_bits1 & 1073741824ul) == 1073741824ul || (_bits1 & 2147483648ul) == 2147483648ul || (_bits1 & 4294967296ul) == 4294967296ul || (_bits1 & 8589934592ul) == 8589934592ul || (_bits1 & 17179869184ul) == 17179869184ul || (_bits1 & 34359738368ul) == 34359738368ul || (_bits1 & 68719476736ul) == 68719476736ul) && IncludeMember(compilation, options, "T:System.ITupleInternal"))
+    if (IncludeMember(compilation, options, "T:System.HashCode"))
         _bits1 = _bits1 | 32uL;
+    if (IncludeMember(compilation, options, "T:System.Index"))
+        _bits1 = _bits1 | 128uL;
+    if (IncludeMember(compilation, options, "T:System.Range"))
+        _bits1 = _bits1 | 256uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"))
+        _bits1 = _bits1 | 512uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"))
+        _bits1 = _bits1 | 1024uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"))
+        _bits1 = _bits1 | 2048uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute"))
+        _bits1 = _bits1 | 4096uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"))
+        _bits1 = _bits1 | 8192uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute"))
+        _bits1 = _bits1 | 16384uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.IsExternalInit"))
+        _bits1 = _bits1 | 32768uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.ModuleInitializerAttribute"))
+        _bits1 = _bits1 | 65536uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.RequiredMemberAttribute"))
+        _bits1 = _bits1 | 131072uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.SkipLocalsInitAttribute"))
+        _bits1 = _bits1 | 262144uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.CompilerServices.TupleElementNamesAttribute"))
+        _bits1 = _bits1 | 524288uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute"))
+        _bits1 = _bits1 | 1048576uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"))
+        _bits1 = _bits1 | 2097152uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute"))
+        _bits1 = _bits1 | 4194304uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"))
+        _bits1 = _bits1 | 8388608uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformAttribute"))
+        _bits1 = _bits1 | 16777216uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute"))
+        _bits1 = _bits1 | 33554432uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.TargetPlatformAttribute"))
+        _bits1 = _bits1 | 67108864uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute"))
+        _bits1 = _bits1 | 134217728uL;
+    if (IncludeMember(compilation, options, "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute"))
+        _bits1 = _bits1 | 268435456uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple"))
+        _bits1 = _bits1 | 536870912uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`1"))
+        _bits1 = _bits1 | 1073741824uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`2"))
+        _bits1 = _bits1 | 2147483648uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`3"))
+        _bits1 = _bits1 | 4294967296uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`4"))
+        _bits1 = _bits1 | 8589934592uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`5"))
+        _bits1 = _bits1 | 17179869184uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`6"))
+        _bits1 = _bits1 | 34359738368uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`7"))
+        _bits1 = _bits1 | 68719476736uL;
+    if (IncludeMember(compilation, options, "T:System.ValueTuple`8"))
+        _bits1 = _bits1 | 137438953472uL;
+    if (((_bits1 & 536870912ul) == 536870912ul || (_bits1 & 1073741824ul) == 1073741824ul || (_bits1 & 2147483648ul) == 2147483648ul || (_bits1 & 4294967296ul) == 4294967296ul || (_bits1 & 8589934592ul) == 8589934592ul || (_bits1 & 17179869184ul) == 17179869184ul || (_bits1 & 34359738368ul) == 34359738368ul || (_bits1 & 68719476736ul) == 68719476736ul || (_bits1 & 137438953472ul) == 137438953472ul) && IncludeMember(compilation, options, "T:System.ITupleInternal"))
+        _bits1 = _bits1 | 64uL;
 }
 public override int GetHashCode()
 {
@@ -335,114 +337,116 @@ public void AddSources(SourceProductionContext context)
     if ((_bits0 & 35184372088832ul) == 35184372088832ul)
         context.AddSource("M_System.Threading.CancellationTokenSource.CancelAsync.g.cs", PolyfillContents.Source_M_System_Threading_CancellationTokenSource_CancelAsync);
     if ((_bits0 & 70368744177664ul) == 70368744177664ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
+        context.AddSource("T_System.Collections.Generic.PriorityQueue`2.g.cs", PolyfillContents.Source_T_System_Collections_Generic_PriorityQueue_2);
     if ((_bits0 & 140737488355328ul) == 140737488355328ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.AllowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute);
     if ((_bits0 & 281474976710656ul) == 281474976710656ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DisallowNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DisallowNullAttribute);
     if ((_bits0 & 562949953421312ul) == 562949953421312ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnAttribute);
     if ((_bits0 & 1125899906842624ul) == 1125899906842624ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DoesNotReturnIfAttribute);
     if ((_bits0 & 2251799813685248ul) == 2251799813685248ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicDependencyAttribute);
     if ((_bits0 & 4503599627370496ul) == 4503599627370496ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMemberTypes);
     if ((_bits0 & 9007199254740992ul) == 9007199254740992ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute);
     if ((_bits0 & 18014398509481984ul) == 18014398509481984ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullAttribute);
     if ((_bits0 & 36028797018963968ul) == 36028797018963968ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MaybeNullWhenAttribute);
     if ((_bits0 & 72057594037927936ul) == 72057594037927936ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullAttribute);
     if ((_bits0 & 144115188075855872ul) == 144115188075855872ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_MemberNotNullWhenAttribute);
     if ((_bits0 & 288230376151711744ul) == 288230376151711744ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullAttribute);
     if ((_bits0 & 576460752303423488ul) == 576460752303423488ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullIfNotNullAttribute);
     if ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_NotNullWhenAttribute);
     if ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresAssemblyFilesAttribute);
     if ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresDynamicCodeAttribute);
     if ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_RequiresUnreferencedCodeAttribute);
     if ((_bits1 & 1ul) == 1ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_SetsRequiredMembersAttribute);
     if ((_bits1 & 2ul) == 2ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_StringSyntaxAttribute);
     if ((_bits1 & 4ul) == 4ul)
-        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnconditionalSuppressMessageAttribute);
     if ((_bits1 & 8ul) == 8ul)
-        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
+        context.AddSource("T_System.Diagnostics.CodeAnalysis.UnscopedRefAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_CodeAnalysis_UnscopedRefAttribute);
     if ((_bits1 & 16ul) == 16ul)
-        context.AddSource("T_System.HashCode.g.cs", PolyfillContents.Source_T_System_HashCode);
-    if ((_bits1 & 64ul) == 64ul)
-        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
-    if ((_bits1 & 128ul) == 128ul)
-        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
-    if ((_bits1 & 256ul) == 256ul)
-        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
-    if ((_bits1 & 512ul) == 512ul)
-        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
-    if ((_bits1 & 1024ul) == 1024ul)
-        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
-    if ((_bits1 & 2048ul) == 2048ul)
-        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
-    if ((_bits1 & 4096ul) == 4096ul)
-        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
-    if ((_bits1 & 8192ul) == 8192ul)
-        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
-    if ((_bits1 & 16384ul) == 16384ul)
-        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
-    if ((_bits1 & 32768ul) == 32768ul)
-        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
-    if ((_bits1 & 65536ul) == 65536ul)
-        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
-    if ((_bits1 & 131072ul) == 131072ul)
-        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
-    if ((_bits1 & 262144ul) == 262144ul)
-        context.AddSource("T_System.Runtime.CompilerServices.TupleElementNamesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_TupleElementNamesAttribute);
-    if ((_bits1 & 524288ul) == 524288ul)
-        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
-    if ((_bits1 & 1048576ul) == 1048576ul)
-        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
-    if ((_bits1 & 2097152ul) == 2097152ul)
-        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
-    if ((_bits1 & 4194304ul) == 4194304ul)
-        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
-    if ((_bits1 & 8388608ul) == 8388608ul)
-        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
-    if ((_bits1 & 16777216ul) == 16777216ul)
-        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
-    if ((_bits1 & 33554432ul) == 33554432ul)
-        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
-    if ((_bits1 & 67108864ul) == 67108864ul)
-        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
-    if ((_bits1 & 134217728ul) == 134217728ul)
-        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
-    if ((_bits1 & 268435456ul) == 268435456ul)
-        context.AddSource("T_System.ValueTuple.g.cs", PolyfillContents.Source_T_System_ValueTuple);
-    if ((_bits1 & 536870912ul) == 536870912ul)
-        context.AddSource("T_System.ValueTuple`1.g.cs", PolyfillContents.Source_T_System_ValueTuple_1);
-    if ((_bits1 & 1073741824ul) == 1073741824ul)
-        context.AddSource("T_System.ValueTuple`2.g.cs", PolyfillContents.Source_T_System_ValueTuple_2);
-    if ((_bits1 & 2147483648ul) == 2147483648ul)
-        context.AddSource("T_System.ValueTuple`3.g.cs", PolyfillContents.Source_T_System_ValueTuple_3);
-    if ((_bits1 & 4294967296ul) == 4294967296ul)
-        context.AddSource("T_System.ValueTuple`4.g.cs", PolyfillContents.Source_T_System_ValueTuple_4);
-    if ((_bits1 & 8589934592ul) == 8589934592ul)
-        context.AddSource("T_System.ValueTuple`5.g.cs", PolyfillContents.Source_T_System_ValueTuple_5);
-    if ((_bits1 & 17179869184ul) == 17179869184ul)
-        context.AddSource("T_System.ValueTuple`6.g.cs", PolyfillContents.Source_T_System_ValueTuple_6);
-    if ((_bits1 & 34359738368ul) == 34359738368ul)
-        context.AddSource("T_System.ValueTuple`7.g.cs", PolyfillContents.Source_T_System_ValueTuple_7);
-    if ((_bits1 & 68719476736ul) == 68719476736ul)
-        context.AddSource("T_System.ValueTuple`8.g.cs", PolyfillContents.Source_T_System_ValueTuple_8);
+        context.AddSource("T_System.Diagnostics.StackTraceHiddenAttribute.g.cs", PolyfillContents.Source_T_System_Diagnostics_StackTraceHiddenAttribute);
     if ((_bits1 & 32ul) == 32ul)
+        context.AddSource("T_System.HashCode.g.cs", PolyfillContents.Source_T_System_HashCode);
+    if ((_bits1 & 128ul) == 128ul)
+        context.AddSource("T_System.Index.g.cs", PolyfillContents.Source_T_System_Index);
+    if ((_bits1 & 256ul) == 256ul)
+        context.AddSource("T_System.Range.g.cs", PolyfillContents.Source_T_System_Range);
+    if ((_bits1 & 512ul) == 512ul)
+        context.AddSource("T_System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_AsyncMethodBuilderAttribute);
+    if ((_bits1 & 1024ul) == 1024ul)
+        context.AddSource("T_System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CallerArgumentExpressionAttribute);
+    if ((_bits1 & 2048ul) == 2048ul)
+        context.AddSource("T_System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_CompilerFeatureRequiredAttribute);
+    if ((_bits1 & 4096ul) == 4096ul)
+        context.AddSource("T_System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute);
+    if ((_bits1 & 8192ul) == 8192ul)
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerArgumentAttribute);
+    if ((_bits1 & 16384ul) == 16384ul)
+        context.AddSource("T_System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_InterpolatedStringHandlerAttribute);
+    if ((_bits1 & 32768ul) == 32768ul)
+        context.AddSource("T_System.Runtime.CompilerServices.IsExternalInit.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_IsExternalInit);
+    if ((_bits1 & 65536ul) == 65536ul)
+        context.AddSource("T_System.Runtime.CompilerServices.ModuleInitializerAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_ModuleInitializerAttribute);
+    if ((_bits1 & 131072ul) == 131072ul)
+        context.AddSource("T_System.Runtime.CompilerServices.RequiredMemberAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_RequiredMemberAttribute);
+    if ((_bits1 & 262144ul) == 262144ul)
+        context.AddSource("T_System.Runtime.CompilerServices.SkipLocalsInitAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_SkipLocalsInitAttribute);
+    if ((_bits1 & 524288ul) == 524288ul)
+        context.AddSource("T_System.Runtime.CompilerServices.TupleElementNamesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_CompilerServices_TupleElementNamesAttribute);
+    if ((_bits1 & 1048576ul) == 1048576ul)
+        context.AddSource("T_System.Runtime.InteropServices.SuppressGCTransitionAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_SuppressGCTransitionAttribute);
+    if ((_bits1 & 2097152ul) == 2097152ul)
+        context.AddSource("T_System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_InteropServices_UnmanagedCallersOnlyAttribute);
+    if ((_bits1 & 4194304ul) == 4194304ul)
+        context.AddSource("T_System.Runtime.Versioning.ObsoletedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_ObsoletedOSPlatformAttribute);
+    if ((_bits1 & 8388608ul) == 8388608ul)
+        context.AddSource("T_System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_RequiresPreviewFeaturesAttribute);
+    if ((_bits1 & 16777216ul) == 16777216ul)
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformAttribute);
+    if ((_bits1 & 33554432ul) == 33554432ul)
+        context.AddSource("T_System.Runtime.Versioning.SupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_SupportedOSPlatformGuardAttribute);
+    if ((_bits1 & 67108864ul) == 67108864ul)
+        context.AddSource("T_System.Runtime.Versioning.TargetPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_TargetPlatformAttribute);
+    if ((_bits1 & 134217728ul) == 134217728ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformAttribute);
+    if ((_bits1 & 268435456ul) == 268435456ul)
+        context.AddSource("T_System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute.g.cs", PolyfillContents.Source_T_System_Runtime_Versioning_UnsupportedOSPlatformGuardAttribute);
+    if ((_bits1 & 536870912ul) == 536870912ul)
+        context.AddSource("T_System.ValueTuple.g.cs", PolyfillContents.Source_T_System_ValueTuple);
+    if ((_bits1 & 1073741824ul) == 1073741824ul)
+        context.AddSource("T_System.ValueTuple`1.g.cs", PolyfillContents.Source_T_System_ValueTuple_1);
+    if ((_bits1 & 2147483648ul) == 2147483648ul)
+        context.AddSource("T_System.ValueTuple`2.g.cs", PolyfillContents.Source_T_System_ValueTuple_2);
+    if ((_bits1 & 4294967296ul) == 4294967296ul)
+        context.AddSource("T_System.ValueTuple`3.g.cs", PolyfillContents.Source_T_System_ValueTuple_3);
+    if ((_bits1 & 8589934592ul) == 8589934592ul)
+        context.AddSource("T_System.ValueTuple`4.g.cs", PolyfillContents.Source_T_System_ValueTuple_4);
+    if ((_bits1 & 17179869184ul) == 17179869184ul)
+        context.AddSource("T_System.ValueTuple`5.g.cs", PolyfillContents.Source_T_System_ValueTuple_5);
+    if ((_bits1 & 34359738368ul) == 34359738368ul)
+        context.AddSource("T_System.ValueTuple`6.g.cs", PolyfillContents.Source_T_System_ValueTuple_6);
+    if ((_bits1 & 68719476736ul) == 68719476736ul)
+        context.AddSource("T_System.ValueTuple`7.g.cs", PolyfillContents.Source_T_System_ValueTuple_7);
+    if ((_bits1 & 137438953472ul) == 137438953472ul)
+        context.AddSource("T_System.ValueTuple`8.g.cs", PolyfillContents.Source_T_System_ValueTuple_8);
+    if ((_bits1 & 64ul) == 64ul)
         context.AddSource("T_System.ITupleInternal.g.cs", PolyfillContents.Source_T_System_ITupleInternal);
 }
 public string DumpAsCSharpComment()
@@ -502,61 +506,62 @@ public string DumpAsCSharpComment()
     sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char}): " + ((_bits0 & 8796093022208ul) == 8796093022208ul));
     sb.AppendLine("// M:System.Text.StringBuilder.Append(System.ReadOnlySpan{System.Char}): " + ((_bits0 & 17592186044416ul) == 17592186044416ul));
     sb.AppendLine("// M:System.Threading.CancellationTokenSource.CancelAsync: " + ((_bits0 & 35184372088832ul) == 35184372088832ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits1 & 1ul) == 1ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits1 & 2ul) == 2ul));
-    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits1 & 4ul) == 4ul));
-    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits1 & 8ul) == 8ul));
-    sb.AppendLine("// T:System.HashCode: " + ((_bits1 & 16ul) == 16ul));
-    sb.AppendLine("// T:System.Index: " + ((_bits1 & 64ul) == 64ul));
-    sb.AppendLine("// T:System.Range: " + ((_bits1 & 128ul) == 128ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits1 & 256ul) == 256ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits1 & 512ul) == 512ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits1 & 1024ul) == 1024ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits1 & 2048ul) == 2048ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits1 & 4096ul) == 4096ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits1 & 8192ul) == 8192ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits1 & 16384ul) == 16384ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits1 & 32768ul) == 32768ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits1 & 65536ul) == 65536ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits1 & 131072ul) == 131072ul));
-    sb.AppendLine("// T:System.Runtime.CompilerServices.TupleElementNamesAttribute: " + ((_bits1 & 262144ul) == 262144ul));
-    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits1 & 524288ul) == 524288ul));
-    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits1 & 1048576ul) == 1048576ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits1 & 2097152ul) == 2097152ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits1 & 4194304ul) == 4194304ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits1 & 8388608ul) == 8388608ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits1 & 16777216ul) == 16777216ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits1 & 33554432ul) == 33554432ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits1 & 67108864ul) == 67108864ul));
-    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits1 & 134217728ul) == 134217728ul));
-    sb.AppendLine("// T:System.ValueTuple: " + ((_bits1 & 268435456ul) == 268435456ul));
-    sb.AppendLine("// T:System.ValueTuple`1: " + ((_bits1 & 536870912ul) == 536870912ul));
-    sb.AppendLine("// T:System.ValueTuple`2: " + ((_bits1 & 1073741824ul) == 1073741824ul));
-    sb.AppendLine("// T:System.ValueTuple`3: " + ((_bits1 & 2147483648ul) == 2147483648ul));
-    sb.AppendLine("// T:System.ValueTuple`4: " + ((_bits1 & 4294967296ul) == 4294967296ul));
-    sb.AppendLine("// T:System.ValueTuple`5: " + ((_bits1 & 8589934592ul) == 8589934592ul));
-    sb.AppendLine("// T:System.ValueTuple`6: " + ((_bits1 & 17179869184ul) == 17179869184ul));
-    sb.AppendLine("// T:System.ValueTuple`7: " + ((_bits1 & 34359738368ul) == 34359738368ul));
-    sb.AppendLine("// T:System.ValueTuple`8: " + ((_bits1 & 68719476736ul) == 68719476736ul));
-    sb.AppendLine("// T:System.ITupleInternal: " + ((_bits1 & 32ul) == 32ul));
+    sb.AppendLine("// T:System.Collections.Generic.PriorityQueue`2: " + ((_bits0 & 70368744177664ul) == 70368744177664ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.AllowNullAttribute: " + ((_bits0 & 140737488355328ul) == 140737488355328ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute: " + ((_bits0 & 281474976710656ul) == 281474976710656ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute: " + ((_bits0 & 562949953421312ul) == 562949953421312ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute: " + ((_bits0 & 1125899906842624ul) == 1125899906842624ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute: " + ((_bits0 & 2251799813685248ul) == 2251799813685248ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes: " + ((_bits0 & 4503599627370496ul) == 4503599627370496ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute: " + ((_bits0 & 9007199254740992ul) == 9007199254740992ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute: " + ((_bits0 & 18014398509481984ul) == 18014398509481984ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute: " + ((_bits0 & 36028797018963968ul) == 36028797018963968ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute: " + ((_bits0 & 72057594037927936ul) == 72057594037927936ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute: " + ((_bits0 & 144115188075855872ul) == 144115188075855872ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullAttribute: " + ((_bits0 & 288230376151711744ul) == 288230376151711744ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute: " + ((_bits0 & 576460752303423488ul) == 576460752303423488ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute: " + ((_bits0 & 1152921504606846976ul) == 1152921504606846976ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute: " + ((_bits0 & 2305843009213693952ul) == 2305843009213693952ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute: " + ((_bits0 & 4611686018427387904ul) == 4611686018427387904ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute: " + ((_bits0 & 9223372036854775808ul) == 9223372036854775808ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute: " + ((_bits1 & 1ul) == 1ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute: " + ((_bits1 & 2ul) == 2ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute: " + ((_bits1 & 4ul) == 4ul));
+    sb.AppendLine("// T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute: " + ((_bits1 & 8ul) == 8ul));
+    sb.AppendLine("// T:System.Diagnostics.StackTraceHiddenAttribute: " + ((_bits1 & 16ul) == 16ul));
+    sb.AppendLine("// T:System.HashCode: " + ((_bits1 & 32ul) == 32ul));
+    sb.AppendLine("// T:System.Index: " + ((_bits1 & 128ul) == 128ul));
+    sb.AppendLine("// T:System.Range: " + ((_bits1 & 256ul) == 256ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute: " + ((_bits1 & 512ul) == 512ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute: " + ((_bits1 & 1024ul) == 1024ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute: " + ((_bits1 & 2048ul) == 2048ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute: " + ((_bits1 & 4096ul) == 4096ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute: " + ((_bits1 & 8192ul) == 8192ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute: " + ((_bits1 & 16384ul) == 16384ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.IsExternalInit: " + ((_bits1 & 32768ul) == 32768ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.ModuleInitializerAttribute: " + ((_bits1 & 65536ul) == 65536ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.RequiredMemberAttribute: " + ((_bits1 & 131072ul) == 131072ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.SkipLocalsInitAttribute: " + ((_bits1 & 262144ul) == 262144ul));
+    sb.AppendLine("// T:System.Runtime.CompilerServices.TupleElementNamesAttribute: " + ((_bits1 & 524288ul) == 524288ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.SuppressGCTransitionAttribute: " + ((_bits1 & 1048576ul) == 1048576ul));
+    sb.AppendLine("// T:System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute: " + ((_bits1 & 2097152ul) == 2097152ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.ObsoletedOSPlatformAttribute: " + ((_bits1 & 4194304ul) == 4194304ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute: " + ((_bits1 & 8388608ul) == 8388608ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformAttribute: " + ((_bits1 & 16777216ul) == 16777216ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.SupportedOSPlatformGuardAttribute: " + ((_bits1 & 33554432ul) == 33554432ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.TargetPlatformAttribute: " + ((_bits1 & 67108864ul) == 67108864ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformAttribute: " + ((_bits1 & 134217728ul) == 134217728ul));
+    sb.AppendLine("// T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute: " + ((_bits1 & 268435456ul) == 268435456ul));
+    sb.AppendLine("// T:System.ValueTuple: " + ((_bits1 & 536870912ul) == 536870912ul));
+    sb.AppendLine("// T:System.ValueTuple`1: " + ((_bits1 & 1073741824ul) == 1073741824ul));
+    sb.AppendLine("// T:System.ValueTuple`2: " + ((_bits1 & 2147483648ul) == 2147483648ul));
+    sb.AppendLine("// T:System.ValueTuple`3: " + ((_bits1 & 4294967296ul) == 4294967296ul));
+    sb.AppendLine("// T:System.ValueTuple`4: " + ((_bits1 & 8589934592ul) == 8589934592ul));
+    sb.AppendLine("// T:System.ValueTuple`5: " + ((_bits1 & 17179869184ul) == 17179869184ul));
+    sb.AppendLine("// T:System.ValueTuple`6: " + ((_bits1 & 34359738368ul) == 34359738368ul));
+    sb.AppendLine("// T:System.ValueTuple`7: " + ((_bits1 & 68719476736ul) == 68719476736ul));
+    sb.AppendLine("// T:System.ValueTuple`8: " + ((_bits1 & 137438953472ul) == 137438953472ul));
+    sb.AppendLine("// T:System.ITupleInternal: " + ((_bits1 & 64ul) == 64ul));
     return sb.ToString();
 }
 }
@@ -1715,6 +1720,1051 @@ static partial class PolyfillExtensions
         target.Cancel();
         return Task.CompletedTask;
     }
+}
+"""""""""", Encoding.UTF8);
+public static SourceText Source_T_System_Collections_Generic_PriorityQueue_2 { get; } = SourceText.From(""""""""""
+// <auto-generated/>
+#pragma warning disable
+#nullable enable annotations
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+
+namespace System.Collections.Generic
+{
+    /// <summary>
+    ///  Represents a min priority queue.
+    /// </summary>
+    /// <typeparam name="TElement">Specifies the type of elements in the queue.</typeparam>
+    /// <typeparam name="TPriority">Specifies the type of priority associated with enqueued elements.</typeparam>
+    /// <remarks>
+    ///  Implements an array-backed quaternary min-heap. Each element is enqueued with an associated priority
+    ///  that determines the dequeue order: elements with the lowest priority get dequeued first.
+    /// </remarks>
+    [DebuggerDisplay("Count = {Count}")]
+    internal class PriorityQueue<TElement, TPriority>
+    {
+        /// <summary>
+        /// Represents an implicit heap-ordered complete d-ary tree, stored as an array.
+        /// </summary>
+        private (TElement Element, TPriority Priority)[] _nodes;
+
+        /// <summary>
+        /// Custom comparer used to order the heap.
+        /// </summary>
+        private readonly IComparer<TPriority>? _comparer;
+
+        /// <summary>
+        /// Lazily-initialized collection used to expose the contents of the queue.
+        /// </summary>
+        private UnorderedItemsCollection? _unorderedItems;
+
+        /// <summary>
+        /// The number of nodes in the heap.
+        /// </summary>
+        private int _size;
+
+        /// <summary>
+        /// Version updated on mutation to help validate enumerators operate on a consistent state.
+        /// </summary>
+        private int _version;
+
+        /// <summary>
+        /// Specifies the arity of the d-ary heap, which here is quaternary.
+        /// It is assumed that this value is a power of 2.
+        /// </summary>
+        private const int Arity = 4;
+
+        /// <summary>
+        /// The binary logarithm of <see cref="Arity" />.
+        /// </summary>
+        private const int Log2Arity = 2;
+
+#if DEBUG
+        static PriorityQueue()
+        {
+            Debug.Assert(Log2Arity > 0 && Math.Pow(2, Log2Arity) == Arity);
+        }
+#endif
+
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class.
+        /// </summary>
+        public PriorityQueue()
+        {
+            _nodes = Array.Empty<(TElement, TPriority)>();
+            _comparer = InitializeComparer(null);
+        }
+
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
+        ///  with the specified initial capacity.
+        /// </summary>
+        /// <param name="initialCapacity">Initial capacity to allocate in the underlying heap array.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///  The specified <paramref name="initialCapacity"/> was negative.
+        /// </exception>
+        public PriorityQueue(int initialCapacity)
+            : this(initialCapacity, comparer: null)
+        {
+        }
+
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
+        ///  with the specified custom priority comparer.
+        /// </summary>
+        /// <param name="comparer">
+        ///  Custom comparer dictating the ordering of elements.
+        ///  Uses <see cref="Comparer{T}.Default" /> if the argument is <see langword="null"/>.
+        /// </param>
+        public PriorityQueue(IComparer<TPriority>? comparer)
+        {
+            _nodes = Array.Empty<(TElement, TPriority)>();
+            _comparer = InitializeComparer(comparer);
+        }
+
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
+        ///  with the specified initial capacity and custom priority comparer.
+        /// </summary>
+        /// <param name="initialCapacity">Initial capacity to allocate in the underlying heap array.</param>
+        /// <param name="comparer">
+        ///  Custom comparer dictating the ordering of elements.
+        ///  Uses <see cref="Comparer{T}.Default" /> if the argument is <see langword="null"/>.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///  The specified <paramref name="initialCapacity"/> was negative.
+        /// </exception>
+        public PriorityQueue(int initialCapacity, IComparer<TPriority>? comparer)
+        {
+            if (initialCapacity < 0)
+                throw new ArgumentOutOfRangeException(nameof(initialCapacity), $"{nameof(initialCapacity)} ('{initialCapacity}') must be a non-negative value.");
+
+            _nodes = new (TElement, TPriority)[initialCapacity];
+            _comparer = InitializeComparer(comparer);
+        }
+
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
+        ///  that is populated with the specified elements and priorities.
+        /// </summary>
+        /// <param name="items">The pairs of elements and priorities with which to populate the queue.</param>
+        /// <exception cref="ArgumentNullException">
+        ///  The specified <paramref name="items"/> argument was <see langword="null"/>.
+        /// </exception>
+        /// <remarks>
+        ///  Constructs the heap using a heapify operation,
+        ///  which is generally faster than enqueuing individual elements sequentially.
+        /// </remarks>
+        public PriorityQueue(IEnumerable<(TElement Element, TPriority Priority)> items)
+            : this(items, comparer: null)
+        {
+        }
+
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class
+        ///  that is populated with the specified elements and priorities,
+        ///  and with the specified custom priority comparer.
+        /// </summary>
+        /// <param name="items">The pairs of elements and priorities with which to populate the queue.</param>
+        /// <param name="comparer">
+        ///  Custom comparer dictating the ordering of elements.
+        ///  Uses <see cref="Comparer{T}.Default" /> if the argument is <see langword="null"/>.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        ///  The specified <paramref name="items"/> argument was <see langword="null"/>.
+        /// </exception>
+        /// <remarks>
+        ///  Constructs the heap using a heapify operation,
+        ///  which is generally faster than enqueuing individual elements sequentially.
+        /// </remarks>
+        public PriorityQueue(IEnumerable<(TElement Element, TPriority Priority)> items, IComparer<TPriority>? comparer)
+        {
+            if (items == null)
+                throw new ArgumentNullException(nameof(items));
+
+            _nodes = EnumerableHelpers.ToArray(items, out _size);
+            _comparer = InitializeComparer(comparer);
+
+            if (_size > 1)
+            {
+                Heapify();
+            }
+        }
+
+        /// <summary>
+        ///  Gets the number of elements contained in the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        public int Count => _size;
+
+        /// <summary>
+        ///  Gets the priority comparer used by the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        public IComparer<TPriority> Comparer => _comparer ?? Comparer<TPriority>.Default;
+
+        /// <summary>
+        ///  Gets a collection that enumerates the elements of the queue in an unordered manner.
+        /// </summary>
+        /// <remarks>
+        ///  The enumeration does not order items by priority, since that would require N * log(N) time and N space.
+        ///  Items are instead enumerated following the internal array heap layout.
+        /// </remarks>
+        public UnorderedItemsCollection UnorderedItems => _unorderedItems ??= new UnorderedItemsCollection(this);
+
+        /// <summary>
+        ///  Adds the specified element with associated priority to the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        /// <param name="element">The element to add to the <see cref="PriorityQueue{TElement, TPriority}"/>.</param>
+        /// <param name="priority">The priority with which to associate the new element.</param>
+        public void Enqueue(TElement element, TPriority priority)
+        {
+            // Virtually add the node at the end of the underlying array.
+            // Note that the node being enqueued does not need to be physically placed
+            // there at this point, as such an assignment would be redundant.
+
+            int currentSize = _size;
+            _version++;
+
+            if (_nodes.Length == currentSize)
+            {
+                Grow(currentSize + 1);
+            }
+
+            _size = currentSize + 1;
+
+            if (_comparer == null)
+            {
+                MoveUpDefaultComparer((element, priority), currentSize);
+            }
+            else
+            {
+                MoveUpCustomComparer((element, priority), currentSize);
+            }
+        }
+
+        /// <summary>
+        ///  Returns the minimal element from the <see cref="PriorityQueue{TElement, TPriority}"/> without removing it.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">The <see cref="PriorityQueue{TElement, TPriority}"/> is empty.</exception>
+        /// <returns>The minimal element of the <see cref="PriorityQueue{TElement, TPriority}"/>.</returns>
+        public TElement Peek()
+        {
+            if (_size == 0)
+            {
+                throw new InvalidOperationException("Queue empty.");
+            }
+
+            return _nodes[0].Element;
+        }
+
+        /// <summary>
+        ///  Removes and returns the minimal element from the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">The queue is empty.</exception>
+        /// <returns>The minimal element of the <see cref="PriorityQueue{TElement, TPriority}"/>.</returns>
+        public TElement Dequeue()
+        {
+            if (_size == 0)
+            {
+                throw new InvalidOperationException("Queue empty.");
+            }
+
+            TElement element = _nodes[0].Element;
+            RemoveRootNode();
+            return element;
+        }
+
+        /// <summary>
+        ///  Removes the minimal element and then immediately adds the specified element with associated priority to the <see cref="PriorityQueue{TElement, TPriority}"/>,
+        /// </summary>
+        /// <param name="element">The element to add to the <see cref="PriorityQueue{TElement, TPriority}"/>.</param>
+        /// <param name="priority">The priority with which to associate the new element.</param>
+        /// <exception cref="InvalidOperationException">The queue is empty.</exception>
+        /// <returns>The minimal element removed before performing the enqueue operation.</returns>
+        /// <remarks>
+        ///  Implements an extract-then-insert heap operation that is generally more efficient
+        ///  than sequencing Dequeue and Enqueue operations: in the worst case scenario only one
+        ///  shift-down operation is required.
+        /// </remarks>
+        public TElement DequeueEnqueue(TElement element, TPriority priority)
+        {
+            if (_size == 0)
+            {
+                throw new InvalidOperationException("Queue empty.");
+            }
+
+            (TElement Element, TPriority Priority) root = _nodes[0];
+
+            if (_comparer == null)
+            {
+                if (Comparer<TPriority>.Default.Compare(priority, root.Priority) > 0)
+                {
+                    MoveDownDefaultComparer((element, priority), 0);
+                }
+                else
+                {
+                    _nodes[0] = (element, priority);
+                }
+            }
+            else
+            {
+                if (_comparer.Compare(priority, root.Priority) > 0)
+                {
+                    MoveDownCustomComparer((element, priority), 0);
+                }
+                else
+                {
+                    _nodes[0] = (element, priority);
+                }
+            }
+
+            _version++;
+            return root.Element;
+        }
+
+        /// <summary>
+        ///  Removes the minimal element from the <see cref="PriorityQueue{TElement, TPriority}"/>,
+        ///  and copies it to the <paramref name="element"/> parameter,
+        ///  and its associated priority to the <paramref name="priority"/> parameter.
+        /// </summary>
+        /// <param name="element">The removed element.</param>
+        /// <param name="priority">The priority associated with the removed element.</param>
+        /// <returns>
+        ///  <see langword="true"/> if the element is successfully removed;
+        ///  <see langword="false"/> if the <see cref="PriorityQueue{TElement, TPriority}"/> is empty.
+        /// </returns>
+        public bool TryDequeue([MaybeNullWhen(false)] out TElement element, [MaybeNullWhen(false)] out TPriority priority)
+        {
+            if (_size != 0)
+            {
+                (element, priority) = _nodes[0];
+                RemoveRootNode();
+                return true;
+            }
+
+            element = default;
+            priority = default;
+            return false;
+        }
+
+        /// <summary>
+        ///  Returns a value that indicates whether there is a minimal element in the <see cref="PriorityQueue{TElement, TPriority}"/>,
+        ///  and if one is present, copies it to the <paramref name="element"/> parameter,
+        ///  and its associated priority to the <paramref name="priority"/> parameter.
+        ///  The element is not removed from the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        /// <param name="element">The minimal element in the queue.</param>
+        /// <param name="priority">The priority associated with the minimal element.</param>
+        /// <returns>
+        ///  <see langword="true"/> if there is a minimal element;
+        ///  <see langword="false"/> if the <see cref="PriorityQueue{TElement, TPriority}"/> is empty.
+        /// </returns>
+        public bool TryPeek([MaybeNullWhen(false)] out TElement element, [MaybeNullWhen(false)] out TPriority priority)
+        {
+            if (_size != 0)
+            {
+                (element, priority) = _nodes[0];
+                return true;
+            }
+
+            element = default;
+            priority = default;
+            return false;
+        }
+
+        /// <summary>
+        ///  Adds the specified element with associated priority to the <see cref="PriorityQueue{TElement, TPriority}"/>,
+        ///  and immediately removes the minimal element, returning the result.
+        /// </summary>
+        /// <param name="element">The element to add to the <see cref="PriorityQueue{TElement, TPriority}"/>.</param>
+        /// <param name="priority">The priority with which to associate the new element.</param>
+        /// <returns>The minimal element removed after the enqueue operation.</returns>
+        /// <remarks>
+        ///  Implements an insert-then-extract heap operation that is generally more efficient
+        ///  than sequencing Enqueue and Dequeue operations: in the worst case scenario only one
+        ///  shift-down operation is required.
+        /// </remarks>
+        public TElement EnqueueDequeue(TElement element, TPriority priority)
+        {
+            if (_size != 0)
+            {
+                (TElement Element, TPriority Priority) root = _nodes[0];
+
+                if (_comparer == null)
+                {
+                    if (Comparer<TPriority>.Default.Compare(priority, root.Priority) > 0)
+                    {
+                        MoveDownDefaultComparer((element, priority), 0);
+                        _version++;
+                        return root.Element;
+                    }
+                }
+                else
+                {
+                    if (_comparer.Compare(priority, root.Priority) > 0)
+                    {
+                        MoveDownCustomComparer((element, priority), 0);
+                        _version++;
+                        return root.Element;
+                    }
+                }
+            }
+
+            return element;
+        }
+
+        /// <summary>
+        ///  Enqueues a sequence of element/priority pairs to the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        /// <param name="items">The pairs of elements and priorities to add to the queue.</param>
+        /// <exception cref="ArgumentNullException">
+        ///  The specified <paramref name="items"/> argument was <see langword="null"/>.
+        /// </exception>
+        public void EnqueueRange(IEnumerable<(TElement Element, TPriority Priority)> items)
+        {
+            if (items == null)
+                throw new ArgumentNullException(nameof(items));
+
+            int count = 0;
+            var collection = items as ICollection<(TElement Element, TPriority Priority)>;
+            if (collection is not null && (count = collection.Count) > _nodes.Length - _size)
+            {
+                Grow(checked(_size + count));
+            }
+
+            if (_size == 0)
+            {
+                // build using Heapify() if the queue is empty.
+
+                if (collection is not null)
+                {
+                    collection.CopyTo(_nodes, 0);
+                    _size = count;
+                }
+                else
+                {
+                    int i = 0;
+                    (TElement, TPriority)[] nodes = _nodes;
+                    foreach ((TElement element, TPriority priority) in items)
+                    {
+                        if (nodes.Length == i)
+                        {
+                            Grow(i + 1);
+                            nodes = _nodes;
+                        }
+
+                        nodes[i++] = (element, priority);
+                    }
+
+                    _size = i;
+                }
+
+                _version++;
+
+                if (_size > 1)
+                {
+                    Heapify();
+                }
+            }
+            else
+            {
+                foreach ((TElement element, TPriority priority) in items)
+                {
+                    Enqueue(element, priority);
+                }
+            }
+        }
+
+        /// <summary>
+        ///  Enqueues a sequence of elements pairs to the <see cref="PriorityQueue{TElement, TPriority}"/>,
+        ///  all associated with the specified priority.
+        /// </summary>
+        /// <param name="elements">The elements to add to the queue.</param>
+        /// <param name="priority">The priority to associate with the new elements.</param>
+        /// <exception cref="ArgumentNullException">
+        ///  The specified <paramref name="elements"/> argument was <see langword="null"/>.
+        /// </exception>
+        public void EnqueueRange(IEnumerable<TElement> elements, TPriority priority)
+        {
+            if (elements == null)
+                throw new ArgumentNullException(nameof(elements));
+
+            int count;
+            if (elements is ICollection<TElement> collection &&
+                (count = collection.Count) > _nodes.Length - _size)
+            {
+                Grow(checked(_size + count));
+            }
+
+            if (_size == 0)
+            {
+                // build using Heapify() if the queue is empty.
+
+                int i = 0;
+                (TElement, TPriority)[] nodes = _nodes;
+                foreach (TElement element in elements)
+                {
+                    if (nodes.Length == i)
+                    {
+                        Grow(i + 1);
+                        nodes = _nodes;
+                    }
+
+                    nodes[i++] = (element, priority);
+                }
+
+                _size = i;
+                _version++;
+
+                if (i > 1)
+                {
+                    Heapify();
+                }
+            }
+            else
+            {
+                foreach (TElement element in elements)
+                {
+                    Enqueue(element, priority);
+                }
+            }
+        }
+
+        /// <summary>
+        ///  Removes all items from the <see cref="PriorityQueue{TElement, TPriority}"/>.
+        /// </summary>
+        public void Clear()
+        {
+            Array.Clear(_nodes, 0, _size);
+            _size = 0;
+            _version++;
+        }
+
+        /// <summary>
+        ///  Ensures that the <see cref="PriorityQueue{TElement, TPriority}"/> can hold up to
+        ///  <paramref name="capacity"/> items without further expansion of its backing storage.
+        /// </summary>
+        /// <param name="capacity">The minimum capacity to be used.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///  The specified <paramref name="capacity"/> is negative.
+        /// </exception>
+        /// <returns>The current capacity of the <see cref="PriorityQueue{TElement, TPriority}"/>.</returns>
+        public int EnsureCapacity(int capacity)
+        {
+            if (capacity < 0)
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"{nameof(capacity)} ('{capacity}') must be a non-negative value.");
+
+            if (_nodes.Length < capacity)
+            {
+                Grow(capacity);
+                _version++;
+            }
+
+            return _nodes.Length;
+        }
+
+        /// <summary>
+        ///  Sets the capacity to the actual number of items in the <see cref="PriorityQueue{TElement, TPriority}"/>,
+        ///  if that is less than 90 percent of current capacity.
+        /// </summary>
+        /// <remarks>
+        ///  This method can be used to minimize a collection's memory overhead
+        ///  if no new elements will be added to the collection.
+        /// </remarks>
+        public void TrimExcess()
+        {
+            int threshold = (int)(_nodes.Length * 0.9);
+            if (_size < threshold)
+            {
+                Array.Resize(ref _nodes, _size);
+                _version++;
+            }
+        }
+
+        /// <summary>
+        /// Grows the priority queue to match the specified min capacity.
+        /// </summary>
+        private void Grow(int minCapacity)
+        {
+            Debug.Assert(_nodes.Length < minCapacity);
+
+            const int GrowFactor = 2;
+            const int MinimumGrow = 4;
+
+            int newcapacity = GrowFactor * _nodes.Length;
+
+            // Allow the queue to grow to maximum possible capacity (~2G elements) before encountering overflow.
+            // Note that this check works even when _nodes.Length overflowed thanks to the (uint) cast
+            if ((uint)newcapacity > ArrayHelpers.MaxLength) newcapacity = ArrayHelpers.MaxLength;
+
+            // Ensure minimum growth is respected.
+            newcapacity = Math.Max(newcapacity, _nodes.Length + MinimumGrow);
+
+            // If the computed capacity is still less than specified, set to the original argument.
+            // Capacities exceeding Array.MaxLength will be surfaced as OutOfMemoryException by Array.Resize.
+            if (newcapacity < minCapacity) newcapacity = minCapacity;
+
+            Array.Resize(ref _nodes, newcapacity);
+        }
+
+        /// <summary>
+        /// Removes the node from the root of the heap
+        /// </summary>
+        private void RemoveRootNode()
+        {
+            int lastNodeIndex = --_size;
+            _version++;
+
+            if (lastNodeIndex > 0)
+            {
+                (TElement Element, TPriority Priority) lastNode = _nodes[lastNodeIndex];
+                if (_comparer == null)
+                {
+                    MoveDownDefaultComparer(lastNode, 0);
+                }
+                else
+                {
+                    MoveDownCustomComparer(lastNode, 0);
+                }
+            }
+
+            _nodes[lastNodeIndex] = default;
+        }
+
+        /// <summary>
+        /// Gets the index of an element's parent.
+        /// </summary>
+        private static int GetParentIndex(int index) => (index - 1) >> Log2Arity;
+
+        /// <summary>
+        /// Gets the index of the first child of an element.
+        /// </summary>
+        private static int GetFirstChildIndex(int index) => (index << Log2Arity) + 1;
+
+        /// <summary>
+        /// Converts an unordered list into a heap.
+        /// </summary>
+        private void Heapify()
+        {
+            // Leaves of the tree are in fact 1-element heaps, for which there
+            // is no need to correct them. The heap property needs to be restored
+            // only for higher nodes, starting from the first node that has children.
+            // It is the parent of the very last element in the array.
+
+            (TElement Element, TPriority Priority)[] nodes = _nodes;
+            int lastParentWithChildren = GetParentIndex(_size - 1);
+
+            if (_comparer == null)
+            {
+                for (int index = lastParentWithChildren; index >= 0; --index)
+                {
+                    MoveDownDefaultComparer(nodes[index], index);
+                }
+            }
+            else
+            {
+                for (int index = lastParentWithChildren; index >= 0; --index)
+                {
+                    MoveDownCustomComparer(nodes[index], index);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Moves a node up in the tree to restore heap order.
+        /// </summary>
+        private void MoveUpDefaultComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        {
+            // Instead of swapping items all the way to the root, we will perform
+            // a similar optimization as in the insertion sort.
+
+            Debug.Assert(_comparer is null);
+            Debug.Assert(0 <= nodeIndex && nodeIndex < _size);
+
+            (TElement Element, TPriority Priority)[] nodes = _nodes;
+
+            while (nodeIndex > 0)
+            {
+                int parentIndex = GetParentIndex(nodeIndex);
+                (TElement Element, TPriority Priority) parent = nodes[parentIndex];
+
+                if (Comparer<TPriority>.Default.Compare(node.Priority, parent.Priority) < 0)
+                {
+                    nodes[nodeIndex] = parent;
+                    nodeIndex = parentIndex;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            nodes[nodeIndex] = node;
+        }
+
+        /// <summary>
+        /// Moves a node up in the tree to restore heap order.
+        /// </summary>
+        private void MoveUpCustomComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        {
+            // Instead of swapping items all the way to the root, we will perform
+            // a similar optimization as in the insertion sort.
+
+            Debug.Assert(_comparer is not null);
+            Debug.Assert(0 <= nodeIndex && nodeIndex < _size);
+
+            IComparer<TPriority> comparer = _comparer;
+            (TElement Element, TPriority Priority)[] nodes = _nodes;
+
+            while (nodeIndex > 0)
+            {
+                int parentIndex = GetParentIndex(nodeIndex);
+                (TElement Element, TPriority Priority) parent = nodes[parentIndex];
+
+                if (comparer.Compare(node.Priority, parent.Priority) < 0)
+                {
+                    nodes[nodeIndex] = parent;
+                    nodeIndex = parentIndex;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            nodes[nodeIndex] = node;
+        }
+
+        /// <summary>
+        /// Moves a node down in the tree to restore heap order.
+        /// </summary>
+        private void MoveDownDefaultComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        {
+            // The node to move down will not actually be swapped every time.
+            // Rather, values on the affected path will be moved up, thus leaving a free spot
+            // for this value to drop in. Similar optimization as in the insertion sort.
+
+            Debug.Assert(_comparer is null);
+            Debug.Assert(0 <= nodeIndex && nodeIndex < _size);
+
+            (TElement Element, TPriority Priority)[] nodes = _nodes;
+            int size = _size;
+
+            int i;
+            while ((i = GetFirstChildIndex(nodeIndex)) < size)
+            {
+                // Find the child node with the minimal priority
+                (TElement Element, TPriority Priority) minChild = nodes[i];
+                int minChildIndex = i;
+
+                int childIndexUpperBound = Math.Min(i + Arity, size);
+                while (++i < childIndexUpperBound)
+                {
+                    (TElement Element, TPriority Priority) nextChild = nodes[i];
+                    if (Comparer<TPriority>.Default.Compare(nextChild.Priority, minChild.Priority) < 0)
+                    {
+                        minChild = nextChild;
+                        minChildIndex = i;
+                    }
+                }
+
+                // Heap property is satisfied; insert node in this location.
+                if (Comparer<TPriority>.Default.Compare(node.Priority, minChild.Priority) <= 0)
+                {
+                    break;
+                }
+
+                // Move the minimal child up by one node and
+                // continue recursively from its location.
+                nodes[nodeIndex] = minChild;
+                nodeIndex = minChildIndex;
+            }
+
+            nodes[nodeIndex] = node;
+        }
+
+        /// <summary>
+        /// Moves a node down in the tree to restore heap order.
+        /// </summary>
+        private void MoveDownCustomComparer((TElement Element, TPriority Priority) node, int nodeIndex)
+        {
+            // The node to move down will not actually be swapped every time.
+            // Rather, values on the affected path will be moved up, thus leaving a free spot
+            // for this value to drop in. Similar optimization as in the insertion sort.
+
+            Debug.Assert(_comparer is not null);
+            Debug.Assert(0 <= nodeIndex && nodeIndex < _size);
+
+            IComparer<TPriority> comparer = _comparer;
+            (TElement Element, TPriority Priority)[] nodes = _nodes;
+            int size = _size;
+
+            int i;
+            while ((i = GetFirstChildIndex(nodeIndex)) < size)
+            {
+                // Find the child node with the minimal priority
+                (TElement Element, TPriority Priority) minChild = nodes[i];
+                int minChildIndex = i;
+
+                int childIndexUpperBound = Math.Min(i + Arity, size);
+                while (++i < childIndexUpperBound)
+                {
+                    (TElement Element, TPriority Priority) nextChild = nodes[i];
+                    if (comparer.Compare(nextChild.Priority, minChild.Priority) < 0)
+                    {
+                        minChild = nextChild;
+                        minChildIndex = i;
+                    }
+                }
+
+                // Heap property is satisfied; insert node in this location.
+                if (comparer.Compare(node.Priority, minChild.Priority) <= 0)
+                {
+                    break;
+                }
+
+                // Move the minimal child up by one node and continue recursively from its location.
+                nodes[nodeIndex] = minChild;
+                nodeIndex = minChildIndex;
+            }
+
+            nodes[nodeIndex] = node;
+        }
+
+        /// <summary>
+        /// Initializes the custom comparer to be used internally by the heap.
+        /// </summary>
+        private static IComparer<TPriority>? InitializeComparer(IComparer<TPriority>? comparer)
+        {
+            if (typeof(TPriority).IsValueType)
+            {
+                if (comparer == Comparer<TPriority>.Default)
+                {
+                    // if the user manually specifies the default comparer,
+                    // revert to using the optimized path.
+                    return null;
+                }
+
+                return comparer;
+            }
+            else
+            {
+                // Currently the JIT doesn't optimize direct Comparer<T>.Default.Compare
+                // calls for reference types, so we want to cache the comparer instance instead.
+                // TODO https://github.com/dotnet/runtime/issues/10050: Update if this changes in the future.
+                return comparer ?? Comparer<TPriority>.Default;
+            }
+        }
+
+        /// <summary>
+        ///  Enumerates the contents of a <see cref="PriorityQueue{TElement, TPriority}"/>, without any ordering guarantees.
+        /// </summary>
+        [DebuggerDisplay("Count = {Count}")]
+        public sealed class UnorderedItemsCollection : IReadOnlyCollection<(TElement Element, TPriority Priority)>, ICollection
+        {
+            internal readonly PriorityQueue<TElement, TPriority> _queue;
+
+            internal UnorderedItemsCollection(PriorityQueue<TElement, TPriority> queue) => _queue = queue;
+
+            public int Count => _queue._size;
+            object ICollection.SyncRoot => this;
+            bool ICollection.IsSynchronized => false;
+
+            void ICollection.CopyTo(Array array, int index)
+            {
+                if (array == null)
+                    throw new ArgumentNullException(nameof(array));
+
+                if (array.Rank != 1)
+                {
+                    throw new ArgumentException("Only single dimensional arrays are supported for the requested action.", nameof(array));
+                }
+
+                if (array.GetLowerBound(0) != 0)
+                {
+                    throw new ArgumentException("The lower bound of target array must be zero.", nameof(array));
+                }
+
+                if (index < 0 || index > array.Length)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index), index, "Index was out of range. Must be non-negative and less than or equal to the size of the collection.");
+                }
+
+                if (array.Length - index < _queue._size)
+                {
+                    throw new ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.");
+                }
+
+                try
+                {
+                    Array.Copy(_queue._nodes, 0, array, index, _queue._size);
+                }
+                catch (ArrayTypeMismatchException)
+                {
+                    throw new ArgumentException("Target array type is not compatible with the type of items in the collection.", nameof(array));
+                }
+            }
+
+            /// <summary>
+            ///  Enumerates the element and priority pairs of a <see cref="PriorityQueue{TElement, TPriority}"/>,
+            ///  without any ordering guarantees.
+            /// </summary>
+            public struct Enumerator : IEnumerator<(TElement Element, TPriority Priority)>
+            {
+                private readonly PriorityQueue<TElement, TPriority> _queue;
+                private readonly int _version;
+                private int _index;
+                private (TElement, TPriority) _current;
+
+                internal Enumerator(PriorityQueue<TElement, TPriority> queue)
+                {
+                    _queue = queue;
+                    _index = 0;
+                    _version = queue._version;
+                    _current = default;
+                }
+
+                /// <summary>
+                /// Releases all resources used by the <see cref="Enumerator"/>.
+                /// </summary>
+                public void Dispose() { }
+
+                /// <summary>
+                /// Advances the enumerator to the next element of the <see cref="UnorderedItems"/>.
+                /// </summary>
+                /// <returns><see langword="true"/> if the enumerator was successfully advanced to the next element; <see langword="false"/> if the enumerator has passed the end of the collection.</returns>
+                public bool MoveNext()
+                {
+                    PriorityQueue<TElement, TPriority> localQueue = _queue;
+
+                    if (_version == localQueue._version && ((uint)_index < (uint)localQueue._size))
+                    {
+                        _current = localQueue._nodes[_index];
+                        _index++;
+                        return true;
+                    }
+
+                    return MoveNextRare();
+                }
+
+                private bool MoveNextRare()
+                {
+                    if (_version != _queue._version)
+                    {
+                        throw new InvalidOperationException("Collection was modified after the enumerator was instantiated.");
+                    }
+
+                    _index = _queue._size + 1;
+                    _current = default;
+                    return false;
+                }
+
+                /// <summary>
+                /// Gets the element at the current position of the enumerator.
+                /// </summary>
+                public (TElement Element, TPriority Priority) Current => _current;
+                object IEnumerator.Current => _current;
+
+                void IEnumerator.Reset()
+                {
+                    if (_version != _queue._version)
+                    {
+                        throw new InvalidOperationException("Collection was modified after the enumerator was instantiated.");
+                    }
+
+                    _index = 0;
+                    _current = default;
+                }
+            }
+
+            /// <summary>
+            /// Returns an enumerator that iterates through the <see cref="UnorderedItems"/>.
+            /// </summary>
+            /// <returns>An <see cref="Enumerator"/> for the <see cref="UnorderedItems"/>.</returns>
+            public Enumerator GetEnumerator() => new Enumerator(_queue);
+
+            IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(TElement Element, TPriority Priority)>.GetEnumerator() =>
+                _queue.Count == 0 ? EnumerableHelpers.GetEmptyEnumerator<(TElement Element, TPriority Priority)>() :
+                GetEnumerator();
+
+            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<(TElement Element, TPriority Priority)>)this).GetEnumerator();
+        }
+    }
+}
+
+file static class EnumerableHelpers
+{
+    internal static T[] ToArray<T>(IEnumerable<T> source, out int length)
+    {
+        if (source is ICollection<T> ic)
+        {
+            int count = ic.Count;
+            if (count != 0)
+            {
+                // Allocate an array of the desired size, then copy the elements into it. Note that this has the same
+                // issue regarding concurrency as other existing collections like List<T>. If the collection size
+                // concurrently changes between the array allocation and the CopyTo, we could end up either getting an
+                // exception from overrunning the array (if the size went up) or we could end up not filling as many
+                // items as 'count' suggests (if the size went down).  This is only an issue for concurrent collections
+                // that implement ICollection<T>, which as of .NET 4.6 is just ConcurrentDictionary<TKey, TValue>.
+                T[] arr = new T[count];
+                ic.CopyTo(arr, 0);
+                length = count;
+                return arr;
+            }
+        }
+        else
+        {
+            using (var en = source.GetEnumerator())
+            {
+                if (en.MoveNext())
+                {
+                    const int DefaultCapacity = 4;
+                    T[] arr = new T[DefaultCapacity];
+                    arr[0] = en.Current;
+                    int count = 1;
+
+                    while (en.MoveNext())
+                    {
+                        if (count == arr.Length)
+                        {
+                            // This is the same growth logic as in List<T>:
+                            // If the array is currently empty, we make it a default size.  Otherwise, we attempt to
+                            // double the size of the array.  Doubling will overflow once the size of the array reaches
+                            // 2^30, since doubling to 2^31 is 1 larger than Int32.MaxValue.  In that case, we instead
+                            // constrain the length to be Array.MaxLength (this overflow check works because of the
+                            // cast to uint).
+                            int newLength = count << 1;
+                            if ((uint)newLength > ArrayHelpers.MaxLength)
+                            {
+                                newLength = ArrayHelpers.MaxLength <= count ? count + 1 : ArrayHelpers.MaxLength;
+                            }
+
+                            Array.Resize(ref arr, newLength);
+                        }
+
+                        arr[count++] = en.Current;
+                    }
+
+                    length = count;
+                    return arr;
+                }
+            }
+        }
+
+        length = 0;
+        return Array.Empty<T>();
+    }
+
+    internal static IEnumerator<T> GetEmptyEnumerator<T>() =>
+         ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator();
+}
+
+file static class ArrayHelpers
+{
+    public const int MaxLength = 0X7FFFFFC7;
 }
 """""""""", Encoding.UTF8);
 public static SourceText Source_T_System_Diagnostics_CodeAnalysis_AllowNullAttribute { get; } = SourceText.From(""""""""""

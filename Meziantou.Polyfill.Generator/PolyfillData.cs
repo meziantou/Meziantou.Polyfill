@@ -35,7 +35,7 @@ internal sealed partial class PolyfillData
         var semanticModel = compilation.GetSemanticModel(tree);
 
         var root = tree.GetRoot();
-        foreach (var type in root.DescendantNodes().OfType<TypeDeclarationSyntax>())
+        foreach (var type in root.DescendantNodes(descendIntoChildren: node => node is not TypeDeclarationSyntax).OfType<TypeDeclarationSyntax>())
         {
             var symbol = (ITypeSymbol)semanticModel.GetDeclaredSymbol(type)!;
             if (symbol.DeclaredAccessibility == Accessibility.Public)

@@ -37,7 +37,7 @@ public class UnitTest1
     [Fact]
     public async Task InternalsVisibleTo_DoNotRegenerateExtensionMethods()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.0", "ref/net6.0/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "ref/netstandard2.0/");
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
         Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs")));
         Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
@@ -45,8 +45,7 @@ public class UnitTest1
         var temp = Path.GetTempFileName() + ".dll";
         File.WriteAllBytes(temp, tempGeneration.Assembly!);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("StringSyntaxAttribute")));
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
+        Assert.Single(result.GeneratorResult.GeneratedTrees); // debug.g.cs
     }
 
     [Theory]
