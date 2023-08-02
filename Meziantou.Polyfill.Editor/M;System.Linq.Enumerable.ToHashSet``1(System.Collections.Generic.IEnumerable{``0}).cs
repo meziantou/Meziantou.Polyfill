@@ -2,6 +2,6 @@
 
 static partial class PolyfillExtensions
 {
-    public static IEnumerable<TSource> ToHashSet<TSource>(this IEnumerable<TSource> source)
+    public static HashSet<TSource> ToHashSet<TSource>(this IEnumerable<TSource> source)
         => source.ToHashSet(null);
 }
