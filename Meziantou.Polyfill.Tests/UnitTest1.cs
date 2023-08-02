@@ -390,4 +390,15 @@ public class UnitTest1
         Assert.Equal("1", queue.Dequeue());
         Assert.Equal("2", queue.Dequeue());
     }
+
+    [Fact]
+    public void ReferenceEqualityComparerTests()
+    {
+        Assert.False(ReferenceEqualityComparer.Instance.Equals(new object(), new object()));
+        Assert.NotEqual(ReferenceEqualityComparer.Instance.GetHashCode(new object()), ReferenceEqualityComparer.Instance.GetHashCode(new object()));
+
+        var obj = new object();
+        Assert.True(ReferenceEqualityComparer.Instance.Equals(obj, obj));
+        Assert.Equal(ReferenceEqualityComparer.Instance.GetHashCode(obj), ReferenceEqualityComparer.Instance.GetHashCode(obj));
+    }
 }
