@@ -440,4 +440,11 @@ public class UnitTest1
 
         Assert.Equal(new byte[] { 1, 2 }, streamContent.ToArray());
     }
+
+    [Fact]
+    public void Encoding_GetString()
+    {
+        var str = Encoding.UTF8.GetString((ReadOnlySpan<byte>)Encoding.UTF8.GetBytes("sample").AsSpan());
+        Assert.Equal("sample", str);
+    }
 }
