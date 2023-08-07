@@ -209,13 +209,23 @@ public class UnitTest1
         Assert.True(cts.Token.IsCancellationRequested);
     }
 
-#if NET461_OR_GREATER
+#if NET461_OR_GREATER || NETCOREAPP
     [Fact]
     public async Task StreamWriter_WriteAsync()
     {
         using var sr = new System.IO.StringWriter();
         await sr.WriteAsync("test".AsMemory(), CancellationToken.None);
         Assert.Equal("test", sr.ToString());
+    }
+#endif
+
+#if NET461_OR_GREATER || NETCOREAPP
+    [Fact]
+    public void StreamWriter_Write()
+    {
+        using var ms = new MemoryStream();
+        ms.Write((ReadOnlySpan<byte>)new byte[] { 1, 2 }.AsSpan());
+        Assert.Equal(new byte[] { 1, 2 }, ms.ToArray());
     }
 #endif
 
@@ -227,7 +237,7 @@ public class UnitTest1
         Assert.Equal("test", result);
     }
 
-#if NET461_OR_GREATER
+#if NET461_OR_GREATER || NETCOREAPP
     [Fact]
     public async Task StreamReader_ReadAsync()
     {
