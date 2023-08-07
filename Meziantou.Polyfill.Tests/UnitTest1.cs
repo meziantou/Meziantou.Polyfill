@@ -428,4 +428,16 @@ public class UnitTest1
 
         Assert.Equal(new byte[] { 1, 2 }, ms.ToArray());
     }
+
+    [Fact]
+    public void HttpContent_ReadAsStream()
+    {
+        using var content = new ByteArrayContent(new byte[] { 1, 2 });
+        var stream = content.ReadAsStream();
+
+        var streamContent = new MemoryStream();
+        stream.CopyTo(streamContent);
+
+        Assert.Equal(new byte[] { 1, 2 }, streamContent.ToArray());
+    }
 }
