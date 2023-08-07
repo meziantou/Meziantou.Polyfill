@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -401,7 +402,7 @@ public class UnitTest1
         Assert.True(ReferenceEqualityComparer.Instance.Equals(obj, obj));
         Assert.Equal(ReferenceEqualityComparer.Instance.GetHashCode(obj), ReferenceEqualityComparer.Instance.GetHashCode(obj));
     }
-    
+
     [Fact]
     public void ReadOnlyDictionary_GetValueOrDefaultTests()
     {
@@ -412,9 +413,19 @@ public class UnitTest1
 
         Assert.Equal(10, dictionary.GetValueOrDefault(1));
         Assert.Equal(10, dictionary.GetValueOrDefault(1, -1));
-        
+
         // key not present
         Assert.Equal(0, dictionary.GetValueOrDefault(100));
         Assert.Equal(-1, dictionary.GetValueOrDefault(100, -1));
+    }
+
+    [Fact]
+    public async Task ReadOnlyMemoryContent()
+    {
+        using var content = new ReadOnlyMemoryContent(new byte[] { 1, 2 });
+        var ms = new MemoryStream();
+        await content.CopyToAsync(ms);
+
+        Assert.Equal(new byte[] { 1, 2 }, ms.ToArray());
     }
 }
