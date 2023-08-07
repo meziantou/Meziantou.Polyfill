@@ -6,18 +6,23 @@ using System.Text.RegularExpressions;
 namespace Meziantou.Polyfill.Generator;
 internal sealed partial class PolyfillData
 {
+    private static readonly string[] PotentialRequiredTypes =
+    {
+        "System.Span`1",
+        "System.ReadOnlySpan`1",
+        "System.Memory`1",
+        "System.ReadOnlyMemory`1",
+        "System.Threading.Tasks.ValueTask",
+        "System.Threading.Tasks.ValueTask`1",
+        "System.Collections.Immutable.ImmutableArray`1",
+        "System.Net.Http.HttpContent",
+    };
+
     public PolyfillData(string content) => Content = content;
 
     public string? Content { get; }
 
-    public bool RequiresSpanOfT { get; private set; }
-    public bool RequiresReadOnlySpanOfT { get; private set; }
-    public bool RequiresMemory { get; private set; }
-    public bool RequiresReadOnlyMemory { get; private set; }
-    public bool RequiresValueTask { get; private set; }
-    public bool RequiresValueTaskOfT { get; private set; }
-    public bool RequiresImmutableArrayOfT { get; private set; }
-
+    public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
     public string[] DeclaredMemberDocumentationIds { get; private set; } = Array.Empty<string>();
     public string[] ConditionalMembers { get; private set; } = Array.Empty<string>();
 
@@ -39,17 +44,20 @@ internal sealed partial class PolyfillData
         {
             var symbol = (ITypeSymbol)semanticModel.GetDeclaredSymbol(type)!;
             if (symbol.DeclaredAccessibility == Accessibility.Public)
-                throw new Exception("All types must be internal");
+                throw new Exception("The symbol " + symbol.ToDisplayString() + " must be internal");
         }
 
         var types = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
         var declaredMethods = new HashSet<string>(StringComparer.Ordinal);
+
         foreach (var method in root.DescendantNodes().OfType<MethodDeclarationSyntax>())
         {
             var symbol = semanticModel.GetDeclaredSymbol(method)!;
             types.Add(symbol.ReturnType);
             foreach (var param in symbol.Parameters.Select(p => p.Type))
+            {
                 types.Add(param);
+            }
 
             if (symbol.DeclaredAccessibility is Accessibility.Public or Accessibility.Internal)
             {
@@ -57,17 +65,31 @@ internal sealed partial class PolyfillData
             }
         }
 
+        foreach (var type in root.DescendantNodes().OfType<TypeDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(type)!;
+            if (symbol.BaseType != null)
+            {
+                types.Add(symbol.BaseType);
+            }
+
+            foreach (var iface in symbol.AllInterfaces)
+            {
+                types.Add(iface);
+            }
+        }
+
         data.DeclaredMemberDocumentationIds = declaredMethods.ToArray();
 
         foreach (var type in types)
         {
-            data.RequiresSpanOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Span`1"));
-            data.RequiresReadOnlySpanOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.ReadOnlySpan`1"));
-            data.RequiresMemory |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Memory`1"));
-            data.RequiresReadOnlyMemory |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.ReadOnlyMemory`1"));
-            data.RequiresValueTask |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask"));
-            data.RequiresValueTaskOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1"));
-            data.RequiresImmutableArrayOfT |= SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName("System.Collections.Immutable.ImmutableArray`1"));
+            foreach (var requiredTypes in PotentialRequiredTypes)
+            {
+                if (SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName(requiredTypes)))
+                {
+                    data.RequiredTypes.Add(requiredTypes);
+                }
+            }
         }
 
         return data;

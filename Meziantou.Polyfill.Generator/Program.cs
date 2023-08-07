@@ -37,6 +37,16 @@ var polyfills = assembly.GetManifestResourceNames()
 
 polyfills = SortPolyfills(polyfills);
 
+var requiredTypes = polyfills.SelectMany(p => p.PolyfillData.RequiredTypes)
+    .Distinct(StringComparer.Ordinal)
+    .Order(StringComparer.Ordinal)
+    .Select(p => new
+    {
+        TypeName = p,
+        CsharpFieldName = "_" + p.Replace('`', '_').Replace('.', '_')
+    })
+    .ToArray();
+
 var fieldCount = (polyfills.Length / 64) + (polyfills.Length % 64 > 0 ? 1 : 0);
 
 var sb = new StringBuilder();
@@ -59,56 +69,34 @@ for (var i = 0; i < fieldCount; i++)
 }
 
 sb.AppendLine($"private readonly PolyfillOptions _options;");
-sb.AppendLine($"private readonly bool _hasSpanOfT;");
-sb.AppendLine($"private readonly bool _hasReadOnlySpanOfT;");
-sb.AppendLine($"private readonly bool _hasMemoryOfT;");
-sb.AppendLine($"private readonly bool _hasReadOnlyMemoryOfT;");
-sb.AppendLine($"private readonly bool _hasValueTask;");
-sb.AppendLine($"private readonly bool _hasValueTaskOfT;");
-sb.AppendLine($"private readonly bool _hasImmutableArrayOfT;");
+
+foreach (var requiredType in requiredTypes)
+{
+    sb.AppendLine($"private readonly bool {requiredType.CsharpFieldName};");
+}
 
 sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
 sb.AppendLine("{");
 sb.AppendLine("    _options = options;");
 
-if (polyfills.Any(p => p.PolyfillData.RequiresSpanOfT))
-    sb.AppendLine("    _hasSpanOfT = compilation.GetTypeByMetadataName(\"System.Span`1\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresReadOnlySpanOfT))
-    sb.AppendLine("    _hasReadOnlySpanOfT = compilation.GetTypeByMetadataName(\"System.ReadOnlySpan`1\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresMemory))
-    sb.AppendLine("    _hasMemoryOfT = compilation.GetTypeByMetadataName(\"System.Memory`1\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresReadOnlyMemory))
-    sb.AppendLine("    _hasReadOnlyMemoryOfT = compilation.GetTypeByMetadataName(\"System.ReadOnlyMemory`1\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresValueTask))
-    sb.AppendLine("    _hasValueTask = compilation.GetTypeByMetadataName(\"System.Threading.Tasks.ValueTask\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresValueTaskOfT))
-    sb.AppendLine("    _hasValueTaskOfT = compilation.GetTypeByMetadataName(\"System.Threading.Tasks.ValueTask`1\") != null;");
-if (polyfills.Any(p => p.PolyfillData.RequiresImmutableArrayOfT))
-    sb.AppendLine("    _hasImmutableArrayOfT = compilation.GetTypeByMetadataName(\"System.Collections.Immutable.ImmutableArray`1\") != null;");
+foreach (var requiredType in requiredTypes)
+{
+    sb.AppendLine($"{requiredType.CsharpFieldName} = compilation.GetTypeByMetadataName(\"{requiredType.TypeName}\") != null;");
+}
 
 foreach (var polyfill in polyfills)
 {
-    // TODO check for declared members
     sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(compilation, options, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
     sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
 
     string GenerateIncludePreCondition(PolyfillData data)
     {
         var result = "";
-        if (data.RequiresSpanOfT)
-            result += "_hasSpanOfT && ";
-        if (data.RequiresReadOnlySpanOfT)
-            result += "_hasReadOnlySpanOfT && ";
-        if (data.RequiresMemory)
-            result += "_hasMemoryOfT && ";
-        if (data.RequiresReadOnlyMemory)
-            result += "_hasReadOnlyMemoryOfT && ";
-        if (data.RequiresValueTask)
-            result += "_hasValueTask && ";
-        if (data.RequiresValueTaskOfT)
-            result += "_hasValueTaskOfT && ";
-        if (data.RequiresImmutableArrayOfT)
-            result += "_hasImmutableArrayOfT && ";
+
+        foreach (var requiredType in data.RequiredTypes)
+        {
+            result += requiredTypes.Single(t => t.TypeName == requiredType).CsharpFieldName + " && ";
+        }
 
         if (data.ConditionalMembers.Length > 0)
         {
@@ -178,12 +166,11 @@ sb.AppendLine("public string DumpAsCSharpComment()");
 sb.AppendLine("{");
 sb.AppendLine("    var sb = new StringBuilder();");
 sb.AppendLine("    sb.AppendLine(_options.DumpAsCSharpComment());");
-sb.AppendLine("    sb.AppendLine(\"// HasMemoryOfT: \" + _hasMemoryOfT);");
-sb.AppendLine("    sb.AppendLine(\"// HasReadOnlyMemoryOfT: \" + _hasReadOnlyMemoryOfT);");
-sb.AppendLine("    sb.AppendLine(\"// HasReadOnlySpanOfT: \" + _hasReadOnlySpanOfT);");
-sb.AppendLine("    sb.AppendLine(\"// HasSpanOfT: \" + _hasSpanOfT);");
-sb.AppendLine("    sb.AppendLine(\"// HasValueTask: \" + _hasValueTask);");
-sb.AppendLine("    sb.AppendLine(\"// HasValueTaskOfT: \" + _hasValueTaskOfT);");
+foreach (var requiredType in requiredTypes)
+{
+    sb.AppendLine($"    sb.AppendLine(\"// {requiredType.TypeName}: \" + {requiredType.CsharpFieldName});");
+}
+
 sb.AppendLine("    sb.AppendLine(\"//\");");
 foreach (var polyfill in polyfills)
 {
