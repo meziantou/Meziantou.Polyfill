@@ -22,6 +22,8 @@ var polyfills = assembly.GetManifestResourceNames()
                                .Replace('}', '_')
                                .Replace('(', '_')
                                .Replace(')', '_')
+                               .Replace('[', '_')
+                               .Replace(']', '_')
                                .Replace(',', '_')
                                .Replace('.', '_')
                                .Replace('`', '_'),
@@ -193,6 +195,7 @@ foreach (var polyfill in polyfills)
 sb.AppendLine("}");
 
 Console.WriteLine(sb.ToString());
+Console.WriteLine("Polyfills: " + polyfills.Length);
 var path = GetMemberFilePath();
 Console.WriteLine(path);
 File.WriteAllText(path, sb.ToString());
