@@ -519,4 +519,18 @@ public class UnitTest1
             yield return "3";
         }
     }
+
+    [Fact]
+    public async Task Task_WaitAsync()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(500);
+            tcs.TrySetResult(1);
+        });
+
+        var result = await tcs.Task.WaitAsync(CancellationToken.None);
+        Assert.Equal(1, result);
+    }
 }
