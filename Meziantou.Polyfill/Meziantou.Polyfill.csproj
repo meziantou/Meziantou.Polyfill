@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>1.0.26</Version>
+    <Version>1.0.27</Version>
     <TransformOnBuild>true</TransformOnBuild>
 
     <LangVersion>11</LangVersion>

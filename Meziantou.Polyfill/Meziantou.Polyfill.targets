@@ -3,4 +3,8 @@
     <CompilerVisibleProperty Include="MeziantouPolyfill_IncludedPolyfills" />
     <CompilerVisibleProperty Include="MeziantouPolyfill_ExcludedPolyfills" />
   </ItemGroup>
+  <PropertyGroup>
+    <MeziantouPolyfill_AllowUnsafeBlocks Condition="'$(MeziantouPolyfill_AllowUnsafeBlocks)' == ''">true</MeziantouPolyfill_AllowUnsafeBlocks>
+    <AllowUnsafeBlocks Condition="$(MeziantouPolyfill_AllowUnsafeBlocks) == 'true'">true</AllowUnsafeBlocks>
+  </PropertyGroup>
 </Project>
