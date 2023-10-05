@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,6 +61,7 @@ public class UnitTest1
         _ = new TargetPlatformAttribute("");
         _ = new UnsupportedOSPlatformAttribute("");
         _ = new UnsupportedOSPlatformGuardAttribute("");
+        _ = new CollectionBuilderAttribute(typeof(string), "");
 
         _ = typeof(IsExternalInit);
     }
@@ -532,5 +534,33 @@ public class UnitTest1
 
         var result = await tcs.Task.WaitAsync(CancellationToken.None);
         Assert.Equal(1, result);
+    }
+
+    [Fact]
+    public void CollectionBuilder()
+    {
+        CustomCollectionWithBuilder collection = ["a", "b"];
+        Assert.Equal(["a", "b"], collection);
+    }
+
+    [CollectionBuilder(typeof(CustomCollectionWithBuilder), "Create")]
+    private sealed class CustomCollectionWithBuilder : IEnumerable<string>
+    {
+        private readonly string[] _data;
+
+        private CustomCollectionWithBuilder(string[] data) => _data = data;
+
+        public static CustomCollectionWithBuilder Create(ReadOnlySpan<string> data)
+        {
+            return new CustomCollectionWithBuilder(data.ToArray());
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            foreach (var item in _data)
+                yield return item;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
