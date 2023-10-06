@@ -21,6 +21,10 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <InternalsVisibleTo Include="Meziantou.Polyfill.SourceGenerator.Tests" />
+  </ItemGroup>
+    
+  <ItemGroup>
     <None Include="icon.png" Pack="true" PackagePath="" Visible="false" />
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="build/" />

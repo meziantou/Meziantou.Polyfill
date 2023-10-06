@@ -59,7 +59,7 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
             return null;
 
         List<string>? values = null;
-        foreach (var part in new LineSplitEnumerator(value.AsSpan()))
+        foreach (var part in new SemiColonSplitEnumerator(value.AsSpan()))
         {
             if (part.IsEmpty)
                 continue;
@@ -107,17 +107,17 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
     }
 
     [StructLayout(LayoutKind.Auto)]
-    private ref struct LineSplitEnumerator
+    private ref struct SemiColonSplitEnumerator
     {
         private ReadOnlySpan<char> _str;
 
-        public LineSplitEnumerator(ReadOnlySpan<char> str)
+        public SemiColonSplitEnumerator(ReadOnlySpan<char> str)
         {
             _str = str;
             Current = default;
         }
 
-        public readonly LineSplitEnumerator GetEnumerator() => this;
+        public readonly SemiColonSplitEnumerator GetEnumerator() => this;
 
         public bool MoveNext()
         {
@@ -125,7 +125,7 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
             if (span.IsEmpty)
                 return false;
 
-            var index = span.IndexOf(';');
+            var index = span.IndexOfAny(';', '|');
             if (index == -1)
             {
                 _str = ReadOnlySpan<char>.Empty; // The remaining string is an empty string

@@ -8,7 +8,7 @@ You can use the following MSBuild properties to configure which polyfills are ge
 <PropertyGroup>
   <!-- semi-column separated list of name prefix -->
   <!-- Tip: The name of the generated polyfills are available in the generated "Debug.g.cs" file -->
-  <MeziantouPolyfill_IncludedPolyfills>T:Type1;T:Type2;M:Member1</MeziantouPolyfill_IncludedPolyfills>
+  <MeziantouPolyfill_IncludedPolyfills>T:Type1|T:Type2|M:Member1</MeziantouPolyfill_IncludedPolyfills>
   <MeziantouPolyfill_ExcludedPolyfills>M:System.Diagnostics.</MeziantouPolyfill_ExcludedPolyfills>
 
   <!-- Optional: Output the generated files to the obj\GeneratedFiles folder  -->

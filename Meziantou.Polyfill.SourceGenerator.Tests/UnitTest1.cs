@@ -14,6 +14,26 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 public class UnitTest1
 {
     [Fact]
+    public void PolyfillOptions_Included()
+    {
+        var options = new PolyfillOptions("T:A;T:B", "");
+        Assert.True(options.Include("T:A"));
+        Assert.True(options.Include("T:B"));
+
+        Assert.False(options.Include("T:C"));
+    }
+    
+    [Fact]
+    public void PolyfillOptions_Excluded()
+    {
+        var options = new PolyfillOptions("", "T:A|T:B");
+        Assert.False(options.Include("T:A"));
+        Assert.False(options.Include("T:B"));
+
+        Assert.True(options.Include("T:C"));
+    }
+
+    [Fact]
     public async Task NoCodeGeneratedForLatestFramework()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0-rc.1.23419.4", "ref/net8.0/");
