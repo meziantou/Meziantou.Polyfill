@@ -106,7 +106,7 @@ foreach (var polyfill in polyfills)
             result += string.Join(" || ", data.ConditionalMembers.Select(member =>
             {
                 var dependency = polyfills.Single(p => p.TypeName == member);
-                return $"({dependency.CSharpFieldName} & {dependency.CSharpFieldBitMask}ul) == {dependency.CSharpFieldBitMask}ul";
+                return $"({dependency.CSharpFieldName} & {dependency.CSharpFieldBitMask}uL) == {dependency.CSharpFieldBitMask}uL";
             }));
             result += ") && ";
         }
@@ -121,7 +121,8 @@ foreach (var polyfill in polyfills)
             result += " && (";
             result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
             {
-                return $"IncludeMember(compilation, options, \"{member}\")";
+                // Do not use "options" as the member cannot be part of Included or Excluded members
+                return $"IncludeMember(compilation, options: null, \"{member}\")";
             }));
             result += ")";
         }

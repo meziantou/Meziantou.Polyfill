@@ -53,6 +53,19 @@ public class UnitTest1
         result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
+    
+    [Fact]
+    public async Task IncludedPolyfill_Methods()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+
+        var result = GenerateFiles("", assemblyLocations: assemblies);
+        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync")));
+
+        result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})");
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync")));
+        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("System.Linq.Enumerable.OrderDescending")));
+    }
 
     [Fact]
     public async Task InternalsVisibleTo_DoNotRegenerateExtensionMethods()
