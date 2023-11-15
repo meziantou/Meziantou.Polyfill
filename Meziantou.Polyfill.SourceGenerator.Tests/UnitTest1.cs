@@ -36,7 +36,7 @@ public class UnitTest1
     [Fact]
     public async Task NoCodeGeneratedForLatestFramework()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0-rc.1.23419.4", "ref/net8.0/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
         var tree = Assert.Single(result.GeneratorResult.GeneratedTrees);
         Assert.Equal("Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs", tree.FilePath);
@@ -140,7 +140,7 @@ public class UnitTest1
     {
         return new TheoryData<PackageReference[]>
         {
-            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0-rc.1.23419.4", "ref/net8.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "5.0.0", "ref/net5.0/") } },
