@@ -62,6 +62,7 @@ public class UnitTest1
         _ = new UnsupportedOSPlatformAttribute("");
         _ = new UnsupportedOSPlatformGuardAttribute("");
         _ = new CollectionBuilderAttribute(typeof(string), "");
+        _ = new ExperimentalAttribute("test");
 
         _ = typeof(IsExternalInit);
     }
