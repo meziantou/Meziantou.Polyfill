@@ -538,6 +538,46 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Span_ContainsAny_2()
+    {
+        Span<int> span = [0, 1, 2];
+        Assert.False(span.ContainsAny(10, 11));
+        Assert.True(span.ContainsAny(10, 1));
+        Assert.True(span.ContainsAny(1, 10));
+    }
+    
+    [Fact]
+    public void Span_ContainsAny_3()
+    {
+        Span<int> span = [0, 1, 2];
+        Assert.False(span.ContainsAny(10, 11, 12));
+        Assert.True(span.ContainsAny(1, 10, 11));
+        Assert.True(span.ContainsAny(10, 1, 11));
+        Assert.True(span.ContainsAny(10, 11, 1));
+    }
+    
+    [Fact]
+    public void Span_ContainsAny_ReadOnlySpan()
+    {
+        Span<int> span = [0, 1, 2];
+        
+        ReadOnlySpan<int>  search = [10, 11, 12];
+        Assert.False(span.ContainsAny(search));
+
+        search = [1, 11, 12];
+        Assert.True(span.ContainsAny(search));
+
+        search = [10, 1, 12];
+        Assert.True(span.ContainsAny(search));
+
+        search = [10, 11, 1];
+        Assert.True(span.ContainsAny(search));
+
+        search = [10, 11, 12, 1];
+        Assert.True(span.ContainsAny(search));
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
