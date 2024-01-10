@@ -545,7 +545,7 @@ public class UnitTest1
         Assert.True(span.ContainsAny(10, 1));
         Assert.True(span.ContainsAny(1, 10));
     }
-    
+
     [Fact]
     public void Span_ContainsAny_3()
     {
@@ -555,13 +555,13 @@ public class UnitTest1
         Assert.True(span.ContainsAny(10, 1, 11));
         Assert.True(span.ContainsAny(10, 11, 1));
     }
-    
+
     [Fact]
     public void Span_ContainsAny_ReadOnlySpan()
     {
         Span<int> span = [0, 1, 2];
-        
-        ReadOnlySpan<int>  search = [10, 11, 12];
+
+        ReadOnlySpan<int> search = [10, 11, 12];
         Assert.False(span.ContainsAny(search));
 
         search = [1, 11, 12];
@@ -575,6 +575,80 @@ public class UnitTest1
 
         search = [10, 11, 12, 1];
         Assert.True(span.ContainsAny(search));
+    }
+
+    [Fact]
+    public void ReadOnlySpan_ContainsAnyExcept_1()
+    {
+        Assert.False(((ReadOnlySpan<int>)[0]).ContainsAnyExcept(0));
+        Assert.True(((ReadOnlySpan<int>)[0]).ContainsAnyExcept(1));
+        Assert.True(((ReadOnlySpan<int>)[0, 1]).ContainsAnyExcept(0));
+    }
+
+    [Fact]
+    public void ReadOnlySpan_ContainsAnyExcept_2()
+    {
+        Assert.False(((ReadOnlySpan<int>)[0]).ContainsAnyExcept(0, 1));
+        Assert.False(((ReadOnlySpan<int>)[0, 1]).ContainsAnyExcept(0, 1));
+        Assert.True(((ReadOnlySpan<int>)[0, 1, 2]).ContainsAnyExcept(0, 1));
+    }
+
+    [Fact]
+    public void ReadOnlySpan_ContainsAnyExcept_3()
+    {
+        Assert.False(((ReadOnlySpan<int>)[0]).ContainsAnyExcept(0, 1, 2));
+        Assert.False(((ReadOnlySpan<int>)[0, 1]).ContainsAnyExcept(0, 1, 2));
+        Assert.False(((ReadOnlySpan<int>)[0, 1, 2]).ContainsAnyExcept(0, 1, 2));
+        Assert.True(((ReadOnlySpan<int>)[0, 1, 2, 3]).ContainsAnyExcept(0, 1, 2));
+    }
+
+    [Fact]
+    public void ReadOnlySpan_ContainsAnyExcept_ReadOnlySpan()
+    {
+        Assert.False(((ReadOnlySpan<int>)[0]).ContainsAnyExcept([0]));
+        Assert.False(((ReadOnlySpan<int>)[0, 1]).ContainsAnyExcept([0, 1, 2]));
+        Assert.True(((ReadOnlySpan<int>)[0, 1]).ContainsAnyExcept([0]));
+    }
+
+    [Fact]
+    public void Span_ContainsAnyExcept_1()
+    {
+        Assert.False(((Span<int>)[0]).ContainsAnyExcept(0));
+        Assert.True(((Span<int>)[0]).ContainsAnyExcept(1));
+        Assert.True(((Span<int>)[0, 1]).ContainsAnyExcept(0));
+    }
+
+    [Fact]
+    public void Span_ContainsAnyExcept_2()
+    {
+        Assert.False(((Span<int>)[0]).ContainsAnyExcept(0, 1));
+        Assert.False(((Span<int>)[0, 1]).ContainsAnyExcept(0, 1));
+        Assert.True(((Span<int>)[0, 1, 2]).ContainsAnyExcept(0, 1));
+    }
+
+    [Fact]
+    public void Span_ContainsAnyExcept_3()
+    {
+        Assert.False(((Span<int>)[0]).ContainsAnyExcept(0, 1, 2));
+        Assert.False(((Span<int>)[0, 1]).ContainsAnyExcept(0, 1, 2));
+        Assert.False(((Span<int>)[0, 1, 2]).ContainsAnyExcept(0, 1, 2));
+        Assert.True(((Span<int>)[0, 1, 2, 3]).ContainsAnyExcept(0, 1, 2));
+    }
+
+    [Fact]
+    public void Span_ContainsAnyExcept_ReadOnlySpan()
+    {
+        Assert.False(((Span<int>)[0]).ContainsAnyExcept([0]));
+        Assert.False(((Span<int>)[0, 1]).ContainsAnyExcept([0, 1, 2]));
+        Assert.True(((Span<int>)[0, 1]).ContainsAnyExcept([0]));
+    }
+
+    [Fact]
+    public void CommonPrefixLength()
+    {
+        Assert.Equal(0, ((Span<int>)[0]).CommonPrefixLength([1]));
+        Assert.Equal(1, ((Span<int>)[0]).CommonPrefixLength([0]));
+        Assert.Equal(2, ((Span<int>)[0, 1]).CommonPrefixLength([0, 1, 2]));
     }
 
     [Fact]
