@@ -33,6 +33,187 @@ By default, all needed polyfills are generated. You can configure which polyfill
 </PropertyGroup>
 ````
 
+## Supported polyfills
+
+<!-- begin_polyfills -->
+
+### Types
+
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
+- `System.Collections.Generic.ReferenceEqualityComparer`
+- `System.Diagnostics.CodeAnalysis.AllowNullAttribute`
+- `System.Diagnostics.CodeAnalysis.DisallowNullAttribute`
+- `System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute`
+- `System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute`
+- `System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes`
+- `System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute`
+- `System.Diagnostics.CodeAnalysis.ExperimentalAttribute`
+- `System.Diagnostics.CodeAnalysis.MaybeNullAttribute`
+- `System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute`
+- `System.Diagnostics.CodeAnalysis.MemberNotNullAttribute`
+- `System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute`
+- `System.Diagnostics.CodeAnalysis.NotNullAttribute`
+- `System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute`
+- `System.Diagnostics.CodeAnalysis.NotNullWhenAttribute`
+- `System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute`
+- `System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute`
+- `System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute`
+- `System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute`
+- `System.Diagnostics.CodeAnalysis.UnscopedRefAttribute`
+- `System.Diagnostics.StackTraceHiddenAttribute`
+- `System.HashCode`
+- `System.Index`
+- `System.Net.Http.ReadOnlyMemoryContent`
+- `System.Range`
+- `System.Runtime.CompilerServices.AsyncMethodBuilderAttribute`
+- `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute`
+- `System.Runtime.CompilerServices.CollectionBuilderAttribute`
+- `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute`
+- `System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute`
+- `System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute`
+- `System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute`
+- `System.Runtime.CompilerServices.IsExternalInit`
+- `System.Runtime.CompilerServices.ModuleInitializerAttribute`
+- `System.Runtime.CompilerServices.RequiredMemberAttribute`
+- `System.Runtime.CompilerServices.SkipLocalsInitAttribute`
+- `System.Runtime.CompilerServices.TupleElementNamesAttribute`
+- `System.Runtime.InteropServices.SuppressGCTransitionAttribute`
+- `System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute`
+- `System.Runtime.Versioning.ObsoletedOSPlatformAttribute`
+- `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute`
+- `System.Runtime.Versioning.SupportedOSPlatformAttribute`
+- `System.Runtime.Versioning.SupportedOSPlatformGuardAttribute`
+- `System.Runtime.Versioning.TargetPlatformAttribute`
+- `System.Runtime.Versioning.UnsupportedOSPlatformAttribute`
+- `System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute`
+- `System.Threading.Tasks.TaskToAsyncResult`
+- `System.ValueTuple`
+- `System.ValueTuple<T1>`
+- `System.ValueTuple<T1, T2>`
+- `System.ValueTuple<T1, T2, T3>`
+- `System.ValueTuple<T1, T2, T3, T4>`
+- `System.ValueTuple<T1, T2, T3, T4, T5>`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
+- `System.ITupleInternal`
+
+### Members
+
+- `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>`
+    - `GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument)`
+- `System.Collections.Generic.CollectionExtensions`
+    - `GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)`
+    - `GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)`
+- `System.Collections.Generic.KeyValuePair<TKey, TValue>`
+    - `Deconstruct(out TKey key, out TValue value)`
+- `System.Collections.Generic.Queue<T>`
+    - `TryDequeue(out T result)`
+- `System.Collections.Immutable.ImmutableArray<T>`
+    - `AsSpan(System.Int32 start, System.Int32 length)`
+    - `AsSpan(System.Range range)`
+- `System.Diagnostics.Process`
+    - `WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.Stream`
+    - `Read(System.Span<System.Byte> buffer)`
+    - `ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+    - `ReadAtLeast(System.Span<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true])`
+    - `ReadAtLeastAsync(System.Memory<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true], [System.Threading.CancellationToken cancellationToken = default])`
+    - `Write(System.ReadOnlySpan<System.Byte> buffer)`
+    - `WriteAsync(System.ReadOnlyMemory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.StreamReader`
+    - `ReadLineAsync()`
+    - `ReadLineAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.IO.TextReader`
+    - `ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+    - `ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.IO.TextWriter`
+    - `WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Linq.Enumerable`
+    - `DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
+    - `DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
+    - `MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
+    - `MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IComparer<TKey>? comparer)`
+    - `MinBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
+    - `MinBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IComparer<TKey>? comparer)`
+    - `Order<T>(this System.Collections.Generic.IEnumerable<T> source)`
+    - `Order<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
+    - `OrderDescending<T>(this System.Collections.Generic.IEnumerable<T> source)`
+    - `OrderDescending<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
+    - `ToHashSet<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
+    - `ToHashSet<TSource>(this System.Collections.Generic.IEnumerable<TSource> source, System.Collections.Generic.IEqualityComparer<TSource>? comparer)`
+    - `Zip<TFirst, TSecond>(this System.Collections.Generic.IEnumerable<TFirst> first, System.Collections.Generic.IEnumerable<TSecond> second)`
+- `System.MemoryExtensions`
+    - `AsSpan(this System.String? text, System.Int32 start, System.Int32 length)`
+    - `CommonPrefixLength<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> other)`
+    - `CommonPrefixLength<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> other, System.Collections.Generic.IEqualityComparer<T>? comparer)`
+    - `CommonPrefixLength<T>(this System.Span<T> span, System.ReadOnlySpan<T> other)`
+    - `CommonPrefixLength<T>(this System.Span<T> span, System.ReadOnlySpan<T> other, System.Collections.Generic.IEqualityComparer<T>? comparer)`
+    - `Contains<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
+    - `Contains<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
+    - `ContainsAny<T>(this System.Span<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
+    - `ContainsAny<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
+    - `ContainsAny<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.ReadOnlySpan<T> span, T value0, T value1) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.ReadOnlySpan<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.Span<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
+    - `ContainsAnyExcept<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, T value0, T value1) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.Span<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
+    - `IndexOfAnyExcept<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+- `System.Net.Http.HttpContent`
+    - `CopyTo(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
+    - `CopyToAsync(System.IO.Stream stream)`
+    - `CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context)`
+    - `CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
+    - `CopyToAsync(System.IO.Stream stream, System.Threading.CancellationToken cancellationToken)`
+    - `ReadAsStream(System.Threading.CancellationToken cancellationToken)`
+    - `ReadAsStream()`
+- `System.Text.Encoding`
+    - `GetString(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.Text.StringBuilder`
+    - `Append(System.ReadOnlyMemory<System.Char> value)`
+    - `Append(System.ReadOnlySpan<System.Char> value)`
+    - `AppendJoin(System.Char separator, params System.Object?[] values)`
+    - `AppendJoin(System.Char separator, params System.String?[] values)`
+    - `AppendJoin(System.String? separator, params System.Object?[] values)`
+    - `AppendJoin(System.String? separator, params System.String?[] values)`
+    - `AppendJoin<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
+    - `AppendJoin<T>(System.String? separator, System.Collections.Generic.IEnumerable<T> values)`
+- `System.Threading.CancellationTokenSource`
+    - `CancelAsync()`
+- `System.Threading.Tasks.Task`
+    - `WaitAsync(System.Threading.CancellationToken cancellationToken)`
+- `string`
+    - `Contains(System.Char value)`
+    - `Contains(System.Char value, System.StringComparison comparisonType)`
+    - `Contains(System.String value, System.StringComparison comparisonType)`
+    - `CopyTo(System.Span<System.Char> destination)`
+    - `EndsWith(System.Char value)`
+    - `GetHashCode(System.StringComparison comparisonType)`
+    - `IndexOf(System.Char value, System.StringComparison comparisonType)`
+    - `Replace(System.String oldValue, System.String? newValue, System.StringComparison comparisonType)`
+    - `ReplaceLineEndings(System.String replacementText)`
+    - `ReplaceLineEndings()`
+    - `Split(System.Char separator, System.Int32 count, [System.StringSplitOptions options = None])`
+    - `Split(System.Char separator, [System.StringSplitOptions options = None])`
+    - `StartsWith(System.Char value)`
+    - `TryCopyTo(System.Span<System.Char> destination)`
+
+<!-- end_polyfills -->
+
 ## Contribution
 
 #### How to add a new polyfill

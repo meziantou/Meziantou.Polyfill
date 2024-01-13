@@ -7,7 +7,7 @@ namespace Meziantou.Polyfill.Generator;
 internal sealed partial class PolyfillData
 {
     private static readonly string[] PotentialRequiredTypes =
-    {
+    [
         "System.Span`1",
         "System.ReadOnlySpan`1",
         "System.Memory`1",
@@ -16,26 +16,23 @@ internal sealed partial class PolyfillData
         "System.Threading.Tasks.ValueTask`1",
         "System.Collections.Immutable.ImmutableArray`1",
         "System.Net.Http.HttpContent",
-    };
+    ];
 
     public PolyfillData(string content) => Content = content;
 
     public string? Content { get; }
 
     public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
-    public string[] DeclaredMemberDocumentationIds { get; private set; } = Array.Empty<string>();
-    public string[] ConditionalMembers { get; private set; } = Array.Empty<string>();
+    public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
+    public string[] ConditionalMembers { get; private set; } = [];
 
-    public static PolyfillData Get(string content)
+    public static PolyfillData Get(CSharpCompilation compilation, string content)
     {
         var data = new PolyfillData(content);
         data.ConditionalMembers = GetConditions(content);
 
         var tree = CSharpSyntaxTree.ParseText(content);
-        var compilation = CSharpCompilation.Create("compilation",
-          new[] { tree },
-          Basic.Reference.Assemblies.Net80.References.All,
-          new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        compilation = compilation.AddSyntaxTrees(tree);
 
         var semanticModel = compilation.GetSemanticModel(tree);
 
@@ -79,7 +76,7 @@ internal sealed partial class PolyfillData
             }
         }
 
-        data.DeclaredMemberDocumentationIds = declaredMethods.ToArray();
+        data.DeclaredMemberDocumentationIds = [.. declaredMethods];
 
         foreach (var type in types)
         {
@@ -96,7 +93,7 @@ internal sealed partial class PolyfillData
 
         static string[] GetConditions(string content)
         {
-            return ConditionRegex().Matches(content.ReplaceLineEndings("\n")).Cast<Match>().Select(m => m.Groups["member"].Value).Order().ToArray();
+            return [.. ConditionRegex().Matches(content.ReplaceLineEndings("\n")).Cast<Match>().Select(m => m.Groups["member"].Value).Order(StringComparer.Ordinal)];
         }
     }
 

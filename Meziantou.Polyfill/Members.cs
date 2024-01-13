@@ -8,7 +8,7 @@ internal partial struct Members
 {
     private static bool IncludeMember(Compilation compilation, PolyfillOptions? options, string memberDocumentationId)
     {
-        if (options != null && !options.Include(memberDocumentationId))
+        if (options is not null && !options.Include(memberDocumentationId))
             return false;
 
         var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(memberDocumentationId, compilation);

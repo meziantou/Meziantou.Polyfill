@@ -95,7 +95,7 @@ public class UnitTest1
     [Fact]
     public void ReadOnlySpan_Contains()
     {
-        ReadOnlySpan<int> span = new int[] { 1, 2 }.AsSpan();
+        ReadOnlySpan<int> span = [1, 2];
         Assert.True(span.Contains(1));
         Assert.True(span.Contains(2));
         Assert.False(span.Contains(3));
@@ -104,7 +104,7 @@ public class UnitTest1
     [Fact]
     public void Span_Contains()
     {
-        Span<int> span = new int[] { 1, 2 }.AsSpan();
+        Span<int> span = [1, 2];
         Assert.True(span.Contains(1));
         Assert.True(span.Contains(2));
         Assert.False(span.Contains(3));
@@ -168,11 +168,11 @@ public class UnitTest1
     [Fact]
     public void String_Split()
     {
-        Assert.Equal(new[] { "a", "b", "c" }, "a;b;c".Split(';'));
-        Assert.Equal(new[] { "a", " b", "c" }, "a; b;c".Split(';'));
-        Assert.Equal(new[] { "a", "", "b", "c" }, "a;;b;c".Split(';', StringSplitOptions.None));
-        Assert.Equal(new[] { "a", "b", "c" }, "a;;b;c".Split(';', StringSplitOptions.RemoveEmptyEntries));
-        Assert.Equal(new[] { "a", " b;c" }, "a; b;c".Split(';', 2, StringSplitOptions.None));
+        Assert.Equal<string[]>(["a", "b", "c"], "a;b;c".Split(';'));
+        Assert.Equal<string[]>(["a", " b", "c"], "a; b;c".Split(';'));
+        Assert.Equal<string[]>(["a", "", "b", "c"], "a;;b;c".Split(';', StringSplitOptions.None));
+        Assert.Equal<string[]>(["a", "b", "c"], "a;;b;c".Split(';', StringSplitOptions.RemoveEmptyEntries));
+        Assert.Equal<string[]>(["a", " b;c"], "a; b;c".Split(';', 2, StringSplitOptions.None));
     }
 
     [Fact]
@@ -227,15 +227,15 @@ public class UnitTest1
     public void StreamWriter_Write()
     {
         using var ms = new MemoryStream();
-        ms.Write((ReadOnlySpan<byte>)new byte[] { 1, 2 }.AsSpan());
-        Assert.Equal(new byte[] { 1, 2 }, ms.ToArray());
+        ms.Write([1, 2]);
+        Assert.Equal([1, 2], ms.ToArray());
     }
 #endif
 
     [Fact]
     public async Task StreamReader_ReadToEndAsync()
     {
-        using var sr = new System.IO.StringReader("test");
+        using var sr = new StringReader("test");
         var result = await sr.ReadToEndAsync(CancellationToken.None);
         Assert.Equal("test", result);
     }
@@ -244,7 +244,7 @@ public class UnitTest1
     [Fact]
     public async Task StreamReader_ReadAsync()
     {
-        using var sr = new System.IO.StringReader("test");
+        using var sr = new StringReader("test");
         var buffer = new char[2];
         var result = await sr.ReadAsync(buffer.AsMemory(), CancellationToken.None);
         Assert.Equal(2, result);
@@ -268,22 +268,22 @@ public class UnitTest1
     [Fact]
     public void Enumerable_Order()
     {
-        Assert.Equal(new[] { 1, 2, 3 }, new[] { 2, 1, 3 }.Order().ToArray());
-        Assert.Equal(new[] { 1, 2, 3 }, new[] { 2, 1, 3 }.Order(Comparer<int>.Default).ToArray());
+        Assert.Equal([1, 2, 3], new[] { 2, 1, 3 }.Order());
+        Assert.Equal([1, 2, 3], new[] { 2, 1, 3 }.Order(Comparer<int>.Default));
     }
 
     [Fact]
     public void Enumerable_OrderDescending()
     {
-        Assert.Equal(new[] { 3, 2, 1 }, new[] { 2, 1, 3 }.OrderDescending().ToArray());
-        Assert.Equal(new[] { 3, 2, 1 }, new[] { 2, 1, 3 }.OrderDescending(Comparer<int>.Default).ToArray());
+        Assert.Equal([3, 2, 1], new[] { 2, 1, 3 }.OrderDescending());
+        Assert.Equal([3, 2, 1], new[] { 2, 1, 3 }.OrderDescending(Comparer<int>.Default));
     }
 
     [Fact]
     public void Enumerable_DistinctBy()
     {
-        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_ => _).ToArray());
-        Assert.Equal(new[] { 2, 1 }, new[] { 2, 1, 1 }.DistinctBy(_ => _, EqualityComparer<int>.Default).ToArray());
+        Assert.Equal([2, 1], new[] { 2, 1, 1 }.DistinctBy(_ => _));
+        Assert.Equal([2, 1], new[] { 2, 1, 1 }.DistinctBy(_ => _, EqualityComparer<int>.Default));
     }
 
     [Fact]
@@ -332,21 +332,21 @@ public class UnitTest1
     [Fact]
     public void Stream_ReadAtLeast()
     {
-        using var ms = new MemoryStream(new byte[] { 1, 2, 3, 4 });
+        using var ms = new MemoryStream([1, 2, 3, 4]);
 
         var buffer = new byte[4];
         Assert.Equal(4, ms.ReadAtLeast(buffer.AsSpan(), 4));
-        Assert.Equal(new byte[] { 1, 2, 3, 4 }, buffer);
+        Assert.Equal([1, 2, 3, 4], buffer);
     }
 
     [Fact]
     public async Task Stream_ReadAtLeastAsync()
     {
-        using var ms = new MemoryStream(new byte[] { 1, 2, 3, 4 });
+        using var ms = new MemoryStream([1, 2, 3, 4]);
 
         var buffer = new byte[4];
         Assert.Equal(4, await ms.ReadAtLeastAsync(buffer.AsMemory(), 4));
-        Assert.Equal(new byte[] { 1, 2, 3, 4 }, buffer);
+        Assert.Equal([1, 2, 3, 4], buffer);
     }
 
     [Fact]
@@ -439,19 +439,19 @@ public class UnitTest1
         var ms = new MemoryStream();
         await content.CopyToAsync(ms);
 
-        Assert.Equal(new byte[] { 1, 2 }, ms.ToArray());
+        Assert.Equal([1, 2], ms.ToArray());
     }
 
     [Fact]
     public void HttpContent_ReadAsStream()
     {
-        using var content = new ByteArrayContent(new byte[] { 1, 2 });
+        using var content = new ByteArrayContent([1, 2]);
         var stream = content.ReadAsStream();
 
         var streamContent = new MemoryStream();
         stream.CopyTo(streamContent);
 
-        Assert.Equal(new byte[] { 1, 2 }, streamContent.ToArray());
+        Assert.Equal([1, 2], streamContent.ToArray());
     }
 
     [Fact]

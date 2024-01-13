@@ -129,11 +129,13 @@ public class UnitTest1
         // Assert the driver doesn't recompute the output
         var result = driver.GetRunResult().Results.Single();
         var allOutputs = result.TrackedOutputSteps.SelectMany(outputStep => outputStep.Value).SelectMany(output => output.Outputs);
-        Assert.Collection(allOutputs, output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason));
+        var output = Assert.Single(allOutputs);
+        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
 
         // Assert the driver use the cached result
         var assemblyNameOutputs = result.TrackedSteps["Members"].Single().Outputs;
-        Assert.Collection(assemblyNameOutputs, output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason));
+        output = Assert.Single(assemblyNameOutputs);
+        Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
     }
 
     public static TheoryData<PackageReference[]> GetConfigurations()
@@ -244,7 +246,7 @@ public class UnitTest1
 
         public TestAnalyzerConfigOptionsProvider(Dictionary<string, string?> values)
         {
-            _values = values ?? new Dictionary<string, string?>();
+            _values = values ?? [];
         }
 
         public override AnalyzerConfigOptions GlobalOptions => new TestAnalyzerConfigOptions(_values);
@@ -317,9 +319,8 @@ public class UnitTest1
                     }
                 }
 
-                return result.ToArray();
+                return [.. result];
             }
         }
     }
-
 }
