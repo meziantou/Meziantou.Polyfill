@@ -249,7 +249,7 @@ async Task GenerateReadme()
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(typeDisplayFormat)}`\n");
     }
 
-    sb.Append("\n### Members\n\n");
+    sb.Append("\n### Methods\n\n");
 
     var methodDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
           .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)

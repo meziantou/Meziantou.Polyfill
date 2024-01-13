@@ -101,7 +101,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Members
+### Methods
 
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>`
     - `GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument)`
