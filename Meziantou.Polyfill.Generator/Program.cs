@@ -256,17 +256,13 @@ async Task GenerateReadme()
           .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining)
           .WithKindOptions(SymbolDisplayKindOptions.IncludeMemberKeyword | SymbolDisplayKindOptions.IncludeTypeKeyword | SymbolDisplayKindOptions.IncludeNamespaceKeyword)
           .WithLocalOptions(SymbolDisplayLocalOptions.IncludeModifiers | SymbolDisplayLocalOptions.IncludeConstantValue | SymbolDisplayLocalOptions.IncludeType)
-          .WithMemberOptions(SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeConstantValue | SymbolDisplayMemberOptions.IncludeRef)
+          .WithMemberOptions(SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeContainingType | SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeConstantValue | SymbolDisplayMemberOptions.IncludeRef)
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var group in polyfills.Where(p => p.Kind is PolyfillKind.Method).GroupBy(p => p.Symbol.ContainingType, SymbolEqualityComparer.Default).OrderBy(group => group.Key!.ToDisplayString(), StringComparer.Ordinal))
+    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method))
     {
-        sb.Append($"- `{group.Key}`\n");
-        foreach (var member in group.OrderBy(polyfill => polyfill.Symbol.Name, StringComparer.Ordinal))
-        {
-            sb.Append($"    - `{member.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
-        }
+        sb.Append($"- `{polyfill.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
     }
 
     var content = await File.ReadAllTextAsync(path);
