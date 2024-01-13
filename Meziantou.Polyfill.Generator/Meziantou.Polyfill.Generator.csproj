@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Basic.Reference.Assemblies.Net80" Version="1.4.2" />
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.8.0" />
   </ItemGroup>
 
   <ItemGroup>
