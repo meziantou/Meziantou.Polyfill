@@ -7,11 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill", "Mezia
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill.Tests", "Meziantou.Polyfill.Tests\Meziantou.Polyfill.Tests.csproj", "{D7D546F9-83EC-4323-94F9-9529837A07B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill.Editor", "Meziantou.Polyfill.Editor\Meziantou.Polyfill.Editor.csproj", "{8F241C49-804D-4259-BE96-9D9B3439434C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill.Editor", "Meziantou.Polyfill.Editor\Meziantou.Polyfill.Editor.csproj", "{8F241C49-804D-4259-BE96-9D9B3439434C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill.SourceGenerator.Tests", "Meziantou.Polyfill.SourceGenerator.Tests\Meziantou.Polyfill.SourceGenerator.Tests.csproj", "{EE0BDD03-91F0-41FD-AFBC-2F68D499E73D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meziantou.Polyfill.Generator", "Meziantou.Polyfill.Generator\Meziantou.Polyfill.Generator.csproj", "{73D3101F-65DD-4D2D-8529-05E8B5FDD047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meziantou.Polyfill.Generator", "Meziantou.Polyfill.Generator\Meziantou.Polyfill.Generator.csproj", "{73D3101F-65DD-4D2D-8529-05E8B5FDD047}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{989AB0EA-9D1F-494C-8B79-18BA0D2FE342}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		global.json = global.json
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

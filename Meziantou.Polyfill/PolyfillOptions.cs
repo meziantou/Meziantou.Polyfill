@@ -18,7 +18,7 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
 
     public bool Include(string memberDocumentationId)
     {
-        if (_excluded != null)
+        if (_excluded is not null)
         {
             var found = false;
             foreach (var filter in _excluded)
@@ -34,7 +34,7 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
                 return false;
         }
 
-        if (_included != null)
+        if (_included is not null)
         {
             var found = false;
             foreach (var filter in _included)
@@ -67,15 +67,15 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
             if (part.Equals("*".AsSpan(), StringComparison.Ordinal))
                 return null;
 
-            values ??= new List<string>();
+            values ??= [];
             values.Add(part.ToString());
         }
 
         if (values == null)
-            return Array.Empty<string>();
+            return [];
 
         values.Sort(StringComparer.Ordinal);
-        return values.ToArray();
+        return [.. values];
     }
 
     public override int GetHashCode() => 0;
@@ -128,7 +128,7 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
             var index = span.IndexOfAny(';', '|');
             if (index == -1)
             {
-                _str = ReadOnlySpan<char>.Empty; // The remaining string is an empty string
+                _str = []; // The remaining string is an empty string
                 Current = span.Trim();
                 return true;
             }
