@@ -35,6 +35,13 @@ jobs:
         retention-days: 3
         path: '**/*.nupkg'
 
+    - uses: actions/upload-artifact@v3
+      with:
+        name: generated-code
+        if-no-files-found: error
+        retention-days: 3
+        path: '**/*.g.cs'
+
   validate_nuget:
     runs-on: ubuntu-latest
     needs: [ create_nuget ]
