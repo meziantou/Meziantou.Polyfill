@@ -15,7 +15,7 @@ static partial class PolyfillExtensions
             segment = new(buffer.ToArray());
         }
 
-        var read = await target.ReadAsync(segment.Array!, 0, buffer.Length);
+        var read = await target.ReadAsync(segment.Array!, segment.Offset, segment.Count);
         return read;
     }
 }

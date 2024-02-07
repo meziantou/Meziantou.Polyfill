@@ -250,6 +250,17 @@ public class UnitTest1
         Assert.Equal(2, result);
         Assert.Equal("te", new string(buffer));
     }
+
+    [Fact]
+    public async Task StreamReader_ReadAsync2()
+    {
+        using var sr = new MemoryStream([3, 4, 5]);
+        var buffer = new byte[3];
+        buffer[0] = 1;
+        var result = await sr.ReadAsync(buffer.AsMemory()[1..], CancellationToken.None);
+        Assert.Equal(2, result);
+        Assert.Equal([1,3,4], buffer);
+    }
 #endif
 
     [Fact]
