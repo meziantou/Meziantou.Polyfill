@@ -13,6 +13,8 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
+    private const string LatestDotnetPackageVersion = "9.0.0-preview.1.24080.9";
+
     [Fact]
     public void PolyfillOptions_Included()
     {
@@ -36,10 +38,10 @@ public class UnitTest1
     [Fact]
     public async Task NoCodeGeneratedForLatestFramework()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
         var tree = Assert.Single(result.GeneratorResult.GeneratedTrees);
-        Assert.Equal("Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs", tree.FilePath);
+        Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Debug.g.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/'));
     }
 
     [Fact]
@@ -142,6 +144,7 @@ public class UnitTest1
     {
         return new TheoryData<PackageReference[]>
         {
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/") } },

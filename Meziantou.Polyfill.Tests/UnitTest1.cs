@@ -259,7 +259,7 @@ public class UnitTest1
         buffer[0] = 1;
         var result = await sr.ReadAsync(buffer.AsMemory()[1..], CancellationToken.None);
         Assert.Equal(2, result);
-        Assert.Equal([1,3,4], buffer);
+        Assert.Equal([1, 3, 4], buffer);
     }
 #endif
 
@@ -313,6 +313,43 @@ public class UnitTest1
     public void Enumerable_Zip()
     {
         Assert.Equal(new[] { ('a', 'b') }, "a".Zip("b"));
+    }
+
+    [Fact]
+    public void Enumerable_CountBy()
+    {
+        var collection = new[] { 1, 1, 2, 3, 4, 3, 3 };
+        var expected = new[] {
+            new KeyValuePair<int, int>(1, 2),
+            new KeyValuePair<int, int>(2, 1),
+            new KeyValuePair<int, int>(3, 3),
+            new KeyValuePair<int, int>(4, 1),
+        };
+        Assert.Equal(expected, collection.CountBy(item => item));
+    }
+
+    [Fact]
+    public void Enumerable_AggregateBy_Seed()
+    {
+        var collection = new[] { 1, 2, 2, 3 };
+        var expected = new[] {
+            new KeyValuePair<int, int>(1, 1),
+            new KeyValuePair<int, int>(2, 4),
+            new KeyValuePair<int, int>(3, 3),
+        };
+        Assert.Equal(expected, collection.AggregateBy(item => item, seed: 0, (acc, item) => acc + item));
+    }
+    
+    [Fact]
+    public void Enumerable_AggregateBy_SeedSelector()
+    {
+        var collection = new[] { 1, 2, 2, 3 };
+        var expected = new[] {
+            new KeyValuePair<int, int>(1, 2),
+            new KeyValuePair<int, int>(2, 5),
+            new KeyValuePair<int, int>(3, 4),
+        };
+        Assert.Equal(expected, collection.AggregateBy(item => item, seedSelector: item => 1, (acc, item) => acc + item));
     }
 
     [Fact]
@@ -535,6 +572,22 @@ public class UnitTest1
     }
 
     [Fact]
+    public void StringBuilder_Replace_ReadOnlySpanChar_ReadOnlySpanChar()
+    {
+        var sb = new StringBuilder("abcd");
+        sb.Replace("bc".AsSpan(), "zy".AsSpan());
+        Assert.Equal("azyd", sb.ToString());
+    }
+
+    [Fact]
+    public void StringBuilder_Replace_ReadOnlySpanChar_ReadOnlySpanChar_Int32_Int32()
+    {
+        var sb = new StringBuilder("abcdbcbc");
+        sb.Replace("bc".AsSpan(), "zy".AsSpan(), 2, 5);
+        Assert.Equal("abcdzybc", sb.ToString());
+    }
+
+    [Fact]
     public async Task Task_WaitAsync()
     {
         var tcs = new TaskCompletionSource<int>();
@@ -660,6 +713,12 @@ public class UnitTest1
         Assert.Equal(0, ((Span<int>)[0]).CommonPrefixLength([1]));
         Assert.Equal(1, ((Span<int>)[0]).CommonPrefixLength([0]));
         Assert.Equal(2, ((Span<int>)[0, 1]).CommonPrefixLength([0, 1, 2]));
+    }
+
+    [Fact]
+    public void Enumerable_Index()
+    {
+        Assert.Equal([(0, "a"), (1, "b")], (new string[] { "a", "b" }).Index());
     }
 
     [Fact]
