@@ -122,8 +122,12 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.IO.TextReader.ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Linq.Enumerable.AggregateBy<TSource, TKey, TAccumulate>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Func<TKey, TAccumulate> seedSelector, System.Func<TAccumulate, TSource, TAccumulate> func, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
+- `System.Linq.Enumerable.AggregateBy<TSource, TKey, TAccumulate>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, TAccumulate seed, System.Func<TAccumulate, TSource, TAccumulate> func, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
+- `System.Linq.Enumerable.CountBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
+- `System.Linq.Enumerable.Index<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
 - `System.Linq.Enumerable.MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.MinBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
@@ -191,6 +195,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Text.StringBuilder.AppendJoin(System.String? separator, params System.String?[] values)`
 - `System.Text.StringBuilder.AppendJoin<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
 - `System.Text.StringBuilder.AppendJoin<T>(System.String? separator, System.Collections.Generic.IEnumerable<T> values)`
+- `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue)`
+- `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue, System.Int32 startIndex, System.Int32 count)`
 - `System.Threading.CancellationTokenSource.CancelAsync()`
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 
