@@ -341,7 +341,7 @@ public class UnitTest1
         };
         Assert.Equal(expected, collection.AggregateBy(item => item, seed: 0, (acc, item) => acc + item));
     }
-    
+
     [Fact]
     public void Enumerable_AggregateBy_SeedSelector()
     {
@@ -507,9 +507,9 @@ public class UnitTest1
     [Fact]
     public void UdpClient()
     {
-        int port = 1000;
+        int port = 1024;
 
-        UdpClient GetPort()
+        UdpClient CreateUdpClient()
         {
             while (true)
             {
@@ -520,13 +520,13 @@ public class UnitTest1
                 catch
                 {
                     port++;
-                    if (port > 65000)
+                    if (port >= ushort.MaxValue)
                         throw;
                 }
             }
         }
 
-        using UdpClient client = GetPort();
+        using UdpClient client = CreateUdpClient();
         using UdpClient server = new();
 
         ReadOnlySpan<byte> data = [1, 2, 3];
