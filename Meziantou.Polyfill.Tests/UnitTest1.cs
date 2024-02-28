@@ -6,7 +6,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -339,7 +341,7 @@ public class UnitTest1
         };
         Assert.Equal(expected, collection.AggregateBy(item => item, seed: 0, (acc, item) => acc + item));
     }
-    
+
     [Fact]
     public void Enumerable_AggregateBy_SeedSelector()
     {
@@ -500,6 +502,38 @@ public class UnitTest1
         stream.CopyTo(streamContent);
 
         Assert.Equal([1, 2], streamContent.ToArray());
+    }
+
+    [Fact]
+    public void UdpClient()
+    {
+        int port = 1024;
+
+        UdpClient CreateUdpClient()
+        {
+            while (true)
+            {
+                try
+                {
+                    return new UdpClient(port);
+                }
+                catch
+                {
+                    port++;
+                    if (port >= ushort.MaxValue)
+                        throw;
+                }
+            }
+        }
+
+        using UdpClient client = CreateUdpClient();
+        using UdpClient server = new();
+
+        ReadOnlySpan<byte> data = [1, 2, 3];
+        server.Send(data, "localhost", port);
+        IPEndPoint endpoint = new(IPAddress.Any, 0);
+        var result = client.Receive(ref endpoint);
+        Assert.Equal(data.ToArray(), result);
     }
 
     [Fact]

@@ -172,6 +172,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStream(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStream()`
+- `System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan<System.Byte> datagram, System.Net.IPEndPoint? endPoint)`
+- `System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan<System.Byte> datagram, System.String? hostname, System.Int32 port)`
 - `System.String.Contains(System.Char value)`
 - `System.String.Contains(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`
