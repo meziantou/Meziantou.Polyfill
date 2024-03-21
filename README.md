@@ -201,6 +201,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue, System.Int32 startIndex, System.Int32 count)`
 - `System.Threading.CancellationTokenSource.CancelAsync()`
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.Type.IsAssignableTo(System.Type? targetType)`
 
 <!-- end_polyfills -->
 
