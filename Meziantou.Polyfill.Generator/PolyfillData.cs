@@ -8,6 +8,7 @@ internal sealed partial class PolyfillData
 {
     private static readonly string[] PotentialRequiredTypes =
     [
+        "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Span`1",
         "System.ReadOnlySpan`1",
         "System.Memory`1",

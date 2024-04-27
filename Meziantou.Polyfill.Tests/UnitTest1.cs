@@ -754,13 +754,26 @@ public class UnitTest1
     {
         Assert.Equal([(0, "a"), (1, "b")], (new string[] { "a", "b" }).Index());
     }
-    
+
     [Fact]
     public void Type_IsAssignableTo()
     {
         Assert.True(typeof(string).IsAssignableTo(typeof(object)));
         Assert.True(typeof(string).IsAssignableTo(typeof(string)));
         Assert.False(typeof(string).IsAssignableTo(typeof(int)));
+    }
+
+    [Fact]
+    public void ToBlockingEnumerable()
+    {
+        Assert.Equal(["a", "b"], CustomAsyncEnumerable().ToBlockingEnumerable());
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
     }
 
     [Fact]
