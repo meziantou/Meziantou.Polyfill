@@ -14,7 +14,7 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
     {
         if (Environment.GetEnvironmentVariable("Meziantou_Polyfill_Debug") is "true" or "1")
         {
-            Debugger.Launch();
+            _ = Debugger.Launch();
             Debugger.Break();
         }
 

@@ -5,16 +5,10 @@ using System.Runtime.InteropServices;
 
 namespace Meziantou.Polyfill;
 
-internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
+internal sealed class PolyfillOptions(string? included, string? excluded) : IEquatable<PolyfillOptions>
 {
-    private readonly string[]? _included;
-    private readonly string[]? _excluded;
-
-    public PolyfillOptions(string? included, string? excluded)
-    {
-        _included = ParseValues(included);
-        _excluded = ParseValues(excluded);
-    }
+    private readonly string[]? _included = ParseValues(included);
+    private readonly string[]? _excluded = ParseValues(excluded);
 
     public bool Include(string memberDocumentationId)
     {
@@ -107,15 +101,9 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
     }
 
     [StructLayout(LayoutKind.Auto)]
-    private ref struct SemiColonSplitEnumerator
+    private ref struct SemiColonSplitEnumerator(ReadOnlySpan<char> str)
     {
-        private ReadOnlySpan<char> _str;
-
-        public SemiColonSplitEnumerator(ReadOnlySpan<char> str)
-        {
-            _str = str;
-            Current = default;
-        }
+        private ReadOnlySpan<char> _str = str;
 
         public readonly SemiColonSplitEnumerator GetEnumerator() => this;
 
