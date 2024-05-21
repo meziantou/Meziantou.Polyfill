@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -142,6 +143,8 @@ public class UnitTest1
 
     public static TheoryData<PackageReference[]> GetConfigurations()
     {
+        var netstandard = new PackageReference("NETStandard.Library", "2.0.3", "");
+
         return new TheoryData<PackageReference[]>
         {
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/") } },
@@ -162,10 +165,10 @@ public class UnitTest1
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") ,new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") ,new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/"), new PackageReference("System.Net.Http", "4.3.4", "lib/net46/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net46", "1.0.3", "") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", "") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { netstandard } },
+            { new[] { netstandard, new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
+            { new[] { netstandard, new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { netstandard, new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
         };
     }
 
@@ -239,8 +242,18 @@ public class UnitTest1
         if (mustCompile)
         {
             var tree = runResult.GeneratedTrees.FirstOrDefault(tree => tree.FilePath == "Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs");
-            var diags = string.Join("\n", result.Diagnostics.Where(diag => !diag.IsSuppressed));
-            Assert.True(result.Success, "Compilation error:\n" + diags + "\n" + tree);
+            Assert.True(result.Success, $"""
+                Compilation error:
+                {string.Join("\n", result.Diagnostics.Where(diag => !diag.IsSuppressed))}
+
+                Assemblies:
+                {string.Join("\n", assemblyLocations)}
+
+                IncludedPolyfills: {includedPolyfills}
+                ExcludePolyfills: {excludedPolyfills}
+                GenerateFiles:
+                {tree}
+                """);
             Assert.Empty(result.Diagnostics);
         }
 
