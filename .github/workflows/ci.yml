@@ -75,7 +75,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
     - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
-    - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
+    - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests --logger trx --results-directory test-results
     - run: dotnet test Meziantou.Polyfill.Tests --logger trx --results-directory test-results
     - uses: actions/upload-artifact@v4
       if: ${{ failure() }}
