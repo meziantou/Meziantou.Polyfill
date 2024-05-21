@@ -10,7 +10,9 @@ namespace System.Runtime.CompilerServices
     /// </summary>
     [CLSCompliant(false)]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Event)]
+#pragma warning disable CS3021 // Type or member does not need a CLSCompliant attribute because the assembly does not have a CLSCompliant attribute
     internal sealed class TupleElementNamesAttribute : Attribute
+#pragma warning restore CS3021
     {
         private readonly string?[] _transformNames;
 
