@@ -78,6 +78,7 @@ jobs:
     - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
     - run: dotnet test Meziantou.Polyfill.Tests --logger trx --results-directory test-results
     - uses: actions/upload-artifact@v4
+      if: ${{ failure() }}
       with:
         name: test-results
         path: test-results
