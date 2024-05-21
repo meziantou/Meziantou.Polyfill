@@ -65,7 +65,7 @@ namespace System
         ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is ValueTuple<T1, T2, T3, T4> && Equals((ValueTuple<T1, T2, T3, T4>)obj);
         }
@@ -88,7 +88,7 @@ namespace System
                 && s_t4Comparer.Equals(Item4, other.Item4);
         }
 
-        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
         {
             if (other == null || !(other is ValueTuple<T1, T2, T3, T4>)) return false;
 
@@ -100,7 +100,7 @@ namespace System
                 && comparer.Equals(Item4, objTuple.Item4);
         }
 
-        int IComparable.CompareTo(object other)
+        int IComparable.CompareTo(object? other)
         {
             if (other == null) return 1;
 
@@ -134,7 +134,7 @@ namespace System
             return Comparer<T4>.Default.Compare(Item4, other.Item4);
         }
 
-        int IStructuralComparable.CompareTo(object other, IComparer comparer)
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
         {
             if (other == null) return 1;
 

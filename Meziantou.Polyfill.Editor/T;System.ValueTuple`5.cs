@@ -110,7 +110,7 @@ namespace System
                 && comparer.Equals(Item5, objTuple.Item5);
         }
 
-        int IComparable.CompareTo(object other)
+        int IComparable.CompareTo(object? other)
         {
             if (other == null) return 1;
 
@@ -147,7 +147,7 @@ namespace System
             return Comparer<T5>.Default.Compare(Item5, other.Item5);
         }
 
-        int IStructuralComparable.CompareTo(object other, IComparer comparer)
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
         {
             if (other == null) return 1;
 

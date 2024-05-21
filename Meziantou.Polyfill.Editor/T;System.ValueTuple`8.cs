@@ -105,7 +105,7 @@ namespace System
         ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> && Equals((ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>)obj);
         }
@@ -132,7 +132,7 @@ namespace System
                 && s_tRestComparer.Equals(Rest, other.Rest);
         }
 
-        bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
+        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer)
         {
             if (other == null || !(other is ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>)) return false;
 
@@ -148,7 +148,7 @@ namespace System
                 && comparer.Equals(Rest, objTuple.Rest);
         }
 
-        int IComparable.CompareTo(object other)
+        int IComparable.CompareTo(object? other)
         {
             if (other == null) return 1;
 
@@ -194,7 +194,7 @@ namespace System
             return Comparer<TRest>.Default.Compare(Rest, other.Rest);
         }
 
-        int IStructuralComparable.CompareTo(object other, IComparer comparer)
+        int IStructuralComparable.CompareTo(object? other, IComparer comparer)
         {
             if (other == null) return 1;
 
@@ -236,7 +236,7 @@ namespace System
         public override int GetHashCode()
         {
             // We want to have a limited hash in this case.  We'll use the last 8 elements of the tuple
-            ITupleInternal rest = Rest as ITupleInternal;
+            var rest = Rest as ITupleInternal;
             if (rest == null)
             {
                 return HashCode.Combine(s_t1Comparer.GetHashCode(Item1), s_t2Comparer.GetHashCode(Item2), s_t3Comparer.GetHashCode(Item3), s_t4Comparer.GetHashCode(Item4), s_t5Comparer.GetHashCode(Item5), s_t6Comparer.GetHashCode(Item6), s_t7Comparer.GetHashCode(Item7));
@@ -278,7 +278,7 @@ namespace System
         private int GetHashCodeCore(IEqualityComparer comparer)
         {
             // We want to have a limited hash in this case.  We'll use the last 8 elements of the tuple
-            ITupleInternal rest = Rest as ITupleInternal;
+            var rest = Rest as ITupleInternal;
             if (rest == null)
             {
                 return HashCode.Combine(comparer.GetHashCode(Item1), comparer.GetHashCode(Item2), comparer.GetHashCode(Item3), comparer.GetHashCode(Item4), comparer.GetHashCode(Item5), comparer.GetHashCode(Item6), comparer.GetHashCode(Item7));
@@ -327,7 +327,7 @@ namespace System
         /// </remarks>
         public override string ToString()
         {
-            ITupleInternal rest = Rest as ITupleInternal;
+            var rest = Rest as ITupleInternal;
             if (rest == null)
             {
                 return "(" + Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + Rest.ToString() + ")";
@@ -340,7 +340,7 @@ namespace System
 
         string ITupleInternal.ToStringEnd()
         {
-            ITupleInternal rest = Rest as ITupleInternal;
+            var rest = Rest as ITupleInternal;
             if (rest == null)
             {
                 return Item1?.ToString() + ", " + Item2?.ToString() + ", " + Item3?.ToString() + ", " + Item4?.ToString() + ", " + Item5?.ToString() + ", " + Item6?.ToString() + ", " + Item7?.ToString() + ", " + Rest.ToString() + ")";
@@ -355,7 +355,7 @@ namespace System
         {
             get
             {
-                ITupleInternal rest = Rest as ITupleInternal;
+                var rest = Rest as ITupleInternal;
                 return rest == null ? 8 : 7 + rest.Size;
             }
         }
