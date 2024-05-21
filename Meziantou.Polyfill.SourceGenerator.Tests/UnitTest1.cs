@@ -13,7 +13,7 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
-    private const string LatestDotnetPackageVersion = "9.0.0-preview.1.24080.9";
+    private const string LatestDotnetPackageVersion = "9.0.0-preview.3.24172.9";
 
     [Fact]
     public void PolyfillOptions_Included()
@@ -209,8 +209,11 @@ public class UnitTest1
             .Select(loc => MetadataReference.CreateFromFile(loc))
             .ToArray();
 
+        var parseOptions = new CSharpParseOptions(LanguageVersion.CSharp11,
+            preprocessorSymbols: ["MEZIANTOU_POLYFILL_DEBUG"]);
+
         var compilation = CSharpCompilation.Create(assemblyName,
-            new[] { CSharpSyntaxTree.ParseText(file) },
+            new[] { CSharpSyntaxTree.ParseText(file, parseOptions) },
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
 
@@ -222,7 +225,8 @@ public class UnitTest1
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
-            }));
+            }), 
+            parseOptions: parseOptions);
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);
         Assert.Empty(diagnostics);
