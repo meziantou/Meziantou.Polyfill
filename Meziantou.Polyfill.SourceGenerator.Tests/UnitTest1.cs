@@ -24,7 +24,7 @@ public class UnitTest1
 
         Assert.False(options.Include("T:C"));
     }
-    
+
     [Fact]
     public void PolyfillOptions_Excluded()
     {
@@ -55,7 +55,7 @@ public class UnitTest1
         result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
-    
+
     [Fact]
     public async Task IncludedPolyfill_Methods()
     {
@@ -225,7 +225,7 @@ public class UnitTest1
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
-            }), 
+            }),
             parseOptions: parseOptions);
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);
@@ -239,7 +239,7 @@ public class UnitTest1
         if (mustCompile)
         {
             var tree = runResult.GeneratedTrees.FirstOrDefault(tree => tree.FilePath == "Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs");
-            var diags = string.Join("\n", result.Diagnostics);
+            var diags = string.Join("\n", result.Diagnostics.Where(diag => !diag.IsSuppressed));
             Assert.True(result.Success, "Compilation error:\n" + diags + "\n" + tree);
             Assert.Empty(result.Diagnostics);
         }
