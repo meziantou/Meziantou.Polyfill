@@ -537,6 +537,38 @@ public class UnitTest1
     }
 
     [Fact]
+    public async Task UdpClientAsync()
+    {
+        int port = 1024;
+
+        UdpClient CreateUdpClient()
+        {
+            while (true)
+            {
+                try
+                {
+                    return new UdpClient(port);
+                }
+                catch
+                {
+                    port++;
+                    if (port >= ushort.MaxValue)
+                        throw;
+                }
+            }
+        }
+
+        using UdpClient client = CreateUdpClient();
+        using UdpClient server = new();
+
+        ReadOnlyMemory<byte> data = new([1, 2, 3]);
+        await server.SendAsync(data, "localhost", port);
+        IPEndPoint endpoint = new(IPAddress.Any, 0);
+        var result = client.Receive(ref endpoint);
+        Assert.Equal(data.ToArray(), result);
+    }
+
+    [Fact]
     public void Encoding_GetString()
     {
         var str = Encoding.UTF8.GetString((ReadOnlySpan<byte>)Encoding.UTF8.GetBytes("sample").AsSpan());
