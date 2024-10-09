@@ -14,8 +14,10 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
     {
         if (Environment.GetEnvironmentVariable("Meziantou_Polyfill_Debug") is "true" or "1")
         {
-            Debugger.Launch();
-            Debugger.Break();
+            if (Debugger.Launch())
+            {
+                Debugger.Break();
+            }
         }
 
         var options = context.AnalyzerConfigOptionsProvider.Select((options, cancellationToken) =>

@@ -65,6 +65,7 @@ public class UnitTest1
         _ = new UnsupportedOSPlatformGuardAttribute("");
         _ = new CollectionBuilderAttribute(typeof(string), "");
         _ = new ExperimentalAttribute("test");
+        _ = new OverloadResolutionPriorityAttribute(1);
 
         _ = typeof(IsExternalInit);
     }

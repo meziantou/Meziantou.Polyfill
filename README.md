@@ -77,6 +77,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute`
 - `System.Runtime.CompilerServices.IsExternalInit`
 - `System.Runtime.CompilerServices.ModuleInitializerAttribute`
+- `System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute`
 - `System.Runtime.CompilerServices.RequiredMemberAttribute`
 - `System.Runtime.CompilerServices.SkipLocalsInitAttribute`
 - `System.Runtime.CompilerServices.TupleElementNamesAttribute`
@@ -103,7 +104,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 ### Methods
 
-- `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument)`
+- `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)`
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`

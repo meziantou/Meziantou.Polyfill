@@ -3,6 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -13,7 +15,7 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
-    private const string LatestDotnetPackageVersion = "9.0.0-preview.1.24080.9";
+    private const string LatestDotnetPackageVersion = "9.0.0-rc.2.24473.5";
 
     [Fact]
     public void PolyfillOptions_Included()
@@ -24,7 +26,7 @@ public class UnitTest1
 
         Assert.False(options.Include("T:C"));
     }
-    
+
     [Fact]
     public void PolyfillOptions_Excluded()
     {
@@ -55,7 +57,7 @@ public class UnitTest1
         result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
         Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
     }
-    
+
     [Fact]
     public async Task IncludedPolyfill_Methods()
     {
@@ -72,7 +74,7 @@ public class UnitTest1
     [Fact]
     public async Task InternalsVisibleTo_DoNotRegenerateExtensionMethods()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "ref/netstandard2.0/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
         Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs")));
         Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
@@ -90,7 +92,7 @@ public class UnitTest1
         var assemblies = new List<string>();
         foreach (var package in packages)
         {
-            assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path));
+            assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path, package.Exclusions));
         }
 
         GenerateFiles("", assemblyLocations: assemblies.ToArray());
@@ -163,9 +165,13 @@ public class UnitTest1
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") ,new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/"), new PackageReference("System.Net.Http", "4.3.4", "lib/net46/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net46", "1.0.3", "") } },
             { new[] { new PackageReference("NETStandard.Library", "2.0.3", "") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""),
+                new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""),
+                new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""),
+                new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"),
+                new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
         };
     }
 
@@ -174,6 +180,8 @@ public class UnitTest1
         public string Name { get; set; }
         public string Version { get; set; }
         public string Path { get; set; }
+
+        public string[]? Exclusions { get; set; }
 
         public PackageReference()
             : this("", "", "")
@@ -192,6 +200,7 @@ public class UnitTest1
             Name = info.GetValue<string>("Name");
             Version = info.GetValue<string>("Version");
             Path = info.GetValue<string>("Path");
+            Exclusions = info.GetValue<string[]>("Exclusions");
         }
 
         public void Serialize(IXunitSerializationInfo info)
@@ -199,6 +208,7 @@ public class UnitTest1
             info.AddValue("Name", Name);
             info.AddValue("Version", Version);
             info.AddValue("Path", Path);
+            info.AddValue("Exclusions", Exclusions);
         }
     }
 
@@ -276,9 +286,10 @@ public class UnitTest1
     {
         private static readonly ConcurrentDictionary<string, Lazy<Task<string[]>>> Cache = new(StringComparer.Ordinal);
 
-        public static Task<string[]> GetNuGetReferences(string packageName, string version, string path)
+        public static Task<string[]> GetNuGetReferences(string packageName, string version, string path, string[]? exclusions = null)
         {
-            var task = Cache.GetOrAdd(packageName + '@' + version + ':' + path, key =>
+            string key = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(packageName + '@' + version + ':' + path + (exclusions is null ? "" : string.Join(":", exclusions)))));
+            var task = Cache.GetOrAdd(key, key =>
             {
                 return new Lazy<Task<string[]>>(Download);
             });
@@ -295,13 +306,15 @@ public class UnitTest1
                     using var stream = await httpClient.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
                     using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
 
-                    foreach (var entry in zip.Entries.Where(file => file.FullName.StartsWith(path, StringComparison.Ordinal)))
+                    foreach (var entry in zip.Entries)
                     {
-                        entry.ExtractToFile(Path.Combine(tempFolder, entry.Name), overwrite: true);
+                        var extractPath = Path.Combine(tempFolder, entry.FullName);
+                        Directory.CreateDirectory(Path.GetDirectoryName(extractPath)!);
+                        entry.ExtractToFile(extractPath, overwrite: true);
                     }
                 }
 
-                var dlls = Directory.GetFiles(tempFolder, "*.dll");
+                var dlls = Directory.GetFiles(tempFolder, "*.dll", SearchOption.AllDirectories);
 
                 // Filter invalid .NET assembly
                 var result = new List<string>();
@@ -309,6 +322,16 @@ public class UnitTest1
                 {
                     if (Path.GetFileName(dll) == "System.EnterpriseServices.Wrapper.dll")
                         continue;
+
+                    var relativePath = Path.GetRelativePath(tempFolder, dll).Replace('\\', '/');
+                    if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    if(exclusions != null)
+                    {
+                        if (exclusions.Any(exclusion => relativePath.StartsWith(exclusion, StringComparison.OrdinalIgnoreCase)))
+                            continue;
+                    }
 
                     try
                     {

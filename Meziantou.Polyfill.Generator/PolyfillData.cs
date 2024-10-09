@@ -59,7 +59,11 @@ internal sealed partial class PolyfillData
 
             if (symbol.DeclaredAccessibility is Accessibility.Public or Accessibility.Internal)
             {
-                declaredMethods.Add(DocumentationCommentId.CreateDeclarationId(symbol));
+                var declarationId = DocumentationCommentId.CreateDeclarationId(symbol);
+                if (declarationId is not null)
+                {
+                    declaredMethods.Add(declarationId);
+                }
             }
         }
 
