@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable IDE0290 // Use primary constructor
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
