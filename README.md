@@ -90,6 +90,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Runtime.Versioning.TargetPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute`
+- `System.Threading.Lock`
 - `System.Threading.Tasks.TaskToAsyncResult`
 - `System.ValueTuple`
 - `System.ValueTuple<T1>`

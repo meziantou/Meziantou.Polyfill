@@ -15,7 +15,7 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
-    private const string LatestDotnetPackageVersion = "9.0.0-rc.2.24473.5";
+    private const string LatestDotnetPackageVersion = "9.0.0";
 
     [Fact]
     public void PolyfillOptions_Included()

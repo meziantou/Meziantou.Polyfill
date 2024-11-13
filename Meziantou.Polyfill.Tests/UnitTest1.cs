@@ -797,6 +797,59 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Lock()
+    {
+        var instance = new Lock();
+        Assert.False(instance.IsHeldByCurrentThread);
+
+        RunOnThread(() =>
+        {
+            instance.Enter();
+            Assert.True(instance.TryEnter());
+            instance.Exit(); // exit tryenter
+            TryEnterFromOtherThreadShouldFail();
+            instance.Exit();
+        });
+
+        RunOnThread(() =>
+        {
+            using var scope = instance.EnterScope();
+            TryEnterFromOtherThreadShouldFail();
+        });
+
+        RunOnThread(() =>
+        {
+            Assert.True(instance.TryEnter());
+            Assert.True(instance.IsHeldByCurrentThread);
+            instance.Exit();
+        });
+
+        RunOnThread(() =>
+        {
+            lock (instance)
+            {
+                Assert.True(instance.IsHeldByCurrentThread);
+            }
+        });
+
+        Assert.False(instance.IsHeldByCurrentThread);
+
+        void RunOnThread(Action action)
+        {
+            var thread = new Thread(() => action());
+            thread.Start();
+            thread.Join();
+        }
+
+        void TryEnterFromOtherThreadShouldFail()
+        {
+            var thread = new Thread(() => Assert.False(instance.TryEnter()));
+            thread.Start();
+            thread.Join();
+        }
+    }
+
+    [Fact]
     public void ToBlockingEnumerable()
     {
         Assert.Equal(["a", "b"], CustomAsyncEnumerable().ToBlockingEnumerable());
