@@ -95,7 +95,7 @@ public class UnitTest1
             assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path, package.Exclusions));
         }
 
-        GenerateFiles("", assemblyLocations: assemblies.ToArray());
+        GenerateFiles("", assemblyLocations: [.. assemblies]);
     }
 
     [Fact]
@@ -152,6 +152,7 @@ public class UnitTest1
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "5.0.0", "ref/net5.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net481", "1.0.3", ""), new PackageReference("system.collections.immutable", "1.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/net461/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net481", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net48", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net472", "1.0.3", "") } },
@@ -161,17 +162,13 @@ public class UnitTest1
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/") } },
-            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") ,new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/") } },
-            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") ,new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/"), new PackageReference("System.Net.Http", "4.3.4", "lib/net46/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/"), new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/") } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/"), new PackageReference("System.ValueTuple", "4.5.0", "lib/net461/"), new PackageReference("System.Net.Http", "4.3.4", "lib/net46/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net46", "1.0.3", "") } },
             { new[] { new PackageReference("NETStandard.Library", "2.0.3", "") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""),
-                new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""),
-                new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
-            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""),
-                new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"),
-                new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
         };
     }
 

@@ -110,6 +110,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
+- `System.Collections.Immutable.ImmutableArray<T>.AsSpan()`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Int32 start, System.Int32 length)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Range range)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
