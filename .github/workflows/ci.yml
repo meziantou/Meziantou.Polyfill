@@ -69,11 +69,21 @@ jobs:
           }
 
   tests:
-    runs-on: 'ubuntu-latest'
+    runs-on: windows-latest
     steps:
+    - name: git configure long path
+      run: git config --global core.longpaths true
     - uses: actions/checkout@v4
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+            9.0.x
+            8.0.x
+            7.0.x
+            6.0.x
     - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
     - run: dotnet test Meziantou.Polyfill.Tests
