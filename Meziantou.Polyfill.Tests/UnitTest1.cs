@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -22,7 +23,7 @@ namespace Meziantou.Polyfill.Tests;
 public class UnitTest1
 {
     [Fact]
-    public void AttributesAreAvailables()
+    public void AttributesAreAvailable()
     {
         _ = new AllowNullAttribute();
         _ = new DisallowNullAttribute();
@@ -426,6 +427,27 @@ public class UnitTest1
     {
         Assert.Equal(new[] { "a", "b" }, new[] { "a", "b", "a" }.ToHashSet());
         Assert.Equal(new[] { "a", "b" }, new[] { "a", "b", "A" }.ToHashSet(StringComparer.OrdinalIgnoreCase));
+    }
+
+    [Fact]
+    public void IList_AsReadOnly()
+    {
+        var list = new List<int>() { 1, 2 };
+        ReadOnlyCollection<int> result = list.AsReadOnly();
+        Assert.Equal(list, result);
+    }
+
+    [Fact]
+    public void IDictionary_AsReadOnly()
+    {
+        IDictionary<int, string> dict = new Dictionary<int, string>
+        {
+            { 1, "a" },
+            { 2, "b" },
+        };
+
+        ReadOnlyDictionary<int, string> result = dict.AsReadOnly();
+        Assert.Equal(dict, result);
     }
 
     [Fact]
