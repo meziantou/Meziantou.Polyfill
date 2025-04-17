@@ -824,6 +824,17 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Dictionary_Remove()
+    {
+        var dict = new Dictionary<int, int>();
+        Assert.False(dict.Remove(1, out _));
+
+        dict.Add(1, 2);
+        Assert.True(dict.Remove(1, out var value));
+        Assert.Equal(2, value);
+    }
+
+    [Fact]
     public void Type_IsAssignableTo()
     {
         Assert.True(typeof(string).IsAssignableTo(typeof(object)));
