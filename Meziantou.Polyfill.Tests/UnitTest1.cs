@@ -817,6 +817,13 @@ public class UnitTest1
     }
 
     [Fact]
+    public async Task HttpContent_ReadAsStringAsync()
+    {
+        var content = new StringContent("dummy");
+        Assert.Equal("dummy", await content.ReadAsStringAsync(CancellationToken.None));
+    }
+
+    [Fact]
     public void Type_IsAssignableTo()
     {
         Assert.True(typeof(string).IsAssignableTo(typeof(object)));
