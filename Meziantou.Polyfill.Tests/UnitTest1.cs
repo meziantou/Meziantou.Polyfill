@@ -835,6 +835,24 @@ public class UnitTest1
     }
 
     [Fact]
+    public void IEnumerable_IntersectBy()
+    {
+        IEnumerable<int> a = [1, 2, 3];
+        IEnumerable<int> b = [2, 3, 4];
+        var result = a.IntersectBy(b, i => i);
+        Assert.Equal([2, 3], result);
+    }
+
+    [Fact]
+    public void IEnumerable_IntersectBy_Comparer()
+    {
+        IEnumerable<int> a = [1, 2, 3];
+        IEnumerable<int> b = [2, 3, 4];
+        var result = a.IntersectBy(b, i => i, EqualityComparer<int>.Default);
+        Assert.Equal([2, 3], result);
+    }
+
+    [Fact]
     public void Type_IsAssignableTo()
     {
         Assert.True(typeof(string).IsAssignableTo(typeof(object)));
