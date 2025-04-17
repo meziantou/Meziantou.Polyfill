@@ -811,6 +811,12 @@ public class UnitTest1
     }
 
     [Fact]
+    public void TimeSpan_Multiply()
+    {
+        Assert.Equal(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1).Multiply(2));
+    }
+
+    [Fact]
     public void Type_IsAssignableTo()
     {
         Assert.True(typeof(string).IsAssignableTo(typeof(object)));

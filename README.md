@@ -210,6 +210,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Threading.CancellationTokenSource.CancelAsync()`
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.TimeSpan.Multiply(System.Double factor)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
 
 <!-- end_polyfills -->
