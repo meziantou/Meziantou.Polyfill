@@ -216,8 +216,10 @@ public class UnitTest1
             .Select(loc => MetadataReference.CreateFromFile(loc))
             .ToArray();
 
+        var options = new CSharpParseOptions(languageVersion: LanguageVersion.Preview);
+
         var compilation = CSharpCompilation.Create(assemblyName,
-            new[] { CSharpSyntaxTree.ParseText(file) },
+            new[] { CSharpSyntaxTree.ParseText(file, options) },
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
 
@@ -225,6 +227,7 @@ public class UnitTest1
 
         GeneratorDriver driver = CSharpGeneratorDriver.Create(
             generators: new ISourceGenerator[] { generator },
+            parseOptions: options,
             optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
