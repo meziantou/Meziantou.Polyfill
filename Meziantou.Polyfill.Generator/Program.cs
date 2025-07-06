@@ -276,7 +276,7 @@ static string GetReadmeFilePath() => GetRootPath() / "README.md";
 
 static FullPath GetRootPath()
 {
-    var suffix = "Meziantou.Polyfill.sln";
+    var suffix = "Meziantou.Polyfill.slnx";
     var currentFolder = FullPath.CurrentDirectory();
     var fullPath = currentFolder / suffix;
     while (!File.Exists(fullPath))
