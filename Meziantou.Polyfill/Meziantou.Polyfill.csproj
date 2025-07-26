@@ -5,17 +5,14 @@
     <TransformOnBuild>true</TransformOnBuild>
 
     <LangVersion>preview</LangVersion>
-    <Nullable>enable</Nullable>
 
     <developmentDependency>true</developmentDependency>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <Description>Source Generator to help multi-targeting projects.</Description>
-    <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Authors>meziantou</Authors>
     <PackageTags>SourceGenerator,Roslyn,Polyfill</PackageTags>
     <PackageProjectUrl>https://github.com/meziantou/Meziantou.Polyfill</PackageProjectUrl>
   </PropertyGroup>
@@ -25,7 +22,6 @@
   </ItemGroup>
     
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="" Visible="false" />
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="build/" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="buildMultiTargeting/" />
@@ -36,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Meziantou.DotNet.CodingStandard" Version="1.0.153">
+    <PackageReference Include="Meziantou.DotNet.CodingStandard" Version="1.0.170">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
