@@ -1,4 +1,4 @@
-﻿<Project Sdk="="Meziantou.NET.Sdk.Test">
+﻿<Project Sdk="Meziantou.NET.Sdk.Test">
 
   <ItemGroup>
 	  <PackageReference Include="xunit" Version="2.9.3" />
