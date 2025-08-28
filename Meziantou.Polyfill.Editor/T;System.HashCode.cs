@@ -491,12 +491,7 @@ file static partial class LocalAppContextSwitches
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get => GetCachedSwitchValue("Switch.System.Data.UseNonRandomizedHashSeed", ref s_useNonRandomizedHashSeed);
     }
-}
 
-// Helper method for local caching of compatibility quirks. Keep this lean and simple - this file is included into
-// every framework assembly that implements any compatibility quirks.
-file static partial class LocalAppContextSwitches
-{
     // Returns value of given switch using provided cache.
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static bool GetCachedSwitchValue(string switchName, ref int cachedSwitchValue)

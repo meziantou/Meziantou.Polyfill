@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text.RegularExpressions;
@@ -29,9 +29,6 @@ internal sealed partial class PolyfillData
 
     public static PolyfillData Get(CSharpCompilation compilation, string content)
     {
-        var data = new PolyfillData(content);
-        data.ConditionalMembers = GetConditions(content);
-
         var tree = CSharpSyntaxTree.ParseText(content);
         compilation = compilation.AddSyntaxTrees(tree);
 
@@ -81,6 +78,11 @@ internal sealed partial class PolyfillData
             }
         }
 
+        // add embedded attribute to all root types
+        var finalContent = new AddEmbeddedAttributeRewriter().Visit(root);
+
+        var data = new PolyfillData(finalContent.ToFullString());
+        data.ConditionalMembers = GetConditions(content);
         data.DeclaredMemberDocumentationIds = [.. declaredMethods];
 
         foreach (var type in types)
@@ -104,4 +106,50 @@ internal sealed partial class PolyfillData
 
     [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline)]
     private static partial Regex ConditionRegex();
+
+    internal sealed class AddEmbeddedAttributeRewriter : CSharpSyntaxRewriter
+    {
+        public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
+        {
+            if(node.Identifier.ValueText == "PolyfillExtensions")
+                return node;
+
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+        public override SyntaxNode? VisitRecordDeclaration(RecordDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+
+        }
+
+        public override SyntaxNode? VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                       SyntaxFactory.AttributeList(
+                           SyntaxFactory.SingletonSeparatedList(
+                               SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+
+        public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+
+        public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Text;
 using Meziantou.Polyfill.Generator;
 using Microsoft.CodeAnalysis.CSharp;
@@ -112,9 +112,10 @@ async Task GenerateMembers()
         sb.AppendLine($"    {requiredType.CsharpFieldName} = compilation.GetTypeByMetadataName(\"{requiredType.TypeName}\") != null;");
     }
 
+    sb.AppendLine($"    var includeContext = new IncludeContext(compilation, options);");
     foreach (var polyfill in polyfills)
     {
-        sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(compilation, options, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
+        sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(includeContext, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
         sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
 
         string GenerateIncludePreCondition(PolyfillData data)
@@ -142,16 +143,16 @@ async Task GenerateMembers()
         string GenerateIncludePostCondition(PolyfillData data)
         {
             var result = "";
-            if (polyfill.TypeName.StartsWith("M:", StringComparison.Ordinal) && data.DeclaredMemberDocumentationIds.Length > 0)
-            {
-                result += " && (";
-                result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
-                {
-                    // Do not use "options" as the member cannot be part of Included or Excluded members
-                    return $"IncludeMember(compilation, options: null, \"{member}\")";
-                }));
-                result += ")";
-            }
+            //if (polyfill.TypeName.StartsWith("M:", StringComparison.Ordinal) && data.DeclaredMemberDocumentationIds.Length > 0)
+            //{
+            //    result += " && (";
+            //    result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
+            //    {
+            //        // Do not use "options" as the member cannot be part of Included or Excluded members
+            //        return $"IncludeMember(compilation, options: null, \"{member}\")";
+            //    }));
+            //    result += ")";
+            //}
 
             return result;
         }

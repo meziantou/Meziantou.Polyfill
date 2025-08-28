@@ -42,8 +42,10 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        var tree = Assert.Single(result.GeneratorResult.GeneratedTrees);
-        Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Debug.g.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/'));
+
+        Assert.Collection(result.GeneratorResult.GeneratedTrees.OrderBy(tree => tree.FilePath, StringComparer.Ordinal),
+            tree => Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Debug.g.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/')),
+            tree => Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Microsoft.CodeAnalysis.EmbeddedAttribute.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/')));
     }
 
     [Fact]
@@ -327,7 +329,7 @@ public class UnitTest1
                     if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
                         continue;
 
-                    if(exclusions != null)
+                    if (exclusions != null)
                     {
                         if (exclusions.Any(exclusion => relativePath.StartsWith(exclusion, StringComparison.OrdinalIgnoreCase)))
                             continue;

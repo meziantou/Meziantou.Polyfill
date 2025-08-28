@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -31,6 +31,12 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
             .Combine(options)
             .Select((provider, cancellationToken) => new Members(provider.Left, provider.Right))
             .WithTrackingName("Members");
+
+
+        context.RegisterPostInitializationOutput(context =>
+        {
+            context.AddEmbeddedAttributeDefinition();
+        });
 
         context.RegisterImplementationSourceOutput(provider, (context, members) =>
         {
