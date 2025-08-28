@@ -52,10 +52,10 @@ public class UnitTest1
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
+        Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute", StringComparison.Ordinal)));
 
         result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute", StringComparison.Ordinal)));
     }
 
     [Fact]
@@ -64,11 +64,11 @@ public class UnitTest1
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync")));
+        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync", StringComparison.Ordinal)));
 
         result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})");
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync")));
-        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("System.Linq.Enumerable.OrderDescending")));
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync", StringComparison.Ordinal)));
+        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("System.Linq.Enumerable.OrderDescending", StringComparison.Ordinal)));
     }
 
     [Fact]
@@ -76,11 +76,11 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
-        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs")));
-        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
+        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", StringComparison.Ordinal)));
+        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs", StringComparison.Ordinal)));
 
         var temp = Path.GetTempFileName() + ".dll";
-        File.WriteAllBytes(temp, tempGeneration.Assembly!);
+        await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
         Assert.Single(result.GeneratorResult.GeneratedTrees); // debug.g.cs
     }

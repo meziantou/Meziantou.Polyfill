@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Text;
 using Meziantou.Polyfill.Generator;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,7 +31,7 @@ var polyfills = assembly.GetManifestResourceNames()
               {
                   SymbolKind.NamedType => PolyfillKind.Type,
                   SymbolKind.Method => PolyfillKind.Method,
-                  _ => throw new Exception($"Unknown symbol kind '{symbol.Kind}'"),
+                  _ => throw new InvalidOperationException($"Unknown symbol kind '{symbol.Kind}'"),
               },
               OutputPath = Path.GetFileNameWithoutExtension(item)
                                .Replace(';', '_')
@@ -324,7 +324,7 @@ static Polyfill[] SortPolyfills(Polyfill[] items)
     }
 }
 
-sealed class Polyfill
+internal sealed class Polyfill
 {
     public required int Index { get; set; }
     public required ISymbol Symbol { get; set; }
@@ -354,7 +354,7 @@ sealed class Polyfill
     }
 }
 
-enum PolyfillKind
+internal enum PolyfillKind
 {
     Type,
     Method,
