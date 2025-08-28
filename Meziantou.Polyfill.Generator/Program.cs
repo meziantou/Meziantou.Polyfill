@@ -1,3 +1,6 @@
+#pragma warning disable MA0011 // IFormatProvider is missing
+#pragma warning disable MA0047 // Declare types in namespaces
+#pragma warning disable MA0048 // File name must match type name
 using System.Reflection;
 using System.Text;
 using Meziantou.Polyfill.Generator;
@@ -266,7 +269,7 @@ async Task GenerateReadme()
     }
 
     var content = await File.ReadAllTextAsync(path);
-    var newContent = Regex.Replace(content, "(?<=<!-- begin_polyfills -->\\r?\\n).*(?=<!-- end_polyfills -->)", "\n" + sb.ToString() + "\n", RegexOptions.Singleline);
+    var newContent = Regex.Replace(content, "(?<=<!-- begin_polyfills -->\\r?\\n).*(?=<!-- end_polyfills -->)", "\n" + sb.ToString() + "\n", RegexOptions.Singleline, Timeout.InfiniteTimeSpan);
     await File.WriteAllTextAsync(path, newContent);
 }
 
@@ -283,7 +286,7 @@ static FullPath GetRootPath()
     {
         currentFolder = currentFolder.Parent;
         if (currentFolder.IsEmpty)
-            throw new Exception("Cannot find the path from " + FullPath.CurrentDirectory());
+            throw new InvalidOperationException("Cannot find the path from " + FullPath.CurrentDirectory());
 
         fullPath = FullPath.Combine(currentFolder, suffix);
     }

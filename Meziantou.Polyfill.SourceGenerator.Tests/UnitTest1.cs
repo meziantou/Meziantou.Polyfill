@@ -116,7 +116,7 @@ public class UnitTest1
         // trackIncrementalGeneratorSteps allows to report info about each step of the generator
         GeneratorDriver driver = CSharpGeneratorDriver.Create(
             generators: new ISourceGenerator[] { sourceGenerator },
-            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
+            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = "*",
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = "test",
@@ -172,12 +172,14 @@ public class UnitTest1
         };
     }
 
+    [SuppressMessage("Design", "CA1034:Nested types should not be visible")]
     public sealed class PackageReference : IXunitSerializable
     {
         public string Name { get; set; }
         public string Version { get; set; }
         public string Path { get; set; }
 
+        [SuppressMessage("Performance", "CA1819:Properties should not return arrays")]
         public string[]? Exclusions { get; set; }
 
         public PackageReference()
@@ -228,7 +230,7 @@ public class UnitTest1
         GeneratorDriver driver = CSharpGeneratorDriver.Create(
             generators: new ISourceGenerator[] { generator },
             parseOptions: options,
-            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
+            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
@@ -327,7 +329,7 @@ public class UnitTest1
                     if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
                         continue;
 
-                    if(exclusions != null)
+                    if (exclusions != null)
                     {
                         if (exclusions.Any(exclusion => relativePath.StartsWith(exclusion, StringComparison.OrdinalIgnoreCase)))
                             continue;

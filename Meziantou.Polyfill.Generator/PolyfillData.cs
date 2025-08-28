@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text.RegularExpressions;
@@ -42,7 +42,7 @@ internal sealed partial class PolyfillData
         {
             var symbol = (ITypeSymbol)semanticModel.GetDeclaredSymbol(type)!;
             if (symbol.DeclaredAccessibility == Accessibility.Public)
-                throw new Exception("The symbol " + symbol.ToDisplayString() + " must be internal");
+                throw new InvalidOperationException("The symbol " + symbol.ToDisplayString() + " must be internal");
         }
 
         var types = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
@@ -102,6 +102,6 @@ internal sealed partial class PolyfillData
         }
     }
 
-    [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline)]
+    [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
     private static partial Regex ConditionRegex();
 }
