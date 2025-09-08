@@ -12,6 +12,10 @@ static partial class PolyfillExtensions
             throw new ArgumentNullException(paramName: nameof(source));
         }
 
-        return new(source, comparer);
+        Dictionary<TKey, TValue> dict = new(
+           capacity: (source as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0,
+           comparer);
+        dict.AddRange(source);
+        return dict;
     }
 }

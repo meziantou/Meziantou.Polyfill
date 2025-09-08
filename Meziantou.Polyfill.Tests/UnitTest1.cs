@@ -431,16 +431,13 @@ public class UnitTest1
     [Fact]
     public void Enumerable_ToDictionary()
     {
-        IDictionary<string, int> dict = new Dictionary<string, int>
-        {
-            { "a", 1 },
-            { "b", 2 },
-        };
+        Dictionary<string, int> dict = new() { ["a"] = 1, ["b"] = 2 };
 
-        Assert.Equal(dict, ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary());
-        Assert.Equal(dict.Comparer, caseInsensitive.Comparer);
+        var copied = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary();
+        Assert.Equal(dict, copied);
+        Assert.Equal(dict.Comparer, copied.Comparer);
 
-        var caseInsensitive = ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
+        var caseInsensitive = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
         Assert.Equal(dict, caseInsensitive);
         Assert.NotEqual(dict.Comparer, caseInsensitive.Comparer);
     }
