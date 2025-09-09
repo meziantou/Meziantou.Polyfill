@@ -429,6 +429,20 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Enumerable_ToDictionary()
+    {
+        Dictionary<string, int> dict = new() { ["a"] = 1, ["b"] = 2 };
+
+        var copied = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary();
+        Assert.Equal(dict, copied);
+        Assert.Equal(dict.Comparer, copied.Comparer);
+
+        var caseInsensitive = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(dict, caseInsensitive);
+        Assert.Equal(StringComparer.OrdinalIgnoreCase, caseInsensitive.Comparer);
+    }
+
+    [Fact]
     public void Enumerable_ToHashSet()
     {
         Assert.Equal(new[] { "a", "b" }, new[] { "a", "b", "a" }.ToHashSet());
