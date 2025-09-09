@@ -439,7 +439,7 @@ public class UnitTest1
 
         var caseInsensitive = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
         Assert.Equal(dict, caseInsensitive);
-        Assert.NotEqual(dict.Comparer, caseInsensitive.Comparer);
+        Assert.Equal(StringComparer.OrdinalIgnoreCase, caseInsensitive.Comparer);
     }
 
     [Fact]
