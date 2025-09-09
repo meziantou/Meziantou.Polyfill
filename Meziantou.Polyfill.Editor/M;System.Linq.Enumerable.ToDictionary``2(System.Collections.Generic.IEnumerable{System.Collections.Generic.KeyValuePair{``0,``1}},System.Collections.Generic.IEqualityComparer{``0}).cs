@@ -7,6 +7,9 @@ static partial class PolyfillExtensions
         this IEnumerable<KeyValuePair<TKey, TValue>> source,
         IEqualityComparer<TKey>? comparer)
             where TKey : notnull
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            => new(source, comparer);
+#else
     {
         if (source is null)
         {
@@ -23,4 +26,5 @@ static partial class PolyfillExtensions
 
         return dict;
     }
+#endif
 }
