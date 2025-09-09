@@ -16,7 +16,11 @@ static partial class PolyfillExtensions
         Dictionary<TKey, TValue> dict = new(
            capacity: (source as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0,
            comparer);
-        foreach (var kvp in source) dict.Add(kvp.Key, kvp.Value);
+        foreach (var kvp in source)
+        {
+            dict.Add(kvp.Key, kvp.Value);
+        }
+
         return dict;
     }
 }
