@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Meziantou.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>1.0.50</Version>
+    <Version>1.0.51</Version>
     <TransformOnBuild>true</TransformOnBuild>
 
     <LangVersion>preview</LangVersion>
@@ -16,17 +16,17 @@
     <PackageTags>SourceGenerator,Roslyn,Polyfill</PackageTags>
     <PackageProjectUrl>https://github.com/meziantou/Meziantou.Polyfill</PackageProjectUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <InternalsVisibleTo Include="Meziantou.Polyfill.SourceGenerator.Tests" />
   </ItemGroup>
-    
+
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="build/" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="buildMultiTargeting/" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Include="$(OutputPath)\netstandard2.0\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
