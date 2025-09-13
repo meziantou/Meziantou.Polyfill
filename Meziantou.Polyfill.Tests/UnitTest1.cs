@@ -16,8 +16,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
@@ -888,6 +890,27 @@ public class UnitTest1
         IEnumerable<int> b = [2, 3, 4];
         var result = a.UnionBy(b, i => i, EqualityComparer<int>.Default);
         Assert.Equal([1, 2, 3, 4], result);
+    }
+
+    [Fact]
+    public void Type_GetConstructor()
+    {
+        Assert.NotNull(typeof(Exception).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
+            new Type[]
+            {
+                typeof(SerializationInfo),
+                typeof(StreamingContext)
+            })
+        );
+        Assert.NotNull(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.Public, new Type[0]));
+        Assert.Null(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, new Type[] { typeof(IntPtr) }));
+    }
+
+    [Fact]
+    public void Type_GetMethod()
+    {
+        Assert.NotNull(typeof(Exception).GetMethod("get_Message", BindingFlags.Instance | BindingFlags.Public, new Type[0]));
+        Assert.Null(typeof(Exception).GetMethod("set_Message", BindingFlags.Instance | BindingFlags.Public, new Type[0]));
     }
 
     [Fact]
