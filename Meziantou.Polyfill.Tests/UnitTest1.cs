@@ -902,7 +902,7 @@ public class UnitTest1
                 typeof(StreamingContext)
             })
         );
-        Assert.NotNull(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.Public, new Type[0]));
+        Assert.NotNull(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.Public, Array.Empty<Type>()));
         Assert.Null(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, new Type[] { typeof(IntPtr) }));
     }
 
