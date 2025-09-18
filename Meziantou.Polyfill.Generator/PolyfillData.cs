@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text.RegularExpressions;
 
 namespace Meziantou.Polyfill.Generator;
+
 internal sealed partial class PolyfillData
 {
     private static readonly string[] PotentialRequiredTypes =
@@ -17,11 +18,16 @@ internal sealed partial class PolyfillData
         "System.Threading.Tasks.ValueTask`1",
         "System.Collections.Immutable.ImmutableArray`1",
         "System.Net.Http.HttpContent",
+        "System.IAsyncDisposable",
+        "System.Collections.Generic.IAsyncEnumerable`1",
+        "System.Collections.Generic.IAsyncEnumerator`1",
     ];
 
     public PolyfillData(string content) => Content = content;
 
     public string? Content { get; }
+
+    public string? XmlDocumentationId { get; private set; }
 
     public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
@@ -31,6 +37,7 @@ internal sealed partial class PolyfillData
     {
         var data = new PolyfillData(content);
         data.ConditionalMembers = GetConditions(content);
+        data.XmlDocumentationId = GetXmlDocId(content);
 
         var tree = CSharpSyntaxTree.ParseText(content);
         compilation = compilation.AddSyntaxTrees(tree);
@@ -100,8 +107,20 @@ internal sealed partial class PolyfillData
         {
             return [.. ConditionRegex().Matches(content.ReplaceLineEndings("\n")).Cast<Match>().Select(m => m.Groups["member"].Value).Order(StringComparer.Ordinal)];
         }
+
+        static string? GetXmlDocId(string content)
+        {
+            var match = XmlDocRegex().Match(content);
+            if (match.Success)
+                return match.Groups["value"].Value;
+
+            return null;
+        }
     }
 
     [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
     private static partial Regex ConditionRegex();
+
+    [GeneratedRegex("""^//\s*XML-DOC:\s+(?<value>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
+    private static partial Regex XmlDocRegex();
 }

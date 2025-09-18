@@ -6,5 +6,4 @@ static partial class PolyfillExtensions
     {
         return new TimeSpan((long)(timeSpan.Ticks * factor));
     }
-
 }
