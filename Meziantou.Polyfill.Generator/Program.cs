@@ -35,7 +35,7 @@ var polyfills = assembly.GetManifestResourceNames()
           var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(typeName, compilation);
           if (symbols.Length == 0)
           {
-              throw new InvalidOperationException($"Cannot find symbol for '{typeName}' (resource name: {item})");
+              throw new InvalidOperationException($"Cannot find symbol for '{typeName}' (resource name: {item}). Polyfill content:\n{polyfillData}");
           }
 
           if (symbols.Length > 1)

@@ -1,7 +1,8 @@
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Meziantou.Polyfill.Generator;
 
@@ -32,6 +33,17 @@ internal sealed partial class PolyfillData
     public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine($"XmlDocumentationId: {XmlDocumentationId}");
+        sb.AppendLine($"RequiredTypes: {string.Join(", ", RequiredTypes)}");
+        sb.AppendLine($"DeclaredMemberDocumentationIds: {string.Join(", ", DeclaredMemberDocumentationIds)}");
+        sb.AppendLine($"ConditionalMembers: {string.Join(", ", ConditionalMembers)}");
+        sb.AppendLine($"Content:\n{Content}");
+        return sb.ToString();
+    }
 
     public static PolyfillData Get(CSharpCompilation compilation, string content)
     {
@@ -112,7 +124,7 @@ internal sealed partial class PolyfillData
         {
             var match = XmlDocRegex().Match(content);
             if (match.Success)
-                return match.Groups["value"].Value;
+                return match.Groups["value"].Value.Trim();
 
             return null;
         }
@@ -121,6 +133,6 @@ internal sealed partial class PolyfillData
     [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
     private static partial Regex ConditionRegex();
 
-    [GeneratedRegex("""^//\s*XML-DOC:\s+(?<value>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
+    [GeneratedRegex("""^//\s*XML-DOC:\s+(?<value>.*)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
     private static partial Regex XmlDocRegex();
 }
