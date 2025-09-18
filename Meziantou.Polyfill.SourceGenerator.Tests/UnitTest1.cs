@@ -15,7 +15,8 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
-    private const string LatestDotnetPackageVersion = "9.0.0";
+    private const string LatestDotnetPackageVersion = "10.0.0-rc.1.25451.107";
+    private const string LatestDotnetTfm = "net10.0";
 
     [Fact]
     public void PolyfillOptions_Included()
@@ -40,7 +41,7 @@ public class UnitTest1
     [Fact]
     public async Task NoCodeGeneratedForLatestFramework()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
         var tree = Assert.Single(result.GeneratorResult.GeneratedTrees);
         Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Debug.g.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/'));
@@ -146,7 +147,8 @@ public class UnitTest1
     {
         return new TheoryData<PackageReference[]>
         {
-            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/") } },
@@ -312,7 +314,11 @@ public class UnitTest1
                     {
                         var extractPath = Path.Combine(tempFolder, entry.FullName);
                         Directory.CreateDirectory(Path.GetDirectoryName(extractPath)!);
+#if NET10_0_OR_GREATER
+                        await entry.ExtractToFileAsync(extractPath, overwrite: true);
+#else
                         entry.ExtractToFile(extractPath, overwrite: true);
+#endif
                     }
                 }
 

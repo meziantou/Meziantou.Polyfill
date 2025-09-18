@@ -435,11 +435,11 @@ public class UnitTest1
     {
         Dictionary<string, int> dict = new() { ["a"] = 1, ["b"] = 2 };
 
-        var copied = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary();
+        var copied = (Dictionary<string, int>)((IEnumerable<KeyValuePair<string, int>>)dict).ToDictionary();
         Assert.Equal(dict, copied);
         Assert.Equal(dict.Comparer, copied.Comparer);
 
-        var caseInsensitive = (Dictionary<string, int>) ((IEnumerable<KeyValuePair<string, int>>) dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
+        var caseInsensitive = (Dictionary<string, int>)((IEnumerable<KeyValuePair<string, int>>)dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
         Assert.Equal(dict, caseInsensitive);
         Assert.Equal(StringComparer.OrdinalIgnoreCase, caseInsensitive.Comparer);
     }
@@ -985,6 +985,77 @@ public class UnitTest1
             await Task.Yield();
             yield return "b";
         }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_AnyAsync()
+    {
+        Assert.True(await CustomAsyncEnumerable().AnyAsync());
+        Assert.True(await CustomAsyncEnumerable().AnyAsync(item => item == "a"));
+        Assert.False(await CustomAsyncEnumerable().AnyAsync(item => item == "c"));
+        Assert.False(await CustomAsyncEnumerable().AnyAsync(async (item, _) => { await Task.Yield(); return item == "c"; }));
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_Where()
+    {
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where(item => item == "a").ToListAsync());
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where((item, index) => item == "a").ToListAsync());
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where(async (item, _) => { await Task.Yield(); return item == "a"; }).ToListAsync());
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where(async (item, index, _) => { await Task.Yield(); return item == "a"; }).ToListAsync());
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_FirstAsync()
+    {
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstAsync());
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstAsync(item => item == "a"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstAsync(async (item, _) => { await Task.Yield(); return item == "a"; }));
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_FirstOrDefaultAsync()
+    {
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync());
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync("default"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(item => item == "a"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(item => item == "a", "default"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(async (item, _) => { await Task.Yield(); return item == "a"; }));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(async (item, _) => { await Task.Yield(); return item == "a"; }, "default"));
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_Concat()
+    {
+        Assert.Equal(["a", "b"], await new[] { "a" }.ToAsyncEnumerable().Concat(new[] { "b" }.ToAsyncEnumerable()).ToListAsync());
     }
 
     [Fact]
