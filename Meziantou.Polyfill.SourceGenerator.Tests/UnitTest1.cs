@@ -43,10 +43,7 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
-
-        Assert.Collection(result.GeneratorResult.GeneratedTrees.OrderBy(tree => tree.FilePath, StringComparer.Ordinal),
-            tree => Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Debug.g.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/')),
-            tree => Assert.Equal("Meziantou.Polyfill/Meziantou.Polyfill.PolyfillGenerator/Microsoft.CodeAnalysis.EmbeddedAttribute.cs", tree.FilePath.Replace(Path.DirectorySeparatorChar, '/')));
+        Assert.Empty(GetFileNames(result.GeneratorResult));
     }
 
     [Fact]
@@ -55,10 +52,10 @@ public class UnitTest1
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute", StringComparison.Ordinal)));
+        Assert.Single(GetFileNames(result.GeneratorResult), file => file.Contains("UnscopedRefAttribute", StringComparison.Ordinal));
 
         result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute", StringComparison.Ordinal)));
+        Assert.DoesNotContain(GetFileNames(result.GeneratorResult), file => file.Contains("UnscopedRefAttribute", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -70,8 +67,9 @@ public class UnitTest1
         Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync", StringComparison.Ordinal)));
 
         result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})");
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync", StringComparison.Ordinal)));
-        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("System.Linq.Enumerable.OrderDescending", StringComparison.Ordinal)));
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        Assert.DoesNotContain(generatedFileNames, file => file.Contains("WaitForExitAsync", StringComparison.Ordinal));
+        Assert.Contains(generatedFileNames, file => file.Contains("System.Linq.Enumerable.OrderDescending", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -79,13 +77,15 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
-        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", StringComparison.Ordinal)));
-        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs", StringComparison.Ordinal)));
+        Assert.Single(GetFileNames(tempGeneration.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+        Assert.Single(GetFileNames(tempGeneration.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
 
         var temp = Path.GetTempFileName() + ".dll";
         await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
-        Assert.Single(result.GeneratorResult.GeneratedTrees); // debug.g.cs
+        Assert.DoesNotContain(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+        Assert.Single(GetFileNames(result.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
+
     }
 
     [Theory]
@@ -174,6 +174,17 @@ public class UnitTest1
             { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
             { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
         };
+    }
+
+    private static IEnumerable<string> GetFileNames(GeneratorDriverRunResult generatorResult, bool includeAlwaysGeneratedFiles = false)
+    {
+        var fileNames = generatorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        if (!includeAlwaysGeneratedFiles)
+        {
+            fileNames = fileNames.Where(name => name != "Debug.g.cs" && name != "PolyfillExtensions.g.cs" && name != "Microsoft.CodeAnalysis.EmbeddedAttribute.cs");
+        }
+
+        return fileNames.Order(StringComparer.Ordinal);
     }
 
     [SuppressMessage("Design", "CA1034:Nested types should not be visible")]

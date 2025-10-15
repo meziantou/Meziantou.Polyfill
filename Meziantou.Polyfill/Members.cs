@@ -17,15 +17,21 @@ internal partial struct Members
             if (ReferenceEquals(symbol.ContainingAssembly, context.Compilation.Assembly))
                 return false;
 
-            if (context.Compilation.IsSymbolAccessibleWithin(symbol, context.Compilation.Assembly) && !IsEmbeddedSymbol(context, symbol))
+            // IsEmbeddedSymbol is a workaround for https://github.com/dotnet/roslyn/issues/79498
+            if (context.Compilation.IsSymbolAccessibleWithin(symbol, context.Compilation.Assembly) && !IsEmbeddedSymbol(symbol))
                 return false;
         }
 
         return true;
     }
 
-    private static bool IsEmbeddedSymbol(IncludeContext context, ISymbol symbol)
+    private static bool IsEmbeddedSymbol(ISymbol symbol)
     {
+        if(symbol is not ITypeSymbol)
+        {
+            symbol = symbol.ContainingType;
+        }
+
         if (symbol is not ITypeSymbol)
             return false;
 

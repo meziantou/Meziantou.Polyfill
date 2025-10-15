@@ -365,6 +365,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
+- `System.Environment.ProcessId`
 
 <!-- end_polyfills -->
 

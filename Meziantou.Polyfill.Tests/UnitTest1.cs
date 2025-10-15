@@ -1059,6 +1059,12 @@ public class UnitTest1
     }
 
     [Fact]
+    public async Task Environment_ProcessId()
+    {
+        Assert.Equal(Process.GetCurrentProcess().Id, Environment.ProcessId);
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
