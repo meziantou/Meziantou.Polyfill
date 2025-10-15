@@ -1151,6 +1151,12 @@ public class UnitTest1
     }
 
     [Fact]
+    public void OperatingSystem_IsLinux()
+    {
+        OperatingSystem.IsLinux();
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
