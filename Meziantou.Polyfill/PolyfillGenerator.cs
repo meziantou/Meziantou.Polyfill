@@ -12,6 +12,7 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
+#pragma warning disable RS1035 // Do not use APIs banned for analyzers
         if (Environment.GetEnvironmentVariable("Meziantou_Polyfill_Debug") is "true" or "1")
         {
             if (Debugger.Launch())
@@ -19,6 +20,7 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
                 Debugger.Break();
             }
         }
+#pragma warning restore RS1035 // Do not use APIs banned for analyzers
 
         var options = context.AnalyzerConfigOptionsProvider.Select((options, cancellationToken) =>
         {

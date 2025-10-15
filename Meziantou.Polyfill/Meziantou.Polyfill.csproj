@@ -8,6 +8,8 @@
 
     <LangVersion>preview</LangVersion>
 
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    
     <developmentDependency>true</developmentDependency>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
