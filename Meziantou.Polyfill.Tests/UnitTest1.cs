@@ -1,10 +1,13 @@
 #pragma warning disable CA1307
+#pragma warning disable CA1837
 #pragma warning disable CA1849
 #pragma warning disable CA2000
+#pragma warning disable CA2264
 #pragma warning disable MA0001
 #pragma warning disable MA0002
 #pragma warning disable MA0021
 #pragma warning disable MA0074
+#pragma warning disable MA0131
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -12,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -1056,6 +1060,94 @@ public class UnitTest1
     public async Task AsyncEnumerable_Concat()
     {
         Assert.Equal(["a", "b"], await new[] { "a" }.ToAsyncEnumerable().Concat(new[] { "b" }.ToAsyncEnumerable()).ToListAsync());
+    }
+
+    [Fact]
+    public void Environment_ProcessId()
+    {
+        Assert.Equal(Process.GetCurrentProcess().Id, Environment.ProcessId);
+    }
+
+    [Fact]
+    public void String_Join_Char()
+    {
+        Assert.Equal("a,b,c", string.Join(',', (object[])["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (string[])["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (ReadOnlySpan<object>)["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (ReadOnlySpan<string>)["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (IEnumerable<string>)["a", "b", "c"]));
+    }
+
+    [Fact]
+    public void ArgumentNullException_ThrowIfNull()
+    {
+        object? sample = null;
+        var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        object? o = new();
+        ArgumentNullException.ThrowIfNull(o);
+    }
+
+    [Fact]
+    public unsafe void ArgumentNullException_ThrowIfNull_Pointer()
+    {
+        void* sample = null;
+        var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentNullException.ThrowIfNull((nint)1);
+    }
+
+    [Fact]
+    public unsafe void ArgumentException_ThrowIfNullOrEmpty()
+    {
+        var sample = "";
+        var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrEmpty(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentException.ThrowIfNullOrEmpty("a");
+    }
+
+    [Fact]
+    public unsafe void ArgumentException_ThrowIfNullOrWhiteSpace()
+    {
+        var sample = "  ";
+        var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrWhiteSpace(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentException.ThrowIfNullOrWhiteSpace("a");
+    }
+
+    [Fact]
+    public unsafe void ObjectDisposedException_ThrowIf()
+    {
+        Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, new object()));
+        Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, typeof(object)));
+
+        ObjectDisposedException.ThrowIf(false, new object());
+        ObjectDisposedException.ThrowIf(false, typeof(object));
+    }
+
+    [Fact]
+    public void String_Concat()
+    {
+        Assert.Equal("ab", string.Concat("a".AsSpan(), "b".AsSpan()));
+        Assert.Equal("abc", string.Concat("a".AsSpan(), "b".AsSpan(), "c".AsSpan()));
+        Assert.Equal("abcd", string.Concat("a".AsSpan(), "b".AsSpan(), "c".AsSpan(), "d".AsSpan()));
+    }
+
+    [Fact]
+    public void OperatingSystem_IsWindows()
+    {
+        OperatingSystem.IsWindows();
+        OperatingSystem.IsWindowsVersionAtLeast(6);
+    }
+
+    [Fact]
+    public void OperatingSystem_IsMacOS()
+    {
+        OperatingSystem.IsMacOS();
     }
 
     [Fact]

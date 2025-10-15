@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -22,6 +21,7 @@ internal sealed partial class PolyfillData
         "System.IAsyncDisposable",
         "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Collections.Generic.IAsyncEnumerator`1",
+        "System.IO.Compression.ZipArchiveEntry",
     ];
 
     public PolyfillData(string content) => Content = content;
@@ -34,6 +34,10 @@ internal sealed partial class PolyfillData
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
 
+    public bool UseUnsafe { get; private set; }
+    public bool UseExtensions { get; private set; }
+    public bool SupportInternalsVisibleTo { get; private set; }
+
     public override string ToString()
     {
         var sb = new StringBuilder();
@@ -45,12 +49,8 @@ internal sealed partial class PolyfillData
         return sb.ToString();
     }
 
-    public static PolyfillData Get(CSharpCompilation compilation, string content)
+    public static PolyfillData Get(CSharpCompilation compilation, string documentationDeclarationId, string content)
     {
-        var data = new PolyfillData(content);
-        data.ConditionalMembers = GetConditions(content);
-        data.XmlDocumentationId = GetXmlDocId(content);
-
         var tree = CSharpSyntaxTree.ParseText(content);
         compilation = compilation.AddSyntaxTrees(tree);
 
@@ -64,25 +64,36 @@ internal sealed partial class PolyfillData
                 throw new InvalidOperationException("The symbol " + symbol.ToDisplayString() + " must be internal");
         }
 
-        var types = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
+        var requiredTypes = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
         var declaredMethods = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var method in root.DescendantNodes().OfType<MethodDeclarationSyntax>())
         {
             var symbol = semanticModel.GetDeclaredSymbol(method)!;
-            types.Add(symbol.ReturnType);
+            requiredTypes.Add(symbol.ReturnType);
             foreach (var param in symbol.Parameters.Select(p => p.Type))
             {
-                types.Add(param);
+                requiredTypes.Add(param);
             }
 
-            if (symbol.DeclaredAccessibility is Accessibility.Public or Accessibility.Internal)
+            if (IsExposed(symbol))
             {
                 var declarationId = DocumentationCommentId.CreateDeclarationId(symbol);
                 if (declarationId is not null)
                 {
                     declaredMethods.Add(declarationId);
                 }
+            }
+
+            static bool IsExposed(ISymbol symbol)
+            {
+                if (symbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal)
+                    return false;
+
+                if (symbol.ContainingSymbol is null)
+                    return true;
+
+                return IsExposed(symbol.ContainingSymbol);
             }
         }
 
@@ -91,24 +102,37 @@ internal sealed partial class PolyfillData
             var symbol = semanticModel.GetDeclaredSymbol(type)!;
             if (symbol.BaseType != null)
             {
-                types.Add(symbol.BaseType);
+                requiredTypes.Add(symbol.BaseType);
             }
 
             foreach (var iface in symbol.AllInterfaces)
             {
-                types.Add(iface);
+                requiredTypes.Add(iface);
             }
         }
 
-        data.DeclaredMemberDocumentationIds = [.. declaredMethods];
+        documentationDeclarationId = GetXmlDocId(content) ?? documentationDeclarationId;
+        var useExtensions = root.DescendantNodes().OfType<ExtensionBlockDeclarationSyntax>().Any();
+        var useUnsafe = root.DescendantNodes().OfType<UnsafeStatementSyntax>().Any() || root.DescendantNodes().OfType<MethodDeclarationSyntax>().Any(m => m.Modifiers.Any(m => m.IsKind(SyntaxKind.UnsafeKeyword)));
 
-        foreach (var type in types)
+        var supportInternalsVisibleTo = documentationDeclarationId.StartsWith("T:", StringComparison.Ordinal);
+        var finalContent = supportInternalsVisibleTo ? root : new AddEmbeddedAttributeRewriter().Visit(root);
+
+        var data = new PolyfillData(finalContent.ToFullString());
+        data.ConditionalMembers = GetConditions(content);
+        data.XmlDocumentationId = documentationDeclarationId;
+        data.DeclaredMemberDocumentationIds = [.. declaredMethods];
+        data.UseExtensions = useExtensions;
+        data.UseUnsafe = useUnsafe;
+        data.SupportInternalsVisibleTo = supportInternalsVisibleTo;
+
+        foreach (var requiredType in requiredTypes)
         {
-            foreach (var requiredTypes in PotentialRequiredTypes)
+            foreach (var potentialRequiredType in PotentialRequiredTypes)
             {
-                if (SymbolEqualityComparer.Default.Equals(type.OriginalDefinition, compilation.GetTypeByMetadataName(requiredTypes)))
+                if (SymbolEqualityComparer.Default.Equals(requiredType.OriginalDefinition, compilation.GetTypeByMetadataName(potentialRequiredType)))
                 {
-                    data.RequiredTypes.Add(requiredTypes);
+                    data.RequiredTypes.Add(potentialRequiredType);
                 }
             }
         }
@@ -135,4 +159,50 @@ internal sealed partial class PolyfillData
 
     [GeneratedRegex("""^//\s*XML-DOC:\s+(?<value>.*)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
     private static partial Regex XmlDocRegex();
+
+    internal sealed class AddEmbeddedAttributeRewriter : CSharpSyntaxRewriter
+    {
+        public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
+        {
+            if (node.Identifier.ValueText == "PolyfillExtensions")
+                return node;
+
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+        public override SyntaxNode? VisitRecordDeclaration(RecordDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+
+        }
+
+        public override SyntaxNode? VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                       SyntaxFactory.AttributeList(
+                           SyntaxFactory.SingletonSeparatedList(
+                               SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+
+        public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+
+        public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+    }
 }

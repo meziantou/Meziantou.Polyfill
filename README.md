@@ -37,7 +37,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types
+### Types (63)
 
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
@@ -103,8 +103,12 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods
+### Methods (277)
 
+- `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
+- `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
+- `System.ArgumentNullException.ThrowIfNull(System.Object? argument, [System.String? paramName = null])`
+- `System.ArgumentNullException.ThrowIfNull(System.Void* argument, [System.String? paramName = null])`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`
@@ -333,6 +337,14 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.Net.IPEndPoint? endPoint, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.String? hostname, System.Int32 port, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Object instance)`
+- `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Type type)`
+- `System.OperatingSystem.IsMacOS()`
+- `System.OperatingSystem.IsWindows()`
+- `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
+- `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1)`
+- `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2)`
+- `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2, System.ReadOnlySpan<System.Char> str3)`
 - `System.String.Contains(System.Char value)`
 - `System.String.Contains(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`
@@ -340,6 +352,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.String.EndsWith(System.Char value)`
 - `System.String.GetHashCode(System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.StringComparison comparisonType)`
+- `System.String.Join(System.Char separator, params System.Object?[] values)`
+- `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.Object?> values)`
+- `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.String?> value)`
+- `System.String.Join(System.Char separator, params System.String?[] value)`
+- `System.String.Join<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
 - `System.String.Replace(System.String oldValue, System.String? newValue, System.StringComparison comparisonType)`
 - `System.String.ReplaceLineEndings(System.String replacementText)`
 - `System.String.ReplaceLineEndings()`
@@ -365,6 +382,10 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
+
+### Properties (1)
+
+- `System.Environment.ProcessId`
 
 <!-- end_polyfills -->
 

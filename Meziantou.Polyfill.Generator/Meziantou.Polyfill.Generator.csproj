@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Meziantou.Framework.FullPath" Version="1.0.18" />
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.14.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="5.0.0-2.final" />
   </ItemGroup>
 
   <ItemGroup>
