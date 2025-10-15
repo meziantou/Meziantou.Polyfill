@@ -140,7 +140,7 @@ async Task GenerateMembers()
     sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
     sb.AppendLine("{");
     sb.AppendLine("    _options = options;");
-    sb.AppendLine("    _supportExtensions = compilation.SyntaxTrees.FirstOrDefault()?.Options is CSharpParseOptions parseOptions && parseOptions.LanguageVersion >= (LanguageVersion)1400;");
+    sb.AppendLine("    _supportExtensions = Enum.IsDefined(typeof(LanguageVersion), 1400) && compilation.SyntaxTrees.FirstOrDefault()?.Options is CSharpParseOptions parseOptions && parseOptions.LanguageVersion >= (LanguageVersion)1400;");
     sb.AppendLine("    _supportUnsafe = compilation.Options is CSharpCompilationOptions compilationOptions && compilationOptions.AllowUnsafe;");
 
     foreach (var requiredType in requiredTypes)
