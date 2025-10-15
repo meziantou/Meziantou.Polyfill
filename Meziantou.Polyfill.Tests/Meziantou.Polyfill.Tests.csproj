@@ -12,7 +12,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.5" />
     <PackageReference Include="System.Memory" Version="4.6.3" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
     <PackageReference Include="System.ValueTuple" Version="4.6.1" />
 	  <PackageReference Include="xunit" Version="2.9.3" />
@@ -21,6 +20,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <ProjectReference Include="..\Meziantou.Polyfill\Meziantou.Polyfill.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" SetTargetFramework="TargetFramework=netstandard2.0" />
+
+
+    <Reference Include="System.Net.Http" Condition="$(TargetFramework) == 'net462' OR $(TargetFramework) == 'net472' OR $(TargetFramework) == 'net48' OR $(TargetFramework) == 'net481'" />
   </ItemGroup>
 
 </Project>
