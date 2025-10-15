@@ -103,7 +103,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (279)
+### Methods (277)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -121,8 +121,6 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Int32 start, System.Int32 length)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Range range)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
-- `System.IO.Compression.ZipFileExtensions.ExtractToFileAsync(this System.IO.Compression.ZipArchiveEntry source, System.String destinationFileName, System.Boolean overwrite, [System.Threading.CancellationToken cancellationToken = default])`
-- `System.IO.Compression.ZipFileExtensions.ExtractToFileAsync(this System.IO.Compression.ZipArchiveEntry source, System.String destinationFileName, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.ReadAtLeast(System.Span<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true])`
