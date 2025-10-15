@@ -131,6 +131,7 @@ async Task GenerateMembers()
 
     sb.AppendLine($"private readonly PolyfillOptions _options;");
     sb.AppendLine($"private readonly bool _supportExtensions;");
+    sb.AppendLine($"private readonly bool _supportUnsafe;");
 
     foreach (var requiredType in requiredTypes)
     {
@@ -141,6 +142,7 @@ async Task GenerateMembers()
     sb.AppendLine("{");
     sb.AppendLine("    _options = options;");
     sb.AppendLine("    _supportExtensions = compilation.SyntaxTrees.FirstOrDefault()?.Options is CSharpParseOptions parseOptions && parseOptions.LanguageVersion >= LanguageVersion.CSharp14;");
+    sb.AppendLine("    _supportUnsafe = compilation.Options is CSharpCompilationOptions compilationOptions && compilationOptions.AllowUnsafe;");
 
     foreach (var requiredType in requiredTypes)
     {
@@ -160,6 +162,11 @@ async Task GenerateMembers()
             if (data.UseExtensions)
             {
                 result += "_supportExtensions && ";
+            }
+
+            if (data.UseUnsafe)
+            {
+                result += "_supportUnsafe && ";
             }
 
             foreach (var requiredType in data.RequiredTypes)

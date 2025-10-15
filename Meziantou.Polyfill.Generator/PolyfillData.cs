@@ -33,6 +33,7 @@ internal sealed partial class PolyfillData
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
 
+    public bool UseUnsafe { get; private set; }
     public bool UseExtensions { get; private set; }
     public bool SupportInternalsVisibleTo { get; private set; }
 
@@ -111,6 +112,7 @@ internal sealed partial class PolyfillData
 
         documentationDeclarationId = GetXmlDocId(content) ?? documentationDeclarationId;
         var useExtensions = root.DescendantNodes().OfType<ExtensionBlockDeclarationSyntax>().Any();
+        var useUnsafe = root.DescendantNodes().OfType<UnsafeStatementSyntax>().Any() || root.DescendantNodes().OfType<MethodDeclarationSyntax>().Any(m => m.Modifiers.Any(m => m.IsKind(SyntaxKind.UnsafeKeyword)));
 
         var supportInternalsVisibleTo = documentationDeclarationId.StartsWith("T:", StringComparison.Ordinal);
         var finalContent = supportInternalsVisibleTo ? root : new AddEmbeddedAttributeRewriter().Visit(root);
@@ -120,6 +122,7 @@ internal sealed partial class PolyfillData
         data.XmlDocumentationId = documentationDeclarationId;
         data.DeclaredMemberDocumentationIds = [.. declaredMethods];
         data.UseExtensions = useExtensions;
+        data.UseUnsafe = useUnsafe;
         data.SupportInternalsVisibleTo = supportInternalsVisibleTo;
 
         foreach (var requiredType in requiredTypes)
