@@ -103,12 +103,18 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (277)
+### Methods (283)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentNullException.ThrowIfNull(System.Object? argument, [System.String? paramName = null])`
 - `System.ArgumentNullException.ThrowIfNull(System.Void* argument, [System.String? paramName = null])`
+- `System.ArgumentOutOfRangeException.ThrowIfEqual<T>(T value, T other, [System.String? paramName = null])`
+- `System.ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
+- `System.ArgumentOutOfRangeException.ThrowIfGreaterThan<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
+- `System.ArgumentOutOfRangeException.ThrowIfLessThanOrEqual<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
+- `System.ArgumentOutOfRangeException.ThrowIfLessThan<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
+- `System.ArgumentOutOfRangeException.ThrowIfNotEqual<T>(T value, T other, [System.String? paramName = null])`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`
