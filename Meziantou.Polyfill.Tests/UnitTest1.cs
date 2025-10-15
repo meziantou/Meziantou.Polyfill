@@ -1081,7 +1081,8 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentNullException.ThrowIfNull(new object());
+        object? o = new();
+        ArgumentNullException.ThrowIfNull(o);
     }
 
     [Fact]
@@ -1092,6 +1093,37 @@ public class UnitTest1
         Assert.Equal("sample", ex.ParamName);
 
         ArgumentNullException.ThrowIfNull((nint)1);
+    }
+
+    [Fact]
+    public unsafe void ArgumentException_ThrowIfNullOrEmpty()
+    {
+        var sample = "";
+        var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrEmpty(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentException.ThrowIfNullOrEmpty("a");
+    }
+
+    [Fact]
+    public unsafe void ArgumentException_ThrowIfNullOrWhiteSpace()
+    {
+        var sample = "  ";
+        var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrWhiteSpace(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentException.ThrowIfNullOrWhiteSpace("a");
+    }
+
+    [Fact]
+    public unsafe void ObjectDisposedException_ThrowIf()
+    {
+        var sample = "  ";
+        Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, new object()));
+        Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, typeof(object)));
+
+        ObjectDisposedException.ThrowIf(false, new object());
+        ObjectDisposedException.ThrowIf(false, typeof(object));
     }
 
     [Fact]

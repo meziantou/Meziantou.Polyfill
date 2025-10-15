@@ -37,7 +37,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types
+### Types (63)
 
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
@@ -103,8 +103,10 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods
+### Methods (271)
 
+- `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
+- `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentNullException.ThrowIfNull(System.Object? argument, [System.String? paramName = null])`
 - `System.ArgumentNullException.ThrowIfNull(System.Void* argument, [System.String? paramName = null])`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
@@ -335,6 +337,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.Net.IPEndPoint? endPoint, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.String? hostname, System.Int32 port, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Object instance)`
+- `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Type type)`
 - `System.String.Contains(System.Char value)`
 - `System.String.Contains(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`
@@ -372,6 +376,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
+
+### Properties (1)
+
 - `System.Environment.ProcessId`
 
 <!-- end_polyfills -->

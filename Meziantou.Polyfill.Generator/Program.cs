@@ -282,7 +282,7 @@ async Task GenerateReadme()
 
     var sb = new StringBuilder();
 
-    sb.Append("### Types\n\n");
+    sb.Append($"### Types ({polyfills.Where(p => p.Kind is PolyfillKind.Type).Count()})\n\n");
     var typeDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
           .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)
           .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining)
@@ -297,7 +297,7 @@ async Task GenerateReadme()
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(typeDisplayFormat)}`\n");
     }
 
-    sb.Append("\n### Methods\n\n");
+    sb.Append($"\n### Methods ({polyfills.Where(p => p.Kind is PolyfillKind.Method).Count()})\n\n");
 
     var methodDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
           .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)
@@ -308,9 +308,25 @@ async Task GenerateReadme()
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method or PolyfillKind.Property))
+    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method))
     {
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
+    }
+
+    sb.Append($"\n### Properties ({polyfills.Where(p => p.Kind is PolyfillKind.Property).Count()})\n\n");
+
+    var propertyDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
+          .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)
+          .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining)
+          .WithKindOptions(SymbolDisplayKindOptions.IncludeMemberKeyword | SymbolDisplayKindOptions.IncludeTypeKeyword | SymbolDisplayKindOptions.IncludeNamespaceKeyword)
+          .WithLocalOptions(SymbolDisplayLocalOptions.IncludeModifiers | SymbolDisplayLocalOptions.IncludeConstantValue | SymbolDisplayLocalOptions.IncludeType)
+          .WithMemberOptions(SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeContainingType | SymbolDisplayMemberOptions.IncludeParameters | SymbolDisplayMemberOptions.IncludeConstantValue | SymbolDisplayMemberOptions.IncludeRef)
+          .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
+          .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
+          ;
+    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Property))
+    {
+        sb.Append($"- `{polyfill.Symbol.ToDisplayString(propertyDisplayFormat)}`\n");
     }
 
     var content = await File.ReadAllTextAsync(path);
