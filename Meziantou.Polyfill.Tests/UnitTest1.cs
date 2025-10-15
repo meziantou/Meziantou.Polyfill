@@ -1059,9 +1059,39 @@ public class UnitTest1
     }
 
     [Fact]
-    public async Task Environment_ProcessId()
+    public void Environment_ProcessId()
     {
         Assert.Equal(Process.GetCurrentProcess().Id, Environment.ProcessId);
+    }
+
+    [Fact]
+    public void String_Join_Char()
+    {
+        Assert.Equal("a,b,c", string.Join(',', (object[])["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (string[])["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (ReadOnlySpan<object>)["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (ReadOnlySpan<string>)["a", "b", "c"]));
+        Assert.Equal("a,b,c", string.Join(',', (IEnumerable<string>)["a", "b", "c"]));
+    }
+
+    [Fact]
+    public void ArgumentNullException_ThrowIfNull()
+    {
+        object? sample = null;
+        var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentNullException.ThrowIfNull(new object());
+    }
+
+    [Fact]
+    public unsafe void ArgumentNullException_ThrowIfNull_Pointer()
+    {
+        void* sample = null;
+        var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentNullException.ThrowIfNull((nint)1);
     }
 
     [Fact]

@@ -105,6 +105,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 ### Methods
 
+- `System.ArgumentNullException.ThrowIfNull(System.Object? argument, [System.String? paramName = null])`
+- `System.ArgumentNullException.ThrowIfNull(System.Void* argument, [System.String? paramName = null])`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`
@@ -340,6 +342,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.String.EndsWith(System.Char value)`
 - `System.String.GetHashCode(System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.StringComparison comparisonType)`
+- `System.String.Join(System.Char separator, params System.Object?[] values)`
+- `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.Object?> values)`
+- `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.String?> value)`
+- `System.String.Join(System.Char separator, params System.String?[] value)`
+- `System.String.Join<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
 - `System.String.Replace(System.String oldValue, System.String? newValue, System.StringComparison comparisonType)`
 - `System.String.ReplaceLineEndings(System.String replacementText)`
 - `System.String.ReplaceLineEndings()`
