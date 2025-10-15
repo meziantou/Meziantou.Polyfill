@@ -1,10 +1,7 @@
-static partial class PolyfillExtensions
+﻿static partial class PolyfillExtensions
 {
-    extension(string target)
+    public static bool EndsWith(this string target, char value)
     {
-        public bool EndsWith(char value)
-        {
-            return target.Length > 0 && target[target.Length - 1] == value;
-        }
+        return target.Length > 0 && target[target.Length - 1] == value;
     }
 }
