@@ -1,48 +1,39 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Meziantou.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>1.0.49</Version>
+    <Version>1.0.52</Version>
     <TransformOnBuild>true</TransformOnBuild>
     <RoslynVersion>4.3.1</RoslynVersion>
     <RoslynVersion>5.0.0-2.final</RoslynVersion>
 
     <LangVersion>preview</LangVersion>
-    <Nullable>enable</Nullable>
 
     <developmentDependency>true</developmentDependency>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <Description>Source Generator to help multi-targeting projects.</Description>
-    <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Authors>meziantou</Authors>
     <PackageTags>SourceGenerator,Roslyn,Polyfill</PackageTags>
     <PackageProjectUrl>https://github.com/meziantou/Meziantou.Polyfill</PackageProjectUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <InternalsVisibleTo Include="Meziantou.Polyfill.SourceGenerator.Tests" />
   </ItemGroup>
-    
+
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="" Visible="false" />
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="build/" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="buildMultiTargeting/" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Include="$(OutputPath)\netstandard2.0\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Meziantou.DotNet.CodingStandard" Version="1.0.153">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    
+  <ItemGroup>    
     <PackageReference Include="Microsoft.CodeAnalysis" Version="$(RoslynVersion)" PrivateAssets="all" />
   </ItemGroup>
 

@@ -1,17 +1,25 @@
+#pragma warning disable CA1307
+#pragma warning disable CA1849
+#pragma warning disable CA2000
+#pragma warning disable MA0001
+#pragma warning disable MA0002
+#pragma warning disable MA0021
+#pragma warning disable MA0074
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
@@ -420,6 +428,20 @@ public class UnitTest1
     {
         Assert.Equal("a", new[] { "a", "ab", "b" }.MinBy(a => a.Length));
         Assert.Equal("a", new[] { "a", "ab", "b" }.MinBy(a => a.Length, Comparer<int>.Default));
+    }
+
+    [Fact]
+    public void Enumerable_ToDictionary()
+    {
+        Dictionary<string, int> dict = new() { ["a"] = 1, ["b"] = 2 };
+
+        var copied = (Dictionary<string, int>)((IEnumerable<KeyValuePair<string, int>>)dict).ToDictionary();
+        Assert.Equal(dict, copied);
+        Assert.Equal(dict.Comparer, copied.Comparer);
+
+        var caseInsensitive = (Dictionary<string, int>)((IEnumerable<KeyValuePair<string, int>>)dict).ToDictionary(StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(dict, caseInsensitive);
+        Assert.Equal(StringComparer.OrdinalIgnoreCase, caseInsensitive.Comparer);
     }
 
     [Fact]
@@ -871,6 +893,27 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Type_GetConstructor()
+    {
+        Assert.NotNull(typeof(Exception).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic,
+            new Type[]
+            {
+                typeof(SerializationInfo),
+                typeof(StreamingContext)
+            })
+        );
+        Assert.NotNull(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.Public, Array.Empty<Type>()));
+        Assert.Null(typeof(Random).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, new Type[] { typeof(IntPtr) }));
+    }
+
+    [Fact]
+    public void Type_GetMethod()
+    {
+        Assert.NotNull(typeof(Exception).GetMethod("get_Message", BindingFlags.Instance | BindingFlags.Public, Array.Empty<Type>()));
+        Assert.Null(typeof(Exception).GetMethod("set_Message", BindingFlags.Instance | BindingFlags.Public, Array.Empty<Type>()));
+    }
+
+    [Fact]
     public void Type_IsAssignableTo()
     {
         Assert.True(typeof(string).IsAssignableTo(typeof(object)));
@@ -942,6 +985,77 @@ public class UnitTest1
             await Task.Yield();
             yield return "b";
         }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_AnyAsync()
+    {
+        Assert.True(await CustomAsyncEnumerable().AnyAsync());
+        Assert.True(await CustomAsyncEnumerable().AnyAsync(item => item == "a"));
+        Assert.False(await CustomAsyncEnumerable().AnyAsync(item => item == "c"));
+        Assert.False(await CustomAsyncEnumerable().AnyAsync(async (item, _) => { await Task.Yield(); return item == "c"; }));
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_Where()
+    {
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where(item => item == "a").ToListAsync());
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where((item, index) => item == "a").ToListAsync());
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where(async (item, _) => { await Task.Yield(); return item == "a"; }).ToListAsync());
+        Assert.Equal(["a"], await CustomAsyncEnumerable().Where(async (item, index, _) => { await Task.Yield(); return item == "a"; }).ToListAsync());
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_FirstAsync()
+    {
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstAsync());
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstAsync(item => item == "a"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstAsync(async (item, _) => { await Task.Yield(); return item == "a"; }));
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_FirstOrDefaultAsync()
+    {
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync());
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync("default"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(item => item == "a"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(item => item == "a", "default"));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(async (item, _) => { await Task.Yield(); return item == "a"; }));
+        Assert.Equal("a", await CustomAsyncEnumerable().FirstOrDefaultAsync(async (item, _) => { await Task.Yield(); return item == "a"; }, "default"));
+
+        async IAsyncEnumerable<string> CustomAsyncEnumerable()
+        {
+            yield return "a";
+            await Task.Yield();
+            yield return "b";
+        }
+    }
+
+    [Fact]
+    public async Task AsyncEnumerable_Concat()
+    {
+        Assert.Equal(["a", "b"], await new[] { "a" }.ToAsyncEnumerable().Concat(new[] { "b" }.ToAsyncEnumerable()).ToListAsync());
     }
 
     [Fact]

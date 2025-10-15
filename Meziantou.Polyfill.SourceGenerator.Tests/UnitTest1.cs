@@ -15,7 +15,8 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
-    private const string LatestDotnetPackageVersion = "9.0.0";
+    private const string LatestDotnetPackageVersion = "10.0.0-rc.1.25451.107";
+    private const string LatestDotnetTfm = "net10.0";
 
     [Fact]
     public void PolyfillOptions_Included()
@@ -40,7 +41,7 @@ public class UnitTest1
     [Fact]
     public async Task NoCodeGeneratedForLatestFramework()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
 
         Assert.Collection(result.GeneratorResult.GeneratedTrees.OrderBy(tree => tree.FilePath, StringComparer.Ordinal),
@@ -54,10 +55,10 @@ public class UnitTest1
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
+        Assert.Single(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute", StringComparison.Ordinal)));
 
         result = GenerateFiles("", assemblyLocations: assemblies, excludedPolyfills: "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute");
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute")));
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("UnscopedRefAttribute", StringComparison.Ordinal)));
     }
 
     [Fact]
@@ -66,11 +67,11 @@ public class UnitTest1
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
 
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync")));
+        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync", StringComparison.Ordinal)));
 
         result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})");
-        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync")));
-        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("System.Linq.Enumerable.OrderDescending")));
+        Assert.Empty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("WaitForExitAsync", StringComparison.Ordinal)));
+        Assert.NotEmpty(result.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.Contains("System.Linq.Enumerable.OrderDescending", StringComparison.Ordinal)));
     }
 
     [Fact]
@@ -78,11 +79,11 @@ public class UnitTest1
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
-        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs")));
-        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs")));
+        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs", StringComparison.Ordinal)));
+        Assert.Single(tempGeneration.GeneratorResult.GeneratedTrees.Where(t => t.FilePath.EndsWith("M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs", StringComparison.Ordinal)));
 
         var temp = Path.GetTempFileName() + ".dll";
-        File.WriteAllBytes(temp, tempGeneration.Assembly!);
+        await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
         Assert.Single(result.GeneratorResult.GeneratedTrees); // debug.g.cs
     }
@@ -118,7 +119,7 @@ public class UnitTest1
         // trackIncrementalGeneratorSteps allows to report info about each step of the generator
         GeneratorDriver driver = CSharpGeneratorDriver.Create(
             generators: new ISourceGenerator[] { sourceGenerator },
-            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
+            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = "*",
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = "test",
@@ -148,7 +149,8 @@ public class UnitTest1
     {
         return new TheoryData<PackageReference[]>
         {
-            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, "ref/net9.0/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/") } },
@@ -174,12 +176,14 @@ public class UnitTest1
         };
     }
 
+    [SuppressMessage("Design", "CA1034:Nested types should not be visible")]
     public sealed class PackageReference : IXunitSerializable
     {
         public string Name { get; set; }
         public string Version { get; set; }
         public string Path { get; set; }
 
+        [SuppressMessage("Performance", "CA1819:Properties should not return arrays")]
         public string[]? Exclusions { get; set; }
 
         public PackageReference()
@@ -230,7 +234,7 @@ public class UnitTest1
         GeneratorDriver driver = CSharpGeneratorDriver.Create(
             generators: new ISourceGenerator[] { generator },
             parseOptions: options,
-            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>()
+            optionsProvider: new TestAnalyzerConfigOptionsProvider(new Dictionary<string, string?>(StringComparer.Ordinal)
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
@@ -312,7 +316,11 @@ public class UnitTest1
                     {
                         var extractPath = Path.Combine(tempFolder, entry.FullName);
                         Directory.CreateDirectory(Path.GetDirectoryName(extractPath)!);
+#if NET10_0_OR_GREATER
+                        await entry.ExtractToFileAsync(extractPath, overwrite: true);
+#else
                         entry.ExtractToFile(extractPath, overwrite: true);
+#endif
                     }
                 }
 
