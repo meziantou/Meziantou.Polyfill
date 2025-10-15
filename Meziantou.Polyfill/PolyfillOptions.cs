@@ -1,7 +1,4 @@
-﻿#pragma warning disable IDE0290 // Use primary constructor
-using System;
-using System.Collections.Generic;
-using System.Linq;
+#pragma warning disable IDE0290 // Use primary constructor
 using System.Runtime.InteropServices;
 
 namespace Meziantou.Polyfill;

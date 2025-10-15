@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -1134,6 +1135,19 @@ public class UnitTest1
         Assert.Equal("ab", string.Concat("a".AsSpan(), "b".AsSpan()));
         Assert.Equal("abc", string.Concat("a".AsSpan(), "b".AsSpan(), "c".AsSpan()));
         Assert.Equal("abcd", string.Concat("a".AsSpan(), "b".AsSpan(), "c".AsSpan(), "d".AsSpan()));
+    }
+
+    [Fact]
+    public void OperatingSystem_IsWindows()
+    {
+        OperatingSystem.IsWindows();
+        OperatingSystem.IsWindowsVersionAtLeast(6);
+    }
+
+    [Fact]
+    public void OperatingSystem_IsMacOS()
+    {
+        OperatingSystem.IsMacOS();
     }
 
     [Fact]

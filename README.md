@@ -103,7 +103,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (274)
+### Methods (279)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -121,6 +121,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Int32 start, System.Int32 length)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Range range)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.Compression.ZipFileExtensions.ExtractToFileAsync(this System.IO.Compression.ZipArchiveEntry source, System.String destinationFileName, System.Boolean overwrite, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.Compression.ZipFileExtensions.ExtractToFileAsync(this System.IO.Compression.ZipArchiveEntry source, System.String destinationFileName, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.ReadAtLeast(System.Span<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true])`
@@ -339,6 +341,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Object instance)`
 - `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Type type)`
+- `System.OperatingSystem.IsMacOS()`
+- `System.OperatingSystem.IsWindows()`
+- `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2, System.ReadOnlySpan<System.Char> str3)`

@@ -2,7 +2,6 @@
 #pragma warning disable MA0047 // Declare types in namespaces
 #pragma warning disable MA0048 // File name must match type name
 using System.Reflection;
-using System.Text;
 using Meziantou.Polyfill.Generator;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
