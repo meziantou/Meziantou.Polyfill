@@ -103,7 +103,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (271)
+### Methods (274)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -339,6 +339,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Object instance)`
 - `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Type type)`
+- `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1)`
+- `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2)`
+- `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2, System.ReadOnlySpan<System.Char> str3)`
 - `System.String.Contains(System.Char value)`
 - `System.String.Contains(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`

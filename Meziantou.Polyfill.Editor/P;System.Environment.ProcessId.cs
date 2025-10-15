@@ -8,7 +8,8 @@ static partial class PolyfillExtensions
         {
             get
             {
-                return Process.GetCurrentProcess().Id;
+                using var process = Process.GetCurrentProcess();
+                return process.Id;
             }
         }
     }

@@ -1118,12 +1118,19 @@ public class UnitTest1
     [Fact]
     public unsafe void ObjectDisposedException_ThrowIf()
     {
-        var sample = "  ";
         Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, new object()));
         Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, typeof(object)));
 
         ObjectDisposedException.ThrowIf(false, new object());
         ObjectDisposedException.ThrowIf(false, typeof(object));
+    }
+
+    [Fact]
+    public void String_Concat()
+    {
+        Assert.Equal("ab", string.Concat("a".AsSpan(), "b".AsSpan()));
+        Assert.Equal("abc", string.Concat("a".AsSpan(), "b".AsSpan(), "c".AsSpan()));
+        Assert.Equal("abcd", string.Concat("a".AsSpan(), "b".AsSpan(), "c".AsSpan(), "d".AsSpan()));
     }
 
     [Fact]
