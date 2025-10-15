@@ -21,6 +21,7 @@ internal sealed partial class PolyfillData
         "System.IAsyncDisposable",
         "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Collections.Generic.IAsyncEnumerator`1",
+        "System.IO.Compression.ZipArchiveEntry",
     ];
 
     public PolyfillData(string content) => Content = content;

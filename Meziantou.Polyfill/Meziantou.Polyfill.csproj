@@ -1,10 +1,9 @@
 <Project Sdk="Meziantou.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>2.0.0</Version>
+    <Version>1.0.53</Version>
     <TransformOnBuild>true</TransformOnBuild>
     <RoslynVersion>4.3.1</RoslynVersion>
-    <RoslynVersion>5.0.0-2.final</RoslynVersion>
 
     <LangVersion>preview</LangVersion>
 
