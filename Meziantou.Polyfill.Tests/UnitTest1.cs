@@ -1235,6 +1235,18 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Convert_ToBase64String_ReadOnlySpan()
+    {
+        ReadOnlySpan<byte> data = [1, 2, 3, 4];
+        var result = Convert.ToBase64String(data);
+        Assert.Equal("AQIDBA==", result);
+
+        // Test with Base64FormattingOptions
+        result = Convert.ToBase64String(data, Base64FormattingOptions.None);
+        Assert.Equal("AQIDBA==", result);
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
