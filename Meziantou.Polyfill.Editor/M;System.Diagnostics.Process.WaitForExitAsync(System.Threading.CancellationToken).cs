@@ -85,26 +85,27 @@ static partial class PolyfillExtensions
 
         target.WaitForExit();
     }
+}
 
-    private sealed class TaskCompletionSourceWithCancellation<T> : TaskCompletionSource<T>
+file sealed class TaskCompletionSourceWithCancellation<T> : TaskCompletionSource<T>
+{
+    private CancellationToken _cancellationToken;
+    public TaskCompletionSourceWithCancellation() : base(TaskCreationOptions.RunContinuationsAsynchronously)
     {
-        private CancellationToken _cancellationToken;
-        public TaskCompletionSourceWithCancellation() : base(TaskCreationOptions.RunContinuationsAsynchronously)
-        {
-        }
-        private void OnCancellation()
-        {
-            TrySetCanceled(_cancellationToken);
-        }
+    }
+    private void OnCancellation()
+    {
+        TrySetCanceled(_cancellationToken);
+    }
 #if NETCOREAPP3_1_OR_GREATER
-        public async ValueTask<T> WaitWithCancellationAsync(CancellationToken cancellationToken)
+    public async ValueTask<T> WaitWithCancellationAsync(CancellationToken cancellationToken)
+    {
+        _cancellationToken = cancellationToken;
+        await using (cancellationToken.UnsafeRegister(s => ((TaskCompletionSourceWithCancellation<T>)s!).OnCancellation(), this))
         {
-            _cancellationToken = cancellationToken;
-            await using (cancellationToken.UnsafeRegister(s => ((TaskCompletionSourceWithCancellation<T>)s!).OnCancellation(), this))
-            {
-                return await Task.ConfigureAwait(false);
-            }
+            return await Task.ConfigureAwait(false);
         }
+    }
 #else
         public async Task<T> WaitWithCancellationAsync(CancellationToken cancellationToken)
         {
@@ -115,5 +116,4 @@ static partial class PolyfillExtensions
             }
         }
 #endif
-    }
 }

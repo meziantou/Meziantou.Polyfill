@@ -1229,6 +1229,12 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Enum_GetNames()
+    {
+        Assert.Equal(Enum.GetNames(typeof(DayOfWeek)), Enum.GetNames<DayOfWeek>());
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
