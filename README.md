@@ -103,7 +103,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (286)
+### Methods (290)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -140,6 +140,10 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.IO.TextReader.ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int32 result)`
+- `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int32 result)`
+- `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int32 result)`
+- `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TSource>> func, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, TSource, TSource> func, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource, TAccumulate>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, TAccumulate seed, System.Func<TAccumulate, TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TAccumulate>> func, [System.Threading.CancellationToken cancellationToken = default])`

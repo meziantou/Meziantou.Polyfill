@@ -1247,6 +1247,100 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Int32_TryParse_ReadOnlySpan_Char()
+    {
+        // Basic parsing
+        Assert.True(int.TryParse("123".AsSpan(), CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123, result);
+
+        // Negative numbers
+        Assert.True(int.TryParse("-456".AsSpan(), CultureInfo.InvariantCulture, out result));
+        Assert.Equal(-456, result);
+
+        // Invalid input
+        Assert.False(int.TryParse("abc".AsSpan(), CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0, result);
+
+        // Empty span
+        Assert.False(int.TryParse(ReadOnlySpan<char>.Empty, CultureInfo.InvariantCulture, out _));
+
+        // Null provider
+        Assert.True(int.TryParse("789".AsSpan(), (IFormatProvider?)null, out result));
+        Assert.Equal(789, result);
+    }
+
+    [Fact]
+    public void Int32_TryParse_ReadOnlySpan_Char_NumberStyles()
+    {
+        // Hex parsing
+        Assert.True(int.TryParse("FF".AsSpan(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(255, result);
+
+        // Allow leading white space
+        Assert.True(int.TryParse("  123".AsSpan(), NumberStyles.Integer, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(123, result);
+
+        // Invalid with specified style
+        Assert.False(int.TryParse("ABC".AsSpan(), NumberStyles.Integer, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0, result);
+
+        // Null provider
+        Assert.True(int.TryParse("42".AsSpan(), NumberStyles.Integer, null, out result));
+        Assert.Equal(42, result);
+    }
+
+    [Fact]
+    public void Int32_TryParse_ReadOnlySpan_Byte()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123"u8;
+        Assert.True(int.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123, result);
+
+        // Negative numbers
+        utf8Data = "-456"u8;
+        Assert.True(int.TryParse(utf8Data, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(-456, result);
+
+        // Invalid UTF8 input
+        utf8Data = "abc"u8;
+        Assert.False(int.TryParse(utf8Data, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0, result);
+
+        // Empty span
+        Assert.False(int.TryParse(ReadOnlySpan<byte>.Empty, CultureInfo.InvariantCulture, out _));
+
+        // Null provider
+        utf8Data = "789"u8;
+        Assert.True(int.TryParse(utf8Data, (IFormatProvider?)null, out result));
+        Assert.Equal(789, result);
+    }
+
+    [Fact]
+    public void Int32_TryParse_ReadOnlySpan_Byte_NumberStyles()
+    {
+        // Hex parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "FF"u8;
+        Assert.True(int.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(255, result);
+
+        // Allow leading white space
+        utf8Data = "  123"u8;
+        Assert.True(int.TryParse(utf8Data, NumberStyles.Integer, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(123, result);
+
+        // Invalid with specified style
+        utf8Data = "ABC"u8;
+        Assert.False(int.TryParse(utf8Data, NumberStyles.Integer, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0, result);
+
+        // Null provider
+        utf8Data = "42"u8;
+        Assert.True(int.TryParse(utf8Data, NumberStyles.Integer, null, out result));
+        Assert.Equal(42, result);
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
