@@ -1130,6 +1130,78 @@ public class UnitTest1
     }
 
     [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfEqual()
+    {
+        var sample = 5;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfEqual(sample, 5));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentOutOfRangeException.ThrowIfEqual(5, 10);
+        ArgumentOutOfRangeException.ThrowIfEqual("a", "b");
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNotEqual()
+    {
+        var sample = 5;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNotEqual(sample, 10));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentOutOfRangeException.ThrowIfNotEqual(5, 5);
+        ArgumentOutOfRangeException.ThrowIfNotEqual("a", "a");
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfGreaterThan()
+    {
+        var sample = 10;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThan(sample, 5));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(5, 10);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(5, 5);
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfGreaterThanOrEqual()
+    {
+        var sample = 10;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(sample, 5));
+        Assert.Equal("sample", ex.ParamName);
+
+        sample = 5;
+        ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(sample, 5));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(5, 10);
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfLessThan()
+    {
+        var sample = 5;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThan(sample, 10));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentOutOfRangeException.ThrowIfLessThan(10, 5);
+        ArgumentOutOfRangeException.ThrowIfLessThan(5, 5);
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfLessThanOrEqual()
+    {
+        var sample = 5;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(sample, 10));
+        Assert.Equal("sample", ex.ParamName);
+
+        sample = 5;
+        ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(sample, 5));
+        Assert.Equal("sample", ex.ParamName);
+
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(10, 5);
+    }
+
+    [Fact]
     public void String_Concat()
     {
         Assert.Equal("ab", string.Concat("a".AsSpan(), "b".AsSpan()));
