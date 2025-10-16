@@ -103,7 +103,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (290)
+### Methods (292)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -129,6 +129,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Convert.ToBase64String(System.ReadOnlySpan<System.Byte> bytes, [System.Base64FormattingOptions options = System.Base64FormattingOptions.None])`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
 - `System.Enum.GetNames<TEnum>() where TEnum : struct, System.Enum`
+- `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.ReadAtLeast(System.Span<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true])`

@@ -1341,6 +1341,25 @@ public class UnitTest1
     }
 
     [Fact]
+    public async Task File_WriteAllTextAsync_ReadOnlyMemory()
+    {
+        var tempFile = Path.GetTempFileName();
+        try
+        {
+            // Write with default encoding (UTF8 without BOM)
+            ReadOnlyMemory<char> content = "Hello, World!".AsMemory();
+            await File.WriteAllTextAsync(tempFile, content);
+
+            var result = File.ReadAllText(tempFile);
+            Assert.Equal("Hello, World!", result);
+        }
+        finally
+        {
+            File.Delete(tempFile);
+        }
+    }
+
+    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];
