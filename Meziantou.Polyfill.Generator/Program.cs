@@ -151,61 +151,78 @@ async Task GenerateMembers()
     sb.AppendLine($"    var includeContext = new IncludeContext(compilation, options);");
     foreach (var polyfill in polyfills)
     {
+        var requiredType = requiredTypes.SingleOrDefault(rt => $"T:{rt.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
+        if (requiredType is null)
+            continue;
+
+        sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(includeContext, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
+        sb.AppendLine($"    {{");
+        sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
+        sb.AppendLine($"        {requiredType.CsharpFieldName} = true;");
+        sb.AppendLine($"    }}");
+    }
+
+    foreach (var polyfill in polyfills)
+    {
+        var requiredType = requiredTypes.SingleOrDefault(rt => $"T:{rt.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
+        if (requiredType is not null)
+            continue;
+
         sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(includeContext, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
         sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
 
-        string GenerateIncludePreCondition(PolyfillData data)
-        {
-            var result = "";
-
-            if (data.UseExtensions)
-            {
-                result += "_supportExtensions && ";
-            }
-
-            if (data.UseUnsafe)
-            {
-                result += "_supportUnsafe && ";
-            }
-
-            foreach (var requiredType in data.RequiredTypes)
-            {
-                result += requiredTypes.Single(t => t.TypeName == requiredType).CsharpFieldName + " && ";
-            }
-
-            if (data.ConditionalMembers.Length > 0)
-            {
-                result += "(";
-                result += string.Join(" || ", data.ConditionalMembers.Select(member =>
-                {
-                    var dependency = polyfills.Single(p => p.TypeName == member);
-                    return $"({dependency.CSharpFieldName} & {dependency.CSharpFieldBitMask}uL) == {dependency.CSharpFieldBitMask}uL";
-                }));
-                result += ") && ";
-            }
-            return result;
-        }
-
-        string GenerateIncludePostCondition(PolyfillData data)
-        {
-            var result = "";
-            if (polyfill.PolyfillData.SupportInternalsVisibleTo && data.DeclaredMemberDocumentationIds.Length > 0)
-            {
-                result += " && (";
-                result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
-                {
-                    // Do not use "options" as the member cannot be part of Included or Excluded members
-                    return $"IncludeMember(includeContext, \"{member}\")";
-                }));
-                result += ")";
-            }
-
-            return result;
-        }
     }
     sb.AppendLine("}");
 
 
+    string GenerateIncludePreCondition(PolyfillData data)
+    {
+        var result = "";
+
+        if (data.UseExtensions)
+        {
+            result += "_supportExtensions && ";
+        }
+
+        if (data.UseUnsafe)
+        {
+            result += "_supportUnsafe && ";
+        }
+
+        foreach (var requiredType in data.RequiredTypes)
+        {
+            result += requiredTypes.Single(t => t.TypeName == requiredType).CsharpFieldName + " && ";
+        }
+
+        if (data.ConditionalMembers.Length > 0)
+        {
+            result += "(";
+            result += string.Join(" || ", data.ConditionalMembers.Select(member =>
+            {
+                var dependency = polyfills.Single(p => p.TypeName == member);
+                return $"({dependency.CSharpFieldName} & {dependency.CSharpFieldBitMask}uL) == {dependency.CSharpFieldBitMask}uL";
+            }));
+            result += ") && ";
+        }
+        return result;
+    }
+
+    string GenerateIncludePostCondition(PolyfillData data)
+    {
+        var result = "";
+        if (data.SupportInternalsVisibleTo && data.DeclaredMemberDocumentationIds.Length > 0)
+        {
+            result += " && (";
+            result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
+            {
+                // Do not use "options" as the member cannot be part of Included or Excluded members
+                return $"IncludeMember(includeContext, \"{member}\")";
+            }));
+            result += ")";
+        }
+
+        return result;
+    }
 
     sb.AppendLine("public override int GetHashCode()");
     sb.AppendLine("{");

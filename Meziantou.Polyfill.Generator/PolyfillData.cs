@@ -22,6 +22,7 @@ internal sealed partial class PolyfillData
         "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Collections.Generic.IAsyncEnumerator`1",
         "System.IO.Compression.ZipArchiveEntry",
+        "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
     ];
 
     public PolyfillData(string content) => Content = content;

@@ -37,7 +37,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types (63)
+### Types (64)
 
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
@@ -72,6 +72,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute`
 - `System.Runtime.CompilerServices.CollectionBuilderAttribute`
 - `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler`
 - `System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute`
 - `System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute`
 - `System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute`
@@ -103,7 +104,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (293)
+### Methods (296)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -312,6 +313,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Linq.Enumerable.UnionBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TSource> second, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.UnionBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TSource> second, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.Zip<TFirst, TSecond>(this System.Collections.Generic.IEnumerable<TFirst> first, System.Collections.Generic.IEnumerable<TSecond> second)`
+- `System.Math.Clamp(System.Int32 value, System.Int32 min, System.Int32 max)`
+- `System.Math.Clamp(System.UInt32 value, System.UInt32 min, System.UInt32 max)`
 - `System.MemoryExtensions.AsSpan(this System.String? text, System.Int32 start, System.Int32 length)`
 - `System.MemoryExtensions.CommonPrefixLength<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> other)`
 - `System.MemoryExtensions.CommonPrefixLength<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> other, System.Collections.Generic.IEqualityComparer<T>? comparer)`
@@ -365,6 +368,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.String.Contains(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`
 - `System.String.CopyTo(System.Span<System.Char> destination)`
+- `System.String.Create(System.IFormatProvider? provider, ref System.Runtime.CompilerServices.DefaultInterpolatedStringHandler handler)`
 - `System.String.EndsWith(System.Char value)`
 - `System.String.GetHashCode(System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.StringComparison comparisonType)`

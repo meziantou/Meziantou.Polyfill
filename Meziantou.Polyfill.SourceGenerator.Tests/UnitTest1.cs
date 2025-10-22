@@ -226,19 +226,19 @@ public class UnitTest1
         }
     }
 
-    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null)
+    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
             .Select(loc => MetadataReference.CreateFromFile(loc))
             .ToArray();
 
-        var options = new CSharpParseOptions(languageVersion: LanguageVersion.Preview);
+        var options = new CSharpParseOptions(languageVersion: languageVersion);
 
         var compilation = CSharpCompilation.Create(assemblyName,
             new[] { CSharpSyntaxTree.ParseText(file, options) },
             references,
-            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: allowUnsafe));
 
         var generator = new PolyfillGenerator().AsSourceGenerator();
 
