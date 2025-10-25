@@ -587,7 +587,20 @@ namespace System.Runtime.CompilerServices
 
             const int StringMaxLength = 0x3FFFFFDF; // see string.MaxLength
             uint newCapacity = Math.Max(requiredMinCapacity, Math.Min((uint)_chars.Length * 2, StringMaxLength));
-            int arraySize = (int)Math.Clamp(newCapacity, MinimumArrayPoolLength, int.MaxValue);
+
+            int arraySize;
+            if (newCapacity < MinimumArrayPoolLength)
+            {
+                arraySize = MinimumArrayPoolLength;
+            }
+            else if (newCapacity > int.MaxValue)
+            {
+                arraySize = int.MaxValue;
+            }
+            else
+            {
+                arraySize = (int)newCapacity;
+            }
 
             char[] newArray = new char[arraySize];
             _chars.Slice(0, _pos).CopyTo(newArray);
