@@ -16,3 +16,5 @@ When creating a new a polyfill, you must:
 - All polyfills must be self contained. Use a `file class` if needed to create helpers.
 - If you need to generate a file only when another polyfill is generated, add `// when <xml documentation id>` in the file
 - If xml documentation id is too long, you can use `// XML-DOC: <xml documentation id>` in the file
+
+Documentation about XML documentation identifiers: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/#id-strings.
