@@ -16,5 +16,13 @@ When creating a new a polyfill, you must:
 - All polyfills must be self contained. Use a `file class` if needed to create helpers.
 - If you need to generate a file only when another polyfill is generated, add `// when <xml documentation id>` in the file
 - If xml documentation id is too long, you can use `// XML-DOC: <xml documentation id>` in the file
+- All polyfill must be in a partial class named `PolyfillExtensions`
+- Add tests in the `Meziantou.Polyfill.Tests` project
 
 Documentation about XML documentation identifiers: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/#id-strings.
+
+What can be polyfilled:
+- Instance methods using extension methods
+- Static methods using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
+- Properties using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
+- Static properties using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
