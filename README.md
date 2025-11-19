@@ -407,11 +407,12 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
 
-### Properties (3)
+### Properties (4)
 
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.Environment.ProcessId`
+- `System.Net.Http.HttpMethod.Query`
 
 <!-- end_polyfills -->
 

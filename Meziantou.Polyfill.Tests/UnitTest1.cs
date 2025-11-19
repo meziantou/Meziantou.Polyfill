@@ -1540,6 +1540,14 @@ public class UnitTest1
         var actual = string.Create(CultureInfo.InvariantCulture, $"a{1}b");
         Assert.Equal("a1b", actual);
     }
+
+    [Fact]
+    public void HttpMethod_Query()
+    {
+        var queryMethod = HttpMethod.Query;
+        Assert.NotNull(queryMethod);
+        Assert.Equal("QUERY", queryMethod.Method);
+    }
 }
 
 [CollectionBuilder(typeof(CustomCollectionWithBuilder), "Create")]
