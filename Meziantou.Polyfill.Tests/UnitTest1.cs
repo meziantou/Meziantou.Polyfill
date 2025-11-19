@@ -1387,15 +1387,6 @@ public class UnitTest1
     }
 
     [Fact]
-    public void MD5_HashData_ReadOnlySpan()
-    {
-        var hash = MD5.HashData(ReadOnlySpan<byte>.Empty);
-        Assert.Equal(16, hash.Length);
-        var expected = new byte[] { 0xD4, 0x1D, 0x8C, 0xD9, 0x8F, 0x00, 0xB2, 0x04, 0xE9, 0x80, 0x09, 0x98, 0xEC, 0xF8, 0x42, 0x7E };
-        Assert.Equal(expected, hash);
-    }
-
-    [Fact]
     public void CollectionBuilder()
     {
         CustomCollectionWithBuilder collection = ["a", "b"];

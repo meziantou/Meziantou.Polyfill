@@ -104,7 +104,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (297)
+### Methods (296)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -360,7 +360,6 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.OperatingSystem.IsMacOS()`
 - `System.OperatingSystem.IsWindows()`
 - `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
-- `System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2)`
