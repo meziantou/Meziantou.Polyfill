@@ -14,5 +14,5 @@ static partial class PolyfillExtensions
 
 file static class EmptyReadOnlyCollection<T>
 {
-    public static readonly ReadOnlyCollection<T> Instance = new(new List<T>());
+    public static readonly ReadOnlyCollection<T> Instance = new(System.Array.Empty<T>());
 }
