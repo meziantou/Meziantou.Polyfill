@@ -17,8 +17,10 @@ When creating a new a polyfill, you must:
 - If you need to generate a file only when another polyfill is generated, add `// when <xml documentation id>` in the file
 - If xml documentation id is too long, you can use `// XML-DOC: <xml documentation id>` in the file
 - All polyfill must be in a partial class named `PolyfillExtensions`
+- If using `extension` keyword, the class name can be suffixed with `PolyfillExtensions_<type>` (e.g., `PolyfillExtensions_Int32`) when there is a risk of name collision
 - Add tests in the `Meziantou.Polyfill.Tests` project
 - Increment the patch component of the version in `Meziantou.Polyfill/Meziantou.Polyfill.csproj`
+- Remove all extra `using` directives in the new file
 
 Documentation about XML documentation identifiers: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/#id-strings.
 
@@ -56,6 +58,6 @@ partial class PolyfillExtensions
         public static int Sample()
         {
         }
-    }
+    }1
 }
 ```
