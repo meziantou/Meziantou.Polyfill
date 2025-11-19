@@ -513,6 +513,22 @@ public class UnitTest1
 #endif
 
     [Fact]
+    public void ReadOnlyCollection_Empty()
+    {
+        var empty = ReadOnlyCollection<int>.Empty;
+        Assert.NotNull(empty);
+        Assert.Empty(empty);
+        
+        // Verify it's the same instance each time
+        Assert.Same(empty, ReadOnlyCollection<int>.Empty);
+        
+        // Verify different type parameters get different instances
+        var emptyString = ReadOnlyCollection<string>.Empty;
+        Assert.NotNull(emptyString);
+        Assert.Empty(emptyString);
+    }
+
+    [Fact]
     public async Task Process_WaitForExitAsync()
     {
         var psi = new ProcessStartInfo

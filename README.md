@@ -405,6 +405,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 ### Properties (3)
 
+- `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.Collections.ObjectModel.ReadOnlySet<T>.Empty`
 - `System.Environment.ProcessId`
