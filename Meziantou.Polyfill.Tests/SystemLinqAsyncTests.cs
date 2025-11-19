@@ -1,15 +1,3 @@
-#pragma warning disable CA1307
-#pragma warning disable CA1837
-#pragma warning disable CA1849
-#pragma warning disable CA2000
-#pragma warning disable CA2264
-#pragma warning disable CA5351
-#pragma warning disable MA0001
-#pragma warning disable MA0002
-#pragma warning disable MA0015
-#pragma warning disable MA0021
-#pragma warning disable MA0074
-#pragma warning disable MA0131
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
