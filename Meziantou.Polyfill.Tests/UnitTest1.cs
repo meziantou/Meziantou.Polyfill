@@ -494,7 +494,6 @@ public class UnitTest1
         Assert.Empty(emptyInt);
     }
 
-#if NET9_0_OR_GREATER
     [Fact]
     public void ReadOnlySet_Empty()
     {
@@ -510,7 +509,6 @@ public class UnitTest1
         Assert.NotNull(emptyString);
         Assert.Empty(emptyString);
     }
-#endif
 
     [Fact]
     public void ReadOnlyCollection_Empty()

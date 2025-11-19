@@ -37,10 +37,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types (64)
+### Types (65)
 
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
+- `System.Collections.ObjectModel.ReadOnlySet<T>`
 - `System.Diagnostics.CodeAnalysis.AllowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DisallowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute`
@@ -403,11 +404,10 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
 
-### Properties (4)
+### Properties (3)
 
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
-- `System.Collections.ObjectModel.ReadOnlySet<T>.Empty`
 - `System.Environment.ProcessId`
 
 <!-- end_polyfills -->
