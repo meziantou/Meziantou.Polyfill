@@ -1360,6 +1360,35 @@ public class UnitTest1
     }
 
     [Fact]
+    public void BitConverter_ToInt32_ReadOnlySpan()
+    {
+        // Test with little-endian bytes representing 42
+        ReadOnlySpan<byte> data1 = [0x2A, 0x00, 0x00, 0x00];
+        var result1 = BitConverter.ToInt32(data1);
+        Assert.Equal(42, result1);
+
+        // Test with little-endian bytes representing -1
+        ReadOnlySpan<byte> data2 = [0xFF, 0xFF, 0xFF, 0xFF];
+        var result2 = BitConverter.ToInt32(data2);
+        Assert.Equal(-1, result2);
+
+        // Test with little-endian bytes representing 256
+        ReadOnlySpan<byte> data3 = [0x00, 0x01, 0x00, 0x00];
+        var result3 = BitConverter.ToInt32(data3);
+        Assert.Equal(256, result3);
+
+        // Test with little-endian bytes representing int.MaxValue (2147483647)
+        ReadOnlySpan<byte> data4 = [0xFF, 0xFF, 0xFF, 0x7F];
+        var result4 = BitConverter.ToInt32(data4);
+        Assert.Equal(int.MaxValue, result4);
+
+        // Test with little-endian bytes representing int.MinValue (-2147483648)
+        ReadOnlySpan<byte> data5 = [0x00, 0x00, 0x00, 0x80];
+        var result5 = BitConverter.ToInt32(data5);
+        Assert.Equal(int.MinValue, result5);
+    }
+
+    [Fact]
     public void Int32_TryParse_ReadOnlySpan_Char()
     {
         // Basic parsing
