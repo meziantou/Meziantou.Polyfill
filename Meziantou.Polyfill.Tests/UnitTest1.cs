@@ -6,6 +6,7 @@
 #pragma warning disable CA5351
 #pragma warning disable MA0001
 #pragma warning disable MA0002
+#pragma warning disable MA0015
 #pragma warning disable MA0021
 #pragma warning disable MA0074
 #pragma warning disable MA0131
@@ -493,6 +494,38 @@ public class UnitTest1
         var emptyInt = ReadOnlyDictionary<string, int>.Empty;
         Assert.NotNull(emptyInt);
         Assert.Empty(emptyInt);
+    }
+
+    [Fact]
+    public void ReadOnlySet_Empty()
+    {
+        var empty = ReadOnlySet<int>.Empty;
+        Assert.NotNull(empty);
+        Assert.Empty(empty);
+        
+        // Verify it's the same instance each time
+        Assert.Same(empty, ReadOnlySet<int>.Empty);
+        
+        // Verify different type parameters get different instances
+        var emptyString = ReadOnlySet<string>.Empty;
+        Assert.NotNull(emptyString);
+        Assert.Empty(emptyString);
+    }
+
+    [Fact]
+    public void ReadOnlyCollection_Empty()
+    {
+        var empty = ReadOnlyCollection<int>.Empty;
+        Assert.NotNull(empty);
+        Assert.Empty(empty);
+        
+        // Verify it's the same instance each time
+        Assert.Same(empty, ReadOnlyCollection<int>.Empty);
+        
+        // Verify different type parameters get different instances
+        var emptyString = ReadOnlyCollection<string>.Empty;
+        Assert.NotNull(emptyString);
+        Assert.Empty(emptyString);
     }
 
     [Fact]
@@ -1104,8 +1137,8 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        object? o = new();
-        ArgumentNullException.ThrowIfNull(o);
+        object? argument = new();
+        ArgumentNullException.ThrowIfNull(argument);
     }
 
     [Fact]
@@ -1115,7 +1148,8 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentNullException.ThrowIfNull((nint)1);
+        nint argument = 1;
+        ArgumentNullException.ThrowIfNull(argument);
     }
 
     [Fact]
@@ -1125,7 +1159,8 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrEmpty(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentException.ThrowIfNullOrEmpty("a");
+        var argument = "a";
+        ArgumentException.ThrowIfNullOrEmpty(argument);
     }
 
     [Fact]
@@ -1135,7 +1170,8 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrWhiteSpace(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentException.ThrowIfNullOrWhiteSpace("a");
+        var argument = "a";
+        ArgumentException.ThrowIfNullOrWhiteSpace(argument);
     }
 
     [Fact]
@@ -1155,8 +1191,12 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfEqual(5, 10);
-        ArgumentOutOfRangeException.ThrowIfEqual("a", "b");
+        var value = 5;
+        var other = 10;
+        ArgumentOutOfRangeException.ThrowIfEqual(value, other);
+        var value2 = "a";
+        var other2 = "b";
+        ArgumentOutOfRangeException.ThrowIfEqual(value2, other2);
     }
 
     [Fact]
@@ -1166,8 +1206,12 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNotEqual(sample, 10));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfNotEqual(5, 5);
-        ArgumentOutOfRangeException.ThrowIfNotEqual("a", "a");
+        var value = 5;
+        var other = 5;
+        ArgumentOutOfRangeException.ThrowIfNotEqual(value, other);
+        var value2 = "a";
+        var other2 = "a";
+        ArgumentOutOfRangeException.ThrowIfNotEqual(value2, other2);
     }
 
     [Fact]
@@ -1177,8 +1221,12 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThan(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(5, 10);
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(5, 5);
+        var value = 5;
+        var other = 10;
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(value, other);
+        var value2 = 5;
+        var other2 = 5;
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(value2, other2);
     }
 
     [Fact]
@@ -1192,7 +1240,9 @@ public class UnitTest1
         ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(5, 10);
+        var value = 5;
+        var other = 10;
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(value, other);
     }
 
     [Fact]
@@ -1202,8 +1252,12 @@ public class UnitTest1
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThan(sample, 10));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfLessThan(10, 5);
-        ArgumentOutOfRangeException.ThrowIfLessThan(5, 5);
+        var value = 10;
+        var other = 5;
+        ArgumentOutOfRangeException.ThrowIfLessThan(value, other);
+        var value2 = 5;
+        var other2 = 5;
+        ArgumentOutOfRangeException.ThrowIfLessThan(value2, other2);
     }
 
     [Fact]
@@ -1217,7 +1271,9 @@ public class UnitTest1
         ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(10, 5);
+        var value = 10;
+        var other = 5;
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, other);
     }
 
     [Fact]
@@ -1260,9 +1316,47 @@ public class UnitTest1
         var result = Convert.ToBase64String(data);
         Assert.Equal("AQIDBA==", result);
 
-        // Test with Base64FormattingOptions
+        // Test with Base64FormattingOptions.None
         result = Convert.ToBase64String(data, Base64FormattingOptions.None);
         Assert.Equal("AQIDBA==", result);
+        
+        // Test with larger data and InsertLineBreaks option
+        var largeData = new byte[100];
+        for (int i = 0; i < largeData.Length; i++)
+            largeData[i] = (byte)(i % 256);
+        
+        var resultWithBreaks = Convert.ToBase64String((ReadOnlySpan<byte>)largeData, Base64FormattingOptions.InsertLineBreaks);
+        var expectedWithBreaks = Convert.ToBase64String(largeData, Base64FormattingOptions.InsertLineBreaks);
+        Assert.Equal(expectedWithBreaks, resultWithBreaks);
+    }
+
+    [Fact]
+    public void BitConverter_ToInt16_ReadOnlySpan()
+    {
+        // Test with little-endian bytes representing 42
+        ReadOnlySpan<byte> data1 = [0x2A, 0x00];
+        var result1 = BitConverter.ToInt16(data1);
+        Assert.Equal(42, result1);
+
+        // Test with little-endian bytes representing -1
+        ReadOnlySpan<byte> data2 = [0xFF, 0xFF];
+        var result2 = BitConverter.ToInt16(data2);
+        Assert.Equal(-1, result2);
+
+        // Test with little-endian bytes representing 256
+        ReadOnlySpan<byte> data3 = [0x00, 0x01];
+        var result3 = BitConverter.ToInt16(data3);
+        Assert.Equal(256, result3);
+
+        // Test with little-endian bytes representing short.MaxValue (32767)
+        ReadOnlySpan<byte> data4 = [0xFF, 0x7F];
+        var result4 = BitConverter.ToInt16(data4);
+        Assert.Equal(short.MaxValue, result4);
+
+        // Test with little-endian bytes representing short.MinValue (-32768)
+        ReadOnlySpan<byte> data5 = [0x00, 0x80];
+        var result5 = BitConverter.ToInt16(data5);
+        Assert.Equal(short.MinValue, result5);
     }
 
     [Fact]

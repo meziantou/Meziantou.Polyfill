@@ -37,10 +37,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types (64)
+### Types (65)
 
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
+- `System.Collections.ObjectModel.ReadOnlySet<T>`
 - `System.Diagnostics.CodeAnalysis.AllowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DisallowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute`
@@ -116,6 +117,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ArgumentOutOfRangeException.ThrowIfLessThanOrEqual<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
 - `System.ArgumentOutOfRangeException.ThrowIfLessThan<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
 - `System.ArgumentOutOfRangeException.ThrowIfNotEqual<T>(T value, T other, [System.String? paramName = null])`
+- `System.BitConverter.ToInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`
@@ -404,8 +406,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
 
-### Properties (2)
+### Properties (3)
 
+- `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.Environment.ProcessId`
 
