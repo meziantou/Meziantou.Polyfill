@@ -1331,6 +1331,66 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Convert_ToHexString_ByteArray()
+    {
+        byte[] data = [0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF];
+        var result = Convert.ToHexString(data);
+        Assert.Equal("0123456789ABCDEF", result);
+
+        // Test with empty array
+        var emptyResult = Convert.ToHexString(Array.Empty<byte>());
+        Assert.Equal("", emptyResult);
+
+        // Test with single byte
+        var singleByte = Convert.ToHexString(new byte[] { 0xFF });
+        Assert.Equal("FF", singleByte);
+    }
+
+    [Fact]
+    public void Convert_ToHexString_ByteArray_Offset_Length()
+    {
+        byte[] data = [0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF];
+        
+        // Test subset from middle
+        var result = Convert.ToHexString(data, 2, 4);
+        Assert.Equal("456789AB", result);
+
+        // Test from beginning
+        var resultStart = Convert.ToHexString(data, 0, 3);
+        Assert.Equal("012345", resultStart);
+
+        // Test from end
+        var resultEnd = Convert.ToHexString(data, 6, 2);
+        Assert.Equal("CDEF", resultEnd);
+
+        // Test with length 0
+        var emptyResult = Convert.ToHexString(data, 0, 0);
+        Assert.Equal("", emptyResult);
+    }
+
+    [Fact]
+    public void Convert_ToHexString_ReadOnlySpan()
+    {
+        ReadOnlySpan<byte> data = [0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF];
+        var result = Convert.ToHexString(data);
+        Assert.Equal("0123456789ABCDEF", result);
+
+        // Test with empty span
+        var emptyResult = Convert.ToHexString(ReadOnlySpan<byte>.Empty);
+        Assert.Equal("", emptyResult);
+
+        // Test with all possible byte values
+        var allBytes = new byte[256];
+        for (int i = 0; i < 256; i++)
+            allBytes[i] = (byte)i;
+        
+        var allBytesResult = Convert.ToHexString(allBytes);
+        Assert.Equal(512, allBytesResult.Length);
+        Assert.Equal("00", allBytesResult.Substring(0, 2));
+        Assert.Equal("FF", allBytesResult.Substring(510, 2));
+    }
+
+    [Fact]
     public void BitConverter_ToInt16_ReadOnlySpan()
     {
         // Test with little-endian bytes representing 42
