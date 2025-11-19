@@ -1,5 +1,3 @@
-using System;
-
 namespace System.Buffers;
 
 internal abstract class SearchValues<T>
