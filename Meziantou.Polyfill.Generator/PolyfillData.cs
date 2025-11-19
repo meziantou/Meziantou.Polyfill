@@ -98,15 +98,6 @@ internal sealed partial class PolyfillData
             }
         }
 
-        foreach (var property in root.DescendantNodes().OfType<PropertyDeclarationSyntax>())
-        {
-            var symbol = semanticModel.GetDeclaredSymbol(property);
-            if (symbol is not null)
-            {
-                requiredTypes.Add(symbol.Type);
-            }
-        }
-
         foreach (var type in root.DescendantNodes().OfType<TypeDeclarationSyntax>())
         {
             var symbol = semanticModel.GetDeclaredSymbol(type)!;
