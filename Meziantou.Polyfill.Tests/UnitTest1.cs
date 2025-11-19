@@ -1281,6 +1281,39 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Convert_ToInt32_ReadOnlySpan()
+    {
+        // Basic parsing
+        ReadOnlySpan<char> data = "123".AsSpan();
+        var result = Convert.ToInt32(data);
+        Assert.Equal(123, result);
+
+        // Negative numbers
+        data = "-456".AsSpan();
+        result = Convert.ToInt32(data);
+        Assert.Equal(-456, result);
+
+        // Zero
+        data = "0".AsSpan();
+        result = Convert.ToInt32(data);
+        Assert.Equal(0, result);
+
+        // Max value
+        data = "2147483647".AsSpan();
+        result = Convert.ToInt32(data);
+        Assert.Equal(2147483647, result);
+
+        // Min value
+        data = "-2147483648".AsSpan();
+        result = Convert.ToInt32(data);
+        Assert.Equal(-2147483648, result);
+
+        // Invalid input should throw
+        Assert.Throws<FormatException>(() => Convert.ToInt32("abc".AsSpan()));
+        Assert.Throws<OverflowException>(() => Convert.ToInt32("2147483648".AsSpan()));
+    }
+
+    [Fact]
     public void Int32_TryParse_ReadOnlySpan_Char()
     {
         // Basic parsing
