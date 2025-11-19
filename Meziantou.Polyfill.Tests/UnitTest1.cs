@@ -479,6 +479,22 @@ public class UnitTest1
     }
 
     [Fact]
+    public void ReadOnlyDictionary_Empty()
+    {
+        var empty = ReadOnlyDictionary<int, string>.Empty;
+        Assert.NotNull(empty);
+        Assert.Empty(empty);
+        
+        // Verify it's the same instance each time
+        Assert.Same(empty, ReadOnlyDictionary<int, string>.Empty);
+        
+        // Verify different type parameters get different instances
+        var emptyInt = ReadOnlyDictionary<string, int>.Empty;
+        Assert.NotNull(emptyInt);
+        Assert.Empty(emptyInt);
+    }
+
+    [Fact]
     public async Task Process_WaitForExitAsync()
     {
         var psi = new ProcessStartInfo
