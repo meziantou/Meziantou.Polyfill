@@ -1,22 +1,14 @@
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
 using System.Runtime.Versioning;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,12 +18,12 @@ namespace Meziantou.Polyfill.Tests;
 
 public class SystemRuntimeCompilerServicesTests
 {
-        [Fact]
-        public void CollectionBuilder()
-        {
-            CustomCollectionWithBuilder collection = ["a", "b"];
-            Assert.Equal(["a", "b"], collection);
-        }
+    [Fact]
+    public void CollectionBuilder()
+    {
+        CustomCollectionWithBuilder collection = ["a", "b"];
+        Assert.Equal(["a", "b"], collection);
+    }
 
 }
 
