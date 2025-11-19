@@ -3,6 +3,7 @@
 #pragma warning disable CA1849
 #pragma warning disable CA2000
 #pragma warning disable CA2264
+#pragma warning disable CA5351
 #pragma warning disable MA0001
 #pragma warning disable MA0002
 #pragma warning disable MA0015
@@ -1485,6 +1486,15 @@ public class UnitTest1
         hash = SHA256.HashData(data);
         Assert.Equal(32, hash.Length);
         expected = new byte[] { 0xBA, 0x78, 0x16, 0xBF, 0x8F, 0x01, 0xCF, 0xEA, 0x41, 0x41, 0x40, 0xDE, 0x5D, 0xAE, 0x22, 0x23, 0xB0, 0x03, 0x61, 0xA3, 0x96, 0x17, 0x7A, 0x9C, 0xB4, 0x10, 0xFF, 0x61, 0xF2, 0x00, 0x15, 0xAD };
+        Assert.Equal(expected, hash);
+    }
+
+    [Fact]
+    public void MD5_HashData_ReadOnlySpan()
+    {
+        var hash = MD5.HashData(ReadOnlySpan<byte>.Empty);
+        Assert.Equal(16, hash.Length);
+        var expected = new byte[] { 0xD4, 0x1D, 0x8C, 0xD9, 0x8F, 0x00, 0xB2, 0x04, 0xE9, 0x80, 0x09, 0x98, 0xEC, 0xF8, 0x42, 0x7E };
         Assert.Equal(expected, hash);
     }
 

@@ -362,6 +362,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.OperatingSystem.IsMacOS()`
 - `System.OperatingSystem.IsWindows()`
 - `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
+- `System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2)`
