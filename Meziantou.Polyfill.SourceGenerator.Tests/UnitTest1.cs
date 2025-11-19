@@ -186,6 +186,50 @@ public class UnitTest1
         return fileNames.Order(StringComparer.Ordinal);
     }
 
+    private static string FormatDiagnosticsWithSource(IEnumerable<Diagnostic> diagnostics)
+    {
+        if (!diagnostics.Any())
+            return "";
+
+        var sb = new StringBuilder();
+        sb.AppendLine("Diagnostics:");
+
+        foreach (var diagnostic in diagnostics)
+        {
+            sb.AppendLine(CultureInfo.InvariantCulture, $"  {diagnostic}");
+
+            if (diagnostic.Location.IsInSource && diagnostic.Location.SourceTree != null)
+            {
+                var tree = diagnostic.Location.SourceTree;
+                var lineSpan = diagnostic.Location.GetLineSpan();
+                var sourceText = tree.GetText();
+
+                // Get the line with the error
+                var startLine = lineSpan.StartLinePosition.Line;
+                var endLine = lineSpan.EndLinePosition.Line;
+
+                // Show a few lines of context
+                var contextStart = Math.Max(0, startLine - 2);
+                var contextEnd = Math.Min(sourceText.Lines.Count - 1, endLine + 2);
+
+                sb.AppendLine($"    File: {Path.GetFileName(tree.FilePath)}");
+                sb.AppendLine("    Source:");
+
+                for (var i = contextStart; i <= contextEnd; i++)
+                {
+                    var line = sourceText.Lines[i];
+                    var lineNumber = i + 1;
+                    var prefix = (i >= startLine && i <= endLine) ? ">>> " : "    ";
+                    sb.AppendLine(CultureInfo.InvariantCulture, $"{prefix}{lineNumber,4}: {line}");
+                }
+
+                sb.AppendLine();
+            }
+        }
+
+        return sb.ToString();
+    }
+
     [SuppressMessage("Design", "CA1034:Nested types should not be visible")]
     public sealed class PackageReference : IXunitSerializable
     {
@@ -251,7 +295,7 @@ public class UnitTest1
             }));
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);
-        Assert.Empty(diagnostics);
+        Assert.False(diagnostics.Any(), FormatDiagnosticsWithSource(diagnostics));
 
         var runResult = driver.GetRunResult();
 
@@ -263,7 +307,7 @@ public class UnitTest1
             var tree = runResult.GeneratedTrees.FirstOrDefault(tree => tree.FilePath == "Meziantou.Polyfill\\Meziantou.Polyfill.PolyfillGenerator\\Debug.g.cs");
             var diags = string.Join("\n", result.Diagnostics);
             Assert.True(result.Success, "Compilation error:\n" + diags + "\n" + tree);
-            Assert.Empty(result.Diagnostics);
+            Assert.False(result.Diagnostics.Any(), FormatDiagnosticsWithSource(result.Diagnostics));
         }
 
         return (runResult, outputCompilation, result.Success ? ms.ToArray() : null);
