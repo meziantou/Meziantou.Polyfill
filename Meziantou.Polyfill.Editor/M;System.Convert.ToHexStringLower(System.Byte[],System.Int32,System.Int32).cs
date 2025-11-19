@@ -20,17 +20,21 @@ static partial class PolyfillExtensions
             if (length == 0)
                 return string.Empty;
 
-            const string hexChars = "0123456789abcdef";
-            var result = new char[length * 2];
-            
-            for (int i = 0; i < length; i++)
+            const int AddToAlpha = 87;
+            const int AddToDigit = -39;
+
+            var c = new char[length * 2];
+            for (var i = 0; i < length; i++)
             {
-                byte b = inArray[offset + i];
-                result[i * 2] = hexChars[b >> 4];
-                result[i * 2 + 1] = hexChars[b & 0xF];
+                var byteValue = inArray[offset + i];
+                var b = byteValue >> 4;
+                c[i * 2] = (char)(AddToAlpha + b + (((b - 10) >> 31) & AddToDigit));
+
+                b = byteValue & 0xF;
+                c[(i * 2) + 1] = (char)(AddToAlpha + b + (((b - 10) >> 31) & AddToDigit));
             }
 
-            return new string(result);
+            return new string(c);
         }
     }
 }
