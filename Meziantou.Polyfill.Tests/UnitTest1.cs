@@ -1115,42 +1115,53 @@ public class UnitTest1
     [Fact]
     public void ArgumentNullException_ThrowIfNull()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         object? sample = null;
         var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        object? o = new();
-        ArgumentNullException.ThrowIfNull(o);
+        object? argument = new();
+        ArgumentNullException.ThrowIfNull(argument);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public unsafe void ArgumentNullException_ThrowIfNull_Pointer()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         void* sample = null;
         var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentNullException.ThrowIfNull((nint)1);
+        nint argument = 1;
+        ArgumentNullException.ThrowIfNull(argument);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public unsafe void ArgumentException_ThrowIfNullOrEmpty()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = "";
         var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrEmpty(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentException.ThrowIfNullOrEmpty("a");
+        var argument = "a";
+        ArgumentException.ThrowIfNullOrEmpty(argument);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public unsafe void ArgumentException_ThrowIfNullOrWhiteSpace()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = "  ";
         var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrWhiteSpace(sample));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentException.ThrowIfNullOrWhiteSpace("a");
+        var argument = "a";
+        ArgumentException.ThrowIfNullOrWhiteSpace(argument);
+#pragma warning restore MA0015
     }
 
     [Fact]
@@ -1166,39 +1177,58 @@ public class UnitTest1
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfEqual()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = 5;
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfEqual(5, 10);
-        ArgumentOutOfRangeException.ThrowIfEqual("a", "b");
+        var value = 5;
+        var other = 10;
+        ArgumentOutOfRangeException.ThrowIfEqual(value, other);
+        var value2 = "a";
+        var other2 = "b";
+        ArgumentOutOfRangeException.ThrowIfEqual(value2, other2);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfNotEqual()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = 5;
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNotEqual(sample, 10));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfNotEqual(5, 5);
-        ArgumentOutOfRangeException.ThrowIfNotEqual("a", "a");
+        var value = 5;
+        var other = 5;
+        ArgumentOutOfRangeException.ThrowIfNotEqual(value, other);
+        var value2 = "a";
+        var other2 = "a";
+        ArgumentOutOfRangeException.ThrowIfNotEqual(value2, other2);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfGreaterThan()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = 10;
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThan(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(5, 10);
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(5, 5);
+        var value = 5;
+        var other = 10;
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(value, other);
+        var value2 = 5;
+        var other2 = 5;
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(value2, other2);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfGreaterThanOrEqual()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = 10;
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
@@ -1207,23 +1237,33 @@ public class UnitTest1
         ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(5, 10);
+        var value = 5;
+        var other = 10;
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(value, other);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfLessThan()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = 5;
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThan(sample, 10));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfLessThan(10, 5);
-        ArgumentOutOfRangeException.ThrowIfLessThan(5, 5);
+        var value = 10;
+        var other = 5;
+        ArgumentOutOfRangeException.ThrowIfLessThan(value, other);
+        var value2 = 5;
+        var other2 = 5;
+        ArgumentOutOfRangeException.ThrowIfLessThan(value2, other2);
+#pragma warning restore MA0015
     }
 
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfLessThanOrEqual()
     {
+#pragma warning disable MA0015 // Specify the parameter name in ArgumentException
         var sample = 5;
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(sample, 10));
         Assert.Equal("sample", ex.ParamName);
@@ -1232,7 +1272,10 @@ public class UnitTest1
         ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(sample, 5));
         Assert.Equal("sample", ex.ParamName);
 
-        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(10, 5);
+        var value = 10;
+        var other = 5;
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, other);
+#pragma warning restore MA0015
     }
 
     [Fact]
