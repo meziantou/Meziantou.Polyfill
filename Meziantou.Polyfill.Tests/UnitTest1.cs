@@ -2080,6 +2080,40 @@ public class UnitTest1
         Assert.NotNull(queryMethod);
         Assert.Equal("QUERY", queryMethod.Method);
     }
+
+    [Fact]
+    public void System_Buffers_SearchValues_Create_Byte()
+    {
+        ReadOnlySpan<byte> span = new byte[] { 1, 2, 3, 4, 5 };
+        var values = System.Buffers.SearchValues.Create(span);
+        Assert.NotNull(values);
+    }
+
+    [Fact]
+    public void System_Buffers_SearchValues_Create_Char()
+    {
+        ReadOnlySpan<char> span = "abcde".AsSpan();
+        var values = System.Buffers.SearchValues.Create(span);
+        Assert.NotNull(values);
+    }
+
+#if NET9_0_OR_GREATER
+    [Fact]
+    public void System_Buffers_SearchValues_Create_String_Ordinal()
+    {
+        ReadOnlySpan<string> span = new[] { "hello", "world", "test" };
+        var values = System.Buffers.SearchValues.Create(span, StringComparison.Ordinal);
+        Assert.NotNull(values);
+    }
+
+    [Fact]
+    public void System_Buffers_SearchValues_Create_String_OrdinalIgnoreCase()
+    {
+        ReadOnlySpan<string> span = new[] { "hello", "world", "test" };
+        var values = System.Buffers.SearchValues.Create(span, StringComparison.OrdinalIgnoreCase);
+        Assert.NotNull(values);
+    }
+#endif
 }
 
 [CollectionBuilder(typeof(CustomCollectionWithBuilder), "Create")]
