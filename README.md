@@ -105,7 +105,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (302)
+### Methods (305)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -131,6 +131,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Int32 start, System.Int32 length)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Range range)`
 - `System.Convert.ToBase64String(System.ReadOnlySpan<System.Byte> bytes, [System.Base64FormattingOptions options = System.Base64FormattingOptions.None])`
+- `System.Convert.ToHexString(System.Byte[] inArray)`
+- `System.Convert.ToHexString(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
+- `System.Convert.ToHexString(System.ReadOnlySpan<System.Byte> bytes)`
 - `System.Convert.ToHexStringLower(System.Byte[] inArray)`
 - `System.Convert.ToHexStringLower(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
 - `System.Convert.ToHexStringLower(System.ReadOnlySpan<System.Byte> bytes)`

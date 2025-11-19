@@ -1785,6 +1785,84 @@ public class UnitTest1
     }
 
     [Fact]
+    public void Convert_ToHexString_ByteArray()
+    {
+        // Test basic conversion
+        byte[] data = [0x0A, 0x1B, 0x2C, 0x3D];
+        var result = Convert.ToHexString(data);
+        Assert.Equal("0A1B2C3D", result);
+
+        // Test with various byte values
+        byte[] data2 = [0x00, 0xFF, 0xAB, 0xCD, 0xEF];
+        var result2 = Convert.ToHexString(data2);
+        Assert.Equal("00FFABCDEF", result2);
+
+        // Test with empty array
+        byte[] emptyData = [];
+        var emptyResult = Convert.ToHexString(emptyData);
+        Assert.Equal("", emptyResult);
+
+        // Test null throws exception
+        Assert.Throws<ArgumentNullException>(() => Convert.ToHexString((byte[])null!));
+    }
+
+    [Fact]
+    public void Convert_ToHexString_ByteArray_Offset_Length()
+    {
+        // Test basic conversion with offset and length
+        byte[] data = [0x00, 0x0A, 0x1B, 0x2C, 0x3D, 0xFF];
+        var result = Convert.ToHexString(data, 1, 3);
+        Assert.Equal("0A1B2C", result);
+
+        // Test with full array
+        var result2 = Convert.ToHexString(data, 0, data.Length);
+        Assert.Equal("000A1B2C3DFF", result2);
+
+        // Test with zero length
+        var result3 = Convert.ToHexString(data, 0, 0);
+        Assert.Equal("", result3);
+
+        // Test null array throws exception
+        Assert.Throws<ArgumentNullException>(() => Convert.ToHexString(null!, 0, 0));
+
+        // Test negative offset throws exception
+        Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToHexString(data, -1, 1));
+
+        // Test negative length throws exception
+        Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToHexString(data, 0, -1));
+
+        // Test offset beyond array throws exception
+        Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToHexString(data, data.Length + 1, 0));
+
+        // Test offset + length beyond array throws exception
+        Assert.Throws<ArgumentOutOfRangeException>(() => Convert.ToHexString(data, 1, data.Length));
+    }
+
+    [Fact]
+    public void Convert_ToHexString_ReadOnlySpan()
+    {
+        // Test basic conversion
+        ReadOnlySpan<byte> data = [0x0A, 0x1B, 0x2C, 0x3D];
+        var result = Convert.ToHexString(data);
+        Assert.Equal("0A1B2C3D", result);
+
+        // Test with various byte values
+        ReadOnlySpan<byte> data2 = [0x00, 0xFF, 0xAB, 0xCD, 0xEF];
+        var result2 = Convert.ToHexString(data2);
+        Assert.Equal("00FFABCDEF", result2);
+
+        // Test with empty span
+        ReadOnlySpan<byte> emptyData = [];
+        var emptyResult = Convert.ToHexString(emptyData);
+        Assert.Equal("", emptyResult);
+
+        // Test single byte
+        ReadOnlySpan<byte> singleByte = [0xA5];
+        var singleResult = Convert.ToHexString(singleByte);
+        Assert.Equal("A5", singleResult);
+    }
+
+    [Fact]
     public void BitConverter_ToInt16_ReadOnlySpan()
     {
         // Test with little-endian bytes representing 42
