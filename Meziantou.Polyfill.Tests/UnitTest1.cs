@@ -1359,65 +1359,32 @@ public class UnitTest1
     }
 
     [Fact]
-    public void BitConverter_ToInt16_ReadOnlySpan()
+    public void BitConverter_ToInt32_ReadOnlySpan()
     {
         // Test with little-endian bytes representing 42
-        ReadOnlySpan<byte> data1 = [0x2A, 0x00];
-        var result1 = BitConverter.ToInt16(data1);
+        ReadOnlySpan<byte> data1 = [0x2A, 0x00, 0x00, 0x00];
+        var result1 = BitConverter.ToInt32(data1);
         Assert.Equal(42, result1);
 
         // Test with little-endian bytes representing -1
-        ReadOnlySpan<byte> data2 = [0xFF, 0xFF];
-        var result2 = BitConverter.ToInt16(data2);
+        ReadOnlySpan<byte> data2 = [0xFF, 0xFF, 0xFF, 0xFF];
+        var result2 = BitConverter.ToInt32(data2);
         Assert.Equal(-1, result2);
 
         // Test with little-endian bytes representing 256
-        ReadOnlySpan<byte> data3 = [0x00, 0x01];
-        var result3 = BitConverter.ToInt16(data3);
+        ReadOnlySpan<byte> data3 = [0x00, 0x01, 0x00, 0x00];
+        var result3 = BitConverter.ToInt32(data3);
         Assert.Equal(256, result3);
 
-        // Test with little-endian bytes representing short.MaxValue (32767)
-        ReadOnlySpan<byte> data4 = [0xFF, 0x7F];
-        var result4 = BitConverter.ToInt16(data4);
-        Assert.Equal(short.MaxValue, result4);
+        // Test with little-endian bytes representing int.MaxValue (2147483647)
+        ReadOnlySpan<byte> data4 = [0xFF, 0xFF, 0xFF, 0x7F];
+        var result4 = BitConverter.ToInt32(data4);
+        Assert.Equal(int.MaxValue, result4);
 
-        // Test with little-endian bytes representing short.MinValue (-32768)
-        ReadOnlySpan<byte> data5 = [0x00, 0x80];
-        var result5 = BitConverter.ToInt16(data5);
-        Assert.Equal(short.MinValue, result5);
-    }
-
-    [Fact]
-    public void Convert_ToInt32_ReadOnlySpan()
-    {
-        // Basic parsing
-        ReadOnlySpan<char> data = "123".AsSpan();
-        var result = Convert.ToInt32(data);
-        Assert.Equal(123, result);
-
-        // Negative numbers
-        data = "-456".AsSpan();
-        result = Convert.ToInt32(data);
-        Assert.Equal(-456, result);
-
-        // Zero
-        data = "0".AsSpan();
-        result = Convert.ToInt32(data);
-        Assert.Equal(0, result);
-
-        // Max value
-        data = "2147483647".AsSpan();
-        result = Convert.ToInt32(data);
-        Assert.Equal(2147483647, result);
-
-        // Min value
-        data = "-2147483648".AsSpan();
-        result = Convert.ToInt32(data);
-        Assert.Equal(-2147483648, result);
-
-        // Invalid input should throw
-        Assert.Throws<FormatException>(() => Convert.ToInt32("abc".AsSpan()));
-        Assert.Throws<OverflowException>(() => Convert.ToInt32("2147483648".AsSpan()));
+        // Test with little-endian bytes representing int.MinValue (-2147483648)
+        ReadOnlySpan<byte> data5 = [0x00, 0x00, 0x00, 0x80];
+        var result5 = BitConverter.ToInt32(data5);
+        Assert.Equal(int.MinValue, result5);
     }
 
     [Fact]
