@@ -105,7 +105,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (302)
+### Methods (305)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -134,6 +134,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Convert.ToHexString(System.Byte[] inArray)`
 - `System.Convert.ToHexString(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
 - `System.Convert.ToHexString(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.Convert.ToHexStringLower(System.Byte[] inArray)`
+- `System.Convert.ToHexStringLower(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
+- `System.Convert.ToHexStringLower(System.ReadOnlySpan<System.Byte> bytes)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
 - `System.Enum.GetNames<TEnum>() where TEnum : struct, System.Enum`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
