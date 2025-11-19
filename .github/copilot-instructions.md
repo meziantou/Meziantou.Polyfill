@@ -18,6 +18,7 @@ When creating a new a polyfill, you must:
 - If xml documentation id is too long, you can use `// XML-DOC: <xml documentation id>` in the file
 - All polyfill must be in a partial class named `PolyfillExtensions`
 - Add tests in the `Meziantou.Polyfill.Tests` project
+- Increment the patch component of the version in `Meziantou.Polyfill/Meziantou.Polyfill.csproj`
 
 Documentation about XML documentation identifiers: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/#id-strings.
 
@@ -26,3 +27,35 @@ What can be polyfilled:
 - Static methods using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
 - Properties using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
 - Static properties using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
+
+```c#
+// Extension method
+partial class PolyfillExtensions
+{
+    public static void Sample(this string? value)
+    {
+    }
+}
+
+// Extension static method
+partial class PolyfillExtensions
+{
+    extension(int)
+    {
+        public static int Sample()
+        {
+        }
+    }
+}
+
+// Extension static method on generic type
+partial class PolyfillExtensions
+{
+    extension<T>(int) where T : class
+    {
+        public static int Sample()
+        {
+        }
+    }
+}
+```
