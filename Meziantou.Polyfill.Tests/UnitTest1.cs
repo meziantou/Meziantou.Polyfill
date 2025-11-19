@@ -1275,9 +1275,18 @@ public class UnitTest1
         var result = Convert.ToBase64String(data);
         Assert.Equal("AQIDBA==", result);
 
-        // Test with Base64FormattingOptions
+        // Test with Base64FormattingOptions.None
         result = Convert.ToBase64String(data, Base64FormattingOptions.None);
         Assert.Equal("AQIDBA==", result);
+        
+        // Test with larger data and InsertLineBreaks option
+        var largeData = new byte[100];
+        for (int i = 0; i < largeData.Length; i++)
+            largeData[i] = (byte)(i % 256);
+        
+        var resultWithBreaks = Convert.ToBase64String((ReadOnlySpan<byte>)largeData, Base64FormattingOptions.InsertLineBreaks);
+        var expectedWithBreaks = Convert.ToBase64String(largeData, Base64FormattingOptions.InsertLineBreaks);
+        Assert.Equal(expectedWithBreaks, resultWithBreaks);
     }
 
     [Fact]
