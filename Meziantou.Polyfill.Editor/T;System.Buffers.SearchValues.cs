@@ -26,7 +26,7 @@ internal static class SearchValues
     }
 }
 
-internal sealed class SearchValuesImpl<T> : SearchValues<T>
+file sealed class SearchValuesImpl<T> : SearchValues<T>
     where T : IEquatable<T>?
 {
     private readonly HashSet<T> _values;
@@ -46,7 +46,7 @@ internal sealed class SearchValuesImpl<T> : SearchValues<T>
     }
 }
 
-internal sealed class SearchValuesImplString : SearchValues<string>
+file sealed class SearchValuesImplString : SearchValues<string>
 {
     private readonly HashSet<string> _values;
 
