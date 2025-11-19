@@ -37,10 +37,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types (64)
+### Types (65)
 
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
+- `System.Collections.ObjectModel.ReadOnlySet<T>`
 - `System.Diagnostics.CodeAnalysis.AllowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DisallowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute`

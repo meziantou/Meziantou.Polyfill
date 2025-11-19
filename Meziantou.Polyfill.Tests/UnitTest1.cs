@@ -496,6 +496,22 @@ public class UnitTest1
     }
 
     [Fact]
+    public void ReadOnlySet_Empty()
+    {
+        var empty = ReadOnlySet<int>.Empty;
+        Assert.NotNull(empty);
+        Assert.Empty(empty);
+        
+        // Verify it's the same instance each time
+        Assert.Same(empty, ReadOnlySet<int>.Empty);
+        
+        // Verify different type parameters get different instances
+        var emptyString = ReadOnlySet<string>.Empty;
+        Assert.NotNull(emptyString);
+        Assert.Empty(emptyString);
+    }
+
+    [Fact]
     public void ReadOnlyCollection_Empty()
     {
         var empty = ReadOnlyCollection<int>.Empty;
