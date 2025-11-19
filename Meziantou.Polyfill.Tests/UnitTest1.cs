@@ -494,6 +494,24 @@ public class UnitTest1
         Assert.Empty(emptyInt);
     }
 
+#if NET9_0_OR_GREATER
+    [Fact]
+    public void ReadOnlySet_Empty()
+    {
+        var empty = ReadOnlySet<int>.Empty;
+        Assert.NotNull(empty);
+        Assert.Empty(empty);
+        
+        // Verify it's the same instance each time
+        Assert.Same(empty, ReadOnlySet<int>.Empty);
+        
+        // Verify different type parameters get different instances
+        var emptyString = ReadOnlySet<string>.Empty;
+        Assert.NotNull(emptyString);
+        Assert.Empty(emptyString);
+    }
+#endif
+
     [Fact]
     public async Task Process_WaitForExitAsync()
     {

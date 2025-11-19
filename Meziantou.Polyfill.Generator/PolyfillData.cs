@@ -23,6 +23,7 @@ internal sealed partial class PolyfillData
         "System.Collections.Generic.IAsyncEnumerator`1",
         "System.IO.Compression.ZipArchiveEntry",
         "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
+        "System.Collections.ObjectModel.ReadOnlySet`1",
     ];
 
     public PolyfillData(string content) => Content = content;
@@ -95,6 +96,15 @@ internal sealed partial class PolyfillData
                     return true;
 
                 return IsExposed(symbol.ContainingSymbol);
+            }
+        }
+
+        foreach (var property in root.DescendantNodes().OfType<PropertyDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(property);
+            if (symbol is not null)
+            {
+                requiredTypes.Add(symbol.Type);
             }
         }
 
