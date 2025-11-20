@@ -17,6 +17,7 @@ internal sealed partial class PolyfillData
         "System.Threading.Tasks.ValueTask",
         "System.Threading.Tasks.ValueTask`1",
         "System.Collections.Immutable.ImmutableArray`1",
+        "System.Net.Http.HttpMethod",
         "System.Net.Http.HttpContent",
         "System.IAsyncDisposable",
         "System.Collections.Generic.IAsyncEnumerable`1",
@@ -109,6 +110,15 @@ internal sealed partial class PolyfillData
             foreach (var iface in symbol.AllInterfaces)
             {
                 requiredTypes.Add(iface);
+            }
+        }
+
+        foreach (var extensionBlock in root.DescendantNodes().OfType<ExtensionBlockDeclarationSyntax>())
+        {
+            foreach(var parameter in extensionBlock.ParameterList!.Parameters)
+            {
+                var parameterType = semanticModel.GetTypeInfo(parameter.Type!).Type!;
+                requiredTypes.Add(parameterType);
             }
         }
 
