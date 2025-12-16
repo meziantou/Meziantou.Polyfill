@@ -465,6 +465,26 @@ public class SystemTests
     }
 
     [Fact]
+    public void Enum_GetValues()
+    {
+        var expected = (DayOfWeek[])Enum.GetValues(typeof(DayOfWeek));
+        var actual = Enum.GetValues<DayOfWeek>();
+        Assert.Equal(expected, actual);
+        Assert.Equal(7, actual.Length);
+        Assert.Contains(DayOfWeek.Monday, actual);
+        Assert.Contains(DayOfWeek.Sunday, actual);
+    }
+
+    [Fact]
+    public void Enum_IsDefined()
+    {
+        Assert.True(Enum.IsDefined(DayOfWeek.Monday));
+        Assert.True(Enum.IsDefined(DayOfWeek.Friday));
+        Assert.True(Enum.IsDefined(DayOfWeek.Sunday));
+        Assert.False(Enum.IsDefined((DayOfWeek)99));
+    }
+
+    [Fact]
     public void Enum_Parse()
     {
         Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("Monday"));

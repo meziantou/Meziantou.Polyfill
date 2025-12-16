@@ -107,7 +107,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (313)
+### Methods (315)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -141,6 +141,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Convert.ToHexStringLower(System.ReadOnlySpan<System.Byte> bytes)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
 - `System.Enum.GetNames<TEnum>() where TEnum : struct, System.Enum`
+- `System.Enum.GetValues<TEnum>() where TEnum : struct, System.Enum`
+- `System.Enum.IsDefined<TEnum>(TEnum value) where TEnum : struct, System.Enum`
 - `System.Enum.Parse<TEnum>(System.ReadOnlySpan<System.Char> value) where TEnum : struct`
 - `System.Enum.Parse<TEnum>(System.ReadOnlySpan<System.Char> value, System.Boolean ignoreCase) where TEnum : struct`
 - `System.Enum.Parse<TEnum>(System.String value) where TEnum : struct`
