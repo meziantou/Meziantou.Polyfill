@@ -45,17 +45,10 @@ public class SystemThreadingTests
         using var cts = new CancellationTokenSource();
         var callbackInvoked = false;
         
-#if NET8_0_OR_GREATER
-        // On .NET 8+, CancellationTokenRegistration implements IAsyncDisposable
         await using (var registration = cts.Token.Register(() => callbackInvoked = true))
         {
             // Registration is active within the scope
         }
-#else
-        // On older frameworks, we need to manually call DisposeAsync
-        var registration = cts.Token.Register(() => callbackInvoked = true);
-        await registration.DisposeAsync();
-#endif
         
         // After disposal, canceling should not invoke the callback
         cts.Cancel();
