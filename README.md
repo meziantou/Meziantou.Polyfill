@@ -107,7 +107,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (315)
+### Methods (316)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -417,6 +417,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Text.StringBuilder.AppendJoin<T>(System.String? separator, System.Collections.Generic.IEnumerable<T> values)`
 - `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue)`
 - `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue, System.Int32 startIndex, System.Int32 count)`
+- `System.Threading.CancellationTokenRegistration.DisposeAsync()`
 - `System.Threading.CancellationTokenSource.CancelAsync()`
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`

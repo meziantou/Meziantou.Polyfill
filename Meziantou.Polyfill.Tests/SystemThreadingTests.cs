@@ -26,6 +26,20 @@ public class SystemThreadingTests
     }
 
     [Fact]
+    public async Task CancellationTokenRegistration_DisposeAsync()
+    {
+        using var cts = new CancellationTokenSource();
+        var callbackInvoked = false;
+        var registration = cts.Token.Register(() => callbackInvoked = true);
+        
+        await registration.DisposeAsync();
+        
+        // After disposal, canceling should not invoke the callback
+        cts.Cancel();
+        Assert.False(callbackInvoked);
+    }
+
+    [Fact]
     public void Lock()
     {
         var instance = new Lock();
