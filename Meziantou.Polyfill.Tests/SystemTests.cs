@@ -470,6 +470,7 @@ public class SystemTests
         Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("Monday"));
         Assert.Equal(DayOfWeek.Friday, Enum.Parse<DayOfWeek>("Friday"));
         Assert.Throws<ArgumentException>(() => Enum.Parse<DayOfWeek>("InvalidDay"));
+        Assert.Throws<ArgumentNullException>(() => Enum.Parse<DayOfWeek>(null!));
     }
 
     [Fact]
