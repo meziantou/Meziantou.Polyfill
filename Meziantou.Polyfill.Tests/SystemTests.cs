@@ -465,6 +465,111 @@ public class SystemTests
     }
 
     [Fact]
+    public void Enum_GetValues()
+    {
+        var expected = (DayOfWeek[])Enum.GetValues(typeof(DayOfWeek));
+        var actual = Enum.GetValues<DayOfWeek>();
+        Assert.Equal(expected, actual);
+        Assert.Equal(7, actual.Length);
+        Assert.Contains(DayOfWeek.Monday, actual);
+        Assert.Contains(DayOfWeek.Sunday, actual);
+    }
+
+    [Fact]
+    public void Enum_IsDefined()
+    {
+        Assert.True(Enum.IsDefined(DayOfWeek.Monday));
+        Assert.True(Enum.IsDefined(DayOfWeek.Friday));
+        Assert.True(Enum.IsDefined(DayOfWeek.Sunday));
+        Assert.False(Enum.IsDefined((DayOfWeek)99));
+    }
+
+    [Fact]
+    public void Enum_Parse()
+    {
+        Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("Monday"));
+        Assert.Equal(DayOfWeek.Friday, Enum.Parse<DayOfWeek>("Friday"));
+        Assert.Throws<ArgumentException>(() => Enum.Parse<DayOfWeek>("InvalidDay"));
+        Assert.Throws<ArgumentNullException>(() => Enum.Parse<DayOfWeek>(null!));
+    }
+
+    [Fact]
+    public void Enum_Parse_IgnoreCase()
+    {
+        Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("monday", ignoreCase: true));
+        Assert.Equal(DayOfWeek.Friday, Enum.Parse<DayOfWeek>("FRIDAY", ignoreCase: true));
+        Assert.Throws<ArgumentException>(() => Enum.Parse<DayOfWeek>("monday", ignoreCase: false));
+    }
+
+    [Fact]
+    public void Enum_Parse_ReadOnlySpan()
+    {
+        Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("Monday".AsSpan()));
+        Assert.Equal(DayOfWeek.Friday, Enum.Parse<DayOfWeek>("Friday".AsSpan()));
+        Assert.Throws<ArgumentException>(() => Enum.Parse<DayOfWeek>("InvalidDay".AsSpan()));
+    }
+
+    [Fact]
+    public void Enum_Parse_ReadOnlySpan_IgnoreCase()
+    {
+        Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("monday".AsSpan(), ignoreCase: true));
+        Assert.Equal(DayOfWeek.Friday, Enum.Parse<DayOfWeek>("FRIDAY".AsSpan(), ignoreCase: true));
+        Assert.Throws<ArgumentException>(() => Enum.Parse<DayOfWeek>("monday".AsSpan(), ignoreCase: false));
+    }
+
+    [Fact]
+    public void Enum_TryParse()
+    {
+        Assert.True(Enum.TryParse<DayOfWeek>("Monday", ignoreCase: false, out var result1));
+        Assert.Equal(DayOfWeek.Monday, result1);
+        
+        Assert.True(Enum.TryParse<DayOfWeek>("Friday", ignoreCase: false, out var result2));
+        Assert.Equal(DayOfWeek.Friday, result2);
+        
+        Assert.False(Enum.TryParse<DayOfWeek>("InvalidDay", ignoreCase: false, out var result3));
+        Assert.Equal(default(DayOfWeek), result3);
+    }
+
+    [Fact]
+    public void Enum_TryParse_IgnoreCase()
+    {
+        Assert.True(Enum.TryParse<DayOfWeek>("monday", ignoreCase: true, out var result1));
+        Assert.Equal(DayOfWeek.Monday, result1);
+        
+        Assert.True(Enum.TryParse<DayOfWeek>("FRIDAY", ignoreCase: true, out var result2));
+        Assert.Equal(DayOfWeek.Friday, result2);
+        
+        Assert.False(Enum.TryParse<DayOfWeek>("monday", ignoreCase: false, out var result3));
+        Assert.Equal(default(DayOfWeek), result3);
+    }
+
+    [Fact]
+    public void Enum_TryParse_ReadOnlySpan()
+    {
+        Assert.True(Enum.TryParse<DayOfWeek>("Monday".AsSpan(), ignoreCase: false, out var result1));
+        Assert.Equal(DayOfWeek.Monday, result1);
+        
+        Assert.True(Enum.TryParse<DayOfWeek>("Friday".AsSpan(), ignoreCase: false, out var result2));
+        Assert.Equal(DayOfWeek.Friday, result2);
+        
+        Assert.False(Enum.TryParse<DayOfWeek>("InvalidDay".AsSpan(), ignoreCase: false, out var result3));
+        Assert.Equal(default(DayOfWeek), result3);
+    }
+
+    [Fact]
+    public void Enum_TryParse_ReadOnlySpan_IgnoreCase()
+    {
+        Assert.True(Enum.TryParse<DayOfWeek>("monday".AsSpan(), ignoreCase: true, out var result1));
+        Assert.Equal(DayOfWeek.Monday, result1);
+        
+        Assert.True(Enum.TryParse<DayOfWeek>("FRIDAY".AsSpan(), ignoreCase: true, out var result2));
+        Assert.Equal(DayOfWeek.Friday, result2);
+        
+        Assert.False(Enum.TryParse<DayOfWeek>("monday".AsSpan(), ignoreCase: false, out var result3));
+        Assert.Equal(default(DayOfWeek), result3);
+    }
+
+    [Fact]
     public void Convert_ToBase64String_ReadOnlySpan()
     {
         ReadOnlySpan<byte> data = [1, 2, 3, 4];
