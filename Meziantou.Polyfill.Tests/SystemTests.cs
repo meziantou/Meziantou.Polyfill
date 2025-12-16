@@ -465,6 +465,14 @@ public class SystemTests
     }
 
     [Fact]
+    public void Enum_Parse()
+    {
+        Assert.Equal(DayOfWeek.Monday, Enum.Parse<DayOfWeek>("Monday"));
+        Assert.Equal(DayOfWeek.Friday, Enum.Parse<DayOfWeek>("Friday"));
+        Assert.Throws<ArgumentException>(() => Enum.Parse<DayOfWeek>("InvalidDay"));
+    }
+
+    [Fact]
     public void Convert_ToBase64String_ReadOnlySpan()
     {
         ReadOnlySpan<byte> data = [1, 2, 3, 4];
