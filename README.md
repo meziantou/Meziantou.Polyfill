@@ -107,7 +107,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (315)
+### Methods (316)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -118,6 +118,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ArgumentOutOfRangeException.ThrowIfGreaterThan<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
 - `System.ArgumentOutOfRangeException.ThrowIfLessThanOrEqual<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
 - `System.ArgumentOutOfRangeException.ThrowIfLessThan<T>(T value, T other, [System.String? paramName = null]) where T : System.IComparable<T>`
+- `System.ArgumentOutOfRangeException.ThrowIfNegative<T>(T value, [System.String? paramName = null]) where T : System.Numerics.INumberBase<T>`
 - `System.ArgumentOutOfRangeException.ThrowIfNotEqual<T>(T value, T other, [System.String? paramName = null])`
 - `System.BitConverter.ToInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`

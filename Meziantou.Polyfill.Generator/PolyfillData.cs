@@ -24,6 +24,7 @@ internal sealed partial class PolyfillData
         "System.Collections.Generic.IAsyncEnumerator`1",
         "System.IO.Compression.ZipArchiveEntry",
         "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
+        "System.Numerics.INumberBase`1",
     ];
 
     public PolyfillData(string content) => Content = content;
@@ -76,6 +77,15 @@ internal sealed partial class PolyfillData
             foreach (var param in symbol.Parameters.Select(p => p.Type))
             {
                 requiredTypes.Add(param);
+            }
+
+            // Add generic constraints as required types
+            foreach (var typeParam in symbol.TypeParameters)
+            {
+                foreach (var constraint in typeParam.ConstraintTypes)
+                {
+                    requiredTypes.Add(constraint);
+                }
             }
 
             if (IsExposed(symbol))

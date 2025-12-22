@@ -432,6 +432,66 @@ public class SystemTests
     }
 
     [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_Int32()
+    {
+#if NET7_0_OR_GREATER
+        var sample = -1;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNegative(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        var value = 0;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+        value = 5;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+#endif
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_Int64()
+    {
+#if NET7_0_OR_GREATER
+        var sample = -1L;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNegative(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        var value = 0L;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+        value = 5L;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+#endif
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_Double()
+    {
+#if NET7_0_OR_GREATER
+        var sample = -1.0;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNegative(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        var value = 0.0;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+        value = 5.0;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+#endif
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_Decimal()
+    {
+#if NET7_0_OR_GREATER
+        var sample = -1m;
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException.ThrowIfNegative(sample));
+        Assert.Equal("sample", ex.ParamName);
+
+        var value = 0m;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+        value = 5m;
+        ArgumentOutOfRangeException.ThrowIfNegative(value);
+#endif
+    }
+
+    [Fact]
     public void String_Concat()
     {
         Assert.Equal("ab", string.Concat("a".AsSpan(), "b".AsSpan()));
