@@ -37,10 +37,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 <!-- begin_polyfills -->
 
-### Types (67)
+### Types (68)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
+- `System.Buffers.SequenceReader<T> where T : unmanaged, System.IEquatable<T>`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
 - `System.Collections.ObjectModel.ReadOnlySet<T>`
