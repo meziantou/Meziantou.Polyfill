@@ -45,7 +45,7 @@ file class Helpers
             TSource value = enumerator.Current;
             TKey key = keySelector(value);
 
-#if NET
+#if NET6_0_OR_GREATER
             ref int currentCount = ref System.Runtime.InteropServices.CollectionsMarshal.GetValueRefOrAddDefault(countsBy, key, out _);
             checked
             {
