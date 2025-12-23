@@ -202,4 +202,161 @@ public class SystemBuffersTests
         Assert.Equal(2, sequence.Slice(position1, position2).Length);
     }
 
+    [Fact]
+    public void SequenceReader_Length()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.Equal(5, reader.Length);
+    }
+
+    [Fact]
+    public void SequenceReader_Sequence()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.Equal(sequence.Start, reader.Sequence.Start);
+        Assert.Equal(sequence.End, reader.Sequence.End);
+    }
+
+    [Fact]
+    public void SequenceReader_End()
+    {
+        var data = new byte[] { 1, 2, 3 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.False(reader.End);
+        reader.Advance(3);
+        Assert.True(reader.End);
+    }
+
+    [Fact]
+    public void SequenceReader_CurrentSpan()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.Equal(5, reader.CurrentSpan.Length);
+        Assert.Equal(1, reader.CurrentSpan[0]);
+    }
+
+    [Fact]
+    public void SequenceReader_CurrentSpanIndex()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.Equal(0, reader.CurrentSpanIndex);
+    }
+
+    [Fact]
+    public void SequenceReader_UnreadSequence()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        reader.Advance(2);
+        var unread = reader.UnreadSequence;
+        Assert.Equal(3, unread.Length);
+    }
+
+    [Fact]
+    public void SequenceReader_UnreadSpan()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        var unreadSpan = reader.UnreadSpan;
+        Assert.Equal(5, unreadSpan.Length);
+    }
+
+    [Fact]
+    public void SequenceReader_AdvanceLong()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        reader.Advance(2L);
+        Assert.Equal(2, reader.Consumed);
+        Assert.Equal(3, reader.Remaining);
+    }
+
+    [Fact]
+    public void SequenceReader_Rewind()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        reader.Advance(3);
+        Assert.Equal(3, reader.Consumed);
+        
+        reader.Rewind(2);
+        Assert.Equal(1, reader.Consumed);
+        Assert.Equal(4, reader.Remaining);
+    }
+
+    [Fact]
+    public void SequenceReader_TryPeek()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.True(reader.TryPeek(out var value));
+        Assert.Equal(1, value);
+        Assert.Equal(0, reader.Consumed); // TryPeek should not advance
+    }
+
+    [Fact]
+    public void SequenceReader_TryPeekWithOffset()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.True(reader.TryPeek(2, out var value));
+        Assert.Equal(3, value);
+        Assert.Equal(0, reader.Consumed); // TryPeek should not advance
+    }
+
+    [Fact]
+    public void SequenceReader_TryRead()
+    {
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.True(reader.TryRead(out var value1));
+        Assert.Equal(1, value1);
+        Assert.Equal(1, reader.Consumed);
+        
+        Assert.True(reader.TryRead(out var value2));
+        Assert.Equal(2, value2);
+        Assert.Equal(2, reader.Consumed);
+    }
+
+    [Fact]
+    public void SequenceReader_TryReadAtEnd()
+    {
+        var data = new byte[] { 1 };
+        var sequence = new System.Buffers.ReadOnlySequence<byte>(data);
+        var reader = new System.Buffers.SequenceReader<byte>(sequence);
+        
+        Assert.True(reader.TryRead(out var value));
+        Assert.Equal(1, value);
+        
+        Assert.False(reader.TryRead(out _));
+    }
+
 }

@@ -27,7 +27,7 @@ namespace System.Buffers
             }
         }
 
-        private long Length
+        public long Length
         {
             get
             {
@@ -44,6 +44,18 @@ namespace System.Buffers
         public readonly long Consumed => _consumed;
 
         public readonly SequencePosition Position => _sequence.GetPosition(_consumed);
+
+        public readonly ReadOnlySequence<T> Sequence => _sequence;
+
+        public readonly bool End => Remaining == 0;
+
+        public readonly ReadOnlySpan<T> CurrentSpan => _currentMemory.Span;
+
+        public readonly int CurrentSpanIndex => _currentIndex;
+
+        public readonly ReadOnlySequence<T> UnreadSequence => _sequence.Slice(_consumed);
+
+        public readonly ReadOnlySpan<T> UnreadSpan => _currentMemory.Span.Slice(_currentIndex);
 
         public readonly bool TryCopyTo(Span<T> destination)
         {
@@ -122,6 +134,127 @@ namespace System.Buffers
                     _currentIndex = 0;
                 }
             }
+        }
+
+        public void Advance(long count)
+        {
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            if (count > int.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            Advance((int)count);
+        }
+
+        public void Rewind(long count)
+        {
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            if (count > _consumed)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            _consumed -= count;
+
+            if (_consumed == 0)
+            {
+                _currentPosition = _sequence.Start;
+                _currentIndex = 0;
+                if (!_sequence.IsEmpty)
+                {
+                    _sequence.TryGet(ref _currentPosition, out _currentMemory);
+                }
+            }
+            else
+            {
+                _currentPosition = _sequence.GetPosition(_consumed);
+                _sequence.TryGet(ref _currentPosition, out _currentMemory);
+                _currentIndex = 0;
+            }
+        }
+
+        public readonly bool TryPeek(out T value)
+        {
+            if (End)
+            {
+                value = default;
+                return false;
+            }
+
+            value = _currentMemory.Span[_currentIndex];
+            return true;
+        }
+
+        public readonly bool TryPeek(long offset, out T value)
+        {
+            if (offset < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(offset));
+            }
+
+            if (offset >= Remaining)
+            {
+                value = default;
+                return false;
+            }
+
+            var position = _sequence.GetPosition(_consumed + offset);
+            if (_sequence.TryGet(ref position, out var memory))
+            {
+                value = memory.Span[0];
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+
+        public bool TryRead(out T value)
+        {
+            if (End)
+            {
+                value = default;
+                return false;
+            }
+
+            value = _currentMemory.Span[_currentIndex];
+            _currentIndex++;
+            _consumed++;
+
+            if (_currentIndex >= _currentMemory.Length)
+            {
+                if (_consumed < Length)
+                {
+                    var nextPosition = _currentPosition;
+                    while (_sequence.TryGet(ref nextPosition, out var nextMemory, advance: true))
+                    {
+                        _currentPosition = nextPosition;
+                        _currentMemory = nextMemory;
+                        _currentIndex = 0;
+                        if (nextMemory.Length > 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    _currentPosition = _sequence.End;
+                    _currentMemory = default;
+                    _currentIndex = 0;
+                }
+            }
+
+            return true;
         }
     }
 }
