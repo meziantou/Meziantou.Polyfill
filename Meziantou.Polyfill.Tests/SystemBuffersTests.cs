@@ -51,7 +51,6 @@ public class SystemBuffersTests
     }
 #endif
 
-#if NET461_OR_GREATER || NETCOREAPP
     [Fact]
     public void SequenceReader_Constructor_EmptySequence()
     {
@@ -202,6 +201,5 @@ public class SystemBuffersTests
         Assert.NotEqual(position1, position2);
         Assert.Equal(2, sequence.Slice(position1, position2).Length);
     }
-#endif
 
 }
