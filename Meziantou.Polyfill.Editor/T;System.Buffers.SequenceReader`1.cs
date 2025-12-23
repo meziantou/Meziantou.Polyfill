@@ -1,6 +1,3 @@
-using System;
-using System.Runtime.CompilerServices;
-
 namespace System.Buffers
 {
     internal ref partial struct SequenceReader<T> where T : unmanaged, IEquatable<T>
@@ -10,9 +7,8 @@ namespace System.Buffers
         private ReadOnlyMemory<T> _currentMemory;
         private int _currentIndex;
         private long _consumed;
-        private readonly long _length;
+        private long _length;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SequenceReader(ReadOnlySequence<T> sequence)
         {
             _sequence = sequence;
@@ -31,13 +27,13 @@ namespace System.Buffers
             }
         }
 
-        private readonly long Length
+        private long Length
         {
             get
             {
                 if (_length < 0)
                 {
-                    Unsafe.AsRef(in _length) = _sequence.Length;
+                    _length = _sequence.Length;
                 }
                 return _length;
             }
@@ -49,7 +45,6 @@ namespace System.Buffers
 
         public readonly SequencePosition Position => _sequence.GetPosition(_consumed);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public readonly bool TryCopyTo(Span<T> destination)
         {
             if (Remaining < destination.Length)
@@ -69,7 +64,6 @@ namespace System.Buffers
             return true;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void CopySequenceToSpan(ReadOnlySequence<T> source, Span<T> destination)
         {
             if (source.IsSingleSegment)
@@ -88,7 +82,6 @@ namespace System.Buffers
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Advance(int count)
         {
             if (count < 0)
