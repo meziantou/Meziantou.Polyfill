@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 static partial class PolyfillExtensions
 {
-    public static async ValueTask<int> ReadAsync(this Stream target, Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public static ValueTask<int> ReadAsync(this Stream target, Memory<byte> buffer, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
-
-        if (!MemoryMarshal.TryGetArray((ReadOnlyMemory<byte>)buffer, out var segment))
+        if (MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment))
         {
-            segment = new(buffer.ToArray());
+            return new ValueTask<int>(target.ReadAsync(segment.Array!, segment.Offset, segment.Count, cancellationToken));
         }
 
-        var read = await target.ReadAsync(segment.Array!, segment.Offset, segment.Count);
-        return read;
+        return new ValueTask<int>(target.ReadAsync(buffer.ToArray(), 0, buffer.Length, cancellationToken));
     }
 }
