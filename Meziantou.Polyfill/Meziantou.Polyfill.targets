@@ -7,4 +7,8 @@
     <MeziantouPolyfill_AllowUnsafeBlocks Condition="'$(MeziantouPolyfill_AllowUnsafeBlocks)' == ''">true</MeziantouPolyfill_AllowUnsafeBlocks>
     <AllowUnsafeBlocks Condition="$(MeziantouPolyfill_AllowUnsafeBlocks) == 'true'">true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <MeziantouPolyfill_IncludedPolyfills>$([System.Text.RegularExpressions.Regex]::Replace($(MeziantouPolyfill_IncludedPolyfills.Replace(';', '|')), '\s+', ''))</MeziantouPolyfill_IncludedPolyfills>
+    <MeziantouPolyfill_ExcludedPolyfills>$([System.Text.RegularExpressions.Regex]::Replace($(MeziantouPolyfill_ExcludedPolyfills.Replace(';', '|')), '\s+', ''))</MeziantouPolyfill_ExcludedPolyfills>
+  </PropertyGroup>
 </Project>
