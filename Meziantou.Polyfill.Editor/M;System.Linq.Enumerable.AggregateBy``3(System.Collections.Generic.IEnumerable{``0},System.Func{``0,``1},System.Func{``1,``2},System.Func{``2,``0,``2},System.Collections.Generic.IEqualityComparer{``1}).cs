@@ -56,7 +56,7 @@ file class Helpers
 				TSource value = enumerator.Current;
 				TKey key = keySelector(value);
 								
-#if NET
+#if NET6_0_OR_GREATER
 				ref TAccumulate? acc = ref System.Runtime.InteropServices.CollectionsMarshal.GetValueRefOrAddDefault(dict, key, out bool exists);
 				acc = func(exists ? acc! : seedSelector(key), value);
 #else
