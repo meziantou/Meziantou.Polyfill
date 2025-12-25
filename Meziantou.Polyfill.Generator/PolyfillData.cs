@@ -35,6 +35,7 @@ internal sealed partial class PolyfillData
     public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
+    public string[] ConditionalSymbols { get; private set; } = [];
 
     public bool UseUnsafe { get; private set; }
     public bool UseExtensions { get; private set; }
@@ -115,7 +116,7 @@ internal sealed partial class PolyfillData
 
         foreach (var extensionBlock in root.DescendantNodes().OfType<ExtensionBlockDeclarationSyntax>())
         {
-            foreach(var parameter in extensionBlock.ParameterList!.Parameters)
+            foreach (var parameter in extensionBlock.ParameterList!.Parameters)
             {
                 var parameterType = semanticModel.GetTypeInfo(parameter.Type!).Type!;
                 requiredTypes.Add(parameterType);
