@@ -6,6 +6,7 @@
   <PropertyGroup>
     <MeziantouPolyfill_AllowUnsafeBlocks Condition="'$(MeziantouPolyfill_AllowUnsafeBlocks)' == ''">true</MeziantouPolyfill_AllowUnsafeBlocks>
     <AllowUnsafeBlocks Condition="$(MeziantouPolyfill_AllowUnsafeBlocks) == 'true'">true</AllowUnsafeBlocks>
+    <DefineConstants Condition="'$(AllowUnsafeBlocks)' == 'true'">$(DefineConstants);MEZIANTOUPOLYFILL_ALLOWUNSAFE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <!-- Roslyn does not support ';' and new lines: https://github.com/dotnet/roslyn/issues/43970 -->
