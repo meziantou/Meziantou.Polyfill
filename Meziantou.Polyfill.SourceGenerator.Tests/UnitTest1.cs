@@ -87,7 +87,7 @@ public class UnitTest1
 
     [Theory]
     [MemberData(nameof(GetConfigurations))]
-    public async Task GeneratedCodeCompile(PackageReference[] packages)
+    public async Task GeneratedCodeCompile(PackageReference[] packages, bool allowUnsafe)
     {
         var assemblies = new List<string>();
         foreach (var package in packages)
@@ -95,7 +95,7 @@ public class UnitTest1
             assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path, package.Exclusions));
         }
 
-        GenerateFiles("", assemblyLocations: [.. assemblies]);
+        GenerateFiles("", assemblyLocations: [.. assemblies], allowUnsafe: allowUnsafe);
     }
 
     [Fact]
@@ -142,9 +142,9 @@ public class UnitTest1
         Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
     }
 
-    public static TheoryData<PackageReference[]> GetConfigurations()
+    public static TheoryData<PackageReference[], bool> GetConfigurations()
     {
-        return new TheoryData<PackageReference[]>
+        var packagesCombination = new List<PackageReference[]>
         {
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/") } },
@@ -171,6 +171,17 @@ public class UnitTest1
             { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
             { new[] { new PackageReference("NETStandard.Library", "2.0.3", ""), new PackageReference("System.ValueTuple", "4.5.0", "lib/netstandard2.0/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") } },
         };
+
+        var result = new TheoryData<PackageReference[], bool>();
+        foreach (var allowUnsafe in new[] { true, false })
+        {
+            foreach (var packages in packagesCombination)
+            {
+                result.Add(packages, allowUnsafe);
+            }
+        }
+
+        return result;
     }
 
     private static IEnumerable<string> GetFileNames(GeneratorDriverRunResult generatorResult, bool includeAlwaysGeneratedFiles = false)
