@@ -4,13 +4,12 @@ using System.Threading;
 static partial class PolyfillExtensions
 {
     /// <summary>
-    /// Gets a <see cref="Task{TResult}"/> that will complete when the <paramref name="task"/> completes or when the specified <paramref name="cancellationToken"/> has cancellation requested.
+    /// Gets a <see cref="Task"/> that will complete when the <paramref name="task"/> completes or when the specified <paramref name="cancellationToken"/> has cancellation requested.
     /// </summary>
-    /// <typeparam name="TResult">The type of the task result.</typeparam>
     /// <param name="task">The task to wait on for completion.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> to monitor for a cancellation request.</param>
-    /// <returns>The <see cref="Task{TResult}"/> representing the asynchronous wait.</returns>
-    public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, CancellationToken cancellationToken)
+    /// <returns>The <see cref="Task"/> representing the asynchronous wait.</returns>
+    public static Task WaitAsync(this Task task, CancellationToken cancellationToken)
     {
         if (task.IsCompleted || (!cancellationToken.CanBeCanceled))
         {
@@ -19,22 +18,22 @@ static partial class PolyfillExtensions
 
         if (cancellationToken.IsCancellationRequested)
         {
-            return Task.FromCanceled<TResult>(cancellationToken);
+            return Task.FromCanceled(cancellationToken);
         }
 
         return WaitTask.WaitTaskAsync(task, cancellationToken);
     }
 }
 
-file sealed class WaitTask
+file static class WaitTask
 {
-    public static async Task<TResult> WaitTaskAsync<TResult>(Task<TResult> task, CancellationToken cancellationToken)
+    public static async Task WaitTaskAsync(Task task, CancellationToken cancellationToken)
     {
-        var tcs = new TaskCompletionSource<TResult>(TaskCreationOptions.RunContinuationsAsynchronously);
-        using (cancellationToken.Register(static state => ((TaskCompletionSource<TResult>)state!).SetCanceled(), tcs, false))
+        var tcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+        using (cancellationToken.Register(static state => ((TaskCompletionSource<object>)state!).SetCanceled(), tcs, false))
         {
             var t = await Task.WhenAny(task, tcs.Task).ConfigureAwait(false);
-            return t.GetAwaiter().GetResult();
+            t.GetAwaiter().GetResult();
         }
     }
 }
