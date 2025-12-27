@@ -108,7 +108,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (322)
+### Methods (328)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -409,7 +409,13 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.String.Split(System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.StartsWith(System.Char value)`
 - `System.String.TryCopyTo(System.Span<System.Char> destination)`
+- `System.Text.Encoding.GetByteCount(System.ReadOnlySpan<System.Char> chars)`
+- `System.Text.Encoding.GetBytes(System.ReadOnlySpan<System.Char> chars, System.Span<System.Byte> bytes)`
+- `System.Text.Encoding.GetCharCount(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.Text.Encoding.GetChars(System.ReadOnlySpan<System.Byte> bytes, System.Span<System.Char> chars)`
 - `System.Text.Encoding.GetString(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.Text.Encoding.TryGetBytes(System.ReadOnlySpan<System.Char> chars, System.Span<System.Byte> bytes, out System.Int32 bytesWritten)`
+- `System.Text.Encoding.TryGetChars(System.ReadOnlySpan<System.Byte> bytes, System.Span<System.Char> chars, out System.Int32 charsWritten)`
 - `System.Text.StringBuilder.Append(System.ReadOnlyMemory<System.Char> value)`
 - `System.Text.StringBuilder.Append(System.ReadOnlySpan<System.Char> value)`
 - `System.Text.StringBuilder.AppendJoin(System.Char separator, params System.Object?[] values)`
