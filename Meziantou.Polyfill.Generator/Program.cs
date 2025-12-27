@@ -17,6 +17,22 @@ var compilation = CSharpCompilation.Create(
     references: files.Select(file => MetadataReference.CreateFromFile(file)),
     options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, metadataImportOptions: MetadataImportOptions.All));
 
+// Write a txt file containing all available types and methods as XML Documentation Id (for debugging purpose)
+if (args.Contains("--generate-all-symbols"))
+{
+    var allDocIds = string.Join('\n', compilation.References
+        .OfType<PortableExecutableReference>()
+        .Select(compilation.GetAssemblyOrModuleSymbol)
+        .OfType<IAssemblySymbol>()
+        .SelectMany(GetAllTypes)
+        .SelectMany(typeSymbol => new[] { typeSymbol }.Concat(typeSymbol.GetMembers().OfType<IMethodSymbol>().Cast<ISymbol>()).Concat(typeSymbol.GetMembers().OfType<IPropertySymbol>().Cast<ISymbol>()))
+        .Select(DocumentationCommentId.CreateDeclarationId)
+        .Distinct(StringComparer.Ordinal)
+        .Order(StringComparer.Ordinal));
+    await File.WriteAllTextAsync(GetRootPath() / "Meziantou.Polyfill.Editor" / "_AllSymbols.txt", allDocIds);
+}
+
+//
 var assembly = Assembly.GetExecutingAssembly();
 var polyfills = assembly.GetManifestResourceNames()
       .OrderBy(_ => _, StringComparer.Ordinal)
@@ -407,6 +423,39 @@ static Polyfill[] SortPolyfills(Polyfill[] items)
             return true;
 
         return false;
+    }
+}
+
+static IEnumerable<ITypeSymbol> GetAllTypes(IAssemblySymbol assembly)
+{
+    var result = new List<ITypeSymbol>();
+    foreach (var module in assembly.Modules)
+    {
+        ProcessNamespace(result, module.GlobalNamespace);
+    }
+
+    return result;
+
+    static void ProcessNamespace(List<ITypeSymbol> result, INamespaceSymbol ns)
+    {
+        foreach (var type in ns.GetTypeMembers())
+        {
+            ProcessType(result, type);
+        }
+
+        foreach (var nestedNs in ns.GetNamespaceMembers())
+        {
+            ProcessNamespace(result, nestedNs);
+        }
+    }
+
+    static void ProcessType(List<ITypeSymbol> result, ITypeSymbol symbol)
+    {
+        result.Add(symbol);
+        foreach (var type in symbol.GetTypeMembers())
+        {
+            ProcessType(result, type);
+        }
     }
 }
 

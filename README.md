@@ -453,3 +453,4 @@ Notes:
 - All files must be self contained. Use a `file class` if needed.
 - If you need to generate a file only when another polyfill is generated, add `// when <xml documentation id>` in the file
 - If xml documentation id is too long, you can use `// XML-DOC: <xml documentation id>` in the file
+- If you are not sure about the xml documentation id, you can run the generator `dotnet run --project Meziantou.Polyfill.Generator -- --generate-all-symbols` and open the file `Meziantou.Polyfill.Editor\_AllSymbols.txt`
