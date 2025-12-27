@@ -48,6 +48,14 @@ public class SystemNetHttpTests
     }
 
     [Fact]
+    public async Task HttpContent_ReadAsByteArrayAsync()
+    {
+        var content = new ByteArrayContent([1, 2, 3]);
+        var result = await content.ReadAsByteArrayAsync(CancellationToken.None);
+        Assert.Equal([1, 2, 3], result);
+    }
+
+    [Fact]
     public void HttpMethod_Query()
     {
         var queryMethod = HttpMethod.Query;

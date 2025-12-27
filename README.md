@@ -108,7 +108,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (316)
+### Methods (322)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -369,6 +369,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Threading.CancellationToken cancellationToken)`
+- `System.Net.Http.HttpContent.ReadAsByteArrayAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStream(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStream()`
 - `System.Net.Http.HttpContent.ReadAsStringAsync(System.Threading.CancellationToken cancellationToken)`
@@ -421,7 +422,12 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue, System.Int32 startIndex, System.Int32 count)`
 - `System.Threading.CancellationTokenSource.CancelAsync()`
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout)`
+- `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Threading.Tasks.Task<TResult>.WaitAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout)`
+- `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
 - `System.TimeSpan.Multiply(System.Double factor)`
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
