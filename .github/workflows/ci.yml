@@ -17,6 +17,28 @@ defaults:
     shell: pwsh
 
 jobs:
+  lint_readme:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+    - name: Copy README before generation
+      run: Copy-Item README.md README.md.before
+    - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
+    - name: Validate README is up to date
+      run: |
+        # Normalize line endings for comparison
+        $before = (Get-Content README.md.before -Raw) -replace '\r\n', "`n"
+        $after = (Get-Content README.md -Raw) -replace '\r\n', "`n"
+        if ($before -ne $after) {
+          Write-Host "ERROR: README.md is not up to date. Please run the generator and commit the changes."
+          Write-Host "Diff:"
+          git --no-pager diff --no-index README.md.before README.md
+          exit 1
+        }
+        Write-Host "README.md is up to date"
+
   create_nuget:
     runs-on: ubuntu-latest
     env:
@@ -90,7 +112,7 @@ jobs:
 
   deploy:
     runs-on: 'ubuntu-latest'
-    needs: [ validate_nuget, tests ]
+    needs: [ validate_nuget, tests, lint_readme ]
     steps:
     - uses: actions/checkout@v4
       with:
