@@ -64,7 +64,9 @@ public class SystemThreadingTasksTests
         });
 
         await ((Task)tcs.Task).WaitAsync(CancellationToken.None);
+#pragma warning disable xUnit1031 // Do not use blocking task operations in test method
         Assert.Equal(1, tcs.Task.Result);
+#pragma warning restore xUnit1031 // Do not use blocking task operations in test method
     }
 
     [Fact]
@@ -120,7 +122,9 @@ public class SystemThreadingTasksTests
         });
 
         await ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5));
+#pragma warning disable xUnit1031 // Do not use blocking task operations in test method
         Assert.Equal(42, tcs.Task.Result);
+#pragma warning restore xUnit1031
     }
 
     [Fact]
@@ -189,7 +193,9 @@ public class SystemThreadingTasksTests
         });
 
         await ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), CancellationToken.None);
+#pragma warning disable xUnit1031 // Do not use blocking task operations in test method
         Assert.Equal(42, tcs.Task.Result);
+#pragma warning restore xUnit1031
     }
 
     [Fact]
@@ -211,5 +217,4 @@ public class SystemThreadingTasksTests
         await Assert.ThrowsAsync<TaskCanceledException>(async () => 
             await ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), cts.Token));
     }
-
 }

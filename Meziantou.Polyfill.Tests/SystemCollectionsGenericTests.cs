@@ -77,7 +77,6 @@ public class SystemCollectionsGenericTests
         Assert.Equal(2, value);
     }
 
-#if NET461_OR_GREATER || NETCOREAPP
     [Fact]
     public void List_AddRange_ReadOnlySpan()
     {
@@ -108,6 +107,4 @@ public class SystemCollectionsGenericTests
         List<int> list = null!;
         Assert.Throws<ArgumentNullException>(() => list.AddRange((ReadOnlySpan<int>)[1, 2, 3]));
     }
-#endif
-
 }

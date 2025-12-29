@@ -115,7 +115,6 @@ public class SystemTextTests
         Assert.Equal("abcdzybc", sb.ToString());
     }
 
-#if NET461_OR_GREATER || NETCOREAPP
     [Fact]
     public void Encoding_GetByteCount_ReadOnlySpan()
     {
@@ -126,24 +125,22 @@ public class SystemTextTests
         Assert.Equal(expected, actual);
     }
 
-#if NET5_0_OR_GREATER // GetBytes with Span only works correctly with unsafe code
     [Fact]
     public void Encoding_GetBytes_ReadOnlySpan_Span()
     {
         var encoding = Encoding.UTF8;
         var text = "Hello, 世界!";
         var expectedBytes = encoding.GetBytes(text);
+
         var bytes = new byte[expectedBytes.Length];
-        
         var count = encoding.GetBytes(text.AsSpan(), bytes);
-        
+
         Assert.Equal(expectedBytes.Length, count);
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             Assert.Equal(expectedBytes[i], bytes[i]);
         }
     }
-#endif
 
     [Fact]
     public void Encoding_GetCharCount_ReadOnlySpan()
@@ -172,7 +169,6 @@ public class SystemTextTests
         Assert.Equal(text, result);
     }
 
-#if NET5_0_OR_GREATER // TryGetBytes only works correctly with unsafe code
     [Fact]
     public void Encoding_TryGetBytes_Success()
     {
@@ -203,7 +199,6 @@ public class SystemTextTests
         Assert.False(success);
         Assert.Equal(0, bytesWritten);
     }
-#endif
 
     [Fact]
     public void Encoding_TryGetChars_Success()
@@ -233,6 +228,4 @@ public class SystemTextTests
         Assert.False(success);
         Assert.Equal(0, charsWritten);
     }
-#endif
-
 }

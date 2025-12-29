@@ -14,7 +14,7 @@ static partial class PolyfillExtensions
     /// <returns>The <see cref="Task<TResult>{TResult}"/> representing the asynchronous wait.</returns>
     public static Task<TResult> WaitAsync<TResult>(this Task<TResult> task, TimeSpan timeout, CancellationToken cancellationToken)
     {
-        if (task.IsCompleted || timeout == Timeout.InfiniteTimeSpan || (!cancellationToken.CanBeCanceled))
+        if (task.IsCompleted || (timeout == Timeout.InfiniteTimeSpan && !cancellationToken.CanBeCanceled))
         {
             return task;
         }

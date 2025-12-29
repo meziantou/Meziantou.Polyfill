@@ -22,7 +22,10 @@ static partial class PolyfillExtensions
             }
         }
 #else
-        return target.GetBytes(chars.ToArray(), 0, chars.Length, bytes.ToArray(), 0);
+        var byteArray = new byte[bytes.Length];
+        int count = target.GetBytes(chars.ToArray(), 0, chars.Length, byteArray, 0);
+        byteArray.AsSpan(0, count).CopyTo(bytes);
+        return count;
 #endif
     }
 }
