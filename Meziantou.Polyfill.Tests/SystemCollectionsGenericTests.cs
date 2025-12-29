@@ -132,7 +132,7 @@ public class SystemCollectionsGenericTests
     public void Dictionary_TryAdd_NullDictionary()
     {
         Dictionary<string, int> dict = null!;
-        Assert.Throws<ArgumentNullException>(() => dict.TryAdd("key1", 100));
+        Assert.Throws<NullReferenceException>(() => dict.TryAdd("key1", 100));
     }
 
     [Fact]
