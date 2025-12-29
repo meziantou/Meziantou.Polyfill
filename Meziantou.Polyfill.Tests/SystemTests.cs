@@ -805,6 +805,430 @@ public class SystemTests
     }
 
     [Fact]
+    public void String_Create()
+    {
+        var actual = string.Create(CultureInfo.InvariantCulture, $"a{1}b");
+        Assert.Equal("a1b", actual);
+    }
+
+    [Fact]
+    public void Single_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        var result = float.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(123.45f, result, 2);
+
+        // Scientific notation
+        utf8Data = "1.23e+2"u8;
+        result = float.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(123f, result, 0);
+
+        // Negative numbers
+        utf8Data = "-456.78"u8;
+        result = float.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(-456.78f, result, 2);
+    }
+
+    [Fact]
+    public void Single_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        // Basic parsing with style
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        var result = float.Parse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture);
+        Assert.Equal(123.45f, result, 2);
+
+        // Allow leading whitespace
+        utf8Data = "  456.78"u8;
+        result = float.Parse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture);
+        Assert.Equal(456.78f, result, 2);
+    }
+
+    [Fact]
+    public void Single_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        Assert.True(float.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.45f, result, 2);
+
+        // Invalid UTF8 input
+        utf8Data = "abc"u8;
+        Assert.False(float.TryParse(utf8Data, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0f, result);
+
+        // Empty span
+        Assert.False(float.TryParse(ReadOnlySpan<byte>.Empty, CultureInfo.InvariantCulture, out _));
+
+        // Null provider
+        utf8Data = "789.01"u8;
+        Assert.True(float.TryParse(utf8Data, null, out result));
+        Assert.Equal(789.01f, result, 2);
+    }
+
+    [Fact]
+    public void Single_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        // Parsing with style
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        Assert.True(float.TryParse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.45f, result, 2);
+
+        // Invalid with specified style
+        utf8Data = "ABC"u8;
+        Assert.False(float.TryParse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0f, result);
+
+        // Null provider
+        utf8Data = "42.5"u8;
+        Assert.True(float.TryParse(utf8Data, NumberStyles.Float, null, out result));
+        Assert.Equal(42.5f, result, 1);
+    }
+
+    [Fact]
+    public void Double_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123.456"u8;
+        var result = double.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(123.456d, result, 3);
+
+        // Scientific notation
+        utf8Data = "1.23e+2"u8;
+        result = double.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(123d, result, 0);
+
+        // Negative numbers
+        utf8Data = "-456.789"u8;
+        result = double.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(-456.789d, result, 3);
+    }
+
+    [Fact]
+    public void Double_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        // Basic parsing with style
+        ReadOnlySpan<byte> utf8Data = "123.456"u8;
+        var result = double.Parse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture);
+        Assert.Equal(123.456d, result, 3);
+
+        // Allow leading whitespace
+        utf8Data = "  456.789"u8;
+        result = double.Parse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture);
+        Assert.Equal(456.789d, result, 3);
+    }
+
+    [Fact]
+    public void Double_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123.456"u8;
+        Assert.True(double.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.456d, result, 3);
+
+        // Invalid UTF8 input
+        utf8Data = "abc"u8;
+        Assert.False(double.TryParse(utf8Data, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0d, result);
+
+        // Empty span
+        Assert.False(double.TryParse(ReadOnlySpan<byte>.Empty, CultureInfo.InvariantCulture, out _));
+
+        // Null provider
+        utf8Data = "789.012"u8;
+        Assert.True(double.TryParse(utf8Data, null, out result));
+        Assert.Equal(789.012d, result, 3);
+    }
+
+    [Fact]
+    public void Double_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        // Parsing with style
+        ReadOnlySpan<byte> utf8Data = "123.456"u8;
+        Assert.True(double.TryParse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.456d, result, 3);
+
+        // Invalid with specified style
+        utf8Data = "ABC"u8;
+        Assert.False(double.TryParse(utf8Data, NumberStyles.Float, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0d, result);
+
+        // Null provider
+        utf8Data = "42.5"u8;
+        Assert.True(double.TryParse(utf8Data, NumberStyles.Float, null, out result));
+        Assert.Equal(42.5d, result, 1);
+    }
+
+    [Fact]
+    public void Decimal_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        var result = decimal.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(123.45m, result);
+
+        // Large number
+        utf8Data = "999999999999.99"u8;
+        result = decimal.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(999999999999.99m, result);
+
+        // Negative numbers
+        utf8Data = "-456.78"u8;
+        result = decimal.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(-456.78m, result);
+    }
+
+    [Fact]
+    public void Decimal_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        // Basic parsing with style
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        var result = decimal.Parse(utf8Data, NumberStyles.Number, CultureInfo.InvariantCulture);
+        Assert.Equal(123.45m, result);
+
+        // Allow leading whitespace
+        utf8Data = "  456.78"u8;
+        result = decimal.Parse(utf8Data, NumberStyles.Number, CultureInfo.InvariantCulture);
+        Assert.Equal(456.78m, result);
+    }
+
+    [Fact]
+    public void Decimal_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        // Basic parsing from UTF8
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        Assert.True(decimal.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.45m, result);
+
+        // Invalid UTF8 input
+        utf8Data = "abc"u8;
+        Assert.False(decimal.TryParse(utf8Data, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0m, result);
+
+        // Empty span
+        Assert.False(decimal.TryParse(ReadOnlySpan<byte>.Empty, CultureInfo.InvariantCulture, out _));
+
+        // Null provider
+        utf8Data = "789.01"u8;
+        Assert.True(decimal.TryParse(utf8Data, null, out result));
+        Assert.Equal(789.01m, result);
+    }
+
+    [Fact]
+    public void Decimal_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        // Parsing with style
+        ReadOnlySpan<byte> utf8Data = "123.45"u8;
+        Assert.True(decimal.TryParse(utf8Data, NumberStyles.Number, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.45m, result);
+
+        // Invalid with specified style
+        utf8Data = "ABC"u8;
+        Assert.False(decimal.TryParse(utf8Data, NumberStyles.Number, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0m, result);
+
+        // Null provider
+        utf8Data = "42.5"u8;
+        Assert.True(decimal.TryParse(utf8Data, NumberStyles.Number, null, out result));
+        Assert.Equal(42.5m, result);
+    }
+
+    [Fact]
+    public void Byte_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "255"u8;
+        var result = byte.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(255, result);
+
+        utf8Data = "0"u8;
+        result = byte.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(0, result);
+    }
+
+    [Fact]
+    public void Byte_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FF"u8;
+        var result = byte.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(255, result);
+    }
+
+    [Fact]
+    public void Byte_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "123"u8;
+        Assert.True(byte.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123, result);
+
+        utf8Data = "256"u8;
+        Assert.False(byte.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void Byte_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FF"u8;
+        Assert.True(byte.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(255, result);
+    }
+
+    [Fact]
+    public void SByte_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "127"u8;
+        var result = sbyte.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(127, result);
+
+        utf8Data = "-128"u8;
+        result = sbyte.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(-128, result);
+    }
+
+    [Fact]
+    public void SByte_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "7F"u8;
+        var result = sbyte.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(127, result);
+    }
+
+    [Fact]
+    public void SByte_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "100"u8;
+        Assert.True(sbyte.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(100, result);
+
+        utf8Data = "128"u8;
+        Assert.False(sbyte.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void SByte_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "7F"u8;
+        Assert.True(sbyte.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(127, result);
+    }
+
+    [Fact]
+    public void Int16_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "32767"u8;
+        var result = short.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(32767, result);
+
+        utf8Data = "-32768"u8;
+        result = short.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(-32768, result);
+    }
+
+    [Fact]
+    public void Int16_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "7FFF"u8;
+        var result = short.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(32767, result);
+    }
+
+    [Fact]
+    public void Int16_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "1000"u8;
+        Assert.True(short.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(1000, result);
+
+        utf8Data = "32768"u8;
+        Assert.False(short.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void Int16_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "7FFF"u8;
+        Assert.True(short.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(32767, result);
+    }
+
+    [Fact]
+    public void UInt16_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "65535"u8;
+        var result = ushort.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(65535, result);
+
+        utf8Data = "0"u8;
+        result = ushort.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(0, result);
+    }
+
+    [Fact]
+    public void UInt16_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FFFF"u8;
+        var result = ushort.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(65535, result);
+    }
+
+    [Fact]
+    public void UInt16_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "50000"u8;
+        Assert.True(ushort.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(50000, result);
+
+        utf8Data = "65536"u8;
+        Assert.False(ushort.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void UInt16_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FFFF"u8;
+        Assert.True(ushort.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(65535, result);
+    }
+
+    [Fact]
+    public void UInt32_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "4294967295"u8;
+        var result = uint.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(4294967295u, result);
+
+        utf8Data = "0"u8;
+        result = uint.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(0u, result);
+    }
+
+    [Fact]
+    public void UInt32_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FFFFFFFF"u8;
+        var result = uint.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(4294967295u, result);
+    }
+
+    [Fact]
+    public void UInt32_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "1000000000"u8;
+        Assert.True(uint.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(1000000000u, result);
+
+        utf8Data = "4294967296"u8;
+        Assert.False(uint.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void UInt32_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FFFFFFFF"u8;
+        Assert.True(uint.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(4294967295u, result);
+    }
+
+    [Fact]
     public void Int32_TryParse_ReadOnlySpan_Char()
     {
         // Basic parsing
@@ -899,10 +1323,81 @@ public class SystemTests
     }
 
     [Fact]
-    public void String_Create()
+    public void UInt64_Parse_ReadOnlySpan_Byte_IFormatProvider()
     {
-        var actual = string.Create(CultureInfo.InvariantCulture, $"a{1}b");
-        Assert.Equal("a1b", actual);
+        ReadOnlySpan<byte> utf8Data = "18446744073709551615"u8;
+        var result = ulong.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(18446744073709551615ul, result);
+
+        utf8Data = "0"u8;
+        result = ulong.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(0ul, result);
+    }
+
+    [Fact]
+    public void UInt64_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FFFFFFFFFFFFFFFF"u8;
+        var result = ulong.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(18446744073709551615ul, result);
+    }
+
+    [Fact]
+    public void UInt64_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "10000000000000000000"u8;
+        Assert.True(ulong.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(10000000000000000000ul, result);
+
+        utf8Data = "18446744073709551616"u8;
+        Assert.False(ulong.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void UInt64_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "FFFFFFFFFFFFFFFF"u8;
+        Assert.True(ulong.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(18446744073709551615ul, result);
+    }
+
+    [Fact]
+    public void Int64_Parse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "9223372036854775807"u8;
+        var result = long.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(9223372036854775807L, result);
+
+        utf8Data = "-9223372036854775808"u8;
+        result = long.Parse(utf8Data, CultureInfo.InvariantCulture);
+        Assert.Equal(-9223372036854775808L, result);
+    }
+
+    [Fact]
+    public void Int64_Parse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "7FFFFFFFFFFFFFFF"u8;
+        var result = long.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+        Assert.Equal(9223372036854775807L, result);
+    }
+
+    [Fact]
+    public void Int64_TryParse_ReadOnlySpan_Byte_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "1000000000000000000"u8;
+        Assert.True(long.TryParse(utf8Data, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(1000000000000000000L, result);
+
+        utf8Data = "9223372036854775808"u8;
+        Assert.False(long.TryParse(utf8Data, CultureInfo.InvariantCulture, out _));
+    }
+
+    [Fact]
+    public void Int64_TryParse_ReadOnlySpan_Byte_NumberStyles_IFormatProvider()
+    {
+        ReadOnlySpan<byte> utf8Data = "7FFFFFFFFFFFFFFF"u8;
+        Assert.True(long.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(9223372036854775807L, result);
     }
 
 }
