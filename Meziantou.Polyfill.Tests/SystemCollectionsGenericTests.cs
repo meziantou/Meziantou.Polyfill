@@ -107,4 +107,47 @@ public class SystemCollectionsGenericTests
         List<int> list = null!;
         Assert.Throws<ArgumentNullException>(() => list.AddRange((ReadOnlySpan<int>)[1, 2, 3]));
     }
+
+    [Fact]
+    public void Dictionary_TryAdd_KeyDoesNotExist()
+    {
+        var dict = new Dictionary<string, int>();
+        Assert.True(dict.TryAdd("key1", 100));
+        Assert.Equal(100, dict["key1"]);
+    }
+
+    [Fact]
+    public void Dictionary_TryAdd_KeyAlreadyExists()
+    {
+        var dict = new Dictionary<string, int>
+        {
+            ["key1"] = 100
+        };
+
+        Assert.False(dict.TryAdd("key1", 200));
+        Assert.Equal(100, dict["key1"]);
+    }
+
+    [Fact]
+    public void Dictionary_TryAdd_NullDictionary()
+    {
+        Dictionary<string, int> dict = null!;
+        Assert.Throws<ArgumentNullException>(() => dict.TryAdd("key1", 100));
+    }
+
+    [Fact]
+    public void Dictionary_TryAdd_MultipleOperations()
+    {
+        var dict = new Dictionary<int, string>();
+
+        Assert.True(dict.TryAdd(1, "one"));
+        Assert.True(dict.TryAdd(2, "two"));
+        Assert.False(dict.TryAdd(1, "uno"));
+        Assert.True(dict.TryAdd(3, "three"));
+
+        Assert.Equal(3, dict.Count);
+        Assert.Equal("one", dict[1]);
+        Assert.Equal("two", dict[2]);
+        Assert.Equal("three", dict[3]);
+    }
 }
