@@ -306,7 +306,7 @@ async Task GenerateMembers()
     var allPolyfillExtensionsClassNames = polyfills
         .SelectMany(p => p.PolyfillData.PolyfillExtensionsClassNames)
         .Distinct(StringComparer.Ordinal)
-        .OrderBy(x => x, StringComparer.Ordinal)
+        .Order(StringComparer.Ordinal)
         .ToArray();
     
     foreach (var className in allPolyfillExtensionsClassNames)
