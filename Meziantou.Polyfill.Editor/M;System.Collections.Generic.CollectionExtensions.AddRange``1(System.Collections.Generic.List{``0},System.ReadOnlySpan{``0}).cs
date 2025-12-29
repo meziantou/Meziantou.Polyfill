@@ -8,7 +8,7 @@ static partial class PolyfillExtensions
     /// <param name="list">The list to which the elements should be added.</param>
     /// <param name="source">The span whose elements should be added to the end of the <see cref="List{T}"/>.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="list"/> is null.</exception>
-    public static void AddRange<T>(List<T> list, ReadOnlySpan<T> source)
+    public static void AddRange<T>(this List<T> list, ReadOnlySpan<T> source)
     {
         ArgumentNullException.ThrowIfNull(list);
 
