@@ -50,12 +50,7 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
         context.RegisterImplementationSourceOutput(provider, (context, members) =>
         {
             context.AddSource("Debug.g.cs", SourceText.From(members.DumpAsCSharpComment(), Encoding.UTF8));
-            context.AddSource("PolyfillExtensions.g.cs", SourceText.From("""
-                [Microsoft.CodeAnalysis.EmbeddedAttribute]
-                internal static partial class PolyfillExtensions
-                {
-                }
-                """, Encoding.UTF8));
+            context.AddSource("PolyfillExtensions.g.cs", SourceText.From(Members.GetPolyfillExtensionsDeclarations(), Encoding.UTF8));
 
             members.AddSources(context);
         });
