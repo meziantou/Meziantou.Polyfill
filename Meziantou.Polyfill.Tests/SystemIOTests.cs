@@ -123,9 +123,9 @@ public class SystemIOTests
     {
         using var ms = new MemoryStream([1, 2, 3, 4, 5]);
         var buffer = new byte[3];
-        
+
         var bytesRead = await ms.ReadAsync(buffer.AsMemory());
-        
+
         Assert.Equal(3, bytesRead);
         Assert.Equal([1, 2, 3], buffer);
     }
@@ -135,9 +135,9 @@ public class SystemIOTests
     {
         using var ms = new MemoryStream();
         var data = new byte[] { 1, 2, 3, 4, 5 };
-        
+
         await ms.WriteAsync(data.AsMemory());
-        
+
         Assert.Equal([1, 2, 3, 4, 5], ms.ToArray());
     }
 
@@ -145,9 +145,9 @@ public class SystemIOTests
     public async Task Stream_DisposeAsync_IAsyncDisposable()
     {
         var stream = new AsyncDisposableStream();
-        
+
         await stream.DisposeAsync();
-        
+
         Assert.True(stream.AsyncDisposed);
         Assert.False(stream.SyncDisposed);
     }
@@ -156,9 +156,9 @@ public class SystemIOTests
     public async Task Stream_DisposeAsync_NotAsyncDisposable()
     {
         var stream = new SyncOnlyDisposableStream();
-        
+
         await stream.DisposeAsync();
-        
+
         Assert.True(stream.Disposed);
     }
 
@@ -174,7 +174,9 @@ public class SystemIOTests
         }
 
 #if NET8_0_OR_GREATER
+#pragma warning disable CA2215 // Dispose methods should call base class dispose
         public override ValueTask DisposeAsync()
+#pragma warning restore CA2215
 #else
         public ValueTask DisposeAsync()
 #endif
