@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -115,6 +115,83 @@ public class SystemIOTests
         finally
         {
             File.Delete(tempFile);
+        }
+    }
+
+    [Fact]
+    public async Task Stream_ReadAsync_Memory()
+    {
+        using var ms = new MemoryStream([1, 2, 3, 4, 5]);
+        var buffer = new byte[3];
+        
+        var bytesRead = await ms.ReadAsync(buffer.AsMemory());
+        
+        Assert.Equal(3, bytesRead);
+        Assert.Equal([1, 2, 3], buffer);
+    }
+
+    [Fact]
+    public async Task Stream_WriteAsync_ReadOnlyMemory()
+    {
+        using var ms = new MemoryStream();
+        var data = new byte[] { 1, 2, 3, 4, 5 };
+        
+        await ms.WriteAsync(data.AsMemory());
+        
+        Assert.Equal([1, 2, 3, 4, 5], ms.ToArray());
+    }
+
+    [Fact]
+    public async Task Stream_DisposeAsync_IAsyncDisposable()
+    {
+        var stream = new AsyncDisposableStream();
+        
+        await stream.DisposeAsync();
+        
+        Assert.True(stream.AsyncDisposed);
+        Assert.False(stream.SyncDisposed);
+    }
+
+    [Fact]
+    public async Task Stream_DisposeAsync_NotAsyncDisposable()
+    {
+        var stream = new SyncOnlyDisposableStream();
+        
+        await stream.DisposeAsync();
+        
+        Assert.True(stream.Disposed);
+    }
+
+    private sealed class AsyncDisposableStream : MemoryStream, IAsyncDisposable
+    {
+        public bool AsyncDisposed { get; private set; }
+        public bool SyncDisposed { get; private set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            SyncDisposed = true;
+            base.Dispose(disposing);
+        }
+
+#if NET8_0_OR_GREATER
+        public override ValueTask DisposeAsync()
+#else
+        public ValueTask DisposeAsync()
+#endif
+        {
+            AsyncDisposed = true;
+            return default;
+        }
+    }
+
+    private sealed class SyncOnlyDisposableStream : MemoryStream
+    {
+        public bool Disposed { get; private set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            Disposed = true;
+            base.Dispose(disposing);
         }
     }
 #endif

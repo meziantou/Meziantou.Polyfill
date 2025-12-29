@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -114,5 +114,125 @@ public class SystemTextTests
         sb.Replace("bc".AsSpan(), "zy".AsSpan(), 2, 5);
         Assert.Equal("abcdzybc", sb.ToString());
     }
+
+#if NET461_OR_GREATER || NETCOREAPP
+    [Fact]
+    public void Encoding_GetByteCount_ReadOnlySpan()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello, 世界!";
+        var expected = encoding.GetByteCount(text);
+        var actual = encoding.GetByteCount(text.AsSpan());
+        Assert.Equal(expected, actual);
+    }
+
+#if NET5_0_OR_GREATER // GetBytes with Span only works correctly with unsafe code
+    [Fact]
+    public void Encoding_GetBytes_ReadOnlySpan_Span()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello, 世界!";
+        var expectedBytes = encoding.GetBytes(text);
+        var bytes = new byte[expectedBytes.Length];
+        
+        var count = encoding.GetBytes(text.AsSpan(), bytes);
+        
+        Assert.Equal(expectedBytes.Length, count);
+        for (int i = 0; i < count; i++)
+        {
+            Assert.Equal(expectedBytes[i], bytes[i]);
+        }
+    }
+#endif
+
+    [Fact]
+    public void Encoding_GetCharCount_ReadOnlySpan()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello, 世界!";
+        var bytes = encoding.GetBytes(text);
+        
+        var expected = encoding.GetCharCount(bytes);
+        var actual = encoding.GetCharCount(bytes.AsSpan());
+        
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void Encoding_GetChars_ReadOnlySpan_Span()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello, 世界!";
+        var bytes = encoding.GetBytes(text);
+        var chars = new char[text.Length];
+        
+        var count = encoding.GetChars(bytes.AsSpan(), chars);
+        var result = new string(chars, 0, count);
+        
+        Assert.Equal(text, result);
+    }
+
+#if NET5_0_OR_GREATER // TryGetBytes only works correctly with unsafe code
+    [Fact]
+    public void Encoding_TryGetBytes_Success()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello";
+        var expectedBytes = encoding.GetBytes(text);
+        var bytes = new byte[100];
+        
+        var success = encoding.TryGetBytes(text.AsSpan(), bytes, out var bytesWritten);
+        
+        Assert.True(success);
+        Assert.Equal(expectedBytes.Length, bytesWritten);
+        for (int i = 0; i < bytesWritten; i++)
+        {
+            Assert.Equal(expectedBytes[i], bytes[i]);
+        }
+    }
+
+    [Fact]
+    public void Encoding_TryGetBytes_DestinationTooSmall()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello, 世界!";
+        var bytes = new byte[2];
+        
+        var success = encoding.TryGetBytes(text.AsSpan(), bytes, out var bytesWritten);
+        
+        Assert.False(success);
+        Assert.Equal(0, bytesWritten);
+    }
+#endif
+
+    [Fact]
+    public void Encoding_TryGetChars_Success()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello";
+        var bytes = encoding.GetBytes(text);
+        var chars = new char[100];
+        
+        var success = encoding.TryGetChars(bytes.AsSpan(), chars, out var charsWritten);
+        
+        Assert.True(success);
+        Assert.Equal(text.Length, charsWritten);
+        Assert.Equal(text, new string(chars, 0, charsWritten));
+    }
+
+    [Fact]
+    public void Encoding_TryGetChars_DestinationTooSmall()
+    {
+        var encoding = Encoding.UTF8;
+        var text = "Hello, 世界!";
+        var bytes = encoding.GetBytes(text);
+        var chars = new char[2];
+        
+        var success = encoding.TryGetChars(bytes.AsSpan(), chars, out var charsWritten);
+        
+        Assert.False(success);
+        Assert.Equal(0, charsWritten);
+    }
+#endif
 
 }

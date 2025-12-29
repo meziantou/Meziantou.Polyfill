@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -76,5 +76,38 @@ public class SystemCollectionsGenericTests
         Assert.True(dict.Remove(1, out var value));
         Assert.Equal(2, value);
     }
+
+#if NET461_OR_GREATER || NETCOREAPP
+    [Fact]
+    public void List_AddRange_ReadOnlySpan()
+    {
+        var list = new List<int> { 1, 2 };
+        list.AddRange((ReadOnlySpan<int>)[3, 4, 5]);
+        Assert.Equal([1, 2, 3, 4, 5], list);
+    }
+
+    [Fact]
+    public void List_AddRange_ReadOnlySpan_Empty()
+    {
+        var list = new List<int> { 1, 2 };
+        list.AddRange(ReadOnlySpan<int>.Empty);
+        Assert.Equal([1, 2], list);
+    }
+
+    [Fact]
+    public void List_AddRange_ReadOnlySpan_EmptyList()
+    {
+        var list = new List<int>();
+        list.AddRange((ReadOnlySpan<int>)[1, 2, 3]);
+        Assert.Equal([1, 2, 3], list);
+    }
+
+    [Fact]
+    public void List_AddRange_ReadOnlySpan_Null()
+    {
+        List<int> list = null!;
+        Assert.Throws<ArgumentNullException>(() => list.AddRange((ReadOnlySpan<int>)[1, 2, 3]));
+    }
+#endif
 
 }
