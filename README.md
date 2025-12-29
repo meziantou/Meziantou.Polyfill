@@ -108,7 +108,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (329)
+### Methods (330)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -129,6 +129,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)`
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.Remove(TKey key, out TValue value)`
+- `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan()`
