@@ -13,7 +13,7 @@ static partial class PolyfillExtensions
     /// <returns>The <see cref="Task"/> representing the asynchronous wait.</returns>
     public static Task WaitAsync(this Task task, TimeSpan timeout, CancellationToken cancellationToken)
     {
-        if (task.IsCompleted || timeout == Timeout.InfiniteTimeSpan || (!cancellationToken.CanBeCanceled))
+        if (task.IsCompleted || (timeout == Timeout.InfiniteTimeSpan && !cancellationToken.CanBeCanceled))
         {
             return task;
         }
