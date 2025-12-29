@@ -36,6 +36,7 @@ internal sealed partial class PolyfillData
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
     public string[] ConditionalSymbols { get; private set; } = [];
+    public string[] PolyfillExtensionsClassNames { get; private set; } = [];
 
     public bool UseUnsafe { get; private set; }
     public bool UseExtensions { get; private set; }
@@ -69,6 +70,16 @@ internal sealed partial class PolyfillData
 
         var requiredTypes = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
         var declaredMethods = new HashSet<string>(StringComparer.Ordinal);
+        var polyfillExtensionsClassNames = new HashSet<string>(StringComparer.Ordinal);
+
+        // Collect all class names starting with "PolyfillExtensions"
+        foreach (var type in root.DescendantNodes(descendIntoChildren: node => node is not TypeDeclarationSyntax).OfType<ClassDeclarationSyntax>())
+        {
+            if (type.Identifier.ValueText.StartsWith("PolyfillExtensions", StringComparison.Ordinal))
+            {
+                polyfillExtensionsClassNames.Add(type.Identifier.ValueText);
+            }
+        }
 
         foreach (var method in root.DescendantNodes().OfType<MethodDeclarationSyntax>())
         {
@@ -134,6 +145,7 @@ internal sealed partial class PolyfillData
         data.ConditionalMembers = GetConditions(content);
         data.XmlDocumentationId = documentationDeclarationId;
         data.DeclaredMemberDocumentationIds = [.. declaredMethods];
+        data.PolyfillExtensionsClassNames = [.. polyfillExtensionsClassNames.OrderBy(x => x, StringComparer.Ordinal)];
         data.UseExtensions = useExtensions;
         data.UseUnsafe = useUnsafe;
         data.SupportInternalsVisibleTo = supportInternalsVisibleTo;
@@ -176,7 +188,8 @@ internal sealed partial class PolyfillData
     {
         public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
         {
-            if (node.Identifier.ValueText == "PolyfillExtensions")
+            // Skip classes that start with "PolyfillExtensions" - they will be handled separately
+            if (node.Identifier.ValueText.StartsWith("PolyfillExtensions", StringComparison.Ordinal))
                 return node;
 
             return node.WithAttributeLists(node.AttributeLists.Add(
