@@ -108,7 +108,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (330)
+### Methods (425)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -122,6 +122,15 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.ArgumentOutOfRangeException.ThrowIfNotEqual<T>(T value, T other, [System.String? paramName = null])`
 - `System.BitConverter.ToInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`
+- `System.Byte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Byte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Byte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Byte.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Byte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Byte result)`
+- `System.Byte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Byte result)`
+- `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, out System.Byte result)`
+- `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Byte result)`
+- `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Byte result)`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Generic.CollectionExtensions.AddRange<T>(this System.Collections.Generic.List<T> list, params System.ReadOnlySpan<T> source)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
@@ -142,7 +151,25 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Convert.ToHexStringLower(System.Byte[] inArray)`
 - `System.Convert.ToHexStringLower(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
 - `System.Convert.ToHexStringLower(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.Decimal.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number], [System.IFormatProvider? provider = null])`
+- `System.Decimal.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Decimal.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number], [System.IFormatProvider? provider = null])`
+- `System.Decimal.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Decimal.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Decimal result)`
+- `System.Decimal.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Decimal result)`
+- `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, out System.Decimal result)`
+- `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Decimal result)`
+- `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
+- `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
+- `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Double.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
+- `System.Double.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Double.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Double result)`
+- `System.Double.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Double result)`
+- `System.Double.TryParse(System.ReadOnlySpan<System.Char> s, out System.Double result)`
+- `System.Double.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Double result)`
+- `System.Double.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Double result)`
 - `System.Enum.GetNames<TEnum>() where TEnum : struct, System.Enum`
 - `System.Enum.GetValues<TEnum>() where TEnum : struct, System.Enum`
 - `System.Enum.IsDefined<TEnum>(TEnum value) where TEnum : struct, System.Enum`
@@ -168,10 +195,33 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.IO.TextReader.ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Int16.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Int16.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Int16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int16 result)`
+- `System.Int16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int16 result)`
+- `System.Int16.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int16 result)`
+- `System.Int16.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int16 result)`
+- `System.Int16.TryParse(System.ReadOnlySpan<System.Char> s, out System.Int16 result)`
+- `System.Int32.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Int32.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Int32.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Int32.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int32 result)`
+- `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, out System.Int32 result)`
+- `System.Int64.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Int64.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Int64.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.Int64.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Int64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int64 result)`
+- `System.Int64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int64 result)`
+- `System.Int64.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int64 result)`
+- `System.Int64.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int64 result)`
+- `System.Int64.TryParse(System.ReadOnlySpan<System.Char> s, out System.Int64 result)`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TSource>> func, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, TSource, TSource> func, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource, TAccumulate>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, TAccumulate seed, System.Func<TAccumulate, TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TAccumulate>> func, [System.Threading.CancellationToken cancellationToken = default])`
@@ -386,8 +436,26 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.OperatingSystem.IsMacOS()`
 - `System.OperatingSystem.IsWindows()`
 - `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
+- `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.SByte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.SByte result)`
+- `System.SByte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.SByte result)`
+- `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.SByte result)`
+- `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.SByte result)`
+- `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, out System.SByte result)`
 - `System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source)`
+- `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
+- `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.Single.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
+- `System.Single.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Single.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Single result)`
+- `System.Single.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Single result)`
+- `System.Single.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Single result)`
+- `System.Single.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Single result)`
+- `System.Single.TryParse(System.ReadOnlySpan<System.Char> s, out System.Single result)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2)`
 - `System.String.Concat(System.ReadOnlySpan<System.Char> str0, System.ReadOnlySpan<System.Char> str1, System.ReadOnlySpan<System.Char> str2, System.ReadOnlySpan<System.Char> str3)`
@@ -440,6 +508,33 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
+- `System.UInt16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.UInt16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.UInt16.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.UInt16.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.UInt16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt16 result)`
+- `System.UInt16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.UInt16 result)`
+- `System.UInt16.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt16 result)`
+- `System.UInt16.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt16 result)`
+- `System.UInt16.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt16 result)`
+- `System.UInt32.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.UInt32.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.UInt32.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.UInt32.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.UInt32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt32 result)`
+- `System.UInt32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.UInt32 result)`
+- `System.UInt32.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt32 result)`
+- `System.UInt32.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt32 result)`
+- `System.UInt32.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt32 result)`
+- `System.UInt64.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.UInt64.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
+- `System.UInt64.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
+- `System.UInt64.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.UInt64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt64 result)`
+- `System.UInt64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.UInt64 result)`
+- `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt64 result)`
+- `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt64 result)`
+- `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt64 result)`
 
 ### Properties (4)
 

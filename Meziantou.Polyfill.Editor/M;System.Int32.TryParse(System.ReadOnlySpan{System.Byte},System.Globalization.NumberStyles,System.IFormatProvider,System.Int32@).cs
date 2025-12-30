@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Text;
 
-static partial class PolyfillExtensions
+static partial class PolyfillExtensions_Int32
 {
     extension(int)
     {
