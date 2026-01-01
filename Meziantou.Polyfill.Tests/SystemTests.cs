@@ -431,6 +431,397 @@ public class SystemTests
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, other);
     }
 
+    private static void ArgumentOutOfRangeException_ThrowIfNegative_Invocation(object sample)
+    {
+        switch (sample)
+        {
+            case char n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case sbyte n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case byte n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case short n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case ushort n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case int n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case uint n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case long n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case ulong n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+#if NET5_0_OR_GREATER
+            case System.Half n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+#endif
+            case float n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case double n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case decimal n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+        }
+    }
+
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable MA0069 // Non-constant static fields should not be visible
+    public static TheoryData<object> ArgumentOutOfRangeException_ThrowIfNegative_ValidInputData =
+#pragma warning restore MA0069 // Non-constant static fields should not be visible
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+        new TheoryData<object>
+        {
+            (char)0,
+            char.MaxValue,
+            (sbyte)0,
+            sbyte.MaxValue,
+            (byte)0,
+            byte.MaxValue,
+            (short)0,
+            short.MaxValue,
+            (ushort)0,
+            ushort.MaxValue,
+            (int)0,
+            int.MaxValue,
+            (uint)0,
+            uint.MaxValue,
+            (long)0,
+            long.MaxValue,
+            (ulong)0,
+            ulong.MaxValue,
+#if NET5_0_OR_GREATER
+            (System.Half)0,
+            System.Half.MaxValue,
+#endif
+            (float)0F,
+            float.MaxValue,
+            (double)0F,
+            double.MaxValue,
+            (decimal)0F,
+            decimal.MaxValue,
+        };
+
+    [Theory]
+    [MemberData(nameof(ArgumentOutOfRangeException_ThrowIfNegative_ValidInputData))]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_WithValidInput(object sample)
+    {
+        ArgumentOutOfRangeException_ThrowIfNegative_Invocation(sample);
+    }
+
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable MA0069 // Non-constant static fields should not be visible
+    public static TheoryData<object> ArgumentOutOfRangeException_ThrowIfNegative_InvalidInputData =
+#pragma warning restore MA0069 // Non-constant static fields should not be visible
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+        new TheoryData<object>
+        {
+            sbyte.MinValue,
+            short.MinValue,
+            int.MinValue,
+            long.MinValue,
+#if NET5_0_OR_GREATER
+            System.Half.MinValue,
+#endif
+            float.MinValue,
+            double.MinValue,
+            decimal.MinValue,
+        };
+
+    [Theory]
+    [MemberData(nameof(ArgumentOutOfRangeException_ThrowIfNegative_InvalidInputData))]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_WithInvalidInput(object sample)
+    {
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException_ThrowIfNegative_Invocation(sample));
+        Assert.Equal(sample, ex.ActualValue);
+        Assert.Equal("n", ex.ParamName);
+    }
+
+    private static void ArgumentOutOfRangeException_ThrowIfNegativeOrZero_Invocation(object sample)
+    {
+        switch (sample)
+        {
+            case char n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case sbyte n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case byte n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case short n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case ushort n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case int n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case uint n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case long n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case ulong n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+#if NET5_0_OR_GREATER
+            case System.Half n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+#endif
+            case float n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case double n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+            case decimal n:
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(n);
+                break;
+        }
+    }
+
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable MA0069 // Non-constant static fields should not be visible
+    public static TheoryData<object> ArgumentOutOfRangeException_ThrowIfNegativeOrZero_ValidInputData =
+#pragma warning restore MA0069 // Non-constant static fields should not be visible
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+        new TheoryData<object>
+        {
+            char.MaxValue,
+            sbyte.MaxValue,
+            byte.MaxValue,
+            short.MaxValue,
+            ushort.MaxValue,
+            int.MaxValue,
+            uint.MaxValue,
+            long.MaxValue,
+            ulong.MaxValue,
+#if NET5_0_OR_GREATER
+            System.Half.MaxValue,
+#endif
+            float.MaxValue,
+            double.MaxValue,
+            decimal.MaxValue,
+        };
+
+    [Theory]
+    [MemberData(nameof(ArgumentOutOfRangeException_ThrowIfNegativeOrZero_ValidInputData))]
+    public void ArgumentOutOfRangeException_ThrowIfNegativeOrZero_WithValidInput(object sample)
+    {
+        ArgumentOutOfRangeException_ThrowIfNegativeOrZero_Invocation(sample);
+    }
+
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable MA0069 // Non-constant static fields should not be visible
+    public static TheoryData<object> ArgumentOutOfRangeException_ThrowIfNegativeOrZero_InvalidInputData =
+#pragma warning restore MA0069 // Non-constant static fields should not be visible
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+        new TheoryData<object>
+        {
+            (char)0,
+            (sbyte)0,
+            sbyte.MinValue,
+            (byte)0,
+            (short)0,
+            short.MinValue,
+            (ushort)0,
+            (int)0,
+            int.MinValue,
+            (uint)0,
+            (long)0,
+            long.MinValue,
+            (ulong)0,
+#if NET5_0_OR_GREATER
+            (System.Half)0,
+            System.Half.MinValue,
+#endif
+            (float)0F,
+            float.MinValue,
+            (double)0F,
+            double.MinValue,
+            (decimal)0F,
+            decimal.MinValue,
+        };
+
+    [Theory]
+    [MemberData(nameof(ArgumentOutOfRangeException_ThrowIfNegativeOrZero_InvalidInputData))]
+    public void ArgumentOutOfRangeException_ThrowIfNegativeOrZero_WithInvalidInput(object sample)
+    {
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException_ThrowIfNegativeOrZero_Invocation(sample));
+        Assert.Equal(sample, ex.ActualValue);
+        Assert.Equal("n", ex.ParamName);
+    }
+
+    private static void ArgumentOutOfRangeException_ThrowIfZero_Invocation(object sample)
+    {
+        switch (sample)
+        {
+            case char n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case sbyte n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case byte n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case short n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case ushort n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case int n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case uint n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case long n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case ulong n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+#if NET5_0_OR_GREATER
+            case System.Half n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+#endif
+            case float n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case double n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+            case decimal n:
+                ArgumentOutOfRangeException.ThrowIfZero(n);
+                break;
+        }
+    }
+
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable MA0069 // Non-constant static fields should not be visible
+    public static TheoryData<object> ArgumentOutOfRangeException_ThrowIfZero_ValidInputData =
+#pragma warning restore MA0069 // Non-constant static fields should not be visible
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+        new TheoryData<object>
+        {
+            char.MaxValue,
+            sbyte.MinValue,
+            sbyte.MaxValue,
+            byte.MaxValue,
+            short.MinValue,
+            short.MaxValue,
+            ushort.MaxValue,
+            int.MinValue,
+            int.MaxValue,
+            uint.MaxValue,
+            long.MinValue,
+            long.MaxValue,
+            ulong.MaxValue,
+#if NET5_0_OR_GREATER
+            System.Half.MinValue,
+            System.Half.MaxValue,
+#endif
+            float.MinValue,
+            float.MaxValue,
+            double.MinValue,
+            double.MaxValue,
+            decimal.MinValue,
+            decimal.MaxValue,
+        };
+
+    [Theory]
+    [MemberData(nameof(ArgumentOutOfRangeException_ThrowIfZero_ValidInputData))]
+    public void ArgumentOutOfRangeException_ThrowIfZero_WithValidInput(object sample)
+    {
+        ArgumentOutOfRangeException_ThrowIfZero_Invocation(sample);
+    }
+
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+#pragma warning disable MA0069 // Non-constant static fields should not be visible
+    public static TheoryData<object> ArgumentOutOfRangeException_ThrowIfZero_InvalidInputData =
+#pragma warning restore MA0069 // Non-constant static fields should not be visible
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+        new TheoryData<object>
+        {
+            (char)0,
+            (sbyte)0,
+            (byte)0,
+            (short)0,
+            (ushort)0,
+            (int)0,
+            (uint)0,
+            (long)0,
+            (ulong)0,
+#if NET5_0_OR_GREATER
+            (System.Half)0,
+#endif
+            (float)0F,
+            (double)0F,
+            (decimal)0F,
+        };
+
+    [Theory]
+    [MemberData(nameof(ArgumentOutOfRangeException_ThrowIfZero_InvalidInputData))]
+    public void ArgumentOutOfRangeException_ThrowIfZero_WithInvalidInput(object sample)
+    {
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => ArgumentOutOfRangeException_ThrowIfZero_Invocation(sample));
+        Assert.Equal(sample, ex.ActualValue);
+        Assert.Equal("n", ex.ParamName);
+    }
+
+#pragma warning disable MA0096 // A class that implements IComparable<T> should also implement IEquatable<T>
+#pragma warning disable MA0097 // A class that implements IComparable<T> or IComparable should override comparison operators
+    private struct ArgumentOutOfRangeException_ThrowIf_InvalidInputType : IComparable<ArgumentOutOfRangeException_ThrowIf_InvalidInputType>
+#pragma warning restore MA0097 // A class that implements IComparable<T> or IComparable should override comparison operators
+#pragma warning restore MA0096 // A class that implements IComparable<T> should also implement IEquatable<T>
+    {
+#pragma warning disable MA0025 // Implement the functionality instead of throwing NotImplementedException
+        public int CompareTo(ArgumentOutOfRangeException_ThrowIf_InvalidInputType other) => throw new NotImplementedException();
+#pragma warning restore MA0025 // Implement the functionality instead of throwing NotImplementedException
+    }
+
+#if !NET5_0_OR_GREATER
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNegative_WithInvalidInputType()
+    {
+        var ex = Assert.Throws<InvalidOperationException>(() => ArgumentOutOfRangeException.ThrowIfNegative(default(ArgumentOutOfRangeException_ThrowIf_InvalidInputType)));
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfNegativeOrZero_WithInvalidInputType()
+    {
+        var ex = Assert.Throws<InvalidOperationException>(() => ArgumentOutOfRangeException.ThrowIfNegativeOrZero(default(ArgumentOutOfRangeException_ThrowIf_InvalidInputType)));
+    }
+
+    [Fact]
+    public void ArgumentOutOfRangeException_ThrowIfZero_WithInvalidInputType()
+    {
+        var ex = Assert.Throws<InvalidOperationException>(() => ArgumentOutOfRangeException.ThrowIfZero(default(ArgumentOutOfRangeException_ThrowIf_InvalidInputType)));
+    }
+#endif
+
     [Fact]
     public void String_Concat()
     {
@@ -522,10 +913,10 @@ public class SystemTests
     {
         Assert.True(Enum.TryParse<DayOfWeek>("Monday", ignoreCase: false, out var result1));
         Assert.Equal(DayOfWeek.Monday, result1);
-        
+
         Assert.True(Enum.TryParse<DayOfWeek>("Friday", ignoreCase: false, out var result2));
         Assert.Equal(DayOfWeek.Friday, result2);
-        
+
         Assert.False(Enum.TryParse<DayOfWeek>("InvalidDay", ignoreCase: false, out var result3));
         Assert.Equal(default(DayOfWeek), result3);
     }
@@ -535,10 +926,10 @@ public class SystemTests
     {
         Assert.True(Enum.TryParse<DayOfWeek>("monday", ignoreCase: true, out var result1));
         Assert.Equal(DayOfWeek.Monday, result1);
-        
+
         Assert.True(Enum.TryParse<DayOfWeek>("FRIDAY", ignoreCase: true, out var result2));
         Assert.Equal(DayOfWeek.Friday, result2);
-        
+
         Assert.False(Enum.TryParse<DayOfWeek>("monday", ignoreCase: false, out var result3));
         Assert.Equal(default(DayOfWeek), result3);
     }
@@ -548,10 +939,10 @@ public class SystemTests
     {
         Assert.True(Enum.TryParse<DayOfWeek>("Monday".AsSpan(), ignoreCase: false, out var result1));
         Assert.Equal(DayOfWeek.Monday, result1);
-        
+
         Assert.True(Enum.TryParse<DayOfWeek>("Friday".AsSpan(), ignoreCase: false, out var result2));
         Assert.Equal(DayOfWeek.Friday, result2);
-        
+
         Assert.False(Enum.TryParse<DayOfWeek>("InvalidDay".AsSpan(), ignoreCase: false, out var result3));
         Assert.Equal(default(DayOfWeek), result3);
     }
@@ -561,10 +952,10 @@ public class SystemTests
     {
         Assert.True(Enum.TryParse<DayOfWeek>("monday".AsSpan(), ignoreCase: true, out var result1));
         Assert.Equal(DayOfWeek.Monday, result1);
-        
+
         Assert.True(Enum.TryParse<DayOfWeek>("FRIDAY".AsSpan(), ignoreCase: true, out var result2));
         Assert.Equal(DayOfWeek.Friday, result2);
-        
+
         Assert.False(Enum.TryParse<DayOfWeek>("monday".AsSpan(), ignoreCase: false, out var result3));
         Assert.Equal(default(DayOfWeek), result3);
     }
