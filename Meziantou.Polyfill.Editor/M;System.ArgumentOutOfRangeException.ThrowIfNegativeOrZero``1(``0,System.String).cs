@@ -9,7 +9,7 @@ static partial class PolyfillExtensions
 #if NET7_0_OR_GREATER
             where T : global::System.Numerics.INumber<T>
         {
-            if (T.IsNegative(value))
+            if (T.IsNegative(value) || T.IsZero(value))
                 ThrowArgumentOutOfRangeException(paramName, value);
 #else
             where T : struct, global::System.IComparable<T>
@@ -73,8 +73,6 @@ static partial class PolyfillExtensions
                 default:
                     throw new InvalidOperationException($"Invalid type '{typeof(T).AssemblyQualifiedName}' for {paramName}.");
             }
-
-            throw new ArgumentOutOfRangeException(paramName, value, $"{paramName} ('{value}') must not be negative.");
 #endif
 
             static void ThrowArgumentOutOfRangeException(string? paramName, object value)

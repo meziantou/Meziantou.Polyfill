@@ -55,8 +55,6 @@ static partial class PolyfillExtensions
                 default:
                     throw new InvalidOperationException($"Invalid type '{typeof(T).AssemblyQualifiedName}' for {paramName}.");
             }
-
-            throw new ArgumentOutOfRangeException(paramName, value, $"{paramName} ('{value}') must not be negative.");
 #endif
 
             static void ThrowArgumentOutOfRangeException(string? paramName, object value)
