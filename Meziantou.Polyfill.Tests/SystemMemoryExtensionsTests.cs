@@ -116,5 +116,48 @@ public class SystemMemoryExtensionsTests
             Assert.Equal("separator", ex.ParamName);
         }
     }
+
+    [Fact]
+    public void Split_Generic_CharSeparator_Simple()
+    {
+        ReadOnlySpan<char> source = "a,b,c";
+        var count = 0;
+        foreach (var range in source.Split(','))
+        {
+            var segment = source[range].ToString();
+            count++;
+            Assert.True(segment == "a" || segment == "b" || segment == "c");
+        }
+        Assert.Equal(3, count);
+    }
+
+    [Fact]
+    public void Split_Generic_StringSeparator_Simple()
+    {
+        ReadOnlySpan<char> source = "a::b::c";
+        var count = 0;
+        foreach (var range in source.Split("::".AsSpan()))
+        {
+            var segment = source[range].ToString();
+            count++;
+            Assert.True(segment == "a" || segment == "b" || segment == "c");
+        }
+        Assert.Equal(3, count);
+    }
+
+    [Fact]
+    public void Split_Generic_IntArray()
+    {
+        ReadOnlySpan<int> source = stackalloc int[] { 1, 0, 2, 0, 3 };
+        var count = 0;
+        foreach (var range in source.Split(0))
+        {
+            var segment = source[range];
+            count++;
+            Assert.True(segment.Length == 1);
+            Assert.True(segment[0] == 1 || segment[0] == 2 || segment[0] == 3);
+        }
+        Assert.Equal(3, count);
+    }
 }
 
