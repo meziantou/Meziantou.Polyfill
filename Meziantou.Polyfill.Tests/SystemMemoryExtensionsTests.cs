@@ -102,6 +102,8 @@ public class SystemMemoryExtensionsTests
     [Fact]
     public void Split_StringSeparator_EmptySeparatorThrows()
     {
+        // Note: Cannot use Assert.Throws<T> here because ReadOnlySpan and Span are ref structs
+        // that cannot be captured in lambda expressions
         try
         {
             ReadOnlySpan<char> source = "a b c";
