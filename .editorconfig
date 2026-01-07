@@ -40,3 +40,29 @@ indent_size = 2
 insert_final_newline = true
 # endreference
 
+# Test files
+[Meziantou.Polyfill.Tests/**.cs]
+# CA1307: Specify StringComparison for clarity
+dotnet_diagnostic.CA1307.severity = none
+# CA1837: Use Environment.ProcessId instead of Process.GetCurrentProcess().Id
+dotnet_diagnostic.CA1837.severity = none
+# CA1849: Call async methods when in an async method
+dotnet_diagnostic.CA1849.severity = none
+# CA2000: Dispose objects before losing scope
+dotnet_diagnostic.CA2000.severity = none
+# CA2264: Do not pass a non-nullable value to 'ArgumentNullException.ThrowIfNull'
+dotnet_diagnostic.CA2264.severity = none
+# CA5351: Do Not Use Broken Cryptographic Algorithms
+dotnet_diagnostic.CA5351.severity = none
+# MA0001: StringComparison is missing
+dotnet_diagnostic.MA0001.severity = none
+# MA0002: IEqualityComparer<string> or IComparer<string> is missing
+dotnet_diagnostic.MA0002.severity = none
+# MA0015: Specify the parameter name in ArgumentException
+dotnet_diagnostic.MA0015.severity = none
+# MA0021: Use StringComparer.GetHashCode instead of string.GetHashCode
+dotnet_diagnostic.MA0021.severity = none
+# MA0074: Avoid implicit culture-sensitive methods
+dotnet_diagnostic.MA0074.severity = none
+# MA0131: Use 'Async' suffix for async methods
+dotnet_diagnostic.MA0131.severity = none
