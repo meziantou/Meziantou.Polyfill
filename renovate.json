@@ -2,5 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>meziantou/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "matchFileNames": ["Meziantou.Polyfill/Meziantou.Polyfill.csproj"],
+      "matchPackageNames": [ 
+        "Microsoft.CodeAnalysis.Analyzers",
+        "Microsoft.CodeAnalysis.CSharp",
+        "Microsoft.CodeAnalysis.CSharp.Workspaces",
+        "Microsoft.CodeAnalysis.Workspaces.Common"
+      ],
+      "enabled": false
+    }
   ]
 }
