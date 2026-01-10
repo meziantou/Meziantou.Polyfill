@@ -419,6 +419,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+- `System.MemoryExtensions.Split(this System.ReadOnlySpan<System.Char> source, System.Span<System.Range> destination, System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.MemoryExtensions.Split(this System.ReadOnlySpan<System.Char> source, System.Span<System.Range> destination, System.ReadOnlySpan<System.Char> separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.MemoryExtensions.Split<T>(this System.ReadOnlySpan<T> source, System.ReadOnlySpan<T> separator) where T : System.IEquatable<T>`
 - `System.Net.Http.HttpContent.CopyTo(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context)`
