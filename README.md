@@ -22,9 +22,13 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 ````xml
 <PropertyGroup>
-  <!-- semicolon-separated or pipe-separated list of name prefix -->
+  <!-- Opt-in: semicolon-separated or pipe-separated list of name prefixes to include (whitelist) -->
+  <!-- When set, ONLY polyfills matching these prefixes will be generated -->
   <!-- Tip: The name of the generated polyfills are available in the generated "Debug.g.cs" file -->
   <MeziantouPolyfill_IncludedPolyfills>T:Type1|T:Type2|M:Member1</MeziantouPolyfill_IncludedPolyfills>
+
+  <!-- Opt-out: semicolon-separated or pipe-separated list of name prefixes to exclude (blacklist) -->
+  <!-- Polyfills matching these prefixes will NOT be generated -->
   <MeziantouPolyfill_ExcludedPolyfills>M:System.Diagnostics.</MeziantouPolyfill_ExcludedPolyfills>
 
   <!-- Optional: Output the generated files to the obj\GeneratedFiles folder  -->
@@ -32,6 +36,15 @@ By default, all needed polyfills are generated. You can configure which polyfill
   <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
 </PropertyGroup>
 ````
+
+### Filtering Behavior
+
+The filtering logic works as follows:
+
+1. **By default** (neither property set): All polyfills that are not already available in your target framework are generated
+2. **MeziantouPolyfill_ExcludedPolyfills** (opt-out/blacklist): Excludes polyfills whose XML documentation ID starts with any of the specified prefixes
+3. **MeziantouPolyfill_IncludedPolyfills** (opt-in/whitelist): When set, ONLY includes polyfills whose XML documentation ID starts with any of the specified prefixes
+4. **Both properties set**: Exclusions are applied first, then inclusions. A polyfill must match an inclusion filter AND not match any exclusion filter to be generated
 
 ## Supported polyfills
 
