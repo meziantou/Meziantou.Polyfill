@@ -22,12 +22,12 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
 ````xml
 <PropertyGroup>
-  <!-- Opt-in: semicolon-separated or pipe-separated list of name prefixes to include (whitelist) -->
+  <!-- Opt-in: semicolon-separated or pipe-separated list of name prefixes to include (allowlist) -->
   <!-- When set, ONLY polyfills matching these prefixes will be generated -->
   <!-- Tip: The name of the generated polyfills are available in the generated "Debug.g.cs" file -->
   <MeziantouPolyfill_IncludedPolyfills>T:Type1|T:Type2|M:Member1</MeziantouPolyfill_IncludedPolyfills>
 
-  <!-- Opt-out: semicolon-separated or pipe-separated list of name prefixes to exclude (blacklist) -->
+  <!-- Opt-out: semicolon-separated or pipe-separated list of name prefixes to exclude (blocklist) -->
   <!-- Polyfills matching these prefixes will NOT be generated -->
   <MeziantouPolyfill_ExcludedPolyfills>M:System.Diagnostics.</MeziantouPolyfill_ExcludedPolyfills>
 
@@ -42,8 +42,8 @@ By default, all needed polyfills are generated. You can configure which polyfill
 The filtering logic works as follows:
 
 1. **By default** (neither property set): All polyfills that are not already available in your target framework are generated
-2. **MeziantouPolyfill_ExcludedPolyfills** (opt-out/blacklist): Excludes polyfills whose XML documentation ID starts with any of the specified prefixes
-3. **MeziantouPolyfill_IncludedPolyfills** (opt-in/whitelist): When set, ONLY includes polyfills whose XML documentation ID starts with any of the specified prefixes
+2. **MeziantouPolyfill_ExcludedPolyfills** (opt-out/blocklist): Excludes polyfills whose XML documentation ID starts with any of the specified prefixes
+3. **MeziantouPolyfill_IncludedPolyfills** (opt-in/allowlist): When set, ONLY includes polyfills whose XML documentation ID starts with any of the specified prefixes
 4. **Both properties set**: Exclusions are applied first, then inclusions. A polyfill must match an inclusion filter AND not match any exclusion filter to be generated
 
 ## Supported polyfills
