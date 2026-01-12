@@ -65,6 +65,9 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
             if (part.Equals("*".AsSpan(), StringComparison.Ordinal))
                 return null;
 
+            if (part.Equals("none".AsSpan(), StringComparison.OrdinalIgnoreCase))
+                return [];
+
             values ??= [];
             values.Add(part.ToString());
         }

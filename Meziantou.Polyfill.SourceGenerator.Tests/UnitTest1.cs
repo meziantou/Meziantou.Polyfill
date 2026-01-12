@@ -36,6 +36,35 @@ public class UnitTest1
     }
 
     [Fact]
+    public void PolyfillOptions_None()
+    {
+        var options = new PolyfillOptions("none", "");
+        Assert.False(options.Include("T:A"));
+        Assert.False(options.Include("T:B"));
+        Assert.False(options.Include("T:C"));
+        Assert.False(options.Include("M:System.String.Contains"));
+    }
+
+    [Fact]
+    public void PolyfillOptions_None_CaseInsensitive()
+    {
+        var options = new PolyfillOptions("NONE", "");
+        Assert.False(options.Include("T:A"));
+        
+        options = new PolyfillOptions("None", "");
+        Assert.False(options.Include("T:A"));
+    }
+
+    [Fact]
+    public void PolyfillOptions_Wildcard()
+    {
+        var options = new PolyfillOptions("*", "");
+        Assert.True(options.Include("T:A"));
+        Assert.True(options.Include("T:B"));
+        Assert.True(options.Include("T:C"));
+    }
+
+    [Fact]
     public async Task NoCodeGeneratedForLatestFramework()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
@@ -67,6 +96,22 @@ public class UnitTest1
         var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
         Assert.DoesNotContain(generatedFileNames, file => file.Contains("WaitForExitAsync", StringComparison.Ordinal));
         Assert.Contains(generatedFileNames, file => file.Contains("System.Linq.Enumerable.OrderDescending", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public async Task IncludedPolyfill_None()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+
+        // With default settings, many polyfills are generated
+        var result = GenerateFiles("", assemblyLocations: assemblies);
+        var defaultFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        Assert.NotEmpty(defaultFileNames);
+
+        // With "none", no polyfills should be generated
+        result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "none");
+        var noneFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        Assert.Empty(noneFileNames);
     }
 
     [Fact]

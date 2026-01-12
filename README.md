@@ -24,12 +24,43 @@ By default, all needed polyfills are generated. You can configure which polyfill
 <PropertyGroup>
   <!-- semicolon-separated or pipe-separated list of name prefix -->
   <!-- Tip: The name of the generated polyfills are available in the generated "Debug.g.cs" file -->
-  <MeziantouPolyfill_IncludedPolyfills>T:Type1|T:Type2|M:Member1</MeziantouPolyfill_IncludedPolyfills>
+  
+  <!-- Option 1: Exclude specific polyfills (all others are included by default) -->
   <MeziantouPolyfill_ExcludedPolyfills>M:System.Diagnostics.</MeziantouPolyfill_ExcludedPolyfills>
+  
+  <!-- Option 2: Include only specific polyfills (all others are excluded) -->
+  <MeziantouPolyfill_IncludedPolyfills>T:Type1|T:Type2|M:Member1</MeziantouPolyfill_IncludedPolyfills>
+  
+  <!-- Option 3: Opt-in mode - Exclude all polyfills by default, then selectively include what you need -->
+  <MeziantouPolyfill_IncludedPolyfills>none</MeziantouPolyfill_IncludedPolyfills>
+  <!-- Then in specific files or projects, override to include just what you need -->
+  
+  <!-- You can also use "*" to explicitly include all polyfills -->
+  <MeziantouPolyfill_IncludedPolyfills>*</MeziantouPolyfill_IncludedPolyfills>
 
   <!-- Optional: Output the generated files to the obj\GeneratedFiles folder  -->
   <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
   <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
+</PropertyGroup>
+````
+
+### Size-sensitive projects
+
+For projects where executable size is critical, you can use the opt-in approach:
+
+````xml
+<PropertyGroup>
+  <!-- Start with no polyfills -->
+  <MeziantouPolyfill_IncludedPolyfills>none</MeziantouPolyfill_IncludedPolyfills>
+</PropertyGroup>
+````
+
+Then, add only the specific polyfills you need:
+
+````xml
+<PropertyGroup>
+  <!-- Include only ArgumentNullException.ThrowIfNull and string extensions -->
+  <MeziantouPolyfill_IncludedPolyfills>M:System.ArgumentNullException.ThrowIfNull|M:System.String.</MeziantouPolyfill_IncludedPolyfills>
 </PropertyGroup>
 ````
 
