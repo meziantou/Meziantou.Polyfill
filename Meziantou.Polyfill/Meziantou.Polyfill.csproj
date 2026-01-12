@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Meziantou.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Version>1.0.83</Version>
+    <Version>1.0.84</Version>
     <TransformOnBuild>true</TransformOnBuild>
     <RoslynVersion>4.3.1</RoslynVersion>
 
@@ -27,6 +27,7 @@
   <ItemGroup>
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="build/" />
+    <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="buildTransitive/" />
     <None Include="Meziantou.Polyfill.targets" Pack="true" PackagePath="buildMultiTargeting/" />
   </ItemGroup>
 
