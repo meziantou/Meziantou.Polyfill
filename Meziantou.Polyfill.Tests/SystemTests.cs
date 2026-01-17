@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -791,6 +791,7 @@ public class SystemTests
         Assert.Equal("n", ex.ParamName);
     }
 
+#if !NET5_0_OR_GREATER
 #pragma warning disable MA0096 // A class that implements IComparable<T> should also implement IEquatable<T>
 #pragma warning disable MA0097 // A class that implements IComparable<T> or IComparable should override comparison operators
     private struct ArgumentOutOfRangeException_ThrowIf_InvalidInputType : IComparable<ArgumentOutOfRangeException_ThrowIf_InvalidInputType>
@@ -802,7 +803,6 @@ public class SystemTests
 #pragma warning restore MA0025 // Implement the functionality instead of throwing NotImplementedException
     }
 
-#if !NET5_0_OR_GREATER
     [Fact]
     public void ArgumentOutOfRangeException_ThrowIfNegative_WithInvalidInputType()
     {
