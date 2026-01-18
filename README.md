@@ -55,11 +55,11 @@ The filtering logic works as follows:
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
 - `System.Buffers.SequenceReader<T> where T : unmanaged, System.IEquatable<T>`
-- `System.Collections.Generic.KeyValuePair`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
 - `System.Collections.ObjectModel.ReadOnlySet<T>`
 - `System.Diagnostics.CodeAnalysis.AllowNullAttribute`
+- `System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute`
 - `System.Diagnostics.CodeAnalysis.DisallowNullAttribute`
 - `System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute`
 - `System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute`
@@ -122,7 +122,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (443)
+### Methods (444)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -156,6 +156,7 @@ The filtering logic works as follows:
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.Remove(TKey key, out TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
+- `System.Collections.Generic.KeyValuePair.Create<TKey, TValue>(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan()`

@@ -61,6 +61,7 @@ public class AttributesTests
         _ = new UnsupportedOSPlatformAttribute("");
         _ = new UnsupportedOSPlatformGuardAttribute("");
         _ = new CollectionBuilderAttribute(typeof(string), "");
+        _ = new ConstantExpectedAttribute();
         _ = new ExperimentalAttribute("test");
         _ = new OverloadResolutionPriorityAttribute(1);
 
