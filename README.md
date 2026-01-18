@@ -121,7 +121,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (428)
+### Methods (431)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -521,6 +521,9 @@ The filtering logic works as follows:
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
 - `System.TimeSpan.Multiply(System.Double factor)`
+- `System.TimeSpan.operator /(System.TimeSpan timeSpan, System.Double divisor)`
+- `System.TimeSpan.operator *(System.Double factor, System.TimeSpan timeSpan)`
+- `System.TimeSpan.operator *(System.TimeSpan timeSpan, System.Double factor)`
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
