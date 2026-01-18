@@ -27,6 +27,15 @@ public class SystemCollectionsGenericTests
     }
 
     [Fact]
+    public void System_Collections_Generic_KeyValuePair_Create()
+    {
+        var kvp = KeyValuePair.Create("key", 42);
+        Assert.Equal("key", kvp.Key);
+        Assert.Equal(42, kvp.Value);
+        Assert.IsType<KeyValuePair<string, int>>(kvp);
+    }
+
+    [Fact]
     public void System_Collections_Generic_Queue_1_TryDequeue()
     {
         var queue = new Queue<int>();
