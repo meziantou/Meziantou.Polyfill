@@ -121,7 +121,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (431)
+### Methods (443)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -554,13 +554,26 @@ The filtering logic works as follows:
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt64 result)`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt64 result)`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt64 result)`
+- `System.Xml.Linq.XDocument.LoadAsync(System.IO.Stream stream, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XDocument.LoadAsync(System.IO.TextReader textReader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XDocument.LoadAsync(System.Xml.XmlReader reader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XDocument.SaveAsync(System.IO.Stream stream, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XDocument.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XDocument.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XElement.LoadAsync(System.IO.Stream stream, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XElement.LoadAsync(System.IO.TextReader textReader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XElement.LoadAsync(System.Xml.XmlReader reader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XElement.SaveAsync(System.IO.Stream stream, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (4)
+### Properties (5)
 
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.Environment.ProcessId`
 - `System.Net.Http.HttpMethod.Query`
+- `System.Threading.Tasks.ValueTask.CompletedTask`
 
 <!-- end_polyfills -->
 
