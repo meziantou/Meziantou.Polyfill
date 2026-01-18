@@ -270,6 +270,54 @@ public class SystemTests
     }
 
     [Fact]
+    public void TimeSpan_Multiply_Double_TimeSpan()
+    {
+        // Test basic multiplication: 2.0 * 1 second = 2 seconds
+        Assert.Equal(TimeSpan.FromSeconds(2), 2.0 * TimeSpan.FromSeconds(1));
+        
+        // Test fractional multiplication: 0.5 * 10 seconds = 5 seconds
+        Assert.Equal(TimeSpan.FromSeconds(5), 0.5 * TimeSpan.FromSeconds(10));
+        
+        // Test negative multiplication: -2.0 * 3 seconds = -6 seconds
+        Assert.Equal(TimeSpan.FromSeconds(-6), -2.0 * TimeSpan.FromSeconds(3));
+        
+        // Test zero multiplication
+        Assert.Equal(TimeSpan.Zero, 0.0 * TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public void TimeSpan_Multiply_TimeSpan_Double()
+    {
+        // Test basic multiplication: 1 second * 2.0 = 2 seconds
+        Assert.Equal(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1) * 2.0);
+        
+        // Test fractional multiplication: 10 seconds * 0.5 = 5 seconds
+        Assert.Equal(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10) * 0.5);
+        
+        // Test negative multiplication: 3 seconds * -2.0 = -6 seconds
+        Assert.Equal(TimeSpan.FromSeconds(-6), TimeSpan.FromSeconds(3) * -2.0);
+        
+        // Test zero multiplication
+        Assert.Equal(TimeSpan.Zero, TimeSpan.FromSeconds(5) * 0.0);
+    }
+
+    [Fact]
+    public void TimeSpan_Division_Double()
+    {
+        // Test basic division: 10 seconds / 2.0 = 5 seconds
+        Assert.Equal(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10) / 2.0);
+        
+        // Test fractional division: 10 seconds / 0.5 = 20 seconds
+        Assert.Equal(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(10) / 0.5);
+        
+        // Test negative division: 6 seconds / -2.0 = -3 seconds
+        Assert.Equal(TimeSpan.FromSeconds(-3), TimeSpan.FromSeconds(6) / -2.0);
+        
+        // Test large values: 1 hour / 60 = 1 minute
+        Assert.Equal(TimeSpan.FromMinutes(1), TimeSpan.FromHours(1) / 60.0);
+    }
+
+    [Fact]
     public void Environment_ProcessId()
     {
         Assert.Equal(Process.GetCurrentProcess().Id, Environment.ProcessId);
