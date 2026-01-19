@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (481)
+### Methods (509)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -205,8 +205,36 @@ The filtering logic works as follows:
 - `System.Enum.TryParse<TEnum>(System.ReadOnlySpan<System.Char> value, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, out TEnum result) where TEnum : struct`
+- `System.IO.File.AppendAllBytes(System.String path, System.Byte[] bytes)`
+- `System.IO.File.AppendAllBytes(System.String path, System.ReadOnlySpan<System.Byte> bytes)`
+- `System.IO.File.AppendAllBytesAsync(System.String path, System.Byte[] bytes, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllBytesAsync(System.String path, System.ReadOnlyMemory<System.Byte> bytes, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllLinesAsync(System.String path, System.Collections.Generic.IEnumerable<System.String> contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllLinesAsync(System.String path, System.Collections.Generic.IEnumerable<System.String> contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllText(System.String path, System.ReadOnlySpan<System.Char> contents)`
+- `System.IO.File.AppendAllText(System.String path, System.ReadOnlySpan<System.Char> contents, System.Text.Encoding encoding)`
+- `System.IO.File.AppendAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllTextAsync(System.String path, System.String? contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.AppendAllTextAsync(System.String path, System.String? contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.Move(System.String sourceFileName, System.String destFileName, System.Boolean overwrite)`
+- `System.IO.File.ReadAllBytesAsync(System.String path, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.ReadAllLinesAsync(System.String path, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.ReadAllLinesAsync(System.String path, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.ReadAllTextAsync(System.String path, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.ReadAllTextAsync(System.String path, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.ReadLinesAsync(System.String path, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.ReadLinesAsync(System.String path, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllBytesAsync(System.String path, System.Byte[] bytes, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllBytesAsync(System.String path, System.ReadOnlyMemory<System.Byte> bytes, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllLinesAsync(System.String path, System.Collections.Generic.IEnumerable<System.String> contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllLinesAsync(System.String path, System.Collections.Generic.IEnumerable<System.String> contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllText(System.String path, System.ReadOnlySpan<System.Char> contents)`
+- `System.IO.File.WriteAllText(System.String path, System.ReadOnlySpan<System.Char> contents, System.Text.Encoding encoding)`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllTextAsync(System.String path, System.String? contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.File.WriteAllTextAsync(System.String path, System.String? contents, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.DisposeAsync()`
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
