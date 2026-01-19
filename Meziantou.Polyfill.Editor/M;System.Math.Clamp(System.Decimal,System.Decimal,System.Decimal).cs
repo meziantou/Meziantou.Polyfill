@@ -1,6 +1,6 @@
 #nullable enable
 
-static partial class PolyfillExtensions_UInt32
+static partial class PolyfillExtensions_Decimal
 {
     extension(System.Math)
     {
@@ -12,8 +12,7 @@ static partial class PolyfillExtensions_UInt32
         /// <param name="max">The upper bound of the result.</param>
         /// <returns>value if min ≤ value ≤ max. -or- min if value &lt; min. -or- max if max &lt; value.</returns>
         /// <exception cref="System.ArgumentException">max is less than min.</exception>
-        [System.CLSCompliant(false)]
-        public static uint Clamp(uint value, uint min, uint max)
+        public static decimal Clamp(decimal value, decimal min, decimal max)
         {
             if (min > max)
                 ThrowHelper.ThrowMinMaxException(min, max);

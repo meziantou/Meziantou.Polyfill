@@ -1,6 +1,6 @@
 #nullable enable
 
-static partial class PolyfillExtensions_UInt32
+static partial class PolyfillExtensions_Double
 {
     extension(System.Math)
     {
@@ -10,10 +10,9 @@ static partial class PolyfillExtensions_UInt32
         /// <param name="value">The value to be clamped.</param>
         /// <param name="min">The lower bound of the result.</param>
         /// <param name="max">The upper bound of the result.</param>
-        /// <returns>value if min ≤ value ≤ max. -or- min if value &lt; min. -or- max if max &lt; value.</returns>
+        /// <returns>value if min ≤ value ≤ max. -or- min if value &lt; min. -or- max if max &lt; value. -or- NaN if value equals NaN.</returns>
         /// <exception cref="System.ArgumentException">max is less than min.</exception>
-        [System.CLSCompliant(false)]
-        public static uint Clamp(uint value, uint min, uint max)
+        public static double Clamp(double value, double min, double max)
         {
             if (min > max)
                 ThrowHelper.ThrowMinMaxException(min, max);

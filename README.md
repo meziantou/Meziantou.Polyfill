@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (450)
+### Methods (461)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -410,8 +410,19 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.UnionBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TSource> second, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.UnionBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TSource> second, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.Zip<TFirst, TSecond>(this System.Collections.Generic.IEnumerable<TFirst> first, System.Collections.Generic.IEnumerable<TSecond> second)`
+- `System.Math.Clamp(System.Byte value, System.Byte min, System.Byte max)`
+- `System.Math.Clamp(System.Decimal value, System.Decimal min, System.Decimal max)`
+- `System.Math.Clamp(System.Double value, System.Double min, System.Double max)`
+- `System.Math.Clamp(System.Int16 value, System.Int16 min, System.Int16 max)`
 - `System.Math.Clamp(System.Int32 value, System.Int32 min, System.Int32 max)`
+- `System.Math.Clamp(System.Int64 value, System.Int64 min, System.Int64 max)`
+- `System.Math.Clamp(nint value, nint min, nint max)`
+- `System.Math.Clamp(System.SByte value, System.SByte min, System.SByte max)`
+- `System.Math.Clamp(System.Single value, System.Single min, System.Single max)`
+- `System.Math.Clamp(System.UInt16 value, System.UInt16 min, System.UInt16 max)`
 - `System.Math.Clamp(System.UInt32 value, System.UInt32 min, System.UInt32 max)`
+- `System.Math.Clamp(System.UInt64 value, System.UInt64 min, System.UInt64 max)`
+- `System.Math.Clamp(nuint value, nuint min, nuint max)`
 - `System.MemoryExtensions.AsSpan(this System.String? text, System.Int32 start, System.Int32 length)`
 - `System.MemoryExtensions.CommonPrefixLength<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> other)`
 - `System.MemoryExtensions.CommonPrefixLength<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> other, System.Collections.Generic.IEqualityComparer<T>? comparer)`

@@ -1,26 +1,34 @@
-using System;
+#nullable enable
 
-static partial class PolyfillExtensions
+static partial class PolyfillExtensions_Int32
 {
-    extension(Math)
+    extension(System.Math)
     {
+        /// <summary>
+        /// Returns value clamped to the inclusive range of min and max.
+        /// </summary>
+        /// <param name="value">The value to be clamped.</param>
+        /// <param name="min">The lower bound of the result.</param>
+        /// <param name="max">The upper bound of the result.</param>
+        /// <returns>value if min ≤ value ≤ max. -or- min if value &lt; min. -or- max if max &lt; value.</returns>
+        /// <exception cref="System.ArgumentException">max is less than min.</exception>
         public static int Clamp(int value, int min, int max)
         {
             if (min > max)
-            {
-                throw new ArgumentException($"'{min}' cannot be greater than '{max}'");
-            }
+                ThrowHelper.ThrowMinMaxException(min, max);
 
             if (value < min)
-            {
                 return min;
-            }
-            else if (value > max)
-            {
+
+            if (value > max)
                 return max;
-            }
 
             return value;
         }
     }
+}
+
+file static class ThrowHelper
+{
+    public static void ThrowMinMaxException<T>(T min, T max) => throw new System.ArgumentException($"'{nameof(min)}' cannot be greater than {nameof(max)}.");
 }

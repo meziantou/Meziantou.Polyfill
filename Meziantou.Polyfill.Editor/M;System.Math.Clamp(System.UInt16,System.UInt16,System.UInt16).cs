@@ -1,6 +1,6 @@
 #nullable enable
 
-static partial class PolyfillExtensions_UInt32
+static partial class PolyfillExtensions_UInt16
 {
     extension(System.Math)
     {
@@ -13,7 +13,7 @@ static partial class PolyfillExtensions_UInt32
         /// <returns>value if min ≤ value ≤ max. -or- min if value &lt; min. -or- max if max &lt; value.</returns>
         /// <exception cref="System.ArgumentException">max is less than min.</exception>
         [System.CLSCompliant(false)]
-        public static uint Clamp(uint value, uint min, uint max)
+        public static ushort Clamp(ushort value, ushort min, ushort max)
         {
             if (min > max)
                 ThrowHelper.ThrowMinMaxException(min, max);
