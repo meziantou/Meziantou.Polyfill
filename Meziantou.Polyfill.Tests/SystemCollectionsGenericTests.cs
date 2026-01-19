@@ -1,3 +1,5 @@
+#pragma warning disable CA1859 // Use concrete types when possible for improved performance
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -158,5 +160,109 @@ public class SystemCollectionsGenericTests
         Assert.Equal("one", dict[1]);
         Assert.Equal("two", dict[2]);
         Assert.Equal("three", dict[3]);
+    }
+
+    [Fact]
+    public void IDictionary_Remove_KeyExists()
+    {
+        IDictionary<int, string> dict = new Dictionary<int, string>
+        {
+            [1] = "one",
+            [2] = "two"
+        };
+
+        Assert.True(dict.Remove(1, out var value));
+        Assert.Equal("one", value);
+        Assert.False(dict.ContainsKey(1));
+        Assert.Single(dict);
+    }
+
+    [Fact]
+    public void IDictionary_Remove_KeyDoesNotExist()
+    {
+        IDictionary<string, int> dict = new Dictionary<string, int>
+        {
+            ["key1"] = 100
+        };
+
+        Assert.False(dict.Remove("key2", out var value));
+        Assert.Equal(0, value);
+        Assert.Single(dict);
+    }
+
+    [Fact]
+    public void IDictionary_Remove_NullDictionary()
+    {
+        IDictionary<string, int> dict = null!;
+        Assert.Throws<ArgumentNullException>(() => dict.Remove("key1", out _));
+    }
+
+    [Fact]
+    public void IDictionary_TryAdd_KeyDoesNotExist()
+    {
+        IDictionary<string, int> dict = new Dictionary<string, int>();
+        Assert.True(dict.TryAdd("key1", 100));
+        Assert.Equal(100, dict["key1"]);
+    }
+
+    [Fact]
+    public void IDictionary_TryAdd_KeyAlreadyExists()
+    {
+        IDictionary<string, int> dict = new Dictionary<string, int>
+        {
+            ["key1"] = 100
+        };
+
+        Assert.False(dict.TryAdd("key1", 200));
+        Assert.Equal(100, dict["key1"]);
+    }
+
+    [Fact]
+    public void IDictionary_TryAdd_NullDictionary()
+    {
+        IDictionary<string, int> dict = null!;
+        Assert.Throws<ArgumentNullException>(() => dict.TryAdd("key1", 100));
+    }
+
+    [Fact]
+    public void IDictionary_TryAdd_MultipleOperations()
+    {
+        IDictionary<int, string> dict = new Dictionary<int, string>();
+
+        Assert.True(dict.TryAdd(1, "one"));
+        Assert.True(dict.TryAdd(2, "two"));
+        Assert.False(dict.TryAdd(1, "uno"));
+        Assert.True(dict.TryAdd(3, "three"));
+
+        Assert.Equal(3, dict.Count);
+        Assert.Equal("one", dict[1]);
+        Assert.Equal("two", dict[2]);
+        Assert.Equal("three", dict[3]);
+    }
+
+    [Fact]
+    public void IDictionary_AsReadOnly()
+    {
+        IDictionary<string, int> dict = new Dictionary<string, int>
+        {
+            ["key1"] = 100,
+            ["key2"] = 200
+        };
+
+        var readOnlyDict = dict.AsReadOnly();
+
+        Assert.Equal(2, readOnlyDict.Count);
+        Assert.Equal(100, readOnlyDict["key1"]);
+        Assert.Equal(200, readOnlyDict["key2"]);
+
+        dict["key1"] = 150;
+        Assert.Equal(150, readOnlyDict["key1"]);
+    }
+
+    [Fact]
+    public void IDictionary_AsReadOnly_NullDictionary()
+    {
+        IDictionary<string, int> dict = null!;
+        Assert.Throws<ArgumentNullException>(() => dict.AsReadOnly());
     }
 }
