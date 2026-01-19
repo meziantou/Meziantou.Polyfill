@@ -296,4 +296,53 @@ public class SystemCollectionsGenericTests
         IDictionary<string, int> dict = null!;
         Assert.Throws<ArgumentNullException>(() => dict.AsReadOnly());
     }
+
+    [Fact]
+    public void SortedList_GetKeyAtIndex()
+    {
+        var sortedList = new SortedList<int, string>
+        {
+            { 3, "three" },
+            { 1, "one" },
+            { 2, "two" }
+        };
+
+        Assert.Equal(1, sortedList.GetKeyAtIndex(0));
+        Assert.Equal(2, sortedList.GetKeyAtIndex(1));
+        Assert.Equal(3, sortedList.GetKeyAtIndex(2));
+    }
+
+    [Fact]
+    public void SortedList_GetValueAtIndex()
+    {
+        var sortedList = new SortedList<int, string>
+        {
+            { 3, "three" },
+            { 1, "one" },
+            { 2, "two" }
+        };
+
+        Assert.Equal("one", sortedList.GetValueAtIndex(0));
+        Assert.Equal("two", sortedList.GetValueAtIndex(1));
+        Assert.Equal("three", sortedList.GetValueAtIndex(2));
+    }
+
+    [Fact]
+    public void DictionaryEntry_Deconstruct()
+    {
+        var entry = new DictionaryEntry("key", "value");
+        var (key, value) = entry;
+        Assert.Equal("key", key);
+        Assert.Equal("value", value);
+    }
+
+    [Fact]
+    public void DictionaryEntry_Deconstruct_NullValue()
+    {
+        var entry = new DictionaryEntry("key", null);
+        var (key, value) = entry;
+        Assert.Equal("key", key);
+        Assert.Null(value);
+    }
 }
+

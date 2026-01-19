@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (509)
+### Methods (523)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -152,6 +152,7 @@ The filtering logic works as follows:
 - `System.Collections.Concurrent.ConcurrentBag<T>.Clear()`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Concurrent.ConcurrentQueue<T>.Clear()`
+- `System.Collections.DictionaryEntry.Deconstruct(out System.Object key, out System.Object? value)`
 - `System.Collections.Generic.CollectionExtensions.AddRange<T>(this System.Collections.Generic.List<T> list, params System.ReadOnlySpan<T> source)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`
@@ -163,6 +164,8 @@ The filtering logic works as follows:
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
+- `System.Collections.Generic.SortedList<TKey, TValue>.GetKeyAtIndex(System.Int32 index)`
+- `System.Collections.Generic.SortedList<TKey, TValue>.GetValueAtIndex(System.Int32 index)`
 - `System.Collections.Generic.Stack<T>.TryPeek(out T result)`
 - `System.Collections.Generic.Stack<T>.TryPop(out T result)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan()`
@@ -175,6 +178,7 @@ The filtering logic works as follows:
 - `System.Convert.ToHexStringLower(System.Byte[] inArray)`
 - `System.Convert.ToHexStringLower(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
 - `System.Convert.ToHexStringLower(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.DateOnly.Deconstruct(out System.Int32 year, out System.Int32 month, out System.Int32 day)`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number], [System.IFormatProvider? provider = null])`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number], [System.IFormatProvider? provider = null])`
@@ -184,6 +188,7 @@ The filtering logic works as follows:
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Decimal result)`
+- `System.Delegate.EnumerateInvocationList<TDelegate>(TDelegate? d) where TDelegate : System.Delegate`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
 - `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
@@ -503,6 +508,8 @@ The filtering logic works as follows:
 - `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
 - `System.Random.NextBytes(System.Span<System.Byte> buffer)`
 - `System.Random.Shuffle<T>(System.Span<T> values)`
+- `System.Reflection.MethodInfo.CreateDelegate<T>(System.Object? target) where T : System.Delegate`
+- `System.Reflection.MethodInfo.CreateDelegate<T>() where T : System.Delegate`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -578,14 +585,20 @@ The filtering logic works as follows:
 - `System.Threading.Tasks.Task.WhenEach(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> tasks)`
 - `System.Threading.Tasks.Task.WhenEach<TResult>(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task<TResult>> tasks)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Threading.Tasks.TaskCompletionSource<TResult>.SetCanceled(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
+- `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute)`
+- `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second)`
+- `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second, out System.Int32 millisecond)`
+- `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second, out System.Int32 millisecond, out System.Int32 microsecond)`
 - `System.TimeSpan.Multiply(System.Double factor)`
 - `System.TimeSpan.operator /(System.TimeSpan timeSpan, System.Double divisor)`
 - `System.TimeSpan.operator *(System.Double factor, System.TimeSpan timeSpan)`
 - `System.TimeSpan.operator *(System.TimeSpan timeSpan, System.Double factor)`
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
+- `System.Type.GetMethod(System.String name, System.Int32 genericParameterCount, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder? binder, System.Type[] types, System.Reflection.ParameterModifier[]? modifiers)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
 - `System.UInt16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -631,20 +644,27 @@ The filtering logic works as follows:
 - `System.Random.Shuffle<T>(T[] values)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 toExclusive)`
 - `System.Security.Cryptography.RandomNumberGenerator.Shuffle<T>(System.Span<T> values)`
+- `System.Type.GetMethod(System.String name, System.Int32 genericParameterCount, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetString(System.ReadOnlySpan<System.Char> choices, System.Int32 length)`
 
-### Properties (8)
+### Properties (14)
 
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.DateTime.Nanosecond`
 - `System.DateTimeOffset.Nanosecond`
+- `System.Delegate.HasSingleTarget`
 - `System.Environment.ProcessId`
 - `System.Net.Http.HttpMethod.Query`
 - `System.Random.Shared`
 - `System.Threading.Tasks.ValueTask.CompletedTask`
+- `System.TimeOnly.Microsecond`
+- `System.TimeOnly.Nanosecond`
+- `System.TimeSpan.Microseconds`
+- `System.TimeSpan.Nanoseconds`
+- `System.Type.IsGenericMethodParameter`
 
 <!-- end_polyfills -->
 

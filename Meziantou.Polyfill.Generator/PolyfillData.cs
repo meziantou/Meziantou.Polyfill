@@ -10,20 +10,22 @@ internal sealed partial class PolyfillData
     private static readonly string[] PotentialRequiredTypes =
     [
         "System.Collections.Generic.IAsyncEnumerable`1",
-        "System.Span`1",
-        "System.ReadOnlySpan`1",
-        "System.Memory`1",
-        "System.ReadOnlyMemory`1",
-        "System.Threading.Tasks.ValueTask",
-        "System.Threading.Tasks.ValueTask`1",
-        "System.Collections.Immutable.ImmutableArray`1",
-        "System.Net.Http.HttpMethod",
-        "System.Net.Http.HttpContent",
-        "System.IAsyncDisposable",
         "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Collections.Generic.IAsyncEnumerator`1",
+        "System.Collections.Immutable.ImmutableArray`1",
+        "System.DateOnly",
+        "System.IAsyncDisposable",
         "System.IO.Compression.ZipArchiveEntry",
+        "System.Memory`1",
+        "System.Net.Http.HttpContent",
+        "System.Net.Http.HttpMethod",
+        "System.ReadOnlyMemory`1",
+        "System.ReadOnlySpan`1",
         "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
+        "System.Span`1",
+        "System.Threading.Tasks.ValueTask",
+        "System.Threading.Tasks.ValueTask`1",
+        "System.TimeOnly",
     ];
 
     public PolyfillData(string content) => Content = content;

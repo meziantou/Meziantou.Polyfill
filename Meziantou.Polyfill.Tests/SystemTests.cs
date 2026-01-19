@@ -1892,4 +1892,147 @@ public class SystemTests
         Assert.Equal(900, DateTimeOffset.MaxValue.Nanosecond);
     }
 
+#if NET6_0_OR_GREATER
+    [Fact]
+    public void DateOnly_Deconstruct()
+    {
+        var date = new DateOnly(2024, 5, 15);
+        var (year, month, day) = date;
+        Assert.Equal(2024, year);
+        Assert.Equal(5, month);
+        Assert.Equal(15, day);
+    }
+
+    [Fact]
+    public void TimeOnly_Deconstruct_HourMinute()
+    {
+        var time = new TimeOnly(14, 30, 45, 123);
+        time.Deconstruct(out int hour, out int minute);
+        Assert.Equal(14, hour);
+        Assert.Equal(30, minute);
+    }
+
+    [Fact]
+    public void TimeOnly_Deconstruct_HourMinuteSecond()
+    {
+        var time = new TimeOnly(14, 30, 45, 123);
+        time.Deconstruct(out int hour, out int minute, out int second);
+        Assert.Equal(14, hour);
+        Assert.Equal(30, minute);
+        Assert.Equal(45, second);
+    }
+
+    [Fact]
+    public void TimeOnly_Deconstruct_HourMinuteSecondMillisecond()
+    {
+        var time = new TimeOnly(14, 30, 45, 123);
+        time.Deconstruct(out int hour, out int minute, out int second, out int millisecond);
+        Assert.Equal(14, hour);
+        Assert.Equal(30, minute);
+        Assert.Equal(45, second);
+        Assert.Equal(123, millisecond);
+    }
+
+    [Fact]
+    public void TimeOnly_Deconstruct_Full()
+    {
+        var time = new TimeOnly(14, 30, 45, 123, 456);
+        var (hour, minute, second, millisecond, microsecond) = time;
+        Assert.Equal(14, hour);
+        Assert.Equal(30, minute);
+        Assert.Equal(45, second);
+        Assert.Equal(123, millisecond);
+        Assert.Equal(456, microsecond);
+    }
+#endif
+
+    [Fact]
+    public void TimeSpan_Microseconds()
+    {
+        // TimeSpan with 0 microseconds
+        var ts1 = new TimeSpan(hours: 1, minutes: 2, seconds: 3);
+        Assert.Equal(0, ts1.Microseconds);
+
+        // TimeSpan with specific microseconds
+        var ts2 = TimeSpan.FromTicks(12345678); // 1.2345678 seconds
+        Assert.Equal(567, ts2.Microseconds); // 5678 ticks = 567.8 microseconds, integer part is 567
+
+        // TimeSpan from hours with microseconds
+        var ts3 = new TimeSpan(0, 0, 0, 0, 123) + TimeSpan.FromTicks(4567);
+        Assert.Equal(456, ts3.Microseconds);
+    }
+
+    [Fact]
+    public void TimeSpan_Nanoseconds()
+    {
+        // TimeSpan with 0 nanoseconds
+        var ts1 = new TimeSpan(hours: 1, minutes: 2, seconds: 3);
+        Assert.Equal(0, ts1.Nanoseconds);
+
+        // TimeSpan with specific nanoseconds (1 tick = 100 nanoseconds)
+        var ts2 = TimeSpan.FromTicks(1);
+        Assert.Equal(100, ts2.Nanoseconds);
+
+        var ts3 = TimeSpan.FromTicks(9);
+        Assert.Equal(900, ts3.Nanoseconds);
+
+        var ts4 = TimeSpan.FromTicks(12345679);
+        Assert.Equal(900, ts4.Nanoseconds); // 9 ticks remainder = 900 nanoseconds
+    }
+
+    [Fact]
+    public void Delegate_HasSingleTarget()
+    {
+        Action action1 = () => { };
+        Assert.True(action1.HasSingleTarget);
+
+        Action action2 = () => { };
+        Action combined = action1 + action2;
+        Assert.False(combined.HasSingleTarget);
+    }
+
+    [Fact]
+    public void Delegate_EnumerateInvocationList()
+    {
+        var count = 0;
+        Action action1 = () => count += 1;
+        Action action2 = () => count += 10;
+        Action action3 = () => count += 100;
+        Action combined = action1 + action2 + action3;
+
+        var invocationCount = 0;
+        foreach (var d in Delegate.EnumerateInvocationList(combined))
+        {
+            invocationCount++;
+            d();
+        }
+
+        Assert.Equal(3, invocationCount);
+        Assert.Equal(111, count);
+    }
+
+    [Fact]
+    public void Delegate_EnumerateInvocationList_Single()
+    {
+        Action action = () => { };
+        var count = 0;
+        foreach (var d in Delegate.EnumerateInvocationList(action))
+        {
+            count++;
+        }
+        Assert.Equal(1, count);
+    }
+
+    [Fact]
+    public void Delegate_EnumerateInvocationList_Null()
+    {
+        Action? action = null;
+        var count = 0;
+        foreach (var _ in Delegate.EnumerateInvocationList(action))
+        {
+            count++;
+        }
+        Assert.Equal(0, count);
+    }
+
 }
