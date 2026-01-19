@@ -9,6 +9,7 @@ Before testing your changes, be sure to run the following commands:
 - `dotnet run --project ./Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj` to regenerate any generated code
 - `dotnet build` to build the solution
 - `dotnet test` to run all tests
+Also, the there must be no warnings during build.
 
 When creating a new a polyfill, you must:
 - Generate the XML Comment Identifier for the new member
@@ -21,6 +22,7 @@ When creating a new a polyfill, you must:
 - Add tests in the `Meziantou.Polyfill.Tests` project
 - Increment the patch component of the version in `Meziantou.Polyfill/Meziantou.Polyfill.csproj`
 - Remove all extra `using` directives in the new file
+- Use the global namespace (do not declare a namespace)
 
 Documentation about XML documentation identifiers: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/#id-strings.
 
@@ -29,6 +31,7 @@ What can be polyfilled:
 - Static methods using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
 - Properties using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
 - Static properties using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
+- Operators using `extension` keyword ([extension members](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#extension-members) introduced in C# 14)
 
 ```c#
 // Extension method

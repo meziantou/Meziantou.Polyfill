@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (461)
+### Methods (467)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -469,6 +469,10 @@ The filtering logic works as follows:
 - `System.OperatingSystem.IsMacOS()`
 - `System.OperatingSystem.IsWindows()`
 - `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
+- `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
+- `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
+- `System.Random.NextBytes(System.Span<System.Byte> buffer)`
+- `System.Random.Shuffle<T>(System.Span<T> values)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -586,8 +590,10 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.Stream stream, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
+- `System.Random.GetItems<T>(T[] choices, System.Int32 length)`
+- `System.Random.Shuffle<T>(T[] values)`
 
-### Properties (7)
+### Properties (8)
 
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
@@ -595,6 +601,7 @@ The filtering logic works as follows:
 - `System.DateTimeOffset.Nanosecond`
 - `System.Environment.ProcessId`
 - `System.Net.Http.HttpMethod.Query`
+- `System.Random.Shared`
 - `System.Threading.Tasks.ValueTask.CompletedTask`
 
 <!-- end_polyfills -->
