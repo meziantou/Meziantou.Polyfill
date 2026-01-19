@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (447)
+### Methods (448)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -151,6 +151,7 @@ The filtering logic works as follows:
 - `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Byte result)`
 - `System.Collections.Concurrent.ConcurrentBag<T>.Clear()`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
+- `System.Collections.Concurrent.ConcurrentQueue<T>.Clear()`
 - `System.Collections.Generic.CollectionExtensions.AddRange<T>(this System.Collections.Generic.List<T> list, params System.ReadOnlySpan<T> source)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`

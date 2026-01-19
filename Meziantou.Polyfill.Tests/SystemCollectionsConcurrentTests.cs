@@ -42,4 +42,52 @@ public class SystemCollectionsConcurrentTests
         Assert.Empty(bag);
     }
 
+    [Fact]
+    public void ConcurrentQueue_Clear()
+    {
+        var queue = new ConcurrentQueue<int>();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+
+        Assert.Equal(3, queue.Count);
+
+        queue.Clear();
+
+        Assert.Equal(0, queue.Count);
+        Assert.Empty(queue);
+    }
+
+    [Fact]
+    public void ConcurrentQueue_Clear_EmptyQueue()
+    {
+        var queue = new ConcurrentQueue<int>();
+
+        Assert.Equal(0, queue.Count);
+
+        queue.Clear();
+
+        Assert.Equal(0, queue.Count);
+        Assert.Empty(queue);
+    }
+
+    [Fact]
+    public void ConcurrentQueue_Clear_PreservesOrder()
+    {
+        var queue = new ConcurrentQueue<int>();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+
+        queue.Clear();
+
+        queue.Enqueue(10);
+        queue.Enqueue(20);
+
+        Assert.True(queue.TryDequeue(out var first));
+        Assert.Equal(10, first);
+        Assert.True(queue.TryDequeue(out var second));
+        Assert.Equal(20, second);
+    }
+
 }
