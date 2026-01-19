@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (477)
+### Methods (479)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -545,6 +545,8 @@ The filtering logic works as follows:
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
+- `System.Threading.Tasks.Task.WhenEach(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> tasks)`
+- `System.Threading.Tasks.Task.WhenEach<TResult>(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task<TResult>> tasks)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout)`
