@@ -78,4 +78,75 @@ public class SystemThreadingTests
         }
     }
 
+    [Fact]
+    public void CancellationToken_Register_WithCancellationToken()
+    {
+        using var cts = new CancellationTokenSource();
+        var token = cts.Token;
+
+        object? callbackState = null;
+        CancellationToken callbackToken = default;
+        var testState = new object();
+
+        var registration = token.Register((state, ct) =>
+        {
+            callbackState = state;
+            callbackToken = ct;
+        }, testState);
+
+        cts.Cancel();
+
+        Assert.Same(testState, callbackState);
+        Assert.Equal(token, callbackToken);
+        Assert.True(callbackToken.IsCancellationRequested);
+
+        registration.Dispose();
+    }
+
+    [Fact]
+    public void CancellationToken_UnsafeRegister_WithCancellationToken()
+    {
+        using var cts = new CancellationTokenSource();
+        var token = cts.Token;
+
+        object? callbackState = null;
+        CancellationToken callbackToken = default;
+        var testState = new object();
+
+        var registration = token.UnsafeRegister((state, ct) =>
+        {
+            callbackState = state;
+            callbackToken = ct;
+        }, testState);
+
+        cts.Cancel();
+
+        Assert.Same(testState, callbackState);
+        Assert.Equal(token, callbackToken);
+        Assert.True(callbackToken.IsCancellationRequested);
+
+        registration.Dispose();
+    }
+
+    [Fact]
+    public void CancellationToken_UnsafeRegister_WithoutCancellationToken()
+    {
+        using var cts = new CancellationTokenSource();
+        var token = cts.Token;
+
+        object? callbackState = null;
+        var testState = new object();
+
+        var registration = token.UnsafeRegister((state) =>
+        {
+            callbackState = state;
+        }, testState);
+
+        cts.Cancel();
+
+        Assert.Same(testState, callbackState);
+
+        registration.Dispose();
+    }
+
 }
