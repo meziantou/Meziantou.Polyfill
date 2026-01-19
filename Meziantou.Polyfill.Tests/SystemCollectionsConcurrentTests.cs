@@ -26,4 +26,20 @@ public class SystemCollectionsConcurrentTests
         Assert.Equal("arg", actual);
     }
 
+    [Fact]
+    public void ConcurrentBag_Clear()
+    {
+        var bag = new ConcurrentBag<int>();
+        bag.Add(1);
+        bag.Add(2);
+        bag.Add(3);
+
+        Assert.Equal(3, bag.Count);
+
+        bag.Clear();
+
+        Assert.Equal(0, bag.Count);
+        Assert.Empty(bag);
+    }
+
 }
