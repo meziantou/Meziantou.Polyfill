@@ -54,6 +54,37 @@ public class SystemCollectionsGenericTests
     }
 
     [Fact]
+    public void System_Collections_Generic_Stack_1_TryPeek()
+    {
+        var stack = new Stack<int>();
+        Assert.False(stack.TryPeek(out _));
+
+        stack.Push(1);
+        stack.Push(2);
+        Assert.True(stack.TryPeek(out var item1));
+        Assert.Equal(2, item1);
+        Assert.True(stack.TryPeek(out var item2));
+        Assert.Equal(2, item2); // TryPeek should not remove the item
+        Assert.Equal(2, stack.Count);
+    }
+
+    [Fact]
+    public void System_Collections_Generic_Stack_1_TryPop()
+    {
+        var stack = new Stack<int>();
+        Assert.False(stack.TryPop(out _));
+
+        stack.Push(1);
+        stack.Push(2);
+        Assert.True(stack.TryPop(out var item1));
+        Assert.True(stack.TryPop(out var item2));
+        Assert.False(stack.TryPop(out _));
+
+        Assert.Equal(2, item1);
+        Assert.Equal(1, item2);
+    }
+
+    [Fact]
     public void PriorityQueueTests()
     {
         var queue = new PriorityQueue<string, int>();

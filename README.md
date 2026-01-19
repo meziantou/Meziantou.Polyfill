@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (479)
+### Methods (481)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -163,6 +163,8 @@ The filtering logic works as follows:
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
+- `System.Collections.Generic.Stack<T>.TryPeek(out T result)`
+- `System.Collections.Generic.Stack<T>.TryPop(out T result)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan()`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Int32 start, System.Int32 length)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Range range)`
