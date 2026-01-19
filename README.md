@@ -123,7 +123,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (467)
+### Methods (477)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -483,6 +483,11 @@ The filtering logic works as follows:
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, out System.SByte result)`
 - `System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan<System.Byte> source)`
+- `System.Security.Cryptography.RandomNumberGenerator.Fill(System.Span<System.Byte> data)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetBytes(System.Int32 count)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetHexString(System.Int32 stringLength, [System.Boolean lowercase = false])`
+- `System.Security.Cryptography.RandomNumberGenerator.GetHexString(System.Span<System.Char> destination, [System.Boolean lowercase = false])`
+- `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 fromInclusive, System.Int32 toExclusive)`
 - `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
@@ -592,6 +597,11 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 - `System.Random.GetItems<T>(T[] choices, System.Int32 length)`
 - `System.Random.Shuffle<T>(T[] values)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 toExclusive)`
+- `System.Security.Cryptography.RandomNumberGenerator.Shuffle<T>(System.Span<T> values)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetString(System.ReadOnlySpan<System.Char> choices, System.Int32 length)`
 
 ### Properties (8)
 
