@@ -274,13 +274,13 @@ public class SystemTests
     {
         // Test basic multiplication: 2.0 * 1 second = 2 seconds
         Assert.Equal(TimeSpan.FromSeconds(2), 2.0 * TimeSpan.FromSeconds(1));
-        
+
         // Test fractional multiplication: 0.5 * 10 seconds = 5 seconds
         Assert.Equal(TimeSpan.FromSeconds(5), 0.5 * TimeSpan.FromSeconds(10));
-        
+
         // Test negative multiplication: -2.0 * 3 seconds = -6 seconds
         Assert.Equal(TimeSpan.FromSeconds(-6), -2.0 * TimeSpan.FromSeconds(3));
-        
+
         // Test zero multiplication
         Assert.Equal(TimeSpan.Zero, 0.0 * TimeSpan.FromSeconds(5));
     }
@@ -290,13 +290,13 @@ public class SystemTests
     {
         // Test basic multiplication: 1 second * 2.0 = 2 seconds
         Assert.Equal(TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1) * 2.0);
-        
+
         // Test fractional multiplication: 10 seconds * 0.5 = 5 seconds
         Assert.Equal(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10) * 0.5);
-        
+
         // Test negative multiplication: 3 seconds * -2.0 = -6 seconds
         Assert.Equal(TimeSpan.FromSeconds(-6), TimeSpan.FromSeconds(3) * -2.0);
-        
+
         // Test zero multiplication
         Assert.Equal(TimeSpan.Zero, TimeSpan.FromSeconds(5) * 0.0);
     }
@@ -306,13 +306,13 @@ public class SystemTests
     {
         // Test basic division: 10 seconds / 2.0 = 5 seconds
         Assert.Equal(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10) / 2.0);
-        
+
         // Test fractional division: 10 seconds / 0.5 = 20 seconds
         Assert.Equal(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(10) / 0.5);
-        
+
         // Test negative division: 6 seconds / -2.0 = -3 seconds
         Assert.Equal(TimeSpan.FromSeconds(-3), TimeSpan.FromSeconds(6) / -2.0);
-        
+
         // Test large values: 1 hour / 60 = 1 minute
         Assert.Equal(TimeSpan.FromMinutes(1), TimeSpan.FromHours(1) / 60.0);
     }
@@ -1837,6 +1837,59 @@ public class SystemTests
         ReadOnlySpan<byte> utf8Data = "7FFFFFFFFFFFFFFF"u8;
         Assert.True(long.TryParse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
         Assert.Equal(9223372036854775807L, result);
+    }
+
+    [Fact]
+    public void DateTime_Nanosecond()
+    {
+        // DateTime with 0 nanoseconds
+        var dt1 = new DateTime(2024, 1, 1, 12, 30, 45, 123);
+        Assert.Equal(0, dt1.Nanosecond);
+
+        // DateTime with 100 nanoseconds (1 tick)
+        var dt2 = new DateTime(2024, 1, 1, 12, 30, 45, 123).AddTicks(1);
+        Assert.Equal(100, dt2.Nanosecond);
+
+        // DateTime with 900 nanoseconds (9 ticks)
+        var dt3 = new DateTime(2024, 1, 1, 12, 30, 45, 123).AddTicks(9);
+        Assert.Equal(900, dt3.Nanosecond);
+
+        // DateTime at maximum nanoseconds
+        var dt4 = new DateTime(2024, 1, 1, 0, 0, 0).AddTicks(9);
+        Assert.Equal(900, dt4.Nanosecond);
+
+        // DateTime at minimum value
+        Assert.Equal(0, DateTime.MinValue.Nanosecond);
+
+        // DateTime at maximum value (9999-12-31 23:59:59.9999999)
+        // MaxValue has 9 ticks remainder
+        Assert.Equal(900, DateTime.MaxValue.Nanosecond);
+    }
+
+    [Fact]
+    public void DateTimeOffset_Nanosecond()
+    {
+        // DateTimeOffset with 0 nanoseconds
+        var dto1 = new DateTimeOffset(2024, 1, 1, 12, 30, 45, 123, TimeSpan.Zero);
+        Assert.Equal(0, dto1.Nanosecond);
+
+        // DateTimeOffset with 100 nanoseconds (1 tick)
+        var dto2 = new DateTimeOffset(2024, 1, 1, 12, 30, 45, 123, TimeSpan.Zero).AddTicks(1);
+        Assert.Equal(100, dto2.Nanosecond);
+
+        // DateTimeOffset with 900 nanoseconds (9 ticks)
+        var dto3 = new DateTimeOffset(2024, 1, 1, 12, 30, 45, 123, TimeSpan.Zero).AddTicks(9);
+        Assert.Equal(900, dto3.Nanosecond);
+
+        // DateTimeOffset with different timezone offset
+        var dto4 = new DateTimeOffset(2024, 1, 1, 12, 30, 45, 123, TimeSpan.FromHours(5)).AddTicks(5);
+        Assert.Equal(500, dto4.Nanosecond);
+
+        // DateTimeOffset at minimum value
+        Assert.Equal(0, DateTimeOffset.MinValue.Nanosecond);
+
+        // DateTimeOffset at maximum value
+        Assert.Equal(900, DateTimeOffset.MaxValue.Nanosecond);
     }
 
 }

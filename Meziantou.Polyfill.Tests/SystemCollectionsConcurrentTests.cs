@@ -38,7 +38,7 @@ public class SystemCollectionsConcurrentTests
 
         bag.Clear();
 
-        Assert.Equal(0, bag.Count);
+        Assert.Empty(bag);
         Assert.Empty(bag);
     }
 
@@ -54,7 +54,7 @@ public class SystemCollectionsConcurrentTests
 
         queue.Clear();
 
-        Assert.Equal(0, queue.Count);
+        Assert.Empty(queue);
         Assert.Empty(queue);
     }
 
@@ -63,11 +63,11 @@ public class SystemCollectionsConcurrentTests
     {
         var queue = new ConcurrentQueue<int>();
 
-        Assert.Equal(0, queue.Count);
+        Assert.Empty(queue);
 
         queue.Clear();
 
-        Assert.Equal(0, queue.Count);
+        Assert.Empty(queue);
         Assert.Empty(queue);
     }
 

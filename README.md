@@ -574,10 +574,12 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (5)
+### Properties (7)
 
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
+- `System.DateTime.Nanosecond`
+- `System.DateTimeOffset.Nanosecond`
 - `System.Environment.ProcessId`
 - `System.Net.Http.HttpMethod.Query`
 - `System.Threading.Tasks.ValueTask.CompletedTask`
