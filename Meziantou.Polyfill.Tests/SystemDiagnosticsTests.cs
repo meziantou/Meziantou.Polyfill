@@ -32,4 +32,30 @@ public class SystemDiagnosticsTests
         Assert.Equal(0, process.ExitCode);
     }
 
+    [Fact]
+    public void UnreachableException_DefaultConstructor()
+    {
+        var exception = new UnreachableException();
+        Assert.NotNull(exception.Message);
+        Assert.Contains("unreachable", exception.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void UnreachableException_MessageConstructor()
+    {
+        var message = "Custom unreachable message";
+        var exception = new UnreachableException(message);
+        Assert.Equal(message, exception.Message);
+    }
+
+    [Fact]
+    public void UnreachableException_MessageAndInnerExceptionConstructor()
+    {
+        var message = "Custom unreachable message";
+        var innerException = new InvalidOperationException("Inner exception");
+        var exception = new UnreachableException(message, innerException);
+        Assert.Equal(message, exception.Message);
+        Assert.Same(innerException, exception.InnerException);
+    }
+
 }

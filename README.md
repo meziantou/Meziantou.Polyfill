@@ -50,7 +50,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (70)
+### Types (71)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -83,6 +83,7 @@ The filtering logic works as follows:
 - `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute`
 - `System.Diagnostics.CodeAnalysis.UnscopedRefAttribute`
 - `System.Diagnostics.StackTraceHiddenAttribute`
+- `System.Diagnostics.UnreachableException`
 - `System.HashCode`
 - `System.Index`
 - `System.Net.Http.ReadOnlyMemoryContent`
