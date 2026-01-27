@@ -10,7 +10,7 @@ namespace System.Diagnostics
 #if POLYFILL_SERIALIZABLE
     [Serializable]
 #endif
-    sealed class UnreachableException : Exception
+    internal sealed class UnreachableException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UnreachableException"/> class with the default error message.
