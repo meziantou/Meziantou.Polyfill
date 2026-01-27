@@ -1,5 +1,6 @@
-using System;
+#if POLYFILL_SERIALIZABLE
 using System.Runtime.Serialization;
+#endif
 
 namespace System.Diagnostics
 {
