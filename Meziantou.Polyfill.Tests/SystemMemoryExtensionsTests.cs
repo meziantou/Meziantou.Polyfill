@@ -58,7 +58,7 @@ public class SystemMemoryExtensionsTests
         
         Assert.Equal(0, "hello there".AsSpan().IndexOfAny(values));
         Assert.Equal(0, "world peace".AsSpan().IndexOfAny(values));
-        Assert.Equal(6, "see hello".AsSpan().IndexOfAny(values));
+        Assert.Equal(4, "see hello".AsSpan().IndexOfAny(values));
         Assert.Equal(-1, "goodbye".AsSpan().IndexOfAny(values));
         Assert.Equal(-1, "".AsSpan().IndexOfAny(values));
     }
@@ -72,7 +72,7 @@ public class SystemMemoryExtensionsTests
         Assert.Equal(0, new Span<char>(buffer).IndexOfAny(values));
         
         buffer = "see hello".ToCharArray();
-        Assert.Equal(6, new Span<char>(buffer).IndexOfAny(values));
+        Assert.Equal(4, new Span<char>(buffer).IndexOfAny(values));
         
         buffer = "goodbye".ToCharArray();
         Assert.Equal(-1, new Span<char>(buffer).IndexOfAny(values));
