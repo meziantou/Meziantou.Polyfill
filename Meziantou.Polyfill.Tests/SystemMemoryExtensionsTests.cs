@@ -26,31 +26,31 @@ public class SystemMemoryExtensionsTests
         Assert.Equal(2, ((Span<int>)[0, 1]).CommonPrefixLength([0, 1, 2]));
     }
 
+    [Fact]
+    public void IndexOfAny_ReadOnlySpan_SearchValues_Char()
+    {
+        var values = SearchValues.Create(['a', 'c', 'e']);
+        
+        Assert.Equal(0, ((ReadOnlySpan<char>)['a', 'b', 'c']).IndexOfAny(values));
+        Assert.Equal(1, ((ReadOnlySpan<char>)['b', 'c', 'd']).IndexOfAny(values));
+        Assert.Equal(2, ((ReadOnlySpan<char>)['b', 'd', 'e']).IndexOfAny(values));
+        Assert.Equal(-1, ((ReadOnlySpan<char>)['b', 'd', 'f']).IndexOfAny(values));
+        Assert.Equal(-1, ((ReadOnlySpan<char>)[]).IndexOfAny(values));
+    }
+
+    [Fact]
+    public void IndexOfAny_Span_SearchValues_Char()
+    {
+        var values = SearchValues.Create(['a', 'c', 'e']);
+        
+        Assert.Equal(0, ((Span<char>)['a', 'b', 'c']).IndexOfAny(values));
+        Assert.Equal(1, ((Span<char>)['b', 'c', 'd']).IndexOfAny(values));
+        Assert.Equal(2, ((Span<char>)['b', 'd', 'e']).IndexOfAny(values));
+        Assert.Equal(-1, ((Span<char>)['b', 'd', 'f']).IndexOfAny(values));
+        Assert.Equal(-1, ((Span<char>)[]).IndexOfAny(values));
+    }
+
 #if !NET8_0_OR_GREATER
-    [Fact]
-    public void IndexOfAny_ReadOnlySpan_SearchValues_T()
-    {
-        var values = SearchValues.Create([1, 3, 5]);
-        
-        Assert.Equal(0, ((ReadOnlySpan<int>)[1, 2, 3]).IndexOfAny(values));
-        Assert.Equal(1, ((ReadOnlySpan<int>)[2, 3, 4]).IndexOfAny(values));
-        Assert.Equal(2, ((ReadOnlySpan<int>)[2, 4, 5]).IndexOfAny(values));
-        Assert.Equal(-1, ((ReadOnlySpan<int>)[2, 4, 6]).IndexOfAny(values));
-        Assert.Equal(-1, ((ReadOnlySpan<int>)[]).IndexOfAny(values));
-    }
-
-    [Fact]
-    public void IndexOfAny_Span_SearchValues_T()
-    {
-        var values = SearchValues.Create([1, 3, 5]);
-        
-        Assert.Equal(0, ((Span<int>)[1, 2, 3]).IndexOfAny(values));
-        Assert.Equal(1, ((Span<int>)[2, 3, 4]).IndexOfAny(values));
-        Assert.Equal(2, ((Span<int>)[2, 4, 5]).IndexOfAny(values));
-        Assert.Equal(-1, ((Span<int>)[2, 4, 6]).IndexOfAny(values));
-        Assert.Equal(-1, ((Span<int>)[]).IndexOfAny(values));
-    }
-
     [Fact]
     public void IndexOfAny_ReadOnlySpan_SearchValues_String()
     {
