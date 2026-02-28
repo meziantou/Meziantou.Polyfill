@@ -50,14 +50,14 @@ jobs:
     - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet pack Meziantou.Polyfill --configuration Release
 
-    - uses: actions/upload-artifact@v6
+    - uses: actions/upload-artifact@v7
       with:
         name: nuget
         if-no-files-found: error
         retention-days: 3
         path: '**/*.nupkg'
 
-    - uses: actions/upload-artifact@v6
+    - uses: actions/upload-artifact@v7
       with:
         name: generated-code
         if-no-files-found: error
@@ -71,7 +71,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Setup .NET Core (global.json)
         uses: actions/setup-dotnet@v5
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: nuget
           path: ${{ env.NuGetDirectory }}
@@ -122,7 +122,7 @@ jobs:
         fetch-depth: 2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v5
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: nuget
         path: ${{ env.NuGetDirectory }}
