@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (523)
+### Methods (525)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -211,6 +211,7 @@ The filtering logic works as follows:
 - `System.Enum.TryParse<TEnum>(System.ReadOnlySpan<System.Char> value, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, out TEnum result) where TEnum : struct`
+- `System.Guid.CreateVersion7(System.DateTimeOffset timestamp)`
 - `System.IO.File.AppendAllBytes(System.String path, System.Byte[] bytes)`
 - `System.IO.File.AppendAllBytes(System.String path, System.ReadOnlySpan<System.Byte> bytes)`
 - `System.IO.File.AppendAllBytesAsync(System.String path, System.Byte[] bytes, [System.Threading.CancellationToken cancellationToken = default])`
@@ -641,6 +642,7 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.Stream stream, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
+- `System.Guid.CreateVersion7()`
 - `System.Random.GetItems<T>(T[] choices, System.Int32 length)`
 - `System.Random.Shuffle<T>(T[] values)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 toExclusive)`

@@ -2035,4 +2035,79 @@ public class SystemTests
         Assert.Equal(0, count);
     }
 
+    [Fact]
+    public void Guid_CreateVersion7_ReturnsVersion7Guid()
+    {
+        var guid = Guid.CreateVersion7();
+        var str = guid.ToString("D");
+
+        // Version should be 7 (character at position 14 in "D" format: xxxxxxxx-xxxx-Vxxx-...)
+        Assert.Equal('7', str[14]);
+
+        // Variant should be 0b10xx (8, 9, a, or b) at position 19
+        Assert.Contains(str[19], new[] { '8', '9', 'a', 'b' });
+    }
+
+    [Fact]
+    public void Guid_CreateVersion7_IsSortable()
+    {
+        // UUID v7 GUIDs with different (1ms apart) timestamps should sort by timestamp
+        var timestamp1 = new DateTimeOffset(2024, 1, 1, 0, 0, 0, 0, TimeSpan.Zero);
+        var timestamp2 = new DateTimeOffset(2024, 1, 1, 0, 0, 0, 1, TimeSpan.Zero);
+
+        var guid1 = Guid.CreateVersion7(timestamp1);
+        var guid2 = Guid.CreateVersion7(timestamp2);
+
+        Assert.True(string.Compare(guid1.ToString("D"), guid2.ToString("D"), StringComparison.Ordinal) < 0);
+    }
+
+    [Fact]
+    public void Guid_CreateVersion7_WithTimestamp_ReturnsVersion7Guid()
+    {
+        var timestamp = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        var guid = Guid.CreateVersion7(timestamp);
+        var str = guid.ToString("D");
+
+        // Version should be 7
+        Assert.Equal('7', str[14]);
+
+        // Variant should be 0b10xx (8, 9, a, or b)
+        Assert.Contains(str[19], new[] { '8', '9', 'a', 'b' });
+    }
+
+    [Fact]
+    public void Guid_CreateVersion7_WithTimestamp_EmbedsTimestamp()
+    {
+        var timestamp = new DateTimeOffset(2024, 6, 15, 12, 30, 45, 123, TimeSpan.Zero);
+        var guid1 = Guid.CreateVersion7(timestamp);
+        var guid2 = Guid.CreateVersion7(timestamp);
+
+        // Both GUIDs created with the same timestamp should have identical timestamp portions
+        // (first 12 hex chars in "N" format = 48-bit timestamp)
+        var str1 = guid1.ToString("N");
+        var str2 = guid2.ToString("N");
+        Assert.True(str1.AsSpan(0, 12).SequenceEqual(str2.AsSpan(0, 12)));
+    }
+
+    [Fact]
+    public void Guid_CreateVersion7_WithTimestamp_TimestampOrderPreserved()
+    {
+        var timestamp1 = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        var timestamp2 = new DateTimeOffset(2025, 1, 1, 0, 0, 0, TimeSpan.Zero);
+
+        var guid1 = Guid.CreateVersion7(timestamp1);
+        var guid2 = Guid.CreateVersion7(timestamp2);
+
+        // GUIDs with earlier timestamps should sort before GUIDs with later timestamps
+        Assert.True(string.Compare(guid1.ToString("D"), guid2.ToString("D"), StringComparison.Ordinal) < 0);
+    }
+
+    [Fact]
+    public void Guid_CreateVersion7_WithTimestamp_OutOfRange_ThrowsArgumentOutOfRangeException()
+    {
+        // Timestamp before Unix epoch
+        var beforeEpoch = new DateTimeOffset(1969, 12, 31, 23, 59, 59, TimeSpan.Zero);
+        Assert.Throws<ArgumentOutOfRangeException>(() => Guid.CreateVersion7(beforeEpoch));
+    }
+
 }
