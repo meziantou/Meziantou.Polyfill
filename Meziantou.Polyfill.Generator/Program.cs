@@ -68,6 +68,7 @@ var polyfills = assembly.GetManifestResourceNames()
                   SymbolKind.NamedType => PolyfillKind.Type,
                   SymbolKind.Method => PolyfillKind.Method,
                   SymbolKind.Property => PolyfillKind.Property,
+                  SymbolKind.Field => PolyfillKind.Property,
                   _ => throw new InvalidOperationException($"Unknown symbol kind '{symbol.Kind}'"),
               },
               OutputPath = Path.GetFileNameWithoutExtension(item)
