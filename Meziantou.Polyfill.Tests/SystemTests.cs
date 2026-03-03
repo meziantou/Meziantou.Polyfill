@@ -1892,6 +1892,13 @@ public class SystemTests
         Assert.Equal(900, DateTimeOffset.MaxValue.Nanosecond);
     }
 
+    [Fact]
+    public void DateTimeOffset_UnixEpoch()
+    {
+        Assert.Equal(new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero), DateTimeOffset.UnixEpoch);
+        Assert.Equal(TimeSpan.Zero, DateTimeOffset.UnixEpoch.Offset);
+    }
+
 #if NET6_0_OR_GREATER
     [Fact]
     public void DateOnly_Deconstruct()
