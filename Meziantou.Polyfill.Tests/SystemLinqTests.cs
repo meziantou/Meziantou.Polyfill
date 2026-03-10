@@ -118,6 +118,47 @@ public class SystemLinqTests
     }
 
     [Fact]
+    public void Enumerable_Chunk()
+    {
+        var result = new[] { 1, 2, 3, 4, 5 }.Chunk(2).ToList();
+        Assert.Equal(3, result.Count);
+        Assert.Equal([1, 2], result[0]);
+        Assert.Equal([3, 4], result[1]);
+        Assert.Equal([5], result[2]);
+    }
+
+    [Fact]
+    public void Enumerable_Chunk_SizeEqualToLength()
+    {
+        var result = new[] { 1, 2, 3 }.Chunk(3).ToList();
+        Assert.Single(result);
+        Assert.Equal([1, 2, 3], result[0]);
+    }
+
+    [Fact]
+    public void Enumerable_Chunk_SizeLargerThanLength()
+    {
+        var result = new[] { 1, 2 }.Chunk(10).ToList();
+        Assert.Single(result);
+        Assert.Equal([1, 2], result[0]);
+    }
+
+    [Fact]
+    public void Enumerable_Chunk_EmptySource()
+    {
+        var result = Array.Empty<int>().Chunk(2).ToList();
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void Enumerable_Chunk_InvalidArguments()
+    {
+        Assert.Throws<ArgumentNullException>(() => ((IEnumerable<int>)null!).Chunk(2).ToList());
+        Assert.Throws<ArgumentOutOfRangeException>(() => new[] { 1, 2 }.Chunk(0).ToList());
+        Assert.Throws<ArgumentOutOfRangeException>(() => new[] { 1, 2 }.Chunk(-1).ToList());
+    }
+
+    [Fact]
     public void Enumerable_Index()
     {
         Assert.Equal([(0, "a"), (1, "b")], (new string[] { "a", "b" }).Index());
