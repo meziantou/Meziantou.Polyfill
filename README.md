@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 - `System.ITupleInternal`
 
-### Methods (525)
+### Methods (526)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -426,6 +426,7 @@ The filtering logic works as follows:
 - `System.Linq.AsyncEnumerable.Zip<TFirst, TSecond, TResult>(this System.Collections.Generic.IAsyncEnumerable<TFirst> first, System.Collections.Generic.IAsyncEnumerable<TSecond> second, System.Func<TFirst, TSecond, TResult> resultSelector)`
 - `System.Linq.Enumerable.AggregateBy<TSource, TKey, TAccumulate>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Func<TKey, TAccumulate> seedSelector, System.Func<TAccumulate, TSource, TAccumulate> func, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
 - `System.Linq.Enumerable.AggregateBy<TSource, TKey, TAccumulate>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, TAccumulate seed, System.Func<TAccumulate, TSource, TAccumulate> func, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
+- `System.Linq.Enumerable.Chunk<TSource>(this System.Collections.Generic.IEnumerable<TSource> source, System.Int32 size)`
 - `System.Linq.Enumerable.CountBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
