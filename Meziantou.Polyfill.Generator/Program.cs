@@ -2,6 +2,7 @@
 #pragma warning disable MA0047 // Declare types in namespaces
 #pragma warning disable MA0048 // File name must match type name
 using System.Reflection;
+using System.Text.Json;
 using Meziantou.Polyfill.Generator;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
@@ -104,6 +105,9 @@ if (duplicatePolyfills.Length > 0)
     }
     throw new InvalidOperationException("There are duplicated polyfills:\n" + sb.ToString());
 }
+
+// Detect which TFMs support each polyfill, sort by earliest supported version, then reassign indices
+DetectAndAssignVersions(polyfills, compilation, GetRootPath());
 
 polyfills = SortPolyfills(polyfills);
 
@@ -362,7 +366,7 @@ async Task GenerateReadme()
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Type))
+    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Type).OrderBy(p => p.TypeName, StringComparer.Ordinal))
     {
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(typeDisplayFormat)}`\n");
     }
@@ -378,7 +382,7 @@ async Task GenerateReadme()
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method))
+    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method).OrderBy(p => p.TypeName, StringComparer.Ordinal))
     {
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
     }
@@ -394,7 +398,7 @@ async Task GenerateReadme()
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Property))
+    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Property).OrderBy(p => p.TypeName, StringComparer.Ordinal))
     {
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(propertyDisplayFormat)}`\n");
     }
@@ -429,6 +433,150 @@ string ReadResourceAsString(string name)
 {
     using var sr = new StreamReader(assembly.GetManifestResourceStream(name)!);
     return sr.ReadToEnd();
+}
+
+static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation currentCompilation, string rootPath)
+{
+    var nugetPackagesPath = GetNuGetPackagesPath();
+    Console.WriteLine($"NuGet packages path: {nugetPackagesPath}");
+
+    // Define TFMs for netstandard and .NET Framework (stable, fixed versions)
+    var tfmDefinitions = new List<(string Name, string RefPath)>
+    {
+        ("netstandard2.0", Path.Combine(nugetPackagesPath, "netstandard.library", "2.0.3", "build", "netstandard2.0", "ref")),
+        ("netstandard2.1", Path.Combine(nugetPackagesPath, "netstandard.library.ref", "2.1.0", "ref", "netstandard2.1")),
+        ("net462", Path.Combine(nugetPackagesPath, "microsoft.netframework.referenceassemblies.net462", "1.0.3", "build", ".NETFramework", "v4.6.2")),
+        ("net472", Path.Combine(nugetPackagesPath, "microsoft.netframework.referenceassemblies.net472", "1.0.3", "build", ".NETFramework", "v4.7.2")),
+        ("net48", Path.Combine(nugetPackagesPath, "microsoft.netframework.referenceassemblies.net48", "1.0.3", "build", ".NETFramework", "v4.8")),
+    };
+
+    // Dynamically discover Microsoft.NETCore.App.Ref versions from NuGet cache
+    var netcoreAppRefPath = Path.Combine(nugetPackagesPath, "microsoft.netcore.app.ref");
+    if (Directory.Exists(netcoreAppRefPath))
+    {
+        var discoveredVersions = new SortedDictionary<int, (string TfmName, string RefPath)>();
+        foreach (var versionDir in Directory.GetDirectories(netcoreAppRefPath))
+        {
+            var versionName = Path.GetFileName(versionDir);
+            var majorPart = versionName.Split('.')[0];
+            if (int.TryParse(majorPart, out var major) && major >= 6 && !discoveredVersions.ContainsKey(major))
+            {
+                var tfmName = $"net{major}.0";
+                var refPath = Path.Combine(versionDir, "ref", tfmName);
+                if (Directory.Exists(refPath))
+                {
+                    discoveredVersions[major] = (tfmName, refPath);
+                }
+            }
+        }
+
+        foreach (var (_, (tfmName, refPath)) in discoveredVersions)
+        {
+            tfmDefinitions.Add((tfmName, refPath));
+        }
+    }
+
+    var compilations = new List<(string Name, int SortOrder, CSharpCompilation Compilation)>();
+
+    for (var i = 0; i < tfmDefinitions.Count; i++)
+    {
+        var (name, refPath) = tfmDefinitions[i];
+        if (!Directory.Exists(refPath))
+        {
+            Console.WriteLine($"Warning: Reference assemblies not found for {name} at {refPath}");
+            continue;
+        }
+
+        var files = Directory.GetFiles(refPath, "*.dll").ToList();
+        var facadesPath = Path.Combine(refPath, "Facades");
+        if (Directory.Exists(facadesPath))
+        {
+            files.AddRange(Directory.GetFiles(facadesPath, "*.dll"));
+        }
+
+        var comp = CSharpCompilation.Create(
+            assemblyName: $"version-check-{name}",
+            references: files.Select(f => MetadataReference.CreateFromFile(f)),
+            options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, metadataImportOptions: MetadataImportOptions.All));
+
+        compilations.Add((name, i, comp));
+        Console.WriteLine($"Loaded {files.Count} assemblies for {name}");
+    }
+
+    // Current runtime represents the latest .NET version
+    var currentVersionName = $"net{Environment.Version.Major}.0";
+    if (!compilations.Any(c => string.Equals(c.Name, currentVersionName, StringComparison.Ordinal)))
+    {
+        compilations.Add((currentVersionName, tfmDefinitions.Count, currentCompilation));
+        Console.WriteLine($"Using current runtime as {currentVersionName}");
+    }
+
+    var allVersionNames = compilations.Select(c => c.Name).ToArray();
+
+    // Check each polyfill against each compilation
+    Console.WriteLine($"Checking {polyfills.Length} polyfills against {compilations.Count} TFMs...");
+    foreach (var polyfill in polyfills)
+    {
+        var supportedVersions = new List<string>();
+        foreach (var (name, _, comp) in compilations)
+        {
+            var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(polyfill.TypeName, comp);
+            if (symbols.Length > 0)
+            {
+                supportedVersions.Add(name);
+            }
+        }
+
+        polyfill.SupportedInVersions = [.. supportedVersions];
+    }
+
+    // Write cache file
+    var cacheEntries = new SortedDictionary<string, string[]>(StringComparer.Ordinal);
+    foreach (var polyfill in polyfills)
+    {
+        cacheEntries[polyfill.TypeName] = polyfill.SupportedInVersions;
+    }
+
+    var cacheFilePath = Path.Combine(rootPath, "Meziantou.Polyfill.Generator", "polyfill-supported-versions.json");
+    var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+    File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { versions = allVersionNames, polyfills = cacheEntries }, jsonOptions));
+    Console.WriteLine($"Wrote version cache to {cacheFilePath}");
+
+    // Sort by earliest supported version (ascending), then by name, and reassign Index
+    var versionOrder = compilations.ToDictionary(c => c.Name, c => c.SortOrder, StringComparer.Ordinal);
+    var sortedPolyfills = polyfills
+        .OrderBy(p => GetEarliestVersionOrder(p.SupportedInVersions, versionOrder))
+        .ThenBy(p => p.TypeName, StringComparer.Ordinal)
+        .ToArray();
+
+    for (var i = 0; i < sortedPolyfills.Length; i++)
+    {
+        sortedPolyfills[i].Index = i;
+    }
+
+    // Print version distribution summary
+    foreach (var group in sortedPolyfills.GroupBy(p => GetEarliestVersionOrder(p.SupportedInVersions, versionOrder)).OrderBy(g => g.Key))
+    {
+        var versionName = group.Key == int.MaxValue ? "unknown" : compilations.First(c => c.SortOrder == group.Key).Name;
+        Console.WriteLine($"  {versionName}: {group.Count()} polyfills (bits {group.Min(p => p.Index)}\u2013{group.Max(p => p.Index)})");
+    }
+
+    static int GetEarliestVersionOrder(string[] supportedVersions, Dictionary<string, int> versionOrder)
+    {
+        if (supportedVersions.Length == 0)
+            return int.MaxValue;
+
+        return supportedVersions.Min(v => versionOrder.GetValueOrDefault(v, int.MaxValue));
+    }
+
+    static string GetNuGetPackagesPath()
+    {
+        var path = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
+        if (!string.IsNullOrEmpty(path))
+            return path;
+
+        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget", "packages");
+    }
 }
 
 static Polyfill[] SortPolyfills(Polyfill[] items)
@@ -507,6 +655,8 @@ internal sealed class Polyfill
     public required PolyfillData PolyfillData { get; set; }
     public required string OutputPath { get; set; }
     public required PolyfillKind Kind { get; set; }
+
+    public string[] SupportedInVersions { get; set; } = [];
 
     public string CSharpFieldName => "_bits" + (Index / 64);
     public int CSharpFieldBitIndex => Index % 64;
