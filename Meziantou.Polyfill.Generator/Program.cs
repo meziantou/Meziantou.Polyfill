@@ -275,7 +275,7 @@ async Task GenerateMembers()
 
     sb.AppendLine("public void AddSources(SourceProductionContext context)");
     sb.AppendLine("{");
-    foreach (var group in polyfills.GroupBy(p => p.CSharpFieldName))
+    foreach (var group in polyfills.GroupBy(p => p.CSharpFieldName, StringComparer.Ordinal))
     {
         sb.AppendLine($"    if ({group.Key} != 0)");
         sb.AppendLine("    {");
