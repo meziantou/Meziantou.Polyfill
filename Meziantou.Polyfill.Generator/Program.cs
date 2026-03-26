@@ -271,10 +271,16 @@ async Task GenerateMembers()
 
     sb.AppendLine("public void AddSources(SourceProductionContext context)");
     sb.AppendLine("{");
-    foreach (var polyfill in polyfills)
+    foreach (var group in polyfills.GroupBy(p => p.CSharpFieldName))
     {
-        sb.AppendLine($"    if (({polyfill.CSharpFieldName} & {polyfill.CSharpFieldBitMask}ul) == {polyfill.CSharpFieldBitMask}ul)");
-        sb.AppendLine($"        AddSource(context, \"{polyfill.OutputPath}\", PolyfillContents.{polyfill.CSharpSourceTextPropertyName});");
+        sb.AppendLine($"    if ({group.Key} != 0)");
+        sb.AppendLine("    {");
+        foreach (var polyfill in group)
+        {
+            sb.AppendLine($"        if (({polyfill.CSharpFieldName} & {polyfill.CSharpFieldBitMask}ul) == {polyfill.CSharpFieldBitMask}ul)");
+            sb.AppendLine($"            AddSource(context, \"{polyfill.OutputPath}\", PolyfillContents.{polyfill.CSharpSourceTextPropertyName});");
+        }
+        sb.AppendLine("    }");
     }
     sb.AppendLine("}");
 
