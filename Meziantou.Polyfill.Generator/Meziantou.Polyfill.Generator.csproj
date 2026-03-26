@@ -16,4 +16,13 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageDownload Include="NETStandard.Library" Version="[2.0.3]" />
+    <PackageDownload Include="NETStandard.Library.Ref" Version="[2.1.0]" />
+    <PackageDownload Include="Microsoft.NETFramework.ReferenceAssemblies.net462" Version="[1.0.3]" />
+    <PackageDownload Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="[1.0.3]" />
+    <PackageDownload Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="[1.0.3]" />
+    <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[6.0.0];[7.0.0];[8.0.0];[9.0.0];[10.0.0]" />
+  </ItemGroup>
+
 </Project>
