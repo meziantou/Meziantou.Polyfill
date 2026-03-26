@@ -116,7 +116,7 @@ namespace System
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
         /// Returns less than zero if this instance is less than <paramref name="other"/>, zero if this
-        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater 
+        /// instance is equal to <paramref name="other"/>, and greater than zero if this instance is greater
         /// than <paramref name="other"/>.
         /// </returns>
         public int CompareTo(ValueTuple<T1, T2> other)
