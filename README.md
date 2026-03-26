@@ -85,6 +85,7 @@ The filtering logic works as follows:
 - `System.Diagnostics.StackTraceHiddenAttribute`
 - `System.Diagnostics.UnreachableException`
 - `System.HashCode`
+- `System.ITupleInternal`
 - `System.Index`
 - `System.Net.Http.ReadOnlyMemoryContent`
 - `System.Range`
@@ -122,7 +123,6 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
-- `System.ITupleInternal`
 
 ### Methods (526)
 
@@ -211,6 +211,7 @@ The filtering logic works as follows:
 - `System.Enum.TryParse<TEnum>(System.ReadOnlySpan<System.Char> value, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, out TEnum result) where TEnum : struct`
+- `System.Guid.CreateVersion7()`
 - `System.Guid.CreateVersion7(System.DateTimeOffset timestamp)`
 - `System.IO.File.AppendAllBytes(System.String path, System.Byte[] bytes)`
 - `System.IO.File.AppendAllBytes(System.String path, System.ReadOnlySpan<System.Byte> bytes)`
@@ -493,8 +494,8 @@ The filtering logic works as follows:
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsByteArrayAsync(System.Threading.CancellationToken cancellationToken)`
-- `System.Net.Http.HttpContent.ReadAsStream(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStream()`
+- `System.Net.Http.HttpContent.ReadAsStream(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStringAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan<System.Byte> datagram, System.Net.IPEndPoint? endPoint)`
 - `System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan<System.Byte> datagram, System.String? hostname, System.Int32 port)`
@@ -509,10 +510,12 @@ The filtering logic works as follows:
 - `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
 - `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
 - `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
+- `System.Random.GetItems<T>(T[] choices, System.Int32 length)`
 - `System.Random.NextBytes(System.Span<System.Byte> buffer)`
 - `System.Random.Shuffle<T>(System.Span<T> values)`
-- `System.Reflection.MethodInfo.CreateDelegate<T>(System.Object? target) where T : System.Delegate`
+- `System.Random.Shuffle<T>(T[] values)`
 - `System.Reflection.MethodInfo.CreateDelegate<T>() where T : System.Delegate`
+- `System.Reflection.MethodInfo.CreateDelegate<T>(System.Object? target) where T : System.Delegate`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -527,7 +530,12 @@ The filtering logic works as follows:
 - `System.Security.Cryptography.RandomNumberGenerator.GetBytes(System.Int32 count)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetHexString(System.Int32 stringLength, [System.Boolean lowercase = false])`
 - `System.Security.Cryptography.RandomNumberGenerator.GetHexString(System.Span<System.Char> destination, [System.Boolean lowercase = false])`
+- `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 toExclusive)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 fromInclusive, System.Int32 toExclusive)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
+- `System.Security.Cryptography.RandomNumberGenerator.GetString(System.ReadOnlySpan<System.Char> choices, System.Int32 length)`
+- `System.Security.Cryptography.RandomNumberGenerator.Shuffle<T>(System.Span<T> values)`
 - `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
@@ -555,8 +563,8 @@ The filtering logic works as follows:
 - `System.String.Join(System.Char separator, params System.String?[] value)`
 - `System.String.Join<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
 - `System.String.Replace(System.String oldValue, System.String? newValue, System.StringComparison comparisonType)`
-- `System.String.ReplaceLineEndings(System.String replacementText)`
 - `System.String.ReplaceLineEndings()`
+- `System.String.ReplaceLineEndings(System.String replacementText)`
 - `System.String.Split(System.Char separator, System.Int32 count, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.Split(System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.StartsWith(System.Char value)`
@@ -602,6 +610,7 @@ The filtering logic works as follows:
 - `System.TimeSpan.operator *(System.TimeSpan timeSpan, System.Double factor)`
 - `System.Type.GetConstructor(System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Int32 genericParameterCount, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder? binder, System.Type[] types, System.Reflection.ParameterModifier[]? modifiers)`
+- `System.Type.GetMethod(System.String name, System.Int32 genericParameterCount, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.GetMethod(System.String name, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
 - `System.Type.IsAssignableTo(System.Type? targetType)`
 - `System.UInt16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -643,15 +652,6 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.Stream stream, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
-- `System.Guid.CreateVersion7()`
-- `System.Random.GetItems<T>(T[] choices, System.Int32 length)`
-- `System.Random.Shuffle<T>(T[] values)`
-- `System.Security.Cryptography.RandomNumberGenerator.GetInt32(System.Int32 toExclusive)`
-- `System.Security.Cryptography.RandomNumberGenerator.Shuffle<T>(System.Span<T> values)`
-- `System.Type.GetMethod(System.String name, System.Int32 genericParameterCount, System.Reflection.BindingFlags bindingAttr, System.Type[] types)`
-- `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
-- `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
-- `System.Security.Cryptography.RandomNumberGenerator.GetString(System.ReadOnlySpan<System.Char> choices, System.Int32 length)`
 
 ### Properties (15)
 
