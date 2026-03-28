@@ -101,15 +101,6 @@ jobs:
 
   tests:
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        tfm: [net10.0, net481, net48, net472, net462]
-        include:
-          - tfm: net9.0
-            additional-dotnet: '9.0.x'
-          - tfm: net8.0
-            additional-dotnet: '8.0.x'
     steps:
     - name: git configure long path
       run: git config --global core.longpaths true
@@ -118,9 +109,11 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         global-json-file: global.json
-        dotnet-version: ${{ matrix.additional-dotnet }}
+        dotnet-version: |
+            9.0.x
+            8.0.x
     - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
-    - run: dotnet test Meziantou.Polyfill.Tests --framework ${{ matrix.tfm }}
+    - run: dotnet test Meziantou.Polyfill.Tests
 
   deploy:
     runs-on: 'ubuntu-latest'
