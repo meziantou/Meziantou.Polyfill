@@ -2,10 +2,8 @@ name: publish
 on:
   push:
     branches:
-      - '*'
+      - 'main'
   pull_request:
-    branches:
-      - '*'
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -98,8 +96,6 @@ jobs:
     - uses: actions/checkout@v6
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
-      with:
-        global-json-file: global.json
     - run: dotnet run --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
 
@@ -108,7 +104,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tfm: [net10.0, net9.0, net8.0, net481, net48, net472, net462]
+        tfm: [net10.0, net481, net48, net472, net462]
         include:
           - tfm: net9.0
             additional-dotnet: '9.0.x'
