@@ -476,74 +476,97 @@ static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation curr
         }
     }
 
-    var compilations = new List<(string Name, int SortOrder, CSharpCompilation Compilation)>();
-
-    for (var i = 0; i < tfmDefinitions.Count; i++)
+    // Filter to TFMs with existing reference directories
+    var availableTfms = new List<(string Name, string RefPath)>();
+    foreach (var (name, refPath) in tfmDefinitions)
     {
-        var (name, refPath) = tfmDefinitions[i];
-        if (!Directory.Exists(refPath))
+        if (Directory.Exists(refPath))
+        {
+            availableTfms.Add((name, refPath));
+        }
+        else
         {
             Console.WriteLine($"Warning: Reference assemblies not found for {name} at {refPath}");
-            continue;
         }
-
-        var files = Directory.GetFiles(refPath, "*.dll").ToList();
-        var facadesPath = Path.Combine(refPath, "Facades");
-        if (Directory.Exists(facadesPath))
-        {
-            files.AddRange(Directory.GetFiles(facadesPath, "*.dll"));
-        }
-
-        var comp = CSharpCompilation.Create(
-            assemblyName: $"version-check-{name}",
-            references: files.Select(f => MetadataReference.CreateFromFile(f)),
-            options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, metadataImportOptions: MetadataImportOptions.All));
-
-        compilations.Add((name, i, comp));
-        Console.WriteLine($"Loaded {files.Count} assemblies for {name}");
     }
 
-    // Current runtime represents the latest .NET version
+    // Include current runtime if not already covered
     var currentVersionName = $"net{Environment.Version.Major}.0";
-    if (!compilations.Any(c => string.Equals(c.Name, currentVersionName, StringComparison.Ordinal)))
+    var includeCurrentRuntime = !availableTfms.Any(t => string.Equals(t.Name, currentVersionName, StringComparison.Ordinal));
+
+    var allVersionNames = availableTfms.Select(t => t.Name).ToList();
+    if (includeCurrentRuntime)
     {
-        compilations.Add((currentVersionName, tfmDefinitions.Count, currentCompilation));
-        Console.WriteLine($"Using current runtime as {currentVersionName}");
+        allVersionNames.Add(currentVersionName);
     }
 
-    var allVersionNames = compilations.Select(c => c.Name).ToArray();
-
-    // Check each polyfill against each compilation
-    Console.WriteLine($"Checking {polyfills.Length} polyfills against {compilations.Count} TFMs...");
-    foreach (var polyfill in polyfills)
+    // Build version order for sorting
+    var versionOrder = new Dictionary<string, int>(StringComparer.Ordinal);
+    for (var i = 0; i < allVersionNames.Count; i++)
     {
-        var supportedVersions = new List<string>();
-        foreach (var (name, _, comp) in compilations)
+        versionOrder[allVersionNames[i]] = i;
+    }
+
+    // Try to use cached version data to skip expensive assembly loading
+    var cacheFilePath = Path.Combine(rootPath, "Meziantou.Polyfill.Generator", "polyfill-supported-versions.json");
+    if (!TryLoadFromCache(cacheFilePath, polyfills, allVersionNames))
+    {
+        // Cache miss - load assemblies and check each polyfill
+        var compilations = new List<(string Name, int SortOrder, CSharpCompilation Compilation)>();
+        for (var i = 0; i < availableTfms.Count; i++)
         {
-            var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(polyfill.TypeName, comp);
-            if (symbols.Length > 0)
+            var (name, refPath) = availableTfms[i];
+            var files = Directory.GetFiles(refPath, "*.dll").ToList();
+            var facadesPath = Path.Combine(refPath, "Facades");
+            if (Directory.Exists(facadesPath))
             {
-                supportedVersions.Add(name);
+                files.AddRange(Directory.GetFiles(facadesPath, "*.dll"));
             }
+
+            var comp = CSharpCompilation.Create(
+                assemblyName: $"version-check-{name}",
+                references: files.Select(f => MetadataReference.CreateFromFile(f)),
+                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, metadataImportOptions: MetadataImportOptions.All));
+
+            compilations.Add((name, i, comp));
+            Console.WriteLine($"Loaded {files.Count} assemblies for {name}");
         }
 
-        polyfill.SupportedInVersions = [.. supportedVersions];
-    }
+        if (includeCurrentRuntime)
+        {
+            compilations.Add((currentVersionName, availableTfms.Count, currentCompilation));
+            Console.WriteLine($"Using current runtime as {currentVersionName}");
+        }
 
-    // Write cache file
-    var cacheEntries = new SortedDictionary<string, string[]>(StringComparer.Ordinal);
-    foreach (var polyfill in polyfills)
-    {
-        cacheEntries[polyfill.TypeName] = polyfill.SupportedInVersions;
-    }
+        Console.WriteLine($"Checking {polyfills.Length} polyfills against {compilations.Count} TFMs...");
+        foreach (var polyfill in polyfills)
+        {
+            var supportedVersions = new List<string>();
+            foreach (var (name, _, comp) in compilations)
+            {
+                var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(polyfill.TypeName, comp);
+                if (symbols.Length > 0)
+                {
+                    supportedVersions.Add(name);
+                }
+            }
 
-    var cacheFilePath = Path.Combine(rootPath, "Meziantou.Polyfill.Generator", "polyfill-supported-versions.json");
-    var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
-    File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { versions = allVersionNames, polyfills = cacheEntries }, jsonOptions));
-    Console.WriteLine($"Wrote version cache to {cacheFilePath}");
+            polyfill.SupportedInVersions = [.. supportedVersions];
+        }
+
+        // Write cache file
+        var cacheEntries = new SortedDictionary<string, string[]>(StringComparer.Ordinal);
+        foreach (var polyfill in polyfills)
+        {
+            cacheEntries[polyfill.TypeName] = polyfill.SupportedInVersions;
+        }
+
+        var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+        File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { versions = allVersionNames.ToArray(), polyfills = cacheEntries }, jsonOptions));
+        Console.WriteLine($"Wrote version cache to {cacheFilePath}");
+    }
 
     // Sort by earliest supported version (ascending), then by name, and reassign Index
-    var versionOrder = compilations.ToDictionary(c => c.Name, c => c.SortOrder, StringComparer.Ordinal);
     var sortedPolyfills = polyfills
         .OrderBy(p => GetEarliestVersionOrder(p.SupportedInVersions, versionOrder))
         .ThenBy(p => p.TypeName, StringComparer.Ordinal)
@@ -557,7 +580,7 @@ static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation curr
     // Print version distribution summary
     foreach (var group in sortedPolyfills.GroupBy(p => GetEarliestVersionOrder(p.SupportedInVersions, versionOrder)).OrderBy(g => g.Key))
     {
-        var versionName = group.Key == int.MaxValue ? "unknown" : compilations.First(c => c.SortOrder == group.Key).Name;
+        var versionName = group.Key == int.MaxValue ? "unknown" : allVersionNames[group.Key];
         Console.WriteLine($"  {versionName}: {group.Count()} polyfills (bits {group.Min(p => p.Index)}\u2013{group.Max(p => p.Index)})");
     }
 
@@ -576,6 +599,59 @@ static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation curr
             return path;
 
         return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget", "packages");
+    }
+
+    static bool TryLoadFromCache(string cacheFilePath, Polyfill[] polyfills, List<string> expectedVersionNames)
+    {
+        if (!File.Exists(cacheFilePath))
+            return false;
+
+        try
+        {
+            var json = File.ReadAllText(cacheFilePath);
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+
+            // Check versions match exactly
+            var cachedVersions = root.GetProperty("versions").EnumerateArray().Select(v => v.GetString()!).ToList();
+            if (!cachedVersions.SequenceEqual(expectedVersionNames, StringComparer.Ordinal))
+            {
+                Console.WriteLine("Cache miss: version list changed");
+                return false;
+            }
+
+            // Check all polyfills are present in cache and no extras
+            var cachedPolyfills = root.GetProperty("polyfills");
+            var polyfillTypeNames = new HashSet<string>(polyfills.Select(p => p.TypeName), StringComparer.Ordinal);
+            var cachedPolyfillNames = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var prop in cachedPolyfills.EnumerateObject())
+            {
+                cachedPolyfillNames.Add(prop.Name);
+            }
+
+            if (!polyfillTypeNames.SetEquals(cachedPolyfillNames))
+            {
+                Console.WriteLine("Cache miss: polyfill list changed");
+                return false;
+            }
+
+            // Populate SupportedInVersions from cache
+            foreach (var polyfill in polyfills)
+            {
+                polyfill.SupportedInVersions = cachedPolyfills.GetProperty(polyfill.TypeName)
+                    .EnumerateArray()
+                    .Select(v => v.GetString()!)
+                    .ToArray();
+            }
+
+            Console.WriteLine("Using cached version data (skipped assembly loading)");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Cache read failed: {ex.Message}");
+            return false;
+        }
     }
 }
 
