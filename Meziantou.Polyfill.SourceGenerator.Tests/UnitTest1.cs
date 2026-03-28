@@ -368,19 +368,33 @@ public class UnitTest1
             async Task<string[]> Download()
             {
                 var tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Meziantou.PolyfillTests", "ref", packageName + '@' + version);
-                using var mutex = new global::System.Threading.Mutex(initiallyOwned: false, "Meziantou.PolyfillTests-" + Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(tempFolder))));
-                var lockTaken = false;
-                try
+                var lockFilePath = tempFolder + ".lock";
+                Directory.CreateDirectory(Path.GetDirectoryName(lockFilePath)!);
+                FileStream? lockFileStream = null;
+                while (lockFileStream is null)
                 {
                     try
                     {
-                        lockTaken = mutex.WaitOne();
+                        var fileStream = new FileStream(lockFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite, bufferSize: 1, options: FileOptions.None);
+                        try
+                        {
+                            fileStream.Lock(0, 0);
+                            lockFileStream = fileStream;
+                        }
+                        catch (IOException)
+                        {
+                            fileStream.Dispose();
+                            await Task.Delay(25).ConfigureAwait(false);
+                        }
                     }
-                    catch (global::System.Threading.AbandonedMutexException)
+                    catch (IOException)
                     {
-                        lockTaken = true;
+                        await Task.Delay(25).ConfigureAwait(false);
                     }
+                }
 
+                try
+                {
                     if (!Directory.Exists(tempFolder) || !Directory.EnumerateFileSystemEntries(tempFolder).Any())
                     {
                         Directory.CreateDirectory(tempFolder);
@@ -402,10 +416,8 @@ public class UnitTest1
                 }
                 finally
                 {
-                    if (lockTaken)
-                    {
-                        mutex.ReleaseMutex();
-                    }
+                    lockFileStream.Unlock(0, 0);
+                    lockFileStream.Dispose();
                 }
 
                 var dlls = Directory.GetFiles(tempFolder, "*.dll", SearchOption.AllDirectories);
