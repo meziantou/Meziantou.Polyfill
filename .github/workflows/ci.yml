@@ -21,6 +21,10 @@ jobs:
     - uses: actions/checkout@v6
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v5
+    - uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
     - name: Copy README before generation
       run: Copy-Item README.md README.md.before
     - run: dotnet build Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
@@ -46,6 +50,10 @@ jobs:
     - uses: actions/checkout@v6
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v5
+    - uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
     - run: dotnet build Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet run --no-build --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet pack Meziantou.Polyfill --configuration Release
@@ -98,6 +106,10 @@ jobs:
     - uses: actions/checkout@v6
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
+    - uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
     - run: dotnet build Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet run --no-build --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
@@ -115,6 +127,10 @@ jobs:
         dotnet-version: |
             9.0.x
             8.0.x
+    - uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
     - run: dotnet build Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet run --no-build --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet test Meziantou.Polyfill.Tests
