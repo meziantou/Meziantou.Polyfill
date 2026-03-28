@@ -368,22 +368,43 @@ public class UnitTest1
             async Task<string[]> Download()
             {
                 var tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Meziantou.PolyfillTests", "ref", packageName + '@' + version);
-                if (!Directory.Exists(tempFolder) || !Directory.EnumerateFileSystemEntries(tempFolder).Any())
+                using var mutex = new global::System.Threading.Mutex(initiallyOwned: false, "Meziantou.PolyfillTests-" + Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(tempFolder))));
+                var lockTaken = false;
+                try
                 {
-                    Directory.CreateDirectory(tempFolder);
-                    using var httpClient = new HttpClient();
-                    using var stream = await httpClient.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
-                    using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
-
-                    foreach (var entry in zip.Entries)
+                    try
                     {
-                        var extractPath = Path.Combine(tempFolder, entry.FullName);
-                        Directory.CreateDirectory(Path.GetDirectoryName(extractPath)!);
+                        lockTaken = mutex.WaitOne();
+                    }
+                    catch (global::System.Threading.AbandonedMutexException)
+                    {
+                        lockTaken = true;
+                    }
+
+                    if (!Directory.Exists(tempFolder) || !Directory.EnumerateFileSystemEntries(tempFolder).Any())
+                    {
+                        Directory.CreateDirectory(tempFolder);
+                        using var httpClient = new HttpClient();
+                        using var stream = await httpClient.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
+                        using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
+
+                        foreach (var entry in zip.Entries)
+                        {
+                            var extractPath = Path.Combine(tempFolder, entry.FullName);
+                            Directory.CreateDirectory(Path.GetDirectoryName(extractPath)!);
 #if NET10_0_OR_GREATER
-                        await entry.ExtractToFileAsync(extractPath, overwrite: true);
+                            await entry.ExtractToFileAsync(extractPath, overwrite: true);
 #else
-                        entry.ExtractToFile(extractPath, overwrite: true);
+                            entry.ExtractToFile(extractPath, overwrite: true);
 #endif
+                        }
+                    }
+                }
+                finally
+                {
+                    if (lockTaken)
+                    {
+                        mutex.ReleaseMutex();
                     }
                 }
 
