@@ -1,6 +1,8 @@
 #pragma warning disable MA0011 // IFormatProvider is missing
 #pragma warning disable MA0047 // Declare types in namespaces
 #pragma warning disable MA0048 // File name must match type name
+using System.IO.Compression;
+using System.Net.Http;
 using System.Reflection;
 using System.Text.Json;
 using Meziantou.Polyfill.Generator;
@@ -107,7 +109,7 @@ if (duplicatePolyfills.Length > 0)
 }
 
 // Detect which TFMs support each polyfill, sort by earliest supported version, then reassign indices
-DetectAndAssignVersions(polyfills, compilation, GetRootPath());
+await DetectAndAssignVersionsAsync(polyfills, compilation, GetRootPath());
 
 polyfills = SortPolyfills(polyfills);
 
@@ -435,66 +437,37 @@ string ReadResourceAsString(string name)
     return sr.ReadToEnd();
 }
 
-static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation currentCompilation, string rootPath)
+static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompilation currentCompilation, string rootPath)
 {
     var nugetPackagesPath = GetNuGetPackagesPath();
     Console.WriteLine($"NuGet packages path: {nugetPackagesPath}");
 
-    // Define TFMs for netstandard and .NET Framework (stable, fixed versions)
-    var tfmDefinitions = new List<(string Name, string RefPath)>
+    // Define required reference assembly packages and their TFM mappings
+    var requiredPackages = new (string PackageId, string Version, string TfmName, string RelativeRefPath)[]
     {
-        ("netstandard2.0", Path.Combine(nugetPackagesPath, "netstandard.library", "2.0.3", "build", "netstandard2.0", "ref")),
-        ("netstandard2.1", Path.Combine(nugetPackagesPath, "netstandard.library.ref", "2.1.0", "ref", "netstandard2.1")),
-        ("net462", Path.Combine(nugetPackagesPath, "microsoft.netframework.referenceassemblies.net462", "1.0.3", "build", ".NETFramework", "v4.6.2")),
-        ("net472", Path.Combine(nugetPackagesPath, "microsoft.netframework.referenceassemblies.net472", "1.0.3", "build", ".NETFramework", "v4.7.2")),
-        ("net48", Path.Combine(nugetPackagesPath, "microsoft.netframework.referenceassemblies.net48", "1.0.3", "build", ".NETFramework", "v4.8")),
+        ("netstandard.library", "2.0.3", "netstandard2.0", Path.Combine("build", "netstandard2.0", "ref")),
+        ("netstandard.library.ref", "2.1.0", "netstandard2.1", Path.Combine("ref", "netstandard2.1")),
+        ("microsoft.netframework.referenceassemblies.net462", "1.0.3", "net462", Path.Combine("build", ".NETFramework", "v4.6.2")),
+        ("microsoft.netframework.referenceassemblies.net472", "1.0.3", "net472", Path.Combine("build", ".NETFramework", "v4.7.2")),
+        ("microsoft.netframework.referenceassemblies.net48", "1.0.3", "net48", Path.Combine("build", ".NETFramework", "v4.8")),
+        ("microsoft.netcore.app.ref", "6.0.0", "net6.0", Path.Combine("ref", "net6.0")),
+        ("microsoft.netcore.app.ref", "7.0.0", "net7.0", Path.Combine("ref", "net7.0")),
+        ("microsoft.netcore.app.ref", "8.0.0", "net8.0", Path.Combine("ref", "net8.0")),
+        ("microsoft.netcore.app.ref", "9.0.0", "net9.0", Path.Combine("ref", "net9.0")),
+        ("microsoft.netcore.app.ref", "10.0.0", "net10.0", Path.Combine("ref", "net10.0")),
     };
 
-    // Dynamically discover Microsoft.NETCore.App.Ref versions from NuGet cache
-    var netcoreAppRefPath = Path.Combine(nugetPackagesPath, "microsoft.netcore.app.ref");
-    if (Directory.Exists(netcoreAppRefPath))
-    {
-        var discoveredVersions = new SortedDictionary<int, (string TfmName, string RefPath)>();
-        foreach (var versionDir in Directory.GetDirectories(netcoreAppRefPath))
-        {
-            var versionName = Path.GetFileName(versionDir);
-            var majorPart = versionName.Split('.')[0];
-            if (int.TryParse(majorPart, out var major) && major >= 6 && !discoveredVersions.ContainsKey(major))
-            {
-                var tfmName = $"net{major}.0";
-                var refPath = Path.Combine(versionDir, "ref", tfmName);
-                if (Directory.Exists(refPath))
-                {
-                    discoveredVersions[major] = (tfmName, refPath);
-                }
-            }
-        }
-
-        foreach (var (_, (tfmName, refPath)) in discoveredVersions)
-        {
-            tfmDefinitions.Add((tfmName, refPath));
-        }
-    }
-
-    // Filter to TFMs with existing reference directories
-    var availableTfms = new List<(string Name, string RefPath)>();
-    foreach (var (name, refPath) in tfmDefinitions)
-    {
-        if (Directory.Exists(refPath))
-        {
-            availableTfms.Add((name, refPath));
-        }
-        else
-        {
-            Console.WriteLine($"Warning: Reference assemblies not found for {name} at {refPath}");
-        }
-    }
+    // Build TFM definitions from known package list
+    var tfmDefinitions = requiredPackages.Select(p => (
+        Name: p.TfmName,
+        RefPath: Path.Combine(nugetPackagesPath, p.PackageId, p.Version, p.RelativeRefPath)
+    )).ToList();
 
     // Include current runtime if not already covered
     var currentVersionName = $"net{Environment.Version.Major}.0";
-    var includeCurrentRuntime = !availableTfms.Any(t => string.Equals(t.Name, currentVersionName, StringComparison.Ordinal));
+    var includeCurrentRuntime = !tfmDefinitions.Any(t => string.Equals(t.Name, currentVersionName, StringComparison.Ordinal));
 
-    var allVersionNames = availableTfms.Select(t => t.Name).ToList();
+    var allVersionNames = tfmDefinitions.Select(t => t.Name).ToList();
     if (includeCurrentRuntime)
     {
         allVersionNames.Add(currentVersionName);
@@ -507,11 +480,28 @@ static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation curr
         versionOrder[allVersionNames[i]] = i;
     }
 
-    // Try to use cached version data to skip expensive assembly loading
+    // Try to use cached version data to skip expensive assembly loading and package downloading
     var cacheFilePath = Path.Combine(rootPath, "Meziantou.Polyfill.Generator", "polyfill-supported-versions.json");
     if (!TryLoadFromCache(cacheFilePath, polyfills, allVersionNames))
     {
-        // Cache miss - load assemblies and check each polyfill
+        // Cache miss - ensure required packages are downloaded
+        await EnsurePackagesDownloadedAsync(nugetPackagesPath, requiredPackages);
+
+        // Filter to TFMs with existing reference directories
+        var availableTfms = new List<(string Name, string RefPath)>();
+        foreach (var (name, refPath) in tfmDefinitions)
+        {
+            if (Directory.Exists(refPath))
+            {
+                availableTfms.Add((name, refPath));
+            }
+            else
+            {
+                Console.WriteLine($"Warning: Reference assemblies not found for {name} at {refPath}");
+            }
+        }
+
+        // Load assemblies and check each polyfill
         var compilations = new List<(string Name, int SortOrder, CSharpCompilation Compilation)>();
         for (var i = 0; i < availableTfms.Count; i++)
         {
@@ -651,6 +641,42 @@ static void DetectAndAssignVersions(Polyfill[] polyfills, CSharpCompilation curr
         {
             Console.WriteLine($"Cache read failed: {ex.Message}");
             return false;
+        }
+    }
+
+    static async Task EnsurePackagesDownloadedAsync(string nugetPackagesPath, (string PackageId, string Version, string TfmName, string RelativeRefPath)[] packages)
+    {
+        var packagesToDownload = packages
+            .Select(p => (p.PackageId, p.Version))
+            .Distinct()
+            .Where(p => !Directory.Exists(Path.Combine(nugetPackagesPath, p.PackageId, p.Version)))
+            .ToArray();
+
+        if (packagesToDownload.Length == 0)
+        {
+            Console.WriteLine("All reference assembly packages already in cache");
+            return;
+        }
+
+        Console.WriteLine($"Downloading {packagesToDownload.Length} missing reference assembly package(s)...");
+
+        using var httpClient = new HttpClient();
+        foreach (var (packageId, version) in packagesToDownload)
+        {
+            var url = $"https://api.nuget.org/v3-flatcontainer/{packageId}/{version}/{packageId}.{version}.nupkg";
+            Console.WriteLine($"  Downloading {packageId}@{version}...");
+
+            using var response = await httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            using var packageStream = await response.Content.ReadAsStreamAsync();
+            using var archive = new ZipArchive(packageStream, ZipArchiveMode.Read);
+
+            var packageDir = Path.Combine(nugetPackagesPath, packageId, version);
+            Directory.CreateDirectory(packageDir);
+            archive.ExtractToDirectory(packageDir);
+
+            Console.WriteLine($"  Installed {packageId}@{version}");
         }
     }
 }
