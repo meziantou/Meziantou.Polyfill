@@ -2,6 +2,7 @@
 #pragma warning disable MA0047 // Declare types in namespaces
 #pragma warning disable MA0048 // File name must match type name
 using System.IO.Compression;
+using System.Net.Http;
 using System.Reflection;
 using System.Text.Json;
 using Meziantou.Polyfill.Generator;
@@ -9,10 +10,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Meziantou.Framework;
 using System.Text.RegularExpressions;
-using NuGet.Common;
-using NuGet.Protocol;
-using NuGet.Protocol.Core.Types;
-using NuGet.Versioning;
 
 // Reference doesn't contains internal types which may be needed
 // So, use the runtime types to get all available types and methods
@@ -663,31 +660,20 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
 
         Console.WriteLine($"Downloading {packagesToDownload.Length} missing reference assembly package(s)...");
 
-        using var cacheContext = new SourceCacheContext();
-        var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");
-        var resource = await repository.GetResourceAsync<FindPackageByIdResource>();
-
+        using var httpClient = new HttpClient();
         foreach (var (packageId, version) in packagesToDownload)
         {
+            var url = $"https://api.nuget.org/v3-flatcontainer/{packageId}/{version}/{packageId}.{version}.nupkg";
             Console.WriteLine($"  Downloading {packageId}@{version}...");
 
-            using var packageStream = new MemoryStream();
-            var success = await resource.CopyNupkgToStreamAsync(
-                packageId,
-                new NuGetVersion(version),
-                packageStream,
-                cacheContext,
-                NullLogger.Instance,
-                CancellationToken.None);
+            using var response = await httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
 
-            if (!success)
-                throw new InvalidOperationException($"Failed to download NuGet package {packageId}@{version}");
+            using var packageStream = await response.Content.ReadAsStreamAsync();
+            using var archive = new ZipArchive(packageStream, ZipArchiveMode.Read);
 
             var packageDir = Path.Combine(nugetPackagesPath, packageId, version);
-            packageStream.Seek(0, SeekOrigin.Begin);
-
             Directory.CreateDirectory(packageDir);
-            using var archive = new ZipArchive(packageStream, ZipArchiveMode.Read);
             archive.ExtractToDirectory(packageDir);
 
             Console.WriteLine($"  Installed {packageId}@{version}");
