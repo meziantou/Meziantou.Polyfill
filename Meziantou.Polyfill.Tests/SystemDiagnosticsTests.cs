@@ -22,9 +22,11 @@ public class SystemDiagnosticsTests
     {
         var psi = new ProcessStartInfo
         {
-            FileName = Environment.OSVersion.Platform == PlatformID.Win32NT ? "ping.exe" : "ping",
-            Arguments = Environment.OSVersion.Platform == PlatformID.Win32NT ? "127.0.0.1 -n 5" : "127.0.0.1 -c 5",
+            FileName = "dotnet",
+            Arguments = "--version",
             CreateNoWindow = true,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
         };
 
         var process = Process.Start(psi);
