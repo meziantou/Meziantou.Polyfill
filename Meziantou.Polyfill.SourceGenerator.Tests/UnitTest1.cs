@@ -85,6 +85,29 @@ public class UnitTest1
 
     }
 
+    [Fact]
+    public async Task InternalsVisibleTo_TwoReferencedAssemblies_DoNotCauseAmbiguity()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+
+        // Generate two assemblies that both expose internals to "main"
+        var proj2Generation = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "proj2", assemblyLocations: assemblies);
+        Assert.Single(GetFileNames(proj2Generation.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+
+        var proj3Generation = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "proj3", assemblyLocations: assemblies);
+        Assert.Single(GetFileNames(proj3Generation.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+
+        var proj2Dll = Path.GetTempFileName() + ".dll";
+        var proj3Dll = Path.GetTempFileName() + ".dll";
+        await File.WriteAllBytesAsync(proj2Dll, proj2Generation.Assembly!);
+        await File.WriteAllBytesAsync(proj3Dll, proj3Generation.Assembly!);
+
+        // "main" references both assemblies. The generator must still produce types
+        // that would otherwise be ambiguous (CS0433) between proj2 and proj3.
+        var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(proj2Dll).Append(proj3Dll));
+        Assert.Single(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+    }
+
     [Theory]
     [MemberData(nameof(GetConfigurations))]
     public async Task GeneratedCodeCompile(PackageReference[] packages, bool allowUnsafe)

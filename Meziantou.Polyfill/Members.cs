@@ -13,6 +13,7 @@ internal partial struct Members
             return false;
 
         var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(memberDocumentationId, context.Compilation);
+        IAssemblySymbol? accessibleFromAssembly = null;
         foreach (var symbol in symbols)
         {
             if (ReferenceEquals(symbol.ContainingAssembly, context.Compilation.Assembly))
@@ -20,8 +21,23 @@ internal partial struct Members
 
             // IsEmbeddedSymbol is a workaround for https://github.com/dotnet/roslyn/issues/79498
             if (context.Compilation.IsSymbolAccessibleWithin(symbol, context.Compilation.Assembly) && !IsEmbeddedSymbol(symbol))
-                return false;
+            {
+                if (accessibleFromAssembly is null)
+                {
+                    accessibleFromAssembly = symbol.ContainingAssembly;
+                }
+                else if (!ReferenceEquals(accessibleFromAssembly, symbol.ContainingAssembly))
+                {
+                    // The symbol is accessible from multiple assemblies, which would cause
+                    // ambiguity (e.g. CS0433). Generate a local copy so the compiler prefers
+                    // the current assembly's definition.
+                    return true;
+                }
+            }
         }
+
+        if (accessibleFromAssembly is not null)
+            return false;
 
         return true;
     }
