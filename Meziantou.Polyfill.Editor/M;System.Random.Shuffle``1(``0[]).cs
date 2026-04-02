@@ -5,8 +5,15 @@ partial class PolyfillExtensions
 {
     public static void Shuffle<T>(this Random random, T[] values)
     {
-        ArgumentNullException.ThrowIfNull(random);
-        ArgumentNullException.ThrowIfNull(values);
+        if (random is null)
+        {
+            throw new ArgumentNullException(nameof(random));
+        }
+
+        if (values is null)
+        {
+            throw new ArgumentNullException(nameof(values));
+        }
 
         Shuffle(random, values.AsSpan());
     }

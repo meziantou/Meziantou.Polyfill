@@ -4,7 +4,10 @@ partial class PolyfillExtensions
     {
         public static byte[] GetBytes(int count)
         {
-            System.ArgumentOutOfRangeException.ThrowIfNegative(count);
+            if (count < 0)
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(count), count, "must not be negative.");
+            }
 
             byte[] ret = new byte[count];
             using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())

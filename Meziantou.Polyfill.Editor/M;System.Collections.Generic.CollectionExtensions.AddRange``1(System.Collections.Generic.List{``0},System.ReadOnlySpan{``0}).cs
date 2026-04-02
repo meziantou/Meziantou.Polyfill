@@ -10,7 +10,10 @@ static partial class PolyfillExtensions
     /// <exception cref="ArgumentNullException">The <paramref name="list"/> is null.</exception>
     public static void AddRange<T>(this List<T> list, ReadOnlySpan<T> source)
     {
-        ArgumentNullException.ThrowIfNull(list);
+        if (list is null)
+        {
+            throw new ArgumentNullException(nameof(list));
+        }
 
         if (!source.IsEmpty)
         {
