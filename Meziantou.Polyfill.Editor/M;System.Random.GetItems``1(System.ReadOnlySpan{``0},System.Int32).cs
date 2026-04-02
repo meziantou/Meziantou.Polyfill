@@ -4,8 +4,15 @@ partial class PolyfillExtensions
 {
     public static T[] GetItems<T>(this Random random, ReadOnlySpan<T> choices, int length)
     {
-        ArgumentNullException.ThrowIfNull(random);
-        ArgumentOutOfRangeException.ThrowIfNegative(length);
+        if (random is null)
+        {
+            throw new ArgumentNullException(nameof(random));
+        }
+
+        if (length < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(length), length, "must not be negative.");
+        }
 
         if (choices.IsEmpty)
         {

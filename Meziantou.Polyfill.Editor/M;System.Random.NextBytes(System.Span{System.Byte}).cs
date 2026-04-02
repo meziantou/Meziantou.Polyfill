@@ -4,7 +4,10 @@ partial class PolyfillExtensions
 {
     public static void NextBytes(this Random random, Span<byte> buffer)
     {
-        ArgumentNullException.ThrowIfNull(random);
+        if (random is null)
+        {
+            throw new ArgumentNullException(nameof(random));
+        }
 
         byte[] array = new byte[buffer.Length];
         random.NextBytes(array);
