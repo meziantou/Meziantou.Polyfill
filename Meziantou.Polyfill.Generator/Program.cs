@@ -241,7 +241,7 @@ async Task GenerateMembers()
     string GenerateIncludePostCondition(PolyfillData data)
     {
         var result = "";
-        if (data.SupportInternalsVisibleTo && data.DeclaredMemberDocumentationIds.Length > 0)
+        if (data.XmlDocumentationId?.StartsWith("T:", StringComparison.Ordinal) == true && data.DeclaredMemberDocumentationIds.Length > 0)
         {
             result += " && (";
             result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
