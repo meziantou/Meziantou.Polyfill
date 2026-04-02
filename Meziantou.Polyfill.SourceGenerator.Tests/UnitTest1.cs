@@ -70,18 +70,20 @@ public class UnitTest1
     }
 
     [Fact]
-    public async Task InternalsVisibleTo_DoNotRegenerateExtensionMethods()
+    public async Task InternalsVisibleTo_EmbeddedTypesAreRegenerated()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
         Assert.Single(GetFileNames(tempGeneration.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
         Assert.Single(GetFileNames(tempGeneration.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
+        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(tempGeneration.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
 
         var temp = Path.GetTempFileName() + ".dll";
         await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
-        Assert.DoesNotContain(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+        Assert.Single(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
+        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(result.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
 
     }
 
@@ -106,6 +108,7 @@ public class UnitTest1
         // that would otherwise be ambiguous (CS0433) between proj2 and proj3.
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(proj2Dll).Append(proj3Dll));
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
+        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(result.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
     }
 
     [Theory]
@@ -216,6 +219,12 @@ public class UnitTest1
         }
 
         return fileNames.Order(StringComparer.Ordinal);
+    }
+
+    private static string GetGeneratedFileContent(GeneratorDriverRunResult generatorResult, string fileName)
+    {
+        var tree = Assert.Single(generatorResult.GeneratedTrees.Where(tree => Path.GetFileName(tree.FilePath) == fileName));
+        return tree.GetText().ToString();
     }
 
     private static string FormatDiagnosticsWithSource(IEnumerable<Diagnostic> diagnostics)

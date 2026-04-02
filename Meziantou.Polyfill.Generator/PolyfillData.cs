@@ -141,7 +141,7 @@ internal sealed partial class PolyfillData
         var useUnsafe = root.DescendantNodes().OfType<UnsafeStatementSyntax>().Any() || root.DescendantNodes().OfType<MethodDeclarationSyntax>().Any(m => m.Modifiers.Any(m => m.IsKind(SyntaxKind.UnsafeKeyword)));
 
         var supportInternalsVisibleTo = documentationDeclarationId.StartsWith("T:", StringComparison.Ordinal);
-        var finalContent = supportInternalsVisibleTo ? root : new AddEmbeddedAttributeRewriter().Visit(root);
+        var finalContent = new AddEmbeddedAttributeRewriter().Visit(root) ?? root;
 
         var data = new PolyfillData(finalContent.ToFullString());
         data.ConditionalMembers = GetConditions(content);
@@ -225,6 +225,14 @@ internal sealed partial class PolyfillData
         }
 
         public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+
+        public override SyntaxNode? VisitDelegateDeclaration(DelegateDeclarationSyntax node)
         {
             return node.WithAttributeLists(node.AttributeLists.Add(
                 SyntaxFactory.AttributeList(
