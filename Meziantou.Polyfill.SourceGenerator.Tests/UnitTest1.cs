@@ -165,6 +165,38 @@ public class UnitTest1
         Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
     }
 
+    [Theory]
+    [MemberData(nameof(GetPolyfillGenerationLanguageVersions))]
+    public async Task GeneratePolyfills_ForLanguageVersions(LanguageVersion languageVersion, bool supportsExtensionMembers)
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var includedPolyfills = "T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute;M:System.ArgumentException.ThrowIfNullOrEmpty(System.String,System.String)";
+
+        var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: includedPolyfills, languageVersion: languageVersion);
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+
+        Assert.Contains(generatedFileNames, file => file.Contains("UnscopedRefAttribute", StringComparison.Ordinal));
+        if (supportsExtensionMembers)
+        {
+            Assert.Contains(generatedFileNames, file => file.Contains("ThrowIfNullOrEmpty", StringComparison.Ordinal));
+        }
+        else
+        {
+            Assert.DoesNotContain(generatedFileNames, file => file.Contains("ThrowIfNullOrEmpty", StringComparison.Ordinal));
+        }
+    }
+
+    public static TheoryData<LanguageVersion, bool> GetPolyfillGenerationLanguageVersions()
+    {
+        return new TheoryData<LanguageVersion, bool>
+        {
+            { LanguageVersion.CSharp13, false },
+            { LanguageVersion.CSharp14, true },
+            { LanguageVersion.Latest, true },
+            { LanguageVersion.Preview, true },
+        };
+    }
+
     public static TheoryData<PackageReference[], bool> GetConfigurations()
     {
         var packagesCombination = new List<PackageReference[]>
