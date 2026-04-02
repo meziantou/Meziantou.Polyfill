@@ -42,7 +42,6 @@ internal sealed partial class PolyfillData
 
     public bool UseUnsafe { get; private set; }
     public bool UseExtensions { get; private set; }
-    public bool SupportInternalsVisibleTo { get; private set; }
 
     public override string ToString()
     {
@@ -140,8 +139,7 @@ internal sealed partial class PolyfillData
         var useExtensions = root.DescendantNodes().OfType<ExtensionBlockDeclarationSyntax>().Any();
         var useUnsafe = root.DescendantNodes().OfType<UnsafeStatementSyntax>().Any() || root.DescendantNodes().OfType<MethodDeclarationSyntax>().Any(m => m.Modifiers.Any(m => m.IsKind(SyntaxKind.UnsafeKeyword)));
 
-        var supportInternalsVisibleTo = documentationDeclarationId.StartsWith("T:", StringComparison.Ordinal);
-        var finalContent = supportInternalsVisibleTo ? root : new AddEmbeddedAttributeRewriter().Visit(root);
+        var finalContent = new AddEmbeddedAttributeRewriter().Visit(root) ?? root;
 
         var data = new PolyfillData(finalContent.ToFullString());
         data.ConditionalMembers = GetConditions(content);
@@ -150,7 +148,6 @@ internal sealed partial class PolyfillData
         data.PolyfillExtensionsClassNames = [.. polyfillExtensionsClassNames.OrderBy(x => x, StringComparer.Ordinal)];
         data.UseExtensions = useExtensions;
         data.UseUnsafe = useUnsafe;
-        data.SupportInternalsVisibleTo = supportInternalsVisibleTo;
 
         foreach (var requiredType in requiredTypes)
         {
@@ -225,6 +222,14 @@ internal sealed partial class PolyfillData
         }
 
         public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
+        {
+            return node.WithAttributeLists(node.AttributeLists.Add(
+                SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+        }
+
+        public override SyntaxNode? VisitDelegateDeclaration(DelegateDeclarationSyntax node)
         {
             return node.WithAttributeLists(node.AttributeLists.Add(
                 SyntaxFactory.AttributeList(
