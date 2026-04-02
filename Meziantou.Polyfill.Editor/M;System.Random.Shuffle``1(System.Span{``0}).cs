@@ -4,7 +4,10 @@ partial class PolyfillExtensions
 {
     public static void Shuffle<T>(this Random random, Span<T> values)
     {
-        ArgumentNullException.ThrowIfNull(random);
+        if (random is null)
+        {
+            throw new ArgumentNullException(nameof(random));
+        }
 
         int n = values.Length;
         for (int i = 0; i < n - 1; i++)

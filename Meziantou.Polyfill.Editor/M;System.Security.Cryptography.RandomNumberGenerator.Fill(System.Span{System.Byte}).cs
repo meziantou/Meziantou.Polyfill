@@ -2,7 +2,10 @@ partial class PolyfillExtensions
 {
     public static void Fill(this System.Security.Cryptography.RandomNumberGenerator random, System.Span<byte> data)
     {
-        System.ArgumentNullException.ThrowIfNull(random);
+        if (random is null)
+        {
+            throw new System.ArgumentNullException(nameof(random));
+        }
 
         if (data.IsEmpty)
             return;

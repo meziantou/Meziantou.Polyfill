@@ -4,7 +4,10 @@ partial class PolyfillExtensions
 {
     public static void GetItems<T>(this Random random, ReadOnlySpan<T> choices, Span<T> destination)
     {
-        ArgumentNullException.ThrowIfNull(random);
+        if (random is null)
+        {
+            throw new ArgumentNullException(nameof(random));
+        }
 
         if (choices.IsEmpty)
         {

@@ -10,7 +10,10 @@ partial class PolyfillExtensions
             if (choices.IsEmpty)
                 throw new System.ArgumentException("choices cannot be empty.", nameof(choices));
 
-            System.ArgumentOutOfRangeException.ThrowIfNegative(length);
+            if (length < 0)
+            {
+                throw new System.ArgumentOutOfRangeException(nameof(length), length, "must not be negative.");
+            }
 
             T[] result = new T[length];
             GetItems(choices, new Span<T>(result));
