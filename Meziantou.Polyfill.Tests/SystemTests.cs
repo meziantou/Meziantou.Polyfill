@@ -1358,6 +1358,19 @@ public class SystemTests
     }
 
     [Fact]
+    public void Double_TryParse_ReadOnlySpan_Char_NumberStyles_IFormatProvider()
+    {
+        Assert.True(double.TryParse("123.456".AsSpan(), NumberStyles.Float, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(123.456d, result, 3);
+
+        Assert.False(double.TryParse("ABC".AsSpan(), NumberStyles.Float, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0d, result);
+
+        Assert.True(double.TryParse("42.5".AsSpan(), NumberStyles.Float, null, out result));
+        Assert.Equal(42.5d, result, 1);
+    }
+
+    [Fact]
     public void Double_TryParse_ReadOnlySpan_Byte_IFormatProvider()
     {
         // Basic parsing from UTF8
@@ -1818,6 +1831,22 @@ public class SystemTests
         ReadOnlySpan<byte> utf8Data = "7FFFFFFFFFFFFFFF"u8;
         var result = long.Parse(utf8Data, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
         Assert.Equal(9223372036854775807L, result);
+    }
+
+    [Fact]
+    public void Int64_TryParse_ReadOnlySpan_Char_NumberStyles_IFormatProvider()
+    {
+        Assert.True(long.TryParse("7FFFFFFFFFFFFFFF".AsSpan(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result));
+        Assert.Equal(9223372036854775807L, result);
+
+        Assert.True(long.TryParse("-42".AsSpan(), NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(-42L, result);
+
+        Assert.False(long.TryParse("ABC".AsSpan(), NumberStyles.Integer, CultureInfo.InvariantCulture, out result));
+        Assert.Equal(0L, result);
+
+        Assert.True(long.TryParse("17".AsSpan(), NumberStyles.Integer, null, out result));
+        Assert.Equal(17L, result);
     }
 
     [Fact]
