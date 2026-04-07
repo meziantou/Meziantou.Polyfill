@@ -185,56 +185,53 @@ internal sealed partial class PolyfillData
 
     internal sealed class AddEmbeddedAttributeRewriter : CSharpSyntaxRewriter
     {
+        private static SyntaxList<AttributeListSyntax> AddGeneratedAttributes(SyntaxList<AttributeListSyntax> existingAttributeLists)
+        {
+            return existingAttributeLists
+                .Add(SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute"))))
+                    .WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n")))
+                .Add(SyntaxFactory.AttributeList(
+                    SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(
+                            SyntaxFactory.ParseName("System.CodeDom.Compiler.GeneratedCodeAttribute"),
+                            SyntaxFactory.ParseAttributeArgumentList("(\"Meziantou.Polyfill\", \"\")"))))
+                    .WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n")));
+        }
+
         public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
         {
             // Skip classes that start with "PolyfillExtensions" - they will be handled separately
             if (node.Identifier.ValueText.StartsWith("PolyfillExtensions", StringComparison.Ordinal))
                 return node;
 
-            return node.WithAttributeLists(node.AttributeLists.Add(
-                SyntaxFactory.AttributeList(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+            return node.WithAttributeLists(AddGeneratedAttributes(node.AttributeLists));
         }
+
         public override SyntaxNode? VisitRecordDeclaration(RecordDeclarationSyntax node)
         {
-            return node.WithAttributeLists(node.AttributeLists.Add(
-                SyntaxFactory.AttributeList(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
-
+            return node.WithAttributeLists(AddGeneratedAttributes(node.AttributeLists));
         }
 
         public override SyntaxNode? VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
         {
-            return node.WithAttributeLists(node.AttributeLists.Add(
-                       SyntaxFactory.AttributeList(
-                           SyntaxFactory.SingletonSeparatedList(
-                               SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+            return node.WithAttributeLists(AddGeneratedAttributes(node.AttributeLists));
         }
 
         public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
         {
-            return node.WithAttributeLists(node.AttributeLists.Add(
-                SyntaxFactory.AttributeList(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+            return node.WithAttributeLists(AddGeneratedAttributes(node.AttributeLists));
         }
 
         public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
         {
-            return node.WithAttributeLists(node.AttributeLists.Add(
-                SyntaxFactory.AttributeList(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+            return node.WithAttributeLists(AddGeneratedAttributes(node.AttributeLists));
         }
 
         public override SyntaxNode? VisitDelegateDeclaration(DelegateDeclarationSyntax node)
         {
-            return node.WithAttributeLists(node.AttributeLists.Add(
-                SyntaxFactory.AttributeList(
-                    SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute")))).WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n"))));
+            return node.WithAttributeLists(AddGeneratedAttributes(node.AttributeLists));
         }
     }
 }

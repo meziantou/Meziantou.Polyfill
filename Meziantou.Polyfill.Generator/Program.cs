@@ -325,6 +325,7 @@ async Task GenerateMembers()
     foreach (var className in allPolyfillExtensionsClassNames)
     {
         sb.AppendLine($"    sb.AppendLine(\"[Microsoft.CodeAnalysis.EmbeddedAttribute]\");");
+        sb.AppendLine($"    sb.AppendLine(\"[System.CodeDom.Compiler.GeneratedCodeAttribute(\\\"Meziantou.Polyfill\\\", \\\"\\\")]\");");
         sb.AppendLine($"    sb.AppendLine(\"internal static partial class {className}\");");
         sb.AppendLine($"    sb.AppendLine(\"{{\");");
         sb.AppendLine($"    sb.AppendLine(\"}}\");");
