@@ -56,6 +56,24 @@ public class SystemNetHttpTests
     }
 
     [Fact]
+    public async Task HttpContent_LoadIntoBufferAsync()
+    {
+        var content = new ByteArrayContent([1, 2, 3]);
+        await content.LoadIntoBufferAsync(CancellationToken.None);
+        var result = await content.ReadAsByteArrayAsync(CancellationToken.None);
+        Assert.Equal([1, 2, 3], result);
+    }
+
+    [Fact]
+    public async Task HttpContent_LoadIntoBufferAsync_WithMaxBufferSize()
+    {
+        var content = new ByteArrayContent([1, 2, 3]);
+        await content.LoadIntoBufferAsync(maxBufferSize: 3, CancellationToken.None);
+        var result = await content.ReadAsByteArrayAsync(CancellationToken.None);
+        Assert.Equal([1, 2, 3], result);
+    }
+
+    [Fact]
     public void HttpMethod_Query()
     {
         var queryMethod = HttpMethod.Query;

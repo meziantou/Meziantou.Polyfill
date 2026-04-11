@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (526)
+### Methods (528)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -493,6 +493,8 @@ The filtering logic works as follows:
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.CopyToAsync(System.IO.Stream stream, System.Threading.CancellationToken cancellationToken)`
+- `System.Net.Http.HttpContent.LoadIntoBufferAsync(System.Int64 maxBufferSize, System.Threading.CancellationToken cancellationToken)`
+- `System.Net.Http.HttpContent.LoadIntoBufferAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsByteArrayAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStream()`
 - `System.Net.Http.HttpContent.ReadAsStream(System.Threading.CancellationToken cancellationToken)`
