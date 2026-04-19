@@ -25,4 +25,19 @@ public class SystemMemoryExtensionsTests
         Assert.Equal(2, ((Span<int>)[0, 1]).CommonPrefixLength([0, 1, 2]));
     }
 
+    [Fact]
+    public void StartsWith_Value()
+    {
+        Assert.False(((ReadOnlySpan<int>)[]).StartsWith(0));
+        Assert.True(((ReadOnlySpan<int>)[0, 1]).StartsWith(0));
+        Assert.False(((ReadOnlySpan<int>)[0, 1]).StartsWith(1));
+    }
+
+    [Fact]
+    public void StartsWith_Value_WithComparer()
+    {
+        Assert.False(((ReadOnlySpan<string>)[]).StartsWith("a", StringComparer.OrdinalIgnoreCase));
+        Assert.True(((ReadOnlySpan<string>)["a", "b"]).StartsWith("A", StringComparer.OrdinalIgnoreCase));
+        Assert.False(((ReadOnlySpan<string>)["a", "b"]).StartsWith("A", StringComparer.Ordinal));
+    }
 }
