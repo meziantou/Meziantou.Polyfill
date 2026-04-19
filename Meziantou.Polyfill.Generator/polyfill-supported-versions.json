@@ -1866,6 +1866,13 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.MemoryExtensions.StartsWith\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600)": [
+      "net9.0",
+      "net10.0"
+    ],
+    "M:System.MemoryExtensions.StartsWith\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+      "net10.0"
+    ],
     "M:System.Net.Http.HttpContent.CopyTo(System.IO.Stream,System.Net.TransportContext,System.Threading.CancellationToken)": [
       "net6.0",
       "net7.0",
