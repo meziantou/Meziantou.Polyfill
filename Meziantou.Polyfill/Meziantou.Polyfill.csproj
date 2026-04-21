@@ -13,7 +13,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <Description>Source Generator to help multi-targeting projects.</Description>
+    <Description>Meziantou.Polyfill generates source-only polyfills for C# features, so runtime-agnostic language capabilities work on older target frameworks.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>SourceGenerator,Roslyn,Polyfill</PackageTags>
