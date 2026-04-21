@@ -1834,6 +1834,10 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.MemoryExtensions.IndexOfAny(System.ReadOnlySpan{System.Char},System.Buffers.SearchValues{System.String})": [
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
       "net7.0",
       "net8.0",

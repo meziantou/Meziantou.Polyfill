@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (534)
+### Methods (535)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -482,6 +482,7 @@ The filtering logic works as follows:
 - `System.MemoryExtensions.ContainsAny<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.Contains<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.Contains<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
+- `System.MemoryExtensions.IndexOfAny(this System.ReadOnlySpan<System.Char> span, System.Buffers.SearchValues<System.String> values)`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, T value0, T value1) where T : System.IEquatable<T>?`
