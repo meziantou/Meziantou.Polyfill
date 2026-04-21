@@ -89,6 +89,22 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.Array.Fill\u0060\u00601(\u0060\u00600[],\u0060\u00600)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "M:System.Array.Fill\u0060\u00601(\u0060\u00600[],\u0060\u00600,System.Int32,System.Int32)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.BitConverter.ToInt16(System.ReadOnlySpan{System.Byte})": [
       "netstandard2.1",
       "net6.0",
