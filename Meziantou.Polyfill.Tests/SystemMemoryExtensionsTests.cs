@@ -51,6 +51,14 @@ public class SystemMemoryExtensionsTests
     }
 
     [Fact]
+    public void IndexOfAnyExcept_SearchValues_Char()
+    {
+        var values = System.Buffers.SearchValues.Create("he");
+        Assert.Equal(4, "heeelloworld".AsSpan().IndexOfAnyExcept(values));
+        Assert.Equal(-1, "eheeh".AsSpan().IndexOfAnyExcept(values));
+    }
+
+    [Fact]
     public void IndexOfAny_SearchValues_String_Ordinal()
     {
         var values = System.Buffers.SearchValues.Create(["hello", "world"], StringComparison.Ordinal);
