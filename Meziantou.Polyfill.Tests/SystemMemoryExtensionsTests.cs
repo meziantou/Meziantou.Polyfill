@@ -43,6 +43,14 @@ public class SystemMemoryExtensionsTests
 
 #if NET9_0_OR_GREATER
     [Fact]
+    public void IndexOfAny_SearchValues_Char()
+    {
+        var values = System.Buffers.SearchValues.Create("ow");
+        Assert.Equal(4, "helloworld".AsSpan().IndexOfAny(values));
+        Assert.Equal(-1, "abcdef".AsSpan().IndexOfAny(values));
+    }
+
+    [Fact]
     public void IndexOfAny_SearchValues_String_Ordinal()
     {
         var values = System.Buffers.SearchValues.Create(["hello", "world"], StringComparison.Ordinal);
