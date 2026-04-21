@@ -81,6 +81,8 @@ public class SystemTests
     {
         Assert.Equal("test".GetHashCode(), "test".GetHashCode(StringComparison.Ordinal));
         Assert.Equal(StringComparer.OrdinalIgnoreCase.GetHashCode("Test"), "test".GetHashCode(StringComparison.OrdinalIgnoreCase));
+        Assert.Equal("test".GetHashCode(), string.GetHashCode("test".AsSpan()));
+        Assert.Equal(StringComparer.OrdinalIgnoreCase.GetHashCode("Test"), string.GetHashCode("test".AsSpan(), StringComparison.OrdinalIgnoreCase));
 
     }
 
