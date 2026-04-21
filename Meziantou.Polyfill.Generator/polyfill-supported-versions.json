@@ -2349,6 +2349,20 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.String.GetHashCode(System.ReadOnlySpan{System.Char})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "M:System.String.GetHashCode(System.ReadOnlySpan{System.Char},System.StringComparison)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.String.GetHashCode(System.StringComparison)": [
       "netstandard2.1",
       "net6.0",
