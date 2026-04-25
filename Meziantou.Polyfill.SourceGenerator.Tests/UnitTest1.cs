@@ -199,6 +199,101 @@ public class UnitTest1
         };
     }
 
+    [Fact]
+    public async Task PolyfillExtensions_NotGenerated_WhenNoPolyfillsRequired()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
+        var result = GenerateFiles("", assemblyLocations: assemblies);
+
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
+    }
+
+    [Fact]
+    public async Task PolyfillExtensions_NotGenerated_WhenIncludeFilterMatchesNoPolyfill()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "T:Some.Type.That.Does.Not.Exist");
+
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
+    }
+
+    [Fact]
+    public async Task PolyfillExtensions_OnlyContainsHostsForEnabledPolyfills()
+    {
+        // OrderDescending is hosted by the bare PolyfillExtensions class. With this filter,
+        // none of the per-type extension hosts (PolyfillExtensions_Byte, _MD5, ...) should appear.
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})");
+
+        var lines = GetGeneratedFileLines(result.GeneratorResult, "PolyfillExtensions.g.cs");
+
+        Assert.Contains("internal static partial class PolyfillExtensions", lines);
+
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Byte", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Decimal", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Double", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int16", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int32", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int64", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_IntPtr", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_MD5", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_SByte", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_SHA256", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Single", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Task", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt16", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt32", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt64", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UIntPtr", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_XDocument", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_XElement", lines);
+    }
+
+    [Fact]
+    public async Task PolyfillExtensions_EmitsTypeSpecificHost_WithoutBareHost()
+    {
+        // MD5.HashData is hosted by PolyfillExtensions_MD5; no other polyfill is enabled,
+        // so the bare PolyfillExtensions class declaration must be skipped.
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan{System.Byte})");
+
+        var lines = GetGeneratedFileLines(result.GeneratorResult, "PolyfillExtensions.g.cs");
+
+        Assert.Contains("internal static partial class PolyfillExtensions_MD5", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions", lines);
+    }
+
+    [Fact]
+    public async Task PolyfillExtensions_NotGenerated_WhenLanguageDoesNotSupportExtensions()
+    {
+        // Every PolyfillExtensions* host carries `extension(...)` blocks that need C# 14+.
+        // On older language versions, no host class is emitted, so the file must be skipped.
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "F:System.DateTimeOffset.UnixEpoch",
+            languageVersion: LanguageVersion.CSharp13);
+
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
+    }
+
+    private static string[] GetGeneratedFileLines(GeneratorDriverRunResult generatorResult, string fileName)
+    {
+        return GetGeneratedFileContent(generatorResult, fileName)
+            .Replace("\r\n", "\n", StringComparison.Ordinal)
+            .Split('\n');
+    }
+
     public static TheoryData<PackageReference[], bool> GetConfigurations()
     {
         var packagesCombination = new List<PackageReference[]>
