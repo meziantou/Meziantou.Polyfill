@@ -121,6 +121,22 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.BitConverter.ToUInt16(System.ReadOnlySpan{System.Byte})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
+    "M:System.BitConverter.ToUInt32(System.ReadOnlySpan{System.Byte})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.Byte.Parse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider)": [
       "net8.0",
       "net9.0",

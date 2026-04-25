@@ -1246,6 +1246,54 @@ public class SystemTests
     }
 
     [Fact]
+    public void BitConverter_ToUInt16_ReadOnlySpan()
+    {
+        // Test with little-endian bytes representing 42
+        ReadOnlySpan<byte> data1 = [0x2A, 0x00];
+        var result1 = BitConverter.ToUInt16(data1);
+        Assert.Equal(42u, result1);
+
+        // Test with little-endian bytes representing 256
+        ReadOnlySpan<byte> data3 = [0x00, 0x01];
+        var result3 = BitConverter.ToUInt16(data3);
+        Assert.Equal(256u, result3);
+
+        // Test with little-endian bytes representing ushort.MaxValue (65535)
+        ReadOnlySpan<byte> data4 = [0xFF, 0xFF];
+        var result4 = BitConverter.ToUInt16(data4);
+        Assert.Equal(ushort.MaxValue, result4);
+
+        // Test with little-endian bytes representing ushort.MinValue (0)
+        ReadOnlySpan<byte> data5 = [0x00, 0x00];
+        var result5 = BitConverter.ToUInt16(data5);
+        Assert.Equal(ushort.MinValue, result5);
+    }
+
+    [Fact]
+    public void BitConverter_ToUInt32_ReadOnlySpan()
+    {
+        // Test with little-endian bytes representing 42
+        ReadOnlySpan<byte> data1 = [0x2A, 0x00, 0x00, 0x00];
+        var result1 = BitConverter.ToUInt32(data1);
+        Assert.Equal(42u, result1);
+
+        // Test with little-endian bytes representing 256
+        ReadOnlySpan<byte> data3 = [0x00, 0x01, 0x00, 0x00];
+        var result3 = BitConverter.ToUInt32(data3);
+        Assert.Equal(256u, result3);
+
+        // Test with little-endian bytes representing uint.MaxValue (4294967295)
+        ReadOnlySpan<byte> data4 = [0xFF, 0xFF, 0xFF, 0xFF];
+        var result4 = BitConverter.ToUInt32(data4);
+        Assert.Equal(uint.MaxValue, result4);
+
+        // Test with little-endian bytes representing uint.MinValue (0)
+        ReadOnlySpan<byte> data5 = [0x00, 0x00, 0x00, 0x00];
+        var result5 = BitConverter.ToUInt32(data5);
+        Assert.Equal(uint.MinValue, result5);
+    }
+
+    [Fact]
     public void String_Create()
     {
         var actual = string.Create(CultureInfo.InvariantCulture, $"a{1}b");
