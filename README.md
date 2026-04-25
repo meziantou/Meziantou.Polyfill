@@ -168,6 +168,7 @@ The filtering logic works as follows:
 - `System.Collections.Generic.Dictionary<TKey, TValue>.Remove(TKey key, out TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
+- `System.Collections.Generic.List<T>.Slice(System.Int32 start, System.Int32 length)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
 - `System.Collections.Generic.SortedList<TKey, TValue>.GetKeyAtIndex(System.Int32 index)`
 - `System.Collections.Generic.SortedList<TKey, TValue>.GetValueAtIndex(System.Int32 index)`
