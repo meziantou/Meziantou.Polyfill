@@ -1255,18 +1255,18 @@ public class SystemTests
 
         // Test with little-endian bytes representing 256
         ReadOnlySpan<byte> data3 = [0x00, 0x01];
-        var result3 = BitConverter.ToUInt16(data3);
-        Assert.Equal(256u, result3);
+        var result2 = BitConverter.ToUInt16(data3);
+        Assert.Equal(256u, result2);
 
         // Test with little-endian bytes representing ushort.MaxValue (65535)
         ReadOnlySpan<byte> data4 = [0xFF, 0xFF];
-        var result4 = BitConverter.ToUInt16(data4);
-        Assert.Equal(ushort.MaxValue, result4);
+        var result3 = BitConverter.ToUInt16(data4);
+        Assert.Equal(ushort.MaxValue, result3);
 
         // Test with little-endian bytes representing ushort.MinValue (0)
         ReadOnlySpan<byte> data5 = [0x00, 0x00];
-        var result5 = BitConverter.ToUInt16(data5);
-        Assert.Equal(ushort.MinValue, result5);
+        var result4 = BitConverter.ToUInt16(data5);
+        Assert.Equal(ushort.MinValue, result4);
     }
 
     [Fact]
@@ -1279,18 +1279,18 @@ public class SystemTests
 
         // Test with little-endian bytes representing 256
         ReadOnlySpan<byte> data3 = [0x00, 0x01, 0x00, 0x00];
-        var result3 = BitConverter.ToUInt32(data3);
-        Assert.Equal(256u, result3);
+        var result2 = BitConverter.ToUInt32(data3);
+        Assert.Equal(256u, result2);
 
         // Test with little-endian bytes representing uint.MaxValue (4294967295)
         ReadOnlySpan<byte> data4 = [0xFF, 0xFF, 0xFF, 0xFF];
-        var result4 = BitConverter.ToUInt32(data4);
-        Assert.Equal(uint.MaxValue, result4);
+        var result3 = BitConverter.ToUInt32(data4);
+        Assert.Equal(uint.MaxValue, result3);
 
         // Test with little-endian bytes representing uint.MinValue (0)
         ReadOnlySpan<byte> data5 = [0x00, 0x00, 0x00, 0x00];
-        var result5 = BitConverter.ToUInt32(data5);
-        Assert.Equal(uint.MinValue, result5);
+        var result4 = BitConverter.ToUInt32(data5);
+        Assert.Equal(uint.MinValue, result4);
     }
 
     [Fact]
