@@ -344,5 +344,21 @@ public class SystemCollectionsGenericTests
         Assert.Equal("key", key);
         Assert.Null(value);
     }
+
+    [Fact]
+    public void List_Slice()
+    {
+        var list = new List<int> { 1, 2, 3, 4, 5 };
+        var result = list.Slice(1, 3);
+        Assert.Equal(new List<int> { 2, 3, 4 }, result);
+    }
+
+    [Fact]
+    public void List_Slice_EmptyRange()
+    {
+        var list = new List<int> { 1, 2, 3 };
+        var result = list.Slice(0, 0);
+        Assert.Empty(result);
+    }
 }
 

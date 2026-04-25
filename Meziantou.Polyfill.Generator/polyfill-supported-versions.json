@@ -284,6 +284,11 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.Collections.Generic.List\u00601.Slice(System.Int32,System.Int32)": [
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.Collections.Generic.Queue\u00601.TryDequeue(\u00600@)": [
       "netstandard2.1",
       "net6.0",
