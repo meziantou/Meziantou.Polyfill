@@ -324,7 +324,11 @@ async Task GenerateMembers()
     foreach (var group in classNameToPolyfills)
     {
         var className = group.Key;
-        var conditions = string.Join(" || ", group.Select(p => $"({p.CSharpFieldName} & {p.CSharpFieldBitMask}uL) == {p.CSharpFieldBitMask}uL"));
+        var maskPerField = group
+            .GroupBy(p => p.CSharpFieldName, StringComparer.Ordinal)
+            .OrderBy(g => g.Key, StringComparer.Ordinal)
+            .Select(g => (Field: g.Key, Mask: g.Aggregate(0uL, (acc, p) => acc | p.CSharpFieldBitMask)));
+        var conditions = string.Join(" || ", maskPerField.Select(m => $"({m.Field} & 0x{m.Mask:X}uL) != 0uL"));
         sb.AppendLine($"    if ({conditions})");
         sb.AppendLine($"    {{");
         sb.AppendLine($"        sb.AppendLine();");
