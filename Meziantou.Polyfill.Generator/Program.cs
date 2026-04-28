@@ -274,6 +274,13 @@ async Task GenerateMembers()
     }
     sb.AppendLine(";");
 
+    sb.Append("public bool HasAnyPolyfill => _bits0 != 0");
+    for (var i = 1; i < fieldCount; i++)
+    {
+        sb.Append($" || _bits{i} != 0");
+    }
+    sb.AppendLine(";");
+
 
     sb.AppendLine("public void AddSources(SourceProductionContext context)");
     sb.AppendLine("{");
