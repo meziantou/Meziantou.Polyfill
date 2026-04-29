@@ -220,6 +220,36 @@ public class UnitTest1
     }
 
     [Fact]
+    public async Task EmbeddedAttribute_NotGenerated_WhenNoPolyfillsRequired()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
+        var result = GenerateFiles("", assemblyLocations: assemblies);
+
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+    }
+
+    [Fact]
+    public async Task EmbeddedAttribute_NotGenerated_WhenIncludeFilterMatchesNoPolyfill()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "T:Some.Type.That.Does.Not.Exist");
+
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+    }
+
+    [Fact]
+    public async Task EmbeddedAttribute_Generated_WhenAtLeastOnePolyfillRequired()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})");
+
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        Assert.Contains("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+    }
+
+    [Fact]
     public async Task PolyfillExtensions_OnlyContainsHostsForEnabledPolyfills()
     {
         // OrderDescending is hosted by the bare PolyfillExtensions class. With this filter,
