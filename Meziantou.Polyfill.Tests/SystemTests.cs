@@ -288,6 +288,14 @@ public class SystemTests
     }
 
     [Fact]
+    public void TimeSpan_Multiply_Double_TimeSpan_EdgeCases()
+    {
+        Assert.Equal(TimeSpan.MaxValue, 1.0 * TimeSpan.MaxValue);
+        Assert.Throws<ArgumentException>(() => double.NaN * TimeSpan.FromSeconds(1));
+        Assert.Throws<OverflowException>(() => 2.0 * TimeSpan.MaxValue);
+    }
+
+    [Fact]
     public void TimeSpan_Multiply_TimeSpan_Double()
     {
         // Test basic multiplication: 1 second * 2.0 = 2 seconds
@@ -304,6 +312,22 @@ public class SystemTests
     }
 
     [Fact]
+    public void TimeSpan_Multiply_TimeSpan_Double_EdgeCases()
+    {
+        Assert.Equal(TimeSpan.MaxValue, TimeSpan.MaxValue * 1.0);
+        Assert.Throws<ArgumentException>(() => TimeSpan.FromSeconds(1) * double.NaN);
+        Assert.Throws<OverflowException>(() => TimeSpan.MaxValue * 2.0);
+    }
+
+    [Fact]
+    public void TimeSpan_Multiply_Method_EdgeCases()
+    {
+        Assert.Equal(TimeSpan.MaxValue, TimeSpan.MaxValue.Multiply(1.0));
+        Assert.Throws<ArgumentException>(() => TimeSpan.FromSeconds(1).Multiply(double.NaN));
+        Assert.Throws<OverflowException>(() => TimeSpan.MaxValue.Multiply(2.0));
+    }
+
+    [Fact]
     public void TimeSpan_Division_Double()
     {
         // Test basic division: 10 seconds / 2.0 = 5 seconds
@@ -317,6 +341,15 @@ public class SystemTests
 
         // Test large values: 1 hour / 60 = 1 minute
         Assert.Equal(TimeSpan.FromMinutes(1), TimeSpan.FromHours(1) / 60.0);
+    }
+
+    [Fact]
+    public void TimeSpan_Division_Double_EdgeCases()
+    {
+        Assert.Equal(TimeSpan.MaxValue, TimeSpan.MaxValue / 1.0);
+        Assert.Throws<OverflowException>(() => TimeSpan.FromSeconds(1) / 0.0);
+        Assert.Throws<OverflowException>(() => TimeSpan.Zero / 0.0);
+        Assert.Throws<ArgumentException>(() => TimeSpan.FromSeconds(1) / double.NaN);
     }
 
     [Fact]
