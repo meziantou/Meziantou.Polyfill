@@ -200,4 +200,60 @@ public class SystemLinqTests
         Assert.Equal([1, 2, 3, 4], result);
     }
 
+    [Fact]
+    public void Enumerable_LeftJoin()
+    {
+        var outer = new[]
+        {
+            new { Id = 1, Name = "a1" },
+            new { Id = 1, Name = "a2" },
+            new { Id = 2, Name = "b" },
+        };
+
+        var inner = new[]
+        {
+            new { Id = 1, Value = "x" },
+            new { Id = 3, Value = "z" },
+            new { Id = 1, Value = "y" },
+        };
+
+        var result = outer.LeftJoin(inner, o => o.Id, i => i.Id, (o, i) => (o.Name, Value: i?.Value ?? "none"));
+        Assert.Equal([("a1", "x"), ("a1", "y"), ("a2", "x"), ("a2", "y"), ("b", "none")], result);
+    }
+
+    [Fact]
+    public void Enumerable_LeftJoin_Comparer()
+    {
+        var result = new[] { "A", "b" }.LeftJoin(new[] { "a" }, outer => outer, inner => inner, (outer, inner) => (outer, Inner: inner ?? "none"), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal([("A", "a"), ("b", "none")], result);
+    }
+
+    [Fact]
+    public void Enumerable_RightJoin()
+    {
+        var outer = new[]
+        {
+            new { Id = 1, Name = "a1" },
+            new { Id = 1, Name = "a2" },
+            new { Id = 2, Name = "b" },
+        };
+
+        var inner = new[]
+        {
+            new { Id = 1, Value = "x" },
+            new { Id = 3, Value = "z" },
+            new { Id = 1, Value = "y" },
+        };
+
+        var result = outer.RightJoin(inner, o => o.Id, i => i.Id, (o, i) => (Name: o?.Name ?? "none", i.Value));
+        Assert.Equal([("a1", "x"), ("a2", "x"), ("none", "z"), ("a1", "y"), ("a2", "y")], result);
+    }
+
+    [Fact]
+    public void Enumerable_RightJoin_Comparer()
+    {
+        var result = new[] { "a" }.RightJoin(new[] { "A", "b" }, outer => outer, inner => inner, (outer, inner) => (Outer: outer ?? "none", inner), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal([("a", "A"), ("none", "b")], result);
+    }
+
 }

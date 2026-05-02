@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (540)
+### Methods (544)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -439,6 +439,8 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.Index<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
 - `System.Linq.Enumerable.IntersectBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TKey> second, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.IntersectBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TKey> second, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
+- `System.Linq.Enumerable.LeftJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter, TInner?, TResult> resultSelector)`
+- `System.Linq.Enumerable.LeftJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter, TInner?, TResult> resultSelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.MinBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
@@ -447,6 +449,8 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.OrderDescending<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source)`
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
+- `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector)`
+- `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.ToDictionary<TKey, TValue>(this System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>> source) where TKey : notnull`
 - `System.Linq.Enumerable.ToDictionary<TKey, TValue>(this System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>> source, System.Collections.Generic.IEqualityComparer<TKey>? comparer) where TKey : notnull`
 - `System.Linq.Enumerable.ToHashSet<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
