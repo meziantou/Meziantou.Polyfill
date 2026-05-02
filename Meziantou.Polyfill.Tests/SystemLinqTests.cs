@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
@@ -255,48 +254,6 @@ public class SystemLinqTests
     {
         var result = new[] { "a" }.RightJoin(new[] { "A", "b" }, outer => outer, inner => inner, (outer, inner) => (Outer: outer ?? "none", inner), StringComparer.OrdinalIgnoreCase);
         Assert.Equal([("a", "A"), ("none", "b")], result);
-    }
-
-    [Fact]
-    public void Queryable_LeftJoin()
-    {
-        IQueryable<int> outer = new[] { 1, 2 }.AsQueryable();
-        IEnumerable<int> inner = [1, 3];
-        var comparer = EqualityComparer<int>.Default;
-
-        var query = outer.LeftJoin(inner, o => o, i => i, (o, i) => new { o, i });
-        var queryExpression = Assert.IsAssignableFrom<MethodCallExpression>(query.Expression);
-        Assert.Equal("LeftJoin", queryExpression.Method.Name);
-        Assert.Equal(5, queryExpression.Arguments.Count);
-
-        var queryWithComparer = outer.LeftJoin(inner, o => o, i => i, (o, i) => new { o, i }, comparer);
-        var queryWithComparerExpression = Assert.IsAssignableFrom<MethodCallExpression>(queryWithComparer.Expression);
-        Assert.Equal("LeftJoin", queryWithComparerExpression.Method.Name);
-        Assert.Equal(6, queryWithComparerExpression.Arguments.Count);
-        var comparerExpression = Assert.IsAssignableFrom<ConstantExpression>(queryWithComparerExpression.Arguments[5]);
-        Assert.Equal(typeof(IEqualityComparer<int>), comparerExpression.Type);
-        Assert.Same(comparer, comparerExpression.Value);
-    }
-
-    [Fact]
-    public void Queryable_RightJoin()
-    {
-        IQueryable<int> outer = new[] { 1, 2 }.AsQueryable();
-        IEnumerable<int> inner = [1, 3];
-        var comparer = EqualityComparer<int>.Default;
-
-        var query = outer.RightJoin(inner, o => o, i => i, (o, i) => new { o, i });
-        var queryExpression = Assert.IsAssignableFrom<MethodCallExpression>(query.Expression);
-        Assert.Equal("RightJoin", queryExpression.Method.Name);
-        Assert.Equal(5, queryExpression.Arguments.Count);
-
-        var queryWithComparer = outer.RightJoin(inner, o => o, i => i, (o, i) => new { o, i }, comparer);
-        var queryWithComparerExpression = Assert.IsAssignableFrom<MethodCallExpression>(queryWithComparer.Expression);
-        Assert.Equal("RightJoin", queryWithComparerExpression.Method.Name);
-        Assert.Equal(6, queryWithComparerExpression.Arguments.Count);
-        var comparerExpression = Assert.IsAssignableFrom<ConstantExpression>(queryWithComparerExpression.Arguments[5]);
-        Assert.Equal(typeof(IEqualityComparer<int>), comparerExpression.Type);
-        Assert.Same(comparer, comparerExpression.Value);
     }
 
 }

@@ -1664,18 +1664,6 @@
       "net9.0",
       "net10.0"
     ],
-    "M:System.Linq.Queryable.LeftJoin\u0060\u00604(System.Linq.IQueryable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00601,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603}})": [
-      "net10.0"
-    ],
-    "M:System.Linq.Queryable.LeftJoin\u0060\u00604(System.Linq.IQueryable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00601,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603}},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
-      "net10.0"
-    ],
-    "M:System.Linq.Queryable.RightJoin\u0060\u00604(System.Linq.IQueryable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00601,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603}})": [
-      "net10.0"
-    ],
-    "M:System.Linq.Queryable.RightJoin\u0060\u00604(System.Linq.IQueryable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00601,\u0060\u00602}},System.Linq.Expressions.Expression{System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603}},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
-      "net10.0"
-    ],
     "M:System.Math.Clamp(System.Byte,System.Byte,System.Byte)": [
       "netstandard2.1",
       "net6.0",
