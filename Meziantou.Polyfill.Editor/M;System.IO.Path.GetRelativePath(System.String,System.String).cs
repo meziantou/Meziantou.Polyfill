@@ -52,17 +52,22 @@ file static class PathGetRelativePathHelper
         if (pathLength > 0 && IsDirectorySeparator(path[pathLength - 1]))
             pathLength--;
 
+        // If paths are the same (ignoring trailing separators), return "."
+        bool pathSameAsRelativeTo = pathLength == relativeToLength && commonLength >= relativeToLength;
+        if (pathSameAsRelativeTo)
+            return ".";
+
+        // Clamp commonLength to relativeToLength to handle when relativeTo ends with a separator
+        if (commonLength > relativeToLength)
+            commonLength = relativeToLength;
+
         if (relativeToLength == commonLength)
         {
+            // No parent segments: target is a child of the base path
             int next = commonLength;
-            if (path.Length != commonLength)
-            {
-                if (IsDirectorySeparator(path[commonLength]))
-                    next++;
-                return path.Substring(next);
-            }
-
-            return ".";
+            if (next < path.Length && IsDirectorySeparator(path[next]))
+                next++;
+            return path.Substring(next);
         }
 
         var sb = new StringBuilder();

@@ -246,4 +246,25 @@ public class SystemIOTests
         Assert.Throws<ArgumentNullException>(() => Path.GetRelativePath("relativeTo", null!));
     }
 
+    [Fact]
+    public void Path_GetRelativePath_SameDirectory_WithTrailingSeparator()
+    {
+        // Path.GetTempPath() returns a trailing separator on some platforms; polyfill must handle it
+        var sep = Path.DirectorySeparatorChar.ToString();
+        var from = Path.Combine(Path.GetTempPath(), "testfolder") + sep;
+        var to = Path.Combine(Path.GetTempPath(), "testfolder") + sep;
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal(".", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SubDirectory_WithTrailingSeparatorOnBase()
+    {
+        var sep = Path.DirectorySeparatorChar.ToString();
+        var from = Path.Combine(Path.GetTempPath(), "testfolder") + sep;
+        var to = Path.Combine(Path.GetTempPath(), "testfolder", "child");
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal("child", result);
+    }
+
 }
