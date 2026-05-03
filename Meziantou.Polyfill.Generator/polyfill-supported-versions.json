@@ -809,6 +809,14 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.IO.Path.GetRelativePath(System.String,System.String)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.IO.Stream.DisposeAsync()": [
       "netstandard2.1",
       "net6.0",

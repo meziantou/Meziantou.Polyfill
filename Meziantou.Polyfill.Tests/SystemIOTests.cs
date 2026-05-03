@@ -198,4 +198,52 @@ public class SystemIOTests
     }
 #endif
 
+    [Fact]
+    public void Path_GetRelativePath_SameDirectory()
+    {
+        var from = Path.GetTempPath();
+        var to = Path.GetTempPath();
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal(".", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SubDirectory()
+    {
+        var from = Path.GetTempPath();
+        var to = Path.Combine(Path.GetTempPath(), "subfolder");
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal("subfolder", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_ParentDirectory()
+    {
+        var from = Path.Combine(Path.GetTempPath(), "subfolder");
+        var to = Path.GetTempPath();
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal("..", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SiblingDirectory()
+    {
+        var from = Path.Combine(Path.GetTempPath(), "a");
+        var to = Path.Combine(Path.GetTempPath(), "b");
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal(Path.Combine("..", "b"), result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_NullRelativeTo_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => Path.GetRelativePath(null!, "path"));
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_NullPath_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => Path.GetRelativePath("relativeTo", null!));
+    }
+
 }
