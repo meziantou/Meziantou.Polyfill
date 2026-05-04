@@ -1,5 +1,4 @@
 // XML-DOC: M:System.IO.Path.GetRelativePath(System.String,System.String)
-#if !NETCOREAPP2_1_OR_GREATER && !NETSTANDARD2_1_OR_GREATER
 using System;
 using System.IO;
 using System.Text;
@@ -131,4 +130,3 @@ file static class PathGetRelativePathHelper
     private static bool IsDirectorySeparator(char c)
         => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
 }
-#endif
