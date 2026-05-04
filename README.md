@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (544)
+### Methods (545)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -248,6 +248,7 @@ The filtering logic works as follows:
 - `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.String? contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.String? contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.Path.GetRelativePath(System.String relativeTo, System.String path)`
 - `System.IO.Stream.DisposeAsync()`
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`

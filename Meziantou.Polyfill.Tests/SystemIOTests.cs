@@ -198,4 +198,73 @@ public class SystemIOTests
     }
 #endif
 
+    [Fact]
+    public void Path_GetRelativePath_SameDirectory()
+    {
+        var from = Path.GetTempPath();
+        var to = Path.GetTempPath();
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal(".", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SubDirectory()
+    {
+        var from = Path.GetTempPath();
+        var to = Path.Combine(Path.GetTempPath(), "subfolder");
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal("subfolder", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_ParentDirectory()
+    {
+        var from = Path.Combine(Path.GetTempPath(), "subfolder");
+        var to = Path.GetTempPath();
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal("..", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SiblingDirectory()
+    {
+        var from = Path.Combine(Path.GetTempPath(), "a");
+        var to = Path.Combine(Path.GetTempPath(), "b");
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal(Path.Combine("..", "b"), result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_NullRelativeTo_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => Path.GetRelativePath(null!, "path"));
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_NullPath_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => Path.GetRelativePath("relativeTo", null!));
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SameDirectory_WithTrailingSeparator()
+    {
+        // Path.GetTempPath() returns a trailing separator on some platforms; polyfill must handle it
+        var sep = Path.DirectorySeparatorChar.ToString();
+        var from = Path.Combine(Path.GetTempPath(), "testfolder") + sep;
+        var to = Path.Combine(Path.GetTempPath(), "testfolder") + sep;
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal(".", result);
+    }
+
+    [Fact]
+    public void Path_GetRelativePath_SubDirectory_WithTrailingSeparatorOnBase()
+    {
+        var sep = Path.DirectorySeparatorChar.ToString();
+        var from = Path.Combine(Path.GetTempPath(), "testfolder") + sep;
+        var to = Path.Combine(Path.GetTempPath(), "testfolder", "child");
+        var result = Path.GetRelativePath(from, to);
+        Assert.Equal("child", result);
+    }
+
 }
