@@ -124,7 +124,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (545)
+### Methods (546)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -588,6 +588,7 @@ The filtering logic works as follows:
 - `System.String.Split(System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.StartsWith(System.Char value)`
 - `System.String.TryCopyTo(System.Span<System.Char> destination)`
+- `System.StringComparer.FromComparison(System.StringComparison comparisonType)`
 - `System.Text.Encoding.GetByteCount(System.ReadOnlySpan<System.Char> chars)`
 - `System.Text.Encoding.GetBytes(System.ReadOnlySpan<System.Char> chars, System.Span<System.Byte> bytes)`
 - `System.Text.Encoding.GetCharCount(System.ReadOnlySpan<System.Byte> bytes)`
