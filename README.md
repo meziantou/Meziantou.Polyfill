@@ -50,7 +50,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (71)
+### Types (73)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -89,6 +89,8 @@ The filtering logic works as follows:
 - `System.Index`
 - `System.Net.Http.ReadOnlyMemoryContent`
 - `System.Range`
+- `System.Reflection.NullabilityInfo`
+- `System.Reflection.NullabilityState`
 - `System.Runtime.CompilerServices.AsyncMethodBuilderAttribute`
 - `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute`
 - `System.Runtime.CompilerServices.CollectionBuilderAttribute`
