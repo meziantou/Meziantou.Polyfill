@@ -2,7 +2,9 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Meziantou.Polyfill.svg)](https://www.nuget.org/packages/Meziantou.Polyfill/)
 
-Source Generator that adds polyfill methods and types. This helps working with multi-targeted projects.
+Source Generator that adds polyfill methods and types so projects targeting older TFMs can compile with source-compatible APIs.
+
+Performance is not a goal. If performance is important, target the latest version of .NET. The generated code can still be performant, but it is not fully optimized for all scenarios.
 
 Read more about the project: [Polyfills in .NET to ease multi-targeting](https://www.meziantou.net/polyfills-in-dotnet-to-ease-multi-targeting.htm)
 
