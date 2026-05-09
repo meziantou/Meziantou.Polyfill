@@ -151,6 +151,7 @@ async Task GenerateMembers()
     }
 
     sb.AppendLine($"private readonly PolyfillOptions _options;");
+    sb.AppendLine($"private readonly bool _supportAllowsRefStruct;");
     sb.AppendLine($"private readonly bool _supportExtensions;");
     sb.AppendLine($"private readonly bool _supportUnsafe;");
     sb.AppendLine($"private readonly string _extraDefines;");
@@ -163,7 +164,10 @@ async Task GenerateMembers()
     sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
     sb.AppendLine("{");
     sb.AppendLine("    _options = options;");
-    sb.AppendLine("    _supportExtensions = Enum.IsDefined(typeof(LanguageVersion), 1400) && compilation.SyntaxTrees.FirstOrDefault()?.Options is CSharpParseOptions parseOptions && parseOptions.LanguageVersion >= (LanguageVersion)1400;");
+    sb.AppendLine("    var languageVersion = compilation.SyntaxTrees.FirstOrDefault()?.Options is CSharpParseOptions parseOptions ? parseOptions.LanguageVersion : LanguageVersion.Default;");
+    sb.AppendLine("    var runtimeFeature = compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.GetTypeByMetadataName(\"System.Runtime.CompilerServices.RuntimeFeature\");");
+    sb.AppendLine("    _supportAllowsRefStruct = Enum.IsDefined(typeof(LanguageVersion), 1300) && languageVersion >= (LanguageVersion)1300 && (runtimeFeature?.GetMembers(\"ByRefLikeGenerics\").Length ?? 0) > 0;");
+    sb.AppendLine("    _supportExtensions = Enum.IsDefined(typeof(LanguageVersion), 1400) && languageVersion >= (LanguageVersion)1400;");
     sb.AppendLine("    _supportUnsafe = compilation.Options is CSharpCompilationOptions compilationOptions && compilationOptions.AllowUnsafe;");
 
     foreach (var requiredType in requiredTypes)
@@ -172,6 +176,7 @@ async Task GenerateMembers()
     }
 
     sb.AppendLine($"    _extraDefines = \"\";");
+    sb.AppendLine("    if (_supportAllowsRefStruct) _extraDefines += \"#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT\\n\";");
     sb.AppendLine("    if (_supportUnsafe) _extraDefines += \"#define MEZIANTOU_POLYFILL_SUPPORT_UNSAFE\\n\";");
     foreach (var requiredType in requiredTypes)
     {
