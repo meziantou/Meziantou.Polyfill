@@ -9,6 +9,7 @@ internal sealed partial class PolyfillData
 {
     private static readonly string[] PotentialRequiredTypes =
     [
+        "System.Buffers.SpanAction`2",
         "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Collections.Generic.IAsyncEnumerable`1",
         "System.Collections.Generic.IAsyncEnumerator`1",
@@ -109,6 +110,20 @@ internal sealed partial class PolyfillData
                     return true;
 
                 return IsExposed(symbol.ContainingSymbol);
+            }
+        }
+
+        foreach (var @delegate in root.DescendantNodes().OfType<DelegateDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(@delegate)!;
+            var invokeMethod = symbol.DelegateInvokeMethod;
+            if (invokeMethod is null)
+                continue;
+
+            requiredTypes.Add(invokeMethod.ReturnType);
+            foreach (var param in invokeMethod.Parameters.Select(p => p.Type))
+            {
+                requiredTypes.Add(param);
             }
         }
 
