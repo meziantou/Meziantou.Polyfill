@@ -199,6 +199,53 @@ public class UnitTest1
         };
     }
 
+    [Theory]
+    [MemberData(nameof(GetRuntimeWithoutByRefLikeGenericSupportLanguageVersions))]
+    public async Task SpanAction_AllowsRefStructConstraint_IsNotGenerated_WhenRuntimeDoesNotSupportByRefLikeGenerics(LanguageVersion languageVersion)
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+        var result = GenerateFiles(
+            """
+            namespace System
+            {
+                public readonly ref struct Span<T>
+                {
+                }
+            }
+            """,
+            assemblyLocations: assemblies,
+            includedPolyfills: "T:System.Buffers.SpanAction`2",
+            languageVersion: languageVersion);
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "T_System.Buffers.SpanAction`2.g.cs");
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task AllowsRefStructDefine_IsGenerated_WhenLanguageAndRuntimeSupportByRefLikeGenerics()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/");
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "P:System.Net.Http.HttpMethod.Query",
+            languageVersion: LanguageVersion.CSharp14);
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "P_System.Net.Http.HttpMethod.Query.g.cs");
+        Assert.Contains("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content, StringComparison.Ordinal);
+    }
+
+    public static TheoryData<LanguageVersion> GetRuntimeWithoutByRefLikeGenericSupportLanguageVersions()
+    {
+        return new TheoryData<LanguageVersion>
+        {
+            LanguageVersion.CSharp12,
+            LanguageVersion.CSharp13,
+            LanguageVersion.Latest,
+            LanguageVersion.Preview,
+        };
+    }
+
     [Fact]
     public async Task PolyfillExtensions_NotGenerated_WhenNoPolyfillsRequired()
     {

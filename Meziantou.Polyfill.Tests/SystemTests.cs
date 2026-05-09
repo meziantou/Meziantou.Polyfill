@@ -1334,6 +1334,21 @@ public class SystemTests
     }
 
     [Fact]
+    public void String_Create_TState()
+    {
+        var actual = string.Create(3, "abc", static (span, state) => state.AsSpan().CopyTo(span));
+        Assert.Equal("abc", actual);
+
+        var called = false;
+        var empty = string.Create(0, 0, (span, state) => called = true);
+        Assert.Empty(empty);
+        Assert.False(called);
+
+        Assert.Throws<ArgumentNullException>(() => string.Create(1, 0, null!));
+        Assert.Throws<ArgumentOutOfRangeException>(() => string.Create(-1, 0, static (span, state) => { }));
+    }
+
+    [Fact]
     public void Single_Parse_ReadOnlySpan_Byte_IFormatProvider()
     {
         // Basic parsing from UTF8

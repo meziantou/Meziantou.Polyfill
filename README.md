@@ -52,11 +52,12 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (71)
+### Types (72)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
 - `System.Buffers.SequenceReader<T> where T : unmanaged, System.IEquatable<T>`
+- `System.Buffers.SpanAction<T, in TArg> where TArg : allows ref struct`
 - `System.Collections.Generic.KeyValuePair`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>`
 - `System.Collections.Generic.ReferenceEqualityComparer`
@@ -126,7 +127,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (546)
+### Methods (547)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -573,6 +574,7 @@ The filtering logic works as follows:
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`
 - `System.String.CopyTo(System.Span<System.Char> destination)`
 - `System.String.Create(System.IFormatProvider? provider, ref System.Runtime.CompilerServices.DefaultInterpolatedStringHandler handler)`
+- `System.String.Create<TState>(System.Int32 length, TState state, System.Buffers.SpanAction<System.Char, TState> action) where TState : allows ref struct`
 - `System.String.EndsWith(System.Char value)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)`
