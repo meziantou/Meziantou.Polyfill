@@ -11,9 +11,8 @@ public sealed class RandomNumberGeneratorTests
     [Fact]
     public void Fill_Span_FillsWithRandomBytes()
     {
-        using var rng = RandomNumberGenerator.Create();
         Span<byte> buffer = new byte[100];
-        rng.Fill(buffer);
+        RandomNumberGenerator.Fill(buffer);
 
         // Check that not all bytes are zero (very unlikely with random data)
         Assert.Contains(buffer.ToArray(), b => b != 0);
@@ -22,9 +21,8 @@ public sealed class RandomNumberGeneratorTests
     [Fact]
     public void Fill_EmptySpan_DoesNotThrow()
     {
-        using var rng = RandomNumberGenerator.Create();
         Span<byte> buffer = Span<byte>.Empty;
-        rng.Fill(buffer);
+        RandomNumberGenerator.Fill(buffer);
     }
 #endif
 
