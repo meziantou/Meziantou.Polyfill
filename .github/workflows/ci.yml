@@ -138,6 +138,7 @@ jobs:
   deploy:
     runs-on: 'ubuntu-latest'
     needs: [ validate_nuget, source_generator_tests, tests, lint_readme ]
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     permissions:
       contents: read
       id-token: write
@@ -177,3 +178,27 @@ jobs:
       if: always()
       env:
         NuGetApiKey: ${{steps.login.outputs.NUGET_API_KEY}}
+
+  final_status_check:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [ create_nuget, validate_nuget, source_generator_tests, tests, lint_readme, deploy ]
+    steps:
+      - name: Check previous jobs status
+        env:
+          NEEDS_JSON: ${{ toJson(needs) }}
+        run: |
+          $needs = $env:NEEDS_JSON | ConvertFrom-Json -AsHashtable
+          $failedJobs = @(
+            $needs.GetEnumerator()
+            | Where-Object { $_.Value.result -notin @('success', 'skipped') }
+          )
+
+          if ($failedJobs.Count -eq 0) {
+            Write-Host "All dependency jobs succeeded or were skipped."
+            exit 0
+          }
+
+          $failedJobNames = $failedJobs.Name | Sort-Object
+          Write-Host "::error::Some jobs did not succeed: $($failedJobNames -join ', ')"
+          exit 1
