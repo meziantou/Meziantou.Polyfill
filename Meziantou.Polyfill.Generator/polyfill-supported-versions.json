@@ -2147,6 +2147,13 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.Runtime.InteropServices.CollectionsMarshal.AsSpan\u0060\u00601(System.Collections.Generic.List{\u0060\u00600})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.SByte.Parse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider)": [
       "net8.0",
       "net9.0",
