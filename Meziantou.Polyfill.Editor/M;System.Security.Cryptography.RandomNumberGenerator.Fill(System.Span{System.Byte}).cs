@@ -1,24 +1,26 @@
 partial class PolyfillExtensions
 {
-    public static void Fill(this System.Security.Cryptography.RandomNumberGenerator random, System.Span<byte> data)
+    extension(System.Security.Cryptography.RandomNumberGenerator)
     {
-        if (random is null)
+        public static void Fill(System.Span<byte> data)
         {
-            throw new System.ArgumentNullException(nameof(random));
-        }
+            if (data.IsEmpty)
+                return;
 
-        if (data.IsEmpty)
-            return;
+            byte[] array = new byte[data.Length];
+            try
+            {
+                using (var random = System.Security.Cryptography.RandomNumberGenerator.Create())
+                {
+                    random.GetBytes(array);
+                }
 
-        byte[] array = new byte[data.Length];
-        try
-        {
-            random.GetBytes(array);
-            new System.ReadOnlySpan<byte>(array).CopyTo(data);
-        }
-        finally
-        {
-            System.Array.Clear(array, 0, array.Length);
+                new System.ReadOnlySpan<byte>(array).CopyTo(data);
+            }
+            finally
+            {
+                System.Array.Clear(array, 0, array.Length);
+            }
         }
     }
 }
