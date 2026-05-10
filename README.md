@@ -127,7 +127,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (547)
+### Methods (548)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -536,6 +536,7 @@ The filtering logic works as follows:
 - `System.Random.Shuffle<T>(T[] values)`
 - `System.Reflection.MethodInfo.CreateDelegate<T>() where T : System.Delegate`
 - `System.Reflection.MethodInfo.CreateDelegate<T>(System.Object? target) where T : System.Delegate`
+- `System.Runtime.InteropServices.CollectionsMarshal.AsSpan<T>(System.Collections.Generic.List<T>? list)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`

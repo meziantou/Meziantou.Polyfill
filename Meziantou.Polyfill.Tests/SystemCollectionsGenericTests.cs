@@ -151,6 +151,30 @@ public class SystemCollectionsGenericTests
     }
 
     [Fact]
+    public void CollectionsMarshal_AsSpan_List()
+    {
+        var list = new List<int>(capacity: 8) { 1, 2, 3 };
+
+        Span<int> span = CollectionsMarshal.AsSpan(list);
+
+        Assert.Equal(list.Count, span.Length);
+        Assert.Equal([1, 2, 3], span.ToArray());
+
+        span[1] = 42;
+        Assert.Equal(42, list[1]);
+    }
+
+    [Fact]
+    public void CollectionsMarshal_AsSpan_NullList()
+    {
+        List<int>? list = null;
+
+        Span<int> span = CollectionsMarshal.AsSpan(list);
+
+        Assert.True(span.IsEmpty);
+    }
+
+    [Fact]
     public void Dictionary_TryAdd_KeyDoesNotExist()
     {
         var dict = new Dictionary<string, int>();
