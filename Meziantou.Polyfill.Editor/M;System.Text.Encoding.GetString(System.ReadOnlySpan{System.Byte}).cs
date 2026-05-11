@@ -16,7 +16,7 @@ static partial class PolyfillExtensions
         {
             fixed (byte* ptr = bytes)
             {
-                return encoding.GetString(ptr, bytes.Length);
+                return target.GetString(ptr, bytes.Length);
             }
         }
 #else
