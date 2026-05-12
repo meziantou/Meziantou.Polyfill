@@ -11,12 +11,12 @@ static partial class PolyfillExtensions
     /// <returns>A string that contains the decoded bytes from the provided read-only span.</returns>
     public static string GetString(this Encoding target, ReadOnlySpan<byte> bytes)
     {
-#if MEZIANTOU_POLYFILL_SUPPORT_UNSAFEs
+#if MEZIANTOU_POLYFILL_SUPPORT_UNSAFE
         unsafe
         {
             fixed (byte* ptr = bytes)
             {
-                return encoding.GetString(ptr, bytes.Length);
+                return target.GetString(ptr, bytes.Length);
             }
         }
 #else
