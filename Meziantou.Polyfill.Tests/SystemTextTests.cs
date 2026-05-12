@@ -38,6 +38,13 @@ public class SystemTextTests
     }
 
     [Fact]
+    public void Encoding_GetString_Empty()
+    {
+        var str = Encoding.UTF8.GetString(ReadOnlySpan<byte>.Empty);
+        Assert.Equal(string.Empty, str);
+    }
+
+    [Fact]
     public void StringBuilder_AppendJoin_String_ObjectArray()
     {
         var sb = new StringBuilder();
@@ -153,6 +160,13 @@ public class SystemTextTests
         var actual = encoding.GetCharCount(bytes.AsSpan());
         
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void Encoding_GetCharCount_Empty()
+    {
+        var actual = Encoding.UTF8.GetCharCount(ReadOnlySpan<byte>.Empty);
+        Assert.Equal(0, actual);
     }
 
     [Fact]
