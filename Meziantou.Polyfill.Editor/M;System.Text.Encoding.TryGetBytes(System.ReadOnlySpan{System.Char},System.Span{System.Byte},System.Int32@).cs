@@ -13,7 +13,7 @@ static partial class PolyfillExtensions
     /// <returns><see langword="true"/> if all of the characters were decoded into the destination; <see langword="false"/> if the destination was too small to contain all the decoded <paramref name="bytes"/>.</returns>
     public static bool TryGetBytes(this Encoding target, ReadOnlySpan<char> chars, Span<byte> bytes, out int bytesWritten)
     {
-#if MEZIANTOUPOLYFILL_ALLOWUNSAFE
+#if MEZIANTOU_POLYFILL_SUPPORT_UNSAFE
         unsafe
         {
             fixed (char* ptrChars = chars)

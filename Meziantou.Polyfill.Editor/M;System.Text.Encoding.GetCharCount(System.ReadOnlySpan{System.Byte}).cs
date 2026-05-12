@@ -11,7 +11,7 @@ static partial class PolyfillExtensions
     /// <returns>The number of characters produced by decoding the byte span.</returns>
     public static int GetCharCount(this Encoding target, ReadOnlySpan<byte> bytes)
     {
-#if MEZIANTOUPOLYFILL_ALLOWUNSAFE
+#if MEZIANTOU_POLYFILL_SUPPORT_UNSAFE
         unsafe
         {
             fixed (byte* ptr = bytes)

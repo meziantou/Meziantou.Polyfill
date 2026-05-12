@@ -12,7 +12,7 @@ static partial class PolyfillExtensions
     /// <returns>The number of encoded bytes.</returns>
     public static int GetBytes(this Encoding target, ReadOnlySpan<char> chars, Span<byte> bytes)
     {
-#if MEZIANTOUPOLYFILL_ALLOWUNSAFE
+#if MEZIANTOU_POLYFILL_SUPPORT_UNSAFE
         unsafe
         {
             fixed (char* ptrChars = chars)

@@ -12,7 +12,7 @@ static partial class PolyfillExtensions
     /// <returns>The actual number of characters written at the span indicated by the <paramref name="chars"/> parameter.</returns>
     public static int GetChars(this Encoding target, ReadOnlySpan<byte> bytes, Span<char> chars)
     {
-#if MEZIANTOUPOLYFILL_ALLOWUNSAFE
+#if MEZIANTOU_POLYFILL_SUPPORT_UNSAFE
         unsafe
         {
             fixed (char* ptrChars = chars)
