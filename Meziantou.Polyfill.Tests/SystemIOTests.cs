@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -18,6 +19,65 @@ namespace Meziantou.Polyfill.Tests;
 
 public class SystemIOTests
 {
+    [Fact]
+    public void TextWriter_CreateBroadcasting_WritesToAllWriters()
+    {
+        using var first = new StringWriter();
+        using var second = new StringWriter();
+        using var writer = TextWriter.CreateBroadcasting(first, second);
+
+        writer.Write("test");
+        writer.WriteLine('!');
+
+        Assert.Equal(first.ToString(), second.ToString());
+        Assert.Equal("test!" + writer.NewLine, first.ToString());
+    }
+
+    [Fact]
+    public void TextWriter_CreateBroadcasting_Empty_ReturnsNullWriter()
+    {
+        var writer = TextWriter.CreateBroadcasting();
+        Assert.Same(TextWriter.Null, writer);
+    }
+
+    [Fact]
+    public void TextWriter_CreateBroadcasting_NullArray_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => TextWriter.CreateBroadcasting(null!));
+    }
+
+    [Fact]
+    public void TextWriter_CreateBroadcasting_NullWriter_ThrowsArgumentNullException()
+    {
+        var first = new StringWriter();
+        Assert.Throws<ArgumentNullException>(() => TextWriter.CreateBroadcasting(first, null!));
+    }
+
+    [Fact]
+    public void TextWriter_CreateBroadcasting_ForwardsEncodingAndFormatProviderFromFirstWriter()
+    {
+        var firstProvider = CultureInfo.GetCultureInfo("fr-FR");
+        using var first = new MetadataTextWriter(Encoding.UTF32, firstProvider);
+        using var second = new MetadataTextWriter(Encoding.ASCII, CultureInfo.InvariantCulture);
+        using var writer = TextWriter.CreateBroadcasting(first, second);
+
+        Assert.Same(first.Encoding, writer.Encoding);
+        Assert.Same(first.FormatProvider, writer.FormatProvider);
+    }
+
+    [Fact]
+    public void TextWriter_CreateBroadcasting_WriterExceptionStopsFollowingWriters()
+    {
+        using var first = new StringWriter();
+        using var second = new ThrowingTextWriter();
+        using var third = new StringWriter();
+        using var writer = TextWriter.CreateBroadcasting(first, second, third);
+
+        Assert.Throws<InvalidOperationException>(() => writer.Write('x'));
+        Assert.Equal("x", first.ToString());
+        Assert.Empty(third.ToString());
+    }
+
 #if NET461_OR_GREATER || NETCOREAPP
     [Fact]
     public async Task StreamWriter_WriteAsync()
@@ -265,6 +325,22 @@ public class SystemIOTests
         var to = Path.Combine(Path.GetTempPath(), "testfolder", "child");
         var result = Path.GetRelativePath(from, to);
         Assert.Equal("child", result);
+    }
+
+    private sealed class MetadataTextWriter : StringWriter
+    {
+        private readonly Encoding _encoding;
+
+        public MetadataTextWriter(Encoding encoding, IFormatProvider formatProvider)
+            : base(formatProvider) =>
+            _encoding = encoding;
+
+        public override Encoding Encoding => _encoding;
+    }
+
+    private sealed class ThrowingTextWriter : StringWriter
+    {
+        public override void Write(char value) => throw new InvalidOperationException("boom");
     }
 
 }

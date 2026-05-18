@@ -127,7 +127,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (548)
+### Methods (549)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -263,6 +263,7 @@ The filtering logic works as follows:
 - `System.IO.StreamReader.ReadLineAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextReader.ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.IO.TextWriter.CreateBroadcasting(params System.IO.TextWriter[] writers)`
 - `System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
