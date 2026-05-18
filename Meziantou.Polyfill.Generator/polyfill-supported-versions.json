@@ -901,6 +901,10 @@
       "net9.0",
       "net10.0"
     ],
+    "M:System.IO.TextWriter.CreateBroadcasting(System.IO.TextWriter[])": [
+      "net9.0",
+      "net10.0"
+    ],
     "M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken)": [
       "netstandard2.1",
       "net6.0",
