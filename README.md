@@ -131,7 +131,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (553)
+### Methods (554)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -594,6 +594,7 @@ The filtering logic works as follows:
 - `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.String?> value)`
 - `System.String.Join(System.Char separator, params System.String?[] value)`
 - `System.String.Join<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
+- `System.String.LastIndexOf(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Replace(System.String oldValue, System.String? newValue, System.StringComparison comparisonType)`
 - `System.String.ReplaceLineEndings()`
 - `System.String.ReplaceLineEndings(System.String replacementText)`
