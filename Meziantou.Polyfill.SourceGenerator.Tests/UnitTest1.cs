@@ -12,8 +12,8 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public class UnitTest1
 {
-    private const string LatestDotnetPackageVersion = "10.0.0";
-    private const string LatestDotnetTfm = "net10.0";
+    private const string LatestDotnetPackageVersion = "11.0.0-preview.4.26230.115";
+    private const string LatestDotnetTfm = "net11.0";
 
     [Fact]
     public void PolyfillOptions_Included()
@@ -376,6 +376,7 @@ public class UnitTest1
         var packagesCombination = new List<PackageReference[]>
         {
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/") } },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "10.0.0", "ref/net10.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/") } },
             { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") } },
