@@ -127,7 +127,6 @@ public class SystemTests
         Assert.Equal(2, "test".IndexOf('S', StringComparison.OrdinalIgnoreCase));
     }
 
-#if NETFRAMEWORK
     [Fact]
     public void String_IndexOf_Char_StartIndex_StringComparison()
     {
@@ -141,7 +140,6 @@ public class SystemTests
         Assert.Equal(2, "test".IndexOf('S', 1, 2, StringComparison.OrdinalIgnoreCase));
         Assert.Equal(-1, "test".IndexOf('t', 1, 2, StringComparison.Ordinal));
     }
-#endif
 
     [Fact]
     public void HashCode_Combine()
