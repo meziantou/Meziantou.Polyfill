@@ -77,6 +77,15 @@ public class SystemTests
     }
 
     [Fact]
+    public void String_EndsWith_Char_StringComparison()
+    {
+        Assert.True("test".EndsWith('t', StringComparison.Ordinal));
+        Assert.True("test".EndsWith('T', StringComparison.OrdinalIgnoreCase));
+        Assert.False("test".EndsWith('T', StringComparison.Ordinal));
+        Assert.False("".EndsWith('t', StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void String_GetHashCode()
     {
         Assert.Equal("test".GetHashCode(), "test".GetHashCode(StringComparison.Ordinal));
@@ -109,6 +118,15 @@ public class SystemTests
     {
         Assert.True("test".StartsWith('t'));
         Assert.False("test".StartsWith('T'));
+    }
+
+    [Fact]
+    public void String_StartsWith_Char_StringComparison()
+    {
+        Assert.True("test".StartsWith('t', StringComparison.Ordinal));
+        Assert.True("test".StartsWith('T', StringComparison.OrdinalIgnoreCase));
+        Assert.False("test".StartsWith('T', StringComparison.Ordinal));
+        Assert.False("".StartsWith('t', StringComparison.Ordinal));
     }
 
     [Fact]

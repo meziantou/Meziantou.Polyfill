@@ -2874,6 +2874,9 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.String.EndsWith(System.Char,System.StringComparison)": [
+      "net11.0"
+    ],
     "M:System.String.GetHashCode(System.ReadOnlySpan{System.Char})": [
       "net6.0",
       "net7.0",
@@ -3001,6 +3004,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.String.StartsWith(System.Char,System.StringComparison)": [
       "net11.0"
     ],
     "M:System.String.TryCopyTo(System.Span{System.Char})": [
@@ -4105,6 +4111,9 @@
       "net10.0",
       "net11.0"
     ],
+    "T:System.Runtime.CompilerServices.IUnion": [
+      "net11.0"
+    ],
     "T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute": [
       "net6.0",
       "net7.0",
@@ -4167,6 +4176,15 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "T:System.Runtime.CompilerServices.UnionAttribute": [
+      "net11.0"
+    ],
+    "T:System.Runtime.InteropServices.ExtendedLayoutAttribute": [
+      "net11.0"
+    ],
+    "T:System.Runtime.InteropServices.ExtendedLayoutKind": [
       "net11.0"
     ],
     "T:System.Runtime.InteropServices.SuppressGCTransitionAttribute": [
