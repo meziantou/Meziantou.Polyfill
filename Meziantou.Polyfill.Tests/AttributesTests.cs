@@ -51,6 +51,7 @@ public class AttributesTests
         _ = new ModuleInitializerAttribute();
         _ = new RequiredMemberAttribute();
         _ = new SkipLocalsInitAttribute();
+        _ = new ExtendedLayoutAttribute(ExtendedLayoutKind.CStruct);
         _ = new SuppressGCTransitionAttribute();
         _ = new UnmanagedCallersOnlyAttribute();
         _ = new ObsoletedOSPlatformAttribute("");
@@ -64,8 +65,22 @@ public class AttributesTests
         _ = new ConstantExpectedAttribute();
         _ = new ExperimentalAttribute("test");
         _ = new OverloadResolutionPriorityAttribute(1);
+        _ = new UnionAttribute();
+
+        _ = ExtendedLayoutKind.CStruct;
+        _ = ExtendedLayoutKind.CUnion;
+        _ = typeof(IUnion);
 
         _ = typeof(IsExternalInit);
+
+        Assert.Null(((IUnion)new CustomUnion(null)).Value);
     }
 
+}
+
+file sealed class CustomUnion : IUnion
+{
+    public CustomUnion(object? value) => Value = value;
+
+    public object? Value { get; }
 }

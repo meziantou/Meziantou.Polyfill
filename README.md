@@ -52,7 +52,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (72)
+### Types (76)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -98,6 +98,7 @@ The filtering logic works as follows:
 - `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute`
 - `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler`
 - `System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute`
+- `System.Runtime.CompilerServices.IUnion`
 - `System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute`
 - `System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute`
 - `System.Runtime.CompilerServices.IsExternalInit`
@@ -106,6 +107,9 @@ The filtering logic works as follows:
 - `System.Runtime.CompilerServices.RequiredMemberAttribute`
 - `System.Runtime.CompilerServices.SkipLocalsInitAttribute`
 - `System.Runtime.CompilerServices.TupleElementNamesAttribute`
+- `System.Runtime.CompilerServices.UnionAttribute`
+- `System.Runtime.InteropServices.ExtendedLayoutAttribute`
+- `System.Runtime.InteropServices.ExtendedLayoutKind`
 - `System.Runtime.InteropServices.SuppressGCTransitionAttribute`
 - `System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute`
 - `System.Runtime.Versioning.ObsoletedOSPlatformAttribute`
@@ -127,7 +131,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (551)
+### Methods (553)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -578,6 +582,7 @@ The filtering logic works as follows:
 - `System.String.Create(System.IFormatProvider? provider, ref System.Runtime.CompilerServices.DefaultInterpolatedStringHandler handler)`
 - `System.String.Create<TState>(System.Int32 length, TState state, System.Buffers.SpanAction<System.Char, TState> action) where TState : allows ref struct`
 - `System.String.EndsWith(System.Char value)`
+- `System.String.EndsWith(System.Char value, System.StringComparison comparisonType)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)`
 - `System.String.GetHashCode(System.StringComparison comparisonType)`
@@ -595,6 +600,7 @@ The filtering logic works as follows:
 - `System.String.Split(System.Char separator, System.Int32 count, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.Split(System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.StartsWith(System.Char value)`
+- `System.String.StartsWith(System.Char value, System.StringComparison comparisonType)`
 - `System.String.TryCopyTo(System.Span<System.Char> destination)`
 - `System.StringComparer.FromComparison(System.StringComparison comparisonType)`
 - `System.Text.Encoding.GetByteCount(System.ReadOnlySpan<System.Char> chars)`
