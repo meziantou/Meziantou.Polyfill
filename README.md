@@ -127,7 +127,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (549)
+### Methods (551)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -581,6 +581,8 @@ The filtering logic works as follows:
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)`
 - `System.String.GetHashCode(System.StringComparison comparisonType)`
+- `System.String.IndexOf(System.Char value, System.Int32 startIndex, System.Int32 count, System.StringComparison comparisonType)`
+- `System.String.IndexOf(System.Char value, System.Int32 startIndex, System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Join(System.Char separator, params System.Object?[] values)`
 - `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.Object?> values)`

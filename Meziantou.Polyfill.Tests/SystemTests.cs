@@ -128,6 +128,20 @@ public class SystemTests
     }
 
     [Fact]
+    public void String_IndexOf_Char_StartIndex_StringComparison()
+    {
+        Assert.Equal(2, "test".IndexOf('S', 1, StringComparison.OrdinalIgnoreCase));
+        Assert.Equal(-1, "test".IndexOf('T', 1, StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void String_IndexOf_Char_StartIndex_Count_StringComparison()
+    {
+        Assert.Equal(2, "test".IndexOf('S', 1, 2, StringComparison.OrdinalIgnoreCase));
+        Assert.Equal(-1, "test".IndexOf('t', 1, 2, StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void HashCode_Combine()
     {
         Assert.Equal(HashCode.Combine("foo", "bar"), HashCode.Combine("foo", "bar"));
