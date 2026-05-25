@@ -146,6 +146,14 @@ public class SystemTests
     }
 
     [Fact]
+    public void String_LastIndexOf_Char_StringComparison()
+    {
+        Assert.Equal(4, "tEstT".LastIndexOf('t', StringComparison.OrdinalIgnoreCase));
+        Assert.Equal(3, "tEstT".LastIndexOf('t', StringComparison.Ordinal));
+        Assert.Equal(-1, "".LastIndexOf('t', StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void String_IndexOf_Char_StartIndex_StringComparison()
     {
         Assert.Equal(2, "test".IndexOf('S', 1, StringComparison.OrdinalIgnoreCase));

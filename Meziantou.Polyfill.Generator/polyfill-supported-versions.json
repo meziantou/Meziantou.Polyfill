@@ -2954,6 +2954,9 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.String.LastIndexOf(System.Char,System.StringComparison)": [
+      "net11.0"
+    ],
     "M:System.String.Replace(System.String,System.String,System.StringComparison)": [
       "netstandard2.1",
       "net6.0",
