@@ -1,4 +1,3 @@
-// when M:System.Uri.UnescapeDataString(System.ReadOnlySpan{System.Char})
 using System;
 
 static partial class PolyfillExtensions
