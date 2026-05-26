@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -2324,6 +2325,85 @@ public class SystemTests
 
         Assert.False(Uri.TryUnescapeDataString("%20suffix".AsSpan(), buffer[..1], out written));
         Assert.Equal(0, written);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NullableProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NullableString))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+        Assert.Equal(NullabilityState.Nullable, info.WriteState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NonNullableProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NonNullString))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+        Assert.Equal(NullabilityState.NotNull, info.WriteState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_ValueTypeProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.IntValue))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NullableValueTypeProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NullableInt))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_Field()
+    {
+        var context = new NullabilityInfoContext();
+        var field = typeof(NullabilityTestHelper).GetField(nameof(NullabilityTestHelper.NullableField))!;
+        var info = context.Create(field);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_Parameter()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.MethodWithNullableParam))!;
+        var param = method.GetParameters()[0];
+        var info = context.Create(param);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_GenericTypeArguments()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.ListOfNullableStrings))!;
+        var info = context.Create(property);
+        Assert.Single(info.GenericTypeArguments);
+        Assert.Equal(NullabilityState.Nullable, info.GenericTypeArguments[0].ReadState);
+    }
+
+    private class NullabilityTestHelper
+    {
+        public string? NullableString { get; set; }
+        public string NonNullString { get; set; } = "";
+        public int IntValue { get; set; }
+        public int? NullableInt { get; set; }
+        public string? NullableField = null;
+        public List<string?> ListOfNullableStrings { get; set; } = new();
+
+        public void MethodWithNullableParam(string? value) { }
     }
 
 }
