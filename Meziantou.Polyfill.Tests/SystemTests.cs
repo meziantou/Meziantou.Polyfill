@@ -2284,4 +2284,46 @@ public class SystemTests
         Assert.Throws<ArgumentOutOfRangeException>(() => Guid.CreateVersion7(beforeEpoch));
     }
 
+    [Fact]
+    public void Uri_EscapeDataString_ReadOnlySpan()
+    {
+        Assert.Equal("hello", Uri.EscapeDataString("hello".AsSpan()));
+        Assert.Equal("hello%20world", Uri.EscapeDataString("hello world".AsSpan()));
+        Assert.Equal("", Uri.EscapeDataString(ReadOnlySpan<char>.Empty));
+        Assert.Equal("%26%3D%3F", Uri.EscapeDataString("&=?".AsSpan()));
+    }
+
+    [Fact]
+    public void Uri_UnescapeDataString_ReadOnlySpan()
+    {
+        Assert.Equal("hello", Uri.UnescapeDataString("hello".AsSpan()));
+        Assert.Equal("hello world", Uri.UnescapeDataString("hello%20world".AsSpan()));
+        Assert.Equal("", Uri.UnescapeDataString(ReadOnlySpan<char>.Empty));
+        Assert.Equal("&=?", Uri.UnescapeDataString("%26%3D%3F".AsSpan()));
+    }
+
+    [Fact]
+    public void Uri_TryEscapeDataString()
+    {
+        Span<char> buffer = stackalloc char[128];
+
+        Assert.True(Uri.TryEscapeDataString("hello world".AsSpan(), buffer, out var written));
+        Assert.Equal("hello%20world", buffer[..written].ToString());
+
+        Assert.False(Uri.TryEscapeDataString("hello world".AsSpan(), buffer[..1], out written));
+        Assert.Equal(0, written);
+    }
+
+    [Fact]
+    public void Uri_TryUnescapeDataString()
+    {
+        Span<char> buffer = stackalloc char[128];
+
+        Assert.True(Uri.TryUnescapeDataString("hello%20world".AsSpan(), buffer, out var written));
+        Assert.Equal("hello world", buffer[..written].ToString());
+
+        Assert.False(Uri.TryUnescapeDataString("hello%20world".AsSpan(), buffer[..1], out written));
+        Assert.Equal(0, written);
+    }
+
 }
