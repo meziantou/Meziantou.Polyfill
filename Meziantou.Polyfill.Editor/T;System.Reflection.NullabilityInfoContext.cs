@@ -619,10 +619,10 @@ namespace System.Reflection
 
 file static class NullabilityInfoContextHelpers
 {
-    public static MemberInfo GetMemberWithSameMetadataDefinitionAs(Type type, MemberInfo member)
+    public static System.Reflection.MemberInfo GetMemberWithSameMetadataDefinitionAs(Type type, System.Reflection.MemberInfo member)
     {
-        const BindingFlags all = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
-        foreach (MemberInfo myMemberInfo in type.GetMembers(all))
+        const System.Reflection.BindingFlags all = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Instance;
+        foreach (System.Reflection.MemberInfo myMemberInfo in type.GetMembers(all))
         {
             if (myMemberInfo.MetadataToken == member.MetadataToken && myMemberInfo.Module.Equals(member.Module))
             {
