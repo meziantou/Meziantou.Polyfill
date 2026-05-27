@@ -60,4 +60,24 @@ public class SystemDiagnosticsTests
         Assert.Same(innerException, exception.InnerException);
     }
 
+    [Fact]
+    public void Stopwatch_GetElapsedTime_TwoTimestamps()
+    {
+        var start = Stopwatch.GetTimestamp();
+        Thread.Sleep(15);
+        var end = Stopwatch.GetTimestamp();
+
+        var elapsed = Stopwatch.GetElapsedTime(start, end);
+        Assert.True(elapsed.TotalMilliseconds >= 10, $"Expected >= 10ms, got {elapsed.TotalMilliseconds}ms");
+        Assert.True(elapsed.TotalSeconds < 5, $"Expected < 5s, got {elapsed.TotalSeconds}s");
+    }
+
+    [Fact]
+    public void Stopwatch_GetElapsedTime_SameTimestamp_ReturnsZero()
+    {
+        var timestamp = Stopwatch.GetTimestamp();
+        var elapsed = Stopwatch.GetElapsedTime(timestamp, timestamp);
+        Assert.Equal(TimeSpan.Zero, elapsed);
+    }
+
 }

@@ -545,6 +545,13 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64,System.Int64)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Double.Parse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider)": [
       "net8.0",
       "net9.0",
