@@ -399,6 +399,17 @@ public class SystemTests
     }
 
     [Fact]
+    public void Environment_TickCount64()
+    {
+        var first = Environment.TickCount64;
+        Assert.True(first > 0, $"Expected positive value, got {first}");
+
+        Thread.Sleep(15);
+        var second = Environment.TickCount64;
+        Assert.True(second > first, $"Expected {second} > {first}");
+    }
+
+    [Fact]
     public void String_Join_Char()
     {
         Assert.Equal("a,b,c", string.Join(',', (object[])["a", "b", "c"]));
