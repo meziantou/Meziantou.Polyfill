@@ -1,4 +1,3 @@
-// when T:System.Reflection.NullabilityState
 namespace System.Reflection
 {
     internal sealed class NullabilityInfo

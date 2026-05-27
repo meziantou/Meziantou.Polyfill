@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -91,5 +92,258 @@ public class SystemReflectionTests
         var method = typeof(string).GetMethod("ToUpper", Type.EmptyTypes)!;
         var del = method.CreateDelegate<Func<string>>("hello");
         Assert.Equal("HELLO", del());
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NullableProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NullableString))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+        Assert.Equal(NullabilityState.Nullable, info.WriteState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NonNullableProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NonNullString))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+        Assert.Equal(NullabilityState.NotNull, info.WriteState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_ValueTypeProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.IntValue))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NullableValueTypeProperty()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NullableInt))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_Field()
+    {
+        var context = new NullabilityInfoContext();
+        var field = typeof(NullabilityTestHelper).GetField(nameof(NullabilityTestHelper.NullableField))!;
+        var info = context.Create(field);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_Parameter()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.MethodWithNullableParam))!;
+        var param = method.GetParameters()[0];
+        var info = context.Create(param);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_GenericTypeArguments()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.ListOfNullableStrings))!;
+        var info = context.Create(property);
+        Assert.Single(info.GenericTypeArguments);
+        Assert.Equal(NullabilityState.Nullable, info.GenericTypeArguments[0].ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NestedGenericType()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NestedGeneric))!;
+        var info = context.Create(property);
+
+        Assert.Equal(2, info.GenericTypeArguments.Length);
+        Assert.Equal(NullabilityState.NotNull, info.GenericTypeArguments[0].ReadState);
+        Assert.Equal(NullabilityState.Nullable, info.GenericTypeArguments[1].ReadState);
+        Assert.Single(info.GenericTypeArguments[1].GenericTypeArguments);
+        Assert.Equal(NullabilityState.Nullable, info.GenericTypeArguments[1].GenericTypeArguments[0].ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_MaybeNullAttribute()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.MethodWithMaybeNullReturn))!;
+        var info = context.Create(method.ReturnParameter);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NotNullAttribute()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.MethodWithNotNullParam))!;
+        var param = method.GetParameters()[0];
+        var info = context.Create(param);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_AllowNullAttribute()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.AllowNullProperty))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+        Assert.Equal(NullabilityState.Nullable, info.WriteState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_DisallowNullAttribute()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.DisallowNullProperty))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+        Assert.Equal(NullabilityState.NotNull, info.WriteState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_MaybeNullWhenAttribute()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.TryGetValue))!;
+        var param = method.GetParameters()[0];
+        var info = context.Create(param);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_Event()
+    {
+        var context = new NullabilityInfoContext();
+        var eventInfo = typeof(NullabilityTestHelper).GetEvent(nameof(NullabilityTestHelper.MyEvent))!;
+        var info = context.Create(eventInfo);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NullableArrayElement()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NullableStringArray))!;
+        var info = context.Create(property);
+        Assert.NotNull(info.ElementType);
+        Assert.Equal(NullabilityState.Nullable, info.ElementType!.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NonNullableArrayElement()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.NonNullStringArray))!;
+        var info = context.Create(property);
+        Assert.NotNull(info.ElementType);
+        Assert.Equal(NullabilityState.NotNull, info.ElementType!.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_ArrayOfGeneric()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityTestHelper).GetProperty(nameof(NullabilityTestHelper.ArrayOfGeneric))!;
+        var info = context.Create(property);
+        Assert.NotNull(info.ElementType);
+        Assert.Single(info.ElementType!.GenericTypeArguments);
+        Assert.Equal(NullabilityState.Nullable, info.ElementType.GenericTypeArguments[0].ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NonNullableField()
+    {
+        var context = new NullabilityInfoContext();
+        var field = typeof(NullabilityTestHelper).GetField(nameof(NullabilityTestHelper.NonNullableField))!;
+        var info = context.Create(field);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NonNullableParameter()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.MethodWithNonNullParam))!;
+        var param = method.GetParameters()[0];
+        var info = context.Create(param);
+        Assert.Equal(NullabilityState.NotNull, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_NullableReturnType()
+    {
+        var context = new NullabilityInfoContext();
+        var method = typeof(NullabilityTestHelper).GetMethod(nameof(NullabilityTestHelper.MethodReturningNullable))!;
+        var info = context.Create(method.ReturnParameter);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    [Fact]
+    public void NullabilityInfoContext_Create_GenericTypeInheritance()
+    {
+        var context = new NullabilityInfoContext();
+        var property = typeof(NullabilityDerivedHelper).GetProperty(nameof(NullabilityDerivedHelper.Value))!;
+        var info = context.Create(property);
+        Assert.Equal(NullabilityState.Nullable, info.ReadState);
+    }
+
+    private sealed class NullabilityTestHelper
+    {
+        public string? NullableString { get; set; }
+        public string NonNullString { get; set; } = "";
+        public int IntValue { get; set; }
+        public int? NullableInt { get; set; }
+#pragma warning disable CA1805
+        public string? NullableField = null;
+#pragma warning restore CA1805
+        public string NonNullableField = "";
+        public List<string?> ListOfNullableStrings { get; set; } = new();
+        public Dictionary<string, List<string?>?> NestedGeneric { get; set; } = new();
+        public string?[] NullableStringArray { get; set; } = Array.Empty<string?>();
+        public string[] NonNullStringArray { get; set; } = Array.Empty<string>();
+        public List<string?>[] ArrayOfGeneric { get; set; } = Array.Empty<List<string?>>();
+
+        [AllowNull]
+        public string AllowNullProperty { get; set; } = "";
+
+        [DisallowNull]
+        public string? DisallowNullProperty { get; set; } = "";
+
+        public static event EventHandler MyEvent { add { } remove { } }
+
+        public static void MethodWithNullableParam(string? value) { }
+        public static void MethodWithNonNullParam(string value) { }
+
+        [return: MaybeNull]
+        public static string MethodWithMaybeNullReturn() => "";
+
+        public static void MethodWithNotNullParam([NotNull] string? value) { _ = value!.Length; }
+
+        public static bool TryGetValue([MaybeNullWhen(false)] out string value) { value = null!; return false; }
+
+        public static string? MethodReturningNullable() => null;
+    }
+
+    private class NullabilityBaseHelper<T>
+    {
+        public T Value { get; set; } = default!;
+    }
+
+    private sealed class NullabilityDerivedHelper : NullabilityBaseHelper<string?>
+    {
     }
 }
