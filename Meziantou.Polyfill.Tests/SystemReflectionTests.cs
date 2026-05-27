@@ -325,15 +325,21 @@ public class SystemReflectionTests
 
         public static event EventHandler MyEvent { add { } remove { } }
 
+#pragma warning disable IDE0060
         public static void MethodWithNullableParam(string? value) { }
         public static void MethodWithNonNullParam(string value) { }
+#pragma warning restore IDE0060
 
         [return: MaybeNull]
         public static string MethodWithMaybeNullReturn() => "";
 
+#pragma warning disable IDE0370
         public static void MethodWithNotNullParam([NotNull] string? value) { _ = value!.Length; }
+#pragma warning restore IDE0370
 
+#pragma warning disable IDE0370
         public static bool TryGetValue([MaybeNullWhen(false)] out string value) { value = null!; return false; }
+#pragma warning restore IDE0370
 
         public static string? MethodReturningNullable() => null;
     }

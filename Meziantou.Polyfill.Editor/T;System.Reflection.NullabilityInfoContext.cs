@@ -618,7 +618,7 @@ namespace System.Reflection
 
 file static class NullabilityInfoContextHelpers
 {
-    public static System.Reflection.MemberInfo GetMemberWithSameMetadataDefinitionAs(Type type, System.Reflection.MemberInfo member)
+    public static System.Reflection.MemberInfo GetMemberWithSameMetadataDefinitionAs(System.Type type, System.Reflection.MemberInfo member)
     {
         const System.Reflection.BindingFlags all = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Instance;
         foreach (System.Reflection.MemberInfo myMemberInfo in type.GetMembers(all))
@@ -629,9 +629,9 @@ file static class NullabilityInfoContextHelpers
             }
         }
 
-        throw new MissingMemberException(type.FullName, member.Name);
+        throw new System.MissingMemberException(type.FullName, member.Name);
     }
 
-    public static bool IsGenericMethodParameter(Type type)
+    public static bool IsGenericMethodParameter(System.Type type)
         => type.IsGenericParameter && type.DeclaringMethod is not null;
 }
