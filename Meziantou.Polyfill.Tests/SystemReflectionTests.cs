@@ -303,14 +303,15 @@ public class SystemReflectionTests
 
     private sealed class NullabilityTestHelper
     {
+        public string NonNullableField = "";
+#pragma warning disable CA1805
+        public string? NullableField = null;
+#pragma warning restore CA1805
+
         public string? NullableString { get; set; }
         public string NonNullString { get; set; } = "";
         public int IntValue { get; set; }
         public int? NullableInt { get; set; }
-#pragma warning disable CA1805
-        public string? NullableField = null;
-#pragma warning restore CA1805
-        public string NonNullableField = "";
         public List<string?> ListOfNullableStrings { get; set; } = new();
         public Dictionary<string, List<string?>?> NestedGeneric { get; set; } = new();
         public string?[] NullableStringArray { get; set; } = Array.Empty<string?>();
@@ -325,23 +326,20 @@ public class SystemReflectionTests
 
         public static event EventHandler MyEvent { add { } remove { } }
 
+        public static string? MethodReturningNullable() => null;
+
+        [return: MaybeNull]
+        public static string MethodWithMaybeNullReturn() => "";
+
 #pragma warning disable IDE0060
         public static void MethodWithNullableParam(string? value) { }
         public static void MethodWithNonNullParam(string value) { }
 #pragma warning restore IDE0060
 
-        [return: MaybeNull]
-        public static string MethodWithMaybeNullReturn() => "";
-
 #pragma warning disable IDE0370
         public static void MethodWithNotNullParam([NotNull] string? value) { _ = value!.Length; }
-#pragma warning restore IDE0370
-
-#pragma warning disable IDE0370
         public static bool TryGetValue([MaybeNullWhen(false)] out string value) { value = null!; return false; }
 #pragma warning restore IDE0370
-
-        public static string? MethodReturningNullable() => null;
     }
 
     private class NullabilityBaseHelper<T>
