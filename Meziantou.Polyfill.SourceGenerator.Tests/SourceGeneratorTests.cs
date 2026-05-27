@@ -6,12 +6,11 @@ using System.Security.Cryptography;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Xunit.Sdk;
 
 namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
-public class UnitTest1
+public sealed class SourceGeneratorTests
 {
     private const string LatestDotnetPackageVersion = "11.0.0-preview.4.26230.115";
     private const string LatestDotnetTfm = "net11.0";
@@ -592,39 +591,81 @@ public class UnitTest1
     {
         private static readonly ConcurrentDictionary<string, Lazy<Task<string[]>>> Cache = new(StringComparer.Ordinal);
 
-        public static Task<string[]> GetNuGetReferences(string packageName, string version, string path, string[]? exclusions = null)
+        public static async Task<string[]> GetNuGetReferences(string packageName, string version, string path, string[]? exclusions = null)
         {
-            string key = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(packageName + '@' + version + ':' + path + (exclusions is null ? "" : string.Join(":", exclusions)))));
-            var task = Cache.GetOrAdd(key, key =>
+            var bytes = Encoding.UTF8.GetBytes("v2:" + packageName + '@' + version + ':' + path + ':' + string.Join(',', exclusions ?? []));
+            var hash = SHA256.HashData(bytes);
+            var key = Convert.ToBase64String(hash).Replace('/', '_');
+            var task = Cache.GetOrAdd(key, _ => new Lazy<Task<string[]>>(Download));
+            try
             {
-                return new Lazy<Task<string[]>>(Download);
-            });
-
-            return task.Value;
+                return await task.Value.ConfigureAwait(false);
+            }
+            catch
+            {
+                _ = Cache.TryRemove(key, out _);
+                throw;
+            }
 
             async Task<string[]> Download()
             {
-                var tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Meziantou.PolyfillTests", "ref", packageName + '@' + version);
-                if (!Directory.Exists(tempFolder) || !Directory.EnumerateFileSystemEntries(tempFolder).Any())
+                var cacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Meziantou.AnalyzerTests", "ref", key);
+                var completionFile = Path.Combine(cacheFolder, ".complete");
+                bool IsCacheValid()
                 {
-                    Directory.CreateDirectory(tempFolder);
-                    using var httpClient = new HttpClient();
-                    using var stream = await httpClient.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
-                    using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
+                    if (!Directory.Exists(cacheFolder))
+                        return false;
 
-                    foreach (var entry in zip.Entries)
+                    if (File.Exists(completionFile))
+                        return true;
+
+                    return Directory.EnumerateFileSystemEntries(cacheFolder).Any();
+                }
+
+                if (!IsCacheValid())
+                {
+                    var tempFolder = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
+                    try
                     {
-                        var extractPath = Path.Combine(tempFolder, entry.FullName);
-                        Directory.CreateDirectory(Path.GetDirectoryName(extractPath)!);
-#if NET10_0_OR_GREATER
-                        await entry.ExtractToFileAsync(extractPath, overwrite: true);
-#else
-                        entry.ExtractToFile(extractPath, overwrite: true);
-#endif
+                        Directory.CreateDirectory(tempFolder);
+                        await using var stream = await SharedHttpClient.Instance.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
+                        await using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
+
+                        foreach (var entry in zip.Entries)
+                        {
+                            if (string.IsNullOrEmpty(entry.Name))
+                                continue;
+
+                            var destinationPath = Path.Combine(tempFolder, entry.FullName.Replace('/', Path.DirectorySeparatorChar));
+                            Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
+                            await entry.ExtractToFileAsync(destinationPath, overwrite: true);
+                        }
+
+                        await File.WriteAllTextAsync(Path.Combine(tempFolder, ".complete"), string.Empty).ConfigureAwait(false);
+
+                        try
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(cacheFolder)!);
+                            Directory.Move(tempFolder, cacheFolder);
+                        }
+                        catch (Exception ex)
+                        {
+                            if (!IsCacheValid())
+                            {
+                                throw new InvalidOperationException("Cannot download NuGet package " + packageName + "@" + version + "\n" + ex);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        if (Directory.Exists(tempFolder))
+                        {
+                            Directory.Delete(tempFolder, recursive: true);
+                        }
                     }
                 }
 
-                var dlls = Directory.GetFiles(tempFolder, "*.dll", SearchOption.AllDirectories);
+                var dlls = Directory.GetFiles(cacheFolder, "*.dll", SearchOption.AllDirectories);
 
                 // Filter invalid .NET assembly
                 var result = new List<string>();
@@ -633,8 +674,11 @@ public class UnitTest1
                     if (Path.GetFileName(dll) == "System.EnterpriseServices.Wrapper.dll")
                         continue;
 
-                    var relativePath = Path.GetRelativePath(tempFolder, dll).Replace('\\', '/');
-                    if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
+                    if (Path.GetFileName(dll).EndsWith(".resources.dll", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    var relativePath = Path.GetRelativePath(cacheFolder, dll).Replace('\\', '/');
+                      if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
                         continue;
 
                     if (exclusions != null)
