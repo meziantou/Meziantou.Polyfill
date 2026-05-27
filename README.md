@@ -677,8 +677,8 @@ The filtering logic works as follows:
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt64 result)`
 - `System.Uri.EscapeDataString(System.ReadOnlySpan<System.Char> charsToEscape)`
 - `System.Uri.TryEscapeDataString(System.ReadOnlySpan<System.Char> charsToEscape, System.Span<System.Char> destination, out System.Int32 charsWritten)`
-- `System.Uri.UnescapeDataString(System.ReadOnlySpan<System.Char> charsToUnescape)`
 - `System.Uri.TryUnescapeDataString(System.ReadOnlySpan<System.Char> charsToUnescape, System.Span<System.Char> destination, out System.Int32 charsWritten)`
+- `System.Uri.UnescapeDataString(System.ReadOnlySpan<System.Char> charsToUnescape)`
 - `System.Xml.Linq.XDocument.LoadAsync(System.IO.Stream stream, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XDocument.LoadAsync(System.IO.TextReader textReader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XDocument.LoadAsync(System.Xml.XmlReader reader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`

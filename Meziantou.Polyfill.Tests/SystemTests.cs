@@ -2322,7 +2322,7 @@ public class SystemTests
         Assert.True(Uri.TryUnescapeDataString("hello%20world".AsSpan(), buffer, out var written));
         Assert.Equal("hello world", buffer[..written].ToString());
 
-        Assert.False(Uri.TryUnescapeDataString("hello%20world".AsSpan(), buffer[..1], out written));
+        Assert.False(Uri.TryUnescapeDataString("%20suffix".AsSpan(), buffer[..1], out written));
         Assert.Equal(0, written);
     }
 
