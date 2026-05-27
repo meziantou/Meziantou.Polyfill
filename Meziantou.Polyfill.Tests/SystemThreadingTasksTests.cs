@@ -46,10 +46,10 @@ public class SystemThreadingTasksTests
     {
         var tcs = new TaskCompletionSource<int>();
         using var cts = new CancellationTokenSource();
-        
+
         var task = tcs.Task.WaitAsync(cts.Token);
         cts.Cancel();
-        
+
         await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
     }
 
@@ -97,8 +97,8 @@ public class SystemThreadingTasksTests
     public async Task Task_WaitAsync_Generic_TimeSpan_Timeout()
     {
         var tcs = new TaskCompletionSource<int>();
-        
-        await Assert.ThrowsAsync<TimeoutException>(async () => 
+
+        await Assert.ThrowsAsync<TimeoutException>(async () =>
             await tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(100)));
     }
 
@@ -106,8 +106,8 @@ public class SystemThreadingTasksTests
     public async Task Task_WaitAsync_Generic_TimeSpan_Zero_Timeout()
     {
         var tcs = new TaskCompletionSource<int>();
-        
-        await Assert.ThrowsAsync<TimeoutException>(async () => 
+
+        await Assert.ThrowsAsync<TimeoutException>(async () =>
             await tcs.Task.WaitAsync(TimeSpan.Zero));
     }
 
@@ -131,8 +131,8 @@ public class SystemThreadingTasksTests
     public async Task Task_WaitAsync_NonGeneric_TimeSpan_Timeout()
     {
         var tcs = new TaskCompletionSource<int>();
-        
-        await Assert.ThrowsAsync<TimeoutException>(async () => 
+
+        await Assert.ThrowsAsync<TimeoutException>(async () =>
             await ((Task)tcs.Task).WaitAsync(TimeSpan.FromMilliseconds(100)));
     }
 
@@ -154,8 +154,8 @@ public class SystemThreadingTasksTests
     public async Task Task_WaitAsync_Generic_TimeSpan_CancellationToken_Timeout()
     {
         var tcs = new TaskCompletionSource<int>();
-        
-        await Assert.ThrowsAsync<TimeoutException>(async () => 
+
+        await Assert.ThrowsAsync<TimeoutException>(async () =>
             await tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(100), CancellationToken.None));
     }
 
@@ -166,7 +166,7 @@ public class SystemThreadingTasksTests
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => 
+        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             await tcs.Task.WaitAsync(TimeSpan.FromSeconds(5), cts.Token));
     }
 
@@ -175,10 +175,10 @@ public class SystemThreadingTasksTests
     {
         var tcs = new TaskCompletionSource<int>();
         using var cts = new CancellationTokenSource();
-        
+
         var task = tcs.Task.WaitAsync(TimeSpan.FromSeconds(5), cts.Token);
         cts.Cancel();
-        
+
         await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
     }
 
@@ -202,8 +202,8 @@ public class SystemThreadingTasksTests
     public async Task Task_WaitAsync_NonGeneric_TimeSpan_CancellationToken_Timeout()
     {
         var tcs = new TaskCompletionSource<int>();
-        
-        await Assert.ThrowsAsync<TimeoutException>(async () => 
+
+        await Assert.ThrowsAsync<TimeoutException>(async () =>
             await ((Task)tcs.Task).WaitAsync(TimeSpan.FromMilliseconds(100), CancellationToken.None));
     }
 
@@ -214,7 +214,7 @@ public class SystemThreadingTasksTests
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => 
+        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             await ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), cts.Token));
     }
 }

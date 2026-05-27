@@ -6,18 +6,11 @@
   "packageRules": [
     {
       "matchFileNames": ["Meziantou.Polyfill/Meziantou.Polyfill.csproj"],
-      "matchPackageNames": [ 
+      "matchPackageNames": [
         "Microsoft.CodeAnalysis.Analyzers",
         "Microsoft.CodeAnalysis.CSharp",
         "Microsoft.CodeAnalysis.CSharp.Workspaces",
         "Microsoft.CodeAnalysis.Workspaces.Common"
-      ],
-      "enabled": false
-    },
-    {
-      "matchPackageNames": [ 
-        "xunit",
-        "xunit.runner.visualstudio"
       ],
       "enabled": false
     }
