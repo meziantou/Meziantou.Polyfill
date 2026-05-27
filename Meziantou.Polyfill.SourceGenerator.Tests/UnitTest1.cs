@@ -6,7 +6,8 @@ using System.Security.Cryptography;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Xunit.Abstractions;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Xunit.Sdk;
 
 namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
@@ -79,7 +80,7 @@ public class UnitTest1
         Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(tempGeneration.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
 
         var temp = Path.GetTempFileName() + ".dll";
-        await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!);
+        await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!, TestContext.Current.CancellationToken);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
@@ -101,8 +102,8 @@ public class UnitTest1
 
         var proj2Dll = Path.GetTempFileName() + ".dll";
         var proj3Dll = Path.GetTempFileName() + ".dll";
-        await File.WriteAllBytesAsync(proj2Dll, proj2Generation.Assembly!);
-        await File.WriteAllBytesAsync(proj3Dll, proj3Generation.Assembly!);
+        await File.WriteAllBytesAsync(proj2Dll, proj2Generation.Assembly!, TestContext.Current.CancellationToken);
+        await File.WriteAllBytesAsync(proj3Dll, proj3Generation.Assembly!, TestContext.Current.CancellationToken);
 
         // "main" references both assemblies. The generator must still produce types
         // that would otherwise be ambiguous (CS0433) between proj2 and proj3.
@@ -132,7 +133,7 @@ public class UnitTest1
             .ToArray();
 
         var compilation = CSharpCompilation.Create("TestProject",
-           new[] { CSharpSyntaxTree.ParseText("struct Test { }") },
+           new[] { CSharpSyntaxTree.ParseText("struct Test { }", cancellationToken: TestContext.Current.CancellationToken) },
            assemblies,
            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
@@ -150,11 +151,11 @@ public class UnitTest1
             driverOptions: new GeneratorDriverOptions(default, trackIncrementalGeneratorSteps: true));
 
         // Run the generator
-        driver = driver.RunGenerators(compilation);
+        driver = driver.RunGenerators(compilation, TestContext.Current.CancellationToken);
 
         // Update the compilation and rerun the generator
-        compilation = compilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText("// dummy"));
-        driver = driver.RunGenerators(compilation);
+        compilation = compilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText("// dummy", cancellationToken: TestContext.Current.CancellationToken));
+        driver = driver.RunGenerators(compilation, TestContext.Current.CancellationToken);
 
         // Assert the driver doesn't recompute the output
         var result = driver.GetRunResult().Results.Single();
@@ -499,9 +500,9 @@ public class UnitTest1
 
         public void Deserialize(IXunitSerializationInfo info)
         {
-            Name = info.GetValue<string>("Name");
-            Version = info.GetValue<string>("Version");
-            Path = info.GetValue<string>("Path");
+            Name = info.GetValue<string>("Name") ?? throw new InvalidOperationException("Missing Name");
+            Version = info.GetValue<string>("Version") ?? throw new InvalidOperationException("Missing Version");
+            Path = info.GetValue<string>("Path") ?? throw new InvalidOperationException("Missing Path");
             Exclusions = info.GetValue<string[]>("Exclusions");
         }
 
