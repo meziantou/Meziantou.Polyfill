@@ -211,7 +211,9 @@ public class SystemThreadingTests
 
         try
         {
+#pragma warning disable CA2012 // ValueTask must be consumed; the call throws synchronously so no ValueTask is produced
             Assert.Throws<InvalidOperationException>(() => timer.WaitForNextTickAsync());
+#pragma warning restore CA2012
         }
         finally
         {
@@ -332,7 +334,9 @@ public class SystemThreadingTests
         manualTimer.Fire();
         Assert.True(wait.IsCompleted);
 
+#pragma warning disable CA2012 // ValueTask must be consumed; the call throws synchronously so no ValueTask is produced
         Assert.Throws<InvalidOperationException>(() => timer.WaitForNextTickAsync());
+#pragma warning restore CA2012
         Assert.True(await WaitWithTimeout(wait));
     }
 
@@ -450,22 +454,9 @@ public class SystemThreadingTests
         }
     }
 
-    private static Task<T> WaitWithTimeout<T>(ValueTask<T> valueTask)
-    {
-        return WaitWithTimeout(AsTask(valueTask));
-    }
+    private static Task<T> WaitWithTimeout<T>(ValueTask<T> valueTask) => WaitWithTimeout(valueTask.AsTask());
 
-    private static async Task<T> WaitWithTimeout<T>(Task<T> task)
-    {
-        var completedTask = await Task.WhenAny(task, Task.Delay(TimeSpan.FromSeconds(5)));
-        Assert.Same(task, completedTask);
-        return await task;
-    }
-
-    private static async Task<T> AsTask<T>(ValueTask<T> valueTask)
-    {
-        return await valueTask;
-    }
+    private static Task<T> WaitWithTimeout<T>(Task<T> task) => task.WaitAsync(TimeSpan.FromSeconds(5));
 
     private sealed class ManualTimeProvider : TimeProvider
     {
