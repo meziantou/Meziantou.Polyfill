@@ -52,7 +52,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (79)
+### Types (82)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -122,8 +122,11 @@ The filtering logic works as follows:
 - `System.Runtime.Versioning.TargetPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute`
+- `System.Threading.ITimer`
 - `System.Threading.Lock`
+- `System.Threading.PeriodicTimer`
 - `System.Threading.Tasks.TaskToAsyncResult`
+- `System.TimeProvider`
 - `System.ValueTuple`
 - `System.ValueTuple<T1>`
 - `System.ValueTuple<T1, T2>`

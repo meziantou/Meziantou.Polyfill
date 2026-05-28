@@ -24,8 +24,13 @@ internal sealed partial class PolyfillData
         "System.ReadOnlySpan`1",
         "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
         "System.Span`1",
+        "System.Threading.ITimer",
+        "System.Threading.Tasks.Sources.IValueTaskSource`1",
+        "System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags",
+        "System.Threading.Tasks.Sources.ValueTaskSourceStatus",
         "System.Threading.Tasks.ValueTask",
         "System.Threading.Tasks.ValueTask`1",
+        "System.TimeProvider",
         "System.TimeOnly",
     ];
 
@@ -113,6 +118,30 @@ internal sealed partial class PolyfillData
             }
         }
 
+        foreach (var constructor in root.DescendantNodes().OfType<ConstructorDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(constructor)!;
+            foreach (var param in symbol.Parameters.Select(p => p.Type))
+            {
+                requiredTypes.Add(param);
+            }
+        }
+
+        foreach (var property in root.DescendantNodes().OfType<PropertyDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(property)!;
+            requiredTypes.Add(symbol.Type);
+        }
+
+        foreach (var field in root.DescendantNodes().OfType<FieldDeclarationSyntax>())
+        {
+            var type = semanticModel.GetTypeInfo(field.Declaration.Type).Type;
+            if (type is not null)
+            {
+                requiredTypes.Add(type);
+            }
+        }
+
         foreach (var @delegate in root.DescendantNodes().OfType<DelegateDeclarationSyntax>())
         {
             var symbol = semanticModel.GetDeclaredSymbol(@delegate)!;
@@ -168,6 +197,9 @@ internal sealed partial class PolyfillData
         {
             foreach (var potentialRequiredType in PotentialRequiredTypes)
             {
+                if (data.XmlDocumentationId == "T:" + potentialRequiredType)
+                    continue;
+
                 if (SymbolEqualityComparer.Default.Equals(requiredType.OriginalDefinition, compilation.GetTypeByMetadataName(potentialRequiredType)))
                 {
                     data.RequiredTypes.Add(potentialRequiredType);

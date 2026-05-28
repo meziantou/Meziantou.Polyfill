@@ -70,6 +70,37 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task PeriodicTimer_UsesMicrosoftBclTimeProviderTypes_WhenReferenced()
+    {
+        var assemblies = new List<string>();
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("Microsoft.NETFramework.ReferenceAssemblies.net472", "1.0.3", ""));
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("System.Threading.Tasks.Extensions", "4.5.4", "lib/net461/"));
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("Microsoft.Bcl.AsyncInterfaces", "8.0.0", "lib/net462/"));
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("Microsoft.Bcl.TimeProvider", "8.0.1", "lib/net462/"));
+
+        var result = GenerateFiles(
+            """
+            using System;
+            using System.Threading;
+
+            class Test
+            {
+                void M()
+                {
+                    using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(1), TimeProvider.System);
+                }
+            }
+            """,
+            assemblyLocations: assemblies,
+            includedPolyfills: "T:System.Threading.PeriodicTimer");
+
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        Assert.Contains("T_System.Threading.PeriodicTimer.g.cs", generatedFileNames);
+        Assert.DoesNotContain("T_System.Threading.ITimer.g.cs", generatedFileNames);
+        Assert.DoesNotContain("T_System.TimeProvider.g.cs", generatedFileNames);
+    }
+
+    [Fact]
     public async Task InternalsVisibleTo_EmbeddedTypesAreRegenerated()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
