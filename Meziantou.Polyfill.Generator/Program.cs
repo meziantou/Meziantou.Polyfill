@@ -130,6 +130,74 @@ async Task GenerateMembers()
 {
     var fieldCount = (polyfills.Length / 64) + (polyfills.Length % 64 > 0 ? 1 : 0);
 
+    // Feature-bit allocation: pack _supportExtensions/_supportUnsafe/_supportAllowsRefStruct
+    // and the per-required-type presence flags into a single ulong _features so the table loop
+    // can short-circuit a polyfill with a single AND-compare against entry.RequiredFeatures.
+    const int FeatureBitExtensions = 0;
+    const int FeatureBitUnsafe = 1;
+    const int FeatureBitAllowsRefStruct = 2;
+    var featureBitForType = new Dictionary<string, int>(StringComparer.Ordinal);
+    for (var i = 0; i < requiredTypes.Length; i++)
+    {
+        featureBitForType[requiredTypes[i].TypeName] = 3 + i;
+    }
+    var totalFeatureBits = 3 + requiredTypes.Length;
+    if (totalFeatureBits > 64)
+        throw new InvalidOperationException($"Feature bit count ({totalFeatureBits}) exceeds 64; widen _features.");
+
+    // Build the ordered table of entries plus the flat conditional/declared arrays.
+    var conditionals = new List<(byte FieldIndex, ulong Mask)>();
+    var declaredDocIds = new List<string>();
+    var tableEntries = new List<(Polyfill Polyfill, sbyte ProvidesFeatureBit, ushort CondStart, byte CondCount, ushort DeclStart, byte DeclCount, ulong RequiredFeatures)>();
+
+    void AddEntry(Polyfill polyfill, int? providesFeatureBit)
+    {
+        ulong required = 0;
+        if (polyfill.PolyfillData.UseExtensions) required |= 1uL << FeatureBitExtensions;
+        if (polyfill.PolyfillData.UseUnsafe) required |= 1uL << FeatureBitUnsafe;
+        foreach (var rt in polyfill.PolyfillData.RequiredTypes)
+            required |= 1uL << featureBitForType[rt];
+
+        var condStart = (ushort)conditionals.Count;
+        byte condCount = 0;
+        foreach (var member in polyfill.PolyfillData.ConditionalMembers)
+        {
+            var dep = polyfills.Single(p => p.TypeName == member);
+            conditionals.Add(((byte)(dep.Index / 64), dep.CSharpFieldBitMask));
+            checked { condCount++; }
+        }
+
+        var declStart = (ushort)declaredDocIds.Count;
+        byte declCount = 0;
+        if (polyfill.PolyfillData.XmlDocumentationId?.StartsWith("T:", StringComparison.Ordinal) == true
+            && polyfill.PolyfillData.DeclaredMemberDocumentationIds.Length > 0)
+        {
+            foreach (var m in polyfill.PolyfillData.DeclaredMemberDocumentationIds)
+            {
+                declaredDocIds.Add(m);
+                checked { declCount++; }
+            }
+        }
+
+        tableEntries.Add((polyfill, providesFeatureBit.HasValue ? (sbyte)providesFeatureBit.Value : (sbyte)-1, condStart, condCount, declStart, declCount, required));
+    }
+
+    // Pass 1: polyfills whose T: declaration matches a required type. They set the corresponding
+    // feature bit so later entries that depend on the type (via RequiredFeatures) see it as present.
+    foreach (var polyfill in polyfills)
+    {
+        var rt = requiredTypes.SingleOrDefault(t => $"T:{t.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
+        if (rt is null) continue;
+        AddEntry(polyfill, featureBitForType[rt.TypeName]);
+    }
+    // Pass 2: everything else, in original (topologically-sorted) order so conditional members see earlier bits.
+    foreach (var polyfill in polyfills)
+    {
+        var rt = requiredTypes.SingleOrDefault(t => $"T:{t.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
+        if (rt is not null) continue;
+        AddEntry(polyfill, null);
+    }
+
     var sb = new StringBuilder();
     sb.AppendLine($$"""
     #nullable enable
@@ -150,116 +218,82 @@ async Task GenerateMembers()
         sb.AppendLine($"private readonly ulong _bits{i} = 0uL;");
     }
 
-    sb.AppendLine($"private readonly PolyfillOptions _options;");
-    sb.AppendLine($"private readonly bool _supportAllowsRefStruct;");
-    sb.AppendLine($"private readonly bool _supportExtensions;");
-    sb.AppendLine($"private readonly bool _supportUnsafe;");
-    sb.AppendLine($"private readonly string _sourcePrefix;");
-
-    foreach (var requiredType in requiredTypes)
-    {
-        sb.AppendLine($"private readonly bool {requiredType.CsharpFieldName};");
-    }
+    sb.AppendLine("private readonly PolyfillOptions _options;");
+    sb.AppendLine("private readonly ulong _features;");
+    sb.AppendLine("private readonly string _sourcePrefix;");
 
     sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
     sb.AppendLine("{");
     sb.AppendLine("    _options = options;");
     sb.AppendLine("    var languageVersion = compilation.SyntaxTrees.FirstOrDefault()?.Options is CSharpParseOptions parseOptions ? parseOptions.LanguageVersion : LanguageVersion.Default;");
     sb.AppendLine("    var runtimeFeature = compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.GetTypeByMetadataName(\"System.Runtime.CompilerServices.RuntimeFeature\");");
-    sb.AppendLine("    _supportAllowsRefStruct = Enum.IsDefined(typeof(LanguageVersion), 1300) && languageVersion >= (LanguageVersion)1300 && (runtimeFeature?.GetMembers(\"ByRefLikeGenerics\").Length ?? 0) > 0;");
-    sb.AppendLine("    _supportExtensions = Enum.IsDefined(typeof(LanguageVersion), 1400) && languageVersion >= (LanguageVersion)1400;");
-    sb.AppendLine("    _supportUnsafe = compilation.Options is CSharpCompilationOptions compilationOptions && compilationOptions.AllowUnsafe;");
+    sb.AppendLine("    ulong features = 0uL;");
+    sb.AppendLine($"    if (Enum.IsDefined(typeof(LanguageVersion), 1300) && languageVersion >= (LanguageVersion)1300 && (runtimeFeature?.GetMembers(\"ByRefLikeGenerics\").Length ?? 0) > 0) features |= {1uL << FeatureBitAllowsRefStruct}uL;");
+    sb.AppendLine($"    if (Enum.IsDefined(typeof(LanguageVersion), 1400) && languageVersion >= (LanguageVersion)1400) features |= {1uL << FeatureBitExtensions}uL;");
+    sb.AppendLine($"    if (compilation.Options is CSharpCompilationOptions compilationOptions && compilationOptions.AllowUnsafe) features |= {1uL << FeatureBitUnsafe}uL;");
 
     foreach (var requiredType in requiredTypes)
     {
-        sb.AppendLine($"    {requiredType.CsharpFieldName} = compilation.GetTypeByMetadataName(\"{requiredType.TypeName}\") != null;");
+        var bitMask = 1uL << featureBitForType[requiredType.TypeName];
+        sb.AppendLine($"    if (compilation.GetTypeByMetadataName(\"{requiredType.TypeName}\") != null) features |= {bitMask}uL;");
     }
 
     sb.AppendLine("    var prefixBuilder = new StringBuilder(\"// <auto-generated/>\\n\");");
-    sb.AppendLine("    if (_supportAllowsRefStruct) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT\\n\");");
-    sb.AppendLine("    if (_supportUnsafe) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_UNSAFE\\n\");");
+    sb.AppendLine($"    if ((features & {1uL << FeatureBitAllowsRefStruct}uL) != 0uL) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT\\n\");");
+    sb.AppendLine($"    if ((features & {1uL << FeatureBitUnsafe}uL) != 0uL) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_UNSAFE\\n\");");
     foreach (var requiredType in requiredTypes)
     {
         var defineName = requiredType.TypeName.Replace('`', '_').Replace('.', '_').ToUpperInvariant();
-        sb.AppendLine($"    if({requiredType.CsharpFieldName}) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_{defineName}\\n\");");
+        var bitMask = 1uL << featureBitForType[requiredType.TypeName];
+        sb.AppendLine($"    if ((features & {bitMask}uL) != 0uL) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_{defineName}\\n\");");
     }
     sb.AppendLine("    _sourcePrefix = prefixBuilder.ToString();");
 
-    sb.AppendLine($"    var includeContext = new IncludeContext(compilation, options);");
-    foreach (var polyfill in polyfills)
+    sb.AppendLine("    var includeContext = new IncludeContext(compilation, options);");
+    sb.AppendLine($"    Span<ulong> bits = stackalloc ulong[{fieldCount}];");
+    sb.AppendLine("    ulong feat = features;");
+    sb.AppendLine("    var entries = PolyfillEntries.Entries;");
+    sb.AppendLine("    var conditionals = PolyfillEntries.Conditionals;");
+    sb.AppendLine("    var declared = PolyfillEntries.DeclaredDocIds;");
+    sb.AppendLine("    for (var idx = 0; idx < entries.Length; idx++)");
+    sb.AppendLine("    {");
+    sb.AppendLine("        ref readonly var entry = ref entries[idx];");
+    sb.AppendLine("        if ((feat & entry.RequiredFeatures) != entry.RequiredFeatures) continue;");
+    sb.AppendLine("        if (entry.ConditionalCount > 0)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            var any = false;");
+    sb.AppendLine("            var condEnd = entry.ConditionalStart + entry.ConditionalCount;");
+    sb.AppendLine("            for (var j = (int)entry.ConditionalStart; j < condEnd; j++)");
+    sb.AppendLine("            {");
+    sb.AppendLine("                ref readonly var c = ref conditionals[j];");
+    sb.AppendLine("                if ((bits[c.FieldIndex] & c.Mask) != 0uL) { any = true; break; }");
+    sb.AppendLine("            }");
+    sb.AppendLine("            if (!any) continue;");
+    sb.AppendLine("        }");
+    sb.AppendLine("        if (!IncludeMember(includeContext, entry.DocId)) continue;");
+    sb.AppendLine("        if (entry.DeclaredCount > 0)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            var allOk = true;");
+    sb.AppendLine("            var declEnd = entry.DeclaredStart + entry.DeclaredCount;");
+    sb.AppendLine("            for (var j = (int)entry.DeclaredStart; j < declEnd; j++)");
+    sb.AppendLine("            {");
+    sb.AppendLine("                if (!IncludeMember(includeContext, declared[j])) { allOk = false; break; }");
+    sb.AppendLine("            }");
+    sb.AppendLine("            if (!allOk) continue;");
+    sb.AppendLine("        }");
+    sb.AppendLine("        bits[entry.FieldIndex] |= entry.Mask;");
+    sb.AppendLine("        if (entry.ProvidesFeatureBit >= 0)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            feat |= 1uL << entry.ProvidesFeatureBit;");
+    sb.AppendLine("        }");
+    sb.AppendLine("    }");
+
+    for (var i = 0; i < fieldCount; i++)
     {
-        var requiredType = requiredTypes.SingleOrDefault(rt => $"T:{rt.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
-        if (requiredType is null)
-            continue;
-
-        sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(includeContext, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
-        sb.AppendLine($"    {{");
-        sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
-        sb.AppendLine($"        {requiredType.CsharpFieldName} = true;");
-        sb.AppendLine($"    }}");
+        sb.AppendLine($"    _bits{i} = bits[{i}];");
     }
-
-    foreach (var polyfill in polyfills)
-    {
-        var requiredType = requiredTypes.SingleOrDefault(rt => $"T:{rt.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
-        if (requiredType is not null)
-            continue;
-
-        sb.AppendLine($"    if ({GenerateIncludePreCondition(polyfill.PolyfillData)}IncludeMember(includeContext, \"{polyfill.TypeName}\"){GenerateIncludePostCondition(polyfill.PolyfillData)})");
-        sb.AppendLine($"        {polyfill.CSharpFieldName} = {polyfill.CSharpFieldName} | {polyfill.CSharpFieldBitMask}uL;");
-
-    }
+    sb.AppendLine("    _features = feat;");
     sb.AppendLine("}");
-
-
-    string GenerateIncludePreCondition(PolyfillData data)
-    {
-        var result = "";
-
-        if (data.UseExtensions)
-        {
-            result += "_supportExtensions && ";
-        }
-
-        if (data.UseUnsafe)
-        {
-            result += "_supportUnsafe && ";
-        }
-
-        foreach (var requiredType in data.RequiredTypes)
-        {
-            result += requiredTypes.Single(t => t.TypeName == requiredType).CsharpFieldName + " && ";
-        }
-
-        if (data.ConditionalMembers.Length > 0)
-        {
-            result += "(";
-            result += string.Join(" || ", data.ConditionalMembers.Select(member =>
-            {
-                var dependency = polyfills.Single(p => p.TypeName == member);
-                return $"({dependency.CSharpFieldName} & {dependency.CSharpFieldBitMask}uL) == {dependency.CSharpFieldBitMask}uL";
-            }));
-            result += ") && ";
-        }
-        return result;
-    }
-
-    string GenerateIncludePostCondition(PolyfillData data)
-    {
-        var result = "";
-        if (data.XmlDocumentationId?.StartsWith("T:", StringComparison.Ordinal) == true && data.DeclaredMemberDocumentationIds.Length > 0)
-        {
-            result += " && (";
-            result += string.Join(" && ", data.DeclaredMemberDocumentationIds.Select(member =>
-            {
-                // Do not use "options" as the member cannot be part of Included or Excluded members
-                return $"IncludeMember(includeContext, \"{member}\")";
-            }));
-            result += ")";
-        }
-
-        return result;
-    }
 
     sb.AppendLine("public override int GetHashCode()");
     sb.AppendLine("{");
@@ -309,7 +343,8 @@ async Task GenerateMembers()
     sb.AppendLine("    sb.AppendLine(_options.DumpAsCSharpComment());");
     foreach (var requiredType in requiredTypes)
     {
-        sb.AppendLine($"    sb.AppendLine(\"// {requiredType.TypeName}: \" + {requiredType.CsharpFieldName});");
+        var bitMask = 1uL << featureBitForType[requiredType.TypeName];
+        sb.AppendLine($"    sb.AppendLine(\"// {requiredType.TypeName}: \" + ((_features & {bitMask}uL) != 0uL));");
     }
 
     sb.AppendLine("    sb.AppendLine(\"//\");");
@@ -366,6 +401,37 @@ async Task GenerateMembers()
 
     sb.AppendLine("}");
 
+    // Emit the static table data. Kept in a file-scoped class so it is private to this file
+    // and the JIT can compile the much smaller constructor without inlining 30k lines of bit-OR.
+    sb.AppendLine();
+    sb.AppendLine("file static class PolyfillEntries");
+    sb.AppendLine("{");
+    sb.AppendLine("    public static readonly PolyfillEntry[] Entries = new PolyfillEntry[]");
+    sb.AppendLine("    {");
+    foreach (var e in tableEntries)
+    {
+        sb.AppendLine($"        new PolyfillEntry({(byte)(e.Polyfill.Index / 64)}, {e.CondCount}, {e.DeclCount}, {e.ProvidesFeatureBit}, {e.CondStart}, {e.DeclStart}, {e.Polyfill.CSharpFieldBitMask}uL, {e.RequiredFeatures}uL, \"{EscapeStringLiteral(e.Polyfill.TypeName)}\"),");
+    }
+    sb.AppendLine("    };");
+
+    sb.AppendLine("    public static readonly ConditionalCheck[] Conditionals = new ConditionalCheck[]");
+    sb.AppendLine("    {");
+    foreach (var c in conditionals)
+    {
+        sb.AppendLine($"        new ConditionalCheck({c.FieldIndex}, {c.Mask}uL),");
+    }
+    sb.AppendLine("    };");
+
+    sb.AppendLine("    public static readonly string[] DeclaredDocIds = new string[]");
+    sb.AppendLine("    {");
+    foreach (var d in declaredDocIds)
+    {
+        sb.AppendLine($"        \"{EscapeStringLiteral(d)}\",");
+    }
+    sb.AppendLine("    };");
+    sb.AppendLine("}");
+
+    sb.AppendLine();
     sb.AppendLine("file static class PolyfillContents");
     sb.AppendLine("{");
     foreach (var polyfill in polyfills)
@@ -376,11 +442,13 @@ async Task GenerateMembers()
     }
     sb.AppendLine("}");
 
-    Console.WriteLine(sb.ToString());
     Console.WriteLine("Polyfills: " + polyfills.Length);
     var path = GetMemberFilePath();
     Console.WriteLine(path);
     await File.WriteAllTextAsync(path, sb.ToString());
+
+    static string EscapeStringLiteral(string value)
+        => value.Replace("\\", "\\\\", StringComparison.Ordinal).Replace("\"", "\\\"", StringComparison.Ordinal);
 }
 
 async Task GenerateReadme()
