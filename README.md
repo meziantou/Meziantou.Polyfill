@@ -696,7 +696,7 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (16)
+### Properties (17)
 
 - `System.DateTimeOffset.UnixEpoch`
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
@@ -708,6 +708,7 @@ The filtering logic works as follows:
 - `System.Environment.TickCount64`
 - `System.Net.Http.HttpMethod.Query`
 - `System.Random.Shared`
+- `System.Threading.Tasks.Task.IsCompletedSuccessfully`
 - `System.Threading.Tasks.ValueTask.CompletedTask`
 - `System.TimeOnly.Microsecond`
 - `System.TimeOnly.Nanosecond`

@@ -3757,6 +3757,15 @@
       "net10.0",
       "net11.0"
     ],
+    "P:System.Threading.Tasks.Task.IsCompletedSuccessfully": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "P:System.Threading.Tasks.ValueTask.CompletedTask": [
       "net6.0",
       "net7.0",

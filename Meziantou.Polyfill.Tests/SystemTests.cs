@@ -410,6 +410,17 @@ public class SystemTests
     }
 
     [Fact]
+    public void Task_IsCompletedSuccessfully()
+    {
+        Assert.True(Task.CompletedTask.IsCompletedSuccessfully);
+        Assert.False(Task.FromException(new InvalidOperationException()).IsCompletedSuccessfully);
+
+        var tcs = new TaskCompletionSource<int>();
+        tcs.SetCanceled();
+        Assert.False(tcs.Task.IsCompletedSuccessfully);
+    }
+
+    [Fact]
     public void String_Join_Char()
     {
         Assert.Equal("a,b,c", string.Join(',', (object[])["a", "b", "c"]));
