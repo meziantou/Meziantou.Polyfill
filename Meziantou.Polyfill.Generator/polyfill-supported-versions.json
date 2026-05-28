@@ -4363,6 +4363,26 @@
       "net10.0",
       "net11.0"
     ],
+    "T:System.TimeProvider": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Threading.ITimer": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Threading.PeriodicTimer": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "T:System.Threading.Lock": [
       "net9.0",
       "net10.0",
