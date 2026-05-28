@@ -134,7 +134,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (558)
+### Methods (559)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -206,6 +206,7 @@ The filtering logic works as follows:
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Delegate.EnumerateInvocationList<TDelegate>(TDelegate? d) where TDelegate : System.Delegate`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
+- `System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64 startingTimestamp, System.Int64 endingTimestamp)`
 - `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Double.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
