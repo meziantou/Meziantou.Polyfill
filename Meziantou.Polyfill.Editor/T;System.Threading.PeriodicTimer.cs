@@ -212,7 +212,7 @@ namespace System.Threading
 
                 return _waiter!.Task.Status switch
                 {
-                    TaskStatus.RanToCompletion => _canceled ? ValueTaskSourceStatus.Canceled : ValueTaskSourceStatus.Succeeded,
+                    TaskStatus.RanToCompletion => _canceled ? ValueTaskSourceStatus.Faulted : ValueTaskSourceStatus.Succeeded,
                     TaskStatus.Canceled => ValueTaskSourceStatus.Canceled,
                     TaskStatus.Faulted => ValueTaskSourceStatus.Faulted,
                     _ => ValueTaskSourceStatus.Pending,
