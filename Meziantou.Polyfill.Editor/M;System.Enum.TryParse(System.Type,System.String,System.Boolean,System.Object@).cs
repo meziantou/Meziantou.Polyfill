@@ -21,12 +21,7 @@ static partial class PolyfillExtensions
                 result = Enum.Parse(enumType, value, ignoreCase);
                 return true;
             }
-            catch (ArgumentException)
-            {
-                result = null;
-                return false;
-            }
-            catch (OverflowException)
+            catch
             {
                 result = null;
                 return false;
