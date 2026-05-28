@@ -134,7 +134,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (559)
+### Methods (563)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -223,6 +223,10 @@ The filtering logic works as follows:
 - `System.Enum.Parse<TEnum>(System.ReadOnlySpan<System.Char> value, System.Boolean ignoreCase) where TEnum : struct`
 - `System.Enum.Parse<TEnum>(System.String value) where TEnum : struct`
 - `System.Enum.Parse<TEnum>(System.String value, System.Boolean ignoreCase) where TEnum : struct`
+- `System.Enum.TryParse(System.Type enumType, System.ReadOnlySpan<System.Char> value, System.Boolean ignoreCase, out System.Object? result)`
+- `System.Enum.TryParse(System.Type enumType, System.ReadOnlySpan<System.Char> value, out System.Object? result)`
+- `System.Enum.TryParse(System.Type enumType, System.String? value, System.Boolean ignoreCase, out System.Object? result)`
+- `System.Enum.TryParse(System.Type enumType, System.String? value, out System.Object? result)`
 - `System.Enum.TryParse<TEnum>(System.ReadOnlySpan<System.Char> value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.ReadOnlySpan<System.Char> value, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`

@@ -675,6 +675,40 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Enum.TryParse(System.Type,System.ReadOnlySpan{System.Char},System.Boolean,System.Object@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Enum.TryParse(System.Type,System.ReadOnlySpan{System.Char},System.Object@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Enum.TryParse(System.Type,System.String,System.Boolean,System.Object@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Enum.TryParse(System.Type,System.String,System.Object@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Enum.TryParse\u0060\u00601(System.ReadOnlySpan{System.Char},System.Boolean,\u0060\u00600@)": [
       "net6.0",
       "net7.0",
