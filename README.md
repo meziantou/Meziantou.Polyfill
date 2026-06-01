@@ -52,7 +52,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (82)
+### Types (83)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -91,6 +91,7 @@ The filtering logic works as follows:
 - `System.ITupleInternal`
 - `System.Index`
 - `System.Net.Http.ReadOnlyMemoryContent`
+- `System.Net.Mime.MediaTypeNames.Video`
 - `System.Range`
 - `System.Reflection.NullabilityInfo`
 - `System.Reflection.NullabilityInfoContext`

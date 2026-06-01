@@ -50,30 +50,34 @@ var polyfills = assembly.GetManifestResourceNames()
           xmlDocumentationId = polyfillData.XmlDocumentationId ?? xmlDocumentationId;
 
           var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(xmlDocumentationId, compilation);
-          if (symbols.Length == 0)
-          {
-              throw new InvalidOperationException($"Cannot find symbol for '{xmlDocumentationId}' (resource name: {item}). Polyfill content:\n{polyfillData}");
-          }
-
           if (symbols.Length > 1)
           {
               throw new InvalidOperationException($"Multiple symbols found for '{xmlDocumentationId}' (resource name: {item}): {string.Join(", ", symbols.Select(s => s.ToDisplayString()))}");
           }
 
-          var symbol = symbols[0];
+          var symbol = symbols.Length == 1 ? symbols[0] : null;
+          var kind = symbol?.Kind switch
+          {
+              SymbolKind.NamedType => PolyfillKind.Type,
+              SymbolKind.Method => PolyfillKind.Method,
+              SymbolKind.Property => PolyfillKind.Property,
+              SymbolKind.Field => PolyfillKind.Property,
+              null => xmlDocumentationId switch
+              {
+                  [var first, ':', ..] when first == 'T' => PolyfillKind.Type,
+                  [var first, ':', ..] when first == 'M' => PolyfillKind.Method,
+                  [var first, ':', ..] when first is 'P' or 'F' => PolyfillKind.Property,
+                  _ => throw new InvalidOperationException($"Unknown symbol kind for '{xmlDocumentationId}' (resource name: {item}). Polyfill content:\n{polyfillData}"),
+              },
+              _ => throw new InvalidOperationException($"Unknown symbol kind '{symbol.Kind}'"),
+          };
+
           return new Polyfill()
           {
               Index = index,
               TypeName = xmlDocumentationId,
               Symbol = symbol,
-              Kind = symbol.Kind switch
-              {
-                  SymbolKind.NamedType => PolyfillKind.Type,
-                  SymbolKind.Method => PolyfillKind.Method,
-                  SymbolKind.Property => PolyfillKind.Property,
-                  SymbolKind.Field => PolyfillKind.Property,
-                  _ => throw new InvalidOperationException($"Unknown symbol kind '{symbol.Kind}'"),
-              },
+              Kind = kind,
               OutputPath = Path.GetFileNameWithoutExtension(item)
                                .Replace(';', '_')
                                .Replace('~', '_')
@@ -456,6 +460,13 @@ async Task GenerateReadme()
     var path = GetReadmeFilePath();
 
     var sb = new StringBuilder();
+    static string GetDisplayString(Polyfill polyfill, SymbolDisplayFormat format)
+    {
+        if (polyfill.Symbol is not null)
+            return polyfill.Symbol.ToDisplayString(format);
+
+        return polyfill.TypeName[2..];
+    }
 
     sb.Append($"### Types ({polyfills.Where(p => p.Kind is PolyfillKind.Type).Count()})\n\n");
     var typeDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
@@ -469,7 +480,7 @@ async Task GenerateReadme()
           ;
     foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Type).OrderBy(p => p.TypeName, StringComparer.Ordinal))
     {
-        sb.Append($"- `{polyfill.Symbol.ToDisplayString(typeDisplayFormat)}`\n");
+        sb.Append($"- `{GetDisplayString(polyfill, typeDisplayFormat)}`\n");
     }
 
     sb.Append($"\n### Methods ({polyfills.Where(p => p.Kind is PolyfillKind.Method).Count()})\n\n");
@@ -485,7 +496,7 @@ async Task GenerateReadme()
           ;
     foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method).OrderBy(p => p.TypeName, StringComparer.Ordinal))
     {
-        sb.Append($"- `{polyfill.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
+        sb.Append($"- `{GetDisplayString(polyfill, methodDisplayFormat)}`\n");
     }
 
     sb.Append($"\n### Properties ({polyfills.Where(p => p.Kind is PolyfillKind.Property).Count()})\n\n");
@@ -501,7 +512,7 @@ async Task GenerateReadme()
           ;
     foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Property).OrderBy(p => p.TypeName, StringComparer.Ordinal))
     {
-        sb.Append($"- `{polyfill.Symbol.ToDisplayString(propertyDisplayFormat)}`\n");
+        sb.Append($"- `{GetDisplayString(polyfill, propertyDisplayFormat)}`\n");
     }
 
     var content = await File.ReadAllTextAsync(path);
@@ -850,7 +861,7 @@ static IEnumerable<ITypeSymbol> GetAllTypes(IAssemblySymbol assembly)
 internal sealed class Polyfill
 {
     public required int Index { get; set; }
-    public required ISymbol Symbol { get; set; }
+    public ISymbol? Symbol { get; set; }
     public required string TypeName { get; set; }
     public required string CSharpName { get; set; }
     public required PolyfillData PolyfillData { get; set; }
@@ -866,6 +877,9 @@ internal sealed class Polyfill
 
     public override string ToString()
     {
+        if (Symbol is null)
+            return TypeName;
+
         var symbolDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
             .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)
             .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining)

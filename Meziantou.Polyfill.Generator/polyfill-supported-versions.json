@@ -3614,12 +3614,12 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Uri.UnescapeDataString(System.ReadOnlySpan{System.Char})": [
+    "M:System.Uri.TryUnescapeDataString(System.ReadOnlySpan{System.Char},System.Span{System.Char},System.Int32@)": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Uri.TryUnescapeDataString(System.ReadOnlySpan{System.Char},System.Span{System.Char},System.Int32@)": [
+    "M:System.Uri.UnescapeDataString(System.ReadOnlySpan{System.Char})": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -4138,6 +4138,7 @@
       "net10.0",
       "net11.0"
     ],
+    "T:System.Net.Mime.MediaTypeNames.Video": [],
     "T:System.Range": [
       "netstandard2.1",
       "net6.0",
@@ -4363,14 +4364,13 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.TimeProvider": [
+    "T:System.Threading.ITimer": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "T:System.Threading.ITimer": [
-      "net8.0",
+    "T:System.Threading.Lock": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -4383,12 +4383,13 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.Threading.Lock": [
+    "T:System.Threading.Tasks.TaskToAsyncResult": [
+      "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "T:System.Threading.Tasks.TaskToAsyncResult": [
+    "T:System.TimeProvider": [
       "net8.0",
       "net9.0",
       "net10.0",

@@ -40,7 +40,7 @@ public sealed class SourceGeneratorTests
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Empty(GetFileNames(result.GeneratorResult));
+        Assert.Single(GetFileNames(result.GeneratorResult), "T_System.Net.Mime.MediaTypeNames.Video.g.cs");
     }
 
     [Fact]
