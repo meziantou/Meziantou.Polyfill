@@ -50,12 +50,18 @@ var polyfills = assembly.GetManifestResourceNames()
           xmlDocumentationId = polyfillData.XmlDocumentationId ?? xmlDocumentationId;
 
           var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(xmlDocumentationId, compilation);
-          if (symbols.Length > 1)
+          ISymbol? symbol;
+          switch (symbols.Length)
           {
-              throw new InvalidOperationException($"Multiple symbols found for '{xmlDocumentationId}' (resource name: {item}): {string.Join(", ", symbols.Select(s => s.ToDisplayString()))}");
+              case 0:
+                  symbol = null;
+                  break;
+              case 1:
+                  symbol = symbols[0];
+                  break;
+              default:
+                  throw new InvalidOperationException($"Multiple symbols found for '{xmlDocumentationId}' (resource name: {item}): {string.Join(", ", symbols.Select(s => s.ToDisplayString()))}");
           }
-
-          var symbol = symbols.Length == 1 ? symbols[0] : null;
           var kind = symbol?.Kind switch
           {
               SymbolKind.NamedType => PolyfillKind.Type,
