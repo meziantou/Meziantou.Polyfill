@@ -43,6 +43,7 @@ internal sealed partial class PolyfillData
     public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
+    public string[] TypeDefines { get; private set; } = [];
     public string[] ConditionalSymbols { get; private set; } = [];
     public string[] PolyfillExtensionsClassNames { get; private set; } = [];
 
@@ -187,6 +188,7 @@ internal sealed partial class PolyfillData
 
         var data = new PolyfillData(finalContent.ToFullString());
         data.ConditionalMembers = GetConditions(content);
+        data.TypeDefines = GetTypeDefines(content);
         data.XmlDocumentationId = documentationDeclarationId;
         data.DeclaredMemberDocumentationIds = [.. declaredMethods];
         data.PolyfillExtensionsClassNames = [.. polyfillExtensionsClassNames.OrderBy(x => x, StringComparer.Ordinal)];
@@ -222,6 +224,11 @@ internal sealed partial class PolyfillData
 
             return null;
         }
+
+        static string[] GetTypeDefines(string content)
+        {
+            return [.. TypeDefineRegex().Matches(content.ReplaceLineEndings("\n")).Cast<Match>().Select(m => m.Groups["type"].Value).Order(StringComparer.Ordinal)];
+        }
     }
 
     [GeneratedRegex("""^//\s*when\s+(?<member>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
@@ -229,6 +236,9 @@ internal sealed partial class PolyfillData
 
     [GeneratedRegex("""^//\s*XML-DOC:\s+(?<value>.*)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
     private static partial Regex XmlDocRegex();
+
+    [GeneratedRegex("""^//\s*define-type\s+(?<type>[^\s]+)$""", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.Multiline, matchTimeoutMilliseconds: -1)]
+    private static partial Regex TypeDefineRegex();
 
     internal sealed class AddEmbeddedAttributeRewriter : CSharpSyntaxRewriter
     {
