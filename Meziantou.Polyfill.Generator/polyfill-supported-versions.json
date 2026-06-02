@@ -22,6 +22,216 @@
       "net10.0",
       "net11.0"
     ],
+    "F:System.Net.Mime.MediaTypeNames.Application.FormUrlEncoded": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.GZip": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.Json": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.JsonPatch": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.JsonSequence": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.Manifest": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.ProblemJson": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.ProblemXml": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.Wasm": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.Xml": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.XmlDtd": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.XmlPatch": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Application.Yaml": [
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Font.Collection": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Font.Otf": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Font.Sfnt": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Font.Ttf": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Font.Woff": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Font.Woff2": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Image.Avif": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Image.Bmp": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Image.Icon": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Image.Png": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Image.Svg": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Image.Webp": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Multipart.ByteRanges": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Multipart.FormData": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Multipart.Mixed": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Multipart.Related": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Text.Css": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Text.Csv": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Text.EventStream": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Text.JavaScript": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Text.Markdown": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Text.Rtf": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.ArgumentException.ThrowIfNullOrEmpty(System.String,System.String)": [
       "net7.0",
       "net8.0",
@@ -3614,12 +3824,12 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Uri.UnescapeDataString(System.ReadOnlySpan{System.Char})": [
+    "M:System.Uri.TryUnescapeDataString(System.ReadOnlySpan{System.Char},System.Span{System.Char},System.Int32@)": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Uri.TryUnescapeDataString(System.ReadOnlySpan{System.Char},System.Span{System.Char},System.Int32@)": [
+    "M:System.Uri.UnescapeDataString(System.ReadOnlySpan{System.Char})": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -4138,6 +4348,18 @@
       "net10.0",
       "net11.0"
     ],
+    "T:System.Net.Mime.MediaTypeNames.Font": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Net.Mime.MediaTypeNames.Multipart": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "T:System.Range": [
       "netstandard2.1",
       "net6.0",
@@ -4363,14 +4585,13 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.TimeProvider": [
+    "T:System.Threading.ITimer": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "T:System.Threading.ITimer": [
-      "net8.0",
+    "T:System.Threading.Lock": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -4383,12 +4604,13 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.Threading.Lock": [
+    "T:System.Threading.Tasks.TaskToAsyncResult": [
+      "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "T:System.Threading.Tasks.TaskToAsyncResult": [
+    "T:System.TimeProvider": [
       "net8.0",
       "net9.0",
       "net10.0",

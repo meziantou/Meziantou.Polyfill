@@ -123,6 +123,29 @@ var requiredTypes = polyfills.SelectMany(p => p.PolyfillData.RequiredTypes)
     })
     .ToArray();
 
+// Type-presence defines requested by polyfills via a "// define-type <FullyQualifiedName>" directive.
+// Unlike required types, these don't consume feature bits or gate inclusion: they only emit a
+// "#define MEZIANTOU_POLYFILL_TYPE_<NAME>" in the source prefix when the type exists in the consumer
+// compilation, so a polyfill can branch deterministically (e.g. on whether a nested type is present)
+// instead of relying on TFM monikers such as NET8_0_OR_GREATER.
+var typeDefines = polyfills
+    .SelectMany(p => p.PolyfillData.TypeDefines)
+    .Distinct(StringComparer.Ordinal)
+    .Order(StringComparer.Ordinal)
+    .Select(typeName =>
+    {
+        var symbols = DocumentationCommentId.GetSymbolsForDeclarationId("T:" + typeName, compilation);
+        if (symbols is not [INamedTypeSymbol typeSymbol])
+            throw new InvalidOperationException($"'// define-type {typeName}' must resolve to exactly one type (found {symbols.Length}).");
+
+        return new
+        {
+            DefineName = typeName.Replace('`', '_').Replace('.', '_').ToUpperInvariant(),
+            MetadataLookupName = GetMetadataLookupName(typeSymbol),
+        };
+    })
+    .ToArray();
+
 await GenerateMembers();
 await GenerateReadme();
 
@@ -246,6 +269,10 @@ async Task GenerateMembers()
         var defineName = requiredType.TypeName.Replace('`', '_').Replace('.', '_').ToUpperInvariant();
         var bitMask = 1uL << featureBitForType[requiredType.TypeName];
         sb.AppendLine($"    if ((features & {bitMask}uL) != 0uL) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_SUPPORT_{defineName}\\n\");");
+    }
+    foreach (var typeDefine in typeDefines)
+    {
+        sb.AppendLine($"    if (compilation.GetTypeByMetadataName(\"{typeDefine.MetadataLookupName}\") != null) prefixBuilder.Append(\"#define MEZIANTOU_POLYFILL_TYPE_{typeDefine.DefineName}\\n\");");
     }
     sb.AppendLine("    _sourcePrefix = prefixBuilder.ToString();");
 
@@ -534,6 +561,18 @@ string ReadResourceAsString(string name)
 {
     using var sr = new StreamReader(assembly.GetManifestResourceStream(name)!);
     return sr.ReadToEnd();
+}
+
+// Builds the name accepted by Compilation.GetTypeByMetadataName, i.e. "Namespace.Outer+Nested`Arity".
+static string GetMetadataLookupName(INamedTypeSymbol symbol)
+{
+    var names = new List<string>();
+    for (INamedTypeSymbol? current = symbol; current is not null; current = current.ContainingType)
+        names.Add(current.MetadataName);
+    names.Reverse();
+
+    var prefix = symbol.ContainingNamespace is { IsGlobalNamespace: false } ns ? ns.ToDisplayString() + "." : "";
+    return prefix + string.Join('+', names);
 }
 
 static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompilation currentCompilation, string rootPath)

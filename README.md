@@ -52,7 +52,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (82)
+### Types (84)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -91,6 +91,8 @@ The filtering logic works as follows:
 - `System.ITupleInternal`
 - `System.Index`
 - `System.Net.Http.ReadOnlyMemoryContent`
+- `System.Net.Mime.MediaTypeNames.Font`
+- `System.Net.Mime.MediaTypeNames.Multipart`
 - `System.Range`
 - `System.Reflection.NullabilityInfo`
 - `System.Reflection.NullabilityInfoContext`
@@ -703,9 +705,44 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (17)
+### Properties (52)
 
 - `System.DateTimeOffset.UnixEpoch`
+- `System.Net.Mime.MediaTypeNames.Application.FormUrlEncoded = "application/x-www-form-urlencoded"`
+- `System.Net.Mime.MediaTypeNames.Application.GZip = "application/gzip"`
+- `System.Net.Mime.MediaTypeNames.Application.Json = "application/json"`
+- `System.Net.Mime.MediaTypeNames.Application.JsonPatch = "application/json-patch+json"`
+- `System.Net.Mime.MediaTypeNames.Application.JsonSequence = "application/json-seq"`
+- `System.Net.Mime.MediaTypeNames.Application.Manifest = "application/manifest+json"`
+- `System.Net.Mime.MediaTypeNames.Application.ProblemJson = "application/problem+json"`
+- `System.Net.Mime.MediaTypeNames.Application.ProblemXml = "application/problem+xml"`
+- `System.Net.Mime.MediaTypeNames.Application.Wasm = "application/wasm"`
+- `System.Net.Mime.MediaTypeNames.Application.Xml = "application/xml"`
+- `System.Net.Mime.MediaTypeNames.Application.XmlDtd = "application/xml-dtd"`
+- `System.Net.Mime.MediaTypeNames.Application.XmlPatch = "application/xml-patch+xml"`
+- `System.Net.Mime.MediaTypeNames.Application.Yaml = "application/yaml"`
+- `System.Net.Mime.MediaTypeNames.Font.Collection = "font/collection"`
+- `System.Net.Mime.MediaTypeNames.Font.Otf = "font/otf"`
+- `System.Net.Mime.MediaTypeNames.Font.Sfnt = "font/sfnt"`
+- `System.Net.Mime.MediaTypeNames.Font.Ttf = "font/ttf"`
+- `System.Net.Mime.MediaTypeNames.Font.Woff = "font/woff"`
+- `System.Net.Mime.MediaTypeNames.Font.Woff2 = "font/woff2"`
+- `System.Net.Mime.MediaTypeNames.Image.Avif = "image/avif"`
+- `System.Net.Mime.MediaTypeNames.Image.Bmp = "image/bmp"`
+- `System.Net.Mime.MediaTypeNames.Image.Icon = "image/x-icon"`
+- `System.Net.Mime.MediaTypeNames.Image.Png = "image/png"`
+- `System.Net.Mime.MediaTypeNames.Image.Svg = "image/svg+xml"`
+- `System.Net.Mime.MediaTypeNames.Image.Webp = "image/webp"`
+- `System.Net.Mime.MediaTypeNames.Multipart.ByteRanges = "multipart/byteranges"`
+- `System.Net.Mime.MediaTypeNames.Multipart.FormData = "multipart/form-data"`
+- `System.Net.Mime.MediaTypeNames.Multipart.Mixed = "multipart/mixed"`
+- `System.Net.Mime.MediaTypeNames.Multipart.Related = "multipart/related"`
+- `System.Net.Mime.MediaTypeNames.Text.Css = "text/css"`
+- `System.Net.Mime.MediaTypeNames.Text.Csv = "text/csv"`
+- `System.Net.Mime.MediaTypeNames.Text.EventStream = "text/event-stream"`
+- `System.Net.Mime.MediaTypeNames.Text.JavaScript = "text/javascript"`
+- `System.Net.Mime.MediaTypeNames.Text.Markdown = "text/markdown"`
+- `System.Net.Mime.MediaTypeNames.Text.Rtf = "text/rtf"`
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.DateTime.Nanosecond`
