@@ -42,6 +42,10 @@ internal sealed partial class PolyfillData
 
     public HashSet<string> RequiredTypes { get; private set; } = new HashSet<string>(StringComparer.Ordinal);
     public string[] DeclaredMemberDocumentationIds { get; private set; } = [];
+    public string[] DeclaredMethodDocumentationIds { get; private set; } = [];
+    public string[] DeclaredPropertyDocumentationIds { get; private set; } = [];
+    public (string DocumentationId, ISymbol Symbol)[] DeclaredMethodSymbols { get; private set; } = [];
+    public (string DocumentationId, ISymbol Symbol)[] DeclaredPropertySymbols { get; private set; } = [];
     public string[] ConditionalMembers { get; private set; } = [];
     public string[] TypeDefines { get; private set; } = [];
     public string[] ConditionalSymbols { get; private set; } = [];
@@ -69,6 +73,7 @@ internal sealed partial class PolyfillData
         var semanticModel = compilation.GetSemanticModel(tree);
 
         var root = tree.GetRoot();
+        documentationDeclarationId = GetXmlDocId(content) ?? documentationDeclarationId;
         foreach (var type in root.DescendantNodes(descendIntoChildren: node => node is not TypeDeclarationSyntax).OfType<TypeDeclarationSyntax>())
         {
             var symbol = (ITypeSymbol)semanticModel.GetDeclaredSymbol(type)!;
@@ -77,7 +82,9 @@ internal sealed partial class PolyfillData
         }
 
         var requiredTypes = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
-        var declaredMethods = new HashSet<string>(StringComparer.Ordinal);
+        var declaredMembers = new HashSet<string>(StringComparer.Ordinal);
+        var declaredMethodSymbols = new Dictionary<string, ISymbol>(StringComparer.Ordinal);
+        var declaredPropertySymbols = new Dictionary<string, ISymbol>(StringComparer.Ordinal);
         var polyfillExtensionsClassNames = new HashSet<string>(StringComparer.Ordinal);
 
         // Collect all class names starting with "PolyfillExtensions"
@@ -98,24 +105,15 @@ internal sealed partial class PolyfillData
                 requiredTypes.Add(param);
             }
 
-            if (IsExposed(symbol))
+            AddReadmeMember(symbol, declaredMethodSymbols);
+
+            if (IsExposedForDeclaredMemberTable(symbol))
             {
                 var declarationId = DocumentationCommentId.CreateDeclarationId(symbol);
                 if (declarationId is not null)
                 {
-                    declaredMethods.Add(declarationId);
+                    declaredMembers.Add(declarationId);
                 }
-            }
-
-            static bool IsExposed(ISymbol symbol)
-            {
-                if (symbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal)
-                    return false;
-
-                if (symbol.ContainingSymbol is null)
-                    return true;
-
-                return IsExposed(symbol.ContainingSymbol);
             }
         }
 
@@ -128,10 +126,47 @@ internal sealed partial class PolyfillData
             }
         }
 
+        foreach (var @operator in root.DescendantNodes().OfType<OperatorDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(@operator)!;
+            requiredTypes.Add(symbol.ReturnType);
+            foreach (var param in symbol.Parameters.Select(p => p.Type))
+            {
+                requiredTypes.Add(param);
+            }
+
+            AddReadmeMember(symbol, declaredMethodSymbols);
+        }
+
+        foreach (var conversionOperator in root.DescendantNodes().OfType<ConversionOperatorDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(conversionOperator)!;
+            requiredTypes.Add(symbol.ReturnType);
+            foreach (var param in symbol.Parameters.Select(p => p.Type))
+            {
+                requiredTypes.Add(param);
+            }
+
+            AddReadmeMember(symbol, declaredMethodSymbols);
+        }
+
         foreach (var property in root.DescendantNodes().OfType<PropertyDeclarationSyntax>())
         {
             var symbol = semanticModel.GetDeclaredSymbol(property)!;
             requiredTypes.Add(symbol.Type);
+            AddReadmeMember(symbol, declaredPropertySymbols);
+        }
+
+        foreach (var indexer in root.DescendantNodes().OfType<IndexerDeclarationSyntax>())
+        {
+            var symbol = semanticModel.GetDeclaredSymbol(indexer)!;
+            requiredTypes.Add(symbol.Type);
+            foreach (var param in symbol.Parameters.Select(p => p.Type))
+            {
+                requiredTypes.Add(param);
+            }
+
+            AddReadmeMember(symbol, declaredPropertySymbols);
         }
 
         foreach (var field in root.DescendantNodes().OfType<FieldDeclarationSyntax>())
@@ -140,6 +175,15 @@ internal sealed partial class PolyfillData
             if (type is not null)
             {
                 requiredTypes.Add(type);
+            }
+
+            foreach (var variable in field.Declaration.Variables)
+            {
+                var symbol = semanticModel.GetDeclaredSymbol(variable);
+                if (symbol is not null)
+                {
+                    AddReadmeMember(symbol, declaredPropertySymbols);
+                }
             }
         }
 
@@ -180,7 +224,6 @@ internal sealed partial class PolyfillData
             }
         }
 
-        documentationDeclarationId = GetXmlDocId(content) ?? documentationDeclarationId;
         var useExtensions = root.DescendantNodes().OfType<ExtensionBlockDeclarationSyntax>().Any();
         var useUnsafe = root.DescendantNodes().OfType<UnsafeStatementSyntax>().Any() || root.DescendantNodes().OfType<MethodDeclarationSyntax>().Any(m => m.Modifiers.Any(m => m.IsKind(SyntaxKind.UnsafeKeyword)));
 
@@ -190,7 +233,17 @@ internal sealed partial class PolyfillData
         data.ConditionalMembers = GetConditions(content);
         data.TypeDefines = GetTypeDefines(content);
         data.XmlDocumentationId = documentationDeclarationId;
-        data.DeclaredMemberDocumentationIds = [.. declaredMethods];
+        data.DeclaredMethodDocumentationIds = [.. declaredMethodSymbols.Keys.Order(StringComparer.Ordinal)];
+        data.DeclaredPropertyDocumentationIds = [.. declaredPropertySymbols.Keys.Order(StringComparer.Ordinal)];
+        data.DeclaredMethodSymbols =
+        [
+            .. declaredMethodSymbols
+                .Where(item => item.Value is not IMethodSymbol { MethodKind: MethodKind.Constructor or MethodKind.StaticConstructor })
+                .OrderBy(item => item.Key, StringComparer.Ordinal)
+                .Select(item => (item.Key, item.Value)),
+        ];
+        data.DeclaredPropertySymbols = [.. declaredPropertySymbols.OrderBy(item => item.Key, StringComparer.Ordinal).Select(item => (item.Key, item.Value))];
+        data.DeclaredMemberDocumentationIds = [.. declaredMembers];
         data.PolyfillExtensionsClassNames = [.. polyfillExtensionsClassNames.OrderBy(x => x, StringComparer.Ordinal)];
         data.UseExtensions = useExtensions;
         data.UseUnsafe = useUnsafe;
@@ -210,6 +263,58 @@ internal sealed partial class PolyfillData
         }
 
         return data;
+
+        void AddReadmeMember(ISymbol symbol, Dictionary<string, ISymbol> declaredSymbols)
+        {
+            if (!IsExposedReadmeMember(symbol))
+                return;
+
+            if (!IsDeclaredOnDocumentedType(symbol))
+                return;
+
+            var declarationId = DocumentationCommentId.CreateDeclarationId(symbol);
+            if (declarationId is not null)
+            {
+                declaredSymbols.TryAdd(declarationId, symbol);
+            }
+        }
+
+        bool IsDeclaredOnDocumentedType(ISymbol symbol)
+        {
+            if (!documentationDeclarationId.StartsWith("T:", StringComparison.Ordinal))
+                return true;
+
+            var containingType = symbol.ContainingType;
+            if (containingType is null)
+                return false;
+
+            return string.Equals(DocumentationCommentId.CreateDeclarationId(containingType), documentationDeclarationId, StringComparison.Ordinal);
+        }
+
+        static bool IsExposedReadmeMember(ISymbol symbol)
+        {
+            if (symbol is INamespaceSymbol or IAssemblySymbol)
+                return true;
+
+            if (symbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal)
+                return false;
+
+            if (symbol.ContainingSymbol is null)
+                return true;
+
+            return IsExposedReadmeMember(symbol.ContainingSymbol);
+        }
+
+        static bool IsExposedForDeclaredMemberTable(ISymbol symbol)
+        {
+            if (symbol.DeclaredAccessibility is not Accessibility.Public and not Accessibility.Internal)
+                return false;
+
+            if (symbol.ContainingSymbol is null)
+                return true;
+
+            return IsExposedForDeclaredMemberTable(symbol.ContainingSymbol);
+        }
 
         static string[] GetConditions(string content)
         {

@@ -483,6 +483,12 @@ async Task GenerateReadme()
     var path = GetReadmeFilePath();
 
     var sb = new StringBuilder();
+    var methods = GetReadmeSymbols(
+        polyfills.Where(p => p.Kind is PolyfillKind.Method).Select(p => (DocumentationId: p.TypeName, p.Symbol))
+            .Concat(polyfills.Where(p => p.Kind is PolyfillKind.Type).SelectMany(p => p.PolyfillData.DeclaredMethodSymbols)));
+    var properties = GetReadmeSymbols(
+        polyfills.Where(p => p.Kind is PolyfillKind.Property).Select(p => (DocumentationId: p.TypeName, p.Symbol))
+            .Concat(polyfills.Where(p => p.Kind is PolyfillKind.Type).SelectMany(p => p.PolyfillData.DeclaredPropertySymbols)));
 
     sb.Append($"### Types ({polyfills.Where(p => p.Kind is PolyfillKind.Type).Count()})\n\n");
     var typeDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
@@ -499,7 +505,7 @@ async Task GenerateReadme()
         sb.Append($"- `{polyfill.Symbol.ToDisplayString(typeDisplayFormat)}`\n");
     }
 
-    sb.Append($"\n### Methods ({polyfills.Where(p => p.Kind is PolyfillKind.Method).Count()})\n\n");
+    sb.Append($"\n### Methods ({methods.Length})\n\n");
 
     var methodDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
           .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)
@@ -510,12 +516,12 @@ async Task GenerateReadme()
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Method).OrderBy(p => p.TypeName, StringComparer.Ordinal))
+    foreach (var method in methods)
     {
-        sb.Append($"- `{polyfill.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
+        sb.Append($"- `{method.Symbol.ToDisplayString(methodDisplayFormat)}`\n");
     }
 
-    sb.Append($"\n### Properties ({polyfills.Where(p => p.Kind is PolyfillKind.Property).Count()})\n\n");
+    sb.Append($"\n### Properties ({properties.Length})\n\n");
 
     var propertyDisplayFormat = SymbolDisplayFormat.FullyQualifiedFormat
           .WithGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance | SymbolDisplayGenericsOptions.IncludeTypeConstraints)
@@ -526,14 +532,25 @@ async Task GenerateReadme()
           .WithParameterOptions(SymbolDisplayParameterOptions.IncludeExtensionThis | SymbolDisplayParameterOptions.IncludeModifiers | SymbolDisplayParameterOptions.IncludeType | SymbolDisplayParameterOptions.IncludeName | SymbolDisplayParameterOptions.IncludeDefaultValue | SymbolDisplayParameterOptions.IncludeOptionalBrackets)
           .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers | SymbolDisplayMiscellaneousOptions.ExpandNullable | SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
           ;
-    foreach (var polyfill in polyfills.Where(p => p.Kind is PolyfillKind.Property).OrderBy(p => p.TypeName, StringComparer.Ordinal))
+    foreach (var property in properties)
     {
-        sb.Append($"- `{polyfill.Symbol.ToDisplayString(propertyDisplayFormat)}`\n");
+        sb.Append($"- `{property.Symbol.ToDisplayString(propertyDisplayFormat)}`\n");
     }
 
     var content = await File.ReadAllTextAsync(path);
     var newContent = Regex.Replace(content, "(?<=<!-- begin_polyfills -->\\r?\\n).*(?=<!-- end_polyfills -->)", "\n" + sb.ToString() + "\n", RegexOptions.Singleline, Timeout.InfiniteTimeSpan);
     await File.WriteAllTextAsync(path, newContent);
+
+    static (string DocumentationId, ISymbol Symbol)[] GetReadmeSymbols(IEnumerable<(string DocumentationId, ISymbol Symbol)> symbols)
+    {
+        var result = new Dictionary<string, ISymbol>(StringComparer.Ordinal);
+        foreach (var (documentationId, symbol) in symbols)
+        {
+            result.TryAdd(documentationId, symbol);
+        }
+
+        return [.. result.OrderBy(item => item.Key, StringComparer.Ordinal).Select(item => (item.Key, item.Value))];
+    }
 }
 
 static string GetMemberFilePath() => GetRootPath() / "Meziantou.Polyfill" / "Members.g.cs";

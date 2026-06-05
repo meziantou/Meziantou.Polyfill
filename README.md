@@ -139,7 +139,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (563)
+### Methods (721)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -160,6 +160,18 @@ The filtering logic works as follows:
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt32(System.ReadOnlySpan<System.Byte> value)`
+- `System.Buffers.SearchValues.Create(System.ReadOnlySpan<System.Byte> values)`
+- `System.Buffers.SearchValues.Create(System.ReadOnlySpan<System.Char> values)`
+- `System.Buffers.SearchValues.Create(System.ReadOnlySpan<System.String> values, System.StringComparison comparisonType)`
+- `System.Buffers.SearchValues.Create<T>(System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
+- `System.Buffers.SearchValues<T>.Contains(T value)`
+- `System.Buffers.SequenceReader<T>.Advance(System.Int32 count)`
+- `System.Buffers.SequenceReader<T>.Advance(System.Int64 count)`
+- `System.Buffers.SequenceReader<T>.Rewind(System.Int64 count)`
+- `readonly System.Buffers.SequenceReader<T>.TryCopyTo(System.Span<T> destination)`
+- `readonly System.Buffers.SequenceReader<T>.TryPeek(System.Int64 offset, out T value)`
+- `readonly System.Buffers.SequenceReader<T>.TryPeek(out T value)`
+- `System.Buffers.SequenceReader<T>.TryRead(out T value)`
 - `System.Byte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Byte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Byte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -182,9 +194,24 @@ The filtering logic works as follows:
 - `System.Collections.Generic.CollectionExtensions.TryAdd<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary, TKey key, TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.Remove(TKey key, out TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
+- `System.Collections.Generic.KeyValuePair.Create<TKey, TValue>(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.List<T>.Slice(System.Int32 start, System.Int32 length)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Clear()`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.DequeueEnqueue(TElement element, TPriority priority)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Dequeue()`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Enqueue(TElement element, TPriority priority)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.EnqueueDequeue(TElement element, TPriority priority)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.EnqueueRange(System.Collections.Generic.IEnumerable<System.ValueTuple<TElement, TPriority>> items)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.EnqueueRange(System.Collections.Generic.IEnumerable<TElement> elements, TPriority priority)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.EnsureCapacity(System.Int32 capacity)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Peek()`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.TrimExcess()`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.TryDequeue(out TElement element, out TPriority priority)`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.TryPeek(out TElement element, out TPriority priority)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
+- `System.Collections.Generic.ReferenceEqualityComparer.Equals(System.Object? x, System.Object? y)`
+- `System.Collections.Generic.ReferenceEqualityComparer.GetHashCode(System.Object? obj)`
 - `System.Collections.Generic.SortedList<TKey, TValue>.GetKeyAtIndex(System.Int32 index)`
 - `System.Collections.Generic.SortedList<TKey, TValue>.GetValueAtIndex(System.Int32 index)`
 - `System.Collections.Generic.Stack<T>.TryPeek(out T result)`
@@ -192,6 +219,15 @@ The filtering logic works as follows:
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan()`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Int32 start, System.Int32 length)`
 - `System.Collections.Immutable.ImmutableArray<T>.AsSpan(System.Range range)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.Contains(T item)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.CopyTo(T[] array, System.Int32 arrayIndex)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.GetEnumerator()`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.IsProperSubsetOf(System.Collections.Generic.IEnumerable<T> other)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.IsProperSupersetOf(System.Collections.Generic.IEnumerable<T> other)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.IsSubsetOf(System.Collections.Generic.IEnumerable<T> other)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.IsSupersetOf(System.Collections.Generic.IEnumerable<T> other)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.Overlaps(System.Collections.Generic.IEnumerable<T> other)`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.SetEquals(System.Collections.Generic.IEnumerable<T> other)`
 - `System.Convert.ToBase64String(System.ReadOnlySpan<System.Byte> bytes, [System.Base64FormattingOptions options = System.Base64FormattingOptions.None])`
 - `System.Convert.ToHexString(System.Byte[] inArray)`
 - `System.Convert.ToHexString(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
@@ -238,6 +274,19 @@ The filtering logic works as follows:
 - `System.Enum.TryParse<TEnum>(System.String? value, out TEnum result) where TEnum : struct`
 - `System.Guid.CreateVersion7()`
 - `System.Guid.CreateVersion7(System.DateTimeOffset timestamp)`
+- `System.HashCode.Add<T>(T value)`
+- `System.HashCode.Add<T>(T value, System.Collections.Generic.IEqualityComparer<T>? comparer)`
+- `System.HashCode.Combine<T1>(T1 value1)`
+- `System.HashCode.Combine<T1, T2>(T1 value1, T2 value2)`
+- `System.HashCode.Combine<T1, T2, T3>(T1 value1, T2 value2, T3 value3)`
+- `System.HashCode.Combine<T1, T2, T3, T4>(T1 value1, T2 value2, T3 value3, T4 value4)`
+- `System.HashCode.Combine<T1, T2, T3, T4, T5>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5)`
+- `System.HashCode.Combine<T1, T2, T3, T4, T5, T6>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6)`
+- `System.HashCode.Combine<T1, T2, T3, T4, T5, T6, T7>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7)`
+- `System.HashCode.Combine<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8)`
+- `System.HashCode.Equals(System.Object? obj)`
+- `System.HashCode.GetHashCode()`
+- `System.HashCode.ToHashCode()`
 - `System.IO.File.AppendAllBytes(System.String path, System.Byte[] bytes)`
 - `System.IO.File.AppendAllBytes(System.String path, System.ReadOnlySpan<System.Byte> bytes)`
 - `System.IO.File.AppendAllBytesAsync(System.String path, System.Byte[] bytes, [System.Threading.CancellationToken cancellationToken = default])`
@@ -282,6 +331,16 @@ The filtering logic works as follows:
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextWriter.CreateBroadcasting(params System.IO.TextWriter[] writers)`
 - `System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.ITupleInternal.GetHashCode(System.Collections.IEqualityComparer comparer)`
+- `System.ITupleInternal.ToStringEnd()`
+- `System.Index.Equals(System.Index other)`
+- `System.Index.Equals(System.Object? value)`
+- `System.Index.FromEnd(System.Int32 value)`
+- `System.Index.FromStart(System.Int32 value)`
+- `System.Index.GetHashCode()`
+- `System.Index.GetOffset(System.Int32 length)`
+- `System.Index.ToString()`
+- `System.Index.implicit operator System.Index(System.Int32 value)`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
@@ -552,8 +611,34 @@ The filtering logic works as follows:
 - `System.Random.NextBytes(System.Span<System.Byte> buffer)`
 - `System.Random.Shuffle<T>(System.Span<T> values)`
 - `System.Random.Shuffle<T>(T[] values)`
+- `System.Range.EndAt(System.Index end)`
+- `System.Range.Equals(System.Object? value)`
+- `System.Range.Equals(System.Range other)`
+- `System.Range.GetHashCode()`
+- `System.Range.GetOffsetAndLength(System.Int32 length)`
+- `System.Range.StartAt(System.Index start)`
+- `System.Range.ToString()`
 - `System.Reflection.MethodInfo.CreateDelegate<T>() where T : System.Delegate`
 - `System.Reflection.MethodInfo.CreateDelegate<T>(System.Object? target) where T : System.Delegate`
+- `System.Reflection.NullabilityInfoContext.Create(System.Reflection.EventInfo eventInfo)`
+- `System.Reflection.NullabilityInfoContext.Create(System.Reflection.FieldInfo fieldInfo)`
+- `System.Reflection.NullabilityInfoContext.Create(System.Reflection.ParameterInfo parameterInfo)`
+- `System.Reflection.NullabilityInfoContext.Create(System.Reflection.PropertyInfo propertyInfo)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted(System.Object? value, [System.Int32 alignment = 0], [System.String? format = null])`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted(scoped System.ReadOnlySpan<System.Char> value)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted(scoped System.ReadOnlySpan<System.Char> value, [System.Int32 alignment = 0], [System.String? format = null])`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted(System.String? value)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted(System.String? value, [System.Int32 alignment = 0], [System.String? format = null])`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted<T>(T value)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted<T>(T value, System.Int32 alignment)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted<T>(T value, System.Int32 alignment, System.String? format)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendFormatted<T>(T value, System.String? format)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.AppendLiteral(System.String value)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.Clear()`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.GetDefaultLength(System.Int32 literalLength, System.Int32 formattedCount)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.HasCustomFormatter(System.IFormatProvider provider)`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.ToStringAndClear()`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.ToString()`
 - `System.Runtime.InteropServices.CollectionsMarshal.AsSpan<T>(System.Collections.Generic.List<T>? list)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
@@ -638,6 +723,15 @@ The filtering logic works as follows:
 - `System.Threading.CancellationToken.UnsafeRegister(System.Action<System.Object?, System.Threading.CancellationToken> callback, System.Object? state)`
 - `System.Threading.CancellationToken.UnsafeRegister(System.Action<System.Object?> callback, System.Object? state)`
 - `System.Threading.CancellationTokenSource.CancelAsync()`
+- `System.Threading.ITimer.Change(System.TimeSpan dueTime, System.TimeSpan period)`
+- `System.Threading.Lock.Enter()`
+- `System.Threading.Lock.EnterScope()`
+- `System.Threading.Lock.Exit()`
+- `System.Threading.Lock.TryEnter(System.Int32 millisecondsTimeout)`
+- `System.Threading.Lock.TryEnter(System.TimeSpan timeout)`
+- `System.Threading.Lock.TryEnter()`
+- `System.Threading.PeriodicTimer.Dispose()`
+- `System.Threading.PeriodicTimer.WaitForNextTickAsync([System.Threading.CancellationToken cancellationToken = default])`
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
@@ -645,6 +739,11 @@ The filtering logic works as follows:
 - `System.Threading.Tasks.Task.WhenEach<TResult>(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task<TResult>> tasks)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Threading.Tasks.TaskCompletionSource<TResult>.SetCanceled(System.Threading.CancellationToken cancellationToken)`
+- `System.Threading.Tasks.TaskToAsyncResult.Begin(System.Threading.Tasks.Task task, System.AsyncCallback? callback, System.Object? state)`
+- `System.Threading.Tasks.TaskToAsyncResult.End(System.IAsyncResult asyncResult)`
+- `System.Threading.Tasks.TaskToAsyncResult.End<TResult>(System.IAsyncResult asyncResult)`
+- `System.Threading.Tasks.TaskToAsyncResult.Unwrap(System.IAsyncResult asyncResult)`
+- `System.Threading.Tasks.TaskToAsyncResult.Unwrap<TResult>(System.IAsyncResult asyncResult)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
@@ -652,6 +751,12 @@ The filtering logic works as follows:
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second)`
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second, out System.Int32 millisecond)`
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second, out System.Int32 millisecond, out System.Int32 microsecond)`
+- `System.TimeProvider.CreateTimer(System.Threading.TimerCallback callback, System.Object? state, System.TimeSpan dueTime, System.TimeSpan period)`
+- `System.TimeProvider.GetElapsedTime(System.Int64 startingTimestamp)`
+- `System.TimeProvider.GetElapsedTime(System.Int64 startingTimestamp, System.Int64 endingTimestamp)`
+- `System.TimeProvider.GetLocalNow()`
+- `System.TimeProvider.GetTimestamp()`
+- `System.TimeProvider.GetUtcNow()`
 - `System.TimeSpan.Multiply(System.Double factor)`
 - `System.TimeSpan.operator /(System.TimeSpan timeSpan, System.Double divisor)`
 - `System.TimeSpan.operator *(System.Double factor, System.TimeSpan timeSpan)`
@@ -692,6 +797,59 @@ The filtering logic works as follows:
 - `System.Uri.TryEscapeDataString(System.ReadOnlySpan<System.Char> charsToEscape, System.Span<System.Char> destination, out System.Int32 charsWritten)`
 - `System.Uri.TryUnescapeDataString(System.ReadOnlySpan<System.Char> charsToUnescape, System.Span<System.Char> destination, out System.Int32 charsWritten)`
 - `System.Uri.UnescapeDataString(System.ReadOnlySpan<System.Char> charsToUnescape)`
+- `System.ValueTuple.CompareTo(System.ValueTuple other)`
+- `System.ValueTuple.Create<T1>(T1 item1)`
+- `System.ValueTuple.Create<T1, T2>(T1 item1, T2 item2)`
+- `System.ValueTuple.Create<T1, T2, T3>(T1 item1, T2 item2, T3 item3)`
+- `System.ValueTuple.Create<T1, T2, T3, T4>(T1 item1, T2 item2, T3 item3, T4 item4)`
+- `System.ValueTuple.Create<T1, T2, T3, T4, T5>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5)`
+- `System.ValueTuple.Create<T1, T2, T3, T4, T5, T6>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6)`
+- `System.ValueTuple.Create<T1, T2, T3, T4, T5, T6, T7>(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7)`
+- `System.ValueTuple.Create()`
+- `System.ValueTuple.Equals(System.Object? obj)`
+- `System.ValueTuple.Equals(System.ValueTuple other)`
+- `System.ValueTuple.GetHashCode()`
+- `System.ValueTuple.ToString()`
+- `System.ValueTuple<T1>.CompareTo(System.ValueTuple<T1> other)`
+- `System.ValueTuple<T1>.Equals(System.Object? obj)`
+- `System.ValueTuple<T1>.Equals(System.ValueTuple<T1> other)`
+- `System.ValueTuple<T1>.GetHashCode()`
+- `System.ValueTuple<T1>.ToString()`
+- `System.ValueTuple<T1, T2>.CompareTo(System.ValueTuple<T1, T2> other)`
+- `System.ValueTuple<T1, T2>.Equals(System.Object? obj)`
+- `System.ValueTuple<T1, T2>.Equals(System.ValueTuple<T1, T2> other)`
+- `System.ValueTuple<T1, T2>.GetHashCode()`
+- `System.ValueTuple<T1, T2>.ToString()`
+- `System.ValueTuple<T1, T2, T3>.CompareTo(System.ValueTuple<T1, T2, T3> other)`
+- `System.ValueTuple<T1, T2, T3>.Equals(System.Object? obj)`
+- `System.ValueTuple<T1, T2, T3>.Equals(System.ValueTuple<T1, T2, T3> other)`
+- `System.ValueTuple<T1, T2, T3>.GetHashCode()`
+- `System.ValueTuple<T1, T2, T3>.ToString()`
+- `System.ValueTuple<T1, T2, T3, T4>.CompareTo(System.ValueTuple<T1, T2, T3, T4> other)`
+- `System.ValueTuple<T1, T2, T3, T4>.Equals(System.Object obj)`
+- `System.ValueTuple<T1, T2, T3, T4>.Equals(System.ValueTuple<T1, T2, T3, T4> other)`
+- `System.ValueTuple<T1, T2, T3, T4>.GetHashCode()`
+- `System.ValueTuple<T1, T2, T3, T4>.ToString()`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.CompareTo(System.ValueTuple<T1, T2, T3, T4, T5> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Equals(System.Object? obj)`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Equals(System.ValueTuple<T1, T2, T3, T4, T5> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.GetHashCode()`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.ToString()`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.CompareTo(System.ValueTuple<T1, T2, T3, T4, T5, T6> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Equals(System.Object? obj)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Equals(System.ValueTuple<T1, T2, T3, T4, T5, T6> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.GetHashCode()`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.ToString()`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.CompareTo(System.ValueTuple<T1, T2, T3, T4, T5, T6, T7> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Equals(System.Object? obj)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Equals(System.ValueTuple<T1, T2, T3, T4, T5, T6, T7> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.GetHashCode()`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.ToString()`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.CompareTo(System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Equals(System.Object obj)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Equals(System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> other)`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.GetHashCode()`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.ToString()`
 - `System.Xml.Linq.XDocument.LoadAsync(System.IO.Stream stream, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XDocument.LoadAsync(System.IO.TextReader textReader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XDocument.LoadAsync(System.Xml.XmlReader reader, System.Xml.Linq.LoadOptions options, System.Threading.CancellationToken cancellationToken)`
@@ -705,9 +863,21 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (52)
+### Properties (187)
 
 - `System.DateTimeOffset.UnixEpoch`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat = "CompositeFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat = "DateOnlyFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat = "DateTimeFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat = "EnumFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat = "GuidFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json = "Json"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat = "NumericFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex = "Regex"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat = "TimeOnlyFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat = "TimeSpanFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri = "Uri"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml = "Xml"`
 - `System.Net.Mime.MediaTypeNames.Application.FormUrlEncoded = "application/x-www-form-urlencoded"`
 - `System.Net.Mime.MediaTypeNames.Application.GZip = "application/gzip"`
 - `System.Net.Mime.MediaTypeNames.Application.Json = "application/json"`
@@ -743,19 +913,142 @@ The filtering logic works as follows:
 - `System.Net.Mime.MediaTypeNames.Text.JavaScript = "text/javascript"`
 - `System.Net.Mime.MediaTypeNames.Text.Markdown = "text/markdown"`
 - `System.Net.Mime.MediaTypeNames.Text.Rtf = "text/rtf"`
+- `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs = "RefStructs"`
+- `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers = "RequiredMembers"`
+- `System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.CallConvs`
+- `System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.EntryPoint`
+- `System.ValueTuple<T1>.Item1`
+- `System.ValueTuple<T1, T2>.Item1`
+- `System.ValueTuple<T1, T2>.Item2`
+- `System.ValueTuple<T1, T2, T3>.Item1`
+- `System.ValueTuple<T1, T2, T3>.Item2`
+- `System.ValueTuple<T1, T2, T3>.Item3`
+- `System.ValueTuple<T1, T2, T3, T4>.Item1`
+- `System.ValueTuple<T1, T2, T3, T4>.Item2`
+- `System.ValueTuple<T1, T2, T3, T4>.Item3`
+- `System.ValueTuple<T1, T2, T3, T4>.Item4`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Item1`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Item2`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Item3`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Item4`
+- `System.ValueTuple<T1, T2, T3, T4, T5>.Item5`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Item1`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Item2`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Item3`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Item4`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Item5`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6>.Item6`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item1`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item2`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item3`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item4`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item5`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item6`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>.Item7`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item1`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item2`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item3`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item4`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item5`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item6`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Item7`
+- `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.Rest`
+- `readonly System.Buffers.SequenceReader<T>.Consumed`
+- `readonly System.Buffers.SequenceReader<T>.CurrentSpan`
+- `readonly System.Buffers.SequenceReader<T>.CurrentSpanIndex`
+- `readonly System.Buffers.SequenceReader<T>.End`
+- `System.Buffers.SequenceReader<T>.Length`
+- `readonly System.Buffers.SequenceReader<T>.Position`
+- `readonly System.Buffers.SequenceReader<T>.Remaining`
+- `readonly System.Buffers.SequenceReader<T>.Sequence`
+- `readonly System.Buffers.SequenceReader<T>.UnreadSequence`
+- `readonly System.Buffers.SequenceReader<T>.UnreadSpan`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Comparer`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Count`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.UnorderedItems`
+- `System.Collections.Generic.ReferenceEqualityComparer.Instance`
 - `System.Collections.ObjectModel.ReadOnlyCollection<T>.Empty`
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.Count`
+- `System.Collections.ObjectModel.ReadOnlySet<T>.Empty`
 - `System.DateTime.Nanosecond`
 - `System.DateTimeOffset.Nanosecond`
 - `System.Delegate.HasSingleTarget`
+- `System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Max`
+- `System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Min`
+- `System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.AssemblyName`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.Condition`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberSignature`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberTypes`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.Type`
+- `System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.TypeName`
+- `System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.MemberTypes`
+- `System.Diagnostics.CodeAnalysis.ExperimentalAttribute.DiagnosticId`
+- `System.Diagnostics.CodeAnalysis.ExperimentalAttribute.UrlFormat`
+- `System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue`
+- `System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members`
+- `System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members`
+- `System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue`
+- `System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName`
+- `System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue`
+- `System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.Message`
+- `System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute.Url`
+- `System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.Message`
+- `System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.Url`
+- `System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.Message`
+- `System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.Url`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Arguments`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Syntax`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.CheckId`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Justification`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.MessageId`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Scope`
+- `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target`
 - `System.Environment.ProcessId`
 - `System.Environment.TickCount64`
+- `System.ITupleInternal.Size`
+- `System.Index.End`
+- `System.Index.IsFromEnd`
+- `System.Index.Start`
+- `System.Index.Value`
 - `System.Net.Http.HttpMethod.Query`
 - `System.Random.Shared`
+- `System.Range.All`
+- `System.Range.End`
+- `System.Range.Start`
+- `System.Reflection.NullabilityInfo.ElementType`
+- `System.Reflection.NullabilityInfo.GenericTypeArguments`
+- `System.Reflection.NullabilityInfo.ReadState`
+- `System.Reflection.NullabilityInfo.Type`
+- `System.Reflection.NullabilityInfo.WriteState`
+- `System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.BuilderType`
+- `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.ParameterName`
+- `System.Runtime.CompilerServices.CollectionBuilderAttribute.BuilderType`
+- `System.Runtime.CompilerServices.CollectionBuilderAttribute.MethodName`
+- `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName`
+- `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.IsOptional`
+- `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.Text`
+- `System.Runtime.CompilerServices.IUnion.Value`
+- `System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.Arguments`
+- `System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.Priority`
+- `System.Runtime.CompilerServices.TupleElementNamesAttribute.TransformNames`
+- `System.Runtime.InteropServices.ExtendedLayoutAttribute.LayoutKind`
+- `System.Runtime.Versioning.ObsoletedOSPlatformAttribute.Message`
+- `System.Runtime.Versioning.ObsoletedOSPlatformAttribute.Url`
+- `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Message`
+- `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Url`
+- `System.Runtime.Versioning.UnsupportedOSPlatformAttribute.Message`
+- `System.Threading.Lock.IsHeldByCurrentThread`
+- `System.Threading.PeriodicTimer.Period`
 - `System.Threading.Tasks.Task.IsCompletedSuccessfully`
 - `System.Threading.Tasks.ValueTask.CompletedTask`
 - `System.TimeOnly.Microsecond`
 - `System.TimeOnly.Nanosecond`
+- `System.TimeProvider.LocalTimeZone`
+- `System.TimeProvider.System`
+- `System.TimeProvider.TimestampFrequency`
 - `System.TimeSpan.Microseconds`
 - `System.TimeSpan.Nanoseconds`
 - `System.Type.IsGenericMethodParameter`
