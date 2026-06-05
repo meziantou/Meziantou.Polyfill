@@ -304,7 +304,7 @@ async Task GenerateMembers()
     sb.AppendLine("            var declEnd = entry.DeclaredStart + entry.DeclaredCount;");
     sb.AppendLine("            for (var j = (int)entry.DeclaredStart; j < declEnd; j++)");
     sb.AppendLine("            {");
-    sb.AppendLine("                if (!IsMemberMissing(includeContext, declared[j])) { allOk = false; break; }");
+    sb.AppendLine("                if (!IncludeMember(includeContext, declared[j])) { allOk = false; break; }");
     sb.AppendLine("            }");
     sb.AppendLine("            if (!allOk) continue;");
     sb.AppendLine("        }");
