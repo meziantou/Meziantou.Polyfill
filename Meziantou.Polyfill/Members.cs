@@ -12,6 +12,11 @@ internal partial struct Members
         if (context.Options is not null && !context.Options.Include(memberDocumentationId))
             return false;
 
+        return IsMemberMissing(context, memberDocumentationId);
+    }
+
+    private static bool IsMemberMissing(IncludeContext context, string memberDocumentationId)
+    {
         var compilation = context.Compilation;
         var currentAssembly = compilation.Assembly;
         var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(memberDocumentationId, compilation);
