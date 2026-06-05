@@ -73,6 +73,10 @@ public class AttributesTests
 
         _ = typeof(IsExternalInit);
 
+        Assert.Equal("C#", StringSyntaxAttribute.CSharp);
+        Assert.Equal("F#", StringSyntaxAttribute.FSharp);
+        Assert.Equal("Visual Basic", StringSyntaxAttribute.VisualBasic);
+
         Assert.Null(((IUnion)new CustomUnion(null)).Value);
     }
 

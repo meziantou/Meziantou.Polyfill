@@ -863,13 +863,15 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (187)
+### Properties (190)
 
 - `System.DateTimeOffset.UnixEpoch`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CSharp = "C#"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat = "CompositeFormat"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat = "DateOnlyFormat"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat = "DateTimeFormat"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat = "EnumFormat"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.FSharp = "F#"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat = "GuidFormat"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json = "Json"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat = "NumericFormat"`
@@ -877,6 +879,7 @@ The filtering logic works as follows:
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat = "TimeOnlyFormat"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat = "TimeSpanFormat"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri = "Uri"`
+- `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.VisualBasic = "Visual Basic"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml = "Xml"`
 - `System.Net.Mime.MediaTypeNames.Application.FormUrlEncoded = "application/x-www-form-urlencoded"`
 - `System.Net.Mime.MediaTypeNames.Application.GZip = "application/gzip"`
