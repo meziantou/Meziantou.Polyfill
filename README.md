@@ -139,7 +139,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (721)
+### Methods (737)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -160,6 +160,22 @@ The filtering logic works as follows:
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt32(System.ReadOnlySpan<System.Byte> value)`
+- `System.Buffers.Binary.BinaryPrimitives.ReadDoubleBigEndian(System.ReadOnlySpan<System.Byte> source)`
+- `System.Buffers.Binary.BinaryPrimitives.ReadDoubleLittleEndian(System.ReadOnlySpan<System.Byte> source)`
+- `System.Buffers.Binary.BinaryPrimitives.ReadSingleBigEndian(System.ReadOnlySpan<System.Byte> source)`
+- `System.Buffers.Binary.BinaryPrimitives.ReadSingleLittleEndian(System.ReadOnlySpan<System.Byte> source)`
+- `System.Buffers.Binary.BinaryPrimitives.TryReadDoubleBigEndian(System.ReadOnlySpan<System.Byte> source, out System.Double value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryReadDoubleLittleEndian(System.ReadOnlySpan<System.Byte> source, out System.Double value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryReadSingleBigEndian(System.ReadOnlySpan<System.Byte> source, out System.Single value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryReadSingleLittleEndian(System.ReadOnlySpan<System.Byte> source, out System.Single value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryWriteDoubleBigEndian(System.Span<System.Byte> destination, System.Double value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryWriteDoubleLittleEndian(System.Span<System.Byte> destination, System.Double value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryWriteSingleBigEndian(System.Span<System.Byte> destination, System.Single value)`
+- `System.Buffers.Binary.BinaryPrimitives.TryWriteSingleLittleEndian(System.Span<System.Byte> destination, System.Single value)`
+- `System.Buffers.Binary.BinaryPrimitives.WriteDoubleBigEndian(System.Span<System.Byte> destination, System.Double value)`
+- `System.Buffers.Binary.BinaryPrimitives.WriteDoubleLittleEndian(System.Span<System.Byte> destination, System.Double value)`
+- `System.Buffers.Binary.BinaryPrimitives.WriteSingleBigEndian(System.Span<System.Byte> destination, System.Single value)`
+- `System.Buffers.Binary.BinaryPrimitives.WriteSingleLittleEndian(System.Span<System.Byte> destination, System.Single value)`
 - `System.Buffers.SearchValues.Create(System.ReadOnlySpan<System.Byte> values)`
 - `System.Buffers.SearchValues.Create(System.ReadOnlySpan<System.Char> values)`
 - `System.Buffers.SearchValues.Create(System.ReadOnlySpan<System.String> values, System.StringComparison comparisonType)`

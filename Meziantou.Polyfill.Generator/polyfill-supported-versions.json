@@ -377,6 +377,134 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Buffers.Binary.BinaryPrimitives.ReadDoubleBigEndian(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.ReadDoubleLittleEndian(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.ReadSingleBigEndian(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.ReadSingleLittleEndian(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryReadDoubleBigEndian(System.ReadOnlySpan{System.Byte},System.Double@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryReadDoubleLittleEndian(System.ReadOnlySpan{System.Byte},System.Double@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryReadSingleBigEndian(System.ReadOnlySpan{System.Byte},System.Single@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryReadSingleLittleEndian(System.ReadOnlySpan{System.Byte},System.Single@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryWriteDoubleBigEndian(System.Span{System.Byte},System.Double)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryWriteDoubleLittleEndian(System.Span{System.Byte},System.Double)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryWriteSingleBigEndian(System.Span{System.Byte},System.Single)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.TryWriteSingleLittleEndian(System.Span{System.Byte},System.Single)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.WriteDoubleBigEndian(System.Span{System.Byte},System.Double)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.WriteDoubleLittleEndian(System.Span{System.Byte},System.Double)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.WriteSingleBigEndian(System.Span{System.Byte},System.Single)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Buffers.Binary.BinaryPrimitives.WriteSingleLittleEndian(System.Span{System.Byte},System.Single)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Byte.Parse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider)": [
       "net8.0",
       "net9.0",
