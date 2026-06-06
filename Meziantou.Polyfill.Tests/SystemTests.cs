@@ -2936,7 +2936,7 @@ public class SystemTests
         Assert.True(IntPtr.TryParse("-123"u8, out var signedValue));
 #pragma warning restore MA0011
         Assert.Equal(new IntPtr(-123), signedValue);
-        Assert.True(IntPtr.TryParse("-123", CultureInfo.InvariantCulture, out signedValue));
+        Assert.True(IntPtr.TryParse("-123", CultureInfo.InvariantCulture, out _));
 
         Assert.Equal(System.Net.IPAddress.Loopback, System.Net.IPAddress.Parse("127.0.0.1".AsSpan()));
         Assert.True(System.Net.IPAddress.TryParse("127.0.0.1"u8, out _));
