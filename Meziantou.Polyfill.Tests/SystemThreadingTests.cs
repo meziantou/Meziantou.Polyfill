@@ -199,7 +199,7 @@ public class SystemThreadingTests
         var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => WaitWithTimeout(wait));
         Assert.Equal(cts.Token, exception.CancellationToken);
 
-        timer.Period = TimeSpan.FromMilliseconds(50);
+        timer.Period = TimeSpan.FromMilliseconds(500);
         Assert.True(await WaitWithTimeout(timer.WaitForNextTickAsync()));
     }
 
