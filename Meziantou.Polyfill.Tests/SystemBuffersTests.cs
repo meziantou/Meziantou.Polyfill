@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,6 +18,84 @@ namespace Meziantou.Polyfill.Tests;
 
 public class SystemBuffersTests
 {
+    [Fact]
+    public void BinaryPrimitives_ReadFloatingPointValues()
+    {
+        Assert.Equal(1d, BinaryPrimitives.ReadDoubleBigEndian([0x3f, 0xf0, 0, 0, 0, 0, 0, 0]));
+        Assert.Equal(1d, BinaryPrimitives.ReadDoubleLittleEndian([0, 0, 0, 0, 0, 0, 0xf0, 0x3f]));
+        Assert.Equal(1f, BinaryPrimitives.ReadSingleBigEndian([0x3f, 0x80, 0, 0]));
+        Assert.Equal(1f, BinaryPrimitives.ReadSingleLittleEndian([0, 0, 0x80, 0x3f]));
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.ReadDoubleBigEndian(new byte[sizeof(double) - 1]));
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.ReadDoubleLittleEndian(new byte[sizeof(double) - 1]));
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.ReadSingleBigEndian(new byte[sizeof(float) - 1]));
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.ReadSingleLittleEndian(new byte[sizeof(float) - 1]));
+    }
+
+    [Fact]
+    public void BinaryPrimitives_TryReadFloatingPointValues()
+    {
+        Assert.True(BinaryPrimitives.TryReadDoubleBigEndian([0x3f, 0xf0, 0, 0, 0, 0, 0, 0], out var doubleValue));
+        Assert.Equal(1d, doubleValue);
+        Assert.True(BinaryPrimitives.TryReadDoubleLittleEndian([0, 0, 0, 0, 0, 0, 0xf0, 0x3f], out doubleValue));
+        Assert.Equal(1d, doubleValue);
+        Assert.True(BinaryPrimitives.TryReadSingleBigEndian([0x3f, 0x80, 0, 0], out var singleValue));
+        Assert.Equal(1f, singleValue);
+        Assert.True(BinaryPrimitives.TryReadSingleLittleEndian([0, 0, 0x80, 0x3f], out singleValue));
+        Assert.Equal(1f, singleValue);
+
+        Assert.False(BinaryPrimitives.TryReadDoubleBigEndian(new byte[sizeof(double) - 1], out doubleValue));
+        Assert.Equal(default, doubleValue);
+        Assert.False(BinaryPrimitives.TryReadDoubleLittleEndian(new byte[sizeof(double) - 1], out doubleValue));
+        Assert.Equal(default, doubleValue);
+        Assert.False(BinaryPrimitives.TryReadSingleBigEndian(new byte[sizeof(float) - 1], out singleValue));
+        Assert.Equal(default, singleValue);
+        Assert.False(BinaryPrimitives.TryReadSingleLittleEndian(new byte[sizeof(float) - 1], out singleValue));
+        Assert.Equal(default, singleValue);
+    }
+
+    [Fact]
+    public void BinaryPrimitives_WriteFloatingPointValues()
+    {
+        var doubleDestination = new byte[sizeof(double)];
+        BinaryPrimitives.WriteDoubleBigEndian(doubleDestination, 1d);
+        Assert.Equal([0x3f, 0xf0, 0, 0, 0, 0, 0, 0], doubleDestination);
+        BinaryPrimitives.WriteDoubleLittleEndian(doubleDestination, 1d);
+        Assert.Equal([0, 0, 0, 0, 0, 0, 0xf0, 0x3f], doubleDestination);
+
+        var singleDestination = new byte[sizeof(float)];
+        BinaryPrimitives.WriteSingleBigEndian(singleDestination, 1f);
+        Assert.Equal([0x3f, 0x80, 0, 0], singleDestination);
+        BinaryPrimitives.WriteSingleLittleEndian(singleDestination, 1f);
+        Assert.Equal([0, 0, 0x80, 0x3f], singleDestination);
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.WriteDoubleBigEndian(new byte[sizeof(double) - 1], 1d));
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.WriteDoubleLittleEndian(new byte[sizeof(double) - 1], 1d));
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.WriteSingleBigEndian(new byte[sizeof(float) - 1], 1f));
+        Assert.Throws<ArgumentOutOfRangeException>(() => BinaryPrimitives.WriteSingleLittleEndian(new byte[sizeof(float) - 1], 1f));
+    }
+
+    [Fact]
+    public void BinaryPrimitives_TryWriteFloatingPointValues()
+    {
+        var doubleDestination = new byte[sizeof(double)];
+        Assert.True(BinaryPrimitives.TryWriteDoubleBigEndian(doubleDestination, 1d));
+        Assert.Equal([0x3f, 0xf0, 0, 0, 0, 0, 0, 0], doubleDestination);
+        Assert.True(BinaryPrimitives.TryWriteDoubleLittleEndian(doubleDestination, 1d));
+        Assert.Equal([0, 0, 0, 0, 0, 0, 0xf0, 0x3f], doubleDestination);
+
+        var singleDestination = new byte[sizeof(float)];
+        Assert.True(BinaryPrimitives.TryWriteSingleBigEndian(singleDestination, 1f));
+        Assert.Equal([0x3f, 0x80, 0, 0], singleDestination);
+        Assert.True(BinaryPrimitives.TryWriteSingleLittleEndian(singleDestination, 1f));
+        Assert.Equal([0, 0, 0x80, 0x3f], singleDestination);
+
+        Assert.False(BinaryPrimitives.TryWriteDoubleBigEndian(new byte[sizeof(double) - 1], 1d));
+        Assert.False(BinaryPrimitives.TryWriteDoubleLittleEndian(new byte[sizeof(double) - 1], 1d));
+        Assert.False(BinaryPrimitives.TryWriteSingleBigEndian(new byte[sizeof(float) - 1], 1f));
+        Assert.False(BinaryPrimitives.TryWriteSingleLittleEndian(new byte[sizeof(float) - 1], 1f));
+    }
+
     [Fact]
     public void System_Buffers_SearchValues_Create_Byte()
     {
