@@ -64,12 +64,10 @@ public class SystemDiagnosticsTests
     public void Stopwatch_GetElapsedTime_TwoTimestamps()
     {
         var start = Stopwatch.GetTimestamp();
-        Thread.Sleep(15);
-        var end = Stopwatch.GetTimestamp();
+        var end = start + (Stopwatch.Frequency / 10); // Add exactly 100ms of ticks
 
         var elapsed = Stopwatch.GetElapsedTime(start, end);
-        Assert.True(elapsed.TotalMilliseconds >= 10, $"Expected >= 10ms, got {elapsed.TotalMilliseconds}ms");
-        Assert.True(elapsed.TotalSeconds < 5, $"Expected < 5s, got {elapsed.TotalSeconds}s");
+        Assert.Equal(TimeSpan.FromMilliseconds(100), elapsed);
     }
 
     [Fact]
