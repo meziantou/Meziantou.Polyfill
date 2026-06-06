@@ -377,6 +377,14 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.BitConverter.DoubleToUInt64Bits(System.Double)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.BitConverter.ToInt16(System.ReadOnlySpan{System.Byte})": [
       "netstandard2.1",
       "net6.0",
@@ -405,6 +413,31 @@
       "net11.0"
     ],
     "M:System.BitConverter.ToUInt32(System.ReadOnlySpan{System.Byte})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.BitConverter.UInt32BitsToSingle(System.UInt32)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.BitConverter.UInt64BitsToDouble(System.UInt64)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Boolean.TryFormat(System.Span{System.Char},System.Int32@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -569,6 +602,27 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Byte.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Byte.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Byte.TryParse(System.ReadOnlySpan{System.Byte},System.Byte@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Byte.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.Byte@)": [
       "net8.0",
       "net9.0",
@@ -600,6 +654,87 @@
       "net11.0"
     ],
     "M:System.Byte.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.Byte@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Byte.TryParse(System.String,System.IFormatProvider,System.Byte@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.Equals(System.Char,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.Char.IsAscii(System.Char)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiDigit(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiHexDigit(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiHexDigitLower(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiHexDigitUpper(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiLetter(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiLetterLower(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiLetterOrDigit(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsAsciiLetterUpper(System.Char)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Char.IsBetween(System.Char,System.Char,System.Char)": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -657,8 +792,18 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly\u0060\u00601(System.Collections.Generic.ISet{\u0060\u00600})": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Collections.Generic.CollectionExtensions.AsReadOnly\u0060\u00602(System.Collections.Generic.IDictionary{\u0060\u00600,\u0060\u00601})": [
       "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.CollectionExtensions.CopyTo\u0060\u00601(System.Collections.Generic.List{\u0060\u00600},System.Span{\u0060\u00600})": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -677,6 +822,12 @@
       "netstandard2.1",
       "net6.0",
       "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.CollectionExtensions.InsertRange\u0060\u00601(System.Collections.Generic.List{\u0060\u00600},System.Int32,System.ReadOnlySpan{\u0060\u00600})": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -713,6 +864,12 @@
       "netstandard2.1",
       "net6.0",
       "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.EqualityComparer\u00601.Create(System.Func{\u00600,\u00600,System.Boolean},System.Func{\u00600,System.Int32})": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -796,6 +953,49 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Console.OpenStandardErrorHandle": [
+      "net11.0"
+    ],
+    "M:System.Console.OpenStandardInputHandle": [
+      "net11.0"
+    ],
+    "M:System.Console.OpenStandardOutputHandle": [
+      "net11.0"
+    ],
+    "M:System.Convert.FromHexString(System.ReadOnlySpan{System.Byte})": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.FromHexString(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.FromHexString(System.ReadOnlySpan{System.Char})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.FromHexString(System.ReadOnlySpan{System.Char},System.Span{System.Byte},System.Int32@,System.Int32@)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.FromHexString(System.String)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.FromHexString(System.String,System.Span{System.Byte},System.Int32@,System.Int32@)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Convert.ToBase64String(System.ReadOnlySpan{System.Byte},System.Base64FormattingOptions)": [
       "netstandard2.1",
       "net6.0",
@@ -844,7 +1044,210 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Convert.TryFromBase64Chars(System.ReadOnlySpan{System.Char},System.Span{System.Byte},System.Int32@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.TryFromBase64String(System.String,System.Span{System.Byte},System.Int32@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.TryToBase64Chars(System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Int32@,System.Base64FormattingOptions)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.TryToHexString(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.TryToHexString(System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Int32@)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.TryToHexStringLower(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Convert.TryToHexStringLower(System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Int32@)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.DateOnly.Deconstruct(System.Int32@,System.Int32@,System.Int32@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateOnly.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateOnly.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.AddMicroseconds(System.Double)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.Deconstruct(System.DateOnly@,System.TimeOnly@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.Deconstruct(System.Int32@,System.Int32@,System.Int32@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryParse(System.ReadOnlySpan{System.Char},System.DateTime@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.DateTime@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryParse(System.String,System.IFormatProvider,System.DateTime@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTime.TryParseExact(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.AddMicroseconds(System.Double)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.Deconstruct(System.DateOnly@,System.TimeOnly@,System.TimeSpan@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryParse(System.ReadOnlySpan{System.Char},System.DateTimeOffset@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.DateTimeOffset@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTimeOffset@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryParse(System.String,System.IFormatProvider,System.DateTimeOffset@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.DateTimeOffset.TryParseExact(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTimeOffset@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
@@ -873,6 +1276,27 @@
     ],
     "M:System.Decimal.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
       "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Decimal.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Decimal.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Decimal.TryParse(System.ReadOnlySpan{System.Byte},System.Decimal@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -915,6 +1339,13 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Decimal.TryParse(System.String,System.IFormatProvider,System.Decimal@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Delegate.EnumerateInvocationList\u0060\u00601(\u0060\u00600)": [
       "net9.0",
       "net10.0",
@@ -922,6 +1353,13 @@
     ],
     "M:System.Diagnostics.Process.WaitForExitAsync(System.Threading.CancellationToken)": [
       "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64)": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -958,6 +1396,27 @@
     ],
     "M:System.Double.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
       "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Double.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Double.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Double.TryParse(System.ReadOnlySpan{System.Byte},System.Double@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -1134,12 +1593,75 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.GC.AllocateUninitializedArray\u0060\u00601(System.Int32,System.Boolean)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Guid.CreateVersion7": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
     "M:System.Guid.CreateVersion7(System.DateTimeOffset)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.Parse(System.ReadOnlySpan{System.Byte})": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char})": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryParse(System.ReadOnlySpan{System.Byte},System.Guid@)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryParse(System.ReadOnlySpan{System.Char},System.Guid@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.Guid@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryParse(System.String,System.IFormatProvider,System.Guid@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Guid.TryParseExact(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.Guid@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
@@ -1357,8 +1879,114 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.IO.Path.Combine(System.ReadOnlySpan{System.String})": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.EndsInDirectorySeparator(System.ReadOnlySpan{System.Char})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.EndsInDirectorySeparator(System.String)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.Exists(System.String)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.GetDirectoryName(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.GetExtension(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.GetFileName(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.GetFileNameWithoutExtension(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.IO.Path.GetRelativePath(System.String,System.String)": [
       "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.HasExtension(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.IsPathRooted(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.Join(System.String[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.TrimEndingDirectorySeparator(System.ReadOnlySpan{System.Char})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Path.TrimEndingDirectorySeparator(System.String)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1454,6 +2082,13 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.IO.TextReader.ReadLineAsync(System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken)": [
       "net7.0",
       "net8.0",
@@ -1466,7 +2101,47 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.IO.TextWriter.FlushAsync(System.Threading.CancellationToken)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.TextWriter.Write(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.TextWriter.Write(System.Text.StringBuilder)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory{System.Char},System.Threading.CancellationToken)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.TextWriter.WriteAsync(System.Text.StringBuilder,System.Threading.CancellationToken)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.TextWriter.WriteLine(System.ReadOnlySpan{System.Char})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -1503,6 +2178,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Int16.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Int16.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Int16.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.Int16@)": [
       "net8.0",
       "net9.0",
@@ -1510,6 +2200,12 @@
       "net11.0"
     ],
     "M:System.Int16.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.Int16@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Int16.TryParse(System.ReadOnlySpan{System.Byte},System.Int16@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -1568,6 +2264,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Int32.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Int32.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Int32.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.Int32@)": [
       "net8.0",
       "net9.0",
@@ -1575,6 +2286,12 @@
       "net11.0"
     ],
     "M:System.Int32.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.Int32@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Int32.TryParse(System.ReadOnlySpan{System.Byte},System.Int32@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -1633,6 +2350,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Int64.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Int64.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Int64.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.Int64@)": [
       "net8.0",
       "net9.0",
@@ -1640,6 +2372,12 @@
       "net11.0"
     ],
     "M:System.Int64.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.Int64@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Int64.TryParse(System.ReadOnlySpan{System.Byte},System.Int64@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -1663,6 +2401,70 @@
     ],
     "M:System.Int64.TryParse(System.ReadOnlySpan{System.Char},System.Int64@)": [
       "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.IntPtr@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.IntPtr@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.ReadOnlySpan{System.Byte},System.IntPtr@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.ReadOnlySpan{System.Char},System.Globalization.NumberStyles,System.IFormatProvider,System.IntPtr@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.IntPtr@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.ReadOnlySpan{System.Char},System.IntPtr@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.IntPtr@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.String,System.IFormatProvider,System.IntPtr@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IntPtr.TryParse(System.String,System.IntPtr@)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -2286,6 +3088,10 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Linq.Enumerable.InfiniteSequence\u0060\u00601(\u0060\u00600,\u0060\u00600)": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Linq.Enumerable.IntersectBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00601})": [
       "net6.0",
       "net7.0",
@@ -2375,6 +3181,10 @@
       "net11.0"
     ],
     "M:System.Linq.Enumerable.RightJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Linq.Enumerable.Sequence\u0060\u00601(\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
       "net10.0",
       "net11.0"
     ],
@@ -2844,6 +3654,28 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Net.IPAddress.Parse(System.ReadOnlySpan{System.Char})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Net.IPAddress.TryParse(System.ReadOnlySpan{System.Byte},System.Net.IPAddress@)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Net.IPAddress.TryParse(System.ReadOnlySpan{System.Char},System.Net.IPAddress@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan{System.Byte},System.Net.IPEndPoint)": [
       "net6.0",
       "net7.0",
@@ -2930,6 +3762,14 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Random.GetHexString(System.Int32,System.Boolean)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Random.GetHexString(System.Span{System.Char},System.Boolean)": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Random.GetItems\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Int32)": [
       "net8.0",
       "net9.0",
@@ -2948,8 +3788,44 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Random.GetString(System.ReadOnlySpan{System.Char},System.Int32)": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Random.NextBytes(System.Span{System.Byte})": [
       "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Random.NextInt64": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Random.NextInt64(System.Int64)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Random.NextInt64(System.Int64,System.Int64)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Random.NextSingle": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -2982,6 +3858,10 @@
       "net7.0",
       "net8.0",
       "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.Clear": [
       "net10.0",
       "net11.0"
     ],
@@ -3021,6 +3901,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.SByte.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.SByte.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.SByte.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.SByte@)": [
       "net8.0",
       "net9.0",
@@ -3028,6 +3923,12 @@
       "net11.0"
     ],
     "M:System.SByte.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.SByte@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.SByte.TryParse(System.ReadOnlySpan{System.Byte},System.SByte@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3137,7 +4038,239 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Security.Cryptography.SHA1.HashData(System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.HashData(System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.HashData(System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.HashData(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.HashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.HashDataAsync(System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.HashDataAsync(System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA1.TryHashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.HashData(System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.HashData(System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.HashData(System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.HashDataAsync(System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.HashDataAsync(System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA256.TryHashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashData(System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashData(System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashData(System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashData(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashDataAsync(System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.HashDataAsync(System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA384.TryHashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashData(System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashData(System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashData(System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashData(System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashDataAsync(System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.HashDataAsync(System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.SHA512.TryHashData(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3173,6 +4306,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Single.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Single.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Single.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.Single@)": [
       "net8.0",
       "net9.0",
@@ -3180,6 +4328,12 @@
       "net11.0"
     ],
     "M:System.Single.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.Single@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Single.TryParse(System.ReadOnlySpan{System.Byte},System.Single@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3694,6 +4848,14 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Threading.Tasks.ValueTask.FromResult\u0060\u00601(\u0060\u00600)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.TimeOnly.Deconstruct(System.Int32@,System.Int32@)": [
       "net8.0",
       "net9.0",
@@ -3718,7 +4880,66 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.TimeOnly.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeOnly.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.FromDays(System.Int32,System.Int32,System.Int64,System.Int64,System.Int64,System.Int64)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.FromHours(System.Int32,System.Int64,System.Int64,System.Int64,System.Int64)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.FromMicroseconds(System.Int64)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.FromMilliseconds(System.Int64,System.Int64)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.FromMinutes(System.Int64,System.Int64,System.Int64,System.Int64)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.FromSeconds(System.Int64,System.Int64,System.Int64)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.TimeSpan.Multiply(System.Double)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.TimeSpan.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -3820,6 +5041,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.UInt16.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UInt16.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.UInt16.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.UInt16@)": [
       "net8.0",
       "net9.0",
@@ -3827,6 +5063,12 @@
       "net11.0"
     ],
     "M:System.UInt16.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.UInt16@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UInt16.TryParse(System.ReadOnlySpan{System.Byte},System.UInt16@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3885,6 +5127,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.UInt32.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UInt32.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.UInt32.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.UInt32@)": [
       "net8.0",
       "net9.0",
@@ -3892,6 +5149,12 @@
       "net11.0"
     ],
     "M:System.UInt32.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.UInt32@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UInt32.TryParse(System.ReadOnlySpan{System.Byte},System.UInt32@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3950,6 +5213,21 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.UInt64.TryFormat(System.Span{System.Byte},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UInt64.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.UInt64.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.UInt64@)": [
       "net8.0",
       "net9.0",
@@ -3957,6 +5235,12 @@
       "net11.0"
     ],
     "M:System.UInt64.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.UInt64@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UInt64.TryParse(System.ReadOnlySpan{System.Byte},System.UInt64@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3980,6 +5264,70 @@
     ],
     "M:System.UInt64.TryParse(System.ReadOnlySpan{System.Char},System.UInt64@)": [
       "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.ReadOnlySpan{System.Byte},System.Globalization.NumberStyles,System.IFormatProvider,System.UIntPtr@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.ReadOnlySpan{System.Byte},System.IFormatProvider,System.UIntPtr@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.ReadOnlySpan{System.Byte},System.UIntPtr@)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.ReadOnlySpan{System.Char},System.Globalization.NumberStyles,System.IFormatProvider,System.UIntPtr@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,System.UIntPtr@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.ReadOnlySpan{System.Char},System.UIntPtr@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.UIntPtr@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.String,System.IFormatProvider,System.UIntPtr@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.UIntPtr.TryParse(System.String,System.UIntPtr@)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -4127,7 +5475,21 @@
       "net10.0",
       "net11.0"
     ],
+    "P:System.DateTime.Microsecond": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "P:System.DateTime.Nanosecond": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "P:System.DateTimeOffset.Microsecond": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -4162,11 +5524,32 @@
       "net10.0",
       "net11.0"
     ],
+    "P:System.Guid.AllBitsSet": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "P:System.Net.Http.HttpMethod.Query": [
       "net10.0",
       "net11.0"
     ],
     "P:System.Random.Shared": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "P:System.Text.Encoding.Latin1": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "P:System.Text.RegularExpressions.Capture.ValueSpan": [
       "net6.0",
       "net7.0",
       "net8.0",

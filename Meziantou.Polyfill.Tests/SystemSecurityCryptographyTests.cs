@@ -44,4 +44,31 @@ public class SystemSecurityCryptographyTests
         Assert.Equal(expected, hash);
     }
 
+    [Fact]
+    public async Task SHA_HashData_Families()
+    {
+        var data = Encoding.UTF8.GetBytes("abc");
+        await AssertAlgorithm(SHA1.Create, SHA1.HashData, SHA1.HashDataAsync, SHA1.TryHashData, 20);
+        await AssertAlgorithm(SHA256.Create, SHA256.HashData, SHA256.HashDataAsync, SHA256.TryHashData, 32);
+        await AssertAlgorithm(SHA384.Create, SHA384.HashData, SHA384.HashDataAsync, SHA384.TryHashData, 48);
+        await AssertAlgorithm(SHA512.Create, SHA512.HashData, SHA512.HashDataAsync, SHA512.TryHashData, 64);
+
+        async Task AssertAlgorithm(Func<HashAlgorithm> create, Func<byte[], byte[]> hashData, Func<Stream, CancellationToken, ValueTask<byte[]>> hashDataAsync, TryHashDataDelegate tryHashData, int size)
+        {
+            using var algorithm = create();
+            var expected = algorithm.ComputeHash(data);
+            Assert.Equal(expected, hashData(data));
+
+            Span<byte> destination = stackalloc byte[size];
+            Assert.True(tryHashData(data, destination, out var written));
+            Assert.Equal(size, written);
+            Assert.Equal(expected, destination.ToArray());
+
+            using var stream = new MemoryStream(data);
+            Assert.Equal(expected, await hashDataAsync(stream, CancellationToken.None));
+        }
+    }
+
+    private delegate bool TryHashDataDelegate(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten);
+
 }

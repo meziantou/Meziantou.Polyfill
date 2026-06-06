@@ -1,0 +1,8 @@
+using System;
+static partial class PolyfillExtensions_Guid
+{
+    extension(Guid)
+    {
+        public static Guid AllBitsSet => new(0xFFFFFFFF, 0xFFFF, 0xFFFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
+    }
+}

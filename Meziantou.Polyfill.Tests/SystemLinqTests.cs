@@ -19,6 +19,31 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemLinqTests
 {
     [Fact]
+    public void Enumerable_InfiniteSequence()
+    {
+        Assert.Equal([2, 5, 8, 11], Enumerable.InfiniteSequence(2, 3).Take(4));
+        Assert.Equal([2L, 5L, 8L, 11L], Enumerable.InfiniteSequence(2L, 3L).Take(4));
+        Assert.Equal([2.5m, 3.0m, 3.5m], Enumerable.InfiniteSequence(2.5m, 0.5m).Take(3));
+    }
+
+    [Fact]
+    public void Enumerable_Sequence()
+    {
+        Assert.Equal([1, 3, 5], Enumerable.Sequence(1, 5, 2));
+        Assert.Equal([5, 3, 1], Enumerable.Sequence(5, 1, -2));
+        Assert.Equal([4], Enumerable.Sequence(4, 4, 0));
+        Assert.Equal([1UL, 3UL, 5UL], Enumerable.Sequence(1UL, 5UL, 2UL));
+        Assert.Equal([1.5m, 2.0m, 2.5m], Enumerable.Sequence(1.5m, 2.5m, 0.5m));
+        Assert.Equal([int.MaxValue - 1], Enumerable.Sequence(int.MaxValue - 1, int.MaxValue, 2));
+        Assert.Equal([int.MinValue + 1], Enumerable.Sequence(int.MinValue + 1, int.MinValue, -2));
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => Enumerable.Sequence(5, 1, 2).ToList());
+        Assert.Throws<ArgumentOutOfRangeException>(() => Enumerable.Sequence(1, 5, -2).ToList());
+        Assert.Throws<ArgumentOutOfRangeException>(() => Enumerable.Sequence(1, 5, 0).ToList());
+        Assert.Throws<ArgumentOutOfRangeException>(() => Enumerable.Sequence(double.NaN, 5, 1).ToList());
+    }
+
+    [Fact]
     public void Enumerable_Order()
     {
         Assert.Equal([1, 2, 3], new[] { 2, 1, 3 }.Order());

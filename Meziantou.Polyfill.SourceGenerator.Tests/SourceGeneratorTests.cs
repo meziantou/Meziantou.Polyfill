@@ -179,6 +179,32 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task GenericMathPolyfills_UseTypePresenceDefines()
+    {
+        var netCore31Assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var netCore31Result = GenerateFiles(
+            "",
+            assemblyLocations: netCore31Assemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.InfiniteSequence``1(``0,``0);M:System.Linq.Enumerable.Sequence``1(``0,``0,``0)");
+
+        var infiniteSequence = GetGeneratedFileContent(netCore31Result.GeneratorResult, "M_System.Linq.Enumerable.InfiniteSequence``1(``0,``0).g.cs");
+        var sequence = GetGeneratedFileContent(netCore31Result.GeneratorResult, "M_System.Linq.Enumerable.Sequence``1(``0,``0,``0).g.cs");
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_IADDITIONOPERATORS_3", infiniteSequence, StringComparison.Ordinal);
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_INUMBER_1", sequence, StringComparison.Ordinal);
+
+        var net8Assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/");
+        var net8Result = GenerateFiles(
+            "",
+            assemblyLocations: net8Assemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.InfiniteSequence``1(``0,``0);M:System.Linq.Enumerable.Sequence``1(``0,``0,``0)");
+
+        infiniteSequence = GetGeneratedFileContent(net8Result.GeneratorResult, "M_System.Linq.Enumerable.InfiniteSequence``1(``0,``0).g.cs");
+        sequence = GetGeneratedFileContent(net8Result.GeneratorResult, "M_System.Linq.Enumerable.Sequence``1(``0,``0,``0).g.cs");
+        Assert.Contains("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_IADDITIONOPERATORS_3", infiniteSequence, StringComparison.Ordinal);
+        Assert.Contains("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_INUMBER_1", sequence, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task IsIncremental()
     {
         var assemblies = (await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/"))

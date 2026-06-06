@@ -1,0 +1,27 @@
+using System;
+
+static partial class PolyfillExtensions
+{
+    extension(Convert)
+    {
+        public static bool TryToHexStringLower(ReadOnlySpan<byte> source, Span<char> destination, out int charsWritten)
+        {
+            if (source.Length > int.MaxValue / 2 || destination.Length < source.Length * 2)
+            {
+                charsWritten = 0;
+                return false;
+            }
+
+            for (var i = 0; i < source.Length; i++)
+            {
+                destination[i * 2] = GetLowerHexChar(source[i] >> 4);
+                destination[(i * 2) + 1] = GetLowerHexChar(source[i] & 0xF);
+            }
+
+            charsWritten = source.Length * 2;
+            return true;
+        }
+
+        private static char GetLowerHexChar(int value) => (char)(value < 10 ? value + '0' : value - 10 + 'a');
+    }
+}

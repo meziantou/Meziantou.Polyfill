@@ -19,6 +19,14 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemTextTests
 {
     [Fact]
+    public void Encoding_Latin1()
+    {
+        Assert.Equal(28591, Encoding.Latin1.CodePage);
+        Assert.Equal([0x41, 0xE9], Encoding.Latin1.GetBytes("A\u00E9"));
+        Assert.Equal("A\u00E9", Encoding.Latin1.GetString([0x41, 0xE9]));
+    }
+
+    [Fact]
     public void StringBuilder_Append_ReadonlySpan()
     {
         Assert.Equal("test", new StringBuilder().Append("test".AsSpan()).ToString());
