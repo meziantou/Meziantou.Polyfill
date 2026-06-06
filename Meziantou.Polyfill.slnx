@@ -4,7 +4,6 @@
     <File Path="global.json" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="Meziantou.Polyfill.Editor/Meziantou.Polyfill.Editor.csproj" />
   <Project Path="Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj" />
   <Project Path="Meziantou.Polyfill.SourceGenerator.Tests/Meziantou.Polyfill.SourceGenerator.Tests.csproj" />
   <Project Path="Meziantou.Polyfill.Tests/Meziantou.Polyfill.Tests.csproj" />
