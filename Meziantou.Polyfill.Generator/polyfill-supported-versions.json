@@ -341,6 +341,42 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.ArraySegment\u00601.CopyTo(System.ArraySegment{\u00600})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.ArraySegment\u00601.CopyTo(\u00600[])": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.ArraySegment\u00601.CopyTo(\u00600[],System.Int32)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.ArraySegment\u00601.GetEnumerator": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.BitConverter.ToInt16(System.ReadOnlySpan{System.Byte})": [
       "netstandard2.1",
       "net6.0",

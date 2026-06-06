@@ -70,6 +70,29 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task ArraySegmentPolyfills_AreSelfContained()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+
+        GenerateFiles(
+            "class Test { void M(System.ArraySegment<int> source, System.ArraySegment<int> destination) => source.CopyTo(destination); }",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.ArraySegment`1.CopyTo(System.ArraySegment{`0})");
+        GenerateFiles(
+            "class Test { void M(System.ArraySegment<int> source, int[] destination) => source.CopyTo(destination); }",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.ArraySegment`1.CopyTo(`0[])");
+        GenerateFiles(
+            "class Test { void M(System.ArraySegment<int> source, int[] destination) => source.CopyTo(destination, 1); }",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.ArraySegment`1.CopyTo(`0[],System.Int32)");
+        GenerateFiles(
+            "class Test { void M(System.ArraySegment<int> source) { var enumerator = source.GetEnumerator(); while (enumerator.MoveNext()) { _ = enumerator.Current; } } }",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.ArraySegment`1.GetEnumerator");
+    }
+
+    [Fact]
     public async Task PeriodicTimer_UsesMicrosoftBclTimeProviderTypes_WhenReferenced()
     {
         var assemblies = new List<string>();

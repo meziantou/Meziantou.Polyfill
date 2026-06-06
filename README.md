@@ -139,7 +139,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (737)
+### Methods (741)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -156,6 +156,10 @@ The filtering logic works as follows:
 - `System.ArgumentOutOfRangeException.ThrowIfZero<T>(T value, [System.String? paramName = null]) where T : System.Numerics.INumberBase<T>`
 - `System.Array.Fill<T>(T[] array, T value)`
 - `System.Array.Fill<T>(T[] array, T value, System.Int32 startIndex, System.Int32 count)`
+- `System.ArraySegment<T>.CopyTo(System.ArraySegment<T> destination)`
+- `System.ArraySegment<T>.CopyTo(T[] destination)`
+- `System.ArraySegment<T>.CopyTo(T[] destination, System.Int32 destinationIndex)`
+- `System.ArraySegment<T>.GetEnumerator()`
 - `System.BitConverter.ToInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt16(System.ReadOnlySpan<System.Byte> value)`
