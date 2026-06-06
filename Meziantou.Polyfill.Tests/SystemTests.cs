@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -1170,6 +1172,116 @@ public class SystemTests
     }
 
     [Fact]
+    public void Convert_FromHexString()
+    {
+        Assert.Equal<byte[]>([0x01, 0xAB, 0xFF], Convert.FromHexString("01abFF"));
+        Assert.Equal<byte[]>([0x01, 0xAB, 0xFF], Convert.FromHexString("01abFF".AsSpan()));
+        Assert.Equal<byte[]>([0x01, 0xAB, 0xFF], Convert.FromHexString("01abFF"u8));
+        Assert.Empty(Convert.FromHexString(""));
+
+        Assert.Throws<ArgumentNullException>(() => Convert.FromHexString((string)null!));
+        Assert.Throws<FormatException>(() => Convert.FromHexString("0"));
+        Assert.Throws<FormatException>(() => Convert.FromHexString("0G"));
+    }
+
+    [Fact]
+    public void Convert_FromHexString_Status()
+    {
+        Span<byte> destination = stackalloc byte[3];
+
+        Assert.Equal(OperationStatus.Done, Convert.FromHexString("01abFF", destination, out var consumed, out var written));
+        Assert.Equal(6, consumed);
+        Assert.Equal(3, written);
+        Assert.Equal<byte[]>([0x01, 0xAB, 0xFF], destination.ToArray());
+
+        destination.Clear();
+        Assert.Equal(OperationStatus.NeedMoreData, Convert.FromHexString("01a", destination, out consumed, out written));
+        Assert.Equal(2, consumed);
+        Assert.Equal(1, written);
+        Assert.Equal(0x01, destination[0]);
+
+        destination.Clear();
+        Assert.Equal(OperationStatus.InvalidData, Convert.FromHexString("01G2", destination, out consumed, out written));
+        Assert.Equal(2, consumed);
+        Assert.Equal(1, written);
+        Assert.Equal(0x01, destination[0]);
+
+        destination.Clear();
+        Assert.Equal(OperationStatus.DestinationTooSmall, Convert.FromHexString("010203", destination[..2], out consumed, out written));
+        Assert.Equal(4, consumed);
+        Assert.Equal(2, written);
+        Assert.Equal<byte[]>([0x01, 0x02], destination[..2].ToArray());
+
+        destination.Clear();
+        Assert.Equal(OperationStatus.Done, Convert.FromHexString("01abFF".AsSpan(), destination, out consumed, out written));
+        Assert.Equal(6, consumed);
+        Assert.Equal(3, written);
+        Assert.Equal<byte[]>([0x01, 0xAB, 0xFF], destination.ToArray());
+
+        destination.Clear();
+        Assert.Equal(OperationStatus.Done, Convert.FromHexString("01abFF"u8, destination, out consumed, out written));
+        Assert.Equal(6, consumed);
+        Assert.Equal(3, written);
+        Assert.Equal<byte[]>([0x01, 0xAB, 0xFF], destination.ToArray());
+
+        Assert.Throws<ArgumentNullException>(() => Convert.FromHexString((string)null!, new byte[1], out _, out _));
+    }
+
+    [Fact]
+    public void Convert_TryBase64()
+    {
+        Span<byte> bytes = stackalloc byte[4];
+        Assert.True(Convert.TryFromBase64String("AQIDBA==", bytes, out var bytesWritten));
+        Assert.Equal(4, bytesWritten);
+        Assert.Equal<byte[]>([1, 2, 3, 4], bytes.ToArray());
+
+        bytes.Clear();
+        Assert.True(Convert.TryFromBase64Chars("AQID\r\nBA==".AsSpan(), bytes, out bytesWritten));
+        Assert.Equal(4, bytesWritten);
+        Assert.Equal<byte[]>([1, 2, 3, 4], bytes.ToArray());
+
+        Assert.False(Convert.TryFromBase64String("invalid", bytes, out bytesWritten));
+        Assert.Equal(0, bytesWritten);
+        Assert.False(Convert.TryFromBase64String("AQIDBA==", bytes[..3], out bytesWritten));
+        Assert.Equal(0, bytesWritten);
+        Assert.Throws<ArgumentNullException>(() => Convert.TryFromBase64String(null!, new byte[1], out _));
+
+        Span<char> chars = stackalloc char[8];
+        Assert.True(Convert.TryToBase64Chars([1, 2, 3, 4], chars, out var charsWritten));
+        Assert.Equal(8, charsWritten);
+        Assert.Equal("AQIDBA==", chars.ToString());
+        Assert.False(Convert.TryToBase64Chars([1, 2, 3, 4], chars[..7], out charsWritten));
+        Assert.Equal(0, charsWritten);
+    }
+
+    [Fact]
+    public void Convert_TryToHexString()
+    {
+        ReadOnlySpan<byte> bytes = [0x01, 0xAB, 0xFF];
+        Span<char> chars = stackalloc char[6];
+        Span<byte> utf8 = stackalloc byte[6];
+
+        Assert.True(Convert.TryToHexString(bytes, chars, out var written));
+        Assert.Equal(6, written);
+        Assert.Equal("01ABFF", chars.ToString());
+        Assert.True(Convert.TryToHexString(bytes, utf8, out written));
+        Assert.Equal(6, written);
+        Assert.Equal("01ABFF", Encoding.ASCII.GetString(utf8));
+
+        Assert.True(Convert.TryToHexStringLower(bytes, chars, out written));
+        Assert.Equal(6, written);
+        Assert.Equal("01abff", chars.ToString());
+        Assert.True(Convert.TryToHexStringLower(bytes, utf8, out written));
+        Assert.Equal(6, written);
+        Assert.Equal("01abff", Encoding.ASCII.GetString(utf8));
+
+        chars.Fill('x');
+        Assert.False(Convert.TryToHexString(bytes, chars[..5], out written));
+        Assert.Equal(0, written);
+        Assert.Equal("xxxxx", chars[..5].ToString());
+    }
+
+    [Fact]
     public void Convert_ToHexStringLower_ByteArray()
     {
         // Test basic conversion
@@ -1689,6 +1801,32 @@ public class SystemTests
     }
 
     [Fact]
+    public void Decimal_TryFormat_TryParse()
+    {
+        const decimal Value = 12345.67m;
+
+        Span<char> chars = stackalloc char[16];
+        Assert.True(Value.TryFormat(chars, out var charsWritten, "F2", CultureInfo.InvariantCulture));
+        Assert.Equal("12345.67", chars[..charsWritten].ToString());
+        Assert.False(Value.TryFormat(chars[..1], out charsWritten, "F2", CultureInfo.InvariantCulture));
+        Assert.Equal(0, charsWritten);
+
+        Span<byte> bytes = stackalloc byte[16];
+        Assert.True(Value.TryFormat(bytes, out var bytesWritten, "F2", CultureInfo.InvariantCulture));
+        Assert.Equal("12345.67", Encoding.UTF8.GetString(bytes[..bytesWritten]));
+        Assert.False(Value.TryFormat(bytes[..1], out bytesWritten, "F2", CultureInfo.InvariantCulture));
+        Assert.Equal(0, bytesWritten);
+
+        ReadOnlySpan<byte> utf8Text = "12345.67"u8;
+#pragma warning disable MA0011 // Test the providerless overload
+        Assert.True(decimal.TryParse(utf8Text, out var parsed));
+#pragma warning restore MA0011
+        Assert.Equal(Value, parsed);
+        Assert.True(decimal.TryParse("12345.67", CultureInfo.InvariantCulture, out parsed));
+        Assert.Equal(Value, parsed);
+    }
+
+    [Fact]
     public void Byte_Parse_ReadOnlySpan_Byte_IFormatProvider()
     {
         ReadOnlySpan<byte> utf8Data = "255"u8;
@@ -2099,6 +2237,49 @@ public class SystemTests
     }
 
     [Fact]
+    public void DateTime_Microsecond_AddMicroseconds_Deconstruct()
+    {
+        var value = new DateTime(2024, 5, 15, 12, 30, 45, 123, DateTimeKind.Utc).AddTicks(4_567);
+
+        Assert.Equal(456, value.Microsecond);
+        Assert.Equal(value.AddTicks(45), value.AddMicroseconds(4.5));
+        Assert.Equal(value.AddTicks(-45), value.AddMicroseconds(-4.5));
+        Assert.Equal(DateTimeKind.Utc, value.AddMicroseconds(1).Kind);
+
+        var (year, month, day) = value;
+        Assert.Equal(2024, year);
+        Assert.Equal(5, month);
+        Assert.Equal(15, day);
+    }
+
+    [Fact]
+    public void DateTime_TryFormat_TryParse_TryParseExact()
+    {
+        var value = new DateTime(2024, 5, 15, 12, 30, 45, DateTimeKind.Utc);
+        Span<char> chars = stackalloc char[32];
+        Assert.True(value.TryFormat(chars, out var charsWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(value.ToString("O", CultureInfo.InvariantCulture), chars[..charsWritten].ToString());
+        Assert.False(value.TryFormat(chars[..1], out charsWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(0, charsWritten);
+
+        Span<byte> bytes = stackalloc byte[32];
+        Assert.True(value.TryFormat(bytes, out var bytesWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(value.ToString("O", CultureInfo.InvariantCulture), Encoding.UTF8.GetString(bytes[..bytesWritten]));
+        Assert.False(value.TryFormat(bytes[..1], out bytesWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(0, bytesWritten);
+
+        ReadOnlySpan<char> input = "2024-05-15";
+#pragma warning disable MA0011 // Test the providerless overload
+        Assert.True(DateTime.TryParse(input, out _));
+#pragma warning restore MA0011
+        Assert.True(DateTime.TryParse(input, CultureInfo.InvariantCulture, out _));
+        Assert.True(DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.None, out _));
+        Assert.True(DateTime.TryParse("2024-05-15", CultureInfo.InvariantCulture, out _));
+        Assert.True(DateTime.TryParseExact(input, "yyyy-MM-dd".AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsed));
+        Assert.Equal(new DateTime(2024, 5, 15), parsed);
+    }
+
+    [Fact]
     public void DateTimeOffset_Nanosecond()
     {
         // DateTimeOffset with 0 nanoseconds
@@ -2125,6 +2306,44 @@ public class SystemTests
     }
 
     [Fact]
+    public void DateTimeOffset_Microsecond_AddMicroseconds()
+    {
+        var value = new DateTimeOffset(2024, 5, 15, 12, 30, 45, 123, TimeSpan.FromHours(5)).AddTicks(4_567);
+
+        Assert.Equal(456, value.Microsecond);
+        Assert.Equal(value.AddTicks(45), value.AddMicroseconds(4.5));
+        Assert.Equal(value.AddTicks(-45), value.AddMicroseconds(-4.5));
+        Assert.Equal(value.Offset, value.AddMicroseconds(1).Offset);
+    }
+
+    [Fact]
+    public void DateTimeOffset_TryFormat_TryParse_TryParseExact()
+    {
+        var value = new DateTimeOffset(2024, 5, 15, 12, 30, 45, TimeSpan.FromHours(5));
+        Span<char> chars = stackalloc char[40];
+        Assert.True(value.TryFormat(chars, out var charsWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(value.ToString("O", CultureInfo.InvariantCulture), chars[..charsWritten].ToString());
+        Assert.False(value.TryFormat(chars[..1], out charsWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(0, charsWritten);
+
+        Span<byte> bytes = stackalloc byte[40];
+        Assert.True(value.TryFormat(bytes, out var bytesWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(value.ToString("O", CultureInfo.InvariantCulture), Encoding.UTF8.GetString(bytes[..bytesWritten]));
+        Assert.False(value.TryFormat(bytes[..1], out bytesWritten, "O", CultureInfo.InvariantCulture));
+        Assert.Equal(0, bytesWritten);
+
+        ReadOnlySpan<char> input = "2024-05-15 +05:00";
+#pragma warning disable MA0011 // Test the providerless overload
+        Assert.True(DateTimeOffset.TryParse(input, out _));
+#pragma warning restore MA0011
+        Assert.True(DateTimeOffset.TryParse(input, CultureInfo.InvariantCulture, out _));
+        Assert.True(DateTimeOffset.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.None, out _));
+        Assert.True(DateTimeOffset.TryParse("2024-05-15 +05:00", CultureInfo.InvariantCulture, out _));
+        Assert.True(DateTimeOffset.TryParseExact(input, "yyyy-MM-dd zzz".AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsed));
+        Assert.Equal(new DateTimeOffset(2024, 5, 15, 0, 0, 0, TimeSpan.FromHours(5)), parsed);
+    }
+
+    [Fact]
     public void DateTimeOffset_UnixEpoch()
     {
         Assert.Equal(new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero), DateTimeOffset.UnixEpoch);
@@ -2132,6 +2351,41 @@ public class SystemTests
     }
 
 #if NET6_0_OR_GREATER
+    [Fact]
+    public void DateTime_DateTimeOffset_Deconstruct_DateOnly_TimeOnly()
+    {
+        var dateTime = new DateTime(2024, 5, 15, 12, 30, 45);
+        var (date, time) = dateTime;
+        Assert.Equal(new DateOnly(2024, 5, 15), date);
+        Assert.Equal(new TimeOnly(12, 30, 45), time);
+
+        var dateTimeOffset = new DateTimeOffset(dateTime, TimeSpan.FromHours(5));
+        var (offsetDate, offsetTime, offset) = dateTimeOffset;
+        Assert.Equal(date, offsetDate);
+        Assert.Equal(time, offsetTime);
+        Assert.Equal(TimeSpan.FromHours(5), offset);
+    }
+
+    [Fact]
+    public void DateOnly_TryFormat()
+    {
+        var date = new DateOnly(2024, 5, 15);
+
+        Span<char> chars = stackalloc char[10];
+        Assert.True(date.TryFormat(chars, out var charsWritten, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+        Assert.Equal(10, charsWritten);
+        Assert.Equal("2024-05-15", chars.ToString());
+        Assert.False(date.TryFormat(chars[..9], out charsWritten, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+        Assert.Equal(0, charsWritten);
+
+        Span<byte> utf8 = stackalloc byte[10];
+        Assert.True(date.TryFormat(utf8, out var bytesWritten, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+        Assert.Equal(10, bytesWritten);
+        Assert.Equal("2024-05-15", Encoding.UTF8.GetString(utf8));
+        Assert.False(date.TryFormat(utf8[..9], out bytesWritten, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+        Assert.Equal(0, bytesWritten);
+    }
+
     [Fact]
     public void DateOnly_Deconstruct()
     {
@@ -2389,6 +2643,351 @@ public class SystemTests
 
         Assert.False(Uri.TryUnescapeDataString("%20suffix".AsSpan(), buffer[..1], out written));
         Assert.Equal(0, written);
+    }
+
+    [Fact]
+    public void Boolean_TryFormat()
+    {
+        Span<char> buffer = stackalloc char[5];
+
+        Assert.True(true.TryFormat(buffer, out var written));
+        Assert.Equal(4, written);
+        Assert.Equal("True", buffer[..written].ToString());
+
+        Assert.False(false.TryFormat(buffer[..4], out written));
+        Assert.Equal(0, written);
+    }
+
+    [Fact]
+    public void Byte_TryFormat_Span_Byte()
+    {
+        Span<byte> buffer = stackalloc byte[2];
+
+        Assert.True(((byte)15).TryFormat(buffer, out var written, "X2", CultureInfo.InvariantCulture));
+        Assert.Equal(2, written);
+        Assert.Equal("0F", Encoding.UTF8.GetString(buffer[..written]));
+
+        Assert.False(((byte)255).TryFormat(buffer[..1], out written, "D3", CultureInfo.InvariantCulture));
+        Assert.Equal(0, written);
+    }
+
+    [Fact]
+    public void Byte_TryFormat_Span_Char()
+    {
+        Span<char> buffer = stackalloc char[2];
+
+        Assert.True(((byte)15).TryFormat(buffer, out var written, "X2", CultureInfo.InvariantCulture));
+        Assert.Equal(2, written);
+        Assert.Equal("0F", buffer[..written].ToString());
+
+        Assert.False(((byte)255).TryFormat(buffer[..1], out written, "D3", CultureInfo.InvariantCulture));
+        Assert.Equal(0, written);
+    }
+
+    [Fact]
+    public void Byte_TryParse_WithoutNumberStyles()
+    {
+        Assert.True(byte.TryParse("123"u8, out var utf8Result));
+        Assert.Equal(123, utf8Result);
+        Assert.False(byte.TryParse("256"u8, out utf8Result));
+        Assert.Equal(0, utf8Result);
+
+        Assert.True(byte.TryParse("42".AsSpan(), out var charResult));
+        Assert.Equal(42, charResult);
+        Assert.False(byte.TryParse("invalid".AsSpan(), out charResult));
+        Assert.Equal(0, charResult);
+
+        Assert.True(byte.TryParse("17", CultureInfo.InvariantCulture, out var stringResult));
+        Assert.Equal(17, stringResult);
+        Assert.False(byte.TryParse((string?)null, CultureInfo.InvariantCulture, out stringResult));
+        Assert.Equal(0, stringResult);
+    }
+
+    [Fact]
+    public void Capture_ValueSpan()
+    {
+        var capture = Regex.Match("abc123", @"\d+", RegexOptions.None, TimeSpan.FromSeconds(1));
+
+        Assert.Equal("123", capture.ValueSpan.ToString());
+    }
+
+    [Fact]
+    public void Char_Equals_StringComparison()
+    {
+        Assert.True('a'.Equals('A', StringComparison.OrdinalIgnoreCase));
+        Assert.False('a'.Equals('A', StringComparison.Ordinal));
+        Assert.False('a'.Equals('b', StringComparison.OrdinalIgnoreCase));
+        Assert.Throws<ArgumentException>(() => 'a'.Equals('a', (StringComparison)(-1)));
+    }
+
+    [Fact]
+    public void Char_IsAscii()
+    {
+        Assert.True(char.IsAscii('\0'));
+        Assert.True(char.IsAscii('\x7F'));
+        Assert.False(char.IsAscii('\x80'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiDigit()
+    {
+        Assert.True(char.IsAsciiDigit('0'));
+        Assert.True(char.IsAsciiDigit('9'));
+        Assert.False(char.IsAsciiDigit('/'));
+        Assert.False(char.IsAsciiDigit(':'));
+        Assert.False(char.IsAsciiDigit('\u0660'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiHexDigit()
+    {
+        Assert.True(char.IsAsciiHexDigit('0'));
+        Assert.True(char.IsAsciiHexDigit('9'));
+        Assert.True(char.IsAsciiHexDigit('A'));
+        Assert.True(char.IsAsciiHexDigit('F'));
+        Assert.True(char.IsAsciiHexDigit('a'));
+        Assert.True(char.IsAsciiHexDigit('f'));
+        Assert.False(char.IsAsciiHexDigit('G'));
+        Assert.False(char.IsAsciiHexDigit('g'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiHexDigitLower()
+    {
+        Assert.True(char.IsAsciiHexDigitLower('0'));
+        Assert.True(char.IsAsciiHexDigitLower('a'));
+        Assert.True(char.IsAsciiHexDigitLower('f'));
+        Assert.False(char.IsAsciiHexDigitLower('A'));
+        Assert.False(char.IsAsciiHexDigitLower('g'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiHexDigitUpper()
+    {
+        Assert.True(char.IsAsciiHexDigitUpper('0'));
+        Assert.True(char.IsAsciiHexDigitUpper('A'));
+        Assert.True(char.IsAsciiHexDigitUpper('F'));
+        Assert.False(char.IsAsciiHexDigitUpper('a'));
+        Assert.False(char.IsAsciiHexDigitUpper('G'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiLetter()
+    {
+        Assert.True(char.IsAsciiLetter('A'));
+        Assert.True(char.IsAsciiLetter('Z'));
+        Assert.True(char.IsAsciiLetter('a'));
+        Assert.True(char.IsAsciiLetter('z'));
+        Assert.False(char.IsAsciiLetter('@'));
+        Assert.False(char.IsAsciiLetter('['));
+        Assert.False(char.IsAsciiLetter('\u00E9'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiLetterLower()
+    {
+        Assert.True(char.IsAsciiLetterLower('a'));
+        Assert.True(char.IsAsciiLetterLower('z'));
+        Assert.False(char.IsAsciiLetterLower('A'));
+        Assert.False(char.IsAsciiLetterLower('{'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiLetterOrDigit()
+    {
+        Assert.True(char.IsAsciiLetterOrDigit('0'));
+        Assert.True(char.IsAsciiLetterOrDigit('A'));
+        Assert.True(char.IsAsciiLetterOrDigit('z'));
+        Assert.False(char.IsAsciiLetterOrDigit('_'));
+        Assert.False(char.IsAsciiLetterOrDigit('\u00E9'));
+    }
+
+    [Fact]
+    public void Char_IsAsciiLetterUpper()
+    {
+        Assert.True(char.IsAsciiLetterUpper('A'));
+        Assert.True(char.IsAsciiLetterUpper('Z'));
+        Assert.False(char.IsAsciiLetterUpper('a'));
+        Assert.False(char.IsAsciiLetterUpper('@'));
+    }
+
+    [Fact]
+    public void Char_IsBetween()
+    {
+        Assert.True(char.IsBetween('a', 'a', 'z'));
+        Assert.True(char.IsBetween('z', 'a', 'z'));
+        Assert.True(char.IsBetween('m', 'a', 'z'));
+        Assert.False(char.IsBetween('A', 'a', 'z'));
+        Assert.False(char.IsBetween('m', 'z', 'a'));
+    }
+
+    [Fact]
+    public void Console_OpenStandardHandles_DoNotOwnUnderlyingHandles()
+    {
+        AssertDoesNotOwnUnderlyingHandle(Console.OpenStandardInputHandle, expectedUnixHandle: 0);
+        AssertDoesNotOwnUnderlyingHandle(Console.OpenStandardOutputHandle, expectedUnixHandle: 1);
+        AssertDoesNotOwnUnderlyingHandle(Console.OpenStandardErrorHandle, expectedUnixHandle: 2);
+
+        static void AssertDoesNotOwnUnderlyingHandle(Func<Microsoft.Win32.SafeHandles.SafeFileHandle> openHandle, int expectedUnixHandle)
+        {
+            var handle = openHandle();
+            var rawHandle = handle.DangerousGetHandle();
+
+            if (!OperatingSystem.IsWindows())
+                Assert.Equal(new IntPtr(expectedUnixHandle), rawHandle);
+
+            Assert.False(handle.IsClosed);
+            handle.Dispose();
+            Assert.True(handle.IsClosed);
+
+            using var reopenedHandle = openHandle();
+            Assert.Equal(rawHandle, reopenedHandle.DangerousGetHandle());
+        }
+    }
+
+    [Fact]
+    public void GC_AllocateUninitializedArray()
+    {
+        Assert.Equal(4, GC.AllocateUninitializedArray<int>(4).Length);
+        Assert.Equal(4, GC.AllocateUninitializedArray<string>(4, pinned: true).Length);
+        Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<int>(-1));
+    }
+
+    [Fact]
+    public void Numeric_TryFormat_And_ProviderlessUtf8TryParse()
+    {
+        Span<byte> bytes = stackalloc byte[32];
+        Span<char> chars = stackalloc char[32];
+
+        Assert.True(123.5d.TryFormat(bytes, out var written, "F1", CultureInfo.InvariantCulture));
+        Assert.Equal("123.5", Encoding.UTF8.GetString(bytes[..written]));
+        Assert.True(123.5f.TryFormat(chars, out written, "F1", CultureInfo.InvariantCulture));
+        Assert.Equal("123.5", chars[..written].ToString());
+        Assert.True(((sbyte)-12).TryFormat(bytes, out _, default, CultureInfo.InvariantCulture));
+        Assert.True(123u.TryFormat(chars, out _, default, CultureInfo.InvariantCulture));
+        Assert.True(123ul.TryFormat(bytes, out _, default, CultureInfo.InvariantCulture));
+        Assert.True(123.TryFormat(chars, out _, default, CultureInfo.InvariantCulture));
+        Assert.True(123L.TryFormat(bytes, out _, default, CultureInfo.InvariantCulture));
+
+#pragma warning disable MA0011 // Test providerless overloads
+        Assert.True(double.TryParse("123.5"u8, out _));
+        Assert.True(float.TryParse("123.5"u8, out _));
+        Assert.True(sbyte.TryParse("-12"u8, out _));
+        Assert.True(uint.TryParse("123"u8, out _));
+        Assert.True(ulong.TryParse("123"u8, out _));
+        Assert.True(int.TryParse("123"u8, out _));
+        Assert.True(long.TryParse("123"u8, out _));
+#pragma warning restore MA0011
+    }
+
+    [Fact]
+    public void Guid_NewMembers()
+    {
+        var guid = Guid.NewGuid();
+        Span<byte> bytes = stackalloc byte[36];
+        Span<char> chars = stackalloc char[36];
+        Assert.True(guid.TryFormat(bytes, out var written, "D"));
+        Assert.Equal(guid.ToString("D"), Encoding.UTF8.GetString(bytes[..written]));
+        Assert.True(guid.TryFormat(chars, out written, "D"));
+        Assert.Equal(guid.ToString("D"), chars[..written].ToString());
+        Assert.Equal(guid, Guid.Parse(bytes));
+        Assert.True(Guid.TryParse(bytes, out _));
+        Assert.True(Guid.TryParse(chars, out _));
+        Assert.True(Guid.TryParse(chars, CultureInfo.InvariantCulture, out _));
+        Assert.True(Guid.TryParse(guid.ToString(), CultureInfo.InvariantCulture, out _));
+        Assert.True(Guid.TryParseExact(chars, "D", out _));
+        Assert.Equal("ffffffff-ffff-ffff-ffff-ffffffffffff", Guid.AllBitsSet.ToString());
+    }
+
+    [Fact]
+    public void TimeSpan_NewFactories_And_TryFormat()
+    {
+        Assert.Equal(TimeSpan.FromTicks(10), TimeSpan.FromMicroseconds(1));
+        Assert.Equal(TimeSpan.FromTicks(10_010), TimeSpan.FromMilliseconds(1, 1));
+        Assert.Equal(TimeSpan.FromTicks(TimeSpan.TicksPerSecond + 10_010), TimeSpan.FromSeconds(1, 1, 1));
+        Assert.Equal(TimeSpan.FromTicks(TimeSpan.TicksPerMinute + TimeSpan.TicksPerSecond + 10_010), TimeSpan.FromMinutes(1, 1, 1, 1));
+        Assert.Equal(TimeSpan.FromTicks(TimeSpan.TicksPerHour + TimeSpan.TicksPerMinute + TimeSpan.TicksPerSecond + 10_010), TimeSpan.FromHours(1, 1, 1, 1, 1));
+        Assert.Equal(TimeSpan.FromTicks(TimeSpan.TicksPerDay + TimeSpan.TicksPerHour + TimeSpan.TicksPerMinute + TimeSpan.TicksPerSecond + 10_010), TimeSpan.FromDays(1, 1, 1, 1, 1, 1));
+
+        Span<char> chars = stackalloc char[32];
+        Span<byte> bytes = stackalloc byte[32];
+        Assert.True(TimeSpan.FromSeconds(1).TryFormat(chars, out _, "c", CultureInfo.InvariantCulture));
+        Assert.True(TimeSpan.FromSeconds(1).TryFormat(bytes, out _, "c", CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void BitConverter_UnsignedBitConversions()
+    {
+        const double DoubleValue = -123.5;
+        Assert.Equal(DoubleValue, BitConverter.UInt64BitsToDouble(BitConverter.DoubleToUInt64Bits(DoubleValue)));
+        Assert.Equal(123.5f, BitConverter.UInt32BitsToSingle(BitConverter.ToUInt32(BitConverter.GetBytes(123.5f), 0)));
+    }
+
+    [Fact]
+    public void Pointer_And_IPAddress_TryParse()
+    {
+#pragma warning disable MA0011 // Test providerless overloads
+        Assert.True(UIntPtr.TryParse("123"u8, out var unsignedValue));
+#pragma warning restore MA0011
+        Assert.Equal(new UIntPtr(123), unsignedValue);
+        Assert.True(UIntPtr.TryParse("7B".AsSpan(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out unsignedValue));
+        Assert.Equal(new UIntPtr(123), unsignedValue);
+#pragma warning disable MA0011 // Test providerless overloads
+        Assert.True(IntPtr.TryParse("-123"u8, out var signedValue));
+#pragma warning restore MA0011
+        Assert.Equal(new IntPtr(-123), signedValue);
+        Assert.True(IntPtr.TryParse("-123", CultureInfo.InvariantCulture, out signedValue));
+
+        Assert.Equal(System.Net.IPAddress.Loopback, System.Net.IPAddress.Parse("127.0.0.1".AsSpan()));
+        Assert.True(System.Net.IPAddress.TryParse("127.0.0.1"u8, out _));
+        Assert.True(System.Net.IPAddress.TryParse("127.0.0.1".AsSpan(), out _));
+    }
+
+    [Fact]
+    public void DefaultInterpolatedStringHandler_Clear()
+    {
+        var handler = new DefaultInterpolatedStringHandler(3, 0);
+        handler.AppendLiteral("abc");
+        handler.Clear();
+        Assert.Equal("", handler.ToString());
+    }
+
+    [Fact]
+    public void Int16_UInt16_TryFormat_And_Utf8TryParse()
+    {
+        Span<byte> bytes = stackalloc byte[16];
+        Span<char> chars = stackalloc char[16];
+        Assert.True(((short)-123).TryFormat(bytes, out var written, default, CultureInfo.InvariantCulture));
+        Assert.Equal("-123", Encoding.UTF8.GetString(bytes[..written]));
+        Assert.True(((ushort)123).TryFormat(chars, out written, default, CultureInfo.InvariantCulture));
+        Assert.Equal("123", chars[..written].ToString());
+
+#pragma warning disable MA0011 // Test providerless overloads
+        Assert.True(short.TryParse("-123"u8, out var signed));
+        Assert.True(ushort.TryParse("123"u8, out var unsigned));
+#pragma warning restore MA0011
+        Assert.Equal(-123, signed);
+        Assert.Equal(123, unsigned);
+    }
+
+    [Fact]
+    public void Random_NewMembers()
+    {
+#pragma warning disable CA5394 // Test System.Random polyfills
+        var random = new Random(42);
+        Assert.Equal(16, random.GetHexString(16).Length);
+        Assert.All(random.GetHexString(16, lowercase: true), value => Assert.Contains(value, "0123456789abcdef"));
+        Span<char> hex = stackalloc char[16];
+        random.GetHexString(hex, lowercase: true);
+        Assert.All(hex.ToArray(), value => Assert.Contains(value, "0123456789abcdef"));
+        Assert.Equal(20, random.GetString("abc", 20).Length);
+        Assert.InRange(random.NextInt64(), 0, long.MaxValue - 1);
+        Assert.InRange(random.NextInt64(10), 0, 9);
+        Assert.InRange(random.NextInt64(-10, 10), -10, 9);
+        var single = random.NextSingle();
+        Assert.True(single >= 0f);
+        Assert.True(single < 1f);
+#pragma warning restore CA5394
     }
 
 }

@@ -20,6 +20,21 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemCollectionsGenericTests
 {
     [Fact]
+    public void EqualityComparer_Create()
+    {
+        var comparer = EqualityComparer<string>.Create(
+            (left, right) => string.Equals(left, right, StringComparison.OrdinalIgnoreCase),
+            value => StringComparer.OrdinalIgnoreCase.GetHashCode(value));
+
+        Assert.True(comparer.Equals("test", "TEST"));
+        Assert.Equal(comparer.GetHashCode("test"), comparer.GetHashCode("TEST"));
+        Assert.Throws<ArgumentNullException>(() => EqualityComparer<string>.Create(null!));
+
+        var comparerWithoutHashCode = EqualityComparer<string>.Create((left, right) => left == right);
+        Assert.Throws<NotSupportedException>(() => comparerWithoutHashCode.GetHashCode("test"));
+    }
+
+    [Fact]
     public void System_Collections_Generic_KeyValuePair_2_Deconstruct()
     {
         var data = new KeyValuePair<string, object>("test", 2);
@@ -384,5 +399,19 @@ public class SystemCollectionsGenericTests
         var result = list.Slice(0, 0);
         Assert.Empty(result);
     }
-}
 
+    [Fact]
+    public void CollectionExtensions_NewMembers()
+    {
+        var list = new List<int> { 1, 4 };
+        list.InsertRange(1, [2, 3]);
+        Assert.Equal([1, 2, 3, 4], list);
+
+        Span<int> destination = stackalloc int[4];
+        list.CopyTo(destination);
+        Assert.True(destination.SequenceEqual([1, 2, 3, 4]));
+
+        ISet<int> set = new HashSet<int> { 1, 2 };
+        Assert.Equal(2, set.AsReadOnly().Count);
+    }
+}

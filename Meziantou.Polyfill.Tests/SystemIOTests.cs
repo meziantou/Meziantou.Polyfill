@@ -343,4 +343,33 @@ public class SystemIOTests
         public override void Write(char value) => throw new InvalidOperationException("boom");
     }
 
+    [Fact]
+    public async Task Path_And_TextReaderWriter_NewMembers()
+    {
+        var separator = Path.DirectorySeparatorChar;
+        var path = $"folder{separator}file.txt";
+        Assert.Equal($"folder{separator}file.txt", Path.Combine(["folder", "file.txt"]));
+        Assert.True(Path.EndsInDirectorySeparator($"folder{separator}"));
+        Assert.True(Path.EndsInDirectorySeparator($"folder{separator}".AsSpan()));
+        Assert.Equal("folder", Path.GetDirectoryName(path.AsSpan()).ToString());
+        Assert.Equal(".txt", Path.GetExtension(path.AsSpan()).ToString());
+        Assert.Equal("file.txt", Path.GetFileName(path.AsSpan()).ToString());
+        Assert.Equal("file", Path.GetFileNameWithoutExtension(path.AsSpan()).ToString());
+        Assert.True(Path.HasExtension(path.AsSpan()));
+        Assert.Equal("folder", Path.TrimEndingDirectorySeparator($"folder{separator}"));
+        Assert.Equal("folder", Path.TrimEndingDirectorySeparator($"folder{separator}".AsSpan()).ToString());
+        Assert.False(Path.Exists(null));
+
+        using var reader = new StringReader("line");
+        Assert.Equal("line", await reader.ReadLineAsync(CancellationToken.None));
+
+        using var writer = new StringWriter();
+        writer.Write("a".AsSpan());
+        writer.Write(new StringBuilder("b"));
+        writer.WriteLine("c".AsSpan());
+        await writer.WriteAsync(new StringBuilder("d"), CancellationToken.None);
+        await writer.FlushAsync(CancellationToken.None);
+        Assert.Contains("abc", writer.ToString().Replace(Environment.NewLine, ""));
+    }
+
 }

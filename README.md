@@ -139,7 +139,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (741)
+### Methods (933)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -160,10 +160,14 @@ The filtering logic works as follows:
 - `System.ArraySegment<T>.CopyTo(T[] destination)`
 - `System.ArraySegment<T>.CopyTo(T[] destination, System.Int32 destinationIndex)`
 - `System.ArraySegment<T>.GetEnumerator()`
+- `System.BitConverter.DoubleToUInt64Bits(System.Double value)`
 - `System.BitConverter.ToInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt32(System.ReadOnlySpan<System.Byte> value)`
+- `System.BitConverter.UInt32BitsToSingle(System.UInt32 value)`
+- `System.BitConverter.UInt64BitsToDouble(System.UInt64 value)`
+- `System.Boolean.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten)`
 - `System.Buffers.Binary.BinaryPrimitives.ReadDoubleBigEndian(System.ReadOnlySpan<System.Byte> source)`
 - `System.Buffers.Binary.BinaryPrimitives.ReadDoubleLittleEndian(System.ReadOnlySpan<System.Byte> source)`
 - `System.Buffers.Binary.BinaryPrimitives.ReadSingleBigEndian(System.ReadOnlySpan<System.Byte> source)`
@@ -196,24 +200,43 @@ The filtering logic works as follows:
 - `System.Byte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Byte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Byte.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Byte.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Byte.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Byte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Byte result)`
 - `System.Byte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Byte result)`
 - `System.Byte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Byte result)`
 - `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, out System.Byte result)`
 - `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Byte result)`
 - `System.Byte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Byte result)`
+- `System.Byte.TryParse(System.String? s, System.IFormatProvider? provider, out System.Byte result)`
+- `System.Char.Equals(System.Char other, System.StringComparison comparisonType)`
+- `System.Char.IsAscii(System.Char c)`
+- `System.Char.IsAsciiDigit(System.Char c)`
+- `System.Char.IsAsciiHexDigit(System.Char c)`
+- `System.Char.IsAsciiHexDigitLower(System.Char c)`
+- `System.Char.IsAsciiHexDigitUpper(System.Char c)`
+- `System.Char.IsAsciiLetter(System.Char c)`
+- `System.Char.IsAsciiLetterLower(System.Char c)`
+- `System.Char.IsAsciiLetterOrDigit(System.Char c)`
+- `System.Char.IsAsciiLetterUpper(System.Char c)`
+- `System.Char.IsBetween(System.Char c, System.Char minInclusive, System.Char maxInclusive)`
 - `System.Collections.Concurrent.ConcurrentBag<T>.Clear()`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Concurrent.ConcurrentQueue<T>.Clear()`
 - `System.Collections.DictionaryEntry.Deconstruct(out System.Object key, out System.Object? value)`
 - `System.Collections.Generic.CollectionExtensions.AddRange<T>(this System.Collections.Generic.List<T> list, params System.ReadOnlySpan<T> source)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.IList<T> list)`
+- `System.Collections.Generic.CollectionExtensions.AsReadOnly<T>(this System.Collections.Generic.ISet<T> set)`
 - `System.Collections.Generic.CollectionExtensions.AsReadOnly<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary) where TKey : notnull`
+- `System.Collections.Generic.CollectionExtensions.CopyTo<T>(this System.Collections.Generic.List<T> list, System.Span<T> destination)`
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)`
 - `System.Collections.Generic.CollectionExtensions.GetValueOrDefault<TKey, TValue>(this System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)`
+- `System.Collections.Generic.CollectionExtensions.InsertRange<T>(this System.Collections.Generic.List<T> list, System.Int32 index, params System.ReadOnlySpan<T> source)`
 - `System.Collections.Generic.CollectionExtensions.Remove<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary, TKey key, out TValue value)`
 - `System.Collections.Generic.CollectionExtensions.TryAdd<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary, TKey key, TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.Remove(TKey key, out TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
+- `System.Collections.Generic.EqualityComparer<T>.Create(System.Func<T?, T?, System.Boolean> equals, [System.Func<T, System.Int32>? getHashCode = null])`
 - `System.Collections.Generic.KeyValuePair.Create<TKey, TValue>(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.List<T>.Slice(System.Int32 start, System.Int32 length)`
@@ -248,6 +271,15 @@ The filtering logic works as follows:
 - `System.Collections.ObjectModel.ReadOnlySet<T>.IsSupersetOf(System.Collections.Generic.IEnumerable<T> other)`
 - `System.Collections.ObjectModel.ReadOnlySet<T>.Overlaps(System.Collections.Generic.IEnumerable<T> other)`
 - `System.Collections.ObjectModel.ReadOnlySet<T>.SetEquals(System.Collections.Generic.IEnumerable<T> other)`
+- `System.Console.OpenStandardErrorHandle()`
+- `System.Console.OpenStandardInputHandle()`
+- `System.Console.OpenStandardOutputHandle()`
+- `System.Convert.FromHexString(System.ReadOnlySpan<System.Byte> utf8Source)`
+- `System.Convert.FromHexString(System.ReadOnlySpan<System.Byte> utf8Source, System.Span<System.Byte> destination, out System.Int32 bytesConsumed, out System.Int32 bytesWritten)`
+- `System.Convert.FromHexString(System.ReadOnlySpan<System.Char> chars)`
+- `System.Convert.FromHexString(System.ReadOnlySpan<System.Char> source, System.Span<System.Byte> destination, out System.Int32 charsConsumed, out System.Int32 bytesWritten)`
+- `System.Convert.FromHexString(System.String s)`
+- `System.Convert.FromHexString(System.String source, System.Span<System.Byte> destination, out System.Int32 charsConsumed, out System.Int32 bytesWritten)`
 - `System.Convert.ToBase64String(System.ReadOnlySpan<System.Byte> bytes, [System.Base64FormattingOptions options = System.Base64FormattingOptions.None])`
 - `System.Convert.ToHexString(System.Byte[] inArray)`
 - `System.Convert.ToHexString(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
@@ -255,23 +287,59 @@ The filtering logic works as follows:
 - `System.Convert.ToHexStringLower(System.Byte[] inArray)`
 - `System.Convert.ToHexStringLower(System.Byte[] inArray, System.Int32 offset, System.Int32 length)`
 - `System.Convert.ToHexStringLower(System.ReadOnlySpan<System.Byte> bytes)`
+- `System.Convert.TryFromBase64Chars(System.ReadOnlySpan<System.Char> chars, System.Span<System.Byte> bytes, out System.Int32 bytesWritten)`
+- `System.Convert.TryFromBase64String(System.String s, System.Span<System.Byte> bytes, out System.Int32 bytesWritten)`
+- `System.Convert.TryToBase64Chars(System.ReadOnlySpan<System.Byte> bytes, System.Span<System.Char> chars, out System.Int32 charsWritten, [System.Base64FormattingOptions options = System.Base64FormattingOptions.None])`
+- `System.Convert.TryToHexString(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten)`
+- `System.Convert.TryToHexString(System.ReadOnlySpan<System.Byte> source, System.Span<System.Char> destination, out System.Int32 charsWritten)`
+- `System.Convert.TryToHexStringLower(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten)`
+- `System.Convert.TryToHexStringLower(System.ReadOnlySpan<System.Byte> source, System.Span<System.Char> destination, out System.Int32 charsWritten)`
 - `System.DateOnly.Deconstruct(out System.Int32 year, out System.Int32 month, out System.Int32 day)`
+- `System.DateOnly.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.DateOnly.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.DateTime.AddMicroseconds(System.Double value)`
+- `System.DateTime.Deconstruct(out System.DateOnly date, out System.TimeOnly time)`
+- `System.DateTime.Deconstruct(out System.Int32 year, out System.Int32 month, out System.Int32 day)`
+- `System.DateTime.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.DateTime.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.DateTime.TryParse(System.ReadOnlySpan<System.Char> s, out System.DateTime result)`
+- `System.DateTime.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.DateTime result)`
+- `System.DateTime.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, System.Globalization.DateTimeStyles styles, out System.DateTime result)`
+- `System.DateTime.TryParse(System.String? s, System.IFormatProvider? provider, out System.DateTime result)`
+- `System.DateTime.TryParseExact(System.ReadOnlySpan<System.Char> s, System.ReadOnlySpan<System.Char> format, System.IFormatProvider? provider, System.Globalization.DateTimeStyles style, out System.DateTime result)`
+- `System.DateTimeOffset.AddMicroseconds(System.Double microseconds)`
+- `System.DateTimeOffset.Deconstruct(out System.DateOnly date, out System.TimeOnly time, out System.TimeSpan offset)`
+- `System.DateTimeOffset.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? formatProvider = null])`
+- `System.DateTimeOffset.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? formatProvider = null])`
+- `System.DateTimeOffset.TryParse(System.ReadOnlySpan<System.Char> input, out System.DateTimeOffset result)`
+- `System.DateTimeOffset.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.DateTimeOffset result)`
+- `System.DateTimeOffset.TryParse(System.ReadOnlySpan<System.Char> input, System.IFormatProvider? formatProvider, System.Globalization.DateTimeStyles styles, out System.DateTimeOffset result)`
+- `System.DateTimeOffset.TryParse(System.String? s, System.IFormatProvider? provider, out System.DateTimeOffset result)`
+- `System.DateTimeOffset.TryParseExact(System.ReadOnlySpan<System.Char> input, System.ReadOnlySpan<System.Char> format, System.IFormatProvider? formatProvider, System.Globalization.DateTimeStyles styles, out System.DateTimeOffset result)`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number], [System.IFormatProvider? provider = null])`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Number], [System.IFormatProvider? provider = null])`
 - `System.Decimal.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Decimal.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Decimal.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Decimal.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Decimal result)`
+- `System.Decimal.TryParse(System.String? s, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Delegate.EnumerateInvocationList<TDelegate>(TDelegate? d) where TDelegate : System.Delegate`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
+- `System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64 startingTimestamp)`
 - `System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64 startingTimestamp, System.Int64 endingTimestamp)`
 - `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Double.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Double.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Double.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Double.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Double.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Double.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Double result)`
 - `System.Double.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Double result)`
 - `System.Double.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Double result)`
 - `System.Double.TryParse(System.ReadOnlySpan<System.Char> s, out System.Double result)`
@@ -292,8 +360,17 @@ The filtering logic works as follows:
 - `System.Enum.TryParse<TEnum>(System.ReadOnlySpan<System.Char> value, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, out TEnum result) where TEnum : struct`
+- `System.GC.AllocateUninitializedArray<T>(System.Int32 length, [System.Boolean pinned = false])`
 - `System.Guid.CreateVersion7()`
 - `System.Guid.CreateVersion7(System.DateTimeOffset timestamp)`
+- `System.Guid.Parse(System.ReadOnlySpan<System.Byte> utf8Text)`
+- `System.Guid.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default])`
+- `System.Guid.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default])`
+- `System.Guid.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Guid result)`
+- `System.Guid.TryParse(System.ReadOnlySpan<System.Char> input, out System.Guid result)`
+- `System.Guid.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Guid result)`
+- `System.Guid.TryParse(System.String? s, System.IFormatProvider? provider, out System.Guid result)`
+- `System.Guid.TryParseExact(System.ReadOnlySpan<System.Char> input, System.ReadOnlySpan<System.Char> format, out System.Guid result)`
 - `System.HashCode.Add<T>(T value)`
 - `System.HashCode.Add<T>(T value, System.Collections.Generic.IEqualityComparer<T>? comparer)`
 - `System.HashCode.Combine<T1>(T1 value1)`
@@ -337,7 +414,20 @@ The filtering logic works as follows:
 - `System.IO.File.WriteAllTextAsync(System.String path, System.ReadOnlyMemory<System.Char> contents, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.String? contents, System.Text.Encoding encoding, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.File.WriteAllTextAsync(System.String path, System.String? contents, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.Path.Combine(params System.ReadOnlySpan<System.String> paths)`
+- `System.IO.Path.EndsInDirectorySeparator(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.EndsInDirectorySeparator(System.String? path)`
+- `System.IO.Path.Exists(System.String? path)`
+- `System.IO.Path.GetDirectoryName(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.GetExtension(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.GetFileName(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.GetFileNameWithoutExtension(System.ReadOnlySpan<System.Char> path)`
 - `System.IO.Path.GetRelativePath(System.String relativeTo, System.String path)`
+- `System.IO.Path.HasExtension(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.IsPathRooted(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.Join(params System.String?[] paths)`
+- `System.IO.Path.TrimEndingDirectorySeparator(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.TrimEndingDirectorySeparator(System.String path)`
 - `System.IO.Stream.DisposeAsync()`
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
@@ -348,9 +438,15 @@ The filtering logic works as follows:
 - `System.IO.StreamReader.ReadLineAsync()`
 - `System.IO.StreamReader.ReadLineAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextReader.ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.TextReader.ReadLineAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextWriter.CreateBroadcasting(params System.IO.TextWriter[] writers)`
+- `System.IO.TextWriter.FlushAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.IO.TextWriter.Write(System.ReadOnlySpan<System.Char> buffer)`
+- `System.IO.TextWriter.Write(System.Text.StringBuilder? value)`
 - `System.IO.TextWriter.WriteAsync(System.ReadOnlyMemory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.TextWriter.WriteAsync(System.Text.StringBuilder? value, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.TextWriter.WriteLine(System.ReadOnlySpan<System.Char> buffer)`
 - `System.ITupleInternal.GetHashCode(System.Collections.IEqualityComparer comparer)`
 - `System.ITupleInternal.ToStringEnd()`
 - `System.Index.Equals(System.Index other)`
@@ -365,8 +461,11 @@ The filtering logic works as follows:
 - `System.Int16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Int16.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Int16.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Int16.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.Int16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int16 result)`
 - `System.Int16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int16 result)`
+- `System.Int16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Int16 result)`
 - `System.Int16.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int16 result)`
 - `System.Int16.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int16 result)`
 - `System.Int16.TryParse(System.ReadOnlySpan<System.Char> s, out System.Int16 result)`
@@ -374,8 +473,11 @@ The filtering logic works as follows:
 - `System.Int32.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Int32.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Int32.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Int32.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Int32.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int32 result)`
+- `System.Int32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int32 result)`
 - `System.Int32.TryParse(System.ReadOnlySpan<System.Char> s, out System.Int32 result)`
@@ -383,11 +485,23 @@ The filtering logic works as follows:
 - `System.Int64.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Int64.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.Int64.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Int64.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Int64.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.Int64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int64 result)`
 - `System.Int64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Int64 result)`
+- `System.Int64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Int64 result)`
 - `System.Int64.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Int64 result)`
 - `System.Int64.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Int64 result)`
 - `System.Int64.TryParse(System.ReadOnlySpan<System.Char> s, out System.Int64 result)`
+- `nint.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out nint result)`
+- `nint.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out nint result)`
+- `nint.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out nint result)`
+- `nint.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out nint result)`
+- `nint.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out nint result)`
+- `nint.TryParse(System.ReadOnlySpan<System.Char> s, out nint result)`
+- `nint.TryParse(System.String? s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out nint result)`
+- `nint.TryParse(System.String? s, System.IFormatProvider? provider, out nint result)`
+- `nint.TryParse(System.String? s, out nint result)`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TSource>> func, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, System.Func<TSource, TSource, TSource> func, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.Linq.AsyncEnumerable.AggregateAsync<TSource, TAccumulate>(this System.Collections.Generic.IAsyncEnumerable<TSource> source, TAccumulate seed, System.Func<TAccumulate, TSource, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TAccumulate>> func, [System.Threading.CancellationToken cancellationToken = default])`
@@ -538,6 +652,7 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.Index<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
+- `System.Linq.Enumerable.InfiniteSequence<T>(T start, T step) where T : System.Numerics.IAdditionOperators<T, T, T>`
 - `System.Linq.Enumerable.IntersectBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TKey> second, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.IntersectBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TKey> second, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.LeftJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter, TInner?, TResult> resultSelector)`
@@ -552,6 +667,7 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector)`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
+- `System.Linq.Enumerable.Sequence<T>(T start, T endInclusive, T step) where T : System.Numerics.INumber<T>`
 - `System.Linq.Enumerable.ToDictionary<TKey, TValue>(this System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>> source) where TKey : notnull`
 - `System.Linq.Enumerable.ToDictionary<TKey, TValue>(this System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>> source, System.Collections.Generic.IEqualityComparer<TKey>? comparer) where TKey : notnull`
 - `System.Linq.Enumerable.ToHashSet<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
@@ -614,6 +730,9 @@ The filtering logic works as follows:
 - `System.Net.Http.HttpContent.ReadAsStream()`
 - `System.Net.Http.HttpContent.ReadAsStream(System.Threading.CancellationToken cancellationToken)`
 - `System.Net.Http.HttpContent.ReadAsStringAsync(System.Threading.CancellationToken cancellationToken)`
+- `System.Net.IPAddress.Parse(System.ReadOnlySpan<System.Char> ipSpan)`
+- `System.Net.IPAddress.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Net.IPAddress? result)`
+- `System.Net.IPAddress.TryParse(System.ReadOnlySpan<System.Char> ipSpan, out System.Net.IPAddress? address)`
 - `System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan<System.Byte> datagram, System.Net.IPEndPoint? endPoint)`
 - `System.Net.Sockets.UdpClient.Send(System.ReadOnlySpan<System.Byte> datagram, System.String? hostname, System.Int32 port)`
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.Net.IPEndPoint? endPoint, [System.Threading.CancellationToken cancellationToken = default])`
@@ -625,10 +744,17 @@ The filtering logic works as follows:
 - `System.OperatingSystem.IsMacOS()`
 - `System.OperatingSystem.IsWindows()`
 - `System.OperatingSystem.IsWindowsVersionAtLeast(System.Int32 major, [System.Int32 minor = 0], [System.Int32 build = 0], [System.Int32 revision = 0])`
+- `System.Random.GetHexString(System.Int32 stringLength, [System.Boolean lowercase = false])`
+- `System.Random.GetHexString(System.Span<System.Char> destination, [System.Boolean lowercase = false])`
 - `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Int32 length)`
 - `System.Random.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
 - `System.Random.GetItems<T>(T[] choices, System.Int32 length)`
+- `System.Random.GetString(System.ReadOnlySpan<System.Char> choices, System.Int32 length)`
 - `System.Random.NextBytes(System.Span<System.Byte> buffer)`
+- `System.Random.NextInt64()`
+- `System.Random.NextInt64(System.Int64 maxValue)`
+- `System.Random.NextInt64(System.Int64 minValue, System.Int64 maxValue)`
+- `System.Random.NextSingle()`
 - `System.Random.Shuffle<T>(System.Span<T> values)`
 - `System.Random.Shuffle<T>(T[] values)`
 - `System.Range.EndAt(System.Index end)`
@@ -664,8 +790,11 @@ The filtering logic works as follows:
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.SByte.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.SByte.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.SByte.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.SByte result)`
+- `System.SByte.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, out System.SByte result)`
@@ -680,13 +809,47 @@ The filtering logic works as follows:
 - `System.Security.Cryptography.RandomNumberGenerator.GetItems<T>(System.ReadOnlySpan<T> choices, System.Span<T> destination)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetString(System.ReadOnlySpan<System.Char> choices, System.Int32 length)`
 - `System.Security.Cryptography.RandomNumberGenerator.Shuffle<T>(System.Span<T> values)`
+- `System.Security.Cryptography.SHA1.HashData(System.Byte[] source)`
+- `System.Security.Cryptography.SHA1.HashData(System.IO.Stream source)`
+- `System.Security.Cryptography.SHA1.HashData(System.IO.Stream source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA1.HashData(System.ReadOnlySpan<System.Byte> source)`
+- `System.Security.Cryptography.SHA1.HashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA1.HashDataAsync(System.IO.Stream source, System.Memory<System.Byte> destination, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA1.HashDataAsync(System.IO.Stream source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA1.TryHashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination, out System.Int32 bytesWritten)`
+- `System.Security.Cryptography.SHA256.HashData(System.Byte[] source)`
+- `System.Security.Cryptography.SHA256.HashData(System.IO.Stream source)`
+- `System.Security.Cryptography.SHA256.HashData(System.IO.Stream source, System.Span<System.Byte> destination)`
 - `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source)`
+- `System.Security.Cryptography.SHA256.HashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA256.HashDataAsync(System.IO.Stream source, System.Memory<System.Byte> destination, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA256.HashDataAsync(System.IO.Stream source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA256.TryHashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination, out System.Int32 bytesWritten)`
+- `System.Security.Cryptography.SHA384.HashData(System.Byte[] source)`
+- `System.Security.Cryptography.SHA384.HashData(System.IO.Stream source)`
+- `System.Security.Cryptography.SHA384.HashData(System.IO.Stream source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA384.HashData(System.ReadOnlySpan<System.Byte> source)`
+- `System.Security.Cryptography.SHA384.HashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA384.HashDataAsync(System.IO.Stream source, System.Memory<System.Byte> destination, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA384.HashDataAsync(System.IO.Stream source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA384.TryHashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination, out System.Int32 bytesWritten)`
+- `System.Security.Cryptography.SHA512.HashData(System.Byte[] source)`
+- `System.Security.Cryptography.SHA512.HashData(System.IO.Stream source)`
+- `System.Security.Cryptography.SHA512.HashData(System.IO.Stream source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA512.HashData(System.ReadOnlySpan<System.Byte> source)`
+- `System.Security.Cryptography.SHA512.HashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination)`
+- `System.Security.Cryptography.SHA512.HashDataAsync(System.IO.Stream source, System.Memory<System.Byte> destination, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA512.HashDataAsync(System.IO.Stream source, [System.Threading.CancellationToken cancellationToken = default])`
+- `System.Security.Cryptography.SHA512.TryHashData(System.ReadOnlySpan<System.Byte> source, System.Span<System.Byte> destination, out System.Int32 bytesWritten)`
 - `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Single.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.Single.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.AllowThousands | System.Globalization.NumberStyles.Float], [System.IFormatProvider? provider = null])`
 - `System.Single.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.Single.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.Single.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.Single.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Single result)`
 - `System.Single.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.Single result)`
+- `System.Single.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.Single result)`
 - `System.Single.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.Single result)`
 - `System.Single.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Single result)`
 - `System.Single.TryParse(System.ReadOnlySpan<System.Char> s, out System.Single result)`
@@ -767,17 +930,28 @@ The filtering logic works as follows:
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task<TResult>.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
+- `System.Threading.Tasks.ValueTask.FromResult<TResult>(TResult result)`
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute)`
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second)`
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second, out System.Int32 millisecond)`
 - `System.TimeOnly.Deconstruct(out System.Int32 hour, out System.Int32 minute, out System.Int32 second, out System.Int32 millisecond, out System.Int32 microsecond)`
+- `System.TimeOnly.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.TimeOnly.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.TimeProvider.CreateTimer(System.Threading.TimerCallback callback, System.Object? state, System.TimeSpan dueTime, System.TimeSpan period)`
 - `System.TimeProvider.GetElapsedTime(System.Int64 startingTimestamp)`
 - `System.TimeProvider.GetElapsedTime(System.Int64 startingTimestamp, System.Int64 endingTimestamp)`
 - `System.TimeProvider.GetLocalNow()`
 - `System.TimeProvider.GetTimestamp()`
 - `System.TimeProvider.GetUtcNow()`
+- `System.TimeSpan.FromDays(System.Int32 days, [System.Int32 hours = 0], [System.Int64 minutes = 0], [System.Int64 seconds = 0], [System.Int64 milliseconds = 0], [System.Int64 microseconds = 0])`
+- `System.TimeSpan.FromHours(System.Int32 hours, [System.Int64 minutes = 0], [System.Int64 seconds = 0], [System.Int64 milliseconds = 0], [System.Int64 microseconds = 0])`
+- `System.TimeSpan.FromMicroseconds(System.Int64 microseconds)`
+- `System.TimeSpan.FromMilliseconds(System.Int64 milliseconds, System.Int64 microseconds)`
+- `System.TimeSpan.FromMinutes(System.Int64 minutes, [System.Int64 seconds = 0], [System.Int64 milliseconds = 0], [System.Int64 microseconds = 0])`
+- `System.TimeSpan.FromSeconds(System.Int64 seconds, [System.Int64 milliseconds = 0], [System.Int64 microseconds = 0])`
 - `System.TimeSpan.Multiply(System.Double factor)`
+- `System.TimeSpan.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? formatProvider = null])`
+- `System.TimeSpan.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? formatProvider = null])`
 - `System.TimeSpan.operator /(System.TimeSpan timeSpan, System.Double divisor)`
 - `System.TimeSpan.operator *(System.Double factor, System.TimeSpan timeSpan)`
 - `System.TimeSpan.operator *(System.TimeSpan timeSpan, System.Double factor)`
@@ -790,8 +964,11 @@ The filtering logic works as follows:
 - `System.UInt16.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.UInt16.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.UInt16.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.UInt16.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.UInt16.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.UInt16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt16 result)`
 - `System.UInt16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.UInt16 result)`
+- `System.UInt16.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.UInt16 result)`
 - `System.UInt16.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt16 result)`
 - `System.UInt16.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt16 result)`
 - `System.UInt16.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt16 result)`
@@ -799,8 +976,11 @@ The filtering logic works as follows:
 - `System.UInt32.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.UInt32.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.UInt32.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.UInt32.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.UInt32.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.UInt32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt32 result)`
 - `System.UInt32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.UInt32 result)`
+- `System.UInt32.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.UInt32 result)`
 - `System.UInt32.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt32 result)`
 - `System.UInt32.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt32 result)`
 - `System.UInt32.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt32 result)`
@@ -808,11 +988,23 @@ The filtering logic works as follows:
 - `System.UInt64.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)`
 - `System.UInt64.Parse(System.ReadOnlySpan<System.Char> s, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])`
 - `System.UInt64.Parse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider)`
+- `System.UInt64.TryFormat(System.Span<System.Byte> utf8Destination, out System.Int32 bytesWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
+- `System.UInt64.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten, [System.ReadOnlySpan<System.Char> format = default], [System.IFormatProvider? provider = null])`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt64 result)`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out System.UInt64 result)`
+- `System.UInt64.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out System.UInt64 result)`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.UInt64 result)`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.UInt64 result)`
 - `System.UInt64.TryParse(System.ReadOnlySpan<System.Char> s, out System.UInt64 result)`
+- `nuint.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out nuint result)`
+- `nuint.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider, out nuint result)`
+- `nuint.TryParse(System.ReadOnlySpan<System.Byte> utf8Text, out nuint result)`
+- `nuint.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out nuint result)`
+- `nuint.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out nuint result)`
+- `nuint.TryParse(System.ReadOnlySpan<System.Char> s, out nuint result)`
+- `nuint.TryParse(System.String? s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out nuint result)`
+- `nuint.TryParse(System.String? s, System.IFormatProvider? provider, out nuint result)`
+- `nuint.TryParse(System.String? s, out nuint result)`
 - `System.Uri.EscapeDataString(System.ReadOnlySpan<System.Char> charsToEscape)`
 - `System.Uri.TryEscapeDataString(System.ReadOnlySpan<System.Char> charsToEscape, System.Span<System.Char> destination, out System.Int32 charsWritten)`
 - `System.Uri.TryUnescapeDataString(System.ReadOnlySpan<System.Char> charsToUnescape, System.Span<System.Char> destination, out System.Int32 charsWritten)`
@@ -883,7 +1075,7 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (190)
+### Properties (195)
 
 - `System.DateTimeOffset.UnixEpoch`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CSharp = "C#"`
@@ -994,7 +1186,9 @@ The filtering logic works as follows:
 - `System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>.Empty`
 - `System.Collections.ObjectModel.ReadOnlySet<T>.Count`
 - `System.Collections.ObjectModel.ReadOnlySet<T>.Empty`
+- `System.DateTime.Microsecond`
 - `System.DateTime.Nanosecond`
+- `System.DateTimeOffset.Microsecond`
 - `System.DateTimeOffset.Nanosecond`
 - `System.Delegate.HasSingleTarget`
 - `System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Max`
@@ -1031,6 +1225,7 @@ The filtering logic works as follows:
 - `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target`
 - `System.Environment.ProcessId`
 - `System.Environment.TickCount64`
+- `System.Guid.AllBitsSet`
 - `System.ITupleInternal.Size`
 - `System.Index.End`
 - `System.Index.IsFromEnd`
@@ -1063,6 +1258,8 @@ The filtering logic works as follows:
 - `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Message`
 - `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Url`
 - `System.Runtime.Versioning.UnsupportedOSPlatformAttribute.Message`
+- `System.Text.Encoding.Latin1`
+- `System.Text.RegularExpressions.Capture.ValueSpan`
 - `System.Threading.Lock.IsHeldByCurrentThread`
 - `System.Threading.PeriodicTimer.Period`
 - `System.Threading.Tasks.Task.IsCompletedSuccessfully`

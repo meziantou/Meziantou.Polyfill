@@ -80,4 +80,12 @@ public class SystemDiagnosticsTests
         Assert.Equal(TimeSpan.Zero, elapsed);
     }
 
+    [Fact]
+    public void Stopwatch_GetElapsedTime_StartingTimestamp()
+    {
+        var start = Stopwatch.GetTimestamp();
+        Thread.Sleep(10);
+        Assert.True(Stopwatch.GetElapsedTime(start) > TimeSpan.Zero);
+    }
+
 }
