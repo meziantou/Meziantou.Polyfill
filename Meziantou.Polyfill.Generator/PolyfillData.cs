@@ -24,7 +24,9 @@ internal sealed partial class PolyfillData
         "System.ReadOnlySpan`1",
         "System.Diagnostics.CodeAnalysis.StringSyntaxAttribute",
         "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
+        "System.Runtime.CompilerServices.Unsafe",
         "System.Span`1",
+        "System.Text.Rune",
         "System.Threading.ITimer",
         "System.Threading.Tasks.Sources.IValueTaskSource`1",
         "System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags",
@@ -222,6 +224,14 @@ internal sealed partial class PolyfillData
             {
                 var parameterType = semanticModel.GetTypeInfo(parameter.Type!).Type!;
                 requiredTypes.Add(parameterType);
+            }
+        }
+
+        foreach (var name in root.DescendantNodes().OfType<NameSyntax>())
+        {
+            if (semanticModel.GetSymbolInfo(name).Symbol is ITypeSymbol type)
+            {
+                requiredTypes.Add(type);
             }
         }
 

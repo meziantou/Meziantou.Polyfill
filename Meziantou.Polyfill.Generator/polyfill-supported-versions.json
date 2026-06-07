@@ -741,6 +741,9 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Collections.BitArray.PopCount": [
+      "net11.0"
+    ],
     "M:System.Collections.Concurrent.ConcurrentBag\u00601.Clear": [
       "netstandard2.1",
       "net6.0",
@@ -860,6 +863,24 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Collections.Generic.Dictionary\u00602.TrimExcess": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.Dictionary\u00602.TrimExcess(System.Int32)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Collections.Generic.Dictionary\u00602.TryAdd(\u00600,\u00601)": [
       "netstandard2.1",
       "net6.0",
@@ -875,6 +896,11 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Collections.Generic.HashSet\u00601.TrimExcess(System.Int32)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Collections.Generic.KeyValuePair\u00602.Deconstruct(\u00600@,\u00601@)": [
       "netstandard2.1",
       "net6.0",
@@ -886,6 +912,16 @@
     ],
     "M:System.Collections.Generic.List\u00601.Slice(System.Int32,System.Int32)": [
       "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.PriorityQueue\u00602.Remove(\u00600,\u00600@,\u00601@,System.Collections.Generic.IEqualityComparer{\u00600})": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.Queue\u00601.TrimExcess(System.Int32)": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -1601,6 +1637,12 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Globalization.TextInfo.ToLower(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.Globalization.TextInfo.ToUpper(System.Text.Rune)": [
+      "net11.0"
+    ],
     "M:System.Guid.CreateVersion7": [
       "net9.0",
       "net10.0",
@@ -1660,6 +1702,13 @@
     "M:System.Guid.TryParseExact(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.Guid@)": [
       "netstandard2.1",
       "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Directory.CreateTempSubdirectory(System.String)": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -3446,6 +3495,9 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.MemoryExtensions.ContainsAnyWhiteSpace(System.ReadOnlySpan{System.Char})": [
+      "net11.0"
+    ],
     "M:System.MemoryExtensions.ContainsAny\u0060\u00601(System.Span{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
       "net8.0",
       "net9.0",
@@ -3480,9 +3532,29 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.MemoryExtensions.EndsWith(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.StringComparison)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.EnumerateLines(System.ReadOnlySpan{System.Char})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.MemoryExtensions.IndexOfAny(System.ReadOnlySpan{System.Char},System.Buffers.SearchValues{System.String})": [
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.IndexOfAnyExceptWhiteSpace(System.ReadOnlySpan{System.Char})": [
       "net11.0"
     ],
     "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Buffers.SearchValues{\u0060\u00600})": [
@@ -3547,7 +3619,73 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.MemoryExtensions.IndexOfAnyWhiteSpace(System.ReadOnlySpan{System.Char})": [
+      "net11.0"
+    ],
     "M:System.MemoryExtensions.IndexOfAny\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Buffers.SearchValues{\u0060\u00600})": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.LastIndexOfAnyExceptWhiteSpace(System.ReadOnlySpan{System.Char})": [
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.LastIndexOfAnyWhiteSpace(System.ReadOnlySpan{System.Char})": [
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.Sort\u0060\u00602(System.Span{\u0060\u00600},System.Span{\u0060\u00601})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.Sort\u0060\u00602(System.Span{\u0060\u00600},System.Span{\u0060\u00601},System.Comparison{\u0060\u00600})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.Sort\u0060\u00603(System.Span{\u0060\u00600},System.Span{\u0060\u00601},\u0060\u00602)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.Split(System.ReadOnlySpan{System.Char},System.Span{System.Range},System.Char,System.StringSplitOptions)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.Split(System.ReadOnlySpan{System.Char},System.Span{System.Range},System.ReadOnlySpan{System.Char},System.StringSplitOptions)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.SplitAny(System.ReadOnlySpan{System.Char},System.Span{System.Range},System.ReadOnlySpan{System.Char},System.StringSplitOptions)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.SplitAny(System.ReadOnlySpan{System.Char},System.Span{System.Range},System.ReadOnlySpan{System.String},System.StringSplitOptions)": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.MemoryExtensions.StartsWith(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.StringComparison)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3840,6 +3978,15 @@
       "net11.0"
     ],
     "M:System.Random.Shuffle\u0060\u00601(\u0060\u00600[])": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Reflection.MemberInfo.HasSameMetadataDefinitionAs(System.Reflection.MemberInfo)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
@@ -4415,6 +4562,12 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.String.Contains(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.Contains(System.Text.Rune,System.StringComparison)": [
+      "net11.0"
+    ],
     "M:System.String.CopyTo(System.Span{System.Char})": [
       "net6.0",
       "net7.0",
@@ -4453,6 +4606,12 @@
       "net11.0"
     ],
     "M:System.String.EndsWith(System.Char,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.EndsWith(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.EndsWith(System.Text.Rune,System.StringComparison)": [
       "net11.0"
     ],
     "M:System.String.GetHashCode(System.ReadOnlySpan{System.Char})": [
@@ -4495,6 +4654,24 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.String.IndexOf(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.IndexOf(System.Text.Rune,System.Int32)": [
+      "net11.0"
+    ],
+    "M:System.String.IndexOf(System.Text.Rune,System.Int32,System.Int32)": [
+      "net11.0"
+    ],
+    "M:System.String.IndexOf(System.Text.Rune,System.Int32,System.Int32,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.IndexOf(System.Text.Rune,System.Int32,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.IndexOf(System.Text.Rune,System.StringComparison)": [
+      "net11.0"
+    ],
     "M:System.String.Join(System.Char,System.Object[])": [
       "netstandard2.1",
       "net6.0",
@@ -4532,7 +4709,31 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.String.LastIndexOf(System.Char,System.Int32,System.Int32,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Char,System.Int32,System.StringComparison)": [
+      "net11.0"
+    ],
     "M:System.String.LastIndexOf(System.Char,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Text.Rune,System.Int32)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Text.Rune,System.Int32,System.Int32)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Text.Rune,System.Int32,System.Int32,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Text.Rune,System.Int32,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.LastIndexOf(System.Text.Rune,System.StringComparison)": [
       "net11.0"
     ],
     "M:System.String.Replace(System.String,System.String,System.StringComparison)": [
@@ -4542,6 +4743,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.String.Replace(System.Text.Rune,System.Text.Rune)": [
       "net11.0"
     ],
     "M:System.String.ReplaceLineEndings": [
@@ -4578,6 +4782,12 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.String.Split(System.Text.Rune,System.Int32,System.StringSplitOptions)": [
+      "net11.0"
+    ],
+    "M:System.String.Split(System.Text.Rune,System.StringSplitOptions)": [
+      "net11.0"
+    ],
     "M:System.String.StartsWith(System.Char)": [
       "netstandard2.1",
       "net6.0",
@@ -4588,6 +4798,21 @@
       "net11.0"
     ],
     "M:System.String.StartsWith(System.Char,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.StartsWith(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.StartsWith(System.Text.Rune,System.StringComparison)": [
+      "net11.0"
+    ],
+    "M:System.String.Trim(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.TrimEnd(System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.String.TrimStart(System.Text.Rune)": [
       "net11.0"
     ],
     "M:System.String.TryCopyTo(System.Span{System.Char})": [
@@ -4604,6 +4829,18 @@
       "net7.0",
       "net8.0",
       "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.StringNormalizationExtensions.GetNormalizedLength(System.ReadOnlySpan{System.Char},System.Text.NormalizationForm)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.StringNormalizationExtensions.IsNormalized(System.ReadOnlySpan{System.Char},System.Text.NormalizationForm)": [
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.StringNormalizationExtensions.TryNormalize(System.ReadOnlySpan{System.Char},System.Span{System.Char},System.Int32@,System.Text.NormalizationForm)": [
       "net10.0",
       "net11.0"
     ],
@@ -4664,6 +4901,172 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan{System.Char})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan{System.Char},System.Int32)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan{System.Char},System.String)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.String)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.String,System.String)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.String,System.String,System.Text.RegularExpressions.RegexOptions)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.Count(System.String,System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan{System.Char})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan{System.Char},System.Int32)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan{System.Char},System.String)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan{System.Char})": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan{System.Char},System.Int32)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan{System.Char},System.Int32,System.Int32)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan{System.Char},System.String)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan{System.Char})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan{System.Char},System.Int32)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan{System.Char},System.String)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan{System.Char},System.String,System.Text.RegularExpressions.RegexOptions,System.TimeSpan)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.Rune.Equals(System.Text.Rune,System.StringComparison)": [
+      "net11.0"
+    ],
     "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})": [
       "net6.0",
       "net7.0",
@@ -4679,6 +5082,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.StringBuilder.Append(System.Text.Rune)": [
       "net11.0"
     ],
     "M:System.Text.StringBuilder.AppendJoin(System.Char,System.Object[])": [
@@ -4735,6 +5141,15 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Text.StringBuilder.EnumerateRunes": [
+      "net11.0"
+    ],
+    "M:System.Text.StringBuilder.GetRuneAt(System.Int32)": [
+      "net11.0"
+    ],
+    "M:System.Text.StringBuilder.Insert(System.Int32,System.Text.Rune)": [
+      "net11.0"
+    ],
     "M:System.Text.StringBuilder.Replace(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char})": [
       "net9.0",
       "net10.0",
@@ -4743,6 +5158,15 @@
     "M:System.Text.StringBuilder.Replace(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char},System.Int32,System.Int32)": [
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.Text.StringBuilder.Replace(System.Text.Rune,System.Text.Rune)": [
+      "net11.0"
+    ],
+    "M:System.Text.StringBuilder.Replace(System.Text.Rune,System.Text.Rune,System.Int32,System.Int32)": [
+      "net11.0"
+    ],
+    "M:System.Text.StringBuilder.TryGetRuneAt(System.Int32,System.Text.Rune@)": [
       "net11.0"
     ],
     "M:System.Threading.CancellationToken.Register(System.Action{System.Object,System.Threading.CancellationToken},System.Object)": [
@@ -4775,6 +5199,12 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Threading.Interlocked.And\u0060\u00601(\u0060\u00600@,\u0060\u00600)": [
+      "net11.0"
+    ],
+    "M:System.Threading.Interlocked.Or\u0060\u00601(\u0060\u00600@,\u0060\u00600)": [
+      "net11.0"
+    ],
     "M:System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken)": [
       "net6.0",
       "net7.0",
@@ -4795,6 +5225,26 @@
       "net6.0",
       "net7.0",
       "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Threading.Tasks.Task.WhenAll(System.ReadOnlySpan{System.Threading.Tasks.Task})": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Threading.Tasks.Task.WhenAll\u0060\u00601(System.ReadOnlySpan{System.Threading.Tasks.Task{\u0060\u00600}})": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Threading.Tasks.Task.WhenAny(System.ReadOnlySpan{System.Threading.Tasks.Task})": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Threading.Tasks.Task.WhenAny\u0060\u00601(System.ReadOnlySpan{System.Threading.Tasks.Task{\u0060\u00600}})": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -5455,6 +5905,24 @@
       "net11.0"
     ],
     "M:System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter,System.Threading.CancellationToken)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Xml.Linq.XNode.ReadFromAsync(System.Xml.XmlReader,System.Threading.CancellationToken)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Xml.Linq.XNode.WriteToAsync(System.Xml.XmlWriter,System.Threading.CancellationToken)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -6139,6 +6607,31 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "T:System.Text.RegularExpressions.Regex.ValueMatchEnumerator": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Text.RegularExpressions.Regex.ValueSplitEnumerator": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Text.RegularExpressions.ValueMatch": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Text.RunePosition": [
+      "net11.0"
+    ],
+    "T:System.Text.StringBuilderRuneEnumerator": [
       "net11.0"
     ],
     "T:System.Threading.ITimer": [
