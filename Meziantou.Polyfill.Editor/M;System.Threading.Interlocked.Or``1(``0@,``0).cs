@@ -6,23 +6,58 @@ static partial class PolyfillExtensions_Interlocked
 {
     extension(Interlocked)
     {
-        public static unsafe T Or<T>(ref T location1, T value)
+        public static T Or<T>(ref T location1, T value)
             where T : struct
         {
             ValidateOrType<T>();
 
-            if (Unsafe.SizeOf<T>() == 1)
-                return ApplyOrByte(ref location1, value);
-            if (Unsafe.SizeOf<T>() == 2)
-                return ApplyOrUInt16(ref location1, value);
-            if (Unsafe.SizeOf<T>() == 4)
+            if (Unsafe.SizeOf<T>() < 4)
             {
-                var original = Interlocked.Or(ref Unsafe.As<T, int>(ref location1), Unsafe.As<T, int>(ref value));
-                return Unsafe.As<int, T>(ref original);
+                lock (typeof(PolyfillExtensions_Interlocked))
+                {
+                    var original = location1;
+                    if (Unsafe.SizeOf<T>() == 1)
+                    {
+                        var result = (byte)(Unsafe.As<T, byte>(ref location1) | Unsafe.As<T, byte>(ref value));
+                        location1 = Unsafe.As<byte, T>(ref result);
+                    }
+                    else
+                    {
+                        var result = (ushort)(Unsafe.As<T, ushort>(ref location1) | Unsafe.As<T, ushort>(ref value));
+                        location1 = Unsafe.As<ushort, T>(ref result);
+                    }
+
+                    return original;
+                }
             }
 
-            var original64 = Interlocked.Or(ref Unsafe.As<T, long>(ref location1), Unsafe.As<T, long>(ref value));
-            return Unsafe.As<long, T>(ref original64);
+            // Interlocked.Or is unavailable on some target frameworks and would resolve back to this polyfill.
+            if (Unsafe.SizeOf<T>() == 4)
+            {
+                ref var target = ref Unsafe.As<T, int>(ref location1);
+                var operand = Unsafe.As<T, int>(ref value);
+                var current = target;
+                while (true)
+                {
+                    var original = Interlocked.CompareExchange(ref target, current | operand, current);
+                    if (original == current)
+                        return Unsafe.As<int, T>(ref original);
+
+                    current = original;
+                }
+            }
+
+            ref var target64 = ref Unsafe.As<T, long>(ref location1);
+            var operand64 = Unsafe.As<T, long>(ref value);
+            var current64 = target64;
+            while (true)
+            {
+                var original = Interlocked.CompareExchange(ref target64, current64 | operand64, current64);
+                if (original == current64)
+                    return Unsafe.As<long, T>(ref original);
+
+                current64 = original;
+            }
         }
 
         private static void ValidateOrType<T>()
@@ -32,58 +67,5 @@ static partial class PolyfillExtensions_Interlocked
                 throw new NotSupportedException("The type must be an integer primitive type or an enum type backed by an integer type.");
         }
 
-        private static unsafe T ApplyOrByte<T>(ref T location1, T value)
-            where T : struct
-        {
-            ref var byteLocation = ref Unsafe.As<T, byte>(ref location1);
-            fixed (byte* pointer = &byteLocation)
-            {
-                var offset = (int)((nuint)pointer & 3);
-                ref var alignedLocation = ref Unsafe.AsRef<int>(pointer - offset);
-                var shift = (BitConverter.IsLittleEndian ? offset : 3 - offset) * 8;
-                var mask = 0xff << shift;
-                var shiftedValue = Unsafe.As<T, byte>(ref value) << shift;
-                var current = alignedLocation;
-                while (true)
-                {
-                    var newValue = (current & ~mask) | ((current & mask) | shiftedValue);
-                    var original = Interlocked.CompareExchange(ref alignedLocation, newValue, current);
-                    if (original == current)
-                    {
-                        var result = (byte)(original >> shift);
-                        return Unsafe.As<byte, T>(ref result);
-                    }
-
-                    current = original;
-                }
-            }
-        }
-
-        private static unsafe T ApplyOrUInt16<T>(ref T location1, T value)
-            where T : struct
-        {
-            ref var byteLocation = ref Unsafe.As<T, byte>(ref location1);
-            fixed (byte* pointer = &byteLocation)
-            {
-                var offset = (int)((nuint)pointer & 3);
-                ref var alignedLocation = ref Unsafe.AsRef<int>(pointer - offset);
-                var shift = (BitConverter.IsLittleEndian ? offset : 2 - offset) * 8;
-                var mask = 0xffff << shift;
-                var shiftedValue = Unsafe.As<T, ushort>(ref value) << shift;
-                var current = alignedLocation;
-                while (true)
-                {
-                    var newValue = (current & ~mask) | ((current & mask) | shiftedValue);
-                    var original = Interlocked.CompareExchange(ref alignedLocation, newValue, current);
-                    if (original == current)
-                    {
-                        var result = (ushort)(original >> shift);
-                        return Unsafe.As<ushort, T>(ref result);
-                    }
-
-                    current = original;
-                }
-            }
-        }
     }
 }

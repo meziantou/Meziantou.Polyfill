@@ -59,6 +59,20 @@ public class SystemThreadingTests
     }
 
     [Fact]
+    public void Interlocked_GenericAndOr_DoesNotModifyAdjacentArrayElements()
+    {
+        var bytes = new byte[] { 0x11, 0xff, 0x22, 0x33 };
+        Assert.Equal((byte)0xff, Interlocked.And<byte>(ref bytes[1], 0x0f));
+        Assert.Equal((byte)0x0f, Interlocked.Or<byte>(ref bytes[1], 0x80));
+        Assert.Equal(new byte[] { 0x11, 0x8f, 0x22, 0x33 }, bytes);
+
+        var values = new ushort[] { 0x1111, 0xffff, 0x2222 };
+        Assert.Equal((ushort)0xffff, Interlocked.And<ushort>(ref values[1], 0x0f0f));
+        Assert.Equal((ushort)0x0f0f, Interlocked.Or<ushort>(ref values[1], 0x8080));
+        Assert.Equal(new ushort[] { 0x1111, 0x8f8f, 0x2222 }, values);
+    }
+
+    [Fact]
     public async Task CancellationTokenSource_CancelAsync()
     {
         using var cts = new CancellationTokenSource();
