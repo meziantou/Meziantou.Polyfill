@@ -41,16 +41,29 @@ file static class WhenEachImplementation
         if (taskList.Count == 0)
             yield break;
 
-        var remainingTasks = new HashSet<Task>(taskList);
+        var remainingTasks = taskList;
 
         while (remainingTasks.Count > 0)
         {
-            var completedTask = await Task.WhenAny(remainingTasks).ConfigureAwait(false);
-
-            cancellationToken.ThrowIfCancellationRequested();
+            var completedTask = await WhenAnyAsync(remainingTasks, cancellationToken).ConfigureAwait(false);
 
             remainingTasks.Remove(completedTask);
             yield return completedTask;
         }
+    }
+
+    private static async Task<Task> WhenAnyAsync(IEnumerable<Task> tasks, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!cancellationToken.CanBeCanceled)
+            return await Task.WhenAny(tasks).ConfigureAwait(false);
+
+        var cancellationTaskSource = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        using var registration = cancellationToken.Register(static state => ((TaskCompletionSource<bool>)state).TrySetResult(true), cancellationTaskSource);
+        var whenAnyTask = Task.WhenAny(tasks);
+        if (await Task.WhenAny(whenAnyTask, cancellationTaskSource.Task).ConfigureAwait(false) != whenAnyTask)
+            cancellationToken.ThrowIfCancellationRequested();
+
+        return await whenAnyTask.ConfigureAwait(false);
     }
 }

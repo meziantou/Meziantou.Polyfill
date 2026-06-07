@@ -217,4 +217,99 @@ public class SystemThreadingTasksTests
         await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             await ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), cts.Token));
     }
+
+    [Fact]
+    public async Task Task_WhenAll_ReadOnlySpan()
+    {
+        Task[] tasks = [Task.CompletedTask, Task.Delay(1)];
+
+        await Task.WhenAll(tasks.AsSpan());
+    }
+
+    [Fact]
+    public async Task Task_WhenAll_ReadOnlySpan_Generic()
+    {
+        Task<int>[] tasks = [Task.FromResult(1), Task.FromResult(2)];
+
+        var results = await Task.WhenAll<int>(tasks.AsSpan());
+
+        Assert.Equal([1, 2], results);
+    }
+
+    [Fact]
+    public async Task Task_WhenAny_ReadOnlySpan()
+    {
+        var incompleteTask = new TaskCompletionSource<bool>();
+        Task[] tasks = [incompleteTask.Task, Task.CompletedTask];
+
+        var completedTask = await Task.WhenAny(tasks.AsSpan());
+
+        Assert.Same(tasks[1], completedTask);
+    }
+
+    [Fact]
+    public async Task Task_WhenAny_ReadOnlySpan_Generic()
+    {
+        var incompleteTask = new TaskCompletionSource<int>();
+        Task<int>[] tasks = [incompleteTask.Task, Task.FromResult(2)];
+
+        var completedTask = await Task.WhenAny<int>(tasks.AsSpan());
+
+        Assert.Same(tasks[1], completedTask);
+        Assert.Equal(2, await completedTask);
+    }
+
+    [Fact]
+    public async Task Task_WhenEach_YieldsTasksAsTheyCompleteIncludingDuplicates()
+    {
+        var first = new TaskCompletionSource<bool>();
+        var second = new TaskCompletionSource<bool>();
+        IEnumerable<Task> tasks = [first.Task, second.Task, first.Task];
+        var enumerable = Task.WhenEach(tasks);
+        await using var enumerator = enumerable.GetAsyncEnumerator();
+
+        second.SetResult(true);
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Same(second.Task, enumerator.Current);
+
+        first.SetResult(true);
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Same(first.Task, enumerator.Current);
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Same(first.Task, enumerator.Current);
+        Assert.False(await enumerator.MoveNextAsync());
+    }
+
+    [Fact]
+    public async Task Task_WhenEach_Generic_YieldsTasksAsTheyComplete()
+    {
+        var first = new TaskCompletionSource<int>();
+        var second = new TaskCompletionSource<int>();
+        IEnumerable<Task<int>> tasks = [first.Task, second.Task];
+        var enumerable = Task.WhenEach<int>(tasks);
+        await using var enumerator = enumerable.GetAsyncEnumerator();
+
+        second.SetResult(2);
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Same(second.Task, enumerator.Current);
+
+        first.SetResult(1);
+        Assert.True(await enumerator.MoveNextAsync());
+        Assert.Same(first.Task, enumerator.Current);
+        Assert.False(await enumerator.MoveNextAsync());
+    }
+
+    [Fact]
+    public async Task Task_WhenEach_EnumerationCanBeCanceled()
+    {
+        var task = new TaskCompletionSource<bool>();
+        using var cancellationTokenSource = new CancellationTokenSource();
+        IEnumerable<Task> tasks = [task.Task];
+        await using var enumerator = Task.WhenEach(tasks).GetAsyncEnumerator(cancellationTokenSource.Token);
+
+        var moveNextTask = enumerator.MoveNextAsync().AsTask();
+        cancellationTokenSource.Cancel();
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => moveNextTask);
+    }
 }

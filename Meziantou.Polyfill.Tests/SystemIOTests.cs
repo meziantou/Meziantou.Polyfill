@@ -286,6 +286,22 @@ public class SystemIOTests
     }
 
     [Fact]
+    public void Directory_CreateTempSubdirectory()
+    {
+        var directory = Directory.CreateTempSubdirectory("polyfill-");
+        try
+        {
+            Assert.True(directory.Exists);
+            Assert.StartsWith("polyfill-", directory.Name);
+            Assert.Equal(Path.GetFullPath(Path.GetTempPath()).TrimEnd(Path.DirectorySeparatorChar), directory.Parent!.FullName.TrimEnd(Path.DirectorySeparatorChar));
+        }
+        finally
+        {
+            directory.Delete(recursive: true);
+        }
+    }
+
+    [Fact]
     public void Path_GetRelativePath_SiblingDirectory()
     {
         var from = Path.Combine(Path.GetTempPath(), "a");

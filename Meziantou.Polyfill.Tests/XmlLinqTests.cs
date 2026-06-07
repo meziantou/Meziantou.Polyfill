@@ -176,4 +176,47 @@ public class XmlLinqTests
         Assert.Equal("root", element.Name.LocalName);
         Assert.NotNull(element.Element("item"));
     }
+
+    [Fact]
+    public async Task XNode_WriteToAsync()
+    {
+        XNode node = XElement.Parse("<root><item>Value</item></root>");
+        using var stringWriter = new StringWriter();
+        using (var xmlWriter = XmlWriter.Create(stringWriter, new XmlWriterSettings { Async = true }))
+        {
+            await node.WriteToAsync(xmlWriter, CancellationToken.None);
+        }
+
+        Assert.Contains("<root>", stringWriter.ToString());
+        Assert.Contains("<item>Value</item>", stringWriter.ToString());
+    }
+
+    [Fact]
+    public async Task XNode_ReadFromAsync()
+    {
+        using var stringReader = new StringReader("<root><item>Value</item></root>");
+        using var xmlReader = XmlReader.Create(stringReader, new XmlReaderSettings { Async = true });
+        await xmlReader.ReadAsync();
+
+        var node = await XNode.ReadFromAsync(xmlReader, CancellationToken.None);
+
+        var element = Assert.IsType<XElement>(node);
+        Assert.Equal("root", element.Name.LocalName);
+        Assert.Equal("Value", element.Element("item")?.Value);
+    }
+
+    [Fact]
+    public async Task XNode_AsyncMethods_ThrowWhenCanceled()
+    {
+        var cancellationToken = new CancellationToken(canceled: true);
+        XNode node = new XElement("root");
+        using var stringWriter = new StringWriter();
+        using var xmlWriter = XmlWriter.Create(stringWriter, new XmlWriterSettings { Async = true });
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => node.WriteToAsync(xmlWriter, cancellationToken));
+
+        using var stringReader = new StringReader("<root />");
+        using var xmlReader = XmlReader.Create(stringReader, new XmlReaderSettings { Async = true });
+        await xmlReader.ReadAsync();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => XNode.ReadFromAsync(xmlReader, cancellationToken));
+    }
 }

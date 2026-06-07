@@ -50,6 +50,14 @@ public class SystemReflectionTests
         Assert.False(typeof(string).IsAssignableTo(typeof(int)));
     }
 
+    [Fact]
+    public void MemberInfo_HasSameMetadataDefinitionAs()
+    {
+        var member = typeof(string).GetMethod(nameof(string.ToString), Type.EmptyTypes)!;
+        Assert.True(member.HasSameMetadataDefinitionAs(member));
+        Assert.False(member.HasSameMetadataDefinitionAs(typeof(object).GetMethod(nameof(ToString), Type.EmptyTypes)!));
+    }
+
 #if NET6_0_OR_GREATER
     [Fact]
     public void Type_GetMethod_WithGenericParameterCount()

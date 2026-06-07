@@ -18,6 +18,47 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemThreadingTests
 {
     [Fact]
+    public void Interlocked_GenericAndOr()
+    {
+        byte byteValue = 0b_1010;
+        Assert.Equal((byte)0b_1010, Interlocked.And<byte>(ref byteValue, 0b_1100));
+        Assert.Equal((byte)0b_1000, byteValue);
+        Assert.Equal((byte)0b_1000, Interlocked.Or<byte>(ref byteValue, 0b_0011));
+        Assert.Equal((byte)0b_1011, byteValue);
+
+        ushort ushortValue = 0xff00;
+        Assert.Equal((ushort)0xff00, Interlocked.And<ushort>(ref ushortValue, 0x0ff0));
+        Assert.Equal((ushort)0x0f00, ushortValue);
+
+        uint uintValue = 0xff00ff00;
+        Assert.Equal(0xff00ff00u, Interlocked.Or<uint>(ref uintValue, 0x000000ff));
+        Assert.Equal(0xff00ffffu, uintValue);
+
+        ulong ulongValue = 0xffff0000ffff0000;
+        Assert.Equal(0xffff0000ffff0000ul, Interlocked.And<ulong>(ref ulongValue, 0x00ffffffffff00ff));
+        Assert.Equal(0x00ff0000ffff0000ul, ulongValue);
+
+        var enumValue = TestFlags.First | TestFlags.Second;
+        Assert.Equal(TestFlags.First | TestFlags.Second, Interlocked.And(ref enumValue, TestFlags.Second));
+        Assert.Equal(TestFlags.Second, enumValue);
+        Assert.Equal(TestFlags.Second, Interlocked.Or(ref enumValue, TestFlags.Third));
+        Assert.Equal(TestFlags.Second | TestFlags.Third, enumValue);
+
+        var fields = new AtomicFields { ByteValue = 0b_1010, ByteNeighbor = 0xff, UInt16Value = 0xff00, UInt16Neighbor = 0xffff };
+        Interlocked.And<byte>(ref fields.ByteValue, 0b_1100);
+        Interlocked.Or<ushort>(ref fields.UInt16Value, 0x00ff);
+        Assert.Equal((byte)0b_1000, fields.ByteValue);
+        Assert.Equal((byte)0xff, fields.ByteNeighbor);
+        Assert.Equal((ushort)0xffff, fields.UInt16Value);
+        Assert.Equal((ushort)0xffff, fields.UInt16Neighbor);
+
+        float floatValue = 1;
+        Assert.Throws<NotSupportedException>(() => Interlocked.And(ref floatValue, 1));
+        var structValue = new TestStruct();
+        Assert.Throws<NotSupportedException>(() => Interlocked.Or(ref structValue, default));
+    }
+
+    [Fact]
     public async Task CancellationTokenSource_CancelAsync()
     {
         using var cts = new CancellationTokenSource();
@@ -457,6 +498,26 @@ public class SystemThreadingTests
     private static Task<T> WaitWithTimeout<T>(ValueTask<T> valueTask) => WaitWithTimeout(valueTask.AsTask());
 
     private static Task<T> WaitWithTimeout<T>(Task<T> task) => task.WaitAsync(TimeSpan.FromSeconds(5));
+
+    [Flags]
+    private enum TestFlags : byte
+    {
+        First = 1,
+        Second = 2,
+        Third = 4,
+    }
+
+    private struct TestStruct
+    {
+    }
+
+    private sealed class AtomicFields
+    {
+        public byte ByteValue;
+        public byte ByteNeighbor;
+        public ushort UInt16Value;
+        public ushort UInt16Neighbor;
+    }
 
     private sealed class ManualTimeProvider : TimeProvider
     {

@@ -52,7 +52,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (84)
+### Types (89)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -124,6 +124,11 @@ The filtering logic works as follows:
 - `System.Runtime.Versioning.TargetPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute`
+- `System.Text.RegularExpressions.Regex.ValueMatchEnumerator`
+- `System.Text.RegularExpressions.Regex.ValueSplitEnumerator`
+- `System.Text.RegularExpressions.ValueMatch`
+- `System.Text.RunePosition`
+- `System.Text.StringBuilderRuneEnumerator`
 - `System.Threading.ITimer`
 - `System.Threading.Lock`
 - `System.Threading.PeriodicTimer`
@@ -139,7 +144,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (933)
+### Methods (1039)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -220,6 +225,7 @@ The filtering logic works as follows:
 - `System.Char.IsAsciiLetterOrDigit(System.Char c)`
 - `System.Char.IsAsciiLetterUpper(System.Char c)`
 - `System.Char.IsBetween(System.Char c, System.Char minInclusive, System.Char maxInclusive)`
+- `System.Collections.BitArray.PopCount()`
 - `System.Collections.Concurrent.ConcurrentBag<T>.Clear()`
 - `System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>.GetOrAdd<TArg>(TKey key, System.Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument) where TArg : allows ref struct`
 - `System.Collections.Concurrent.ConcurrentQueue<T>.Clear()`
@@ -235,8 +241,11 @@ The filtering logic works as follows:
 - `System.Collections.Generic.CollectionExtensions.Remove<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary, TKey key, out TValue value)`
 - `System.Collections.Generic.CollectionExtensions.TryAdd<TKey, TValue>(this System.Collections.Generic.IDictionary<TKey, TValue> dictionary, TKey key, TValue value)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.Remove(TKey key, out TValue value)`
+- `System.Collections.Generic.Dictionary<TKey, TValue>.TrimExcess()`
+- `System.Collections.Generic.Dictionary<TKey, TValue>.TrimExcess(System.Int32 capacity)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
 - `System.Collections.Generic.EqualityComparer<T>.Create(System.Func<T?, T?, System.Boolean> equals, [System.Func<T, System.Int32>? getHashCode = null])`
+- `System.Collections.Generic.HashSet<T>.TrimExcess(System.Int32 capacity)`
 - `System.Collections.Generic.KeyValuePair.Create<TKey, TValue>(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
 - `System.Collections.Generic.List<T>.Slice(System.Int32 start, System.Int32 length)`
@@ -249,9 +258,11 @@ The filtering logic works as follows:
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>.EnqueueRange(System.Collections.Generic.IEnumerable<TElement> elements, TPriority priority)`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>.EnsureCapacity(System.Int32 capacity)`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Peek()`
+- `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Remove(TElement element, out TElement removedElement, out TPriority priority, [System.Collections.Generic.IEqualityComparer<TElement>? equalityComparer = null])`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>.TrimExcess()`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>.TryDequeue(out TElement element, out TPriority priority)`
 - `System.Collections.Generic.PriorityQueue<TElement, TPriority>.TryPeek(out TElement element, out TPriority priority)`
+- `System.Collections.Generic.Queue<T>.TrimExcess(System.Int32 capacity)`
 - `System.Collections.Generic.Queue<T>.TryDequeue(out T result)`
 - `System.Collections.Generic.ReferenceEqualityComparer.Equals(System.Object? x, System.Object? y)`
 - `System.Collections.Generic.ReferenceEqualityComparer.GetHashCode(System.Object? obj)`
@@ -361,6 +372,8 @@ The filtering logic works as follows:
 - `System.Enum.TryParse<TEnum>(System.String? value, System.Boolean ignoreCase, out TEnum result) where TEnum : struct`
 - `System.Enum.TryParse<TEnum>(System.String? value, out TEnum result) where TEnum : struct`
 - `System.GC.AllocateUninitializedArray<T>(System.Int32 length, [System.Boolean pinned = false])`
+- `System.Globalization.TextInfo.ToLower(System.Text.Rune value)`
+- `System.Globalization.TextInfo.ToUpper(System.Text.Rune value)`
 - `System.Guid.CreateVersion7()`
 - `System.Guid.CreateVersion7(System.DateTimeOffset timestamp)`
 - `System.Guid.Parse(System.ReadOnlySpan<System.Byte> utf8Text)`
@@ -384,6 +397,7 @@ The filtering logic works as follows:
 - `System.HashCode.Equals(System.Object? obj)`
 - `System.HashCode.GetHashCode()`
 - `System.HashCode.ToHashCode()`
+- `System.IO.Directory.CreateTempSubdirectory([System.String? prefix = null])`
 - `System.IO.File.AppendAllBytes(System.String path, System.Byte[] bytes)`
 - `System.IO.File.AppendAllBytes(System.String path, System.ReadOnlySpan<System.Byte> bytes)`
 - `System.IO.File.AppendAllBytesAsync(System.String path, System.Byte[] bytes, [System.Threading.CancellationToken cancellationToken = default])`
@@ -701,12 +715,16 @@ The filtering logic works as follows:
 - `System.MemoryExtensions.ContainsAnyExcept<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.ContainsAnyExcept<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.ContainsAnyExcept<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+- `System.MemoryExtensions.ContainsAnyWhiteSpace(this System.ReadOnlySpan<System.Char> span)`
 - `System.MemoryExtensions.ContainsAny<T>(this System.Span<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.ContainsAny<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.ContainsAny<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.Contains<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.Contains<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
+- `System.MemoryExtensions.EndsWith(this System.ReadOnlySpan<System.Char> span, System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)`
+- `System.MemoryExtensions.EnumerateLines(this System.ReadOnlySpan<System.Char> span)`
 - `System.MemoryExtensions.IndexOfAny(this System.ReadOnlySpan<System.Char> span, System.Buffers.SearchValues<System.String> values)`
+- `System.MemoryExtensions.IndexOfAnyExceptWhiteSpace(this System.ReadOnlySpan<System.Char> span)`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, System.Buffers.SearchValues<T> values) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, System.ReadOnlySpan<T> values) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
@@ -716,7 +734,18 @@ The filtering logic works as follows:
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.IndexOfAnyExcept<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?`
+- `System.MemoryExtensions.IndexOfAnyWhiteSpace(this System.ReadOnlySpan<System.Char> span)`
 - `System.MemoryExtensions.IndexOfAny<T>(this System.ReadOnlySpan<T> span, System.Buffers.SearchValues<T> values) where T : System.IEquatable<T>?`
+- `System.MemoryExtensions.LastIndexOfAnyExceptWhiteSpace(this System.ReadOnlySpan<System.Char> span)`
+- `System.MemoryExtensions.LastIndexOfAnyWhiteSpace(this System.ReadOnlySpan<System.Char> span)`
+- `System.MemoryExtensions.Sort<TKey, TValue>(this System.Span<TKey> keys, System.Span<TValue> items)`
+- `System.MemoryExtensions.Sort<TKey, TValue>(this System.Span<TKey> keys, System.Span<TValue> items, System.Comparison<TKey> comparison)`
+- `System.MemoryExtensions.Sort<TKey, TValue, TComparer>(this System.Span<TKey> keys, System.Span<TValue> items, TComparer comparer) where TComparer : System.Collections.Generic.IComparer<TKey>?`
+- `System.MemoryExtensions.Split(this System.ReadOnlySpan<System.Char> source, System.Span<System.Range> destination, System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.MemoryExtensions.Split(this System.ReadOnlySpan<System.Char> source, System.Span<System.Range> destination, System.ReadOnlySpan<System.Char> separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.MemoryExtensions.SplitAny(this System.ReadOnlySpan<System.Char> source, System.Span<System.Range> destination, System.ReadOnlySpan<System.Char> separators, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.MemoryExtensions.SplitAny(this System.ReadOnlySpan<System.Char> source, System.Span<System.Range> destination, System.ReadOnlySpan<System.String> separators, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.MemoryExtensions.StartsWith(this System.ReadOnlySpan<System.Char> span, System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)`
 - `System.MemoryExtensions.StartsWith<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?`
 - `System.MemoryExtensions.StartsWith<T>(this System.ReadOnlySpan<T> span, T value, [System.Collections.Generic.IEqualityComparer<T>? comparer = null])`
 - `System.Net.Http.HttpContent.CopyTo(System.IO.Stream stream, System.Net.TransportContext? context, System.Threading.CancellationToken cancellationToken)`
@@ -764,6 +793,7 @@ The filtering logic works as follows:
 - `System.Range.GetOffsetAndLength(System.Int32 length)`
 - `System.Range.StartAt(System.Index start)`
 - `System.Range.ToString()`
+- `System.Reflection.MemberInfo.HasSameMetadataDefinitionAs(System.Reflection.MemberInfo other)`
 - `System.Reflection.MethodInfo.CreateDelegate<T>() where T : System.Delegate`
 - `System.Reflection.MethodInfo.CreateDelegate<T>(System.Object? target) where T : System.Delegate`
 - `System.Reflection.NullabilityInfoContext.Create(System.Reflection.EventInfo eventInfo)`
@@ -859,32 +889,61 @@ The filtering logic works as follows:
 - `System.String.Contains(System.Char value)`
 - `System.String.Contains(System.Char value, System.StringComparison comparisonType)`
 - `System.String.Contains(System.String value, System.StringComparison comparisonType)`
+- `System.String.Contains(System.Text.Rune value)`
+- `System.String.Contains(System.Text.Rune value, System.StringComparison comparisonType)`
 - `System.String.CopyTo(System.Span<System.Char> destination)`
 - `System.String.Create(System.IFormatProvider? provider, ref System.Runtime.CompilerServices.DefaultInterpolatedStringHandler handler)`
 - `System.String.Create<TState>(System.Int32 length, TState state, System.Buffers.SpanAction<System.Char, TState> action) where TState : allows ref struct`
 - `System.String.EndsWith(System.Char value)`
 - `System.String.EndsWith(System.Char value, System.StringComparison comparisonType)`
+- `System.String.EndsWith(System.Text.Rune value)`
+- `System.String.EndsWith(System.Text.Rune value, System.StringComparison comparisonType)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value)`
 - `System.String.GetHashCode(System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)`
 - `System.String.GetHashCode(System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.Int32 startIndex, System.Int32 count, System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.Int32 startIndex, System.StringComparison comparisonType)`
 - `System.String.IndexOf(System.Char value, System.StringComparison comparisonType)`
+- `System.String.IndexOf(System.Text.Rune value)`
+- `System.String.IndexOf(System.Text.Rune value, System.Int32 startIndex)`
+- `System.String.IndexOf(System.Text.Rune value, System.Int32 startIndex, System.Int32 count)`
+- `System.String.IndexOf(System.Text.Rune value, System.Int32 startIndex, System.Int32 count, System.StringComparison comparisonType)`
+- `System.String.IndexOf(System.Text.Rune value, System.Int32 startIndex, System.StringComparison comparisonType)`
+- `System.String.IndexOf(System.Text.Rune value, System.StringComparison comparisonType)`
 - `System.String.Join(System.Char separator, params System.Object?[] values)`
 - `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.Object?> values)`
 - `System.String.Join(System.Char separator, params System.ReadOnlySpan<System.String?> value)`
 - `System.String.Join(System.Char separator, params System.String?[] value)`
 - `System.String.Join<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
+- `System.String.LastIndexOf(System.Char value, System.Int32 startIndex, System.Int32 count, System.StringComparison comparisonType)`
+- `System.String.LastIndexOf(System.Char value, System.Int32 startIndex, System.StringComparison comparisonType)`
 - `System.String.LastIndexOf(System.Char value, System.StringComparison comparisonType)`
+- `System.String.LastIndexOf(System.Text.Rune value)`
+- `System.String.LastIndexOf(System.Text.Rune value, System.Int32 startIndex)`
+- `System.String.LastIndexOf(System.Text.Rune value, System.Int32 startIndex, System.Int32 count)`
+- `System.String.LastIndexOf(System.Text.Rune value, System.Int32 startIndex, System.Int32 count, System.StringComparison comparisonType)`
+- `System.String.LastIndexOf(System.Text.Rune value, System.Int32 startIndex, System.StringComparison comparisonType)`
+- `System.String.LastIndexOf(System.Text.Rune value, System.StringComparison comparisonType)`
 - `System.String.Replace(System.String oldValue, System.String? newValue, System.StringComparison comparisonType)`
+- `System.String.Replace(System.Text.Rune oldRune, System.Text.Rune newRune)`
 - `System.String.ReplaceLineEndings()`
 - `System.String.ReplaceLineEndings(System.String replacementText)`
 - `System.String.Split(System.Char separator, System.Int32 count, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.Split(System.Char separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.String.Split(System.Text.Rune separator, System.Int32 count, [System.StringSplitOptions options = System.StringSplitOptions.None])`
+- `System.String.Split(System.Text.Rune separator, [System.StringSplitOptions options = System.StringSplitOptions.None])`
 - `System.String.StartsWith(System.Char value)`
 - `System.String.StartsWith(System.Char value, System.StringComparison comparisonType)`
+- `System.String.StartsWith(System.Text.Rune value)`
+- `System.String.StartsWith(System.Text.Rune value, System.StringComparison comparisonType)`
+- `System.String.Trim(System.Text.Rune trimRune)`
+- `System.String.TrimEnd(System.Text.Rune trimRune)`
+- `System.String.TrimStart(System.Text.Rune trimRune)`
 - `System.String.TryCopyTo(System.Span<System.Char> destination)`
 - `System.StringComparer.FromComparison(System.StringComparison comparisonType)`
+- `System.StringNormalizationExtensions.GetNormalizedLength(this System.ReadOnlySpan<System.Char> source, [System.Text.NormalizationForm normalizationForm = System.Text.NormalizationForm.FormC])`
+- `System.StringNormalizationExtensions.IsNormalized(this System.ReadOnlySpan<System.Char> source, [System.Text.NormalizationForm normalizationForm = System.Text.NormalizationForm.FormC])`
+- `System.StringNormalizationExtensions.TryNormalize(this System.ReadOnlySpan<System.Char> source, System.Span<System.Char> destination, out System.Int32 charsWritten, [System.Text.NormalizationForm normalizationForm = System.Text.NormalizationForm.FormC])`
 - `System.Text.Encoding.GetByteCount(System.ReadOnlySpan<System.Char> chars)`
 - `System.Text.Encoding.GetBytes(System.ReadOnlySpan<System.Char> chars, System.Span<System.Byte> bytes)`
 - `System.Text.Encoding.GetCharCount(System.ReadOnlySpan<System.Byte> bytes)`
@@ -892,21 +951,67 @@ The filtering logic works as follows:
 - `System.Text.Encoding.GetString(System.ReadOnlySpan<System.Byte> bytes)`
 - `System.Text.Encoding.TryGetBytes(System.ReadOnlySpan<System.Char> chars, System.Span<System.Byte> bytes, out System.Int32 bytesWritten)`
 - `System.Text.Encoding.TryGetChars(System.ReadOnlySpan<System.Byte> bytes, System.Span<System.Char> chars, out System.Int32 charsWritten)`
+- `System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan<System.Char> input)`
+- `System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan<System.Char> input, System.Int32 startat)`
+- `System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan<System.Char> input, System.String pattern)`
+- `System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options)`
+- `System.Text.RegularExpressions.Regex.Count(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options, System.TimeSpan matchTimeout)`
+- `System.Text.RegularExpressions.Regex.Count(System.String input)`
+- `System.Text.RegularExpressions.Regex.Count(System.String input, System.String pattern)`
+- `System.Text.RegularExpressions.Regex.Count(System.String input, System.String pattern, System.Text.RegularExpressions.RegexOptions options)`
+- `System.Text.RegularExpressions.Regex.Count(System.String input, System.String pattern, System.Text.RegularExpressions.RegexOptions options, System.TimeSpan matchTimeout)`
+- `System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan<System.Char> input)`
+- `System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan<System.Char> input, System.Int32 startat)`
+- `System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan<System.Char> input, System.String pattern)`
+- `System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options)`
+- `System.Text.RegularExpressions.Regex.EnumerateMatches(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options, System.TimeSpan matchTimeout)`
+- `System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan<System.Char> input)`
+- `System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan<System.Char> input, System.Int32 count)`
+- `System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan<System.Char> input, System.Int32 count, System.Int32 startat)`
+- `System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan<System.Char> input, System.String pattern)`
+- `System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options)`
+- `System.Text.RegularExpressions.Regex.EnumerateSplits(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options, System.TimeSpan matchTimeout)`
+- `System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan<System.Char> input)`
+- `System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan<System.Char> input, System.Int32 startat)`
+- `System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan<System.Char> input, System.String pattern)`
+- `System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options)`
+- `System.Text.RegularExpressions.Regex.IsMatch(System.ReadOnlySpan<System.Char> input, System.String pattern, System.Text.RegularExpressions.RegexOptions options, System.TimeSpan matchTimeout)`
+- `System.Text.Rune.Equals(System.Text.Rune other, System.StringComparison comparisonType)`
+- `System.Text.RunePosition.Deconstruct(out System.Text.Rune rune, out System.Int32 startIndex)`
+- `System.Text.RunePosition.Deconstruct(out System.Text.Rune rune, out System.Int32 startIndex, out System.Int32 length)`
+- `System.Text.RunePosition.EnumerateUtf16(System.ReadOnlySpan<System.Char> span)`
+- `System.Text.RunePosition.EnumerateUtf8(System.ReadOnlySpan<System.Byte> span)`
+- `System.Text.RunePosition.Equals(System.Object? obj)`
+- `System.Text.RunePosition.Equals(System.Text.RunePosition other)`
+- `System.Text.RunePosition.GetHashCode()`
+- `System.Text.RunePosition.operator ==(System.Text.RunePosition left, System.Text.RunePosition right)`
+- `System.Text.RunePosition.operator !=(System.Text.RunePosition left, System.Text.RunePosition right)`
 - `System.Text.StringBuilder.Append(System.ReadOnlyMemory<System.Char> value)`
 - `System.Text.StringBuilder.Append(System.ReadOnlySpan<System.Char> value)`
+- `System.Text.StringBuilder.Append(System.Text.Rune value)`
 - `System.Text.StringBuilder.AppendJoin(System.Char separator, params System.Object?[] values)`
 - `System.Text.StringBuilder.AppendJoin(System.Char separator, params System.String?[] values)`
 - `System.Text.StringBuilder.AppendJoin(System.String? separator, params System.Object?[] values)`
 - `System.Text.StringBuilder.AppendJoin(System.String? separator, params System.String?[] values)`
 - `System.Text.StringBuilder.AppendJoin<T>(System.Char separator, System.Collections.Generic.IEnumerable<T> values)`
 - `System.Text.StringBuilder.AppendJoin<T>(System.String? separator, System.Collections.Generic.IEnumerable<T> values)`
+- `System.Text.StringBuilder.EnumerateRunes()`
+- `System.Text.StringBuilder.GetRuneAt(System.Int32 index)`
+- `System.Text.StringBuilder.Insert(System.Int32 index, System.Text.Rune value)`
 - `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue)`
 - `System.Text.StringBuilder.Replace(System.ReadOnlySpan<System.Char> oldValue, System.ReadOnlySpan<System.Char> newValue, System.Int32 startIndex, System.Int32 count)`
+- `System.Text.StringBuilder.Replace(System.Text.Rune oldRune, System.Text.Rune newRune)`
+- `System.Text.StringBuilder.Replace(System.Text.Rune oldRune, System.Text.Rune newRune, System.Int32 startIndex, System.Int32 count)`
+- `System.Text.StringBuilder.TryGetRuneAt(System.Int32 index, out System.Text.Rune value)`
+- `readonly System.Text.StringBuilderRuneEnumerator.GetEnumerator()`
+- `System.Text.StringBuilderRuneEnumerator.MoveNext()`
 - `System.Threading.CancellationToken.Register(System.Action<System.Object?, System.Threading.CancellationToken> callback, System.Object? state)`
 - `System.Threading.CancellationToken.UnsafeRegister(System.Action<System.Object?, System.Threading.CancellationToken> callback, System.Object? state)`
 - `System.Threading.CancellationToken.UnsafeRegister(System.Action<System.Object?> callback, System.Object? state)`
 - `System.Threading.CancellationTokenSource.CancelAsync()`
 - `System.Threading.ITimer.Change(System.TimeSpan dueTime, System.TimeSpan period)`
+- `System.Threading.Interlocked.And<T>(ref T location1, T value) where T : struct`
+- `System.Threading.Interlocked.Or<T>(ref T location1, T value) where T : struct`
 - `System.Threading.Lock.Enter()`
 - `System.Threading.Lock.EnterScope()`
 - `System.Threading.Lock.Exit()`
@@ -918,6 +1023,10 @@ The filtering logic works as follows:
 - `System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout)`
 - `System.Threading.Tasks.Task.WaitAsync(System.TimeSpan timeout, System.Threading.CancellationToken cancellationToken)`
+- `System.Threading.Tasks.Task.WhenAll(params System.ReadOnlySpan<System.Threading.Tasks.Task> tasks)`
+- `System.Threading.Tasks.Task.WhenAll<TResult>(params System.ReadOnlySpan<System.Threading.Tasks.Task<TResult>> tasks)`
+- `System.Threading.Tasks.Task.WhenAny(params System.ReadOnlySpan<System.Threading.Tasks.Task> tasks)`
+- `System.Threading.Tasks.Task.WhenAny<TResult>(params System.ReadOnlySpan<System.Threading.Tasks.Task<TResult>> tasks)`
 - `System.Threading.Tasks.Task.WhenEach(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> tasks)`
 - `System.Threading.Tasks.Task.WhenEach<TResult>(System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task<TResult>> tasks)`
 - `System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable<T>(this System.Collections.Generic.IAsyncEnumerable<T> source, [System.Threading.CancellationToken cancellationToken = default])`
@@ -1074,8 +1183,10 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.Stream stream, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.IO.TextWriter textWriter, System.Xml.Linq.SaveOptions options, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XElement.SaveAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XNode.ReadFromAsync(System.Xml.XmlReader reader, System.Threading.CancellationToken cancellationToken)`
+- `System.Xml.Linq.XNode.WriteToAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (195)
+### Properties (200)
 
 - `System.DateTimeOffset.UnixEpoch`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CSharp = "C#"`
@@ -1260,6 +1371,11 @@ The filtering logic works as follows:
 - `System.Runtime.Versioning.UnsupportedOSPlatformAttribute.Message`
 - `System.Text.Encoding.Latin1`
 - `System.Text.RegularExpressions.Capture.ValueSpan`
+- `System.Text.RunePosition.Length`
+- `System.Text.RunePosition.Rune`
+- `System.Text.RunePosition.StartIndex`
+- `System.Text.RunePosition.WasReplaced`
+- `System.Text.StringBuilderRuneEnumerator.Current`
 - `System.Threading.Lock.IsHeldByCurrentThread`
 - `System.Threading.PeriodicTimer.Period`
 - `System.Threading.Tasks.Task.IsCompletedSuccessfully`

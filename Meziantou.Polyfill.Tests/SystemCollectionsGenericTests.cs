@@ -414,4 +414,42 @@ public class SystemCollectionsGenericTests
         ISet<int> set = new HashSet<int> { 1, 2 };
         Assert.Equal(2, set.AsReadOnly().Count);
     }
+
+    [Fact]
+    public void Collection_CapacityAndPriorityQueueMembers()
+    {
+        var dictionary = new Dictionary<int, string> { [1] = "one" };
+        dictionary.TrimExcess();
+        dictionary.TrimExcess(1);
+        Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.TrimExcess(0));
+
+        var set = new HashSet<int> { 1 };
+        set.TrimExcess(1);
+        Assert.Throws<ArgumentOutOfRangeException>(() => set.TrimExcess(0));
+
+        var queue = new Queue<int>();
+        queue.Enqueue(1);
+        queue.TrimExcess(1);
+        Assert.Throws<ArgumentOutOfRangeException>(() => queue.TrimExcess(0));
+
+        var priorityQueue = new PriorityQueue<string, int>();
+        priorityQueue.Enqueue("one", 1);
+        priorityQueue.Enqueue("two", 2);
+        Assert.True(priorityQueue.Remove("one", out var removed, out var priority));
+        Assert.Equal("one", removed);
+        Assert.Equal(1, priority);
+        Assert.Equal("two", priorityQueue.Dequeue());
+    }
+
+    [Fact]
+    public void Span_KeyValueSort()
+    {
+        Span<int> keys = [3, 1, 2];
+        Span<string> values = ["three", "one", "two"];
+
+        keys.Sort(values);
+
+        Assert.True(keys.SequenceEqual([1, 2, 3]));
+        Assert.True(values.SequenceEqual(["one", "two", "three"]));
+    }
 }

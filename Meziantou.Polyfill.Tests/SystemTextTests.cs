@@ -18,6 +18,90 @@ namespace Meziantou.Polyfill.Tests;
 
 public class SystemTextTests
 {
+#if NET8_0_OR_GREATER
+    [Fact]
+    public void Rune_StringMembers()
+    {
+        var rune = new Rune(0x1F600);
+        const string Value = "a😀b😀";
+
+        Assert.True(Value.Contains(rune));
+        Assert.True(Value.Contains(new Rune('A'), StringComparison.OrdinalIgnoreCase));
+        Assert.True(Value.StartsWith(new Rune('a')));
+        Assert.True(Value.EndsWith(rune));
+        Assert.Equal(1, Value.IndexOf(rune));
+        Assert.Equal(4, Value.IndexOf(rune, 2));
+        Assert.Equal(4, Value.LastIndexOf(rune));
+        Assert.Equal(1, Value.LastIndexOf(rune, 3));
+        Assert.Equal("aXbX", Value.Replace(rune, new Rune('X')));
+        Assert.Equal(["a", "b", ""], Value.Split(rune));
+        Assert.Equal(["a", "b😀"], Value.Split(rune, 2));
+        Assert.Equal("x", "😀😀x😀".Trim(rune));
+        Assert.Equal("x😀", "😀😀x😀".TrimStart(rune));
+        Assert.Equal("😀😀x", "😀😀x😀".TrimEnd(rune));
+    }
+
+    [Fact]
+    public void Rune_ComparisonAndTextInfo()
+    {
+        Assert.True(new Rune('a').Equals(new Rune('A'), StringComparison.OrdinalIgnoreCase));
+        Assert.Equal(new Rune('i'), System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToLower(new Rune('I')));
+        Assert.Equal(new Rune('I'), System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToUpper(new Rune('i')));
+    }
+
+    [Fact]
+    public void Rune_StringBuilderMembers()
+    {
+        var smile = new Rune(0x1F600);
+        var builder = new StringBuilder("a");
+        builder.Append(smile).Insert(0, smile);
+        Assert.Equal("😀a😀", builder.ToString());
+        Assert.Equal(smile, builder.GetRuneAt(0));
+        Assert.True(builder.TryGetRuneAt(3, out var value));
+        Assert.Equal(smile, value);
+        Assert.Throws<ArgumentOutOfRangeException>(() => builder.TryGetRuneAt(-1, out _));
+        Assert.False(new StringBuilder("\uD800").TryGetRuneAt(0, out _));
+
+        builder.Replace(smile, new Rune('X'));
+        Assert.Equal("XaX", builder.ToString());
+
+        var runes = new List<Rune>();
+        foreach (var rune in new StringBuilder("a😀\uD800").EnumerateRunes())
+            runes.Add(rune);
+        Assert.Equal([new Rune('a'), smile, Rune.ReplacementChar], runes);
+    }
+
+    [Fact]
+    public void RunePosition_EnumerateUtf16()
+    {
+        var items = new List<RunePosition>();
+        foreach (var item in RunePosition.EnumerateUtf16("a😀\uD800".AsSpan()))
+            items.Add(item);
+
+        Assert.Equal(3, items.Count);
+        Assert.Equal(new RunePosition(new Rune('a'), 0, 1, false), items[0]);
+        Assert.Equal(new RunePosition(new Rune(0x1F600), 1, 2, false), items[1]);
+        Assert.Equal(new RunePosition(Rune.ReplacementChar, 3, 1, true), items[2]);
+        var (rune, startIndex, length) = items[1];
+        Assert.Equal(new Rune(0x1F600), rune);
+        Assert.Equal(1, startIndex);
+        Assert.Equal(2, length);
+    }
+
+    [Fact]
+    public void RunePosition_EnumerateUtf8()
+    {
+        var items = new List<RunePosition>();
+        foreach (var item in RunePosition.EnumerateUtf8(new byte[] { 0x61, 0xF0, 0x9F, 0x98, 0x80, 0xFF }))
+            items.Add(item);
+
+        Assert.Equal(3, items.Count);
+        Assert.Equal(new RunePosition(new Rune('a'), 0, 1, false), items[0]);
+        Assert.Equal(new RunePosition(new Rune(0x1F600), 1, 4, false), items[1]);
+        Assert.Equal(new RunePosition(Rune.ReplacementChar, 5, 1, true), items[2]);
+    }
+#endif
+
     [Fact]
     public void Encoding_Latin1()
     {
