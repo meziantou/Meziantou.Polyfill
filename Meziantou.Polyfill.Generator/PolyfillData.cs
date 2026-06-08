@@ -22,6 +22,7 @@ internal sealed partial class PolyfillData
         "System.Net.Http.HttpMethod",
         "System.ReadOnlyMemory`1",
         "System.ReadOnlySpan`1",
+        "System.Security.Cryptography.IncrementalHash",
         "System.Diagnostics.CodeAnalysis.StringSyntaxAttribute",
         "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
         "System.Runtime.CompilerServices.Unsafe",

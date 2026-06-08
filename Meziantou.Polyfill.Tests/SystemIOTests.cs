@@ -160,6 +160,21 @@ public class SystemIOTests
     }
 
     [Fact]
+    public void Stream_ReadExactly()
+    {
+        using var ms = new MemoryStream([1, 2, 3, 4]);
+
+        var buffer = new byte[4];
+        ms.ReadExactly(buffer.AsSpan());
+        Assert.Equal([1, 2, 3, 4], buffer);
+
+        ms.Position = 0;
+        Array.Clear(buffer, 0, buffer.Length);
+        ms.ReadExactly(buffer, 0, buffer.Length);
+        Assert.Equal([1, 2, 3, 4], buffer);
+    }
+
+    [Fact]
     public async Task File_WriteAllTextAsync_ReadOnlyMemory()
     {
         var tempFile = Path.GetTempFileName();

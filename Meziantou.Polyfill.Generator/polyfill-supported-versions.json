@@ -421,6 +421,15 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.BitConverter.ToUInt64(System.ReadOnlySpan{System.Byte})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.BitConverter.UInt32BitsToSingle(System.UInt32)": [
       "net6.0",
       "net7.0",
@@ -2078,6 +2087,20 @@
       "net11.0"
     ],
     "M:System.IO.Stream.ReadAtLeastAsync(System.Memory{System.Byte},System.Int32,System.Boolean,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Stream.ReadExactly(System.Byte[],System.Int32,System.Int32)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.IO.Stream.ReadExactly(System.Span{System.Byte})": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -4098,6 +4121,15 @@
       "net11.0"
     ],
     "M:System.SByte.TryParse(System.ReadOnlySpan{System.Char},System.SByte@)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.IncrementalHash.AppendData(System.ReadOnlySpan{System.Byte})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
