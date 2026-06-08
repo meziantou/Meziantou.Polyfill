@@ -144,7 +144,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1043)
+### Methods (1045)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -439,6 +439,8 @@ The filtering logic works as follows:
 - `System.IO.Path.GetFileNameWithoutExtension(System.ReadOnlySpan<System.Char> path)`
 - `System.IO.Path.GetRelativePath(System.String relativeTo, System.String path)`
 - `System.IO.Path.HasExtension(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.IsPathFullyQualified(System.ReadOnlySpan<System.Char> path)`
+- `System.IO.Path.IsPathFullyQualified(System.String path)`
 - `System.IO.Path.IsPathRooted(System.ReadOnlySpan<System.Char> path)`
 - `System.IO.Path.Join(params System.String?[] paths)`
 - `System.IO.Path.TrimEndingDirectorySeparator(System.ReadOnlySpan<System.Char> path)`

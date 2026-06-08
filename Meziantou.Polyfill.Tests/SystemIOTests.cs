@@ -358,6 +358,52 @@ public class SystemIOTests
         Assert.Equal("child", result);
     }
 
+    [Fact]
+    public void Path_IsPathFullyQualified_NullArgument()
+    {
+        Assert.Throws<ArgumentNullException>(() => Path.IsPathFullyQualified((string)null!));
+    }
+
+    [Fact]
+    public void Path_IsPathFullyQualified_Empty()
+    {
+        Assert.False(Path.IsPathFullyQualified(""));
+        Assert.False(Path.IsPathFullyQualified(ReadOnlySpan<char>.Empty));
+    }
+
+    [Fact]
+    public void Path_IsPathFullyQualified_PlatformSpecific()
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            AssertPathsAreNotFullyQualified("/", "\\", ".", "C:", "C:foo.txt");
+            AssertPathsAreFullyQualified(@"\\", @"\\\", @"\\Server", @"\\Server\Foo.txt", @"\\Server\Share\Foo.txt", @"\\Server\Share\Test\Foo.txt", @"C:\", @"C:\\", @"C:\foo1", @"C:\\foo2", @"C:/", @"C://", @"C:/foo1", @"C://foo2");
+        }
+        else
+        {
+            AssertPathsAreNotFullyQualified(@"\", @"\\", ".", "./foo.txt", "..", "../foo.txt", "C:", "C:/", "C://");
+            AssertPathsAreFullyQualified("/", "/foo.txt", "/..", "//", "//foo.txt", "//..");
+        }
+    }
+
+    private static void AssertPathsAreNotFullyQualified(params string[] paths)
+    {
+        foreach (var path in paths)
+        {
+            Assert.False(Path.IsPathFullyQualified(path));
+            Assert.False(Path.IsPathFullyQualified(path.AsSpan()));
+        }
+    }
+
+    private static void AssertPathsAreFullyQualified(params string[] paths)
+    {
+        foreach (var path in paths)
+        {
+            Assert.True(Path.IsPathFullyQualified(path));
+            Assert.True(Path.IsPathFullyQualified(path.AsSpan()));
+        }
+    }
+
     private sealed class MetadataTextWriter : StringWriter
     {
         private readonly Encoding _encoding;
