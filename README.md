@@ -144,7 +144,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1039)
+### Methods (1043)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -170,6 +170,7 @@ The filtering logic works as follows:
 - `System.BitConverter.ToInt32(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt16(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.ToUInt32(System.ReadOnlySpan<System.Byte> value)`
+- `System.BitConverter.ToUInt64(System.ReadOnlySpan<System.Byte> value)`
 - `System.BitConverter.UInt32BitsToSingle(System.UInt32 value)`
 - `System.BitConverter.UInt64BitsToDouble(System.UInt64 value)`
 - `System.Boolean.TryFormat(System.Span<System.Char> destination, out System.Int32 charsWritten)`
@@ -447,6 +448,8 @@ The filtering logic works as follows:
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.Stream.ReadAtLeast(System.Span<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true])`
 - `System.IO.Stream.ReadAtLeastAsync(System.Memory<System.Byte> buffer, System.Int32 minimumBytes, [System.Boolean throwOnEndOfStream = true], [System.Threading.CancellationToken cancellationToken = default])`
+- `System.IO.Stream.ReadExactly(System.Byte[] buffer, System.Int32 offset, System.Int32 count)`
+- `System.IO.Stream.ReadExactly(System.Span<System.Byte> buffer)`
 - `System.IO.Stream.Write(System.ReadOnlySpan<System.Byte> buffer)`
 - `System.IO.Stream.WriteAsync(System.ReadOnlyMemory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])`
 - `System.IO.StreamReader.ReadLineAsync()`
@@ -828,6 +831,7 @@ The filtering logic works as follows:
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, out System.SByte result)`
+- `System.Security.Cryptography.IncrementalHash.AppendData(System.ReadOnlySpan<System.Byte> data)`
 - `System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Security.Cryptography.RandomNumberGenerator.Fill(System.Span<System.Byte> data)`
 - `System.Security.Cryptography.RandomNumberGenerator.GetBytes(System.Int32 count)`

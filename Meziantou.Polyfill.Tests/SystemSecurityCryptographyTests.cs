@@ -71,4 +71,15 @@ public class SystemSecurityCryptographyTests
 
     private delegate bool TryHashDataDelegate(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten);
 
+    [Fact]
+    public void IncrementalHash_AppendData_ReadOnlySpan()
+    {
+        using var incrementalHash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        incrementalHash.AppendData("abc"u8);
+
+        var hash = incrementalHash.GetHashAndReset();
+        var expected = SHA256.HashData("abc"u8);
+        Assert.Equal(expected, hash);
+    }
+
 }

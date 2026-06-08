@@ -1544,6 +1544,30 @@ public class SystemTests
     }
 
     [Fact]
+    public void BitConverter_ToUInt64_ReadOnlySpan()
+    {
+        // Test with little-endian bytes representing 42
+        ReadOnlySpan<byte> data1 = [0x2A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
+        var result1 = BitConverter.ToUInt64(data1);
+        Assert.Equal(42UL, result1);
+
+        // Test with little-endian bytes representing 256
+        ReadOnlySpan<byte> data2 = [0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
+        var result2 = BitConverter.ToUInt64(data2);
+        Assert.Equal(256UL, result2);
+
+        // Test with little-endian bytes representing ulong.MaxValue
+        ReadOnlySpan<byte> data3 = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF];
+        var result3 = BitConverter.ToUInt64(data3);
+        Assert.Equal(ulong.MaxValue, result3);
+
+        // Test with little-endian bytes representing ulong.MinValue
+        ReadOnlySpan<byte> data4 = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
+        var result4 = BitConverter.ToUInt64(data4);
+        Assert.Equal(ulong.MinValue, result4);
+    }
+
+    [Fact]
     public void String_Create()
     {
         var actual = string.Create(CultureInfo.InvariantCulture, $"a{1}b");
