@@ -470,6 +470,7 @@ public sealed class SourceGeneratorTests
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net471", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net47", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net462", "1.0.3", "") { Exclusions = ["build/.NETFramework/v4.6.2/System.Net.Http.dll"] } } },
+            { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net462", "1.0.3", ""), new PackageReference("Microsoft.Bcl.Memory", "10.0.8", "lib/net462/") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net462", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", "") } },
             { new[] { new PackageReference("Microsoft.NETFramework.ReferenceAssemblies.net461", "1.0.3", ""), new PackageReference("System.Memory", "4.5.5", "lib/net461/") } },
