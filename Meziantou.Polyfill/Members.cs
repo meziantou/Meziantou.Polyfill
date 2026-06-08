@@ -22,7 +22,7 @@ internal partial struct Members
                 return false;
 
             // IsEmbeddedSymbol is a workaround for https://github.com/dotnet/roslyn/issues/79498
-            if (compilation.IsSymbolAccessibleWithin(symbol, currentAssembly) && !IsEmbeddedSymbol(context, symbol))
+            if (compilation.IsSymbolAccessibleWithin(symbol, currentAssembly) && !context.IsEmbeddedSymbol(symbol))
             {
                 if (accessibleFromAssembly is null)
                 {
@@ -42,18 +42,6 @@ internal partial struct Members
             return false;
 
         return true;
-    }
-
-    private static bool IsEmbeddedSymbol(IncludeContext context, ISymbol symbol)
-    {
-        if (symbol is not ITypeSymbol typeSymbol)
-        {
-            typeSymbol = symbol.ContainingType;
-            if (typeSymbol is null)
-                return false;
-        }
-
-        return context.IsEmbeddedType(typeSymbol);
     }
 
     private void AddSource(SourceProductionContext context, string path, string content)
@@ -77,6 +65,34 @@ internal partial struct Members
 
         public Compilation Compilation { get; }
         public PolyfillOptions? Options { get; }
+
+        public bool IsSymbolAccessible(ISymbol symbol)
+        {
+            if (!Compilation.IsSymbolAccessibleWithin(symbol, Compilation.Assembly))
+                return false;
+
+            var type = symbol as ITypeSymbol;
+            if (symbol is not ITypeSymbol)
+            {
+                type = symbol.ContainingType;
+            }
+
+            if (type is not null)
+                return !IsEmbeddedType(type);
+
+            return true;
+        }
+
+        public bool IsEmbeddedSymbol(ISymbol symbol)
+        {
+            if (symbol is ITypeSymbol typeSymbol)
+                return IsEmbeddedType(typeSymbol);
+
+            if (symbol.ContainingType is not null)
+                return IsEmbeddedType(symbol.ContainingType);
+
+            return false;
+        }
 
         public bool IsEmbeddedType(ITypeSymbol typeSymbol)
         {
