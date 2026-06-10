@@ -409,7 +409,9 @@ async Task GenerateMembers()
         sb.AppendLine($"    if ({conditions})");
         sb.AppendLine($"    {{");
         sb.AppendLine($"        sb.AppendLine();");
+        sb.AppendLine($"        sb.AppendLine(\"#if !MEZIANTOU_POLYFILL_SKIP_MICROSOFT_CODEANALYSIS_EMBEDDEDATTRIBUTE\");");
         sb.AppendLine($"        sb.AppendLine(\"[Microsoft.CodeAnalysis.EmbeddedAttribute]\");");
+        sb.AppendLine($"        sb.AppendLine(\"#endif\");");
         sb.AppendLine($"        sb.AppendLine(\"[System.CodeDom.Compiler.GeneratedCodeAttribute(\\\"Meziantou.Polyfill\\\", \\\"\\\")]\");");
         sb.AppendLine($"        sb.AppendLine(\"internal static partial class {className}\");");
         sb.AppendLine($"        sb.AppendLine(\"{{\");");
