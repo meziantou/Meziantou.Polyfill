@@ -366,7 +366,7 @@ internal sealed partial class PolyfillData
                 .Add(SyntaxFactory.AttributeList(
                     SyntaxFactory.SingletonSeparatedList(
                         SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute"))))
-                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia("#if !MEZIANTOU_POLYFILL_SKIP_EMBEDDEDATTRIBUTE\n"))
+                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia("#if !MEZIANTOU_POLYFILL_SKIP_MICROSOFT_CODEANALYSIS_EMBEDDEDATTRIBUTE\n"))
                     .WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n")))
                 // [GeneratedCodeAttribute]
                 .Add(SyntaxFactory.AttributeList(

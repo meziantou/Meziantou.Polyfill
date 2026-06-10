@@ -39,11 +39,11 @@ By default, all needed polyfills are generated. You can configure which polyfill
 </PropertyGroup>
 ````
 
-You can disable the `[EmbeddedAttribute]` by defining the `MEZIANTOU_POLYFILL_SKIP_EMBEDDEDATTRIBUTE` symbol. Note that this may cause issues with InternalsVisibleTo.
+You can disable the `[Microsoft.CodeAnalysis.EmbeddedAttribute]` by defining the `MEZIANTOU_POLYFILL_SKIP_MICROSOFT_CODEANALYSIS_EMBEDDEDATTRIBUTE` symbol. Note that this may cause issues with InternalsVisibleTo.
 
 ```xml
 <PropertyGroup>
-  <DefineConstants>$(DefineConstants);MEZIANTOU_POLYFILL_SKIP_EMBEDDEDATTRIBUTE</DefineConstants>
+  <DefineConstants>$(DefineConstants);MEZIANTOU_POLYFILL_SKIP_MICROSOFT_CODEANALYSIS_EMBEDDEDATTRIBUTE</DefineConstants>
 </PropertyGroup>
 ```
 
