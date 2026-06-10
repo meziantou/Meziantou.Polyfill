@@ -39,6 +39,14 @@ By default, all needed polyfills are generated. You can configure which polyfill
 </PropertyGroup>
 ````
 
+You can disable the `[EmbeddedAttribute]` by defining the `MEZIANTOU_POLYFILL_SKIP_EMBEDDEDATTRIBUTE` symbol. Note that this may cause issues with InternalsVisibleTo.
+
+```xml
+<PropertyGroup>
+  <DefineConstants>$(DefineConstants);MEZIANTOU_POLYFILL_SKIP_EMBEDDEDATTRIBUTE</DefineConstants>
+</PropertyGroup>
+```
+
 ### Filtering Behavior
 
 The filtering logic works as follows:
