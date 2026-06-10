@@ -362,15 +362,19 @@ internal sealed partial class PolyfillData
         private static SyntaxList<AttributeListSyntax> AddGeneratedAttributes(SyntaxList<AttributeListSyntax> existingAttributeLists)
         {
             return existingAttributeLists
+                // [EmbeddedAttribute]
                 .Add(SyntaxFactory.AttributeList(
                     SyntaxFactory.SingletonSeparatedList(
                         SyntaxFactory.Attribute(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.EmbeddedAttribute"))))
+                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia("#if !MEZIANTOU_POLYFILL_SKIP_MICROSOFT_CODEANALYSIS_EMBEDDEDATTRIBUTE\n"))
                     .WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n")))
+                // [GeneratedCodeAttribute]
                 .Add(SyntaxFactory.AttributeList(
                     SyntaxFactory.SingletonSeparatedList(
                         SyntaxFactory.Attribute(
                             SyntaxFactory.ParseName("System.CodeDom.Compiler.GeneratedCodeAttribute"),
                             SyntaxFactory.ParseAttributeArgumentList("(\"Meziantou.Polyfill\", \"\")"))))
+                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia("#endif\n"))
                     .WithTrailingTrivia(SyntaxFactory.ParseTrailingTrivia("\n")));
         }
 
