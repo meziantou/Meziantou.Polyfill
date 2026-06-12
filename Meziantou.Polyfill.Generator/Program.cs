@@ -29,10 +29,29 @@ if (args.Contains("--generate-all-symbols"))
         .OfType<IAssemblySymbol>()
         .SelectMany(GetAllTypes)
         .SelectMany(typeSymbol => new[] { typeSymbol }.Concat(typeSymbol.GetMembers().OfType<IMethodSymbol>().Cast<ISymbol>()).Concat(typeSymbol.GetMembers().OfType<IPropertySymbol>().Cast<ISymbol>()))
+        .Where(IsVisibleOutsideOfAssembly)
         .Select(DocumentationCommentId.CreateDeclarationId)
         .Distinct(StringComparer.Ordinal)
         .Order(StringComparer.Ordinal));
     await File.WriteAllTextAsync(GetRootPath() / "Meziantou.Polyfill.Editor" / "_AllSymbols.txt", allDocIds);
+
+    static bool IsVisibleOutsideOfAssembly(ISymbol? symbol)
+    {
+        if (symbol is null)
+            return false;
+
+        if (symbol.DeclaredAccessibility != Accessibility.Public &&
+            symbol.DeclaredAccessibility != Accessibility.Protected &&
+            symbol.DeclaredAccessibility != Accessibility.ProtectedOrInternal)
+        {
+            return false;
+        }
+
+        if (symbol.ContainingType is null)
+            return true;
+
+        return IsVisibleOutsideOfAssembly(symbol.ContainingType);
+    }
 }
 
 //
@@ -176,8 +195,10 @@ async Task GenerateMembers()
     void AddEntry(Polyfill polyfill, int? providesFeatureBit)
     {
         ulong required = 0;
-        if (polyfill.PolyfillData.UseExtensions) required |= 1uL << FeatureBitExtensions;
-        if (polyfill.PolyfillData.UseUnsafe) required |= 1uL << FeatureBitUnsafe;
+        if (polyfill.PolyfillData.UseExtensions)
+            required |= 1uL << FeatureBitExtensions;
+        if (polyfill.PolyfillData.UseUnsafe)
+            required |= 1uL << FeatureBitUnsafe;
         foreach (var rt in polyfill.PolyfillData.RequiredTypes)
             required |= 1uL << featureBitForType[rt];
 
@@ -187,7 +208,8 @@ async Task GenerateMembers()
         {
             var dep = polyfills.Single(p => p.TypeName == member);
             conditionals.Add(((byte)(dep.Index / 64), dep.CSharpFieldBitMask));
-            checked { condCount++; }
+            checked
+            { condCount++; }
         }
 
         var declStart = (ushort)declaredDocIds.Count;
@@ -198,7 +220,8 @@ async Task GenerateMembers()
             foreach (var m in polyfill.PolyfillData.DeclaredMemberDocumentationIds)
             {
                 declaredDocIds.Add(m);
-                checked { declCount++; }
+                checked
+                { declCount++; }
             }
         }
 
@@ -210,14 +233,16 @@ async Task GenerateMembers()
     foreach (var polyfill in polyfills)
     {
         var rt = requiredTypes.SingleOrDefault(t => $"T:{t.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
-        if (rt is null) continue;
+        if (rt is null)
+            continue;
         AddEntry(polyfill, featureBitForType[rt.TypeName]);
     }
     // Pass 2: everything else, in original (topologically-sorted) order so conditional members see earlier bits.
     foreach (var polyfill in polyfills)
     {
         var rt = requiredTypes.SingleOrDefault(t => $"T:{t.TypeName}" == polyfill.PolyfillData.XmlDocumentationId);
-        if (rt is not null) continue;
+        if (rt is not null)
+            continue;
         AddEntry(polyfill, null);
     }
 
