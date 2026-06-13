@@ -241,6 +241,21 @@
       "net10.0",
       "net11.0"
     ],
+    "F:System.Net.Mime.MediaTypeNames.Video.Mp4": [
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Video.Mpeg": [
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Video.Ogg": [
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Video.QuickTime": [
+      "net11.0"
+    ],
+    "F:System.Net.Mime.MediaTypeNames.Video.WebM": [
+      "net11.0"
+    ],
     "M:System.ArgumentException.ThrowIfNullOrEmpty(System.String,System.String)": [
       "net7.0",
       "net8.0",
@@ -903,6 +918,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.Collections.Generic.EqualityComparer\u00601.Create\u0060\u00601(System.Func{\u00600,\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
       "net11.0"
     ],
     "M:System.Collections.Generic.HashSet\u00601.TrimExcess(System.Int32)": [
@@ -3173,6 +3191,15 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Linq.Enumerable.FullJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+      "net11.0"
+    ],
+    "M:System.Linq.Enumerable.FullJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+      "net11.0"
+    ],
+    "M:System.Linq.Enumerable.GroupJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+      "net11.0"
+    ],
     "M:System.Linq.Enumerable.Index\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600})": [
       "net9.0",
       "net10.0",
@@ -3196,6 +3223,12 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.Linq.Enumerable.Join\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+      "net11.0"
+    ],
+    "M:System.Linq.Enumerable.LeftJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
       "net11.0"
     ],
     "M:System.Linq.Enumerable.LeftJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603})": [
@@ -3264,6 +3297,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.Linq.Enumerable.RightJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
       "net11.0"
     ],
     "M:System.Linq.Enumerable.RightJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603})": [
@@ -4145,6 +4181,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.ReadOnlySpan{System.Byte},System.Byte)": [
       "net11.0"
     ],
     "M:System.Security.Cryptography.IncrementalHash.AppendData(System.ReadOnlySpan{System.Byte})": [
@@ -6401,8 +6440,7 @@
     ],
     "T:System.ITupleInternal": [
       "net472",
-      "net48",
-      "net11.0"
+      "net48"
     ],
     "T:System.Index": [
       "netstandard2.1",
@@ -6432,6 +6470,9 @@
       "net8.0",
       "net9.0",
       "net10.0",
+      "net11.0"
+    ],
+    "T:System.Net.Mime.MediaTypeNames.Video": [
       "net11.0"
     ],
     "T:System.Range": [
@@ -6652,6 +6693,15 @@
       "net11.0"
     ],
     "T:System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "T:System.Security.Cryptography.CryptographicOperations": [
+      "netstandard2.1",
       "net6.0",
       "net7.0",
       "net8.0",

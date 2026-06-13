@@ -52,5 +52,12 @@ public class SystemNetMimeTests
         Assert.Equal("text/markdown", MediaTypeNames.Text.Markdown);
         Assert.Equal("text/rtf", MediaTypeNames.Text.Rtf);
         Assert.Equal("text/event-stream", MediaTypeNames.Text.EventStream);
+
+        // Video
+        Assert.Equal("video/mp4", MediaTypeNames.Video.Mp4);
+        Assert.Equal("video/mpeg", MediaTypeNames.Video.Mpeg);
+        Assert.Equal("video/ogg", MediaTypeNames.Video.Ogg);
+        Assert.Equal("video/quicktime", MediaTypeNames.Video.QuickTime);
+        Assert.Equal("video/webm", MediaTypeNames.Video.WebM);
     }
 }

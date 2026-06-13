@@ -281,4 +281,61 @@ public class SystemLinqTests
         Assert.Equal([("a", "A"), ("none", "b")], result);
     }
 
+    [Fact]
+    public void Enumerable_FullJoin()
+    {
+        var result = new[] { "a1", "a2", "b" }.FullJoin(new[] { "a3", "c1", "c2" }, value => value[0], value => value[0]);
+
+        Assert.Equal([("a1", "a3"), ("a2", "a3"), ("b", null), (null, "c1"), (null, "c2")], result);
+    }
+
+    [Fact]
+    public void Enumerable_FullJoin_ResultSelector_Comparer()
+    {
+        var result = new[] { "A", "b" }.FullJoin(new[] { "a", "C" }, outer => outer, inner => inner, (outer, inner) => $"{outer ?? "none"}:{inner ?? "none"}", StringComparer.OrdinalIgnoreCase);
+
+        Assert.Equal(["A:a", "b:none", "none:C"], result);
+    }
+
+    [Fact]
+    public void Enumerable_FullJoin_NullKeysDoNotMatch()
+    {
+        var result = new string?[] { null }.FullJoin(new string?[] { null }, value => value, value => value);
+
+        Assert.Equal([(null, null), (null, null)], result);
+    }
+
+    [Fact]
+    public void Enumerable_GroupJoin_TupleJoin()
+    {
+        var result = new[] { "a1", "a2", "b" }.GroupJoin(new[] { "a3", "c" }, value => value[0], value => value[0]);
+
+        Assert.Equal(["a1", "a2", "b"], result.Select(group => group.Key));
+        Assert.Equal([["a3"], ["a3"], []], result.Select(group => group.ToArray()));
+    }
+
+    [Fact]
+    public void Enumerable_Join_TupleJoin()
+    {
+        var result = new[] { "a1", "a2", "b" }.Join(new[] { "a3", "c" }, value => value[0], value => value[0]);
+
+        Assert.Equal([("a1", "a3"), ("a2", "a3")], result);
+    }
+
+    [Fact]
+    public void Enumerable_LeftJoin_TupleJoin()
+    {
+        var result = new[] { "a", "b" }.LeftJoin(new[] { "A" }, outer => outer, inner => inner, comparer: StringComparer.OrdinalIgnoreCase);
+
+        Assert.Equal([("a", "A"), ("b", null)], result);
+    }
+
+    [Fact]
+    public void Enumerable_RightJoin_TupleJoin()
+    {
+        var result = new[] { "a" }.RightJoin(new[] { "A", "b" }, outer => outer, inner => inner, comparer: StringComparer.OrdinalIgnoreCase);
+
+        Assert.Equal([("a", "A"), (null, "b")], result);
+    }
+
 }

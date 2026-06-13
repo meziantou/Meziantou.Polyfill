@@ -19,6 +19,14 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemSecurityCryptographyTests
 {
     [Fact]
+    public void CryptographicOperations_FixedTimeEquals_Value()
+    {
+        Assert.True(CryptographicOperations.FixedTimeEquals(ReadOnlySpan<byte>.Empty, (byte)42));
+        Assert.True(CryptographicOperations.FixedTimeEquals([42, 42, 42], (byte)42));
+        Assert.False(CryptographicOperations.FixedTimeEquals([42, 41, 42], (byte)42));
+    }
+
+    [Fact]
     public void SHA256_HashData_ReadOnlySpan()
     {
         // Test with empty span - SHA256 of empty string
