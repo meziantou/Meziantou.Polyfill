@@ -31,10 +31,13 @@ static partial class PolyfillExtensions
             throw new ArgumentNullException(nameof(resultSelector));
         }
 
-        return FullJoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
+        return FullJoinImplementation.FullJoinIterator(outer, inner, outerKeySelector, innerKeySelector, resultSelector, comparer);
     }
+}
 
-    private static IEnumerable<TResult> FullJoinIterator<TOuter, TInner, TKey, TResult>(IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter?, TInner?, TResult> resultSelector, IEqualityComparer<TKey>? comparer)
+file static class FullJoinImplementation
+{
+    public static IEnumerable<TResult> FullJoinIterator<TOuter, TInner, TKey, TResult>(IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter?, TInner?, TResult> resultSelector, IEqualityComparer<TKey>? comparer)
     {
         var innerLookup = inner.ToLookup(innerKeySelector, comparer);
         var matchedKeys = new HashSet<TKey>(comparer);

@@ -26,10 +26,13 @@ static partial class PolyfillExtensions
             throw new ArgumentNullException(nameof(innerKeySelector));
         }
 
-        return RightJoinTupleIterator(outer, inner, outerKeySelector, innerKeySelector, comparer);
+        return RightJoinImplementation.RightJoinIterator(outer, inner, outerKeySelector, innerKeySelector, comparer);
     }
+}
 
-    private static IEnumerable<(TOuter? Outer, TInner Inner)> RightJoinTupleIterator<TOuter, TInner, TKey>(IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, IEqualityComparer<TKey>? comparer)
+file static class RightJoinImplementation
+{
+    public static IEnumerable<(TOuter? Outer, TInner Inner)> RightJoinIterator<TOuter, TInner, TKey>(IEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, IEqualityComparer<TKey>? comparer)
     {
         var outerLookup = outer.ToLookup(outerKeySelector, comparer);
         foreach (var innerItem in inner)
