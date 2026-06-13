@@ -60,7 +60,7 @@ The filtering logic works as follows:
 
 <!-- begin_polyfills -->
 
-### Types (89)
+### Types (91)
 
 - `System.Buffers.SearchValues`
 - `System.Buffers.SearchValues<T> where T : System.IEquatable<T>?`
@@ -101,6 +101,7 @@ The filtering logic works as follows:
 - `System.Net.Http.ReadOnlyMemoryContent`
 - `System.Net.Mime.MediaTypeNames.Font`
 - `System.Net.Mime.MediaTypeNames.Multipart`
+- `System.Net.Mime.MediaTypeNames.Video`
 - `System.Range`
 - `System.Reflection.NullabilityInfo`
 - `System.Reflection.NullabilityInfoContext`
@@ -132,6 +133,7 @@ The filtering logic works as follows:
 - `System.Runtime.Versioning.TargetPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformAttribute`
 - `System.Runtime.Versioning.UnsupportedOSPlatformGuardAttribute`
+- `System.Security.Cryptography.CryptographicOperations`
 - `System.Text.RegularExpressions.Regex.ValueMatchEnumerator`
 - `System.Text.RegularExpressions.Regex.ValueSplitEnumerator`
 - `System.Text.RegularExpressions.ValueMatch`
@@ -152,7 +154,7 @@ The filtering logic works as follows:
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1045)
+### Methods (1053)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -254,6 +256,7 @@ The filtering logic works as follows:
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TrimExcess(System.Int32 capacity)`
 - `System.Collections.Generic.Dictionary<TKey, TValue>.TryAdd(TKey key, TValue value)`
 - `System.Collections.Generic.EqualityComparer<T>.Create(System.Func<T?, T?, System.Boolean> equals, [System.Func<T, System.Int32>? getHashCode = null])`
+- `System.Collections.Generic.EqualityComparer<T>.Create<TKey>(System.Func<T?, TKey?> keySelector, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null])`
 - `System.Collections.Generic.HashSet<T>.TrimExcess(System.Int32 capacity)`
 - `System.Collections.Generic.KeyValuePair.Create<TKey, TValue>(TKey key, TValue value)`
 - `System.Collections.Generic.KeyValuePair<TKey, TValue>.Deconstruct(out TKey key, out TValue value)`
@@ -678,10 +681,15 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.CountBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, [System.Collections.Generic.IEqualityComparer<TKey>? keyComparer = null]) where TKey : notnull`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.DistinctBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
+- `System.Linq.Enumerable.FullJoin<TOuter, TInner, TKey>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
+- `System.Linq.Enumerable.FullJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner?, TResult> resultSelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
+- `System.Linq.Enumerable.GroupJoin<TOuter, TInner, TKey>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
 - `System.Linq.Enumerable.Index<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)`
 - `System.Linq.Enumerable.InfiniteSequence<T>(T start, T step) where T : System.Numerics.IAdditionOperators<T, T, T>`
 - `System.Linq.Enumerable.IntersectBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TKey> second, System.Func<TSource, TKey> keySelector)`
 - `System.Linq.Enumerable.IntersectBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> first, System.Collections.Generic.IEnumerable<TKey> second, System.Func<TSource, TKey> keySelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
+- `System.Linq.Enumerable.Join<TOuter, TInner, TKey>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
+- `System.Linq.Enumerable.LeftJoin<TOuter, TInner, TKey>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
 - `System.Linq.Enumerable.LeftJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter, TInner?, TResult> resultSelector)`
 - `System.Linq.Enumerable.LeftJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter, TInner?, TResult> resultSelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.MaxBy<TSource, TKey>(this System.Collections.Generic.IEnumerable<TSource> source, System.Func<TSource, TKey> keySelector)`
@@ -692,6 +700,7 @@ The filtering logic works as follows:
 - `System.Linq.Enumerable.OrderDescending<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source)`
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
+- `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector)`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
 - `System.Linq.Enumerable.Sequence<T>(T start, T endInclusive, T step) where T : System.Numerics.INumber<T>`
@@ -841,6 +850,7 @@ The filtering logic works as follows:
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.Globalization.NumberStyles style, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.SByte result)`
 - `System.SByte.TryParse(System.ReadOnlySpan<System.Char> s, out System.SByte result)`
+- `System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.ReadOnlySpan<System.Byte> source, System.Byte value)`
 - `System.Security.Cryptography.IncrementalHash.AppendData(System.ReadOnlySpan<System.Byte> data)`
 - `System.Security.Cryptography.MD5.HashData(System.ReadOnlySpan<System.Byte> source)`
 - `System.Security.Cryptography.RandomNumberGenerator.Fill(System.Span<System.Byte> data)`
@@ -1200,7 +1210,7 @@ The filtering logic works as follows:
 - `System.Xml.Linq.XNode.ReadFromAsync(System.Xml.XmlReader reader, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XNode.WriteToAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (200)
+### Properties (205)
 
 - `System.DateTimeOffset.UnixEpoch`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CSharp = "C#"`
@@ -1253,6 +1263,11 @@ The filtering logic works as follows:
 - `System.Net.Mime.MediaTypeNames.Text.JavaScript = "text/javascript"`
 - `System.Net.Mime.MediaTypeNames.Text.Markdown = "text/markdown"`
 - `System.Net.Mime.MediaTypeNames.Text.Rtf = "text/rtf"`
+- `System.Net.Mime.MediaTypeNames.Video.Mp4 = "video/mp4"`
+- `System.Net.Mime.MediaTypeNames.Video.Mpeg = "video/mpeg"`
+- `System.Net.Mime.MediaTypeNames.Video.Ogg = "video/ogg"`
+- `System.Net.Mime.MediaTypeNames.Video.QuickTime = "video/quicktime"`
+- `System.Net.Mime.MediaTypeNames.Video.WebM = "video/webm"`
 - `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs = "RefStructs"`
 - `System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers = "RequiredMembers"`
 - `System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute.CallConvs`

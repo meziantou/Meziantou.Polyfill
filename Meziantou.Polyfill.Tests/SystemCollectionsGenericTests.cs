@@ -35,6 +35,18 @@ public class SystemCollectionsGenericTests
     }
 
     [Fact]
+    public void EqualityComparer_Create_KeySelector()
+    {
+        var comparer = EqualityComparer<string>.Create(value => value?.Length);
+
+        Assert.True(comparer.Equals("test", "TEST"));
+        Assert.False(comparer.Equals("test", "other"));
+        Assert.Equal(comparer.GetHashCode("test"), comparer.GetHashCode("TEST"));
+        Assert.Equal(0, comparer.GetHashCode(null!));
+        Assert.Throws<ArgumentNullException>(() => EqualityComparer<string>.Create((Func<string?, int?>)null!));
+    }
+
+    [Fact]
     public void System_Collections_Generic_KeyValuePair_2_Deconstruct()
     {
         var data = new KeyValuePair<string, object>("test", 2);
