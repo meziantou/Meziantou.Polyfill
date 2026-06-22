@@ -609,6 +609,12 @@ public class SystemTests
             case ulong n:
                 ArgumentOutOfRangeException.ThrowIfNegative(n);
                 break;
+            case nint n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
+            case nuint n:
+                ArgumentOutOfRangeException.ThrowIfNegative(n);
+                break;
 #if NET5_0_OR_GREATER
             case System.Half n:
                 ArgumentOutOfRangeException.ThrowIfNegative(n);
@@ -651,6 +657,10 @@ public class SystemTests
             long.MaxValue,
             (ulong)0,
             ulong.MaxValue,
+            (nint)0,
+            (nint)42,
+            (nuint)0,
+            (nuint)42,
 #if NET5_0_OR_GREATER
             (System.Half)0,
             System.Half.MaxValue,
@@ -681,6 +691,7 @@ public class SystemTests
             short.MinValue,
             int.MinValue,
             long.MinValue,
+            (nint)(-1),
 #if NET5_0_OR_GREATER
             System.Half.MinValue,
 #endif
