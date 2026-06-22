@@ -5,6 +5,19 @@ static partial class PolyfillExtensions
 {
     extension(global::System.ArgumentOutOfRangeException)
     {
+        public static void ThrowIfNegative(nint value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        {
+            if (value < 0)
+                ThrowArgumentOutOfRangeException(paramName, value);
+        }
+
+        [global::System.CLSCompliant(false)]
+        public static void ThrowIfNegative(nuint value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        {
+            _ = value;
+            _ = paramName;
+        }
+
         public static void ThrowIfNegative<T>(T value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
 #if NET7_0_OR_GREATER
             where T : global::System.Numerics.INumber<T>
@@ -57,10 +70,11 @@ static partial class PolyfillExtensions
             }
 #endif
 
-            static void ThrowArgumentOutOfRangeException(string? paramName, object value)
-            {
-                throw new ArgumentOutOfRangeException(paramName, value, $"{paramName} ('{value}') must not be negative.");
-            }
+        }
+
+        static void ThrowArgumentOutOfRangeException(string? paramName, object value)
+        {
+            throw new ArgumentOutOfRangeException(paramName, value, $"{paramName} ('{value}') must not be negative.");
         }
     }
 }
