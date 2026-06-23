@@ -359,6 +359,27 @@ public class SystemIOTests
     }
 
     [Fact]
+    public void Path_Join_Params_DoesNotDuplicateExistingSeparator()
+    {
+        var basePath = Path.GetTempPath();
+        var expected = basePath + (Path.EndsInDirectorySeparator(basePath) ? "" : Path.DirectorySeparatorChar.ToString()) + "file.txt";
+        Assert.Equal(expected, Path.Join(basePath, "file.txt"));
+    }
+
+    [Fact]
+    public void Path_Join_Params_SkipsNullOrEmptySegments()
+    {
+        var expected = "folder" + Path.DirectorySeparatorChar + "child";
+        Assert.Equal(expected, Path.Join("folder", "", null, "child"));
+    }
+
+    [Fact]
+    public void Path_Join_Params_NullArray_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => Path.Join(null!));
+    }
+
+    [Fact]
     public void Path_IsPathFullyQualified_NullArgument()
     {
         Assert.Throws<ArgumentNullException>(() => Path.IsPathFullyQualified((string)null!));
