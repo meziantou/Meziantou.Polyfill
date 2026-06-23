@@ -22,7 +22,10 @@ static partial class PolyfillExtensions_Path
                 }
                 else
                 {
-                    if (!IsDirectorySeparator(sb[sb.Length - 1]) && !IsDirectorySeparator(path[0]))
+                    if (sb[sb.Length - 1] != Path.DirectorySeparatorChar &&
+                        sb[sb.Length - 1] != Path.AltDirectorySeparatorChar &&
+                        path[0] != Path.DirectorySeparatorChar &&
+                        path[0] != Path.AltDirectorySeparatorChar)
                         sb.Append(Path.DirectorySeparatorChar);
 
                     sb.Append(path);
@@ -31,7 +34,5 @@ static partial class PolyfillExtensions_Path
 
             return sb.ToString();
         }
-
-        private static bool IsDirectorySeparator(char c) => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
     }
 }
