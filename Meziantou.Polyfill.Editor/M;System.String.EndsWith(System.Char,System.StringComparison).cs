@@ -5,6 +5,9 @@ static partial class PolyfillExtensions
 {
     public static bool EndsWith(this string target, char value, System.StringComparison comparisonType)
     {
+        if (comparisonType == System.StringComparison.Ordinal)
+            return target.Length > 0 && target[target.Length - 1] == value;
+
         return target.EndsWith(value.ToString(), comparisonType);
     }
 }
