@@ -582,9 +582,9 @@ async Task GenerateReadme()
     }
 }
 
-static string GetMemberFilePath() => GetRootPath() / "Meziantou.Polyfill" / "Members.g.cs";
+static FullPath GetMemberFilePath() => GetRootPath() / "Meziantou.Polyfill" / "Members.g.cs";
 
-static string GetReadmeFilePath() => GetRootPath() / "README.md";
+static FullPath GetReadmeFilePath() => GetRootPath() / "README.md";
 
 static FullPath GetRootPath()
 {
