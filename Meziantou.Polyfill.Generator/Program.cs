@@ -334,7 +334,8 @@ async Task GenerateMembers()
     sb.AppendLine("            }");
     sb.AppendLine("            if (!any) continue;");
     sb.AppendLine("        }");
-    sb.AppendLine("        if (entry.ProvidesFeatureBit >= 0 && (wantedFeatures & (1uL << entry.ProvidesFeatureBit)) != 0uL ? !IncludeMemberAsRequiredDependency(includeContext, entry.DocId) : !IncludeMember(includeContext, entry.DocId)) continue;");
+    sb.AppendLine("        var isRequiredDependency = entry.ProvidesFeatureBit >= 0 && (wantedFeatures & (1uL << entry.ProvidesFeatureBit)) != 0uL;");
+    sb.AppendLine("        if (isRequiredDependency ? !IncludeMemberAsRequiredDependency(includeContext, entry.DocId) : !IncludeMember(includeContext, entry.DocId)) continue;");
     sb.AppendLine("        if (entry.DeclaredCount > 0)");
     sb.AppendLine("        {");
     sb.AppendLine("            var allOk = true;");
