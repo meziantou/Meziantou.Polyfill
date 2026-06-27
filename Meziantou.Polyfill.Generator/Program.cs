@@ -188,7 +188,7 @@ async Task GenerateMembers()
         throw new InvalidOperationException($"Feature bit count ({totalFeatureBits}) exceeds 64; widen _features.");
 
     // Build the ordered table of entries plus the flat conditional/declared arrays.
-    var conditionals = new List<(byte FieldIndex, ulong Mask)>();
+    var conditionals = new List<(byte FieldIndex, ulong Mask, string DocId)>();
     var declaredDocIds = new List<string>();
     var tableEntries = new List<(Polyfill Polyfill, sbyte ProvidesFeatureBit, ushort CondStart, byte CondCount, ushort DeclStart, byte DeclCount, ulong RequiredFeatures)>();
 
@@ -207,7 +207,7 @@ async Task GenerateMembers()
         foreach (var member in polyfill.PolyfillData.ConditionalMembers)
         {
             var dep = polyfills.Single(p => p.TypeName == member);
-            conditionals.Add(((byte)(dep.Index / 64), dep.CSharpFieldBitMask));
+            conditionals.Add(((byte)(dep.Index / 64), dep.CSharpFieldBitMask, dep.TypeName));
             checked
             { condCount++; }
         }
@@ -269,6 +269,7 @@ async Task GenerateMembers()
     sb.AppendLine("private readonly PolyfillOptions _options;");
     sb.AppendLine("private readonly ulong _features;");
     sb.AppendLine("private readonly string _sourcePrefix;");
+    sb.AppendLine("private readonly string[]? _skipReasons;");
 
     sb.AppendLine("public Members(Compilation compilation, PolyfillOptions options)");
     sb.AppendLine("{");
@@ -309,10 +310,15 @@ async Task GenerateMembers()
     sb.AppendLine("    var entries = PolyfillEntries.Entries;");
     sb.AppendLine("    var conditionals = PolyfillEntries.Conditionals;");
     sb.AppendLine("    var declared = PolyfillEntries.DeclaredDocIds;");
+    sb.AppendLine("    string[]? skipReasons = options.GenerateDebugFile ? new string[entries.Length] : null;");
     sb.AppendLine("    for (var idx = 0; idx < entries.Length; idx++)");
     sb.AppendLine("    {");
     sb.AppendLine("        ref readonly var entry = ref entries[idx];");
-    sb.AppendLine("        if ((feat & entry.RequiredFeatures) != entry.RequiredFeatures) continue;");
+    sb.AppendLine("        if ((feat & entry.RequiredFeatures) != entry.RequiredFeatures)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            skipReasons?[idx] = GetMissingFeaturesReason(feat, entry.RequiredFeatures);");
+    sb.AppendLine("            continue;");
+    sb.AppendLine("        }");
     sb.AppendLine("        if (entry.ConditionalCount > 0)");
     sb.AppendLine("        {");
     sb.AppendLine("            var any = false;");
@@ -322,16 +328,31 @@ async Task GenerateMembers()
     sb.AppendLine("                ref readonly var c = ref conditionals[j];");
     sb.AppendLine("                if ((bits[c.FieldIndex] & c.Mask) != 0uL) { any = true; break; }");
     sb.AppendLine("            }");
-    sb.AppendLine("            if (!any) continue;");
+    sb.AppendLine("            if (!any)");
+    sb.AppendLine("            {");
+    sb.AppendLine("                skipReasons?[idx] = GetConditionalDependenciesReason(bits, conditionals, entry.ConditionalStart, entry.ConditionalCount);");
+    sb.AppendLine("                continue;");
+    sb.AppendLine("            }");
     sb.AppendLine("        }");
-    sb.AppendLine("        if (!IncludeMember(includeContext, entry.DocId)) continue;");
+    sb.AppendLine("        var skipReason = GetMemberSkipReason(includeContext, entry.DocId);");
+    sb.AppendLine("        if (skipReason is not null)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            skipReasons?[idx] = skipReason;");
+    sb.AppendLine("            continue;");
+    sb.AppendLine("        }");
     sb.AppendLine("        if (entry.DeclaredCount > 0)");
     sb.AppendLine("        {");
     sb.AppendLine("            var allOk = true;");
     sb.AppendLine("            var declEnd = entry.DeclaredStart + entry.DeclaredCount;");
     sb.AppendLine("            for (var j = (int)entry.DeclaredStart; j < declEnd; j++)");
     sb.AppendLine("            {");
-    sb.AppendLine("                if (!IncludeMember(includeContext, declared[j])) { allOk = false; break; }");
+    sb.AppendLine("                var declaredSkipReason = GetMemberSkipReason(includeContext, declared[j]);");
+    sb.AppendLine("                if (declaredSkipReason is not null)");
+    sb.AppendLine("                {");
+    sb.AppendLine("                    allOk = false;");
+    sb.AppendLine("                    skipReasons?[idx] = \"declared member \" + declared[j] + \": \" + declaredSkipReason;");
+    sb.AppendLine("                    break;");
+    sb.AppendLine("                }");
     sb.AppendLine("            }");
     sb.AppendLine("            if (!allOk) continue;");
     sb.AppendLine("        }");
@@ -347,12 +368,13 @@ async Task GenerateMembers()
         sb.AppendLine($"    _bits{i} = bits[{i}];");
     }
     sb.AppendLine("    _features = feat;");
+    sb.AppendLine("    _skipReasons = skipReasons;");
     sb.AppendLine("}");
 
     sb.AppendLine("public override int GetHashCode()");
     sb.AppendLine("{");
-    sb.AppendLine("    var hash = _bits0.GetHashCode();");
-    for (var i = 1; i < fieldCount; i++)
+    sb.AppendLine("    var hash = _options.GetHashCode();");
+    for (var i = 0; i < fieldCount; i++)
     {
         sb.AppendLine($"    hash = hash * 23 + _bits{i}.GetHashCode();");
     }
@@ -361,8 +383,8 @@ async Task GenerateMembers()
     sb.AppendLine("}");
 
     sb.AppendLine("public override bool Equals(object? obj) => obj is Members other && Equals(other);");
-    sb.Append("public bool Equals(Members other) => _bits0 == other._bits0");
-    for (var i = 1; i < fieldCount; i++)
+    sb.Append("public bool Equals(Members other) => _options.Equals(other._options)");
+    for (var i = 0; i < fieldCount; i++)
     {
         sb.Append($"  && _bits{i} == other._bits{i}");
     }
@@ -374,6 +396,9 @@ async Task GenerateMembers()
         sb.Append($" || _bits{i} != 0");
     }
     sb.AppendLine(";");
+
+    sb.AppendLine("public bool GenerateDebugFile => _options.GenerateDebugFile;");
+    sb.AppendLine();
 
 
     sb.AppendLine("public void AddSources(SourceProductionContext context)");
@@ -391,6 +416,10 @@ async Task GenerateMembers()
     }
     sb.AppendLine("}");
 
+    var entryIndexByTypeName = tableEntries
+        .Select((Entry, Index) => (Entry.Polyfill.TypeName, Index))
+        .ToDictionary(item => item.TypeName, item => item.Index, StringComparer.Ordinal);
+
     sb.AppendLine("public string DumpAsCSharpComment()");
     sb.AppendLine("{");
     sb.AppendLine("    var sb = new StringBuilder();");
@@ -404,9 +433,63 @@ async Task GenerateMembers()
     sb.AppendLine("    sb.AppendLine(\"//\");");
     foreach (var polyfill in polyfills)
     {
-        sb.AppendLine($"    sb.AppendLine(\"// {polyfill.TypeName}: \" + (({polyfill.CSharpFieldName} & {polyfill.CSharpFieldBitMask}ul) == {polyfill.CSharpFieldBitMask}ul));");
+        var entryIndex = entryIndexByTypeName[polyfill.TypeName];
+        sb.AppendLine($"    AppendPolyfillDebugLine(sb, \"{EscapeStringLiteral(polyfill.TypeName)}\", ({polyfill.CSharpFieldName} & {polyfill.CSharpFieldBitMask}ul) == {polyfill.CSharpFieldBitMask}ul, {entryIndex});");
     }
 
+    sb.AppendLine("    return sb.ToString();");
+    sb.AppendLine("}");
+    sb.AppendLine();
+    sb.AppendLine("private void AppendPolyfillDebugLine(StringBuilder sb, string documentationId, bool isGenerated, int entryIndex)");
+    sb.AppendLine("{");
+    sb.AppendLine("    sb.Append(\"// \");");
+    sb.AppendLine("    sb.Append(documentationId);");
+    sb.AppendLine("    sb.Append(\": \");");
+    sb.AppendLine("    sb.Append(isGenerated);");
+    sb.AppendLine("    if (!isGenerated && _skipReasons is not null && entryIndex >= 0 && entryIndex < _skipReasons.Length)");
+    sb.AppendLine("    {");
+    sb.AppendLine("        var skipReason = _skipReasons[entryIndex];");
+    sb.AppendLine("        if (!string.IsNullOrEmpty(skipReason))");
+    sb.AppendLine("        {");
+    sb.AppendLine("            sb.Append(\" (\");");
+    sb.AppendLine("            sb.Append(skipReason);");
+    sb.AppendLine("            sb.Append(')');");
+    sb.AppendLine("        }");
+    sb.AppendLine("    }");
+    sb.AppendLine("    sb.AppendLine();");
+    sb.AppendLine("}");
+    sb.AppendLine();
+    sb.AppendLine("private static string GetMissingFeaturesReason(ulong features, ulong requiredFeatures)");
+    sb.AppendLine("{");
+    sb.AppendLine("    var sb = new StringBuilder(\"missing required features: \");");
+    sb.AppendLine("    var separator = \"\";");
+    sb.AppendLine("    foreach (var feature in PolyfillDebugData.Features)");
+    sb.AppendLine("    {");
+    sb.AppendLine("        if ((requiredFeatures & feature.Mask) != 0uL && (features & feature.Mask) == 0uL)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            sb.Append(separator);");
+    sb.AppendLine("            sb.Append(feature.Name);");
+    sb.AppendLine("            separator = \", \";");
+    sb.AppendLine("        }");
+    sb.AppendLine("    }");
+    sb.AppendLine("    return sb.ToString();");
+    sb.AppendLine("}");
+    sb.AppendLine();
+    sb.AppendLine("private static string GetConditionalDependenciesReason(ReadOnlySpan<ulong> bits, ConditionalCheck[] conditionals, ushort start, byte count)");
+    sb.AppendLine("{");
+    sb.AppendLine("    var sb = new StringBuilder(\"conditional dependencies not generated: \");");
+    sb.AppendLine("    var separator = \"\";");
+    sb.AppendLine("    var end = start + count;");
+    sb.AppendLine("    for (var i = (int)start; i < end; i++)");
+    sb.AppendLine("    {");
+    sb.AppendLine("        ref readonly var conditional = ref conditionals[i];");
+    sb.AppendLine("        if ((bits[conditional.FieldIndex] & conditional.Mask) == 0uL)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            sb.Append(separator);");
+    sb.AppendLine("            sb.Append(PolyfillDebugData.ConditionalDocIds[i]);");
+    sb.AppendLine("            separator = \", \";");
+    sb.AppendLine("        }");
+    sb.AppendLine("    }");
     sb.AppendLine("    return sb.ToString();");
     sb.AppendLine("}");
 
@@ -485,6 +568,43 @@ async Task GenerateMembers()
         sb.AppendLine($"        \"{EscapeStringLiteral(d)}\",");
     }
     sb.AppendLine("    };");
+    sb.AppendLine("}");
+
+    sb.AppendLine();
+    sb.AppendLine("file static class PolyfillDebugData");
+    sb.AppendLine("{");
+    sb.AppendLine("    public static readonly string[] ConditionalDocIds = new string[]");
+    sb.AppendLine("    {");
+    foreach (var c in conditionals)
+    {
+        sb.AppendLine($"        \"{EscapeStringLiteral(c.DocId)}\",");
+    }
+    sb.AppendLine("    };");
+    sb.AppendLine();
+    sb.AppendLine("    public static readonly PolyfillFeature[] Features = new PolyfillFeature[]");
+    sb.AppendLine("    {");
+    sb.AppendLine($"        new PolyfillFeature({1uL << FeatureBitExtensions}uL, \"CSharp14ExtensionMembers\"),");
+    sb.AppendLine($"        new PolyfillFeature({1uL << FeatureBitUnsafe}uL, \"Unsafe\"),");
+    sb.AppendLine($"        new PolyfillFeature({1uL << FeatureBitAllowsRefStruct}uL, \"AllowsRefStruct\"),");
+    foreach (var requiredType in requiredTypes)
+    {
+        var bitMask = 1uL << featureBitForType[requiredType.TypeName];
+        sb.AppendLine($"        new PolyfillFeature({bitMask}uL, \"T:{EscapeStringLiteral(requiredType.TypeName)}\"),");
+    }
+    sb.AppendLine("    };");
+    sb.AppendLine("}");
+
+    sb.AppendLine();
+    sb.AppendLine("file readonly struct PolyfillFeature");
+    sb.AppendLine("{");
+    sb.AppendLine("    public readonly ulong Mask;");
+    sb.AppendLine("    public readonly string Name;");
+    sb.AppendLine();
+    sb.AppendLine("    public PolyfillFeature(ulong mask, string name)");
+    sb.AppendLine("    {");
+    sb.AppendLine("        Mask = mask;");
+    sb.AppendLine("        Name = name;");
+    sb.AppendLine("    }");
     sb.AppendLine("}");
 
     sb.AppendLine();

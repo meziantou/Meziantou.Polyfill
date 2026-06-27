@@ -444,6 +444,76 @@ public sealed class SourceGeneratorTests
         Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
     }
 
+    [Fact]
+    public async Task DebugFile_NotGenerated_ByDefault()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})");
+
+        Assert.DoesNotContain("Debug.g.cs", GetFileNames(result.GeneratorResult, includeAlwaysGeneratedFiles: true));
+    }
+
+    [Fact]
+    public async Task DebugFile_Generated_WhenEnabled()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})",
+            generateDebugFile: true);
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// GenerateDebugFile: True", content, StringComparison.Ordinal);
+        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): True", content, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task DebugFile_ReportsSkipReasons()
+    {
+        var netCore31Assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+        var latestAssemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
+        var net462Assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETFramework.ReferenceAssemblies.net462", "1.0.3", "");
+
+        var excludedResult = GenerateFiles(
+            "",
+            assemblyLocations: netCore31Assemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})",
+            excludedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})",
+            generateDebugFile: true);
+        var excludedContent = GetGeneratedFileContent(excludedResult.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): False (excluded by options)", excludedContent, StringComparison.Ordinal);
+
+        var alreadyAvailableResult = GenerateFiles(
+            "",
+            assemblyLocations: latestAssemblies,
+            includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})",
+            generateDebugFile: true);
+        var alreadyAvailableContent = GetGeneratedFileContent(alreadyAvailableResult.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): False (already available in compilation)", alreadyAvailableContent, StringComparison.Ordinal);
+
+        var missingTypeResult = GenerateFiles(
+            "",
+            assemblyLocations: net462Assemblies,
+            includedPolyfills: "M:System.Random.NextBytes(System.Span{System.Byte})",
+            generateDebugFile: true);
+        var missingTypeContent = GetGeneratedFileContent(missingTypeResult.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// M:System.Random.NextBytes(System.Span{System.Byte}): False (missing required features: T:System.Span`1)", missingTypeContent, StringComparison.Ordinal);
+
+        var conditionalResult = GenerateFiles(
+            "",
+            assemblyLocations: netCore31Assemblies,
+            includedPolyfills: "T:System.ITupleInternal",
+            generateDebugFile: true);
+        var conditionalContent = GetGeneratedFileContent(conditionalResult.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// T:System.ITupleInternal: False (conditional dependencies not generated: T:System.ValueTuple", conditionalContent, StringComparison.Ordinal);
+    }
+
     private static string[] GetGeneratedFileLines(GeneratorDriverRunResult generatorResult, string fileName)
     {
         return GetGeneratedFileContent(generatorResult, fileName)
@@ -595,7 +665,7 @@ public sealed class SourceGeneratorTests
         }
     }
 
-    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true)
+    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
@@ -618,6 +688,7 @@ public sealed class SourceGeneratorTests
             {
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
+                ["build_property.MeziantouPolyfill_GenerateDebugFile"] = generateDebugFile ? "true" : null,
             }));
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);

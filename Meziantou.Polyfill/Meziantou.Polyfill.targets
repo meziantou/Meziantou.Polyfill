@@ -2,6 +2,7 @@
   <ItemGroup>
     <CompilerVisibleProperty Include="MeziantouPolyfill_IncludedPolyfills" />
     <CompilerVisibleProperty Include="MeziantouPolyfill_ExcludedPolyfills" />
+    <CompilerVisibleProperty Include="MeziantouPolyfill_GenerateDebugFile" />
   </ItemGroup>
   <PropertyGroup>
     <MeziantouPolyfill_AllowUnsafeBlocks Condition="'$(MeziantouPolyfill_AllowUnsafeBlocks)' == ''">true</MeziantouPolyfill_AllowUnsafeBlocks>

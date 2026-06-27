@@ -8,9 +8,13 @@ namespace Meziantou.Polyfill;
 internal partial struct Members
 {
     private static bool IncludeMember(IncludeContext context, string memberDocumentationId)
+        => GetMemberSkipReason(context, memberDocumentationId) is null;
+
+    private static string? GetMemberSkipReason(IncludeContext context, string memberDocumentationId)
     {
-        if (context.Options is not null && !context.Options.Include(memberDocumentationId))
-            return false;
+        var optionSkipReason = context.Options?.GetSkipReason(memberDocumentationId);
+        if (optionSkipReason is not null)
+            return optionSkipReason;
 
         var compilation = context.Compilation;
         var currentAssembly = compilation.Assembly;
@@ -19,7 +23,7 @@ internal partial struct Members
         foreach (var symbol in symbols)
         {
             if (ReferenceEquals(symbol.ContainingAssembly, currentAssembly))
-                return false;
+                return "already available in compilation";
 
             // IsEmbeddedSymbol is a workaround for https://github.com/dotnet/roslyn/issues/79498
             if (compilation.IsSymbolAccessibleWithin(symbol, currentAssembly) && !context.IsEmbeddedSymbol(symbol))
@@ -33,15 +37,15 @@ internal partial struct Members
                     // The symbol is accessible from multiple assemblies, which would cause
                     // ambiguity (e.g. CS0433). Generate a local copy so the compiler prefers
                     // the current assembly's definition.
-                    return true;
+                    return null;
                 }
             }
         }
 
         if (accessibleFromAssembly is not null)
-            return false;
+            return "already available in compilation";
 
-        return true;
+        return null;
     }
 
     private void AddSource(SourceProductionContext context, string path, string content)
