@@ -24,7 +24,8 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
         {
             return new PolyfillOptions(
                 included: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_IncludedPolyfills"),
-                excluded: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_ExcludedPolyfills"));
+                excluded: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_ExcludedPolyfills"),
+                generateDebugFile: IsTrue(GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_GenerateDebugFile")));
         }).WithTrackingName("Options");
 
         var provider = context.CompilationProvider
@@ -35,7 +36,10 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
 
         context.RegisterImplementationSourceOutput(provider, (context, members) =>
         {
-            context.AddSource("Debug.g.cs", SourceText.From(members.DumpAsCSharpComment(), Encoding.UTF8));
+            if (members.GenerateDebugFile)
+            {
+                context.AddSource("Debug.g.cs", SourceText.From(members.DumpAsCSharpComment(), Encoding.UTF8));
+            }
 
             // The EmbeddedAttribute definition is only needed when at least one polyfill is
             // generated; every polyfill source either decorates its types with the attribute
@@ -70,5 +74,10 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
             return value;
 
         return null;
+    }
+
+    private static bool IsTrue(string? value)
+    {
+        return value is "1" || string.Equals(value, "true", StringComparison.OrdinalIgnoreCase);
     }
 }

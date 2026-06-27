@@ -8,47 +8,40 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
     private readonly string[]? _included;
     private readonly string[]? _excluded;
 
-    public PolyfillOptions(string? included, string? excluded)
+    public PolyfillOptions(string? included, string? excluded, bool generateDebugFile = false)
     {
         _included = ParseValues(included);
         _excluded = ParseValues(excluded);
+        GenerateDebugFile = generateDebugFile;
     }
 
-    public bool Include(string memberDocumentationId)
+    public bool GenerateDebugFile { get; }
+
+    public bool Include(string memberDocumentationId) => GetSkipReason(memberDocumentationId) is null;
+
+    public string? GetSkipReason(string memberDocumentationId)
     {
         if (_excluded is not null)
         {
-            var found = false;
             foreach (var filter in _excluded)
             {
                 if (memberDocumentationId.StartsWith(filter, StringComparison.Ordinal))
-                {
-                    found = true;
-                    break;
-                }
+                    return "excluded by options";
             }
-
-            if (found)
-                return false;
         }
 
         if (_included is not null)
         {
-            var found = false;
             foreach (var filter in _included)
             {
                 if (memberDocumentationId.StartsWith(filter, StringComparison.Ordinal))
-                {
-                    found = true;
-                    break;
-                }
+                    return null;
             }
 
-            if (!found)
-                return false;
+            return "not included by options";
         }
 
-        return true;
+        return null;
     }
 
     private static string[]? ParseValues(string? value)
@@ -76,14 +69,15 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
         return [.. values];
     }
 
-    public override int GetHashCode() => 0;
+    public override int GetHashCode() => GenerateDebugFile ? 1 : 0;
     public override bool Equals(object obj) => Equals(obj as PolyfillOptions);
     public bool Equals(PolyfillOptions? other)
     {
         if (other == null)
             return false;
 
-        return SequenceEqual(_included, other._included)
+        return GenerateDebugFile == other.GenerateDebugFile
+            && SequenceEqual(_included, other._included)
             && SequenceEqual(_excluded, other._excluded);
 
         static bool SequenceEqual(string[]? value1, string[]? value2)
@@ -101,7 +95,8 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
     public string DumpAsCSharpComment()
     {
         return "// IncludedMembers: " + (_included == null ? "<null>" : string.Join(";", _included)) + "\n"
-             + "// ExcludedMembers: " + (_excluded == null ? "<null>" : string.Join(";", _excluded));
+             + "// ExcludedMembers: " + (_excluded == null ? "<null>" : string.Join(";", _excluded)) + "\n"
+             + "// GenerateDebugFile: " + GenerateDebugFile;
     }
 
     [StructLayout(LayoutKind.Auto)]

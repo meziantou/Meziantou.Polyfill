@@ -26,7 +26,7 @@ By default, all needed polyfills are generated. You can configure which polyfill
 <PropertyGroup>
   <!-- Opt-in: semicolon-separated or pipe-separated list of name prefixes to include (allowlist) -->
   <!-- When set, ONLY polyfills matching these prefixes will be generated -->
-  <!-- Tip: The name of the generated polyfills are available in the generated "Debug.g.cs" file -->
+  <!-- Tip: The names of the available polyfills and skip reasons are available when Debug.g.cs is enabled -->
   <MeziantouPolyfill_IncludedPolyfills>T:Type1|T:Type2|M:Member1</MeziantouPolyfill_IncludedPolyfills>
 
   <!-- Opt-out: semicolon-separated or pipe-separated list of name prefixes to exclude (blocklist) -->
@@ -36,6 +36,9 @@ By default, all needed polyfills are generated. You can configure which polyfill
   <!-- Optional: Output the generated files to the obj\GeneratedFiles folder  -->
   <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
   <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
+
+  <!-- Optional: Generate Debug.g.cs with polyfill generation decisions and skip reasons -->
+  <MeziantouPolyfill_GenerateDebugFile>true</MeziantouPolyfill_GenerateDebugFile>
 </PropertyGroup>
 ````
 
@@ -55,6 +58,8 @@ The filtering logic works as follows:
 2. **MeziantouPolyfill_ExcludedPolyfills** (opt-out/blocklist): Excludes polyfills whose XML documentation ID starts with any of the specified prefixes
 3. **MeziantouPolyfill_IncludedPolyfills** (opt-in/allowlist): When set, ONLY includes polyfills whose XML documentation ID starts with any of the specified prefixes
 4. **Both properties set**: Exclusions are applied first, then inclusions. A polyfill must match an inclusion filter AND not match any exclusion filter to be generated
+
+Set **MeziantouPolyfill_GenerateDebugFile** to `true` to emit `Debug.g.cs`. This diagnostic file lists required type availability, each polyfill generation decision, and skip reasons such as already-available members, excluded filters, missing required types, or unmet conditional dependencies.
 
 ## Supported polyfills
 
