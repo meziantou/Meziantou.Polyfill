@@ -51,6 +51,22 @@ internal sealed class PolyfillOptions : IEquatable<PolyfillOptions>
         return true;
     }
 
+    // Returns true when the polyfill is explicitly blocked by the ExcludedPolyfills list,
+    // regardless of whether it appears in IncludedPolyfills.
+    public bool IsExplicitlyExcluded(string memberDocumentationId)
+    {
+        if (_excluded is null)
+            return false;
+
+        foreach (var filter in _excluded)
+        {
+            if (memberDocumentationId.StartsWith(filter, StringComparison.Ordinal))
+                return true;
+        }
+
+        return false;
+    }
+
     private static string[]? ParseValues(string? value)
     {
         if (string.IsNullOrEmpty(value))

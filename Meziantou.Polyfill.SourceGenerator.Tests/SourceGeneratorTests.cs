@@ -70,6 +70,19 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task IncludedPolyfill_Types()
+    {
+        // Regression test for https://github.com/meziantou/Meziantou.Polyfill/issues/269
+        // T:System.TimeProvider in IncludedPolyfills should generate the type polyfill,
+        // even though its declared member IDs start with "M:" rather than "T:".
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
+
+        var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "T:System.TimeProvider");
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        Assert.Contains("T_System.TimeProvider.g.cs", generatedFileNames);
+    }
+
+    [Fact]
     public async Task ArraySegmentPolyfills_AreSelfContained()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");

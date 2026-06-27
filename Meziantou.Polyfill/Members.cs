@@ -12,6 +12,26 @@ internal partial struct Members
         if (context.Options is not null && !context.Options.Include(memberDocumentationId))
             return false;
 
+        return IsSymbolNeeded(context, memberDocumentationId);
+    }
+
+    // Used for required-type polyfills that are auto-included as dependencies of
+    // explicitly-included polyfills. Bypasses the IncludedPolyfills filter so that
+    // e.g. T:System.Threading.ITimer is generated when T:System.TimeProvider is
+    // requested, but still respects the ExcludedPolyfills filter.
+    private static bool IncludeMemberAsRequiredDependency(IncludeContext context, string memberDocumentationId)
+    {
+        if (context.Options is not null && context.Options.IsExplicitlyExcluded(memberDocumentationId))
+            return false;
+
+        return IsSymbolNeeded(context, memberDocumentationId);
+    }
+
+    // Like IncludeMember but does not apply the options filter.
+    // Used for declared-member checks on type polyfills: we only want to know whether
+    // a member already exists in the compilation, not whether the user opted it in.
+    private static bool IsSymbolNeeded(IncludeContext context, string memberDocumentationId)
+    {
         var compilation = context.Compilation;
         var currentAssembly = compilation.Assembly;
         var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(memberDocumentationId, compilation);
