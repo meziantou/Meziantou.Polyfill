@@ -417,7 +417,7 @@ async Task GenerateMembers()
     sb.AppendLine("}");
 
     var entryIndexByTypeName = tableEntries
-        .Select((Entry, Index) => (Entry.Polyfill.TypeName, Index))
+        .Select((entry, index) => (entry.Polyfill.TypeName, Index: index))
         .ToDictionary(item => item.TypeName, item => item.Index, StringComparer.Ordinal);
 
     sb.AppendLine("public string DumpAsCSharpComment()");
