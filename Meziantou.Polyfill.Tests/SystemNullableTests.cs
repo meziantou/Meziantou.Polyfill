@@ -14,8 +14,16 @@ public sealed class SystemNullableTests
         ref readonly var valueRef = ref Nullable.GetValueRefOrDefaultRef(in value);
         ref var expectedRef = ref Unsafe.As<int?, NullableValueStorage<int>>(ref value).Value;
 
+        Assert.True(value.HasValue);
+        Assert.Equal(1, value.Value);
         Assert.Equal(1, valueRef);
         Assert.True(Unsafe.AreSame(ref expectedRef, ref Unsafe.AsRef(in valueRef)));
+
+        value = 42;
+
+        Assert.True(value.HasValue);
+        Assert.Equal(42, value.Value);
+        Assert.Equal(42, valueRef);
     }
 
     [Fact]
@@ -26,8 +34,15 @@ public sealed class SystemNullableTests
         ref readonly var valueRef = ref Nullable.GetValueRefOrDefaultRef(in value);
         ref var expectedRef = ref Unsafe.As<int?, NullableValueStorage<int>>(ref value).Value;
 
+        Assert.False(value.HasValue);
         Assert.Equal(0, valueRef);
         Assert.True(Unsafe.AreSame(ref expectedRef, ref Unsafe.AsRef(in valueRef)));
+
+        value = 42;
+
+        Assert.True(value.HasValue);
+        Assert.Equal(42, value.Value);
+        Assert.Equal(42, valueRef);
     }
 }
 
