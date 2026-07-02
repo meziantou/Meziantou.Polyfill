@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 static partial class PolyfillExtensions_Nullable
 {
@@ -15,7 +14,6 @@ static partial class PolyfillExtensions_Nullable
     }
 }
 
-[StructLayout(LayoutKind.Sequential)]
 file struct NullableValueStorage<T>
     where T : struct
 {

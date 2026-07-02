@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace Meziantou.Polyfill.Tests;
@@ -11,12 +12,10 @@ public sealed class SystemNullableTests
         int? value = 1;
 
         ref readonly var valueRef = ref Nullable.GetValueRefOrDefaultRef(in value);
+        ref var expectedRef = ref Unsafe.As<int?, NullableValueStorage<int>>(ref value).Value;
 
         Assert.Equal(1, valueRef);
-
-        value = 42;
-
-        Assert.Equal(42, valueRef);
+        Assert.True(Unsafe.AreSame(ref expectedRef, ref Unsafe.AsRef(in valueRef)));
     }
 
     [Fact]
@@ -25,11 +24,18 @@ public sealed class SystemNullableTests
         int? value = default;
 
         ref readonly var valueRef = ref Nullable.GetValueRefOrDefaultRef(in value);
+        ref var expectedRef = ref Unsafe.As<int?, NullableValueStorage<int>>(ref value).Value;
 
         Assert.Equal(0, valueRef);
-
-        value = 42;
-
-        Assert.Equal(42, valueRef);
+        Assert.True(Unsafe.AreSame(ref expectedRef, ref Unsafe.AsRef(in valueRef)));
     }
 }
+
+#pragma warning disable CS0649
+file struct NullableValueStorage<T>
+    where T : struct
+{
+    public bool HasValue;
+    public T Value;
+}
+#pragma warning restore CS0649
