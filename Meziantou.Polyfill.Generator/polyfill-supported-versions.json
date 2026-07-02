@@ -3931,6 +3931,13 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Nullable.GetValueRefOrDefaultRef\u0060\u00601(System.Nullable{\u0060\u00600}@)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.ObjectDisposedException.ThrowIf(System.Boolean,System.Object)": [
       "net7.0",
       "net8.0",
