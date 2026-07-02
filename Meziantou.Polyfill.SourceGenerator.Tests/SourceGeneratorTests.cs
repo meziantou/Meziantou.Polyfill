@@ -268,6 +268,29 @@ public sealed class SourceGeneratorTests
         }
     }
 
+    [Fact]
+    public async Task Nullable_GetValueRefOrDefaultRef_IsGenerated_ForOlderFrameworks()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.0", "ref/net6.0/");
+
+        var result = GenerateFiles(
+            """
+            class Test
+            {
+                static int Read(ref readonly int? value)
+                {
+                    ref readonly int valueRef = ref System.Nullable.GetValueRefOrDefaultRef(in value);
+                    return valueRef;
+                }
+            }
+            """,
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Nullable.GetValueRefOrDefaultRef``1(System.Nullable{``0}@)",
+            languageVersion: LanguageVersion.CSharp14);
+
+        Assert.Contains(GetFileNames(result.GeneratorResult), file => file.Contains("GetValueRefOrDefaultRef", StringComparison.Ordinal));
+    }
+
     public static TheoryData<LanguageVersion, bool> GetPolyfillGenerationLanguageVersions()
     {
         return new TheoryData<LanguageVersion, bool>

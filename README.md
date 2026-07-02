@@ -161,7 +161,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1053)
+### Methods (1054)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -796,6 +796,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.Net.IPEndPoint? endPoint, [System.Threading.CancellationToken cancellationToken = default])` _(requires ``T:System.ReadOnlyMemory`1``, ``T:System.Threading.Tasks.ValueTask`1``)_
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, System.String? hostname, System.Int32 port, [System.Threading.CancellationToken cancellationToken = default])` _(requires ``T:System.ReadOnlyMemory`1``, ``T:System.Threading.Tasks.ValueTask`1``)_
 - `System.Net.Sockets.UdpClient.SendAsync(System.ReadOnlyMemory<System.Byte> datagram, [System.Threading.CancellationToken cancellationToken = default])` _(requires ``T:System.ReadOnlyMemory`1``, ``T:System.Threading.Tasks.ValueTask`1``)_
+- `System.Nullable.GetValueRefOrDefaultRef<T>(ref readonly System.Nullable<T> nullable) where T : struct` _(requires `T:System.Runtime.CompilerServices.Unsafe`)_
 - `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Object instance)`
 - `System.ObjectDisposedException.ThrowIf(System.Boolean condition, System.Type type)`
 - `System.OperatingSystem.IsLinux()`
