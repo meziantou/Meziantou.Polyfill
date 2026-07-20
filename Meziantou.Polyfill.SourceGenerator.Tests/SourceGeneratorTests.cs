@@ -93,6 +93,55 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task RuntimeHelpersGetSubArrayPolyfill_SupportsArrayRangeSyntax()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+
+        var result = GenerateFiles(
+            """
+            public static class Test
+            {
+                public static int[] RightHalf()
+                {
+                    int[] numbers = [0, 10, 20, 30, 40, 50];
+                    int amountToDrop = numbers.Length / 2;
+                    return numbers[amountToDrop..];
+                }
+
+                public static int[] LeftHalf()
+                {
+                    int[] numbers = [0, 10, 20, 30, 40, 50];
+                    int amountToDrop = numbers.Length / 2;
+                    return numbers[..^amountToDrop];
+                }
+
+                public static int[] All()
+                {
+                    int[] numbers = [0, 10, 20, 30, 40, 50];
+                    return numbers[..];
+                }
+
+                public static int[] Invalid()
+                {
+                    int[] numbers = [1, 2, 3];
+                    return numbers[..4];
+                }
+            }
+            """,
+            assemblyLocations: assemblies,
+            includedPolyfills: "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute;T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute;T:System.Index;T:System.Range;M:System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray``1(``0[],System.Range)");
+
+        var assembly = global::System.Reflection.Assembly.Load(result.Assembly!);
+        var type = assembly.GetType("Test")!;
+        Assert.Equal([30, 40, 50], (int[])type.GetMethod("RightHalf")!.Invoke(null, null)!);
+        Assert.Equal([0, 10, 20], (int[])type.GetMethod("LeftHalf")!.Invoke(null, null)!);
+        Assert.Equal([0, 10, 20, 30, 40, 50], (int[])type.GetMethod("All")!.Invoke(null, null)!);
+
+        var exception = Assert.Throws<global::System.Reflection.TargetInvocationException>(() => type.GetMethod("Invalid")!.Invoke(null, null));
+        Assert.IsType<ArgumentOutOfRangeException>(exception.InnerException);
+    }
+
+    [Fact]
     public async Task PeriodicTimer_UsesMicrosoftBclTimeProviderTypes_WhenReferenced()
     {
         var assemblies = new List<string>();

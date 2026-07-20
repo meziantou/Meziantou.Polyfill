@@ -4096,6 +4096,15 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray\u0060\u00601(\u0060\u00600[],System.Range)": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Runtime.InteropServices.CollectionsMarshal.AsSpan\u0060\u00601(System.Collections.Generic.List{\u0060\u00600})": [
       "net6.0",
       "net7.0",
