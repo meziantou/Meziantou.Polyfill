@@ -14,7 +14,7 @@ static partial class PolyfillExtensions
             var end = endIndex.IsFromEnd ? array.Length - endIndex.Value : endIndex.Value;
 
             if ((uint)end > (uint)array.Length || (uint)offset > (uint)end)
-                throw new global::System.ArgumentOutOfRangeException("length");
+                throw new global::System.ArgumentOutOfRangeException(nameof(range));
 
             var length = end - offset;
 
@@ -50,7 +50,7 @@ namespace System.Runtime.CompilerServices
             var end = endIndex.IsFromEnd ? array.Length - endIndex.Value : endIndex.Value;
 
             if ((uint)end > (uint)array.Length || (uint)offset > (uint)end)
-                throw new global::System.ArgumentOutOfRangeException("length");
+                throw new global::System.ArgumentOutOfRangeException(nameof(range));
 
             var length = end - offset;
 
