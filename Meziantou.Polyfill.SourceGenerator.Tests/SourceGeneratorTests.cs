@@ -128,8 +128,7 @@ public sealed class SourceGeneratorTests
                 }
             }
             """,
-            assemblyLocations: assemblies,
-            includedPolyfills: "T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute;T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute;T:System.Index;T:System.Range;M:System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray``1(``0[],System.Range)");
+            assemblyLocations: assemblies);
 
         var assembly = global::System.Reflection.Assembly.Load(result.Assembly!);
         var type = assembly.GetType("Test")!;
