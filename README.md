@@ -161,7 +161,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1054)
+### Methods (1055)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -845,6 +845,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.HasCustomFormatter(System.IFormatProvider provider)` _(requires ``T:System.ReadOnlySpan`1``, ``T:System.Span`1``)_
 - `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.ToStringAndClear()` _(requires ``T:System.ReadOnlySpan`1``, ``T:System.Span`1``)_
 - `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.ToString()` _(requires ``T:System.ReadOnlySpan`1``, ``T:System.Span`1``)_
+- `System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray<T>(T[] array, System.Range range)`
 - `System.Runtime.InteropServices.CollectionsMarshal.AsSpan<T>(System.Collections.Generic.List<T>? list)` _(requires ``T:System.Span`1``)_
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, [System.Globalization.NumberStyles style = System.Globalization.NumberStyles.Integer], [System.IFormatProvider? provider = null])` _(requires ``T:System.ReadOnlySpan`1``)_
 - `System.SByte.Parse(System.ReadOnlySpan<System.Byte> utf8Text, System.IFormatProvider? provider)` _(requires ``T:System.ReadOnlySpan`1``)_
