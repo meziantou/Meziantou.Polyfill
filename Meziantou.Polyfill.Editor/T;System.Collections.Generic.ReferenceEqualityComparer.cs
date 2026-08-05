@@ -1,5 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+// define-type System.Runtime.CompilerServices.RuntimeHelpers
 
 namespace System.Collections.Generic
 {
@@ -47,12 +48,17 @@ namespace System.Collections.Generic
         /// </remarks>
         public int GetHashCode(object? obj)
         {
+#if MEZIANTOU_POLYFILL_TYPE_SYSTEM_RUNTIME_COMPILERSERVICES_RUNTIMEHELPERS
+            return global::System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(obj!);
+#else
             return ReferenceEqualityComparerHelper.GetHashCode(obj!);
+#endif
         }
     }
 
     file static class ReferenceEqualityComparerHelper
     {
+#if !MEZIANTOU_POLYFILL_TYPE_SYSTEM_RUNTIME_COMPILERSERVICES_RUNTIMEHELPERS
         private static readonly global::System.Func<object, int> s_getHashCode = CreateGetHashCodeDelegate();
 
         public static int GetHashCode(object obj) => s_getHashCode(obj);
@@ -63,5 +69,6 @@ namespace System.Collections.Generic
             var getHashCodeMethod = runtimeHelpersType.GetMethod("GetHashCode", [typeof(object)])!;
             return (global::System.Func<object, int>)global::System.Delegate.CreateDelegate(typeof(global::System.Func<object, int>), getHashCodeMethod);
         }
+#endif
     }
 }
