@@ -95,7 +95,7 @@ public sealed class SourceGeneratorTests
     [Fact]
     public async Task RuntimeHelpersGetSubArrayPolyfill_SupportsArrayRangeSyntax()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "5.0.0", "ref/net5.0/");
 
         var result = GenerateFiles(
             """

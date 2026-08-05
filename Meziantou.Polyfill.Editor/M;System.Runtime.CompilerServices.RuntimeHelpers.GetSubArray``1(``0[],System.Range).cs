@@ -1,4 +1,5 @@
-#if NETFRAMEWORK
+// define-type System.Runtime.CompilerServices.RuntimeHelpers
+#if MEZIANTOU_POLYFILL_TYPE_SYSTEM_RUNTIME_COMPILERSERVICES_RUNTIMEHELPERS
 static partial class PolyfillExtensions
 {
     extension(global::System.Runtime.CompilerServices.RuntimeHelpers)
