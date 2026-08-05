@@ -13,6 +13,14 @@ static partial class PolyfillExtensions
             return new ValueTask<int>(target.ReadAsync(segment.Array!, segment.Offset, segment.Count, cancellationToken));
         }
 
-        return new ValueTask<int>(target.ReadAsync(buffer.ToArray(), 0, buffer.Length, cancellationToken));
+        return ReadAsyncFallback(target, buffer, cancellationToken);
+    }
+
+    private static async ValueTask<int> ReadAsyncFallback(Stream target, Memory<byte> buffer, CancellationToken cancellationToken)
+    {
+        var tempArray = new byte[buffer.Length];
+        var bytesRead = await target.ReadAsync(tempArray, 0, tempArray.Length, cancellationToken).ConfigureAwait(false);
+        tempArray.AsSpan(0, bytesRead).CopyTo(buffer.Span);
+        return bytesRead;
     }
 }

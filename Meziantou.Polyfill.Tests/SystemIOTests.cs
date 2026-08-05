@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -206,6 +207,18 @@ public class SystemIOTests
     }
 
     [Fact]
+    public async Task Stream_ReadAsync_Memory_NonArrayBacked()
+    {
+        using var ms = new MemoryStream([1, 2, 3, 4, 5]);
+        using var manager = new NonArrayMemoryManager(3);
+
+        var bytesRead = await ms.ReadAsync(manager.Memory);
+
+        Assert.Equal(3, bytesRead);
+        Assert.Equal([1, 2, 3], manager.Data.ToArray());
+    }
+
+    [Fact]
     public async Task Stream_WriteAsync_ReadOnlyMemory()
     {
         using var ms = new MemoryStream();
@@ -270,6 +283,23 @@ public class SystemIOTests
             Disposed = true;
             base.Dispose(disposing);
         }
+    }
+
+    private sealed class NonArrayMemoryManager : MemoryManager<byte>
+    {
+        private readonly byte[] _array;
+
+        public NonArrayMemoryManager(int size) => _array = new byte[size];
+
+        public ReadOnlySpan<byte> Data => _array;
+
+        public override Span<byte> GetSpan() => _array;
+
+        public override MemoryHandle Pin(int elementIndex = 0) => throw new NotSupportedException();
+
+        public override void Unpin() { }
+
+        protected override void Dispose(bool disposing) { }
     }
 #endif
 
