@@ -40,7 +40,16 @@ public sealed class SourceGeneratorTests
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Empty(GetFileNames(result.GeneratorResult));
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+
+        if (ContainsReferenceType(assemblies, "System.Runtime.CompilerServices.IsClosedTypeAttribute"))
+        {
+            Assert.Empty(generatedFileNames);
+        }
+        else
+        {
+            Assert.Equal(["T_System.Runtime.CompilerServices.IsClosedTypeAttribute.g.cs"], generatedFileNames);
+        }
     }
 
     [Fact]
@@ -423,8 +432,18 @@ public sealed class SourceGeneratorTests
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
 
-        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
-        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath)).ToArray();
+        if (ContainsReferenceType(assemblies, "System.Runtime.CompilerServices.IsClosedTypeAttribute"))
+        {
+            Assert.Empty(generatedFileNames);
+            Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+        }
+        else
+        {
+            Assert.Equal(["T_System.Runtime.CompilerServices.IsClosedTypeAttribute.g.cs"], generatedFileNames);
+            Assert.Contains("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+        }
     }
 
     [Fact]
@@ -645,6 +664,15 @@ public sealed class SourceGeneratorTests
         }
 
         return fileNames.Order(StringComparer.Ordinal);
+    }
+
+    private static bool ContainsReferenceType(IEnumerable<string> assemblyLocations, string metadataName)
+    {
+        var compilation = CSharpCompilation.Create("ReferenceCheck",
+            references: assemblyLocations.Select(loc => MetadataReference.CreateFromFile(loc)),
+            options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+        return compilation.GetTypeByMetadataName(metadataName) is not null;
     }
 
     private static string GetGeneratedFileContent(GeneratorDriverRunResult generatorResult, string fileName)
