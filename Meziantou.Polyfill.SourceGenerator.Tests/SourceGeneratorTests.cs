@@ -42,14 +42,7 @@ public sealed class SourceGeneratorTests
         var result = GenerateFiles("", assemblyLocations: assemblies);
         var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
 
-        if (ContainsReferenceType(assemblies, "System.Runtime.CompilerServices.IsClosedTypeAttribute"))
-        {
-            Assert.Empty(generatedFileNames);
-        }
-        else
-        {
-            Assert.Equal(["T_System.Runtime.CompilerServices.IsClosedTypeAttribute.g.cs"], generatedFileNames);
-        }
+        Assert.Empty(generatedFileNames);
     }
 
     [Fact]
@@ -434,16 +427,8 @@ public sealed class SourceGeneratorTests
 
         var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath)).ToArray();
-        if (ContainsReferenceType(assemblies, "System.Runtime.CompilerServices.IsClosedTypeAttribute"))
-        {
-            Assert.Empty(generatedFileNames);
-            Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
-        }
-        else
-        {
-            Assert.Equal(["T_System.Runtime.CompilerServices.IsClosedTypeAttribute.g.cs"], generatedFileNames);
-            Assert.Contains("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
-        }
+        Assert.Empty(generatedFileNames);
+        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
     }
 
     [Fact]
@@ -664,15 +649,6 @@ public sealed class SourceGeneratorTests
         }
 
         return fileNames.Order(StringComparer.Ordinal);
-    }
-
-    private static bool ContainsReferenceType(IEnumerable<string> assemblyLocations, string metadataName)
-    {
-        var compilation = CSharpCompilation.Create("ReferenceCheck",
-            references: assemblyLocations.Select(loc => MetadataReference.CreateFromFile(loc)),
-            options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
-        return compilation.GetTypeByMetadataName(metadataName) is not null;
     }
 
     private static string GetGeneratedFileContent(GeneratorDriverRunResult generatorResult, string fileName)
@@ -929,7 +905,7 @@ public sealed class SourceGeneratorTests
                         continue;
 
                     var relativePath = Path.GetRelativePath(cacheFolder, dll).Replace('\\', '/');
-                      if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
+                    if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
                         continue;
 
                     if (exclusions != null)
