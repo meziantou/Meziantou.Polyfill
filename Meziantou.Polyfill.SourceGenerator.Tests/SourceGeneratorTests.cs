@@ -12,7 +12,7 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public sealed class SourceGeneratorTests
 {
-    private const string LatestDotnetPackageVersion = "11.0.0-preview.5.26302.115";
+    private const string LatestDotnetPackageVersion = "11.0.0-preview.6.26359.118";
     private const string LatestDotnetTfm = "net11.0";
 
     [Fact]
@@ -40,7 +40,9 @@ public sealed class SourceGeneratorTests
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
-        Assert.Empty(GetFileNames(result.GeneratorResult));
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+
+        Assert.Empty(generatedFileNames);
     }
 
     [Fact]
@@ -423,7 +425,9 @@ public sealed class SourceGeneratorTests
         var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", LatestDotnetPackageVersion, $"ref/{LatestDotnetTfm}/");
         var result = GenerateFiles("", assemblyLocations: assemblies);
 
-        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath)).ToArray();
+        Assert.Empty(generatedFileNames);
         Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
     }
 
@@ -901,7 +905,7 @@ public sealed class SourceGeneratorTests
                         continue;
 
                     var relativePath = Path.GetRelativePath(cacheFolder, dll).Replace('\\', '/');
-                      if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
+                    if (!relativePath.StartsWith(path, StringComparison.OrdinalIgnoreCase))
                         continue;
 
                     if (exclusions != null)

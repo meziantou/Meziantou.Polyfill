@@ -77,9 +77,13 @@ public class AttributesTests
         Assert.Equal("F#", StringSyntaxAttribute.FSharp);
         Assert.Equal("Visual Basic", StringSyntaxAttribute.VisualBasic);
 
+        var isClosedTypeAttribute = new IsClosedTypeAttribute();
+        Assert.Empty(isClosedTypeAttribute.DerivedTypes);
+        isClosedTypeAttribute.DerivedTypes = [typeof(string)];
+        Assert.Equal([typeof(string)], isClosedTypeAttribute.DerivedTypes);
+
         Assert.Null(((IUnion)new CustomUnion(null)).Value);
     }
-
 }
 
 file sealed class CustomUnion : IUnion

@@ -1,0 +1,29 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+namespace System.Runtime.CompilerServices
+{
+    /// <summary>
+    /// Reserved for use by a compiler for tracking metadata.
+    /// This attribute should not be used by developers in source code.
+    /// </summary>
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    [global::System.AttributeUsage(global::System.AttributeTargets.Class, Inherited = false)]
+    internal sealed class IsClosedTypeAttribute : global::System.Attribute
+    {
+        private global::System.Type[] _derivedTypes = global::System.Type.EmptyTypes;
+
+        /// <summary>Initializes the attribute.</summary>
+        public IsClosedTypeAttribute()
+        {
+        }
+
+        /// <summary>Gets or sets the derived types of the closed type.</summary>
+        /// <value>An array of the derived types of the closed type. A <see langword="null" /> value is normalized to an empty array.</value>
+        public global::System.Type[] DerivedTypes
+        {
+            get => _derivedTypes;
+            set => _derivedTypes = value ?? global::System.Type.EmptyTypes;
+        }
+    }
+}
