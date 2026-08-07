@@ -12,7 +12,8 @@ namespace Meziantou.Polyfill.SourceGenerator.Tests;
 
 public sealed class SourceGeneratorTests
 {
-    private const string LatestDotnetPackageVersion = "11.0.0-preview.5.26302.115";
+    private const string LatestDotnetSdkVersion = "11.0.100-preview.6.26359.118";
+    private static readonly string LatestDotnetPackageVersion = LatestDotnetSdkVersion.Replace(".100-", ".0-", StringComparison.Ordinal);
     private const string LatestDotnetTfm = "net11.0";
 
     [Fact]
