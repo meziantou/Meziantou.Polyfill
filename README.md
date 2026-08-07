@@ -1220,7 +1220,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Xml.Linq.XNode.ReadFromAsync(System.Xml.XmlReader reader, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XNode.WriteToAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (205)
+### Properties (206)
 
 - `System.DateTimeOffset.UnixEpoch`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CSharp = "C#"` _(requires `T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute`)_
@@ -1400,6 +1400,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Runtime.CompilerServices.DefaultInterpolatedStringHandler.Text` _(requires ``T:System.ReadOnlySpan`1``, ``T:System.Span`1``)_
 - `System.Runtime.CompilerServices.IUnion.Value`
 - `System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.Arguments`
+- `System.Runtime.CompilerServices.IsClosedTypeAttribute.DerivedTypes`
 - `System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.Priority`
 - `System.Runtime.CompilerServices.TupleElementNamesAttribute.TransformNames`
 - `System.Runtime.InteropServices.ExtendedLayoutAttribute.LayoutKind`
