@@ -48,6 +48,7 @@ public class AttributesTests
         _ = new DisableRuntimeMarshallingAttribute();
         _ = new InterpolatedStringHandlerArgumentAttribute("");
         _ = new InterpolatedStringHandlerAttribute();
+        _ = new IsClosedTypeAttribute();
         _ = new ModuleInitializerAttribute();
         _ = new RequiredMemberAttribute();
         _ = new SkipLocalsInitAttribute();
