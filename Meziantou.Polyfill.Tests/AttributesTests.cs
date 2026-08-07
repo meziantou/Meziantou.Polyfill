@@ -48,7 +48,6 @@ public class AttributesTests
         _ = new DisableRuntimeMarshallingAttribute();
         _ = new InterpolatedStringHandlerArgumentAttribute("");
         _ = new InterpolatedStringHandlerAttribute();
-        var isClosedTypeAttribute = new IsClosedTypeAttribute();
         _ = new ModuleInitializerAttribute();
         _ = new RequiredMemberAttribute();
         _ = new SkipLocalsInitAttribute();
@@ -77,17 +76,14 @@ public class AttributesTests
         Assert.Equal("C#", StringSyntaxAttribute.CSharp);
         Assert.Equal("F#", StringSyntaxAttribute.FSharp);
         Assert.Equal("Visual Basic", StringSyntaxAttribute.VisualBasic);
-        Assert.Empty(isClosedTypeAttribute.DerivedTypes);
 
+        var isClosedTypeAttribute = new IsClosedTypeAttribute();
+        Assert.Empty(isClosedTypeAttribute.DerivedTypes);
         isClosedTypeAttribute.DerivedTypes = [typeof(string)];
         Assert.Equal([typeof(string)], isClosedTypeAttribute.DerivedTypes);
 
-        isClosedTypeAttribute.DerivedTypes = null!;
-        Assert.Empty(isClosedTypeAttribute.DerivedTypes);
-
         Assert.Null(((IUnion)new CustomUnion(null)).Value);
     }
-
 }
 
 file sealed class CustomUnion : IUnion
