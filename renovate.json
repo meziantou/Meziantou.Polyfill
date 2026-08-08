@@ -7,6 +7,7 @@
     {
       "matchFileNames": ["Meziantou.Polyfill/Meziantou.Polyfill.csproj"],
       "matchPackageNames": [
+        "Microsoft.CodeAnalysis",
         "Microsoft.CodeAnalysis.Analyzers",
         "Microsoft.CodeAnalysis.CSharp",
         "Microsoft.CodeAnalysis.CSharp.Workspaces",
