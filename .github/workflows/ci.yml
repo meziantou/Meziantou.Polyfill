@@ -18,10 +18,10 @@ jobs:
   lint_readme:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
-    - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.nuget/packages
         key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
@@ -47,10 +47,10 @@ jobs:
     env:
       RepositoryBranch: ${{github.ref}}
     steps:
-    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
-    - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.nuget/packages
         key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
@@ -76,9 +76,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ create_nuget ]
     steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Setup .NET Core (global.json)
-        uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nuget
@@ -103,10 +103,10 @@ jobs:
     steps:
     - name: git configure long path
       run: git config --global core.longpaths true
-    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
     - name: Setup .NET
-      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
-    - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.nuget/packages
         key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
@@ -119,15 +119,15 @@ jobs:
     steps:
     - name: git configure long path
       run: git config --global core.longpaths true
-    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
     - name: Setup .NET
-      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
       with:
         global-json-file: global.json
         dotnet-version: |
             9.0.x
             8.0.x
-    - uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.nuget/packages
         key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
@@ -143,17 +143,17 @@ jobs:
       contents: read
       id-token: write
     steps:
-    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         fetch-depth: 2
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
     - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
       with:
         name: nuget
         path: ${{ env.NuGetDirectory }}
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
     - name: NuGet login (OIDC → temp API key)
       uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
       id: login
