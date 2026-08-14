@@ -3,7 +3,7 @@
     "version": "11.0.100-preview.7.26381.103"
   },
   "msbuild-sdks": {
-    "Meziantou.NET.Sdk": "1.0.129",
-    "Meziantou.NET.Sdk.Test": "1.0.129"
+    "Meziantou.NET.Sdk": "1.0.133",
+    "Meziantou.NET.Sdk.Test": "1.0.133"
   }
 }
