@@ -219,6 +219,70 @@ public class SystemIOTests
     }
 
     [Fact]
+    public async Task Stream_CopyToAsync_CancellationToken()
+    {
+        using var source = new MemoryStream([1, 2, 3, 4, 5]);
+        using var destination = new MemoryStream();
+
+        await source.CopyToAsync(destination, CancellationToken.None);
+
+        Assert.Equal([1, 2, 3, 4, 5], destination.ToArray());
+    }
+
+    [Fact]
+    public async Task Stream_CopyToAsync_CancellationToken_Canceled()
+    {
+        using var source = new MemoryStream([1, 2, 3, 4, 5]);
+        using var destination = new MemoryStream();
+        using var cancellationTokenSource = new CancellationTokenSource();
+        cancellationTokenSource.Cancel();
+
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => source.CopyToAsync(destination, cancellationTokenSource.Token));
+
+        Assert.Equal(cancellationTokenSource.Token, exception.CancellationToken);
+        Assert.Empty(destination.ToArray());
+    }
+
+    [Fact]
+    public async Task TextReader_ReadBlockAsync_Memory()
+    {
+        using var reader = new ChunkedTextReader("abcd", maxCharsPerRead: 2);
+        var buffer = new[] { 'x', 'x', 'x', 'x', 'x' };
+
+        var charsRead = await reader.ReadBlockAsync(buffer.AsMemory(1, 4), CancellationToken.None);
+
+        Assert.Equal(4, charsRead);
+        Assert.Equal(['x', 'a', 'b', 'c', 'd'], buffer);
+        Assert.True(reader.ReadCount >= 2);
+    }
+
+    [Fact]
+    public async Task TextReader_ReadBlockAsync_Memory_NonArrayBacked()
+    {
+        using var reader = new StringReader("abcde");
+        using var manager = new NonArrayCharMemoryManager(3);
+
+        var charsRead = await reader.ReadBlockAsync(manager.Memory, CancellationToken.None);
+
+        Assert.Equal(3, charsRead);
+        Assert.Equal("abc", new string(manager.Data.ToArray()));
+    }
+
+    [Fact]
+    public async Task TextReader_ReadBlockAsync_Memory_Canceled()
+    {
+        using var reader = new StringReader("abcde");
+        using var cancellationTokenSource = new CancellationTokenSource();
+        cancellationTokenSource.Cancel();
+        var buffer = new char[3];
+
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await reader.ReadBlockAsync(buffer.AsMemory(), cancellationTokenSource.Token));
+
+        Assert.Equal(cancellationTokenSource.Token, exception.CancellationToken);
+        Assert.Equal(['\0', '\0', '\0'], buffer);
+    }
+
+    [Fact]
     public async Task Stream_WriteAsync_ReadOnlyMemory()
     {
         using var ms = new MemoryStream();
@@ -300,6 +364,47 @@ public class SystemIOTests
         public override void Unpin() { }
 
         protected override void Dispose(bool disposing) { }
+    }
+
+    private sealed class NonArrayCharMemoryManager : MemoryManager<char>
+    {
+        private readonly char[] _array;
+
+        public NonArrayCharMemoryManager(int size) => _array = new char[size];
+
+        public ReadOnlySpan<char> Data => _array;
+
+        public override Span<char> GetSpan() => _array;
+
+        public override MemoryHandle Pin(int elementIndex = 0) => throw new NotSupportedException();
+
+        public override void Unpin() { }
+
+        protected override void Dispose(bool disposing) { }
+    }
+
+    private sealed class ChunkedTextReader : TextReader
+    {
+        private readonly string _text;
+        private readonly int _maxCharsPerRead;
+        private int _position;
+
+        public ChunkedTextReader(string text, int maxCharsPerRead)
+        {
+            _text = text;
+            _maxCharsPerRead = maxCharsPerRead;
+        }
+
+        public int ReadCount { get; private set; }
+
+        public override int Read(char[] buffer, int index, int count)
+        {
+            ReadCount++;
+            var charsToRead = Math.Min(Math.Min(count, _maxCharsPerRead), _text.Length - _position);
+            _text.CopyTo(_position, buffer, index, charsToRead);
+            _position += charsToRead;
+            return charsToRead;
+        }
     }
 #endif
 
