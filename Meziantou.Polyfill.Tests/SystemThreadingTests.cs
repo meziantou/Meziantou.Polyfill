@@ -238,8 +238,11 @@ public class SystemThreadingTests
     public async Task PeriodicTimer_Cancellation()
     {
         using var timer = new PeriodicTimer(TimeSpan.FromHours(1));
-        using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(50));
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => WaitWithTimeout(timer.WaitForNextTickAsync(cts.Token)));
+        using var cts = new CancellationTokenSource();
+        var wait = timer.WaitForNextTickAsync(cts.Token);
+        cts.Cancel();
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => WaitWithTimeout(wait));
     }
 
     [Fact]
@@ -413,12 +416,18 @@ public class SystemThreadingTests
     [Fact]
     public async Task PeriodicTimer_Period_CanChange()
     {
-        using var timer = new PeriodicTimer(TimeSpan.FromHours(1));
+        var timeProvider = new ManualTimeProvider();
+        using var timer = new PeriodicTimer(TimeSpan.FromHours(1), timeProvider);
+        var manualTimer = Assert.IsType<ManualTimer>(timeProvider.Timer);
+
         timer.Period = TimeSpan.FromMilliseconds(50);
         Assert.Equal(TimeSpan.FromMilliseconds(50), timer.Period);
+        Assert.Equal(TimeSpan.FromMilliseconds(50), manualTimer.DueTime);
+        Assert.Equal(TimeSpan.FromMilliseconds(50), manualTimer.Period);
 
-        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-        Assert.True(await WaitWithTimeout(timer.WaitForNextTickAsync(cts.Token)));
+        var wait = timer.WaitForNextTickAsync().AsTask();
+        manualTimer.Fire();
+        Assert.True(await WaitWithTimeout(wait));
     }
 
     [Fact]
@@ -500,7 +509,7 @@ public class SystemThreadingTests
 
         try
         {
-            Assert.True(timer.Change(TimeSpan.FromMilliseconds(50), Timeout.InfiniteTimeSpan));
+            Assert.True(timer.Change(TimeSpan.Zero, Timeout.InfiniteTimeSpan));
             Assert.True(await WaitWithTimeout(tcs.Task));
         }
         finally

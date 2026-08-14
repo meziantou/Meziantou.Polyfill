@@ -168,9 +168,9 @@ public sealed class SourceGeneratorTests
             includedPolyfills: "T:System.Threading.PeriodicTimer");
 
         var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
-        Assert.Contains("T_System.Threading.PeriodicTimer.g.cs", generatedFileNames);
-        Assert.DoesNotContain("T_System.Threading.ITimer.g.cs", generatedFileNames);
-        Assert.DoesNotContain("T_System.TimeProvider.g.cs", generatedFileNames);
+        Assert.Contains("T_System.Threading.PeriodicTimer.g.cs", generatedFileNames, StringComparer.Ordinal);
+        Assert.DoesNotContain("T_System.Threading.ITimer.g.cs", generatedFileNames, StringComparer.Ordinal);
+        Assert.DoesNotContain("T_System.TimeProvider.g.cs", generatedFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -406,7 +406,7 @@ public sealed class SourceGeneratorTests
         var result = GenerateFiles("", assemblyLocations: assemblies);
 
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
-        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
+        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -416,7 +416,7 @@ public sealed class SourceGeneratorTests
         var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "T:Some.Type.That.Does.Not.Exist");
 
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
-        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
+        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -428,7 +428,7 @@ public sealed class SourceGeneratorTests
         var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath)).ToArray();
         Assert.Empty(generatedFileNames);
-        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -438,7 +438,7 @@ public sealed class SourceGeneratorTests
         var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "T:Some.Type.That.Does.Not.Exist");
 
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
-        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+        Assert.DoesNotContain("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -448,7 +448,7 @@ public sealed class SourceGeneratorTests
         var result = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})");
 
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
-        Assert.Contains("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames);
+        Assert.Contains("Microsoft.CodeAnalysis.EmbeddedAttribute.cs", allFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -464,26 +464,26 @@ public sealed class SourceGeneratorTests
 
         var lines = GetGeneratedFileLines(result.GeneratorResult, "PolyfillExtensions.g.cs");
 
-        Assert.Contains("internal static partial class PolyfillExtensions", lines);
+        Assert.Contains("internal static partial class PolyfillExtensions", lines, StringComparer.Ordinal);
 
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Byte", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Decimal", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Double", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int16", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int32", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int64", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_IntPtr", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_MD5", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_SByte", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_SHA256", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Single", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Task", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt16", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt32", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt64", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UIntPtr", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_XDocument", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions_XElement", lines);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Byte", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Decimal", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Double", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int16", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int32", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Int64", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_IntPtr", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_MD5", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_SByte", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_SHA256", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Single", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_Task", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt16", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt32", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UInt64", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_UIntPtr", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_XDocument", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions_XElement", lines, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -499,8 +499,8 @@ public sealed class SourceGeneratorTests
 
         var lines = GetGeneratedFileLines(result.GeneratorResult, "PolyfillExtensions.g.cs");
 
-        Assert.Contains("internal static partial class PolyfillExtensions_MD5", lines);
-        Assert.DoesNotContain("internal static partial class PolyfillExtensions", lines);
+        Assert.Contains("internal static partial class PolyfillExtensions_MD5", lines, StringComparer.Ordinal);
+        Assert.DoesNotContain("internal static partial class PolyfillExtensions", lines, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -516,7 +516,7 @@ public sealed class SourceGeneratorTests
             languageVersion: LanguageVersion.CSharp13);
 
         var allFileNames = result.GeneratorResult.GeneratedTrees.Select(tree => Path.GetFileName(tree.FilePath));
-        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames);
+        Assert.DoesNotContain("PolyfillExtensions.g.cs", allFileNames, StringComparer.Ordinal);
     }
 
     [Fact]
@@ -529,7 +529,7 @@ public sealed class SourceGeneratorTests
             assemblyLocations: assemblies,
             includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})");
 
-        Assert.DoesNotContain("Debug.g.cs", GetFileNames(result.GeneratorResult, includeAlwaysGeneratedFiles: true));
+        Assert.DoesNotContain("Debug.g.cs", GetFileNames(result.GeneratorResult, includeAlwaysGeneratedFiles: true), StringComparer.Ordinal);
     }
 
     [Fact]
