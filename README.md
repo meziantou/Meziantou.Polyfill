@@ -162,7 +162,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1055)
+### Methods (1057)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -464,6 +464,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.IO.Path.Join(params System.String?[] paths)`
 - `System.IO.Path.TrimEndingDirectorySeparator(System.ReadOnlySpan<System.Char> path)` _(requires ``T:System.ReadOnlySpan`1``)_
 - `System.IO.Path.TrimEndingDirectorySeparator(System.String path)`
+- `System.IO.Stream.CopyToAsync(System.IO.Stream destination, System.Threading.CancellationToken cancellationToken)`
 - `System.IO.Stream.DisposeAsync()` _(requires `T:System.Threading.Tasks.ValueTask`)_
 - `System.IO.Stream.Read(System.Span<System.Byte> buffer)` _(requires ``T:System.Span`1``)_
 - `System.IO.Stream.ReadAsync(System.Memory<System.Byte> buffer, [System.Threading.CancellationToken cancellationToken = default])` _(requires ``T:System.Memory`1``, ``T:System.Threading.Tasks.ValueTask`1``)_
@@ -476,6 +477,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.IO.StreamReader.ReadLineAsync()`
 - `System.IO.StreamReader.ReadLineAsync(System.Threading.CancellationToken cancellationToken)` _(requires ``T:System.Threading.Tasks.ValueTask`1``)_
 - `System.IO.TextReader.ReadAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])` _(requires ``T:System.Memory`1``, ``T:System.ReadOnlyMemory`1``, ``T:System.Threading.Tasks.ValueTask`1``)_
+- `System.IO.TextReader.ReadBlockAsync(System.Memory<System.Char> buffer, [System.Threading.CancellationToken cancellationToken = default])` _(requires ``T:System.Memory`1``, ``T:System.ReadOnlyMemory`1``, ``T:System.Threading.Tasks.ValueTask`1``)_
 - `System.IO.TextReader.ReadLineAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken cancellationToken)`
 - `System.IO.TextWriter.CreateBroadcasting(params System.IO.TextWriter[] writers)` _(requires `T:System.IAsyncDisposable`)_
