@@ -180,14 +180,14 @@ public sealed class SourceGeneratorTests
         var tempGeneration = GenerateFiles("""[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("main")]""", assemblyName: "temp", assemblyLocations: assemblies);
         Assert.Single(GetFileNames(tempGeneration.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
         Assert.Single(GetFileNames(tempGeneration.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
-        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(tempGeneration.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
+        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(tempGeneration.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"));
 
         var temp = Path.GetTempFileName() + ".dll";
         await File.WriteAllBytesAsync(temp, tempGeneration.Assembly!, TestContext.Current.CancellationToken);
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(temp));
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "M_System.IO.TextReader.ReadToEndAsync(System.Threading.CancellationToken).g.cs");
-        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(result.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
+        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(result.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"));
 
     }
 
@@ -212,7 +212,7 @@ public sealed class SourceGeneratorTests
         // that would otherwise be ambiguous (CS0433) between proj2 and proj3.
         var result = GenerateFiles("", assemblyName: "main", assemblyLocations: assemblies.Append(proj2Dll).Append(proj3Dll));
         Assert.Single(GetFileNames(result.GeneratorResult), file => file is "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs");
-        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(result.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"), StringComparison.Ordinal);
+        Assert.Contains("[Microsoft.CodeAnalysis.EmbeddedAttribute]", GetGeneratedFileContent(result.GeneratorResult, "T_System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.g.cs"));
     }
 
     [Theory]
@@ -239,8 +239,8 @@ public sealed class SourceGeneratorTests
 
         var infiniteSequence = GetGeneratedFileContent(netCore31Result.GeneratorResult, "M_System.Linq.Enumerable.InfiniteSequence``1(``0,``0).g.cs");
         var sequence = GetGeneratedFileContent(netCore31Result.GeneratorResult, "M_System.Linq.Enumerable.Sequence``1(``0,``0,``0).g.cs");
-        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_IADDITIONOPERATORS_3", infiniteSequence, StringComparison.Ordinal);
-        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_INUMBER_1", sequence, StringComparison.Ordinal);
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_IADDITIONOPERATORS_3", infiniteSequence);
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_INUMBER_1", sequence);
 
         var net8Assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/");
         var net8Result = GenerateFiles(
@@ -250,8 +250,8 @@ public sealed class SourceGeneratorTests
 
         infiniteSequence = GetGeneratedFileContent(net8Result.GeneratorResult, "M_System.Linq.Enumerable.InfiniteSequence``1(``0,``0).g.cs");
         sequence = GetGeneratedFileContent(net8Result.GeneratorResult, "M_System.Linq.Enumerable.Sequence``1(``0,``0,``0).g.cs");
-        Assert.Contains("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_IADDITIONOPERATORS_3", infiniteSequence, StringComparison.Ordinal);
-        Assert.Contains("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_INUMBER_1", sequence, StringComparison.Ordinal);
+        Assert.Contains("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_IADDITIONOPERATORS_3", infiniteSequence);
+        Assert.Contains("#define MEZIANTOU_POLYFILL_TYPE_SYSTEM_NUMERICS_INUMBER_1", sequence);
     }
 
     [Fact]
@@ -371,7 +371,7 @@ public sealed class SourceGeneratorTests
             languageVersion: languageVersion);
 
         var content = GetGeneratedFileContent(result.GeneratorResult, "T_System.Buffers.SpanAction`2.g.cs");
-        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content, StringComparison.Ordinal);
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content);
     }
 
     [Fact]
@@ -385,7 +385,7 @@ public sealed class SourceGeneratorTests
             languageVersion: LanguageVersion.CSharp14);
 
         var content = GetGeneratedFileContent(result.GeneratorResult, "P_System.Net.Http.HttpMethod.Query.g.cs");
-        Assert.Contains("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content, StringComparison.Ordinal);
+        Assert.Contains("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content);
     }
 
     public static TheoryData<LanguageVersion> GetRuntimeWithoutByRefLikeGenericSupportLanguageVersions()
@@ -544,8 +544,8 @@ public sealed class SourceGeneratorTests
             generateDebugFile: true);
 
         var content = GetGeneratedFileContent(result.GeneratorResult, "Debug.g.cs");
-        Assert.Contains("// GenerateDebugFile: True", content, StringComparison.Ordinal);
-        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): True", content, StringComparison.Ordinal);
+        Assert.Contains("// GenerateDebugFile: True", content);
+        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): True", content);
     }
 
     [Fact]
@@ -562,7 +562,7 @@ public sealed class SourceGeneratorTests
             excludedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})",
             generateDebugFile: true);
         var excludedContent = GetGeneratedFileContent(excludedResult.GeneratorResult, "Debug.g.cs");
-        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): False (excluded by options)", excludedContent, StringComparison.Ordinal);
+        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): False (excluded by options)", excludedContent);
 
         var alreadyAvailableResult = GenerateFiles(
             "",
@@ -570,7 +570,7 @@ public sealed class SourceGeneratorTests
             includedPolyfills: "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})",
             generateDebugFile: true);
         var alreadyAvailableContent = GetGeneratedFileContent(alreadyAvailableResult.GeneratorResult, "Debug.g.cs");
-        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): False (already available in compilation)", alreadyAvailableContent, StringComparison.Ordinal);
+        Assert.Contains("// M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0}): False (already available in compilation)", alreadyAvailableContent);
 
         var missingTypeResult = GenerateFiles(
             "",
@@ -578,7 +578,7 @@ public sealed class SourceGeneratorTests
             includedPolyfills: "M:System.Random.NextBytes(System.Span{System.Byte})",
             generateDebugFile: true);
         var missingTypeContent = GetGeneratedFileContent(missingTypeResult.GeneratorResult, "Debug.g.cs");
-        Assert.Contains("// M:System.Random.NextBytes(System.Span{System.Byte}): False (missing required features: T:System.Span`1)", missingTypeContent, StringComparison.Ordinal);
+        Assert.Contains("// M:System.Random.NextBytes(System.Span{System.Byte}): False (missing required features: T:System.Span`1)", missingTypeContent);
 
         var conditionalResult = GenerateFiles(
             "",
@@ -586,7 +586,7 @@ public sealed class SourceGeneratorTests
             includedPolyfills: "T:System.ITupleInternal",
             generateDebugFile: true);
         var conditionalContent = GetGeneratedFileContent(conditionalResult.GeneratorResult, "Debug.g.cs");
-        Assert.Contains("// T:System.ITupleInternal: False (conditional dependencies not generated: T:System.ValueTuple", conditionalContent, StringComparison.Ordinal);
+        Assert.Contains("// T:System.ITupleInternal: False (conditional dependencies not generated: T:System.ValueTuple", conditionalContent);
     }
 
     private static string[] GetGeneratedFileLines(GeneratorDriverRunResult generatorResult, string fileName)
