@@ -6,6 +6,10 @@
     <LangVersion>preview</LangVersion>
     <NoWarn>$(NoWarns);xUnit1051</NoWarn>
 
+    <!-- 'Meziantou.Framework.Assertions' supports .NET 10 and later only, so the assertions must
+         compile against the xUnit.net ones to also support the older target frameworks -->
+    <EnableMeziantouAssertions>false</EnableMeziantouAssertions>
+
     <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles\$(TargetFramework)</CompilerGeneratedFilesOutputPath>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
