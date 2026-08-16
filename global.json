@@ -6,7 +6,7 @@
     "runner": "Microsoft.Testing.Platform"
   },
   "msbuild-sdks": {
-    "Meziantou.NET.Sdk": "1.0.148",
-    "Meziantou.NET.Sdk.Test": "1.0.148"
+    "Meziantou.NET.Sdk": "1.0.149",
+    "Meziantou.NET.Sdk.Test": "1.0.149"
   }
 }
