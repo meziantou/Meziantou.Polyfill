@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 static partial class PolyfillExtensions
@@ -7,7 +6,7 @@ static partial class PolyfillExtensions
     public static async ValueTask DisposeAsync(this Stream target)
     {
 #if MEZIANTOU_POLYFILL_SUPPORTS_ASYNC_DISPOSABLE
-        if (target is IAsyncDisposable asyncDisposable)
+        if (target is global::System.IAsyncDisposable asyncDisposable)
         {
             await asyncDisposable.DisposeAsync().ConfigureAwait(false);
         }

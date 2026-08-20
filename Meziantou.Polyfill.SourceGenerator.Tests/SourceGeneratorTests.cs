@@ -229,6 +229,30 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task GeneratedCodeCompile_WithWindowsFormsGlobalUsings()
+    {
+        // WinForms projects with ImplicitUsings bring both System.Threading and System.Windows.Forms in scope,
+        // which makes unqualified type names such as Timer ambiguous (CS0104) in the generated code.
+        var assemblies = new List<string>();
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("Microsoft.NETFramework.ReferenceAssemblies.net481", "1.0.3", ""));
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("System.Threading.Tasks.Extensions", "4.5.4", "lib/net461/"));
+        assemblies.AddRange(await NuGetHelpers.GetNuGetReferences("Microsoft.Bcl.AsyncInterfaces", "8.0.0", "lib/net462/"));
+
+        GenerateFiles(
+            """
+            global using System.Drawing;
+            global using System.Windows.Forms;
+
+            static class WinFormsUsage
+            {
+                public static object Form = typeof(Form);
+                public static object Point = typeof(Point);
+            }
+            """,
+            assemblyLocations: assemblies);
+    }
+
+    [Fact]
     public async Task GenericMathPolyfills_UseTypePresenceDefines()
     {
         var netCore31Assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "3.1.0", "ref/netcoreapp3.1/");
