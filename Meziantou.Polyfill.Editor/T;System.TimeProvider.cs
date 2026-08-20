@@ -62,12 +62,12 @@ namespace System
 
         private sealed class SystemTimeProviderTimer : ITimer
         {
-            private readonly Timer _timer;
+            private readonly global::System.Threading.Timer _timer;
 
             public SystemTimeProviderTimer(TimeSpan dueTime, TimeSpan period, TimerCallback callback, object? state)
             {
                 var timerState = new TimerState(callback, state);
-                timerState.Timer = _timer = new Timer(static s =>
+                timerState.Timer = _timer = new global::System.Threading.Timer(static s =>
                 {
                     var ts = (TimerState)s!;
                     ts.Callback(ts.State);
@@ -78,7 +78,7 @@ namespace System
             {
                 public TimerCallback Callback { get; } = callback;
                 public object? State { get; } = state;
-                public Timer? Timer { get; set; }
+                public global::System.Threading.Timer? Timer { get; set; }
             }
 
             public bool Change(TimeSpan dueTime, TimeSpan period)
