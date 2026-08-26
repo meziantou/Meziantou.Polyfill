@@ -38,6 +38,19 @@ static partial class PolyfillExtensions
                 break;
         }
 
+        // NLS folds the target characters that pair with oldValue's own weightless tail into the match, so
+        // the shortest equal region falls one character short for each of them. The count only depends on
+        // oldValue, so it is computed once instead of once per occurrence.
+        var ignorableTail = 0;
+        if (compareInfo != null && ExtendsMatchOverIgnorableTail(compareInfo, compareOptions))
+        {
+            while (ignorableTail < oldValue.Length &&
+                   HasNoCollationWeight(compareInfo, oldValue, oldValue.Length - ignorableTail - 1, ignorableTail + 1, compareOptions))
+            {
+                ignorableTail++;
+            }
+        }
+
         var sb = new StringBuilder();
 
         var previousIndex = 0;
@@ -50,7 +63,7 @@ static partial class PolyfillExtensions
             }
             else
             {
-                matchLength = GetMatchLength(compareInfo, target, index, oldValue, compareOptions);
+                matchLength = GetMatchLength(compareInfo, target, index, oldValue, compareOptions, ignorableTail);
 
                 // oldValue has no collation weight (or no match length could be determined):
                 // behave as if there is nothing left to replace
@@ -66,18 +79,47 @@ static partial class PolyfillExtensions
         sb.Append(target, previousIndex, target.Length - previousIndex);
         return sb.ToString();
 
-        // Equivalent of CompareInfo.IndexOf(..., out int matchLength) which is not available on all
-        // the supported frameworks: find the shortest region of target starting at index that is
-        // equal to oldValue. Returns -1 when no such region exists.
-        static int GetMatchLength(CompareInfo compareInfo, string target, int index, string oldValue, CompareOptions options)
+        // Equivalent of CompareInfo.IndexOf(..., out int matchLength) which is not available on all the
+        // supported frameworks: find the shortest region of target starting at index that is equal to
+        // oldValue, then extend it over the weightless characters NLS folds into the match.
+        // Returns -1 when no such region exists.
+        static int GetMatchLength(CompareInfo compareInfo, string target, int index, string oldValue, CompareOptions options, int ignorableTail)
         {
-            for (var length = 0; index + length <= target.Length; length++)
+            var length = -1;
+            for (var candidate = 0; index + candidate <= target.Length; candidate++)
             {
-                if (compareInfo.Compare(target, index, length, oldValue, 0, oldValue.Length, options) == 0)
-                    return length;
+                if (compareInfo.Compare(target, index, candidate, oldValue, 0, oldValue.Length, options) == 0)
+                {
+                    length = candidate;
+                    break;
+                }
             }
 
-            return -1;
+            // No match, or oldValue is weightless in its entirety. Extending a zero-length match would turn
+            // "there is nothing to replace" into a replacement, so leave it for the caller to stop on.
+            if (length <= 0)
+                return length;
+
+            var remaining = ignorableTail;
+            while (remaining > 0 &&
+                   index + length < target.Length &&
+                   HasNoCollationWeight(compareInfo, target, index + length, 1, options))
+            {
+                length++;
+                remaining--;
+            }
+
+            return length;
         }
+
+        static bool HasNoCollationWeight(CompareInfo compareInfo, string value, int index, int length, CompareOptions options)
+            => compareInfo.Compare(value, index, length, "", 0, 0, options) == 0;
+
+        // Only NLS extends a match over the weightless characters that pair with oldValue's tail; applying
+        // the rule under ICU makes the result worse. NLS also compares U+00DF (LATIN SMALL LETTER SHARP S)
+        // equal to "ss" at the default strength while ICU does not, which tells the two implementations
+        // apart without depending on globalization internals.
+        static bool ExtendsMatchOverIgnorableTail(CompareInfo compareInfo, CompareOptions options)
+            => compareInfo.Compare("\u00DF", "ss", options) == 0;
     }
 }

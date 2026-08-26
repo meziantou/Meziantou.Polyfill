@@ -138,6 +138,28 @@ public class SystemTests
         Assert.Equal("ab\u00ADc", "ab\u00ADc".Replace("\u00AD", "Z", comparisonType));
         Assert.Equal("\u00AD\u00AD", "\u00AD\u00AD".Replace("\u00AD", "Z", comparisonType));
     }
+
+    [Theory]
+    [InlineData(StringComparison.InvariantCulture)]
+    [InlineData(StringComparison.InvariantCultureIgnoreCase)]
+    public void String_Replace_CultureSensitive_IgnorableTailInOldValue(StringComparison comparisonType)
+    {
+        // oldValue has no weightless tail, so the target's U+00AD is not part of the match
+        Assert.Equal("X\u00ADc", "ab\u00ADc".Replace("ab", "X", comparisonType));
+
+#if NETFRAMEWORK
+        // NLS folds the target characters that pair with oldValue's own weightless tail into the match, so
+        // the trailing U+00AD is replaced along with it. ICU does not do this, and .NET Framework is the
+        // only target framework here that always uses NLS.
+        Assert.Equal("Xc", "ab\u00ADc".Replace("ab\u00AD", "X", comparisonType));
+        Assert.Equal("X", "ab\u00AD".Replace("ab\u00AD", "X", comparisonType));
+        Assert.Equal("aXb", "a\u00DF\u00ADb".Replace("ss\u00AD", "X", comparisonType));
+        Assert.Equal("X Xc", "ab\u00AD ab\u00ADc".Replace("ab\u00AD", "X", comparisonType));
+
+        // A weightless oldValue still replaces nothing, even though its tail is weightless too
+        Assert.Equal("ab\u00ADc", "ab\u00ADc".Replace("\u00AD\u00AD", "X", comparisonType));
+#endif
+    }
 #pragma warning restore RS0030
 
     [Fact]
