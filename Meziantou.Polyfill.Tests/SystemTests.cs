@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
@@ -104,6 +104,41 @@ public class SystemTests
         Assert.Throws<ArgumentException>(() => "".Replace("", "dummy", StringComparison.OrdinalIgnoreCase));
         Assert.Throws<ArgumentNullException>(() => "".Replace(null!, "dummy", StringComparison.OrdinalIgnoreCase));
     }
+
+#pragma warning disable RS0030 // Culture-sensitive comparisons are the subject of these tests
+    [Theory]
+    [InlineData(StringComparison.InvariantCulture)]
+    [InlineData(StringComparison.InvariantCultureIgnoreCase)]
+    public void String_Replace_CultureSensitive_MatchLongerThanOldValue(StringComparison comparisonType)
+    {
+        // U+00AD SOFT HYPHEN is ignorable by the collation, so the matched region is longer than oldValue
+        Assert.Equal("Z", "ab\u00ADc".Replace("abc", "Z", comparisonType));
+        Assert.Equal("Z", "a\u00ADb\u00ADc".Replace("abc", "Z", comparisonType));
+        Assert.Equal("xZy", "xa\u00ADbcy".Replace("abc", "Z", comparisonType));
+        Assert.Equal("Z Z", "a\u00ADbc a\u00ADbc".Replace("abc", "Z", comparisonType));
+        Assert.Equal("\u00ADZ\u00AD", "\u00ADabc\u00AD".Replace("abc", "Z", comparisonType));
+    }
+
+    [Theory]
+    [InlineData(StringComparison.InvariantCulture)]
+    [InlineData(StringComparison.InvariantCultureIgnoreCase)]
+    public void String_Replace_CultureSensitive_MatchShorterThanOldValue(StringComparison comparisonType)
+    {
+        Assert.Equal("Z", "ac".Replace("a\u00ADc", "Z", comparisonType));
+        Assert.Equal("Z Z", "ac ac".Replace("a\u00ADc", "Z", comparisonType));
+    }
+
+    [Theory]
+    [InlineData(StringComparison.InvariantCulture)]
+    [InlineData(StringComparison.InvariantCultureIgnoreCase)]
+    public void String_Replace_CultureSensitive_IgnorableOldValue(StringComparison comparisonType)
+    {
+        // oldValue has no collation weight, so nothing is replaced
+        Assert.Equal("abc", "abc".Replace("\u00AD", "Z", comparisonType));
+        Assert.Equal("ab\u00ADc", "ab\u00ADc".Replace("\u00AD", "Z", comparisonType));
+        Assert.Equal("\u00AD\u00AD", "\u00AD\u00AD".Replace("\u00AD", "Z", comparisonType));
+    }
+#pragma warning restore RS0030
 
     [Fact]
     public void String_Split()
