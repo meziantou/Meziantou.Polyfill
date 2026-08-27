@@ -143,6 +143,39 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task Path_IsPathFullyQualified_ChecksDriveLetterWithoutOverflow()
+    {
+        // The drive-letter check relies on a subtraction wrapping for characters that sort before 'a'.
+        // A consumer compiling with CheckForOverflowUnderflow must still get false rather than an
+        // OverflowException, which is why the polyfill wraps that expression in unchecked. Compiling the
+        // generated code with checkOverflow is the only way to observe this, since the checked context is
+        // fixed at the consumer's compilation and not at the call site.
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+
+        var result = GenerateFiles(
+            """
+            public static class Test
+            {
+                public static bool NonLetterDrive() => System.IO.Path.IsPathFullyQualified(@"1:\dir");
+
+                public static bool LetterDrive() => System.IO.Path.IsPathFullyQualified(@"C:\dir");
+            }
+            """,
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.IO.Path.IsPathFullyQualified(System.String)",
+            checkOverflow: true);
+
+        var assembly = global::System.Reflection.Assembly.Load(result.Assembly!);
+        var type = assembly.GetType("Test")!;
+
+        if (OperatingSystem.IsWindows())
+        {
+            Assert.False((bool)type.GetMethod("NonLetterDrive")!.Invoke(null, null)!);
+            Assert.True((bool)type.GetMethod("LetterDrive")!.Invoke(null, null)!);
+        }
+    }
+
+    [Fact]
     public async Task PeriodicTimer_UsesMicrosoftBclTimeProviderTypes_WhenReferenced()
     {
         var assemblies = new List<string>();
@@ -764,7 +797,7 @@ public sealed class SourceGeneratorTests
         }
     }
 
-    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true)
+    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true, bool checkOverflow = false)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
@@ -776,7 +809,7 @@ public sealed class SourceGeneratorTests
         var compilation = CSharpCompilation.Create(assemblyName,
             new[] { CSharpSyntaxTree.ParseText(file, options) },
             references,
-            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: allowUnsafe));
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: allowUnsafe, checkOverflow: checkOverflow));
 
         var generator = new PolyfillGenerator().AsSourceGenerator();
 

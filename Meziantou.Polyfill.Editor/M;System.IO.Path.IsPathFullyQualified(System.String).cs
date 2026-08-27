@@ -9,8 +9,11 @@ static partial class PolyfillExtensions_Path
         {
             bool IsDirectorySeparator(char c) => c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
 
+            // The subtraction wraps for characters that sort before 'a', so it must not be
+            // compiled in a checked context. Consumers can enable CheckForOverflowUnderflow,
+            // which would otherwise make this throw OverflowException instead of returning false.
             bool IsValidDriveChar(char value)
-                => (uint)((value | 0x20) - 'a') <= (uint)('z' - 'a');
+                => unchecked((uint)((value | 0x20) - 'a')) <= (uint)('z' - 'a');
 
             if (path is null)
                 throw new ArgumentNullException(nameof(path));
