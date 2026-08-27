@@ -490,6 +490,19 @@ public class SystemTests
     }
 
     [Fact]
+    public void String_Join_Char_NullValues()
+    {
+        var stringArray = Assert.Throws<ArgumentNullException>(() => string.Join(',', (string?[])null!));
+        Assert.Equal("value", stringArray.ParamName);
+
+        var objectArray = Assert.Throws<ArgumentNullException>(() => string.Join(',', (object?[])null!));
+        Assert.Equal("values", objectArray.ParamName);
+
+        var enumerable = Assert.Throws<ArgumentNullException>(() => string.Join(',', (IEnumerable<string>)null!));
+        Assert.Equal("values", enumerable.ParamName);
+    }
+
+    [Fact]
     public void ArgumentNullException_ThrowIfNull()
     {
         object? sample = null;

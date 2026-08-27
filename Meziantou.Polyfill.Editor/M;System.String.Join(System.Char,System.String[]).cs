@@ -1,9 +1,14 @@
+using System;
+
 static partial class PolyfillExtensions
 {
     extension(string)
     {
         public static string Join(char separator, params string?[] value)
         {
+            if (value is null)
+                throw new ArgumentNullException(nameof(value));
+
             var sb = new System.Text.StringBuilder();
             for (int i = 0; i < value.Length; i++)
             {
