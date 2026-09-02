@@ -72,6 +72,32 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
+    public async Task InlineArrayAttributePolyfill_DoesNotEnableInlineArrays()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+
+        // The polyfilled attribute is generated and can be referenced
+        var result = GenerateFiles(
+            "class Test { System.Type M() => typeof(System.Runtime.CompilerServices.InlineArrayAttribute); }",
+            assemblyLocations: assemblies,
+            includedPolyfills: "T:System.Runtime.CompilerServices.InlineArrayAttribute");
+        Assert.Contains(GetFileNames(result.GeneratorResult), file => file.Contains("InlineArrayAttribute", StringComparison.Ordinal));
+
+        // ...but applying it does not enable the inline array language feature. Roslyn gates the feature on the
+        // special member System.Runtime.CompilerServices.RuntimeFeature.InlineArrayTypes, and special members are
+        // resolved from corlib only, so no polyfilled type can ever satisfy it.
+        var applied = GenerateFiles(
+            "[System.Runtime.CompilerServices.InlineArray(4)] struct Buffer { private int _element0; }",
+            assemblyLocations: assemblies,
+            mustCompile: false);
+
+        using var ms = new MemoryStream();
+        var emitResult = applied.OutputCompilation.Emit(ms, cancellationToken: TestContext.Current.CancellationToken);
+        Assert.False(emitResult.Success);
+        Assert.Contains(emitResult.Diagnostics, diagnostic => diagnostic.Id == "CS9171");
+    }
+
+    [Fact]
     public async Task ArraySegmentPolyfills_AreSelfContained()
     {
         var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
