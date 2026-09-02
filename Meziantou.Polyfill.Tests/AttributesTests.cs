@@ -66,12 +66,15 @@ public class AttributesTests
         _ = new ExperimentalAttribute("test");
         _ = new OverloadResolutionPriorityAttribute(1);
         _ = new UnionAttribute();
+        _ = new InlineArrayAttribute(4);
 
         _ = ExtendedLayoutKind.CStruct;
         _ = ExtendedLayoutKind.CUnion;
         _ = typeof(IUnion);
 
         _ = typeof(IsExternalInit);
+
+        Assert.Equal(4, new InlineArrayAttribute(4).Length);
 
         Assert.Equal("C#", StringSyntaxAttribute.CSharp);
         Assert.Equal("F#", StringSyntaxAttribute.FSharp);
