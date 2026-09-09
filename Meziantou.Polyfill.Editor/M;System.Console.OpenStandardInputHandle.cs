@@ -14,6 +14,11 @@ file static class ConsoleOpenStandardInputHandle
 {
     public static IntPtr GetHandle() => Environment.OSVersion.Platform == PlatformID.Win32NT ? GetStdHandle(-10) : IntPtr.Zero;
 
+#if MEZIANTOU_POLYFILL_SUPPORT_UPDATED_MEMORY_SAFETY_RULES
+    [DllImport("kernel32.dll")]
+    private static safe extern IntPtr GetStdHandle(int handleType);
+#else
     [DllImport("kernel32.dll")]
     private static extern IntPtr GetStdHandle(int handleType);
+#endif
 }
