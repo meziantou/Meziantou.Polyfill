@@ -112,7 +112,7 @@ jobs:
         key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
     - run: dotnet build Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet run --no-build --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
-    - run: dotnet test Meziantou.Polyfill.SourceGenerator.Tests
+    - run: dotnet test --project ${{ github.workspace }}/Meziantou.Polyfill.SourceGenerator.Tests/Meziantou.Polyfill.SourceGenerator.Tests.csproj
 
   tests:
     runs-on: windows-latest
@@ -133,7 +133,7 @@ jobs:
         key: nuget-${{ hashFiles('**/Meziantou.Polyfill.Generator.csproj', '**/global.json') }}
     - run: dotnet build Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
     - run: dotnet run --no-build --project Meziantou.Polyfill.Generator/Meziantou.Polyfill.Generator.csproj
-    - run: dotnet test Meziantou.Polyfill.Tests
+    - run: dotnet test --project ${{ github.workspace }}/Meziantou.Polyfill.Tests/Meziantou.Polyfill.Tests.csproj
 
   deploy:
     runs-on: 'ubuntu-latest'
