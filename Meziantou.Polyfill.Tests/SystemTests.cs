@@ -514,18 +514,23 @@ public class SystemTests
     }
 
     [Fact]
-    public unsafe void ArgumentNullException_ThrowIfNull_Pointer()
+    public void ArgumentNullException_ThrowIfNull_Pointer()
     {
-        void* sample = null;
-        var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
-        Assert.Equal("sample", ex.ParamName);
+        // Under the updated memory safety rules the 'unsafe' modifier only marks the member as
+        // caller-unsafe, so an 'unsafe' block is needed to call the pointer overload
+        unsafe
+        {
+            void* sample = null;
+            var ex = Assert.Throws<ArgumentNullException>(() => ArgumentNullException.ThrowIfNull(sample));
+            Assert.Equal("sample", ex.ParamName);
 
-        nint argument = 1;
-        ArgumentNullException.ThrowIfNull(argument);
+            nint argument = 1;
+            ArgumentNullException.ThrowIfNull(argument);
+        }
     }
 
     [Fact]
-    public unsafe void ArgumentException_ThrowIfNullOrEmpty()
+    public void ArgumentException_ThrowIfNullOrEmpty()
     {
         var sample = "";
         var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrEmpty(sample));
@@ -536,7 +541,7 @@ public class SystemTests
     }
 
     [Fact]
-    public unsafe void ArgumentException_ThrowIfNullOrWhiteSpace()
+    public void ArgumentException_ThrowIfNullOrWhiteSpace()
     {
         var sample = "  ";
         var ex = Assert.Throws<ArgumentException>(() => ArgumentException.ThrowIfNullOrWhiteSpace(sample));
@@ -547,7 +552,7 @@ public class SystemTests
     }
 
     [Fact]
-    public unsafe void ObjectDisposedException_ThrowIf()
+    public void ObjectDisposedException_ThrowIf()
     {
         Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, new object()));
         Assert.Throws<ObjectDisposedException>(() => ObjectDisposedException.ThrowIf(true, typeof(object)));
@@ -2953,9 +2958,13 @@ public class SystemTests
     [Fact]
     public void GC_AllocateUninitializedArray()
     {
-        Assert.Equal(4, GC.AllocateUninitializedArray<int>(4).Length);
-        Assert.Equal(4, GC.AllocateUninitializedArray<string>(4, pinned: true).Length);
-        Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<int>(-1));
+        // 'GC.AllocateUninitializedArray' is caller-unsafe under the updated memory safety rules
+        unsafe
+        {
+            Assert.Equal(4, GC.AllocateUninitializedArray<int>(4).Length);
+            Assert.Equal(4, GC.AllocateUninitializedArray<string>(4, pinned: true).Length);
+            Assert.Throws<OverflowException>(() => GC.AllocateUninitializedArray<int>(-1));
+        }
     }
 
     [Fact]

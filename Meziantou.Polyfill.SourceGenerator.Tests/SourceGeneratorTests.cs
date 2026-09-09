@@ -445,6 +445,38 @@ public sealed class SourceGeneratorTests
         Assert.Contains("#define MEZIANTOU_POLYFILL_SUPPORT_ALLOWS_REF_STRUCT", content);
     }
 
+    [Fact]
+    public async Task UpdatedMemorySafetyRulesDefine_IsNotGenerated_WhenTheCompilerFeatureIsDisabled()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/");
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Console.OpenStandardInputHandle",
+            updatedMemorySafetyRules: false);
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "M_System.Console.OpenStandardInputHandle.g.cs");
+        Assert.DoesNotContain("#define MEZIANTOU_POLYFILL_SUPPORT_UPDATED_MEMORY_SAFETY_RULES", content);
+        Assert.Contains("private static extern IntPtr GetStdHandle", content);
+    }
+
+    [Fact]
+    public async Task UpdatedMemorySafetyRulesDefine_IsGenerated_WhenTheCompilerFeatureIsEnabled()
+    {
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "9.0.0", "ref/net9.0/");
+
+        // 'mustCompile' asserts the generated 'extern' member carries the 'safe' modifier the rules require
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Console.OpenStandardInputHandle",
+            updatedMemorySafetyRules: true);
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "M_System.Console.OpenStandardInputHandle.g.cs");
+        Assert.Contains("#define MEZIANTOU_POLYFILL_SUPPORT_UPDATED_MEMORY_SAFETY_RULES", content);
+        Assert.Contains("private static safe extern IntPtr GetStdHandle", content);
+    }
+
     public static TheoryData<LanguageVersion> GetRuntimeWithoutByRefLikeGenericSupportLanguageVersions()
     {
         return new TheoryData<LanguageVersion>
@@ -797,7 +829,7 @@ public sealed class SourceGeneratorTests
         }
     }
 
-    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true, bool checkOverflow = false)
+    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true, bool checkOverflow = false, bool updatedMemorySafetyRules = false)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
@@ -805,6 +837,10 @@ public sealed class SourceGeneratorTests
             .ToArray();
 
         var options = new CSharpParseOptions(languageVersion: languageVersion);
+        if (updatedMemorySafetyRules)
+        {
+            options = options.WithFeatures([new KeyValuePair<string, string>("updated-memory-safety-rules", "true")]);
+        }
 
         var compilation = CSharpCompilation.Create(assemblyName,
             new[] { CSharpSyntaxTree.ParseText(file, options) },
