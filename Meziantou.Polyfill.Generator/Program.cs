@@ -929,7 +929,7 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
             cacheEntries[polyfill.TypeName] = polyfill.SupportedInVersions;
         }
 
-        var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+        var jsonOptions = new JsonSerializerOptions { WriteIndented = true, RespectNullableAnnotations = true, RespectRequiredConstructorParameters = true };
         File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { versions = allVersionNames.ToArray(), polyfills = cacheEntries }, jsonOptions));
         Console.WriteLine($"Wrote version cache to {cacheFilePath}");
     }
