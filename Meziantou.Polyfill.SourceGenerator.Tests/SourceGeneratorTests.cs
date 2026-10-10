@@ -948,7 +948,7 @@ public sealed class SourceGeneratorTests
                     try
                     {
                         Directory.CreateDirectory(tempFolder);
-                        await using var stream = await SharedHttpClient.Instance.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
+                        await using var stream = await SharedHttpClient.InstanceWithAutoRedirect.GetStreamAsync(new Uri($"https://www.nuget.org/api/v2/package/{packageName}/{version}")).ConfigureAwait(false);
                         await using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
 
                         foreach (var entry in zip.Entries)
@@ -972,7 +972,7 @@ public sealed class SourceGeneratorTests
                         {
                             if (!IsCacheValid())
                             {
-                                throw new InvalidOperationException("Cannot download NuGet package " + packageName + "@" + version + "\n" + ex);
+                                throw new InvalidOperationException("Cannot download NuGet package " + packageName + "@" + version, ex);
                             }
                         }
                     }
