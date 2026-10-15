@@ -39,6 +39,12 @@ By default, all needed polyfills are generated. You can configure which polyfill
 
   <!-- Optional: Generate Debug.g.cs with polyfill generation decisions and skip reasons -->
   <MeziantouPolyfill_GenerateDebugFile>true</MeziantouPolyfill_GenerateDebugFile>
+
+  <!-- Optional: Declare the oldest framework this project is ever compiled for, to speed up generation -->
+  <MeziantouPolyfill_MinimumTargetFramework>net8.0</MeziantouPolyfill_MinimumTargetFramework>
+
+  <!-- Optional: Infer MeziantouPolyfill_MinimumTargetFramework from TargetFramework/TargetFrameworks -->
+  <MeziantouPolyfill_InferMinimumTargetFramework>true</MeziantouPolyfill_InferMinimumTargetFramework>
 </PropertyGroup>
 ````
 
@@ -60,6 +66,28 @@ The filtering logic works as follows:
 4. **Both properties set**: Exclusions are applied first, then inclusions. A polyfill must match an inclusion filter AND not match any exclusion filter to be generated
 
 Set **MeziantouPolyfill_GenerateDebugFile** to `true` to emit `Debug.g.cs`. This diagnostic file lists required type availability, each polyfill generation decision, and skip reasons such as already-available members, excluded filters, missing required types, or unmet conditional dependencies.
+
+### Minimum target framework
+
+Deciding whether a polyfill is needed requires looking up its symbol in the compilation. Doing that for every polyfill costs a noticeable amount of time on each build. **MeziantouPolyfill_MinimumTargetFramework** lets you declare the oldest framework the project is ever compiled for, so every polyfill whose API already ships in that framework is skipped without any lookup:
+
+````xml
+<PropertyGroup>
+  <MeziantouPolyfill_MinimumTargetFramework>net8.0</MeziantouPolyfill_MinimumTargetFramework>
+</PropertyGroup>
+````
+
+The property accepts a single moniker or a semicolon-separated (or pipe-separated) list, in which case the lowest one wins. Only .NET (Core) monikers (`net5.0` and later, with or without a platform suffix such as `net8.0-windows`) enable the optimization: `netstandard2.0`, `net472` and friends are not comparable with a .NET release, so a list containing one of them disables it entirely.
+
+Instead of setting the value explicitly, you can opt in to inferring it from the project:
+
+````xml
+<PropertyGroup>
+  <MeziantouPolyfill_InferMinimumTargetFramework>true</MeziantouPolyfill_InferMinimumTargetFramework>
+</PropertyGroup>
+````
+
+The inferred value is `$(TargetFramework)` when it is set (which is the case for every compilation, including each inner build of a multi-targeting project), and `$(TargetFrameworks)` otherwise. Inference is opt-in because the moniker being compiled is not a guarantee that every API of that framework is actually referenced: a project can trim or override its reference assemblies, in which case the polyfills skipped by the optimization would really have been needed.
 
 ## Supported polyfills
 

@@ -8,6 +8,11 @@ internal readonly struct PolyfillEntry
     public readonly byte FieldIndex;
     public readonly byte ConditionalCount;
     public readonly byte DeclaredCount;
+
+    // Oldest .NET (Core) major version that ships this API natively (255 when there is none). When the
+    // consumer declares a minimum target framework at or above it, the polyfill can be skipped before
+    // doing any symbol lookup.
+    public readonly byte AvailableSinceDotNetMajorVersion;
     public readonly sbyte ProvidesFeatureBit; // -1 when the polyfill does not provide a required-type feature
     public readonly ushort ConditionalStart;
     public readonly ushort DeclaredStart;
@@ -15,11 +20,12 @@ internal readonly struct PolyfillEntry
     public readonly ulong RequiredFeatures;
     public readonly string DocId;
 
-    public PolyfillEntry(byte fieldIndex, byte conditionalCount, byte declaredCount, sbyte providesFeatureBit, ushort conditionalStart, ushort declaredStart, ulong mask, ulong requiredFeatures, string docId)
+    public PolyfillEntry(byte fieldIndex, byte conditionalCount, byte declaredCount, byte availableSinceDotNetMajorVersion, sbyte providesFeatureBit, ushort conditionalStart, ushort declaredStart, ulong mask, ulong requiredFeatures, string docId)
     {
         FieldIndex = fieldIndex;
         ConditionalCount = conditionalCount;
         DeclaredCount = declaredCount;
+        AvailableSinceDotNetMajorVersion = availableSinceDotNetMajorVersion;
         ProvidesFeatureBit = providesFeatureBit;
         ConditionalStart = conditionalStart;
         DeclaredStart = declaredStart;

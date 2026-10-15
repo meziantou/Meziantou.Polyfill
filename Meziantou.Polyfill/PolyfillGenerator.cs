@@ -25,7 +25,8 @@ public sealed partial class PolyfillGenerator : IIncrementalGenerator
             return new PolyfillOptions(
                 included: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_IncludedPolyfills"),
                 excluded: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_ExcludedPolyfills"),
-                generateDebugFile: IsTrue(GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_GenerateDebugFile")));
+                generateDebugFile: IsTrue(GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_GenerateDebugFile")),
+                minimumTargetFramework: GetValueOrDefault(options.GlobalOptions, "build_property.MeziantouPolyfill_MinimumTargetFramework"));
         }).WithTrackingName("Options");
 
         var provider = context.CompilationProvider

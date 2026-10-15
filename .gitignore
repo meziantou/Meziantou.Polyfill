@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Meziantou.Polyfill/Members.g.cs
 /Meziantou.Polyfill.Editor/_AllSymbols.txt
+.DS_Store
