@@ -45,6 +45,104 @@ public sealed class SourceGeneratorTests
         Assert.Empty(generatedFileNames);
     }
 
+    [Theory]
+    [InlineData(null, 0)]
+    [InlineData("", 0)]
+    [InlineData("net8.0", 8)]
+    [InlineData("net5.0", 5)]
+    [InlineData("net10.0", 10)]
+    [InlineData("net10.0-windows10.0.19041.0", 10)]
+    [InlineData("net10.0|net8.0", 8)]
+    [InlineData("net8.0|net10.0", 8)]
+    // A framework outside the .NET (Core) family is not comparable with a .NET release, so the whole
+    // optimization is disabled as soon as one of them appears.
+    [InlineData("netstandard2.0", 0)]
+    [InlineData("netstandard2.0|net10.0", 0)]
+    [InlineData("net472", 0)]
+    [InlineData("netcoreapp3.1", 0)]
+    [InlineData("net4.8", 0)]
+    [InlineData("garbage", 0)]
+    public void PolyfillOptions_MinimumTargetFramework(string? value, int expected)
+    {
+        var options = new PolyfillOptions(included: null, excluded: null, minimumTargetFramework: value);
+        Assert.Equal(expected, options.MinimumDotNetMajorVersion);
+    }
+
+    [Fact]
+    public async Task MinimumTargetFramework_SkipsPolyfillsAvailableInThatVersion()
+    {
+        // OrderDescending ships in net7.0, so a consumer that never compiles below net7.0 cannot need it,
+        // even when the current compilation (net6.0 here) is missing it.
+        const string OrderDescending = "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})";
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/");
+
+        var withoutMinimum = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: OrderDescending);
+        Assert.NotEmpty(GetFileNames(withoutMinimum.GeneratorResult));
+
+        var net7Minimum = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: OrderDescending, minimumTargetFramework: "net7.0");
+        Assert.Empty(GetFileNames(net7Minimum.GeneratorResult));
+
+        var net8Minimum = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: OrderDescending, minimumTargetFramework: "net8.0");
+        Assert.Empty(GetFileNames(net8Minimum.GeneratorResult));
+    }
+
+    [Fact]
+    public async Task MinimumTargetFramework_KeepsPolyfillsNotAvailableInThatVersion()
+    {
+        const string OrderDescending = "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})";
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/");
+
+        var net6Minimum = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: OrderDescending, minimumTargetFramework: "net6.0");
+        Assert.NotEmpty(GetFileNames(net6Minimum.GeneratorResult));
+
+        // The lowest moniker of the list wins
+        var multiTargeting = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: OrderDescending, minimumTargetFramework: "net10.0|net6.0");
+        Assert.NotEmpty(GetFileNames(multiTargeting.GeneratorResult));
+
+        // netstandard2.0 is not comparable with a .NET release, so nothing is skipped
+        var netStandard = GenerateFiles("", assemblyLocations: assemblies, includedPolyfills: OrderDescending, minimumTargetFramework: "netstandard2.0|net10.0");
+        Assert.NotEmpty(GetFileNames(netStandard.GeneratorResult));
+    }
+
+    [Fact]
+    public async Task MinimumTargetFramework_DoesNotSkipPolyfillsThatNoFrameworkProvides()
+    {
+        // System.ITupleInternal is internal in every framework, so no minimum target framework can rule
+        // it out. It is still not generated here, but only because System.ValueTuple - the polyfill it is
+        // conditioned on - is itself ruled out by the minimum target framework.
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETFramework.ReferenceAssemblies.net462", "1.0.3", "");
+
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: "T:System.ITupleInternal;T:System.ValueTuple",
+            generateDebugFile: true,
+            minimumTargetFramework: LatestDotnetTfm);
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// T:System.ValueTuple: False (available since net6.0, which the minimum target framework already requires)", content);
+        Assert.Contains("// T:System.ITupleInternal: False (conditional dependencies not generated: T:System.ValueTuple", content);
+    }
+
+    [Fact]
+    public async Task MinimumTargetFramework_IsReportedInTheDebugFile()
+    {
+        const string OrderDescending = "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})";
+        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "6.0.16", "ref/net6.0/");
+
+        var result = GenerateFiles(
+            "",
+            assemblyLocations: assemblies,
+            includedPolyfills: OrderDescending,
+            generateDebugFile: true,
+            minimumTargetFramework: "net8.0");
+
+        var content = GetGeneratedFileContent(result.GeneratorResult, "Debug.g.cs");
+        Assert.Contains("// MinimumTargetFramework: net8.0", content);
+        Assert.Contains("// MinimumDotNetMajorVersion: 8", content);
+        Assert.Contains($"// {OrderDescending}: False (available since net7.0, which the minimum target framework already requires)", content);
+    }
+
     [Fact]
     public async Task ExcludedPolyfill()
     {
@@ -829,7 +927,7 @@ public sealed class SourceGeneratorTests
         }
     }
 
-    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true, bool checkOverflow = false, bool updatedMemorySafetyRules = false)
+    private static (GeneratorDriverRunResult GeneratorResult, Compilation OutputCompilation, byte[]? Assembly) GenerateFiles(string file, string assemblyName = "compilation", bool mustCompile = true, IEnumerable<string>? assemblyLocations = null, string? includedPolyfills = null, string? excludedPolyfills = null, bool generateDebugFile = false, LanguageVersion languageVersion = LanguageVersion.Preview, bool allowUnsafe = true, bool checkOverflow = false, bool updatedMemorySafetyRules = false, string? minimumTargetFramework = null)
     {
         assemblyLocations ??= Array.Empty<string>();
         var references = assemblyLocations
@@ -857,6 +955,7 @@ public sealed class SourceGeneratorTests
                 ["build_property.MeziantouPolyfill_IncludedPolyfills"] = includedPolyfills,
                 ["build_property.MeziantouPolyfill_ExcludedPolyfills"] = excludedPolyfills,
                 ["build_property.MeziantouPolyfill_GenerateDebugFile"] = generateDebugFile ? "true" : null,
+                ["build_property.MeziantouPolyfill_MinimumTargetFramework"] = minimumTargetFramework,
             }));
 
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);

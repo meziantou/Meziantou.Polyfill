@@ -319,9 +319,18 @@ async Task GenerateMembers()
     sb.AppendLine("    var conditionals = PolyfillEntries.Conditionals;");
     sb.AppendLine("    var declared = PolyfillEntries.DeclaredDocIds;");
     sb.AppendLine("    string[]? skipReasons = options.GenerateDebugFile ? new string[entries.Length] : null;");
+    sb.AppendLine("    var minimumDotNetMajorVersion = options.MinimumDotNetMajorVersion;");
     sb.AppendLine("    for (var idx = 0; idx < entries.Length; idx++)");
     sb.AppendLine("    {");
     sb.AppendLine("        ref readonly var entry = ref entries[idx];");
+    // The consumer promised never to compile for anything older than minimumDotNetMajorVersion, and the
+    // API already ships in that release (and every newer one we know of), so the polyfill can never be
+    // needed. Checked first because it is the only test that avoids the symbol lookups entirely.
+    sb.AppendLine("        if (minimumDotNetMajorVersion > 0 && minimumDotNetMajorVersion >= entry.AvailableSinceDotNetMajorVersion)");
+    sb.AppendLine("        {");
+    sb.AppendLine("            skipReasons?[idx] = GetMinimumTargetFrameworkReason(entry.AvailableSinceDotNetMajorVersion);");
+    sb.AppendLine("            continue;");
+    sb.AppendLine("        }");
     sb.AppendLine("        if ((feat & entry.RequiredFeatures) != entry.RequiredFeatures)");
     sb.AppendLine("        {");
     sb.AppendLine("            skipReasons?[idx] = GetMissingFeaturesReason(feat, entry.RequiredFeatures);");
@@ -467,6 +476,11 @@ async Task GenerateMembers()
     sb.AppendLine("    sb.AppendLine();");
     sb.AppendLine("}");
     sb.AppendLine();
+    sb.AppendLine("private static string GetMinimumTargetFrameworkReason(byte availableSinceDotNetMajorVersion)");
+    sb.AppendLine("{");
+    sb.AppendLine("    return \"available since net\" + availableSinceDotNetMajorVersion.ToString(System.Globalization.CultureInfo.InvariantCulture) + \".0, which the minimum target framework already requires\";");
+    sb.AppendLine("}");
+    sb.AppendLine();
     sb.AppendLine("private static string GetMissingFeaturesReason(ulong features, ulong requiredFeatures)");
     sb.AppendLine("{");
     sb.AppendLine("    var sb = new StringBuilder(\"missing required features: \");");
@@ -557,7 +571,7 @@ async Task GenerateMembers()
     sb.AppendLine("    {");
     foreach (var e in tableEntries)
     {
-        sb.AppendLine($"        new PolyfillEntry({(byte)(e.Polyfill.Index / 64)}, {e.CondCount}, {e.DeclCount}, {e.ProvidesFeatureBit}, {e.CondStart}, {e.DeclStart}, {e.Polyfill.CSharpFieldBitMask}uL, {e.RequiredFeatures}uL, \"{EscapeStringLiteral(e.Polyfill.TypeName)}\"),");
+        sb.AppendLine($"        new PolyfillEntry({(byte)(e.Polyfill.Index / 64)}, {e.CondCount}, {e.DeclCount}, {e.Polyfill.AvailableSinceDotNetMajorVersion}, {e.ProvidesFeatureBit}, {e.CondStart}, {e.DeclStart}, {e.Polyfill.CSharpFieldBitMask}uL, {e.RequiredFeatures}uL, \"{EscapeStringLiteral(e.Polyfill.TypeName)}\"),");
     }
     sb.AppendLine("    };");
 
@@ -912,8 +926,10 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
             var supportedVersions = new List<string>();
             foreach (var (name, _, comp) in compilations)
             {
+                // Mirror the source generator's own check (Members.GetMemberSkipReason): a symbol that
+                // exists but is not accessible from the consumer assembly still needs a polyfill.
                 var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(polyfill.TypeName, comp);
-                if (symbols.Length > 0)
+                if (symbols.Any(symbol => comp.IsSymbolAccessibleWithin(symbol, comp.Assembly)))
                 {
                     supportedVersions.Add(name);
                 }
@@ -930,9 +946,15 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
         }
 
         var jsonOptions = new JsonSerializerOptions { WriteIndented = true, RespectNullableAnnotations = true, RespectRequiredConstructorParameters = true };
-        File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { versions = allVersionNames.ToArray(), polyfills = cacheEntries }, jsonOptions));
+        File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { format = PolyfillVersionCache.Format, versions = allVersionNames.ToArray(), polyfills = cacheEntries }, jsonOptions));
         Console.WriteLine($"Wrote version cache to {cacheFilePath}");
     }
+
+    // Compute, for each polyfill, the oldest .NET (Core) release from which the API is natively
+    // available and stays available in every newer known release. A consumer that declares a minimum
+    // target framework at or above that release never needs the polyfill, so the source generator can
+    // skip it without doing any symbol lookup.
+    AssignAvailableSinceDotNetMajorVersions(polyfills, allVersionNames);
 
     // Sort by earliest supported version (ascending), then by name, and reassign Index
     var sortedPolyfills = polyfills
@@ -950,6 +972,39 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
     {
         var versionName = group.Key == int.MaxValue ? "unknown" : allVersionNames[group.Key];
         Console.WriteLine($"  {versionName}: {group.Count()} polyfills (bits {group.Min(p => p.Index)}\u2013{group.Max(p => p.Index)})");
+    }
+
+    static void AssignAvailableSinceDotNetMajorVersions(Polyfill[] polyfills, List<string> allVersionNames)
+    {
+        // Only the .NET (Core) family is ordered in a way that lets us reason about "and everything
+        // newer". netstandard* and net4* are separate families, so a minimum set to one of those
+        // disables the optimization entirely (see PolyfillOptions.ParseMinimumDotNetMajorVersion).
+        var dotnetVersions = allVersionNames
+            .Select(name => (Name: name, Major: TryGetDotNetMajorVersion(name)))
+            .Where(item => item.Major > 0)
+            .OrderBy(item => item.Major)
+            .ToArray();
+
+        foreach (var polyfill in polyfills)
+        {
+            var supported = new HashSet<string>(polyfill.SupportedInVersions, StringComparer.Ordinal);
+            var availableSince = Polyfill.NeverAvailable;
+            for (var i = dotnetVersions.Length - 1; i >= 0; i--)
+            {
+                if (!supported.Contains(dotnetVersions[i].Name))
+                    break;
+
+                availableSince = (byte)dotnetVersions[i].Major;
+            }
+
+            polyfill.AvailableSinceDotNetMajorVersion = availableSince;
+        }
+
+        static int TryGetDotNetMajorVersion(string tfm)
+        {
+            var match = Regex.Match(tfm, "^net(?<major>[0-9]+)\\.[0-9]+$", RegexOptions.CultureInvariant, Timeout.InfiniteTimeSpan);
+            return match.Success ? int.Parse(match.Groups["major"].Value, CultureInfo.InvariantCulture) : 0;
+        }
     }
 
     static int GetEarliestVersionOrder(string[] supportedVersions, Dictionary<string, int> versionOrder)
@@ -979,6 +1034,12 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
             var json = File.ReadAllText(cacheFilePath);
             using var doc = JsonDocument.Parse(json);
             var root = doc.RootElement;
+
+            if (!root.TryGetProperty("format", out var format) || format.GetInt32() != PolyfillVersionCache.Format)
+            {
+                Console.WriteLine("Cache miss: format changed");
+                return false;
+            }
 
             // Check versions match exactly
             var cachedVersions = root.GetProperty("versions").EnumerateArray().Select(v => v.GetString()!).ToList();
@@ -1126,6 +1187,13 @@ static IEnumerable<ITypeSymbol> GetAllTypes(IAssemblySymbol assembly)
     }
 }
 
+internal static class PolyfillVersionCache
+{
+    // Bump whenever the supported-version detection algorithm changes, so caches written by an older
+    // version of this tool are recomputed instead of being silently reused.
+    public const int Format = 2;
+}
+
 internal sealed class Polyfill
 {
     public required int Index { get; set; }
@@ -1137,6 +1205,14 @@ internal sealed class Polyfill
     public required PolyfillKind Kind { get; set; }
 
     public string[] SupportedInVersions { get; set; } = [];
+
+    /// <summary>
+    /// Oldest .NET (Core) major version from which this API is natively available and remains available
+    /// in every newer known release, or <see cref="NeverAvailable"/> when there is no such version.
+    /// </summary>
+    public byte AvailableSinceDotNetMajorVersion { get; set; } = NeverAvailable;
+
+    public const byte NeverAvailable = byte.MaxValue;
 
     public string CSharpFieldName => "_bits" + (Index / 64);
     public int CSharpFieldBitIndex => Index % 64;

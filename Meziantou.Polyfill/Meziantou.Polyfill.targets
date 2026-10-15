@@ -3,15 +3,26 @@
     <CompilerVisibleProperty Include="MeziantouPolyfill_IncludedPolyfills" />
     <CompilerVisibleProperty Include="MeziantouPolyfill_ExcludedPolyfills" />
     <CompilerVisibleProperty Include="MeziantouPolyfill_GenerateDebugFile" />
+    <CompilerVisibleProperty Include="MeziantouPolyfill_MinimumTargetFramework" />
   </ItemGroup>
   <PropertyGroup>
     <MeziantouPolyfill_AllowUnsafeBlocks Condition="'$(MeziantouPolyfill_AllowUnsafeBlocks)' == ''">true</MeziantouPolyfill_AllowUnsafeBlocks>
     <AllowUnsafeBlocks Condition="$(MeziantouPolyfill_AllowUnsafeBlocks) == 'true'">true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
+    <!-- Opt-in: infer the minimum supported TFM from the project. Inside an inner build, $(TargetFramework)
+         is the framework actually being compiled; the outer build only knows $(TargetFrameworks).
+         The generator takes the lowest moniker of the list, and disables the optimization as soon as one
+         of them is not a .NET (Core) moniker. -->
+    <MeziantouPolyfill_InferMinimumTargetFramework Condition="'$(MeziantouPolyfill_InferMinimumTargetFramework)' == ''">false</MeziantouPolyfill_InferMinimumTargetFramework>
+    <MeziantouPolyfill_MinimumTargetFramework Condition="'$(MeziantouPolyfill_MinimumTargetFramework)' == '' AND '$(MeziantouPolyfill_InferMinimumTargetFramework)' == 'true' AND '$(TargetFramework)' != ''">$(TargetFramework)</MeziantouPolyfill_MinimumTargetFramework>
+    <MeziantouPolyfill_MinimumTargetFramework Condition="'$(MeziantouPolyfill_MinimumTargetFramework)' == '' AND '$(MeziantouPolyfill_InferMinimumTargetFramework)' == 'true'">$(TargetFrameworks)</MeziantouPolyfill_MinimumTargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
     <!-- Roslyn does not support ';' and new lines: https://github.com/dotnet/roslyn/issues/43970 -->
     <!-- Replace ';' with '|' and remove new lines -->
     <MeziantouPolyfill_IncludedPolyfills Condition="'$(MeziantouPolyfill_IncludedPolyfills)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(MeziantouPolyfill_IncludedPolyfills.Replace(';', '|')), '\s+', ''))</MeziantouPolyfill_IncludedPolyfills>
     <MeziantouPolyfill_ExcludedPolyfills Condition="'$(MeziantouPolyfill_ExcludedPolyfills)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(MeziantouPolyfill_ExcludedPolyfills.Replace(';', '|')), '\s+', ''))</MeziantouPolyfill_ExcludedPolyfills>
+    <MeziantouPolyfill_MinimumTargetFramework Condition="'$(MeziantouPolyfill_MinimumTargetFramework)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(MeziantouPolyfill_MinimumTargetFramework.Replace(';', '|')), '\s+', ''))</MeziantouPolyfill_MinimumTargetFramework>
   </PropertyGroup>
 </Project>
