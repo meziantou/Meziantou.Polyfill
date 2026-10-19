@@ -42,6 +42,15 @@ public class SystemMemoryExtensionsTests
     }
 
     [Fact]
+    public void IndexOf_Value_WithComparer()
+    {
+        Assert.Equal(-1, ((ReadOnlySpan<string>)[]).IndexOf("a", StringComparer.OrdinalIgnoreCase));
+        Assert.Equal(1, ((ReadOnlySpan<string>)["a", "b"]).IndexOf("B", StringComparer.OrdinalIgnoreCase));
+        Assert.Equal(-1, ((ReadOnlySpan<string>)["a", "b"]).IndexOf("B", StringComparer.Ordinal));
+        Assert.Equal(1, ((ReadOnlySpan<int>)[1, 2]).IndexOf(2));
+    }
+
+    [Fact]
     public void CharSpan_NewMembers()
     {
         ReadOnlySpan<char> value = "  a,b ,,c  ";
