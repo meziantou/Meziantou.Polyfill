@@ -3620,6 +3620,10 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.MemoryExtensions.Contains\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.MemoryExtensions.Contains\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600)": [
       "net6.0",
       "net7.0",

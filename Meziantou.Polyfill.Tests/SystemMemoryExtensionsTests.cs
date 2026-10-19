@@ -51,6 +51,15 @@ public class SystemMemoryExtensionsTests
     }
 
     [Fact]
+    public void Contains_Value_WithComparer()
+    {
+        Assert.True(((ReadOnlySpan<string>)["a", "b"]).Contains("A", StringComparer.OrdinalIgnoreCase));
+        Assert.False(((ReadOnlySpan<string>)["a", "b"]).Contains("A", StringComparer.Ordinal));
+        Assert.True(((ReadOnlySpan<string?>)[null, "b"]).Contains(null));
+        Assert.False(((ReadOnlySpan<string>)[]).Contains("a", StringComparer.OrdinalIgnoreCase));
+    }
+
+    [Fact]
     public void CharSpan_NewMembers()
     {
         ReadOnlySpan<char> value = "  a,b ,,c  ";
