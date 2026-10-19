@@ -3728,6 +3728,10 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.MemoryExtensions.IndexOf\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.MemoryExtensions.LastIndexOfAnyExceptWhiteSpace(System.ReadOnlySpan{System.Char})": [
       "net11.0"
     ],
