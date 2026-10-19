@@ -190,7 +190,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1057)
+### Methods (1058)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -780,6 +780,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.MemoryExtensions.ContainsAny<T>(this System.Span<T> span, T value0, T value1) where T : System.IEquatable<T>?` _(requires ``T:System.Span`1``)_
 - `System.MemoryExtensions.ContainsAny<T>(this System.Span<T> span, T value0, T value1, T value2) where T : System.IEquatable<T>?` _(requires ``T:System.Span`1``)_
 - `System.MemoryExtensions.Contains<T>(this System.ReadOnlySpan<T> span, T value) where T : System.IEquatable<T>?` _(requires ``T:System.ReadOnlySpan`1``)_
+- `System.MemoryExtensions.Contains<T>(this System.ReadOnlySpan<T> span, T value, [System.Collections.Generic.IEqualityComparer<T>? comparer = null])` _(requires ``T:System.ReadOnlySpan`1``)_
 - `System.MemoryExtensions.Contains<T>(this System.Span<T> span, T value) where T : System.IEquatable<T>?` _(requires ``T:System.Span`1``)_
 - `System.MemoryExtensions.EndsWith(this System.ReadOnlySpan<System.Char> span, System.ReadOnlySpan<System.Char> value, System.StringComparison comparisonType)` _(requires ``T:System.ReadOnlySpan`1``)_
 - `System.MemoryExtensions.EnumerateLines(this System.ReadOnlySpan<System.Char> span)` _(requires ``T:System.ReadOnlySpan`1``)_
