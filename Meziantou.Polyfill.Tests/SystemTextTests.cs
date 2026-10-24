@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -18,6 +19,19 @@ namespace Meziantou.Polyfill.Tests;
 
 public class SystemTextTests
 {
+    [Fact]
+    public void StringBuilder_Append_FormatProvider_InterpolatedString()
+    {
+        var culture = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+        culture.NumberFormat.NumberDecimalSeparator = "#";
+
+        var builder = new StringBuilder("a");
+        var value = 1.5;
+        var result = builder.Append(culture, $"-{value}-{2}");
+        Assert.Same(builder, result);
+        Assert.Equal("a-1#5-2", builder.ToString());
+    }
+
 #if NET8_0_OR_GREATER
     [Fact]
     public void Rune_StringMembers()
