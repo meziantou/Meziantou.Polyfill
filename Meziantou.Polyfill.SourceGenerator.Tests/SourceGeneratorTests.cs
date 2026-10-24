@@ -496,6 +496,57 @@ public sealed class SourceGeneratorTests
         Assert.Contains(GetFileNames(result.GeneratorResult), file => file.Contains("GetValueRefOrDefaultRef", StringComparison.Ordinal));
     }
 
+    public static TheoryData<PackageReference[], bool> GetMemoryMarshalWriteConfigurations()
+    {
+        return new TheoryData<PackageReference[], bool>
+        {
+            // MemoryMarshal.Write(Span<byte>, ref T) has the same documentation ID as Write(Span<byte>, in T),
+            // so the polyfill is only skipped when the parameter ref kinds match.
+            { new[] { new PackageReference("NETStandard.Library", "2.0.3", "build/"), new PackageReference("System.Memory", "4.5.5", "lib/netstandard2.0/") }, true },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "7.0.5", "ref/net7.0/") }, true },
+            { new[] { new PackageReference("Microsoft.NETCore.App.Ref", "8.0.0", "ref/net8.0/") }, false },
+        };
+    }
+
+    [Theory]
+    [MemberData(nameof(GetMemoryMarshalWriteConfigurations))]
+    public async Task MemoryMarshal_Write_In_IsGenerated_WhenOnlyRefOverloadExists(PackageReference[] packages, bool expectPolyfill)
+    {
+        var assemblies = new List<string>();
+        foreach (var package in packages)
+        {
+            assemblies.AddRange(await NuGetHelpers.GetNuGetReferences(package.Name, package.Version, package.Path, package.Exclusions));
+        }
+
+        var result = GenerateFiles(
+            """
+            using System;
+            using System.Runtime.InteropServices;
+
+            class Test
+            {
+                static void M(Span<byte> destination, int value)
+                {
+                    MemoryMarshal.Write(destination, in value);
+                    MemoryMarshal.Write(destination, value);
+                }
+            }
+            """,
+            assemblyLocations: assemblies,
+            includedPolyfills: "M:System.Runtime.InteropServices.MemoryMarshal.Write``1(System.Span{System.Byte},``0@)",
+            languageVersion: LanguageVersion.CSharp14);
+
+        var generatedFileNames = GetFileNames(result.GeneratorResult).ToArray();
+        if (expectPolyfill)
+        {
+            Assert.Contains(generatedFileNames, file => file.Contains("MemoryMarshal.Write", StringComparison.Ordinal));
+        }
+        else
+        {
+            Assert.DoesNotContain(generatedFileNames, file => file.Contains("MemoryMarshal.Write", StringComparison.Ordinal));
+        }
+    }
+
     public static TheoryData<LanguageVersion, bool> GetPolyfillGenerationLanguageVersions()
     {
         return new TheoryData<LanguageVersion, bool>
