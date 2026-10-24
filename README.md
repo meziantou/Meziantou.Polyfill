@@ -190,7 +190,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7>`
 - `System.ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> where TRest : struct`
 
-### Methods (1060)
+### Methods (1063)
 
 - `System.ArgumentException.ThrowIfNullOrEmpty(System.String? argument, [System.String? paramName = null])`
 - `System.ArgumentException.ThrowIfNullOrWhiteSpace(System.String? argument, [System.String? paramName = null])`
@@ -389,6 +389,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Decimal.TryParse(System.ReadOnlySpan<System.Char> s, System.IFormatProvider? provider, out System.Decimal result)` _(requires ``T:System.ReadOnlySpan`1``)_
 - `System.Decimal.TryParse(System.String? s, System.IFormatProvider? provider, out System.Decimal result)`
 - `System.Delegate.EnumerateInvocationList<TDelegate>(TDelegate? d) where TDelegate : System.Delegate`
+- `System.Diagnostics.Process.Kill(System.Boolean entireProcessTree)`
 - `System.Diagnostics.Process.WaitForExitAsync([System.Threading.CancellationToken cancellationToken = default])`
 - `System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64 startingTimestamp)`
 - `System.Diagnostics.Stopwatch.GetElapsedTime(System.Int64 startingTimestamp, System.Int64 endingTimestamp)`
@@ -738,6 +739,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Linq.Enumerable.OrderDescending<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source)`
 - `System.Linq.Enumerable.Order<T>(this System.Collections.Generic.IEnumerable<T> source, System.Collections.Generic.IComparer<T>? comparer)`
+- `System.Linq.Enumerable.Reverse<TSource>(this TSource[] source)`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, [System.Collections.Generic.IEqualityComparer<TKey>? comparer = null])`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector)`
 - `System.Linq.Enumerable.RightJoin<TOuter, TInner, TKey, TResult>(this System.Collections.Generic.IEnumerable<TOuter> outer, System.Collections.Generic.IEnumerable<TInner> inner, System.Func<TOuter, TKey> outerKeySelector, System.Func<TInner, TKey> innerKeySelector, System.Func<TOuter?, TInner, TResult> resultSelector, System.Collections.Generic.IEqualityComparer<TKey>? comparer)`
@@ -1053,6 +1055,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Text.RunePosition.GetHashCode()` _(requires ``T:System.ReadOnlySpan`1``, `T:System.Text.Rune`)_
 - `System.Text.RunePosition.operator ==(System.Text.RunePosition left, System.Text.RunePosition right)` _(requires ``T:System.ReadOnlySpan`1``, `T:System.Text.Rune`)_
 - `System.Text.RunePosition.operator !=(System.Text.RunePosition left, System.Text.RunePosition right)` _(requires ``T:System.ReadOnlySpan`1``, `T:System.Text.Rune`)_
+- `System.Text.StringBuilder.Append(System.IFormatProvider? provider, ref System.Text.StringBuilder.AppendInterpolatedStringHandler handler)` _(requires `T:System.Runtime.CompilerServices.DefaultInterpolatedStringHandler`)_
 - `System.Text.StringBuilder.Append(System.ReadOnlyMemory<System.Char> value)` _(requires ``T:System.ReadOnlyMemory`1``)_
 - `System.Text.StringBuilder.Append(System.ReadOnlySpan<System.Char> value)` _(requires ``T:System.ReadOnlySpan`1``)_
 - `System.Text.StringBuilder.Append(System.Text.Rune value)` _(requires `T:System.Text.Rune`)_
@@ -1253,7 +1256,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Xml.Linq.XNode.ReadFromAsync(System.Xml.XmlReader reader, System.Threading.CancellationToken cancellationToken)`
 - `System.Xml.Linq.XNode.WriteToAsync(System.Xml.XmlWriter writer, System.Threading.CancellationToken cancellationToken)`
 
-### Properties (206)
+### Properties (208)
 
 - `System.DateTimeOffset.UnixEpoch`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CSharp = "C#"` _(requires `T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute`)_
@@ -1271,6 +1274,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri = "Uri"`
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.VisualBasic = "Visual Basic"` _(requires `T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute`)_
 - `System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml = "Xml"`
+- `System.Net.HttpVersion.Version20`
 - `System.Net.Mime.MediaTypeNames.Application.FormUrlEncoded = "application/x-www-form-urlencoded"`
 - `System.Net.Mime.MediaTypeNames.Application.GZip = "application/gzip"`
 - `System.Net.Mime.MediaTypeNames.Application.Json = "application/json"`
@@ -1407,6 +1411,7 @@ Dependency annotations use XML documentation IDs and indicate symbols that must 
 - `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Scope`
 - `System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target`
 - `System.Environment.ProcessId`
+- `System.Environment.ProcessPath`
 - `System.Environment.TickCount64`
 - `System.Guid.AllBitsSet`
 - `System.ITupleInternal.Size` _(when any of `T:System.ValueTuple`, ``T:System.ValueTuple`1``, ``T:System.ValueTuple`2``, ``T:System.ValueTuple`3``, ``T:System.ValueTuple`4``, ``T:System.ValueTuple`5``, ``T:System.ValueTuple`6``, ``T:System.ValueTuple`7``, ``T:System.ValueTuple`8`` is generated)_

@@ -19,6 +19,15 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemLinqTests
 {
     [Fact]
+    public void Enumerable_Reverse_Array()
+    {
+        var array = new[] { 1, 2, 3 };
+        IEnumerable<int> result = array.Reverse();
+        Assert.Equal([3, 2, 1], result);
+        Assert.Equal([1, 2, 3], array);
+    }
+
+    [Fact]
     public void Enumerable_InfiniteSequence()
     {
         Assert.Equal([2, 5, 8, 11], Enumerable.InfiniteSequence(2, 3).Take(4));

@@ -19,6 +19,13 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemNetHttpTests
 {
     [Fact]
+    public void HttpVersion_Version20()
+    {
+        Assert.Equal(new Version(2, 0), System.Net.HttpVersion.Version20);
+        Assert.Same(System.Net.HttpVersion.Version20, System.Net.HttpVersion.Version20);
+    }
+
+    [Fact]
     public async Task ReadOnlyMemoryContent()
     {
         using var content = new ReadOnlyMemoryContent(new byte[] { 1, 2 });

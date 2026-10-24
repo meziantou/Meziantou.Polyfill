@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Net.Sockets;
@@ -17,6 +18,82 @@ namespace Meziantou.Polyfill.Tests;
 
 public class SystemDiagnosticsTests
 {
+    [Fact]
+    public void Process_Kill_EntireProcessTree()
+    {
+        // The root process starts a child process and writes the child process id on the standard output
+        var psi = OperatingSystem.IsWindows()
+            ? new ProcessStartInfo("powershell.exe", "-NoProfile -NonInteractive -Command \"$p = Start-Process -FilePath ping.exe -ArgumentList '-n 120 127.0.0.1' -WindowStyle Hidden -PassThru; [Console]::Out.WriteLine($p.Id); $p.WaitForExit()\"")
+            : new ProcessStartInfo("/bin/sh", "-c \"sleep 120 & echo $!; wait\"");
+        psi.UseShellExecute = false;
+        psi.CreateNoWindow = true;
+        psi.RedirectStandardOutput = true;
+
+        using var process = Process.Start(psi)!;
+        try
+        {
+            var childProcessId = int.Parse(process.StandardOutput.ReadLine()!.Trim(), CultureInfo.InvariantCulture);
+            Assert.True(IsRunning(childProcessId));
+
+            process.Kill(entireProcessTree: true);
+
+            Assert.True(process.WaitForExit(30_000));
+            var stopwatch = Stopwatch.StartNew();
+            while (IsRunning(childProcessId) && stopwatch.Elapsed < TimeSpan.FromSeconds(30))
+            {
+                Thread.Sleep(50);
+            }
+
+            Assert.False(IsRunning(childProcessId));
+        }
+        finally
+        {
+            if (!process.HasExited)
+            {
+                process.Kill();
+            }
+        }
+
+        static bool IsRunning(int processId)
+        {
+            try
+            {
+                using var p = Process.GetProcessById(processId);
+                return !p.HasExited;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+        }
+    }
+
+    [Fact]
+    public void Process_Kill_EntireProcessTree_CurrentProcess()
+    {
+        using var process = Process.GetCurrentProcess();
+        Assert.Throws<InvalidOperationException>(() => process.Kill(entireProcessTree: true));
+    }
+
+    [Fact]
+    public void Process_Kill_EntireProcessTree_False()
+    {
+        var psi = OperatingSystem.IsWindows()
+            ? new ProcessStartInfo("ping.exe", "-n 120 127.0.0.1")
+            : new ProcessStartInfo("sleep", "120");
+        psi.UseShellExecute = false;
+        psi.CreateNoWindow = true;
+        psi.RedirectStandardOutput = true;
+
+        using var process = Process.Start(psi)!;
+        process.Kill(entireProcessTree: false);
+        Assert.True(process.WaitForExit(30_000));
+    }
+
     [Fact]
     public async Task Process_WaitForExitAsync()
     {
