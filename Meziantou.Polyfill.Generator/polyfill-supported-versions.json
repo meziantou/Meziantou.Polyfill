@@ -32,6 +32,15 @@
     "F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.VisualBasic": [
       "net11.0"
     ],
+    "F:System.Net.HttpVersion.Version20": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "F:System.Net.Mime.MediaTypeNames.Application.FormUrlEncoded": [
       "net8.0",
       "net9.0",
@@ -1411,6 +1420,14 @@
       "net11.0"
     ],
     "M:System.Delegate.EnumerateInvocationList\u0060\u00601(\u0060\u00600)": [
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Diagnostics.Process.Kill(System.Boolean)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
@@ -3318,6 +3335,10 @@
       "net10.0",
       "net11.0"
     ],
+    "M:System.Linq.Enumerable.Reverse\u0060\u00601(\u0060\u00600[])": [
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Linq.Enumerable.RightJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
       "net11.0"
     ],
@@ -5196,6 +5217,14 @@
     "M:System.Text.Rune.Equals(System.Text.Rune,System.StringComparison)": [
       "net11.0"
     ],
+    "M:System.Text.StringBuilder.Append(System.IFormatProvider,System.Text.StringBuilder.AppendInterpolatedStringHandler@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Text.StringBuilder.Append(System.ReadOnlyMemory{System.Char})": [
       "net6.0",
       "net7.0",
@@ -6106,6 +6135,14 @@
       "net11.0"
     ],
     "P:System.Environment.ProcessId": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "P:System.Environment.ProcessPath": [
       "net6.0",
       "net7.0",
       "net8.0",

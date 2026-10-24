@@ -22,6 +22,13 @@ namespace Meziantou.Polyfill.Tests;
 public class SystemTests
 {
     [Fact]
+    public void Environment_ProcessPath()
+    {
+        using var process = Process.GetCurrentProcess();
+        Assert.Equal(process.MainModule?.FileName, Environment.ProcessPath);
+    }
+
+    [Fact]
     public void ReadOnlySpan_Contains()
     {
         ReadOnlySpan<int> span = [1, 2];
