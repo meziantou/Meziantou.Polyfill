@@ -20,7 +20,12 @@ internal readonly struct PolyfillEntry
     public readonly ulong RequiredFeatures;
     public readonly string DocId;
 
-    public PolyfillEntry(byte fieldIndex, byte conditionalCount, byte declaredCount, byte availableSinceDotNetMajorVersion, sbyte providesFeatureBit, ushort conditionalStart, ushort declaredStart, ulong mask, ulong requiredFeatures, string docId)
+    // One character per parameter ('-' by value, 'r' ref, 'o' out, 'i' in / ref readonly), or null when
+    // the member has no by-ref parameter. Documentation IDs encode 'ref', 'in' and 'out' the same way, so
+    // an existing member only counts as available when its parameter ref kinds match.
+    public readonly string? ParameterRefKinds;
+
+    public PolyfillEntry(byte fieldIndex, byte conditionalCount, byte declaredCount, byte availableSinceDotNetMajorVersion, sbyte providesFeatureBit, ushort conditionalStart, ushort declaredStart, ulong mask, ulong requiredFeatures, string docId, string? parameterRefKinds)
     {
         FieldIndex = fieldIndex;
         ConditionalCount = conditionalCount;
@@ -32,5 +37,6 @@ internal readonly struct PolyfillEntry
         Mask = mask;
         RequiredFeatures = requiredFeatures;
         DocId = docId;
+        ParameterRefKinds = parameterRefKinds;
     }
 }

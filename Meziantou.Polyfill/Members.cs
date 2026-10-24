@@ -10,7 +10,7 @@ internal partial struct Members
     private static bool IncludeMember(IncludeContext context, string memberDocumentationId)
         => GetMemberSkipReason(context, memberDocumentationId) is null;
 
-    private static string? GetMemberSkipReason(IncludeContext context, string memberDocumentationId)
+    private static string? GetMemberSkipReason(IncludeContext context, string memberDocumentationId, string? parameterRefKinds = null)
     {
         var optionSkipReason = context.Options?.GetSkipReason(memberDocumentationId);
         if (optionSkipReason is not null)
@@ -22,6 +22,11 @@ internal partial struct Members
         IAssemblySymbol? accessibleFromAssembly = null;
         foreach (var symbol in symbols)
         {
+            // 'ref', 'in' and 'out' share the same documentation ID (e.g. MemoryMarshal.Write(Span<byte>, ref T)
+            // in System.Memory vs MemoryMarshal.Write(Span<byte>, in T) in .NET 8), but are not source-compatible.
+            if (parameterRefKinds is not null && !HasParameterRefKinds(symbol, parameterRefKinds))
+                continue;
+
             if (ReferenceEquals(symbol.ContainingAssembly, currentAssembly))
                 return "already available in compilation";
 
@@ -46,6 +51,37 @@ internal partial struct Members
             return "already available in compilation";
 
         return null;
+    }
+
+    // Must stay in sync with GetParameterRefKinds in Meziantou.Polyfill.Generator/Program.cs
+    private static bool HasParameterRefKinds(ISymbol symbol, string parameterRefKinds)
+    {
+        var parameters = symbol switch
+        {
+            IMethodSymbol method => method.Parameters,
+            IPropertySymbol property => property.Parameters,
+            _ => default,
+        };
+
+        if (parameters.IsDefault || parameters.Length != parameterRefKinds.Length)
+            return false;
+
+        for (var i = 0; i < parameters.Length; i++)
+        {
+            var expected = (int)parameters[i].RefKind switch
+            {
+                0 => '-', // None
+                1 => 'r', // Ref
+                2 => 'o', // Out
+                3 or 4 => 'i', // In, RefReadOnlyParameter (not available in the Roslyn version referenced by this project)
+                _ => '?',
+            };
+
+            if (expected != parameterRefKinds[i])
+                return false;
+        }
+
+        return true;
     }
 
     private void AddSource(SourceProductionContext context, string path, string content)
