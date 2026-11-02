@@ -4250,6 +4250,237 @@
     "M:System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.ReadOnlySpan{System.Byte},System.Byte)": [
       "net11.0"
     ],
+    "M:System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})": [
+      "netstandard2.1",
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashData(System.Byte[],System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashData(System.Byte[],System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashData(System.ReadOnlySpan{System.Byte},System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashData(System.ReadOnlySpan{System.Byte},System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashDataAsync(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashDataAsync(System.ReadOnlyMemory{System.Byte},System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.HashDataAsync(System.ReadOnlyMemory{System.Byte},System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA256.TryHashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashData(System.Byte[],System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashData(System.Byte[],System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashData(System.ReadOnlySpan{System.Byte},System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashData(System.ReadOnlySpan{System.Byte},System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashDataAsync(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashDataAsync(System.ReadOnlyMemory{System.Byte},System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.HashDataAsync(System.ReadOnlyMemory{System.Byte},System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA384.TryHashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashData(System.Byte[],System.Byte[])": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashData(System.Byte[],System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashData(System.ReadOnlySpan{System.Byte},System.IO.Stream)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashData(System.ReadOnlySpan{System.Byte},System.IO.Stream,System.Span{System.Byte})": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte})": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashDataAsync(System.Byte[],System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashDataAsync(System.ReadOnlyMemory{System.Byte},System.IO.Stream,System.Memory{System.Byte},System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.HashDataAsync(System.ReadOnlyMemory{System.Byte},System.IO.Stream,System.Threading.CancellationToken)": [
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.HMACSHA512.TryHashData(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
     "M:System.Security.Cryptography.IncrementalHash.AppendData(System.ReadOnlySpan{System.Byte})": [
       "netstandard2.1",
       "net6.0",
@@ -4333,6 +4564,54 @@
       "net11.0"
     ],
     "M:System.Security.Cryptography.RandomNumberGenerator.Shuffle\u0060\u00601(System.Span{\u0060\u00600})": [
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.Rfc2898DeriveBytes.Pbkdf2(System.Byte[],System.Byte[],System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Int32)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.Rfc2898DeriveBytes.Pbkdf2(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Int32)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.Rfc2898DeriveBytes.Pbkdf2(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32,System.Security.Cryptography.HashAlgorithmName)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.Rfc2898DeriveBytes.Pbkdf2(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte},System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Int32)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.Rfc2898DeriveBytes.Pbkdf2(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32,System.Security.Cryptography.HashAlgorithmName)": [
+      "net6.0",
+      "net7.0",
+      "net8.0",
+      "net9.0",
+      "net10.0",
+      "net11.0"
+    ],
+    "M:System.Security.Cryptography.Rfc2898DeriveBytes.Pbkdf2(System.String,System.Byte[],System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Int32)": [
+      "net6.0",
+      "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
