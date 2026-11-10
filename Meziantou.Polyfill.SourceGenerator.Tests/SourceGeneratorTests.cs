@@ -193,51 +193,67 @@ public sealed class SourceGeneratorTests
     }
 
     [Fact]
-    public async Task RuntimeHelpersGetSubArrayPolyfill_SupportsArrayRangeSyntax()
+    public async Task RuntimeHelpersGetSubArrayPolyfill_ExplicitCall()
     {
-        var assemblies = await NuGetHelpers.GetNuGetReferences("Microsoft.NETCore.App.Ref", "5.0.0", "ref/net5.0/");
+        // Use netstandard2.0 so the polyfill is actually generated (GetSubArray ships in .NET Core 3.0+)
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
 
         var result = GenerateFiles(
             """
+            using System;
+            using System.Runtime.CompilerServices;
+
             public static class Test
             {
-                public static int[] RightHalf()
-                {
-                    int[] numbers = [0, 10, 20, 30, 40, 50];
-                    int amountToDrop = numbers.Length / 2;
-                    return numbers[amountToDrop..];
-                }
+                private static readonly int[] Numbers = [0, 10, 20, 30, 40, 50];
 
-                public static int[] LeftHalf()
-                {
-                    int[] numbers = [0, 10, 20, 30, 40, 50];
-                    int amountToDrop = numbers.Length / 2;
-                    return numbers[..^amountToDrop];
-                }
-
-                public static int[] All()
-                {
-                    int[] numbers = [0, 10, 20, 30, 40, 50];
-                    return numbers[..];
-                }
-
-                public static int[] Invalid()
-                {
-                    int[] numbers = [1, 2, 3];
-                    return numbers[..4];
-                }
+                public static int[] RightHalf() => RuntimeHelpers.GetSubArray(Numbers, new Range(Numbers.Length / 2, Index.End));
+                public static int[] LeftHalf() => RuntimeHelpers.GetSubArray(Numbers, new Range(Index.Start, new Index(Numbers.Length / 2, fromEnd: true)));
+                public static int[] All() => RuntimeHelpers.GetSubArray(Numbers, Range.All);
+                public static int[] Empty() => RuntimeHelpers.GetSubArray(Numbers, new Range(2, 2));
+                public static object[] Covariant() => RuntimeHelpers.GetSubArray<object>(new string[] { "a", "b", "c" }, new Range(1, 3));
+                public static int[] Invalid() => RuntimeHelpers.GetSubArray(new int[] { 1, 2, 3 }, new Range(0, 4));
             }
             """,
             assemblyLocations: assemblies);
+
+        Assert.Single(GetFileNames(result.GeneratorResult), file => file.Contains("RuntimeHelpers.GetSubArray", StringComparison.Ordinal));
 
         var assembly = global::System.Reflection.Assembly.Load(result.Assembly!);
         var type = assembly.GetType("Test")!;
         Assert.Equal([30, 40, 50], (int[])type.GetMethod("RightHalf")!.Invoke(null, null)!);
         Assert.Equal([0, 10, 20], (int[])type.GetMethod("LeftHalf")!.Invoke(null, null)!);
         Assert.Equal([0, 10, 20, 30, 40, 50], (int[])type.GetMethod("All")!.Invoke(null, null)!);
+        Assert.Empty((int[])type.GetMethod("Empty")!.Invoke(null, null)!);
+
+        var covariant = (object[])type.GetMethod("Covariant")!.Invoke(null, null)!;
+        Assert.IsType<string[]>(covariant);
+        Assert.Equal(["b", "c"], covariant);
 
         var exception = Assert.Throws<global::System.Reflection.TargetInvocationException>(() => type.GetMethod("Invalid")!.Invoke(null, null));
         Assert.IsType<ArgumentOutOfRangeException>(exception.InnerException);
+    }
+
+    [Fact]
+    public async Task RuntimeHelpersGetSubArrayPolyfill_ArrayRangeSyntaxIsNotSupported()
+    {
+        // Known limitation: the compiler needs a real static RuntimeHelpers.GetSubArray to lower array[a..b],
+        // and extension members do not satisfy it. If this test starts failing, the limitation is gone
+        // and the README should be updated.
+        var assemblies = await NuGetHelpers.GetNuGetReferences("NETStandard.Library", "2.0.3", "build/");
+
+        var result = GenerateFiles(
+            """
+            public static class Test
+            {
+                public static int[] Slice(int[] a) => a[1..^1];
+            }
+            """,
+            assemblyLocations: assemblies,
+            mustCompile: false);
+
+        Assert.Null(result.Assembly);
+        Assert.Contains(result.OutputCompilation.GetDiagnostics(TestContext.Current.CancellationToken), d => d.Id == "CS0656" && d.GetMessage(System.Globalization.CultureInfo.InvariantCulture).Contains("GetSubArray", StringComparison.Ordinal));
     }
 
     [Fact]
