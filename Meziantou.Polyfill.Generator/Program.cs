@@ -846,7 +846,7 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
         ("microsoft.netcore.app.ref", "8.0.0", "net8.0", Path.Combine("ref", "net8.0")),
         ("microsoft.netcore.app.ref", "9.0.0", "net9.0", Path.Combine("ref", "net9.0")),
         ("microsoft.netcore.app.ref", "10.0.0", "net10.0", Path.Combine("ref", "net10.0")),
-        ("microsoft.netcore.app.ref", "11.0.0-rc.3.26522.148", "net11.0", Path.Combine("ref", "net11.0")),
+        ("microsoft.netcore.app.ref", "11.0.0", "net11.0", Path.Combine("ref", "net11.0")),
     };
 
     // Build TFM definitions from known package list
