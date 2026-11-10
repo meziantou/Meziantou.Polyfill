@@ -89,6 +89,21 @@ Instead of setting the value explicitly, you can opt in to inferring it from the
 
 The inferred value is `$(TargetFramework)` when it is set (which is the case for every compilation, including each inner build of a multi-targeting project), and `$(TargetFrameworks)` otherwise. Inference is opt-in because the moniker being compiled is not a guarantee that every API of that framework is actually referenced: a project can trim or override its reference assemblies, in which case the polyfills skipped by the optimization would really have been needed.
 
+## Known limitations
+
+### Array range syntax on .NET Framework and .NET Standard
+
+`System.Index` and `System.Range` are polyfilled, so you can use them with `Span<T>`, `string`, and any type that has a `Slice` method. However, slicing an array with range syntax (`array[1..^1]`) does not compile on targets that don't provide `RuntimeHelpers.GetSubArray` (for example .NET Framework and `netstandard2.0`):
+
+```
+error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
+```
+
+The compiler requires `GetSubArray` to be a real static member of `System.Runtime.CompilerServices.RuntimeHelpers`. These targets already ship a `RuntimeHelpers` type, so the polyfill can only add `GetSubArray` as an extension member, which the compiler ignores when lowering range syntax. Replacing the whole `RuntimeHelpers` type would hide the framework's members that the compiler also needs (`InitializeArray`, `OffsetToStringData`, …). Use one of the following instead:
+
+- `array.AsSpan(range).ToArray()` or `array.AsSpan()[range]`
+- `RuntimeHelpers.GetSubArray(array, range)` (polyfilled)
+
 ## Supported polyfills
 
 <!-- begin_polyfills -->
