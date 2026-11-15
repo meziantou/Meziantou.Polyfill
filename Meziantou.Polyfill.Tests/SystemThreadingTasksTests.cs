@@ -251,6 +251,79 @@ public class SystemThreadingTasksTests
     }
 
     [Fact]
+    public async Task Task_WaitAsync_Generic_CancellationToken_InnerTaskCancelled()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var waitCts = new CancellationTokenSource();
+        using var innerCts = new CancellationTokenSource();
+        innerCts.Cancel();
+
+        var task = tcs.Task.WaitAsync(waitCts.Token);
+        tcs.TrySetCanceled(innerCts.Token);
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(innerCts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
+    public async Task Task_WaitAsync_NonGeneric_CancellationToken_InnerTaskCancelled()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var waitCts = new CancellationTokenSource();
+        using var innerCts = new CancellationTokenSource();
+        innerCts.Cancel();
+
+        var task = ((Task)tcs.Task).WaitAsync(waitCts.Token);
+        tcs.TrySetCanceled(innerCts.Token);
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(innerCts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
+    public async Task Task_WaitAsync_Generic_TimeSpan_CancellationToken_InnerTaskCancelled()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var waitCts = new CancellationTokenSource();
+        using var innerCts = new CancellationTokenSource();
+        innerCts.Cancel();
+
+        var task = tcs.Task.WaitAsync(TimeSpan.FromSeconds(5), waitCts.Token);
+        tcs.TrySetCanceled(innerCts.Token);
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(innerCts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
+    public async Task Task_WaitAsync_NonGeneric_TimeSpan_CancellationToken_InnerTaskCancelled()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var waitCts = new CancellationTokenSource();
+        using var innerCts = new CancellationTokenSource();
+        innerCts.Cancel();
+
+        var task = ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), waitCts.Token);
+        tcs.TrySetCanceled(innerCts.Token);
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(innerCts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
+    public async Task Task_WaitAsync_NonGeneric_TimeSpan_InfiniteTimeout_CancelledWhileWaiting()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var cts = new CancellationTokenSource();
+
+        var task = ((Task)tcs.Task).WaitAsync(Timeout.InfiniteTimeSpan, cts.Token);
+        cts.Cancel();
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(cts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
     public async Task Task_WhenAll_ReadOnlySpan()
     {
         Task[] tasks = [Task.CompletedTask, Task.Delay(1)];

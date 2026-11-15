@@ -31,14 +31,12 @@ file static class WaitTask
 {
     public static async Task<TResult> WaitTaskAsync<TResult>(Task<TResult> task, TimeSpan timeout)
     {
-        var delayTask = Task<TResult>.Delay(timeout);
-        var t = await Task<TResult>.WhenAny(task, delayTask).ConfigureAwait(false);
-
-        if (t == delayTask)
+        var promise = new TaskCompletionSource<TResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+        using (var timeoutCts = new CancellationTokenSource(timeout))
+        using (timeoutCts.Token.Register(static state => ((TaskCompletionSource<TResult>)state!).TrySetException(new TimeoutException()), promise, false))
         {
-            throw new TimeoutException();
+            var t = await Task.WhenAny(task, promise.Task).ConfigureAwait(false);
+            return t.GetAwaiter().GetResult();
         }
-
-        return task.GetAwaiter().GetResult();
     }
 }

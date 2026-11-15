@@ -36,15 +36,26 @@ file static class WaitTask
 {
     public static async Task WaitTaskAsync(Task task, TimeSpan timeout, CancellationToken cancellationToken)
     {
-        var delayTask = Task.Delay(timeout, cancellationToken);
-        var t = await Task.WhenAny(task, delayTask).ConfigureAwait(false);
-
-        if (t == delayTask)
+        var promise = new CancellationPromise(cancellationToken);
+        using (var timeoutCts = new CancellationTokenSource(timeout))
+        using (timeoutCts.Token.Register(static state => ((CancellationPromise)state!).TrySetException(new TimeoutException()), promise, false))
+        using (cancellationToken.Register(static state => ((CancellationPromise)state!).Cancel(), promise, false))
         {
-            t.GetAwaiter().GetResult(); // Propagate cancellation
-            throw new TimeoutException();
+            var t = await Task.WhenAny(task, promise.Task).ConfigureAwait(false);
+            t.GetAwaiter().GetResult();
         }
-
-        task.GetAwaiter().GetResult();
     }
+}
+
+file sealed class CancellationPromise : TaskCompletionSource<object>
+{
+    private readonly CancellationToken _cancellationToken;
+
+    public CancellationPromise(CancellationToken cancellationToken)
+        : base(TaskCreationOptions.RunContinuationsAsynchronously)
+    {
+        _cancellationToken = cancellationToken;
+    }
+
+    public void Cancel() => TrySetCanceled(_cancellationToken);
 }

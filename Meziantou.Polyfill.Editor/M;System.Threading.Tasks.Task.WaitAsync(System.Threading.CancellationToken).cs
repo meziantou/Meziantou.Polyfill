@@ -29,11 +29,24 @@ file static class WaitTask
 {
     public static async Task WaitTaskAsync(Task task, CancellationToken cancellationToken)
     {
-        var tcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-        using (cancellationToken.Register(() => tcs.TrySetCanceled(cancellationToken), false))
+        var promise = new CancellationPromise(cancellationToken);
+        using (cancellationToken.Register(static state => ((CancellationPromise)state!).Cancel(), promise, false))
         {
-            var t = await Task.WhenAny(task, tcs.Task).ConfigureAwait(false);
+            var t = await Task.WhenAny(task, promise.Task).ConfigureAwait(false);
             t.GetAwaiter().GetResult();
         }
     }
+}
+
+file sealed class CancellationPromise : TaskCompletionSource<object>
+{
+    private readonly CancellationToken _cancellationToken;
+
+    public CancellationPromise(CancellationToken cancellationToken)
+        : base(TaskCreationOptions.RunContinuationsAsynchronously)
+    {
+        _cancellationToken = cancellationToken;
+    }
+
+    public void Cancel() => TrySetCanceled(_cancellationToken);
 }
