@@ -31,7 +31,7 @@ file static class WaitTask
     public static async Task<TResult> WaitTaskAsync<TResult>(Task<TResult> task, CancellationToken cancellationToken)
     {
         var tcs = new TaskCompletionSource<TResult>(TaskCreationOptions.RunContinuationsAsynchronously);
-        using (cancellationToken.Register(static state => ((TaskCompletionSource<TResult>)state!).SetCanceled(), tcs, false))
+        using (cancellationToken.Register(() => tcs.TrySetCanceled(cancellationToken), false))
         {
             var t = await Task.WhenAny(task, tcs.Task).ConfigureAwait(false);
             return t.GetAwaiter().GetResult();

@@ -38,7 +38,8 @@ public class SystemThreadingTasksTests
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => await tcs.Task.WaitAsync(cts.Token));
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await tcs.Task.WaitAsync(cts.Token));
+        Assert.Equal(cts.Token, ex.CancellationToken);
     }
 
     [Fact]
@@ -50,7 +51,8 @@ public class SystemThreadingTasksTests
         var task = tcs.Task.WaitAsync(cts.Token);
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(cts.Token, ex.CancellationToken);
     }
 
     [Fact]
@@ -76,7 +78,21 @@ public class SystemThreadingTasksTests
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => await ((Task)tcs.Task).WaitAsync(cts.Token));
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await ((Task)tcs.Task).WaitAsync(cts.Token));
+        Assert.Equal(cts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
+    public async Task Task_WaitAsync_NonGeneric_CancellationToken_CancelledWhileWaiting()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var cts = new CancellationTokenSource();
+
+        var task = ((Task)tcs.Task).WaitAsync(cts.Token);
+        cts.Cancel();
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(cts.Token, ex.CancellationToken);
     }
 
     [Fact]
@@ -166,8 +182,9 @@ public class SystemThreadingTasksTests
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             await tcs.Task.WaitAsync(TimeSpan.FromSeconds(5), cts.Token));
+        Assert.Equal(cts.Token, ex.CancellationToken);
     }
 
     [Fact]
@@ -179,7 +196,8 @@ public class SystemThreadingTasksTests
         var task = tcs.Task.WaitAsync(TimeSpan.FromSeconds(5), cts.Token);
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(cts.Token, ex.CancellationToken);
     }
 
     [Fact]
@@ -214,8 +232,22 @@ public class SystemThreadingTasksTests
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () =>
             await ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), cts.Token));
+        Assert.Equal(cts.Token, ex.CancellationToken);
+    }
+
+    [Fact]
+    public async Task Task_WaitAsync_NonGeneric_TimeSpan_CancellationToken_CancelledWhileWaiting()
+    {
+        var tcs = new TaskCompletionSource<int>();
+        using var cts = new CancellationTokenSource();
+
+        var task = ((Task)tcs.Task).WaitAsync(TimeSpan.FromSeconds(5), cts.Token);
+        cts.Cancel();
+
+        var ex = await Assert.ThrowsAsync<TaskCanceledException>(async () => await task);
+        Assert.Equal(cts.Token, ex.CancellationToken);
     }
 
     [Fact]
