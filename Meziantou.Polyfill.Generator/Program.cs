@@ -4,6 +4,7 @@
 using System.IO.Compression;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using Meziantou.Polyfill.Generator;
 using Microsoft.CodeAnalysis.CSharp;
@@ -973,7 +974,8 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
             cacheEntries[polyfill.TypeName] = polyfill.SupportedInVersions;
         }
 
-        var jsonOptions = new JsonSerializerOptions { WriteIndented = true, RespectNullableAnnotations = true, RespectRequiredConstructorParameters = true };
+        // Keep characters such as backticks (common in documentation IDs) readable instead of escaping them as \u0060
+        var jsonOptions = new JsonSerializerOptions { WriteIndented = true, RespectNullableAnnotations = true, RespectRequiredConstructorParameters = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
         File.WriteAllText(cacheFilePath, JsonSerializer.Serialize(new { format = PolyfillVersionCache.Format, versions = allVersionNames.ToArray(), polyfills = cacheEntries }, jsonOptions));
         Console.WriteLine($"Wrote version cache to {cacheFilePath}");
     }
