@@ -111,6 +111,7 @@ var polyfills = assembly.GetManifestResourceNames()
                                .Replace('.', '_')
                                .Replace('`', '_'),
               PolyfillData = polyfillData,
+              ParameterRefKinds = GetParameterRefKinds(symbol),
           };
       })
       .ToArray();
@@ -351,7 +352,7 @@ async Task GenerateMembers()
     sb.AppendLine("                continue;");
     sb.AppendLine("            }");
     sb.AppendLine("        }");
-    sb.AppendLine("        var skipReason = GetMemberSkipReason(includeContext, entry.DocId);");
+    sb.AppendLine("        var skipReason = GetMemberSkipReason(includeContext, entry.DocId, entry.ParameterRefKinds);");
     sb.AppendLine("        if (skipReason is not null)");
     sb.AppendLine("        {");
     sb.AppendLine("            skipReasons?[idx] = skipReason;");
@@ -571,7 +572,7 @@ async Task GenerateMembers()
     sb.AppendLine("    {");
     foreach (var e in tableEntries)
     {
-        sb.AppendLine($"        new PolyfillEntry({(byte)(e.Polyfill.Index / 64)}, {e.CondCount}, {e.DeclCount}, {e.Polyfill.AvailableSinceDotNetMajorVersion}, {e.ProvidesFeatureBit}, {e.CondStart}, {e.DeclStart}, {e.Polyfill.CSharpFieldBitMask}uL, {e.RequiredFeatures}uL, \"{EscapeStringLiteral(e.Polyfill.TypeName)}\"),");
+        sb.AppendLine($"        new PolyfillEntry({(byte)(e.Polyfill.Index / 64)}, {e.CondCount}, {e.DeclCount}, {e.Polyfill.AvailableSinceDotNetMajorVersion}, {e.ProvidesFeatureBit}, {e.CondStart}, {e.DeclStart}, {e.Polyfill.CSharpFieldBitMask}uL, {e.RequiredFeatures}uL, \"{EscapeStringLiteral(e.Polyfill.TypeName)}\", {(e.Polyfill.ParameterRefKinds is null ? "null" : $"\"{e.Polyfill.ParameterRefKinds}\"")}),");
     }
     sb.AppendLine("    };");
 
@@ -817,6 +818,31 @@ string ReadResourceAsString(string name)
 }
 
 // Builds the name accepted by Compilation.GetTypeByMetadataName, i.e. "Namespace.Outer+Nested`Arity".
+// Encodes the parameter ref kinds of a member, one character per parameter: '-' (by value), 'r' (ref),
+// 'o' (out), 'i' (in or ref readonly). Returns null when no parameter is passed by reference, so most
+// polyfills skip the check. Must stay in sync with Members.GetParameterRefKinds in Meziantou.Polyfill.
+static string? GetParameterRefKinds(ISymbol symbol)
+{
+    var parameters = symbol switch
+    {
+        IMethodSymbol method => method.Parameters,
+        IPropertySymbol property => property.Parameters,
+        _ => [],
+    };
+
+    if (parameters.All(p => p.RefKind == RefKind.None))
+        return null;
+
+    return string.Concat(parameters.Select(p => p.RefKind switch
+    {
+        RefKind.None => '-',
+        RefKind.Ref => 'r',
+        RefKind.Out => 'o',
+        RefKind.In or RefKind.RefReadOnlyParameter => 'i',
+        _ => throw new InvalidOperationException($"Unsupported RefKind '{p.RefKind}'"),
+    }));
+}
+
 static string GetMetadataLookupName(INamedTypeSymbol symbol)
 {
     var names = new List<string>();
@@ -928,8 +954,10 @@ static async Task DetectAndAssignVersionsAsync(Polyfill[] polyfills, CSharpCompi
             {
                 // Mirror the source generator's own check (Members.GetMemberSkipReason): a symbol that
                 // exists but is not accessible from the consumer assembly still needs a polyfill.
+                // Like the source generator, ignore symbols whose parameter ref kinds differ: 'ref', 'in'
+                // and 'out' share the same documentation ID, but are not source-compatible.
                 var symbols = DocumentationCommentId.GetSymbolsForDeclarationId(polyfill.TypeName, comp);
-                if (symbols.Any(symbol => comp.IsSymbolAccessibleWithin(symbol, comp.Assembly)))
+                if (symbols.Any(symbol => comp.IsSymbolAccessibleWithin(symbol, comp.Assembly) && (polyfill.ParameterRefKinds is null || string.Equals(GetParameterRefKinds(symbol), polyfill.ParameterRefKinds, StringComparison.Ordinal))))
                 {
                     supportedVersions.Add(name);
                 }
@@ -1191,7 +1219,7 @@ internal static class PolyfillVersionCache
 {
     // Bump whenever the supported-version detection algorithm changes, so caches written by an older
     // version of this tool are recomputed instead of being silently reused.
-    public const int Format = 2;
+    public const int Format = 3;
 }
 
 internal sealed class Polyfill
@@ -1205,6 +1233,13 @@ internal sealed class Polyfill
     public required PolyfillKind Kind { get; set; }
 
     public string[] SupportedInVersions { get; set; } = [];
+
+    /// <summary>
+    /// Parameter ref kinds of the polyfilled member (see <c>GetParameterRefKinds</c>), or <see langword="null"/>
+    /// when it has no by-ref parameter. Documentation IDs encode 'ref', 'in' and 'out' the same way, so
+    /// the API is only considered present when a symbol with the same ref kinds exists.
+    /// </summary>
+    public string? ParameterRefKinds { get; set; }
 
     /// <summary>
     /// Oldest .NET (Core) major version from which this API is natively available and remains available
