@@ -294,61 +294,61 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfEqual\u0060\u00601(\u0060\u00600,\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfEqual``1(``0,``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual\u0060\u00601(\u0060\u00600,\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual``1(``0,``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfGreaterThan\u0060\u00601(\u0060\u00600,\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfGreaterThan``1(``0,``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfLessThanOrEqual\u0060\u00601(\u0060\u00600,\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfLessThanOrEqual``1(``0,``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfLessThan\u0060\u00601(\u0060\u00600,\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfLessThan``1(``0,``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfNegativeOrZero\u0060\u00601(\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfNegativeOrZero``1(``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfNegative\u0060\u00601(\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfNegative``1(``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfNotEqual\u0060\u00601(\u0060\u00600,\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfNotEqual``1(``0,``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArgumentOutOfRangeException.ThrowIfZero\u0060\u00601(\u0060\u00600,System.String)": [
+    "M:System.ArgumentOutOfRangeException.ThrowIfZero``1(``0,System.String)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Array.Fill\u0060\u00601(\u0060\u00600[],\u0060\u00600)": [
+    "M:System.Array.Fill``1(``0[],``0)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -357,7 +357,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Array.Fill\u0060\u00601(\u0060\u00600[],\u0060\u00600,System.Int32,System.Int32)": [
+    "M:System.Array.Fill``1(``0[],``0,System.Int32,System.Int32)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -366,7 +366,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArraySegment\u00601.CopyTo(System.ArraySegment{\u00600})": [
+    "M:System.ArraySegment`1.CopyTo(System.ArraySegment{`0})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -375,7 +375,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArraySegment\u00601.CopyTo(\u00600[])": [
+    "M:System.ArraySegment`1.CopyTo(`0[])": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -384,7 +384,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArraySegment\u00601.CopyTo(\u00600[],System.Int32)": [
+    "M:System.ArraySegment`1.CopyTo(`0[],System.Int32)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -393,7 +393,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.ArraySegment\u00601.GetEnumerator": [
+    "M:System.ArraySegment`1.GetEnumerator": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -778,7 +778,7 @@
     "M:System.Collections.BitArray.PopCount": [
       "net11.0"
     ],
-    "M:System.Collections.Concurrent.ConcurrentBag\u00601.Clear": [
+    "M:System.Collections.Concurrent.ConcurrentBag`1.Clear": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -787,7 +787,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Concurrent.ConcurrentDictionary\u00602.GetOrAdd\u0060\u00601(\u00600,System.Func{\u00600,\u0060\u00600,\u00601},\u0060\u00600)": [
+    "M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd``1(`0,System.Func{`0,``0,`1},``0)": [
       "netstandard2.1",
       "net472",
       "net48",
@@ -798,7 +798,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Concurrent.ConcurrentQueue\u00601.Clear": [
+    "M:System.Collections.Concurrent.ConcurrentQueue`1.Clear": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -816,37 +816,37 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.AddRange\u0060\u00601(System.Collections.Generic.List{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.Collections.Generic.CollectionExtensions.AddRange``1(System.Collections.Generic.List{``0},System.ReadOnlySpan{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly\u0060\u00601(System.Collections.Generic.IList{\u0060\u00600})": [
+    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly``1(System.Collections.Generic.IList{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly\u0060\u00601(System.Collections.Generic.ISet{\u0060\u00600})": [
+    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly``1(System.Collections.Generic.ISet{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly\u0060\u00602(System.Collections.Generic.IDictionary{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Collections.Generic.CollectionExtensions.AsReadOnly``2(System.Collections.Generic.IDictionary{``0,``1})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.CopyTo\u0060\u00601(System.Collections.Generic.List{\u0060\u00600},System.Span{\u0060\u00600})": [
+    "M:System.Collections.Generic.CollectionExtensions.CopyTo``1(System.Collections.Generic.List{``0},System.Span{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.GetValueOrDefault\u0060\u00602(System.Collections.Generic.IReadOnlyDictionary{\u0060\u00600,\u0060\u00601},\u0060\u00600)": [
+    "M:System.Collections.Generic.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -855,7 +855,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.GetValueOrDefault\u0060\u00602(System.Collections.Generic.IReadOnlyDictionary{\u0060\u00600,\u0060\u00601},\u0060\u00600,\u0060\u00601)": [
+    "M:System.Collections.Generic.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -864,13 +864,13 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.InsertRange\u0060\u00601(System.Collections.Generic.List{\u0060\u00600},System.Int32,System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.Collections.Generic.CollectionExtensions.InsertRange``1(System.Collections.Generic.List{``0},System.Int32,System.ReadOnlySpan{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.Remove\u0060\u00602(System.Collections.Generic.IDictionary{\u0060\u00600,\u0060\u00601},\u0060\u00600,\u0060\u00601@)": [
+    "M:System.Collections.Generic.CollectionExtensions.Remove``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -879,7 +879,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.CollectionExtensions.TryAdd\u0060\u00602(System.Collections.Generic.IDictionary{\u0060\u00600,\u0060\u00601},\u0060\u00600,\u0060\u00601)": [
+    "M:System.Collections.Generic.CollectionExtensions.TryAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -888,7 +888,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Dictionary\u00602.Remove(\u00600,\u00601@)": [
+    "M:System.Collections.Generic.Dictionary`2.Remove(`0,`1@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -897,7 +897,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Dictionary\u00602.TrimExcess": [
+    "M:System.Collections.Generic.Dictionary`2.TrimExcess": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -906,7 +906,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Dictionary\u00602.TrimExcess(System.Int32)": [
+    "M:System.Collections.Generic.Dictionary`2.TrimExcess(System.Int32)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -915,7 +915,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Dictionary\u00602.TryAdd(\u00600,\u00601)": [
+    "M:System.Collections.Generic.Dictionary`2.TryAdd(`0,`1)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -924,21 +924,21 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.EqualityComparer\u00601.Create(System.Func{\u00600,\u00600,System.Boolean},System.Func{\u00600,System.Int32})": [
+    "M:System.Collections.Generic.EqualityComparer`1.Create(System.Func{`0,`0,System.Boolean},System.Func{`0,System.Int32})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.EqualityComparer\u00601.Create\u0060\u00601(System.Func{\u00600,\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.Collections.Generic.EqualityComparer`1.Create``1(System.Func{`0,``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "net11.0"
     ],
-    "M:System.Collections.Generic.HashSet\u00601.TrimExcess(System.Int32)": [
+    "M:System.Collections.Generic.HashSet`1.TrimExcess(System.Int32)": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.KeyValuePair\u00602.Deconstruct(\u00600@,\u00601@)": [
+    "M:System.Collections.Generic.KeyValuePair`2.Deconstruct(`0@,`1@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -947,23 +947,23 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.List\u00601.Slice(System.Int32,System.Int32)": [
+    "M:System.Collections.Generic.List`1.Slice(System.Int32,System.Int32)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.PriorityQueue\u00602.Remove(\u00600,\u00600@,\u00601@,System.Collections.Generic.IEqualityComparer{\u00600})": [
+    "M:System.Collections.Generic.PriorityQueue`2.Remove(`0,`0@,`1@,System.Collections.Generic.IEqualityComparer{`0})": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Queue\u00601.TrimExcess(System.Int32)": [
+    "M:System.Collections.Generic.Queue`1.TrimExcess(System.Int32)": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Queue\u00601.TryDequeue(\u00600@)": [
+    "M:System.Collections.Generic.Queue`1.TryDequeue(`0@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -972,21 +972,21 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.SortedList\u00602.GetKeyAtIndex(System.Int32)": [
+    "M:System.Collections.Generic.SortedList`2.GetKeyAtIndex(System.Int32)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.SortedList\u00602.GetValueAtIndex(System.Int32)": [
+    "M:System.Collections.Generic.SortedList`2.GetValueAtIndex(System.Int32)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Stack\u00601.TryPeek(\u00600@)": [
+    "M:System.Collections.Generic.Stack`1.TryPeek(`0@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -995,7 +995,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Generic.Stack\u00601.TryPop(\u00600@)": [
+    "M:System.Collections.Generic.Stack`1.TryPop(`0@)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -1004,7 +1004,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Immutable.ImmutableArray\u00601.AsSpan()": [
+    "M:System.Collections.Immutable.ImmutableArray`1.AsSpan()": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1012,14 +1012,14 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Immutable.ImmutableArray\u00601.AsSpan(System.Int32,System.Int32)": [
+    "M:System.Collections.Immutable.ImmutableArray`1.AsSpan(System.Int32,System.Int32)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Collections.Immutable.ImmutableArray\u00601.AsSpan(System.Range)": [
+    "M:System.Collections.Immutable.ImmutableArray`1.AsSpan(System.Range)": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -1419,7 +1419,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Delegate.EnumerateInvocationList\u0060\u00601(\u0060\u00600)": [
+    "M:System.Delegate.EnumerateInvocationList``1(``0)": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -1540,7 +1540,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.GetNames\u0060\u00601": [
+    "M:System.Enum.GetNames``1": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1548,7 +1548,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.GetValues\u0060\u00601": [
+    "M:System.Enum.GetValues``1": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1556,7 +1556,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.IsDefined\u0060\u00601(\u0060\u00600)": [
+    "M:System.Enum.IsDefined``1(``0)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1564,7 +1564,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.Parse\u0060\u00601(System.ReadOnlySpan{System.Char})": [
+    "M:System.Enum.Parse``1(System.ReadOnlySpan{System.Char})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1572,7 +1572,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.Parse\u0060\u00601(System.ReadOnlySpan{System.Char},System.Boolean)": [
+    "M:System.Enum.Parse``1(System.ReadOnlySpan{System.Char},System.Boolean)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1580,7 +1580,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.Parse\u0060\u00601(System.String)": [
+    "M:System.Enum.Parse``1(System.String)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -1589,7 +1589,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.Parse\u0060\u00601(System.String,System.Boolean)": [
+    "M:System.Enum.Parse``1(System.String,System.Boolean)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -1632,7 +1632,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.TryParse\u0060\u00601(System.ReadOnlySpan{System.Char},System.Boolean,\u0060\u00600@)": [
+    "M:System.Enum.TryParse``1(System.ReadOnlySpan{System.Char},System.Boolean,``0@)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1640,7 +1640,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.TryParse\u0060\u00601(System.ReadOnlySpan{System.Char},\u0060\u00600@)": [
+    "M:System.Enum.TryParse``1(System.ReadOnlySpan{System.Char},``0@)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -1648,7 +1648,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.TryParse\u0060\u00601(System.String,System.Boolean,\u0060\u00600@)": [
+    "M:System.Enum.TryParse``1(System.String,System.Boolean,``0@)": [
       "netstandard2.0",
       "netstandard2.1",
       "net462",
@@ -1661,7 +1661,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Enum.TryParse\u0060\u00601(System.String,\u0060\u00600@)": [
+    "M:System.Enum.TryParse``1(System.String,``0@)": [
       "netstandard2.0",
       "netstandard2.1",
       "net462",
@@ -1674,7 +1674,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.GC.AllocateUninitializedArray\u0060\u00601(System.Int32,System.Boolean)": [
+    "M:System.GC.AllocateUninitializedArray``1(System.Int32,System.Boolean)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -2616,67 +2616,67 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00600}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AggregateAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``0}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00600,\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AggregateAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``0,``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00601,System.Func{\u0060\u00601,\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AggregateAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},``1,System.Func{``1,``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00601,System.Func{\u0060\u00601,\u0060\u00600,\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AggregateAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},``1,System.Func{``1,``0,``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateAsync\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00601,System.Func{\u0060\u00601,\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Func{\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AggregateAsync``3(System.Collections.Generic.IAsyncEnumerable{``0},``1,System.Func{``1,``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Func{``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateAsync\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00601,System.Func{\u0060\u00601,\u0060\u00600,\u0060\u00601},System.Func{\u0060\u00601,\u0060\u00602},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AggregateAsync``3(System.Collections.Generic.IAsyncEnumerable{``0},``1,System.Func{``1,``0,``1},System.Func{``1,``2},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateBy\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Func{\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}},System.Func{\u0060\u00602,\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.AggregateBy``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Func{``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}},System.Func{``2,``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateBy\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},\u0060\u00602,System.Func{\u0060\u00602,\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.AggregateBy``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},``2,System.Func{``2,``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateBy\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00602,\u0060\u00600,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.AggregateBy``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Func{``1,``2},System.Func{``2,``0,``2},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AggregateBy\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},\u0060\u00602,System.Func{\u0060\u00602,\u0060\u00600,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.AggregateBy``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},``2,System.Func{``2,``0,``2},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AllAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AllAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AllAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AllAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AnyAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AnyAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AnyAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AnyAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.AnyAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.AnyAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Append\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600)": [
+    "M:System.Linq.AsyncEnumerable.Append``1(System.Collections.Generic.IAsyncEnumerable{``0},``0)": [
       "net10.0",
       "net11.0"
     ],
@@ -2720,319 +2720,319 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Chunk\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32)": [
+    "M:System.Linq.AsyncEnumerable.Chunk``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Concat\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.Concat``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ContainsAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ContainsAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.CountAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.CountAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.CountAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.CountAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.CountAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.CountAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.DefaultIfEmpty\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.DefaultIfEmpty``1(System.Collections.Generic.IAsyncEnumerable{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.DefaultIfEmpty\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600)": [
+    "M:System.Linq.AsyncEnumerable.DefaultIfEmpty``1(System.Collections.Generic.IAsyncEnumerable{``0},``0)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.DistinctBy\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.DistinctBy``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.DistinctBy\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.DistinctBy``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Distinct\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.Distinct``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ElementAtAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Index,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ElementAtAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Index,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ElementAtAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ElementAtAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ElementAtOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Index,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ElementAtOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Index,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ElementAtOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ElementAtOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ExceptBy\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00601},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.ExceptBy``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``1},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ExceptBy\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.ExceptBy``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``1},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Except\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.Except``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.FirstOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Index\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.Index``1(System.Collections.Generic.IAsyncEnumerable{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LastOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LongCountAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LongCountAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LongCountAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LongCountAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.LongCountAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.LongCountAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.MaxAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IComparer{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.MaxAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IComparer{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.MaxByAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Collections.Generic.IComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.MaxByAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Collections.Generic.IComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.MaxByAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.MaxByAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.MinAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IComparer{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.MinAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IComparer{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.MinByAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Collections.Generic.IComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.MinByAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Collections.Generic.IComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.MinByAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.MinByAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Prepend\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600)": [
+    "M:System.Linq.AsyncEnumerable.Prepend``1(System.Collections.Generic.IAsyncEnumerable{``0},``0)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Collections.Generic.IAsyncEnumerable{\u0060\u00601}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Collections.Generic.IAsyncEnumerable{``1}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Collections.Generic.IEnumerable{\u0060\u00601}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``1}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Collections.Generic.IAsyncEnumerable{\u0060\u00601}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Collections.Generic.IAsyncEnumerable{``1}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Collections.Generic.IEnumerable{\u0060\u00601}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Collections.Generic.IEnumerable{``1}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{\u0060\u00601}}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{``1}}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{\u0060\u00601}}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{``1}}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Collections.Generic.IAsyncEnumerable{\u0060\u00601}},System.Func{\u0060\u00600,\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Collections.Generic.IAsyncEnumerable{``1}},System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Collections.Generic.IAsyncEnumerable{\u0060\u00601}},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00602})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Collections.Generic.IAsyncEnumerable{``1}},System.Func{``0,``1,``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Collections.Generic.IEnumerable{\u0060\u00601}},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00602})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``1}},System.Func{``0,``1,``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Collections.Generic.IAsyncEnumerable{\u0060\u00601}},System.Func{\u0060\u00600,\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Collections.Generic.IAsyncEnumerable{``1}},System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Collections.Generic.IEnumerable{\u0060\u00601}},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00602})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Collections.Generic.IEnumerable{``1}},System.Func{``0,``1,``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{\u0060\u00601}}},System.Func{\u0060\u00600,\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{``1}}},System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SelectMany\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{\u0060\u00601}}},System.Func{\u0060\u00600,\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}})": [
+    "M:System.Linq.AsyncEnumerable.SelectMany``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.IEnumerable{``1}}},System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Select\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}})": [
+    "M:System.Linq.AsyncEnumerable.Select``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Select\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.Select``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Select\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}})": [
+    "M:System.Linq.AsyncEnumerable.Select``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Select\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.Select``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},\u0060\u00600,System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.SingleOrDefaultAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},``0,System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SkipLast\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32)": [
+    "M:System.Linq.AsyncEnumerable.SkipLast``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SkipWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean})": [
+    "M:System.Linq.AsyncEnumerable.SkipWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SkipWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Boolean})": [
+    "M:System.Linq.AsyncEnumerable.SkipWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Boolean})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SkipWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
+    "M:System.Linq.AsyncEnumerable.SkipWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.SkipWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
+    "M:System.Linq.AsyncEnumerable.SkipWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Skip\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32)": [
+    "M:System.Linq.AsyncEnumerable.Skip``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32)": [
       "net10.0",
       "net11.0"
     ],
@@ -3076,129 +3076,129 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.TakeLast\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32)": [
+    "M:System.Linq.AsyncEnumerable.TakeLast``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.TakeWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean})": [
+    "M:System.Linq.AsyncEnumerable.TakeWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.TakeWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Boolean})": [
+    "M:System.Linq.AsyncEnumerable.TakeWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Boolean})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.TakeWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
+    "M:System.Linq.AsyncEnumerable.TakeWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.TakeWhile\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
+    "M:System.Linq.AsyncEnumerable.TakeWhile``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Take\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Int32)": [
+    "M:System.Linq.AsyncEnumerable.Take``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Int32)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Take\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Range)": [
+    "M:System.Linq.AsyncEnumerable.Take``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Range)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToArrayAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToArrayAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToAsyncEnumerable\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.ToAsyncEnumerable``1(System.Collections.Generic.IEnumerable{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{System.Collections.Generic.KeyValuePair{\u0060\u00600,\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync``2(System.Collections.Generic.IAsyncEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}},System.Collections.Generic.IEqualityComparer{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{System.ValueTuple{\u0060\u00600,\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync``2(System.Collections.Generic.IAsyncEnumerable{System.ValueTuple{``0,``1}},System.Collections.Generic.IEqualityComparer{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}},System.Collections.Generic.IEqualityComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00601},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToDictionaryAsync``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToHashSetAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToHashSetAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.ToListAsync\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Linq.AsyncEnumerable.ToListAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.UnionBy\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.UnionBy``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.UnionBy\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.UnionBy``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Union\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.Linq.AsyncEnumerable.Union``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Where\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Boolean})": [
+    "M:System.Linq.AsyncEnumerable.Where``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Boolean})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Where\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Boolean})": [
+    "M:System.Linq.AsyncEnumerable.Where``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Boolean})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Where\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
+    "M:System.Linq.AsyncEnumerable.Where``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Int32,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Where\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Func{\u0060\u00600,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
+    "M:System.Linq.AsyncEnumerable.Where``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Zip\u0060\u00602(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00601})": [
+    "M:System.Linq.AsyncEnumerable.Zip``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``1})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Zip\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00601},System.Collections.Generic.IAsyncEnumerable{\u0060\u00602})": [
+    "M:System.Linq.AsyncEnumerable.Zip``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``1},System.Collections.Generic.IAsyncEnumerable{``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Zip\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00601,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{\u0060\u00602}})": [
+    "M:System.Linq.AsyncEnumerable.Zip``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``1},System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``2}})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.AsyncEnumerable.Zip\u0060\u00603(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Collections.Generic.IAsyncEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00602})": [
+    "M:System.Linq.AsyncEnumerable.Zip``3(System.Collections.Generic.IAsyncEnumerable{``0},System.Collections.Generic.IAsyncEnumerable{``1},System.Func{``0,``1,``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.AggregateBy\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00602,\u0060\u00600,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.AggregateBy``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``1,``2},System.Func{``2,``0,``2},System.Collections.Generic.IEqualityComparer{``1})": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.AggregateBy\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},\u0060\u00602,System.Func{\u0060\u00602,\u0060\u00600,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.AggregateBy``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},``2,System.Func{``2,``0,``2},System.Collections.Generic.IEqualityComparer{``1})": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Chunk\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Int32)": [
+    "M:System.Linq.Enumerable.Chunk``1(System.Collections.Generic.IEnumerable{``0},System.Int32)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3206,12 +3206,12 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.CountBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.CountBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.DistinctBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3219,7 +3219,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.DistinctBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3227,25 +3227,25 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.FullJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.FullJoin``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Collections.Generic.IEqualityComparer{``2})": [
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.FullJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.FullJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Collections.Generic.IEqualityComparer{``2})": [
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.GroupJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.GroupJoin``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Collections.Generic.IEqualityComparer{``2})": [
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Index\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.Index``1(System.Collections.Generic.IEnumerable{``0})": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.InfiniteSequence\u0060\u00601(\u0060\u00600,\u0060\u00600)": [
+    "M:System.Linq.Enumerable.InfiniteSequence``1(``0,``0)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.IntersectBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Linq.Enumerable.IntersectBy``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3253,7 +3253,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.IntersectBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.IntersectBy``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3261,21 +3261,21 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Join\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.Join``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Collections.Generic.IEqualityComparer{``2})": [
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.LeftJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.LeftJoin``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Collections.Generic.IEqualityComparer{``2})": [
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.LeftJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603})": [
+    "M:System.Linq.Enumerable.LeftJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.LeftJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.LeftJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Collections.Generic.IEqualityComparer{``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.MaxBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3283,7 +3283,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.MaxBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.MaxBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3291,7 +3291,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.MinBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3299,7 +3299,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.MinBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3307,66 +3307,66 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.OrderDescending\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.OrderDescending\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IComparer{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.OrderDescending``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Order\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Order\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IComparer{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.Order``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IComparer{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Reverse\u0060\u00601(\u0060\u00600[])": [
+    "M:System.Linq.Enumerable.Reverse``1(``0[])": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.RightJoin\u0060\u00603(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.RightJoin``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Collections.Generic.IEqualityComparer{``2})": [
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.RightJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603})": [
+    "M:System.Linq.Enumerable.RightJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.RightJoin\u0060\u00604(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601},System.Func{\u0060\u00600,\u0060\u00602},System.Func{\u0060\u00601,\u0060\u00602},System.Func{\u0060\u00600,\u0060\u00601,\u0060\u00603},System.Collections.Generic.IEqualityComparer{\u0060\u00602})": [
+    "M:System.Linq.Enumerable.RightJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Collections.Generic.IEqualityComparer{``2})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Sequence\u0060\u00601(\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
+    "M:System.Linq.Enumerable.Sequence``1(``0,``0,``0)": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.ToDictionary\u0060\u00602(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{\u0060\u00600,\u0060\u00601}})": [
+    "M:System.Linq.Enumerable.ToDictionary``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.ToDictionary\u0060\u00602(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{\u0060\u00600,\u0060\u00601}},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.ToDictionary``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}},System.Collections.Generic.IEqualityComparer{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.ToHashSet\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.ToHashSet``1(System.Collections.Generic.IEnumerable{``0})": [
       "netstandard2.1",
       "net472",
       "net48",
@@ -3377,7 +3377,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.ToHashSet\u0060\u00601(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.Linq.Enumerable.ToHashSet``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "netstandard2.1",
       "net472",
       "net48",
@@ -3388,7 +3388,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.UnionBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601})": [
+    "M:System.Linq.Enumerable.UnionBy``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3396,7 +3396,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.UnionBy\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00600},System.Func{\u0060\u00600,\u0060\u00601},System.Collections.Generic.IEqualityComparer{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.UnionBy``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3404,7 +3404,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Linq.Enumerable.Zip\u0060\u00602(System.Collections.Generic.IEnumerable{\u0060\u00600},System.Collections.Generic.IEnumerable{\u0060\u00601})": [
+    "M:System.Linq.Enumerable.Zip``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3536,77 +3536,77 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.CommonPrefixLength\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.CommonPrefixLength``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.CommonPrefixLength\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.MemoryExtensions.CommonPrefixLength``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.CommonPrefixLength\u0060\u00601(System.Span{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.CommonPrefixLength``1(System.Span{``0},System.ReadOnlySpan{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.CommonPrefixLength\u0060\u00601(System.Span{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600},System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.MemoryExtensions.CommonPrefixLength``1(System.Span{``0},System.ReadOnlySpan{``0},System.Collections.Generic.IEqualityComparer{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.ReadOnlySpan{``0},``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.ReadOnlySpan{``0},``0,``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.ReadOnlySpan{``0},``0,``0,``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.Span{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.Span{``0},System.ReadOnlySpan{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.Span{``0},``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.Span{``0},``0,``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAnyExcept\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAnyExcept``1(System.Span{``0},``0,``0,``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -3615,25 +3615,25 @@
     "M:System.MemoryExtensions.ContainsAnyWhiteSpace(System.ReadOnlySpan{System.Char})": [
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAny\u0060\u00601(System.Span{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.ContainsAny``1(System.Span{``0},System.ReadOnlySpan{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAny\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAny``1(System.Span{``0},``0,``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.ContainsAny\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.ContainsAny``1(System.Span{``0},``0,``0,``0)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.Contains\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3641,11 +3641,11 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.Contains\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.MemoryExtensions.Contains``1(System.ReadOnlySpan{``0},``0,System.Collections.Generic.IEqualityComparer{``0})": [
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.Contains\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.Contains``1(System.Span{``0},``0)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3678,62 +3678,62 @@
     "M:System.MemoryExtensions.IndexOfAnyExceptWhiteSpace(System.ReadOnlySpan{System.Char})": [
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Buffers.SearchValues{\u0060\u00600})": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.ReadOnlySpan{``0},System.Buffers.SearchValues{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.ReadOnlySpan{``0},System.ReadOnlySpan{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.ReadOnlySpan{``0},``0)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.ReadOnlySpan{``0},``0,``0)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.ReadOnlySpan{``0},``0,``0,``0)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.Span{\u0060\u00600},System.ReadOnlySpan{\u0060\u00600})": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.Span{``0},System.ReadOnlySpan{``0})": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.Span{``0},``0)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.Span{``0},``0,``0)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAnyExcept\u0060\u00601(System.Span{\u0060\u00600},\u0060\u00600,\u0060\u00600,\u0060\u00600)": [
+    "M:System.MemoryExtensions.IndexOfAnyExcept``1(System.Span{``0},``0,``0,``0)": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -3743,13 +3743,13 @@
     "M:System.MemoryExtensions.IndexOfAnyWhiteSpace(System.ReadOnlySpan{System.Char})": [
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOfAny\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Buffers.SearchValues{\u0060\u00600})": [
+    "M:System.MemoryExtensions.IndexOfAny``1(System.ReadOnlySpan{``0},System.Buffers.SearchValues{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.IndexOf\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.MemoryExtensions.IndexOf``1(System.ReadOnlySpan{``0},``0,System.Collections.Generic.IEqualityComparer{``0})": [
       "net10.0",
       "net11.0"
     ],
@@ -3759,7 +3759,7 @@
     "M:System.MemoryExtensions.LastIndexOfAnyWhiteSpace(System.ReadOnlySpan{System.Char})": [
       "net11.0"
     ],
-    "M:System.MemoryExtensions.Sort\u0060\u00602(System.Span{\u0060\u00600},System.Span{\u0060\u00601})": [
+    "M:System.MemoryExtensions.Sort``2(System.Span{``0},System.Span{``1})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3767,7 +3767,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.Sort\u0060\u00602(System.Span{\u0060\u00600},System.Span{\u0060\u00601},System.Comparison{\u0060\u00600})": [
+    "M:System.MemoryExtensions.Sort``2(System.Span{``0},System.Span{``1},System.Comparison{``0})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3775,7 +3775,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.Sort\u0060\u00603(System.Span{\u0060\u00600},System.Span{\u0060\u00601},\u0060\u00602)": [
+    "M:System.MemoryExtensions.Sort``3(System.Span{``0},System.Span{``1},``2)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -3816,12 +3816,12 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.StartsWith\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600)": [
+    "M:System.MemoryExtensions.StartsWith``1(System.ReadOnlySpan{``0},``0)": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.MemoryExtensions.StartsWith\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},\u0060\u00600,System.Collections.Generic.IEqualityComparer{\u0060\u00600})": [
+    "M:System.MemoryExtensions.StartsWith``1(System.ReadOnlySpan{``0},``0,System.Collections.Generic.IEqualityComparer{``0})": [
       "net10.0",
       "net11.0"
     ],
@@ -3979,7 +3979,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Nullable.GetValueRefOrDefaultRef\u0060\u00601(System.Nullable{\u0060\u00600}@)": [
+    "M:System.Nullable.GetValueRefOrDefaultRef``1(System.Nullable{``0}@)": [
       "net7.0",
       "net8.0",
       "net9.0",
@@ -4040,19 +4040,19 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Random.GetItems\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Int32)": [
+    "M:System.Random.GetItems``1(System.ReadOnlySpan{``0},System.Int32)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Random.GetItems\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Span{\u0060\u00600})": [
+    "M:System.Random.GetItems``1(System.ReadOnlySpan{``0},System.Span{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Random.GetItems\u0060\u00601(\u0060\u00600[],System.Int32)": [
+    "M:System.Random.GetItems``1(``0[],System.Int32)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -4103,13 +4103,13 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Random.Shuffle\u0060\u00601(System.Span{\u0060\u00600})": [
+    "M:System.Random.Shuffle``1(System.Span{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Random.Shuffle\u0060\u00601(\u0060\u00600[])": [
+    "M:System.Random.Shuffle``1(``0[])": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -4124,7 +4124,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Reflection.MethodInfo.CreateDelegate\u0060\u00601": [
+    "M:System.Reflection.MethodInfo.CreateDelegate``1": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -4132,7 +4132,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Reflection.MethodInfo.CreateDelegate\u0060\u00601(System.Object)": [
+    "M:System.Reflection.MethodInfo.CreateDelegate``1(System.Object)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -4144,7 +4144,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray\u0060\u00601(\u0060\u00600[],System.Range)": [
+    "M:System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray``1(``0[],System.Range)": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -4153,7 +4153,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Runtime.InteropServices.CollectionsMarshal.AsSpan\u0060\u00601(System.Collections.Generic.List{\u0060\u00600})": [
+    "M:System.Runtime.InteropServices.CollectionsMarshal.AsSpan``1(System.Collections.Generic.List{``0})": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -4161,7 +4161,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Runtime.InteropServices.MemoryMarshal.Write\u0060\u00601(System.Span{System.Byte},\u0060\u00600@)": [
+    "M:System.Runtime.InteropServices.MemoryMarshal.Write``1(System.Span{System.Byte},``0@)": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -4551,13 +4551,13 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Security.Cryptography.RandomNumberGenerator.GetItems\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Int32)": [
+    "M:System.Security.Cryptography.RandomNumberGenerator.GetItems``1(System.ReadOnlySpan{``0},System.Int32)": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Security.Cryptography.RandomNumberGenerator.GetItems\u0060\u00601(System.ReadOnlySpan{\u0060\u00600},System.Span{\u0060\u00600})": [
+    "M:System.Security.Cryptography.RandomNumberGenerator.GetItems``1(System.ReadOnlySpan{``0},System.Span{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -4569,7 +4569,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Security.Cryptography.RandomNumberGenerator.Shuffle\u0060\u00601(System.Span{\u0060\u00600})": [
+    "M:System.Security.Cryptography.RandomNumberGenerator.Shuffle``1(System.Span{``0})": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -5022,7 +5022,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.String.Create\u0060\u00601(System.Int32,\u0060\u00600,System.Buffers.SpanAction{System.Char,\u0060\u00600})": [
+    "M:System.String.Create``1(System.Int32,``0,System.Buffers.SpanAction{System.Char,``0})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -5135,7 +5135,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.String.Join\u0060\u00601(System.Char,System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.String.Join``1(System.Char,System.Collections.Generic.IEnumerable{``0})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -5566,7 +5566,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Text.StringBuilder.AppendJoin\u0060\u00601(System.Char,System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Text.StringBuilder.AppendJoin``1(System.Char,System.Collections.Generic.IEnumerable{``0})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -5575,7 +5575,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Text.StringBuilder.AppendJoin\u0060\u00601(System.String,System.Collections.Generic.IEnumerable{\u0060\u00600})": [
+    "M:System.Text.StringBuilder.AppendJoin``1(System.String,System.Collections.Generic.IEnumerable{``0})": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -5642,10 +5642,10 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Interlocked.And\u0060\u00601(\u0060\u00600@,\u0060\u00600)": [
+    "M:System.Threading.Interlocked.And``1(``0@,``0)": [
       "net11.0"
     ],
-    "M:System.Threading.Interlocked.Or\u0060\u00601(\u0060\u00600@,\u0060\u00600)": [
+    "M:System.Threading.Interlocked.Or``1(``0@,``0)": [
       "net11.0"
     ],
     "M:System.Threading.Tasks.Task.WaitAsync(System.Threading.CancellationToken)": [
@@ -5677,7 +5677,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.Task.WhenAll\u0060\u00601(System.ReadOnlySpan{System.Threading.Tasks.Task{\u0060\u00600}})": [
+    "M:System.Threading.Tasks.Task.WhenAll``1(System.ReadOnlySpan{System.Threading.Tasks.Task{``0}})": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -5687,7 +5687,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.Task.WhenAny\u0060\u00601(System.ReadOnlySpan{System.Threading.Tasks.Task{\u0060\u00600}})": [
+    "M:System.Threading.Tasks.Task.WhenAny``1(System.ReadOnlySpan{System.Threading.Tasks.Task{``0}})": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -5697,19 +5697,19 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.Task.WhenEach\u0060\u00601(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task{\u0060\u00600}})": [
+    "M:System.Threading.Tasks.Task.WhenEach``1(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task{``0}})": [
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable\u0060\u00601(System.Collections.Generic.IAsyncEnumerable{\u0060\u00600},System.Threading.CancellationToken)": [
+    "M:System.Threading.Tasks.TaskAsyncEnumerableExtensions.ToBlockingEnumerable``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.CancellationToken)": [
       "net7.0",
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.TaskCompletionSource\u00601.SetCanceled(System.Threading.CancellationToken)": [
+    "M:System.Threading.Tasks.TaskCompletionSource`1.SetCanceled(System.Threading.CancellationToken)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -5717,7 +5717,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.Task\u00601.WaitAsync(System.Threading.CancellationToken)": [
+    "M:System.Threading.Tasks.Task`1.WaitAsync(System.Threading.CancellationToken)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -5725,7 +5725,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.Task\u00601.WaitAsync(System.TimeSpan)": [
+    "M:System.Threading.Tasks.Task`1.WaitAsync(System.TimeSpan)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -5733,7 +5733,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.Task\u00601.WaitAsync(System.TimeSpan,System.Threading.CancellationToken)": [
+    "M:System.Threading.Tasks.Task`1.WaitAsync(System.TimeSpan,System.Threading.CancellationToken)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -5741,7 +5741,7 @@
       "net10.0",
       "net11.0"
     ],
-    "M:System.Threading.Tasks.ValueTask.FromResult\u0060\u00601(\u0060\u00600)": [
+    "M:System.Threading.Tasks.ValueTask.FromResult``1(``0)": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -6374,13 +6374,13 @@
       "net10.0",
       "net11.0"
     ],
-    "P:System.Collections.ObjectModel.ReadOnlyCollection\u00601.Empty": [
+    "P:System.Collections.ObjectModel.ReadOnlyCollection`1.Empty": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "P:System.Collections.ObjectModel.ReadOnlyDictionary\u00602.Empty": [
+    "P:System.Collections.ObjectModel.ReadOnlyDictionary`2.Empty": [
       "net8.0",
       "net9.0",
       "net10.0",
@@ -6536,13 +6536,13 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.Buffers.SearchValues\u00601": [
+    "T:System.Buffers.SearchValues`1": [
       "net8.0",
       "net9.0",
       "net10.0",
       "net11.0"
     ],
-    "T:System.Buffers.SequenceReader\u00601": [
+    "T:System.Buffers.SequenceReader`1": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -6551,7 +6551,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.Buffers.SpanAction\u00602": [
+    "T:System.Buffers.SpanAction`2": [
       "netstandard2.1",
       "net6.0",
       "net7.0",
@@ -6569,7 +6569,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.Collections.Generic.PriorityQueue\u00602": [
+    "T:System.Collections.Generic.PriorityQueue`2": [
       "net6.0",
       "net7.0",
       "net8.0",
@@ -6585,7 +6585,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.Collections.ObjectModel.ReadOnlySet\u00601": [
+    "T:System.Collections.ObjectModel.ReadOnlySet`1": [
       "net9.0",
       "net10.0",
       "net11.0"
@@ -7139,7 +7139,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00601": [
+    "T:System.ValueTuple`1": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7151,7 +7151,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00602": [
+    "T:System.ValueTuple`2": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7163,7 +7163,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00603": [
+    "T:System.ValueTuple`3": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7175,7 +7175,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00604": [
+    "T:System.ValueTuple`4": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7187,7 +7187,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00605": [
+    "T:System.ValueTuple`5": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7199,7 +7199,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00606": [
+    "T:System.ValueTuple`6": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7211,7 +7211,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00607": [
+    "T:System.ValueTuple`7": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
@@ -7223,7 +7223,7 @@
       "net10.0",
       "net11.0"
     ],
-    "T:System.ValueTuple\u00608": [
+    "T:System.ValueTuple`8": [
       "netstandard2.0",
       "netstandard2.1",
       "net472",
