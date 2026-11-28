@@ -751,7 +751,7 @@ public class SystemTests
             float.MaxValue,
             (double)0F,
             double.MaxValue,
-            (decimal)0F,
+            0M,
             decimal.MaxValue,
         };
 
@@ -898,7 +898,7 @@ public class SystemTests
             float.MinValue,
             (double)0F,
             double.MinValue,
-            (decimal)0F,
+            0M,
             decimal.MinValue,
         };
 
@@ -1019,7 +1019,7 @@ public class SystemTests
 #endif
             (float)0F,
             (double)0F,
-            (decimal)0F,
+            0M,
         };
 
     [Theory]
